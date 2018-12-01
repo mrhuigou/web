@@ -369,9 +369,9 @@ class CheckoutForm extends Model {
 								$promotion_id = $product->promotion->promotion_id;
 								$promotion_detail_id = $product->promotion->promotion_detail_id;
 							}
-							$product_base  = ProductBase::findOne(['product_base_id'=>$product->product->product_base_id]);
-							$product_base->date_modified = date("Y-m-d H:i:s");
-                            $product_base->save();
+//							$product_base  = ProductBase::findOne(['product_base_id'=>$product->product->product_base_id]);
+//							$product_base->date_modified = date("Y-m-d H:i:s");
+//                            $product_base->save();
 							$Order_product = new OrderProduct();
 							$Order_product->order_id = $Order_model->order_id;
 							$Order_product->product_base_id = $product->product->product_base_id;

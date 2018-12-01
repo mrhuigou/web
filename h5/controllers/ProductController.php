@@ -26,7 +26,12 @@ class ProductController extends \yii\web\Controller
                     $cur_sku=$product->sku;
                 }else{
                     $product = Product::findOne(['store_code'=>$store_code,'product_base_id'=>$product_base_id,'beintoinv'=>1]);
-                    $cur_sku=$product->sku;
+                    if($product->beintoinv == 1){
+                        $cur_sku=$product->sku;
+                    }else{
+                        throw new NotFoundHttpException("该商品已下架！");
+                    }
+
                 }
             }else{
                 $product_base_id=0;

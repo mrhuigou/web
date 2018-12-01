@@ -6,4 +6,3 @@ Yii::setAlias('frontend', dirname(dirname(__DIR__)) . '/frontend');
 Yii::setAlias('backend', dirname(dirname(__DIR__)) . '/backend');
 Yii::setAlias('affiliate', dirname(dirname(__DIR__)) . '/affiliate');
 Yii::setAlias('console', dirname(dirname(__DIR__)) . '/console');
-
