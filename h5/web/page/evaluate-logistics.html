@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../assets/stylesheet/mobile.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/script/raty/jquery.raty.css">
+</head>
+<body>
+	<header class="bg-wh lh44 bs-b pr zi9">
+		<div class="flex-col tc">
+			<a href="javascript:history.go(-1);" class="flex-item-2 green">
+				<i class="iconfont arr-l vm-2"></i>
+			</a>
+			<div class="flex-item-8 f16">评价</div>
+			<div class="flex-item-2"></div>
+		</div>
+	</header>
+
+	<div class="content">
+		<div class="p10 bg-wh">
+			<p class="tc">
+				<i class="iconfont blue f70">&#xe6a3;</i>
+			</p>
+			<div class="tit-- gray6 f12">为本次物流服务打分</div>
+
+			<div class="tc pt10">
+				<div class="bd p15 mr50 ml50 bg-fb star-scoring-1"></div>
+				<div class="star-hint-1"></div>
+			</div>
+
+			<hr class="mt1 mb20">
+
+			<p class="tc mb15">给物流人员点个赞吧</p>
+
+			<div class="mb10">
+				<a href="javascript:void(0)" class="btn btn-s btn-bd-gray btn-pill mb5 btn-blue">服务好</a>
+				<a href="javascript:void(0)" class="btn btn-s btn-bd-gray btn-pill mb5">准时送达</a>
+				<a href="javascript:void(0)" class="btn btn-s btn-bd-gray btn-pill mb5">送货上门</a>
+				<a href="javascript:void(0)" class="btn btn-s btn-bd-gray btn-pill mb5">服务好</a>
+				<a href="javascript:void(0)" class="btn btn-s btn-bd-gray btn-pill mb5">好</a>
+				<a href="javascript:void(0)" class="btn btn-s btn-bd-gray btn-pill mb5">准时</a>
+				<a href="javascript:void(0)" class="btn btn-s btn-bd-gray btn-pill mb5">送货上门</a>
+			</div>
+
+			<textarea class="textarea bd-blue- w mb5" rows="3" placeholder="您的评价"></textarea>
+
+			<a href="#" class="btn btn-l btn-green w mb50">匿名评价</a>
+		</div>
+	</div>
+
+	<div class="fx-bottom fx-convert-tar">
+	    <div class="nav-main clearfix">
+	        <a href="/site/index" class="green fb"><i class="iconfont"></i>首页</a>
+	        <a href="/product/category" class=""><i class="iconfont"></i>分类</a>
+	        <a href="/share/index"><i class="" style="margin-top:-19px;"><img src="/assets/images/fudai.png" width="30" class="shakesmall"></i><span class="f12 db org">新人福利</span></a>
+	        <a href="/cart/index" class="pr ">
+	            <i class="iconfont"></i>购物车
+	            <em class="info-point ellipsis cart_qty pa-rt r5" style="max-width: 22px;">3</em>        </a>
+	        <a href="/user/index" class=""><i class="iconfont"></i>我的</a>
+	    </div>
+	</div>
+
+	<script type="text/javascript" src="../assets/script/jq.min.js"></script>
+	<script type="text/javascript" src="../assets/script/raty/jquery.raty.js"></script>
+	<script type="text/javascript">
+		//星级评论
+		$('.star-scoring-1').raty({ 
+			starType: 'i',
+			hints   : ['不满意', '有待提高', '大体可以', '满意', '非常满意'],
+			target: '.star-hint-1'
+		});
+	</script>
+</body>
+</html>

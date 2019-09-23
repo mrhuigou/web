@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>拆红包</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+
+    <style>
+        html{font-size:20px;}
+        
+    </style>
+</head>
+<body>
+
+    <div class="hb2-banner3">
+        <div class="tc">
+            <p class="pt20 fb">
+                抱歉，红包已拆完<br>
+                下次早点哦
+            </p>
+        </div>
+    </div>
+
+    <div style="background:#fff7dd;" class="pb50">
+        <div class="tc pt20">
+            <p class="pb15">
+                关注公众号，还可以领取<span class="red f16 fb">98元</span>大礼包
+            </p>
+
+            <img src="http://m.365jiarun.com/assets/images/wx.jpg" class="bc" width="130" height="130">
+            <p class="mt5">长按识别二维码</p>
+        </div>
+    </div>
+
+	
+
+
+
+
+	<script src="assets/script/jq.min.js"></script>
+    <script>
+        /* rem计算 */
+        (function (doc, win) {
+          var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+              var clientWidth = docEl.clientWidth;
+              if (!clientWidth) return;
+              docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+            };
+
+          if (!doc.addEventListener) return;
+          win.addEventListener(resizeEvt, recalc, false);
+          doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+
+</body>
+</html>
+

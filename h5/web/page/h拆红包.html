@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>拆红包</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+    <style>
+        html{font-size:20px;}
+    </style>
+</head>
+<body>
+
+	<div class='hb-tear'>
+        <div class="bg1"></div>
+        <div class="bg2 tc">
+            <!--头像-->
+            <a href="#">
+                <img src="" alt="头像" width="90" height="90" class="bd img-circle">
+            </a>
+            <p class="text">
+                帮我拆红包 <br>
+                你也有机会获得红包
+            </p>
+            <!--拆按钮-->
+            <a href="#" class="b"></a>
+        </div>
+    </div>
+
+
+	<script src="assets/script/jq.min.js"></script>
+    <script>
+        /* rem计算 */
+        (function (doc, win) {
+          var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+              var clientWidth = docEl.clientWidth;
+              if (!clientWidth) return;
+              docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+            };
+
+          if (!doc.addEventListener) return;
+          win.addEventListener(resizeEvt, recalc, false);
+          doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+
+</body>
+</html>
+

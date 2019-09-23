@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>购物车</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+</head>
+<body>
+	<article>
+		<header class="header">
+			<a href="javascript:history.back();" class="his-back">返回</a>
+			<h2>购物车</h2>
+			<a href="#" class="header-cate iconfont">&#xe613;</a>
+		</header>
+		
+		<section class="veiwport">
+			<label class="p10 db bdb whitebg"><input type="checkbox" class="vm"> <span class="vm">家润自营</span></label>
+			<table cellspacing="0" cellpadding="0" class="tb-p10 mb10 whitebg">
+				<tr>
+					<td width="3%">
+						<input type="checkbox">
+					</td>
+					<td width="25%" class="bdb">
+						<a href="#" class="db">
+							<img src="assets/images/eg/img2.jpg" alt="tu" class="db w">
+						</a>
+					</td>
+					<td width="72%" class="bdb">
+						<a href="#" class="mb10 db">大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜</a>
+						<div>
+							<p class="clearfix fr pl5 vm">
+								<span class="num-lower iconfont"></span>
+								<input type="number" class="num-text" value="1">
+								<span class="num-add iconfont"></span>
+							</p>
+							<span class="red fb mt2">￥18.9</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="3%">
+						<input type="checkbox">
+					</td>
+					<td width="25%" class="bdb">
+						<a href="#" class="db">
+							<img src="assets/images/eg/img2.jpg" alt="tu" class="db w">
+						</a>
+					</td>
+					<td width="72%" class="bdb">
+						<a href="#" class="mb10 db">大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜</a>
+						<div>
+							<p class="clearfix fr pl5 vm">
+								<span class="num-lower iconfont"></span>
+								<input type="number" class="num-text" value="1">
+								<span class="num-add iconfont"></span>
+							</p>
+							<span class="red fb mt2">￥18.9</span>
+						</div>
+					</td>
+				</tr>
+			</table>
+
+			<label class="p10 db bdb whitebg"><input type="checkbox" class="vm"> <span class="vm">店铺名称</span></label>
+			<table cellspacing="0" cellpadding="0" class="tb-p10 whitebg mb10">
+				<tr>
+					<td width="3%">
+						<input type="checkbox">
+					</td>
+					<td width="25%" class="bdb">
+						<a href="#" class="db">
+							<img src="assets/images/eg/img2.jpg" alt="tu" class="db w">
+						</a>
+					</td>
+					<td width="72%" class="bdb">
+						<a href="#" class="mb10 db">大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜</a>
+						<div>
+							<p class="clearfix fr pl5 vm">
+								<span class="num-lower iconfont"></span>
+								<input type="number" class="num-text" value="1">
+								<span class="num-add iconfont"></span>
+							</p>
+							<span class="red fb mt2">￥18.9</span>
+						</div>
+					</td>
+				</tr>
+			</table>
+			
+			<!--距离底部的距离-->
+			<div style="height:3.5em;">&nbsp;</div>
+
+			<div class="fixed-bottom clearfix">	
+				<label class="fl" style="padding-top:0.5em;"><input type="checkbox" class="vm"> <span class="vm">全选</span></label>
+				<div class="fr ml10">
+					<button type="button" class="appbtn redbtn pr15 pl15">去结算(0)</button>
+				</div>
+				<div class="fr">
+					<span>商品金额总计</span>
+					<p><span class="red">￥0.00</span></p>
+				</div>
+			</div>
+			
+		</section>
+	</article>
+
+	<script src="assets/script/less-1.7.3.min.js"></script>
+	<script src="assets/script/jq.min.js"></script>
+	<script src="assets/script/unslider.min.js"></script>
+	
+	<script>
+
+		//~~ 数量控制 ~~
+		$(".num-add").click(function(){
+			var a=$(this).siblings(".num-text").val();
+			a++;
+			$(this).siblings(".num-text").val(a);
+		});
+		
+		$(".num-lower").click(function(){
+			var a=$(this).siblings(".num-text").val();
+			if(a>1){
+				a--;
+			}
+			$(this).siblings(".num-text").val(a);
+		});
+
+	</script>
+
+</body>
+</html>

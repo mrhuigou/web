@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta property="qc:admins" content="1013706074652112566375" />
+    <meta name="baidu-site-verification" content="YfBJrvVnS9" />
+    <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="ai56dWktWVUicTYQDGQ2BF9oKAcHRAgTLlssBhpqYB0EZjwaAE8OIA==">
+    <title>家润慧生活</title>
+    <meta name="description" content="家润慧生活（www.365jiarun.com）- 青岛首选综合性同城网购-家润都市生活平台将城市生活分为吃、喝、穿、用、玩五大类，全面覆盖城市人生活的方方面面-家润生活圈开放30余个生活体验版块，发现达人体验、分享网购乐趣-家润慧生活为您量身打造高品质、高性价比、24小时上门服务的同城网购体验" />
+    <meta name="keywords" content="家润网、同城网购、网上购物、网购、网上商城、生活圈、慧生活网、网购商城" />
+    <link rel="shortcut icon" href="/icons/favicon.ico" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon-76.png" sizes="76x76">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon-120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon-152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon-180.png" sizes="180x180">
+    <link href="assets/stylesheet/mobile.min.css?v=20170313" rel="stylesheet">
+    <link href="assets/stylesheet/swiper.min.css?v=20170113" rel="stylesheet">
+
+    <script type="text/javascript">
+    (function(doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function() {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) {
+                    return;
+                } else if (clientWidth > 640) {
+                    docEl.style.fontSize = 20 + 'px';
+                } else {
+                    docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+                }
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="assets/script/html5shiv.js"></script>
+    <script src="assets/script/respond.min.js"></script>
+    <script src="assets/script/ie8.js"></script>
+    <![endif]-->
+
+    <script type="application/javascript">
+    function init_page() {
+        $("img.lazy").scrollLoading({
+            container: $(".content")
+        });
+    }
+    </script>
+
+</head>
+
+<body onload="init_page()">
+    <article>
+        <header class="header">
+            <a href="javascript:;" class="header-left" id="show-notification">
+                <img src="assets/images/logo2.png" width="110" style="margin-top: -6px;">
+            </a>
+            <div class="header-search clearfix pr">
+                <form action="/search/index" method="get" id="search_form">
+                    <input class="input-text s w" type="text" name="keyword" value="" autocomplete="off" tabindex="1" style="border: medium none;">
+                    <a href="javascript:void(0)" class="search-btn iconfont">&#xe601;</a>
+                </form>
+            </div>
+            <!--消息-->
+            <div class="dropdown1">
+                <div class="pa-rt tc w50 dropdown-t">
+                    <i class="iconfont green">&#xe670;</i>
+                    <em class="dots-o pa-tr r10 t10"></em>
+                </div>
+                <ul class="dropdown-c lh180" style="display: none;">
+                    <li>
+                        <a href="/news/list">
+                            <i class="iconfont vm mr5">&#xe649;</i>
+                            <span class="vm">消息</span>
+                            <em class="dots-o pa-tr r10 t10"></em>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" class="share-guide">
+                            <i class="iconfont vm mr5">&#xe644;</i>
+                            <span class="vm">分享</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tel:4008556977">
+                            <i class="iconfont vm mr5">&#xe65e;</i>
+                            <span class="vm">客服</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="content">
+            <section class="veiwport " style="max-width: inherit;width: 32rem;height: auto;">
+
+                <!-- 幻灯 -->
+                <div id="swiper_content" style="max-width: inherit;width: 32rem;height: 13.3rem;overflow: hidden;"></div>
+                <script id="swiper_content_tpl" type="text/html">
+                    <div class="swiper-container" id="swiper-container_banner">
+                        <div class="swiper-wrapper">
+                            <% for(var i=from; i<=to; i++) {%>
+                                <div class="swiper-slide">
+                                    <a href="<%:=list[i].url%>">
+                            <img
+                                  data-original="<%:=list[i].image%>" class=" w lazy">
+                        </a>
+                                </div>
+                                <% } %>
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination swiper-pagination-white swiper-pagination-banner"></div>
+                    </div>
+                </script>
+
+
+                <!--妈妈必读-->
+                <div class="BreakingNewsController easing mt5 mb5" id="breakingnews">
+                    <div class="bn-title"></div>
+                    <ul>
+                        <li>
+                            <a href="/read-more/index#item_postion_268" class=" db w">
+                                                <span class="btn btn-xxs btn-bd-red">促销</span>精选24款爆款超低价促销中！</a>
+                            <a href="/read-more/index#item_postion_412" class=" db w">
+                                                <span class="btn btn-xxs btn-bd-red">洗护</span>盛夏洗护狂欢，满199送199</a>
+                        </li>
+                        <li>
+                            <a href="/read-more/index#item_postion_424" class=" db w">
+                                                <span class="btn btn-xxs btn-bd-red">鲜花</span>爱在七夕，鲜花红酒为爱放价！</a>
+                            <a href="/read-more/index#item_postion_139" class="red db w">
+                                                <span class="btn btn-xxs btn-bd-red">酸奶</span>新鲜酸奶全场低至半价！</a>
+                        </li>
+                        <li>
+                            <a href="/read-more/index#item_postion_406" class=" db w">
+                                                <span class="btn btn-xxs btn-bd-red">鱼丸</span>可以直接吃的泰国TVI鱼丸低至33.8元/500g</a>
+                            <a href="/read-more/index#item_postion_418" class=" db w">
+                                                <span class="btn btn-xxs btn-bd-red">洗护</span>阿道夫洗发乳买一送一限时抢！</a>
+                        </li>
+                        <li>
+                            <a href="/read-more/index#item_postion_355" class=" db w">
+                                                <span class="btn btn-xxs btn-bd-red">驱蚊</span>夏季驱蚊专场，六神花露水低至6.5元</a>
+                            <a href="/read-more/index#item_postion_220" class="red db w">
+                                                <span class="btn btn-xxs btn-bd-red">粮油</span>面粉低至19.9元，满19.9元送金沙河鸡蛋面1袋</a>
+                        </li>
+                        <li>
+                            <a href="/read-more/index#item_postion_400" class=" db w">
+                                                <span class="btn btn-xxs btn-bd-red">杂粮大米</span>十月稻田黄小米仅售9.9元</a>
+                            <a href="/read-more/index#item_postion_391" class=" db w">
+                                                <span class="btn btn-xxs btn-bd-red">干货</span>八荒滋补养生百合干50g专享9.9元包邮</a>
+                        </li>
+                    </ul>
+                </div>
+
+                
+                <!-- 妈咪必购 -->
+                <div>
+                    <div class="tit1  tit1-red">
+                        <h2>妈咪必购</h2>
+                    </div>
+                    <div id="hot_content" style="max-width: inherit;overflow: hidden;" class="pl5 pr5"></div>
+                </div>
+                <script id="hot_content_tpl" type="text/html">
+                    <div class="swiper-container" id="swiper-container_ad">
+                        <div class="swiper-wrapper swiper-container-no-flexbox">
+                            <div class="swiper-slide clearfix row">
+                            <% for(var i=from; i<=to; i++) {%>
+                                <a href="<%:=list[i].url%>" class="db col-3 " >
+                                    <img src="<%:=list[i].image%>"  class="fl" style="height: 10.4rem;width: 10.4rem;border-left: 0.125rem solid #eee;border-bottom: 0.23rem solid #eee;"">
+                                </a>
+                           <% if((i+1)%6==0 && (i+1)< to){ %>
+                            </div> <div class="swiper-slide clearfix row">
+                            <% } %>
+                            <% } %>
+                            </div>
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination swiper-pagination-ad" style="position: relative;"></div>
+                    </div>
+                </script>
+
+
+                <!-- 品类钜惠 -->
+                <div class="tit1 tit1-org">
+                    <h2>品类钜惠</h2>
+                </div>
+                <div class="flex-col">
+                    <a href="#" class="flex-item-6 p2">
+                        <img src="http://img1.365jiarun.com/group1/M00/05/E9/wKgB7lkiiESAK0wsAABbVuEYDFo026.jpg" class="w">
+                    </a>
+                    <a href="#" class="flex-item-6 p2">
+                        <img src="http://img1.365jiarun.com/group1/M00/05/E9/wKgB7lkiiESAK0wsAABbVuEYDFo026.jpg" class="w">
+                    </a>
+                    <a href="#" class="flex-item-6 p2">
+                        <img src="http://img1.365jiarun.com/group1/M00/05/E9/wKgB7lkiiESAK0wsAABbVuEYDFo026.jpg" class="w">
+                    </a>
+                    <a href="#" class="flex-item-6 p2">
+                        <img src="http://img1.365jiarun.com/group1/M00/05/E9/wKgB7lkiiESAK0wsAABbVuEYDFo026.jpg" class="w">
+                    </a>
+                </div>
+
+
+                <!-- 宝宝成长之路 -->
+                <div class="tit1 tit1-green">
+                    <h2>宝宝成长之路</h2>
+                </div>
+                <div class="oh">
+                    <div class="flex-col" style="margin: 0 -1px;">
+                        <div class="flex-item-6 p1">
+                            <a href="#">
+                                <img src="http://img1.365jiarun.com/group1/M00/05/E7/wKgB7lkeYhqAeMNEAADhCf92OY0760.jpg_180x180.jpg" class="w">
+                            </a>
+                        </div>
+                        <div class="flex-item-6 p1">
+                            <a href="#">
+                                <img src="http://img1.365jiarun.com/group1/M00/05/E7/wKgB7lkeYhqAeMNEAADhCf92OY0760.jpg_180x180.jpg" class="w">
+                            </a>
+                        </div>
+                        <div class="flex-item-6 p1">
+                            <a href="#">
+                                <img src="http://img1.365jiarun.com/group1/M00/05/E7/wKgB7lkeYhqAeMNEAADhCf92OY0760.jpg_180x180.jpg" class="w">
+                            </a>
+                        </div>
+                        <div class="flex-item-6 p1">
+                            <a href="#">
+                                <img src="http://img1.365jiarun.com/group1/M00/05/E7/wKgB7lkeYhqAeMNEAADhCf92OY0760.jpg_180x180.jpg" class="w">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            
+
+                <!--特惠专享-->
+                <div class="tit1 tit1-green">
+                    <h2 class="dib">特惠专享</h2><span class="f12 gray9"> | 大牌来袭</span>
+                </div>
+
+                <div>
+                    <a href="https://m.365jiarun.com/page/2122.html">
+                        <img src="http://img1.365jiarun.com/group1/M00/05/E8/wKgB7lkeqRKAGuj-AACuGNxAKNQ476.jpg_640x250.jpg" class="w">
+                    </a>
+                </div>
+                <div class="flex-col bg-wh mb10">
+                    <a href="/DP0001-508233.html" class="flex-item-3 pr">
+                        <img src="http://img1.365jiarun.com/group1/M00/02/D8/wKgB7lU3XaCANf9uAAB9JBKClJg477.jpg_190x190.jpg" class="w">
+                        <div class="p5 tc">
+                            <p class="row-two f12">威露士（Walch） 衣物家居消毒液 3L</p>
+                            <span class="red">￥59.9</span>
+                        </div>
+                    </a>
+                    <a href="/DP0001-504015.html" class="flex-item-3 pr">
+                        <img src="http://img1.365jiarun.com/group1/M00/01/AC/wKgB7lRIt4qAJl5YAAFDX6_Tk-c484.jpg_190x190.jpg" class="w">
+                        <div class="p5 tc">
+                            <p class="row-two f12">威露士洗衣液双袋加量装有氧洗2KG+2KG</p>
+                            <span class="red">￥39.9</span>
+                        </div>
+                    </a>
+                    <a href="/DP0001-509419.html" class="flex-item-3 pr">
+                        <img src="http://img1.365jiarun.com/group1/M00/03/5A/wKgB7lXEajOAdEyPAABoHlTiFOk341.jpg_190x190.jpg" class="w">
+                        <div class="p5 tc">
+                            <p class="row-two f12">汰渍 全效360度三重功效洗衣皂238克*2</p>
+                            <span class="red">￥7.9</span>
+                        </div>
+                    </a>
+                    <a href="/DP0001-504015.html" class="flex-item-3 pr">
+                        <img src="http://img1.365jiarun.com/group1/M00/01/AC/wKgB7lRIt4qAJl5YAAFDX6_Tk-c484.jpg_190x190.jpg" class="w">
+                        <div class="p5 tc">
+                            <p class="row-two f12">威露士洗衣液双袋加量装有氧洗2KG+2KG</p>
+                            <span class="red">￥39.9</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div>
+                    <a href="https://m.365jiarun.com/page/2122.html">
+                        <img src="http://img1.365jiarun.com/group1/M00/05/E6/wKgB7lkc-z2Aawy9AACt_WxVS1k079.jpg_640x250.jpg" class="w">
+                    </a>
+                </div>
+                <div class="flex-col bg-wh mb10">
+                    <a href="/DP0001-508233.html" class="flex-item-3 pr">
+                        <img src="http://img1.365jiarun.com/group1/M00/02/D8/wKgB7lU3XaCANf9uAAB9JBKClJg477.jpg_190x190.jpg" class="w">
+                        <div class="p5 tc">
+                            <p class="row-two f12">威露士（Walch） 衣物家居消毒液 3L</p>
+                            <span class="red">￥59.9</span>
+                        </div>
+                    </a>
+                    <a href="/DP0001-504015.html" class="flex-item-3 pr">
+                        <img src="http://img1.365jiarun.com/group1/M00/01/AC/wKgB7lRIt4qAJl5YAAFDX6_Tk-c484.jpg_190x190.jpg" class="w">
+                        <div class="p5 tc">
+                            <p class="row-two f12">威露士洗衣液双袋加量装有氧洗2KG+2KG</p>
+                            <span class="red">￥39.9</span>
+                        </div>
+                    </a>
+                    <a href="/DP0001-509419.html" class="flex-item-3 pr">
+                        <img src="http://img1.365jiarun.com/group1/M00/03/5A/wKgB7lXEajOAdEyPAABoHlTiFOk341.jpg_190x190.jpg" class="w">
+                        <div class="p5 tc">
+                            <p class="row-two f12">汰渍 全效360度三重功效洗衣皂238克*2</p>
+                            <span class="red">￥7.9</span>
+                        </div>
+                    </a>
+                    <a href="/DP0001-504015.html" class="flex-item-3 pr">
+                        <img src="http://img1.365jiarun.com/group1/M00/01/AC/wKgB7lRIt4qAJl5YAAFDX6_Tk-c484.jpg_190x190.jpg" class="w">
+                        <div class="p5 tc">
+                            <p class="row-two f12">威露士洗衣液双袋加量装有氧洗2KG+2KG</p>
+                            <span class="red">￥39.9</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div>
+                    <a href="https://m.365jiarun.com/page/2122.html">
+                        <img src="http://img1.365jiarun.com/group1/M00/05/EA/wKgB7lkiqumAQnPkAADuR_GJssc631.jpg_640x250.jpg" class="w">
+                    </a>
+                </div>
+                <div class="flex-col bg-wh mb10">
+                    <a href="/DP0001-508233.html" class="flex-item-3 pr">
+                        <img src="http://img1.365jiarun.com/group1/M00/02/D8/wKgB7lU3XaCANf9uAAB9JBKClJg477.jpg_190x190.jpg" class="w">
+                        <div class="p5 tc">
+                            <p class="row-two f12">威露士（Walch） 衣物家居消毒液 3L</p>
+                            <span class="red">￥59.9</span>
+                        </div>
+                    </a>
+                    <a href="/DP0001-504015.html" class="flex-item-3 pr">
+                        <img src="http://img1.365jiarun.com/group1/M00/01/AC/wKgB7lRIt4qAJl5YAAFDX6_Tk-c484.jpg_190x190.jpg" class="w">
+                        <div class="p5 tc">
+                            <p class="row-two f12">威露士洗衣液双袋加量装有氧洗2KG+2KG</p>
+                            <span class="red">￥39.9</span>
+                        </div>
+                    </a>
+                    <a href="/DP0001-509419.html" class="flex-item-3 pr">
+                        <img src="http://img1.365jiarun.com/group1/M00/03/5A/wKgB7lXEajOAdEyPAABoHlTiFOk341.jpg_190x190.jpg" class="w">
+                        <div class="p5 tc">
+                            <p class="row-two f12">汰渍 全效360度三重功效洗衣皂238克*2</p>
+                            <span class="red">￥7.9</span>
+                        </div>
+                    </a>
+                    <a href="/DP0001-504015.html" class="flex-item-3 pr">
+                        <img src="http://img1.365jiarun.com/group1/M00/01/AC/wKgB7lRIt4qAJl5YAAFDX6_Tk-c484.jpg_190x190.jpg" class="w">
+                        <div class="p5 tc">
+                            <p class="row-two f12">威露士洗衣液双袋加量装有氧洗2KG+2KG</p>
+                            <span class="red">￥39.9</span>
+                        </div>
+                    </a>
+                </div>
+
+  
+
+
+            </section>
+            <footer class="gray9 tc p10 f14">
+                Copyright©2015家润慧生活 版权所有
+                <br> 客服热线：4008-556-977
+            </footer>
+            </div>
+
+    </article>
+
+
+    <script src="assets/js/jq.min.js"></script>
+    <script src="assets/script/jquery-migrate-1.2.1.js"></script>
+    <script src="assets/js/core/yii.js"></script>
+    <script src="assets/script/swiper.jquery.min.js?v=20170113"></script>
+    <script src="assets/script/jquery-extend.js"></script>
+    <script src="assets/script/template7.js"></script>
+    <script src="assets/script/infinite.js"></script>
+    <script src="assets/script/popup.js"></script>
+    <script src="assets/script/toast.js"></script>
+    <script src="assets/script/modal.js"></script>
+    <script src="assets/script/notification.js"></script>
+    <script src="assets/script/jquery_mask.js"></script>
+    <script src="assets/script/jquery.followit.js?v=20170101"></script>
+    <script src="assets/script/jquery.tabslet.min.js?v=20170101"></script>
+    <script src="assets/script/jquery.scrollLoading.js?v=20170101"></script>
+    <script src="assets/script/ipop.js?v=20170101"></script>
+    <script src="assets/script/page.js?v=20170303"></script>
+    <script src="assets/script/layer.m/layer.m.js?v=20170101"></script>
+    <script src="assets/script/scrollfix.js?v=20170101"></script>
+    <script src="assets/script/jquery.nav.js?v=20170101"></script>
+    <script src="assets/script/jquery.cookie.js?v=20170101"></script>
+    <script src="assets/js/template.js?v=20170101"></script>
+    <script src="assets/script/breakingnews.js?v=20170220"></script>
+    <script src="assets/script/TT.js?v=20170220"></script>
+    <script src="assets/fonts/iconfont.js"></script>
+    <script type="text/javascript">
+    jQuery(document).ready(function() {
+
+        /* 新闻播放 */
+        $('#breakingnews').BreakingNews({
+        title: '<img src="https://m.365jiarun.com/assets/images/green-kuaibao.png">',
+        timer: 4000,
+        effect: 'slide'
+        });
+
+        /* 妈咪必购 */
+        var hot_content_tpl = $('#hot_content_tpl').html();
+        $.getJSON('https://open.365jiarun.com/mall/v1/ad/index?code=H5-0F-AD&callback=?', function(result){
+            var html= template(hot_content_tpl, {list:result.data,from:0,to:(result.data.length-1)});
+            $("#hot_content").html(html);
+            $("img.lazy").scrollLoading({container:$(".content")});
+            //滑动
+            var swiper_ad = new Swiper('#swiper-container_ad', {
+            pagination: '.swiper-pagination-ad',
+            paginationType: 'progress',
+            paginationClickable: true,
+            autoplay: 6000,
+            loop:true,
+            });
+        });
+
+
+        var swiper_content_tpl = $('#swiper_content_tpl').html();
+        $.getJSON('https://open.365jiarun.com/mall/v1/ad/index?code=H5-0F-SLIDE&callback=?', function(result) {
+            if (!result.status) {
+                return;
+            }
+            var html = template(swiper_content_tpl, {
+                list: result.data,
+                from: 0,
+                to: (result.data.length - 1)
+            });
+            $("#swiper_content").html(html);
+            $("img.lazy").scrollLoading({
+                container: $(".content")
+            });
+            var swiper_banner = new Swiper('#swiper-container_banner', {
+                pagination: '.swiper-pagination-banner',
+                paginationClickable: true,
+                loop: true,
+                spaceBetween: 0,
+                centeredSlides: true,
+                autoplay: 4000,
+                autoplayDisableOnInteraction: false
+            });
+        });
+
+
+        //滑动
+        var brandSale = new Swiper('#brand-sale', {
+            slidesPerView: "auto",
+            spaceBetween: 5,
+            loop: true,
+            autoplay: 6000,
+            autoplayDisableOnInteraction: false
+        });
+
+
+
+        if ($.cookie('home_scroll')) {
+            $(".content").scrollTop($.cookie('home_scroll'));
+        }
+        $(".content").on('scroll', function() {
+            var scroll = $(this).scrollTop();
+            $.cookie('home_scroll', scroll);
+        });
+        /* 消息列表 */
+        $(".dropdown-t").dropdown();
+        $.backtop(".content");
+
+
+    });
+    </script>
+</body>
+
+</html>

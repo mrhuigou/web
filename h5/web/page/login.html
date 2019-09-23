@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>登录</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+</head>
+<body>
+	<article>
+		<header class="header">
+			<a href="javascript:history.back();" class="his-back">返回</a>
+			<h2>登录</h2>
+			<a href="#" class="right">注册</a>
+		</header>
+
+		<section class="login-bodyer">
+			<div class="pr">
+				<input class="input-text w fx-convert-tri" type="text" value="" placeholder="手机号/邮箱/昵称" maxlength="20" autocomplete="off" tabindex="1">
+				<p class="input-setup clearfix">
+					<a href="javascript:void(0);" class="input-del fr" style="display:none;"></a>
+				</p>
+			</div>
+			<div class="pr pt-15em">
+				<input class="input-text w fx-convert-tri" type="password" value="" placeholder="登录密码" maxlength="20" autocomplete="off">
+				<p class="input-setup clearfix">
+					<a href="javascript:void(0);" class="pwd-btn right fr">
+                        <span class="bg_l"></span>
+                        <span class="bg_r"></span>
+                        <i>隐藏</i>
+                    </a>
+					<a href="javascript:void(0);" class="input-del fr" style="display:none;"></a>
+				</p>
+			</div>
+
+			<div class="pt-15em clearfix">
+				<div class="pr w-per60 fl">
+					<input class="input-text w fx-convert-tri" type="text" value="" placeholder="请输入图片验证码" maxlength="4" autocomplete="off">
+					<p class="input-setup clearfix">
+						<a href="javascript:void(0);" class="input-del fr" style="display:none;"></a>
+					</p>
+				</div>
+				<img src="http://www.365jiarun.com/common/checkcode" class="appbtn w-per35 fr">
+			</div>
+
+			<button type="button" class="appbtn mt-15em w greenbtn">登录</button>
+
+			<h3 class="pt-15em">第三方账号登录</h3>
+			<div class="pt-15em login-other clearfix">
+				<a href="#" class="login-qq"></a>
+				<a href="#" class="login-weibo"></a>
+				<a href="#" class="login-wechat"></a>
+			</div>
+			<div class="pwd-text right">
+				<span class="l"></span>
+				<span class="r"></span>
+				<i></i>
+			</div>
+
+			<!--主导航-->
+			<nav class="fx-bottom fx-convert-tar">
+				<div class="nav-main clearfix">
+					<a href="#"><i class="iconfont">&#xe63f;</i>首页</a>
+					<a href="#"><i class="iconfont">&#xe640;</i>分类</a>
+					<a href="#"><i class="iconfont">&#xe63e;</i>发现</a>
+					<a href="#" class="pr">
+						<i class="iconfont">&#xe63b;</i>购物车
+						<em class="info-point">2</em>
+					</a>
+					<a href="#"><i class="iconfont">&#xe603;</i>我的</a>
+				</div>
+			</nav>
+
+
+		</section>
+	</article>
+
+
+	<script src="assets/script/zepto.min.js"></script>
+	<script src="assets/script/less-1.7.3.min.js"></script>
+	
+	<script>
+
+	/*~~ 文本框输入内容时出现删除图标 ~~*/
+	$(".input-text").keyup(function() {
+		if($(this).val()){
+			$(this).next(".input-setup").find(".input-del").show();
+		}else{
+			$(this).next(".input-setup").find(".input-del").hide();
+		}
+	});
+	/*~~ 点击删除图标 重置文本框内容~~*/
+	$(".input-del").click(function() {
+		$(this).hide().parent(".input-setup").prev(".input-text").val("").focus();
+	});
+
+	/*~~ 密码框可见加密的切换 ~~*/
+	$(".pwd-btn").click(function(){
+		var _this=$(this),
+			input=_this.parent(".input-setup").prev(".input-text");
+
+		if(_this.is(".right")){
+			//切换可见图标
+			_this.removeClass('right').addClass('left');
+			//切换为普通文本框
+			input.attr("type","text").focus();
+
+		}else if(_this.is(".left")){
+			//切换加密图标
+			_this.addClass('right').removeClass('left');
+			//切换为密码框
+			input.attr("type","password").focus();
+		}
+	})
+
+	//fixed和软键盘
+	$(".fx-convert-tri").focus(function(event) {
+		$(".fx-convert-tar").css("position","absolute");
+	});
+	$(".fx-convert-tri").blur(function(event) {
+		$(".fx-convert-tar").css("position","fixed");
+	});
+	
+
+	</script>
+</body>
+</html>

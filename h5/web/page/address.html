@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>收货地址</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+</head>
+<body>
+	<article>
+		<header class="header">
+			<a href="javascript:history.back();" class="his-back">返回</a>
+			<h2>收货地址</h2>
+		</header>
+		
+		<section class="veiwport">
+			<table cellspacing="5" cellpadding="0" class="tb-p10 mb10 whitebg">
+				<tr class="bdb">
+					<td width="4%">
+						<input type="checkbox" checked>
+					</td>
+					<td width="85%" class="label-addr">
+						<span>收货人：荆丽苹</span><em class="ml10">15762298085</em>
+						<p>中国  山东 青岛市 四方区</p>
+						<p>周口路97号中航科技园</p>
+					</td>
+					<td>
+						<a href="#" class="iconfont red">&#xe615;</a>
+					</td>
+				</tr>
+				<tr class="bdb">
+					<td width="4%">
+						<input type="checkbox">
+					</td>
+					<td width="85%" class="label-addr">
+						<span>收货人：荆丽苹</span><em class="ml10">15762298085</em>
+						<p>中国  山东 青岛市 四方区</p>
+						<p>周口路97号中航科技园</p>
+					</td>
+					<td>
+						<a href="#" class="iconfont red">&#xe615;</a>
+					</td>
+				</tr>
+			
+			</table>
+		
+			<div class="fixed-bottom tc">
+				<button type="button" class="appbtn redbtn pr15 pl15">添加新地址</button>
+			</div>
+
+		</section>
+	</article>
+
+	<script src="assets/script/less-1.7.3.min.js"></script>
+	<script src="assets/script/jq.min.js"></script>
+
+	<script>
+		//选择地址点击整行选中
+		$(".label-addr").click(function(){
+			$(this).parents("table").find("input").attr("checked",false);
+			$(this).prev().find("input").attr("checked",true);
+		})
+	</script>
+
+</body>
+</html>

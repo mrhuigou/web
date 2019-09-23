@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/global.css" />
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/layout.css" />
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/modules.css" />
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/icommon.css" />
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/page.css" />
+</head>
+
+<body>
+    <div id="header" style="margin-top:0!important;">
+        <!--top-->
+        <div class="site-nav">
+            <div class="site-nav-bd clearfix" style="width: 1100px">
+                <ul class="site-nav-bd-l clearfix">
+                    <li><a href="/">家润首页</a></li>
+                    <li><a href="/account">pipip</a></li>
+                    <li><a href="/site/logout">[退出]</a></li>
+                </ul>
+                <ul class="site-nav-bd-r clearfix">
+                    <li class="sn-menu">
+                        <a class="menu-hd" href="/message/index" rel="nofollow"><i class="iconfont green f14"></i> 消息 <span class="green">2</span><b></b></a>
+                        <div class="menu-bd">
+                            <a href="/message/index" rel="nofollow">查看全部</a>
+                        </div>
+                    </li>
+                    <li class="sn-menu">
+                        <a href="/account" class="menu-hd" rel="nofollow">我的家润<b></b></a>
+                        <div class="menu-bd">
+                            <a href="/order/index" rel="nofollow">我的订单</a>
+                            <a href="/collect/index" rel="nofollow">我的收藏</a>
+                            <!-- <a rel="nofollow">我的消息</a> -->
+                        </div>
+                    </li>
+                    <li><a href="/cart/index">购物车</a></li>
+                    <li class="sn-mobile">
+                        APP下载
+                        <div class="sn-qrcode">
+                            <img src="/assets/images/app.png" alt="家润慧生活-微博二维码" width="120" height="120" class="db">
+                            <b></b>
+                        </div>
+                    </li>
+                    <li class="sn-mobile">
+                        微信
+                        <div class="sn-qrcode">
+                            <img src="/assets/images/wx.jpg" alt="家润慧生活-微信二维码" width="120" height="120" class="db">
+                            <b></b>
+                        </div>
+                    </li>
+                    <li class="sn-mobile">
+                        微博
+                        <div class="sn-qrcode">
+                            <img src="/assets/images/weibo.png" alt="家润慧生活-微博二维码" width="120" height="120" class="db">
+                            <b></b>
+                        </div>
+                    </li>
+                    <li><a href="javascript:void(0)" onclick="addToFav('http://www.365jiarun.com','家润慧生活')">收藏网站</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--logo和search-->
+        <div class="header-wrap">
+            <div class="header-box w1100 bc">
+                <div class="logo-search clearfix">
+                    <div class="logos fl">
+                        <a href="/"><img src="http://www.365jiarun.com/assets/images/logo1.png" width="153" alt="慧生活logo"></a>
+                    </div>
+                    <ul class="jr-nav fl clearfix">
+                        <li><a href="/site/index">首页</a></li>
+                        <li><a href="/order/index">订单中心</a></li>
+                        <li><a href="/account/index">帐户中心</a></li>
+                        <li><a href="/club/default/index">生活圈</a></li>
+                    </ul>
+                    <div class="search-box fr pr clearfix">
+                        <form action="/product/category" method="get" id="search_form">
+                            <input type="text" id="search_keyword" name="keyword" value="" placeholder="搜索你想要的商品" class="fl">
+                            <button class="btn-search fr search-btn">搜索</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="graybg2 pb10">
+        <div class="w1100 bc pt15">
+			
+			<!--面包屑导航-->
+			<p class="gray6 mb15"><a class="f14"></a><a href="/">首页</a> &gt; <a class="f14"></a><a href="/account">用户中心</a> &gt; <a class="f14">我的优惠券</a></p>
+
+            <div class="whitebg p15 mb10">
+           		<a href="#" class="fr">
+           			<i class="iconfont f25 red">&#xe635;</i>	
+           			<span class="vm2">领取更多优惠券</span>
+           		</a>
+
+           		<span class="f14">优惠券：</span>
+           		<input type="text" class="input sinput vm">
+           		<input type="text" class="input sinput vm">
+           		<a href="#" class="btn sbtn grayBtn vm">激活优惠券</a>
+            </div>
+
+
+			<div class="whitebg">
+			    <div class="orderCata clearfix">
+			    	<div class="item">
+			    		<select class="select f14">
+			    			<option>未使用（3）</option>
+			    			<option>未使用（3）</option>
+			    		</select>
+			    	</div>
+			    	<div class="item">
+			    		<select class="select f14">
+			    			<option>优惠券类型</option>
+			    			<option>优惠券类型</option>
+			    		</select>
+			    	</div>
+			    	<a href="#" class="item">
+			    		<span class="red">即将过期（2）</span>
+			    	</a>
+			    </div>
+
+			    <!--列表-->
+	            <div class="clearfix mt5">
+					<div class="pw33 fl">
+						<div class="p5">
+							<div class="bd whitebg clearfix pr">
+								<div class="pw35 fl">
+									<img src="assets/images/temp/i2.jpg" class="db w">
+								</div>
+								<div class="pw45 fl">
+									<div class="p10 lh pt25">
+										<div class="lh200 pl10">
+											<p>满100元可用</p>
+											<p class="mxh20">限<span class="red">家润全场</span>通用限<span class="red">家润全场</span>通用</p>
+											<p>2016.7.3~2016.7.25</p>
+										</div>
+									</div>
+								</div>
+								<div class="pw20 fr graybg2 tc pa-rt b0 pt40">
+									<p class="f25 red pb5">￥20</p>
+									<a href="#">去使用</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="pw33 fl">
+						<div class="p5">
+							<div class="bd whitebg clearfix pr">
+								<div class="pw35 fl">
+									<img src="assets/images/temp/i2.jpg" class="db w">
+								</div>
+								<div class="pw45 fl">
+									<div class="p10 lh pt25">
+										<div class="lh200 pl10">
+											<p>满100元可用</p>
+											<p class="mxh20">限<span class="red">家润全场</span>通用限<span class="red">家润全场</span>通用</p>
+											<p>2016.7.3~2016.7.25</p>
+										</div>
+									</div>
+								</div>
+								<div class="pw20 fr graybg2 tc pa-rt b0 pt40">
+									<p class="f25 red pb5">￥20</p>
+									<a href="#">去使用</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="pw33 fl">
+						<div class="p5">
+							<div class="bd whitebg clearfix pr">
+								<div class="pw35 fl">
+									<img src="assets/images/temp/i2.jpg" class="db w">
+								</div>
+								<div class="pw45 fl">
+									<div class="p10 lh pt25">
+										<div class="lh200 pl10">
+											<p>满100元可用</p>
+											<p class="mxh20">限<span class="red">家润全场</span>通用限<span class="red">家润全场</span>通用</p>
+											<p>2016.7.3~2016.7.25</p>
+										</div>
+									</div>
+								</div>
+								<div class="pw20 fr graybg2 tc pa-rt b0 pt40">
+									<p class="f25 red pb5">￥20</p>
+									<a href="#">去使用</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="pw33 fl grayscale">
+						<div class="p5">
+							<div class="bd whitebg clearfix pr">
+								<div class="pw35 fl">
+									<img src="assets/images/temp/i2.jpg" class="db w">
+								</div>
+								<div class="pw45 fl icon-pass">
+									<div class="p10 lh pt25">
+										<div class="lh200 pl10">
+											<p>满100元可用</p>
+											<p class="mxh20">限<span class="red">家润全场</span>通用限<span class="red">家润全场</span>通用</p>
+											<p>2016.7.3~2016.7.25</p>
+										</div>
+									</div>
+									<!--折扣券状态icon-->
+									<i class="iconfont lh">&#xe633;</i>
+								</div>
+								<div class="pw20 fr graybg2 tc pa-rt b0 pt40">
+									<p class="f25 red pb5">￥20</p>
+									<a href="#">去使用</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="pw33 fl grayscale">
+						<div class="p5">
+							<div class="bd whitebg clearfix pr">
+								<div class="pw35 fl">
+									<img src="assets/images/temp/i2.jpg" class="db w">
+								</div>
+								<div class="pw45 fl icon-pass">
+									<div class="p10 lh pt25">
+										<div class="lh200 pl10">
+											<p>满100元可用</p>
+											<p class="mxh20">限<span class="red">家润全场</span>通用限<span class="red">家润全场</span>通用</p>
+											<p>2016.7.3~2016.7.25</p>
+										</div>
+									</div>
+									<!--折扣券状态icon-->
+									<i class="iconfont lh">&#xe632;</i>
+								</div>
+								<div class="pw20 fr graybg2 tc pa-rt b0 pt40">
+									<p class="f25 red pb5">￥20</p>
+									<a href="#">去使用</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="pw33 fl">
+						<div class="p5">
+							<div class="bd whitebg clearfix pr">
+								<div class="pw35 fl">
+									<img src="assets/images/temp/i2.jpg" class="db w">
+								</div>
+								<div class="pw45 fl">
+									<div class="p10 lh pt25">
+										<div class="lh200 pl10">
+											<p>满100元可用</p>
+											<p class="mxh20">限<span class="red">家润全场</span>通用限<span class="red">家润全场</span>通用</p>
+											<p>2016.7.3~2016.7.25</p>
+										</div>
+									</div>
+								</div>
+								<div class="pw20 fr graybg2 tc pa-rt b0 pt40">
+									<p class="f25 red pb5">￥20</p>
+									<a href="#">去使用</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<!--规则-->
+				<div class="p15">
+					<div class="yellowBox p15 lh200">
+						<h2 class="fb">规则：</h2>
+						<p>这里是规则说明这里是规则说明这里是规则说明这里是规则说明</p>
+						<p>这里是规则说明这里是规则说明这里是规则说明这里是规则说明</p>
+						<p>这里是规则说明这里是规则说明这里是规则说明这里是规则说明</p>
+					</div>
+				</div>
+
+
+			</div>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="v2_footer" style="min-width:1100px;">
+        <div class="w1100 pt10 pb30 bc">
+            <ul class="clearfix mt10">
+                <li>
+                    <dl>
+                        <dt>购物指南</dt>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=584">订餐外卖</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/会员 会员注册">会员介绍</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/会员须知">服务协议</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=6">购物流程</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=194">积分制度</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=202">在线客服指南</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=40">常见问题</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>支付配送</dt>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=206">支付方式</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=9">配送范围</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=208">配送时效</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=369">配送费用标准</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=10">配送服务须知</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=130">代送服务</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>售后服务</dt>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=128">低价保障</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=11">售后政策</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=14">退货流程</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=43">退款说明</a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=307">订单取消</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>关注与合作</dt>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/merchant"><span class="">平台开放</span></a>
+                        </dd>
+                        <dd>
+                            <a target="_blank" href="http://www.365jiarun.com/information/information?information_id=274">加入我们</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <p class="pt20 pb10 tc gray6">
+        <a href="http://www.365jiarun.com/aboutus">关于我们</a>
+        <!-- -->
+        <a href="javascript:void(0);">诚聘英才</a>
+        <a href="javascript:void(0);">联系我们</a>
+        <a href="javascript:void(0);">网站合作</a> 版权说明 举报邮箱：service@365jiarun.com 仅限18周岁以上人士购买 网络社会征信网
+        <br> Copyright© 2006-2014 家润网 www.365jiarun.com 版权所有 网站备案号：鲁ICP备13017153号
+        <br> 客服电话：4008-556-977 时间:9:00-12:00 13:00-22:00 客服邮箱：service@365jiarun.com
+    </p>
+    <p class="pb50 tc gray6">
+        <img src="http://www.365jiarun.com/image/licence.jpg" alt="营业许可" title="营业许可">
+        <img border="0" alt="360安全认证" src="http://www.365jiarun.com/image/360safe.png">
+        <a href="http://pinggu.zx110.org/review_url_365jiarun.com" target="_blank" title="可信评估"><img height="47" alt="可信评估" src="http://www.365jiarun.com/image/xinyong.jpg" border="0"></a>
+    </p>
+    <!--侧边栏浮动条-->
+    <div class="right-float">
+        <div class="right-float-main">
+            <a href="javascript:void(0);" class="iconfont gouwuche">&#xe606;<span class="db f12 simSun">购<br>物<br>车</span><i class="numicon">22</i></a>
+            <a href="javascript:void(0);" class="iconfont" title="联系客服">&#xe600;</a>
+            <a href="javascript:void(0);" class="iconfont" title="我的收藏">&#xe62a;</a>
+            <a href="javascript:void(0);" class="iconfont" title="我看过的">&#xe62b;</a>
+            <a href="javascript:void(0);" class="iconfont pr" title="信息">&#xe622;<i class="numicon pa" style="top: -1px;right: 0px;">2</i></a>
+        </div>
+        <div class="right-float-bottom">
+            <a href="javascript:void(0)" class="iconfont" title="用户反馈">&#xe62c;</a>
+            <a href="javascript:void(0)" class="back-top" title="返回顶部"></a>
+        </div>
+    </div>
+    <script src="assets/script/jq.min.js"></script>
+    <script src="assets/script/less-1.7.3.min.js"></script>
+    <script src="assets/script/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="assets/script/ipop.js"></script>
+    <script type="text/javascript" src="assets/script/ipage.js"></script>
+    <script type="text/javascript" src="assets/script/jquery.SuperSlide.2.1.1.js"></script>
+    <script>
+    /*
+    	2016-7-5 开网
+    	*/
+    /*热门商品*/
+    jQuery(".hotlist-wrap").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        autoPage: true,
+        effect: "leftLoop",
+        autoPlay: true,
+        scroll: 1,
+        vis: 4
+    });
+    </script>
+</body>
+
+</html>

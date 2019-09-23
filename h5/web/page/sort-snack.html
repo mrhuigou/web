@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>休食</title>
+    <link rel="stylesheet" href="assets/stylesheet/mobile.css">
+    <link rel="stylesheet" href="assets/stylesheet/flex.css">
+    <link rel="stylesheet" href="assets/stylesheet/swiper.min.css">
+    <!-- 需要写到本页的style 以下-->
+    <style>
+        html {
+            font-size: 20px;
+        }
+        .item-des{display: none;}
+        .item-name{height: 2.6em;}
+        .item-inner{background-color: #fff;border:1px solid #ddd;}
+        .item-detail{padding-top: 15px;}
+        .p-1{display: none;}
+        .item-btn{
+            margin-top: -34px;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <article> 
+
+        <header class="header">
+            <a href="/site/index" class="header-left">
+                <img src="https://m.365jiarun.com/assets/images/logo2.png" width="110">
+            </a>
+            
+            <div class="header-search clearfix pr">
+                <form action="/search/index" method="get" id="search_form">
+                    <input class="input-text s w fx-convert-tri" type="text" name="keyword" value="" autocomplete="off" tabindex="1">
+                    <a href="javascript:void(0)" class="search-btn iconfont">&#xe601;</a>
+                </form>
+            </div>
+        </header>
+     
+
+        <div class="content">
+            <section class="veiwport" style="max-width: inherit;">
+                <!-- 活动焦点图 -->
+                <div class="swiper-container mb10" id="swiper-container_banner">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="http://m.365jiarun.com/act/EPP000793.html">
+                                <img src="http://img1.365jiarun.com/group1/M00/04/CF/wKgB7lfTdouAEn5-AAESJGD59yA600.jpg_640x266.jpg" title="中秋团圆 啤酒畅饮" alt="中秋团圆 啤酒畅饮" style="width: 32rem;height: 13.3rem;" class="lazy">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="http://m.365jiarun.com/act/EPP000796.html">
+                                <img src="http://img1.365jiarun.com/group1/M00/04/C4/wKgB7lfD3N2AFBVcAAHEz5rWS7Q765.jpg_640x266.jpg" title="蛋奶节" alt="蛋奶节" style="width: 32rem;height: 13.3rem;" class="lazy">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="http://m.365jiarun.com/act/EPP000732.html">
+                                <img src="http://img1.365jiarun.com/group1/M00/04/CC/wKgB7lfM0MKAVRyzAAGzIbLR3RI319.jpg_640x266.jpg" title="优果汇" alt="优果汇" style="width: 32rem;height: 13.3rem;" class="lazy">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination swiper-pagination-white"></div>
+                </div>
+
+                
+                <!-- 商品列表 -->
+                <div class="Items">
+                    <div class="item-wrap item-hori" id="list">
+                        <!--tpl-->
+                    </div>
+                </div>
+
+                
+                <!-- 广告位 -->
+                <div class="flex-col mt5 mb10">
+                    <div class="flex-item-6">
+                        <a href="#"><img src="http://img1.365jiarun.com/group1/M00/03/29/wKgB7lWSCZmAZbsRAAD6RH29lj4891.jpg_190x190.jpg" class="w"></a>
+                    </div>
+                    <div class="flex-item-6">
+                        <a href="#"><img src="http://img1.365jiarun.com/group1/M00/03/29/wKgB7lWSCZmAZbsRAAD6RH29lj4891.jpg_190x190.jpg" class="w"></a>
+                    </div>
+                </div>
+
+
+                <!-- 广告位 -->
+                <div class="flex-col mb10">
+                    <div class="flex-item-4">
+                        <a href="#"><img src="http://img1.365jiarun.com/group1/M00/03/29/wKgB7lWSCZmAZbsRAAD6RH29lj4891.jpg_190x190.jpg" class="w"></a>
+                    </div>
+                    <div class="flex-item-4">
+                        <a href="#"><img src="http://img1.365jiarun.com/group1/M00/03/29/wKgB7lWSCZmAZbsRAAD6RH29lj4891.jpg_190x190.jpg" class="w"></a>
+                    </div>
+                    <div class="flex-item-4">
+                        <a href="#"><img src="http://img1.365jiarun.com/group1/M00/03/29/wKgB7lWSCZmAZbsRAAD6RH29lj4891.jpg_190x190.jpg" class="w"></a>
+                    </div>
+                </div>
+
+
+                <!-- 分类导航 -->
+                <div class="tab-box pr">
+                    <div class="tab-tit normal-items x os-x normal-items1">
+                        <a href="javascript:void(0)" class="tab-tit-tri item cur">休闲零食</a>
+                        <a href="javascript:void(0)" class="tab-tit-tri item">饼干糕点</a>
+                        <a href="javascript:void(0)" class="tab-tit-tri item">糖巧</a>
+                        <a href="javascript:void(0)" class="tab-tit-tri item">干果蜜饯</a>
+                        <a href="javascript:void(0)" class="tab-tit-tri item">肉干肉脯</a>
+                        <a href="javascript:void(0)" class="tab-tit-tri item">冲调茗茶</a>
+                        <a href="javascript:void(0)" class="tab-tit-tri item">滋补养生 </a>
+                    </div>
+                    <!-- 滑动查看更多 -->
+                    <i class="iconfont pa-tr t10 pt2 f12 grayc">&#xe68c;</i>
+                </div>
+
+                <div class="normal-items y normal-items2 row-more">
+                    <a class="item cur">分类</a><a class="item">分类</a><a class="item">分类</a><a class="item">分类</a><a class="item">分类</a><a class="item">分类</a><a class="item">分类</a><a class="item">分类</a><a class="item">分类</a>
+                    <i class="more iconfont" style="display: none;">&#xe60a;</i>
+                </div>
+
+
+                <!-- 小分类 -->
+                <div class="clearfix bg-wh pt10 pr5">
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片</a>
+                    <a href="#" class="label label-pill label-default label-danger fl ml10 mb10">薯片薯</a>
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片</a>
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片片</a>
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片</a>
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片</a>
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片</a>
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片</a>
+                    
+                </div>
+
+                <!-- 商品列表 -->
+                <div class="Items">
+                    <div class="item-wrap item-2" id="list2">
+                        <!--tpl-->
+                    </div>
+                </div>
+
+
+                <!-- 商品列表的模板 -->
+                <script id="tpl" type="text/html">
+                <% for(var i=from; i<=to; i++) {%>
+                    <div class="item">
+                        <div class="item-padding">
+                            <div class="item-inner">
+                                <div class="item-photo">
+                                    <a href="<%:=list[i].url%>"> <img src="<%:=list[i].image%>" alt="" class="db w" /> </a> <!--已售罄-->
+                                    <% if(list[i].stock <=0){ %> <i class="item-tip iconfont">&#xe696;</i> <%}%>
+                                </div>
+                                <div class="item-detail">
+                                    <a href="<%:=list[i].url%>" class="item-name"> <%:=list[i].name%> </a> 
+                                    <div class="item-des">
+                                        <%:=list[i].meta_description%>
+                                    </div>
+                                    <div class="item-price">
+                                        <div class="item-price-2">
+                                            <span class="p-1">优惠价:</span><span class="p-2">￥</span><span class="p-3"><%:=list[i].cur_price%></span> 
+                                        </div>
+                                        <div class="item-price-1" style="display:none;">
+                                            ￥<%:=list[i].vip_price%>
+                                        </div>
+                                        <a class="item-btn btn btn-s btn-red" href="javascript:;" onclick="AddCart(<%:=list[i].id%>)">购物车</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+                </script>
+
+
+                <!-- 领红包 -->
+                <div class="getRedbag">
+                <svg class="icon shakesmall" aria-hidden="true">
+                      <use xlink:href="#icon-yuanbaodai-01"></use>
+                    </svg>
+                    <p>领红包</p>
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- 主导航 -->
+        <nav class="fx-bottom fx-convert-tar">
+            <div class="nav-main clearfix">
+                <a href="/site/index"><i class="iconfont">&#xe63f;</i>首页</a>
+                <a href="/product/category"><i class="iconfont">&#xe640;</i>分类</a>
+                <a href="/share/index"><i class="" style="margin-top:-19px;"><img src="/assets/images/fudai.png" width="30" class="shakesmall"></i><span class="f12 db org">新人专享</span></a>
+                <a href="/cart/index" class="pr ">
+                    <i class="iconfont">&#xe63b;</i>购物车
+                    <em class="info-point cart_qty">4</em> </a>
+                <a href="/user/index"><i class="iconfont">&#xe603;</i>我的</a>
+            </div>
+        </nav>
+
+
+    </article>
+
+
+    <script src="assets/js/jq.min.js"></script>
+    <script src="assets/script/jquery-migrate-1.2.1.js"></script>
+	<script src="assets/script/template.js"></script>
+    <script src="assets/script/swiper.jquery.min.js"></script>
+    <script src="assets/script/scrollfix.js"></script>
+	<script src="assets/script/TT.js?v=201600902"></script>
+    <script type="text/javascript" src="assets/fonts/iconfont.js"></script>
+
+    <script type="text/javascript">
+
+    /* rem计算 */
+    (function(doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function() {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+            };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+
+
+    /* 活动焦点图 */
+    var swiper_banner = new Swiper('#swiper-container_banner', {
+        pagination: '.swiper-pagination-banner',
+        paginationClickable: true,
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay: 4000,
+        autoplayDisableOnInteraction: false
+    });
+
+
+    /* 模板 */
+    var tpl = $('#tpl').html();
+    $.getJSON('https://open.365jiarun.com/mall/v1/promotion/product?callback=?',{
+        product_code:[
+        "513142","513143","513144","513145","513146",
+        "513147","513148","513149","513150","513151",
+        "513152","513153","513154","513155","513156",
+        "513157","513158"
+        ]}, function(result){
+        var html= template(tpl, {list:result.data,from:0,to:2});
+        $("#list").html(html);
+        var html= template(tpl, {list:result.data,from:3,to:8});
+        $("#list2").html(html);
+    });
+
+
+    /* 分类导航初始化行数，及显示隐藏 */
+    $('.normal-items2').rowMore(1);
+
+
+    /* 返回顶部 */
+    $.backtop(".content");
+
+
+    /* a */
+    $("a").click(function(){
+    	var t = $(".content").scrollTop();
+    	console.log(t);
+    })
+    
+    </script>
+
+</body>
+
+</html>

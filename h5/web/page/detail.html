@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>商品详情</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+	<link rel="stylesheet/less" href="assets/stylesheet/flex-m.css">
+</head>
+<body>
+	<article>
+
+
+		<header class="fx-top bs-bottom whbg lh44">
+			<div class="flex-col tc">
+				<div class="flex-item-2">
+					<i class="iconfont">&#xe63d;</i>
+				</div>
+				<div class="flex-item-8 flex-col">
+					<a href="#" class="flex-item-6 fb f14">商品</a>
+					<a href="#" class="flex-item-6">详情</a>
+				</div>
+				<div class="flex-item-2">
+					<i class="iconfont f28">&#xe63f;</i>
+				</div>
+			</div>
+		</header>
+
+		<section class="veiwport">
+			<div class="mb50 pt50">
+				<!--价格-->
+				<div class="flex-col tc flex-center">
+					<div class="flex-item-6 flex-row flex-middle redbg">
+						<span class="white">
+							<i class="f20">￥99.9</i>
+							<i class="del ml5">￥100.0</i>
+						</span>
+					</div>
+					<div class="flex-item-6 flex-col flex-middle">
+						<div class="flex-item-9">
+							<span class="red">1</span>天
+							<span class="red">11</span>时
+							<span class="red">5</span>分
+							<span class="red">5</span>秒
+						</div>
+						<div class="flex-item-3">
+							<p class="iconfont yellow pb5">&#xe62d;</p>
+							<p>收藏</p>
+						</div>
+					</div>
+				</div>
+
+				<!--价格 无促销价格显示-->
+				<div class="flex-col flex-middle tc">
+					<div class="flex-item-6 redbg pt10 pb10">
+						<span class="white">
+							<i class="f20">￥99.9</i>
+							<i class="del ml5">￥100.0</i>
+						</span>
+					</div>
+					<div class="flex-item-6">
+						<i class="iconfont yellow pb5">&#xe62d;</i>
+						收藏商品
+					</div>
+				</div>
+				
+				<!--标题、卖点-->
+				<div class="p10 graybg">
+		            <h2>蒙牛利乐枕高钙牛奶230ml×16包 蒙牛牛奶</h2>
+		            <!--买点-->
+		            <p class="green f12 mt5">
+		                高钙牛奶 营养健康            </p>
+		        </div>
+
+		        <!--促销-->
+		        <div class="whitebg p5 flex-col">
+		        	<div class="flex-item-2 tc">
+		        		促销
+		        	</div>
+		        	<div class="flex-item-10">
+		        		<p class="mb5">
+							<span class="label label-danger">限购</span> 		        		
+							每单限购1份
+		        		</p>
+		        		<p>
+							<span class="label label-danger">买赠</span> 		        		
+							赠雕牌透明皂(惊爆装)202g*2 洗衣皂肥皂衣物清洁 1件 买1赠1
+		        		</p>
+		        	</div>
+		        </div>
+
+				
+
+
+				<p class="line"></p>
+				<dl class="line-a">
+					<dt>
+						<i class="iconfont fr"></i>
+						查看促销
+					</dt>
+					<dd style="display:none;">
+						<span class="red f12">满399.0减50.0，满699.0减100.0</span>
+					</dd>
+				</dl>
+			
+				<dl class="line-a">
+					<dt>
+						<i class="iconfont fr"></i>
+						选择包装
+					</dt>
+					<dd style="display:none;">
+						<div class="clearfix pt10">
+							<p class="fl f14">尺码：</p>
+							<p class="package clearfix"> 
+								<a href="javascript:void(0)" class="cur">1XL</a>
+								<a href="javascript:void(0)" class="disabled">2XL</a>
+								<a href="javascript:void(0)">3XL</a>
+							</p>
+						</div>
+						
+					</dd>
+				</dl>
+
+				<dl class="line-a">
+					<dt>
+						<i class="iconfont fr"></i>
+						发票
+					</dt>
+					<dd style="display:none;">
+						<ul class="space-two clearfix none">
+							<li>
+								<label>
+									<input type="radio" name="invoice" class="vm" checked="checked"> 不需要发票
+								</label>
+							</li>
+							<li>
+								<label><input type="radio" name="invoice" class="vm"> 个人</label>
+							</li>
+							<li>
+								<label><input type="radio" name="invoice" class="vm"> 企业普通发票</label>
+							</li>
+						</ul>	
+						<p class="f12 pt10 none">
+							<span class="vm">发票抬头：</span>
+							<input type="text" class="vm input" placeholder="请输入单位名称">
+						</p>
+
+						<ul class="invoice clearfix">
+							<li>
+								<label>
+									<input type="radio" name="invoice" class="vm" checked="checked"> 不需要发票
+								</label>
+							</li>
+							<li>
+								<label><input type="radio" name="invoice" class="vm"> 个人</label>
+							</li>
+							<li>
+								<label><input type="radio" name="invoice" class="vm"> 企业普通发票</label>
+							</li>
+							<li>
+								<span class="fl">发票抬头：</span>
+								<input type="text" class="input" placeholder="请输入单位名称" style="margin-top:-4px;">
+							</li>
+						</ul>	
+										
+					</dd>
+				</dl>
+
+				<div class="">
+					<p class="pb15">
+						送货时间：<span class="red">生鲜类的预售，为保证现摘直送，19:00前支付成功，次日送达；19:00后支付成功隔日送达</span>
+					</p>
+					<p>
+						退货提示：<span class="red">该商品不支持7天无理由退货 </span>
+					</p>
+
+
+					
+
+
+					<!--数量-->
+					<div class="clearfix pt15">
+						<span class="fb fl vm">数量：</span>
+						<p class="clearfix fl pl5 pr20 vm">
+							<span class="num-lower iconfont"></span>
+							<input type="number" class="num-text" value="1">
+							<span class="num-add iconfont"></span>
+						</p>
+						<span class="green vm fl">库存充足</span>
+					</div>
+				</div>
+
+				<p class="line"></p>
+				<dl class="line-a">
+					<dt>
+						<i class="iconfont fr"></i>
+						商品属性
+					</dt>
+					<dd style="display:none;">
+						<span class="red f12">满399.0减50.0，满699.0减100.0</span>
+					</dd>
+				</dl>
+				<a href="#" class="line-a">
+					<i class="iconfont fr"></i>
+					商品详情
+				</a>
+				
+
+				<a href="#" class="db bdb pl10 lh44">
+					<i class="iconfont fr">&#xe60b;</i>
+					商品详情
+				</a>
+				
+				<ul class="row clearfix">
+					<li class="col-md-4">dd</li>
+					<li class="col-md-8">dd</li>
+				</ul>
+				
+				<div class="vm-bd">
+					<span>dfdfd</span>
+				</div>
+				<div class="spinner red small fr">
+				  <div class="bounce1"></div>
+				  <div class="bounce2"></div>
+				  <div class="bounce3"></div>
+				</div>
+				<div class="pb50"></div>
+
+			</div>
+
+
+			<!--~~ 底部加入购物车 ~~-->
+			<div class="footer-cart tri clearfix">
+				<a href="#" class="fl">立即购买</a>
+				<a href="#" class="fr">加入购物车</a>
+			</div> 
+
+			<div class="fx-bottom bs-top whbg dn">
+				<div class="flex-col tc">
+					<div class="flex-item-4 flex-col pt2">
+						<div class="flex-item-6">
+							<i class="iconfont f20">&#xe635;</i>
+							<p>店铺</p>
+						</div>
+						<div class="flex-item-6 pr">
+							<i class=iconfont>&#xe63b;</i> 
+							<p>购物车</p>
+							<em class="info-point pa-rt r5">2</em>
+						</div>
+					</div>
+					<div class="flex-item-4 lh44 redbg white f14">
+						加入购物车
+					</div>
+					<div class="flex-item-4 lh44 orgbg white f14">
+						立即购买						
+					</div>
+				</div>
+			</div>
+
+			<!--~~ 加入购物车、立即购买弹层 ~~-->
+			<div class="cart-pop" style="display:none;">
+				<div class="cart-top-goods clearfix">
+					<a href="#" class="fl">
+						<img src="assets/images/eg/img.jpg" alt="tu" width="50" class="db bc">
+					</a>
+					<p class="fl pr5">
+						<a href="#" class="mxh20 f12 db">水果水果水果水果水果水果水果水果水果水果水果</a>
+						<span class="f14 red fb db">￥128.00</span>
+					</p>
+					<a href="#" class="close-pop iconfont">&#xe612;</a>
+				</div>
+				<div class="clearfix p10">
+					<p class="fl f14">尺码：</p>
+					<p class="package clearfix"> 
+						<a href="javascript:void(0)" class="cur">1XL</a>
+						<a href="javascript:void(0)">2XL</a>
+						<a href="javascript:void(0)">3XL</a>
+					</p>
+				</div>
+				<p class="line"></p>
+				<div class="clearfix p10">
+					<p class="fl f14">数量：</p>
+					<p class="clearfix fl pl5 pr20 vm">
+						<span class="num-lower iconfont"></span>
+						<input type="number" class="num-text" value="1">
+						<span class="num-add iconfont"></span>
+					</p>
+				</div>
+				<div class="footer-cart clearfix static">
+					<a href="#" class="fl">立即购买</a>
+					<a href="#" class="fr">加入购物车</a>
+				</div>
+			</div>
+
+		</section>
+	</article>
+
+	<script src="assets/script/less-1.7.3.min.js"></script>
+	<script src="assets/script/jq.min.js"></script>
+	<script src="assets/script/unslider.min.js"></script>
+	<script src="assets/script/ipop.js"></script>
+	
+	<script>
+		$(function() {
+		    $('.banner').unslider({
+				speed: 500,               //  The speed to animate each slide (in milliseconds)
+				delay: 3000,              //  The delay between slide animations (in milliseconds)
+				keys: true,               //  Enable keyboard (left, right) arrow shortcuts
+				dots: true,               //  Display dot navigation
+				fluid: true
+			});
+		});
+
+		//~~ 数量控制 ~~
+		$(".num-add").click(function(){
+			var a=$(".num-text").val();
+			a++;
+			$(".num-text").val(a);
+		});
+		
+		$(".num-lower").click(function(){
+			var a=$(".num-text").val();
+			if(a>1){
+				a--;
+			}
+			$(".num-text").val(a);
+		});
+
+		/*展开促销、包装详情*/
+		$("dl.line-a dt").toggle(function(){
+			$(this).addClass('cur').next("dd").show();
+		},function(){
+			$(this).removeClass('cur').next("dd").hide();
+		})
+
+		//包装
+		$(".package a").click(function(){
+			if($(this).hasClass("cur")){
+				$(this).removeClass("cur");
+			}else{
+				$(".package a").removeClass("cur");
+				$(this).addClass("cur");
+			}
+		});
+
+		/*弹层*/
+		$(".food_f2").click(function(){
+			maskdiv($(".dished_addPop"));
+			$(".close_btn2,.shareGoods_save").click(function(e){
+				e.stopPropagation();
+				$(".dished_addPop").hide();
+				$(".maskdiv").hide();
+			});
+		});
+
+		/*~~ 底部购物车弹层 ~~*/
+		$(".footer-cart.tri a").click(function() {
+			maskdiv($(".cart-pop"),"bottom");
+		});
+		$(".close-pop").click(function(e){
+			e.stopPropagation();
+			$(".cart-pop").slideUp();
+			$(".maskdiv").hide();
+		});
+
+	</script>
+
+</body>
+</html>

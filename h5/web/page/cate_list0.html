@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>分类</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+</head>
+<body>
+	<article>
+		<header class="header">
+			<a href="javascript:history.back();" class="his-back">返回</a>
+			<h2>蔬菜水果</h2>
+		</header>
+
+		<section class="veiwport">
+			<ul class="filter four clearfix">
+				<li><a href="#">销量</a></li>
+				<li><a href="#">价格</a></li>
+				<li class="cur">
+					<label><input type="checkbox" class="vm"> 家润自营</label>
+				</li>
+				<li class="filter-tri"><a href="#">筛选 <i class="iconfont" style="line-height:12px;">&#xe60a;</i></a></li>
+			</ul>
+			<!--~~ 筛选 ~~-->
+			<div class="filter-list">
+				<dl class="clearfix">
+					<dt>品牌：</dt>
+					<dd>
+						<a href="#">品牌</a>
+						<a href="#">品牌</a>
+						<a href="#">品牌</a>
+						<a href="#">品牌</a>
+					</dd>
+					<dd class="last">
+						<a href="javascript:void(0)" class="iconfont fl">&#xe60a;</a>
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt>产地：</dt>
+					<dd>
+						<a href="#">产地产地</a>
+						<a href="#">产地</a>
+						<a href="#">产地</a>
+						<a href="#">产地</a>
+						<a href="#">产地</a>
+						<a href="#">产地</a>
+						<a href="#">产地产地产地产地</a>
+					</dd>
+					<dd class="last">
+						<a href="javascript:void(0)" class="iconfont fl">&#xe60a;</a>
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt>产商：</dt>
+					<dd>
+						<a href="#">制造商</a>
+						<a href="#">制造商</a>
+						<a href="#">制造商</a>
+						<a href="#">制造商</a>
+						<a href="#">制造商</a>
+						<a href="#">制造商</a>
+						<a href="#">制造商制造商制造商</a>
+					</dd>
+					<dd class="last">
+						<a href="javascript:void(0)" class="iconfont fl">&#xe60a;</a>
+					</dd>
+				</dl>
+
+			</div>
+
+
+			<ul class="pro-list2">
+				<li class="clearfix">
+					<a href="#" class="db w-per30 fl">
+						<img src="assets/images/eg/img2.jpg" alt="tu" class="db w fl mr15">
+					</a>
+					<div class="w-per65 fr">
+						<a href="#" class="db pt10 pb5">大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜</a>
+						<span class="red fb">￥18.9</span><span class="del pl10 gray9">￥18.9</span>
+						<p class="mt10 mb10">
+							<button class="appbtn redbtn pl10 pr10 mr5">立即购买</button>
+							<button class="appbtn graybtn pl10 pr10">加入购物车</button>
+						</p>
+					</div>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="db w-per30 fl">
+						<img src="assets/images/eg/img2.jpg" alt="tu" class="db w fl mr15">
+					</a>
+					<div class="w-per65 fr">
+						<a href="#" class="db pt10 pb5">大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜</a>
+						<span class="red fb">￥18.9</span>
+						<p class="mt10 mb10">
+							<button class="appbtn redbtn pl10 pr10 mr5">立即购买</button>
+							<button class="appbtn graybtn pl10 pr10">加入购物车</button>
+						</p>
+					</div>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="db w-per30 fl">
+						<img src="assets/images/eg/img2.jpg" alt="tu" class="db w fl mr15">
+					</a>
+					<div class="w-per65 fr">
+						<a href="#" class="db pt10 pb5">大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜</a>
+						<span class="red fb">￥18.9</span>
+						<p class="mt10 mb10">
+							<button class="appbtn redbtn pl10 pr10 mr5">立即购买</button>
+							<button class="appbtn graybtn pl10 pr10">加入购物车</button>
+						</p>
+					</div>
+				</li>
+				<li class="clearfix">
+					<a href="#" class="db w-per30 fl">
+						<img src="assets/images/eg/img2.jpg" alt="tu" class="db w fl mr15">
+					</a>
+					<div class="w-per65 fr">
+						<a href="#" class="db pt10 pb5">大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜大头菜</a>
+						<span class="red fb">￥18.9</span>
+						<p class="mt10 mb10">
+							<button class="appbtn redbtn pl10 pr10 mr5">立即购买</button>
+							<button class="appbtn graybtn pl10 pr10">加入购物车</button>
+						</p>
+					</div>
+				</li>
+			</ul>
+
+
+		</section>
+
+	</article>
+
+	<script src="assets/script/less-1.7.3.min.js"></script>
+	<script src="assets/script/jq.min.js"></script>
+	<script>
+		<!-- 筛选 -->
+		$(".filter-tri").click(function() {
+			if($(".filter-list").is(":visible")){
+				$(".filter-list").hide();
+			}else{
+				$(".filter-list").show();
+			}
+		});
+		
+		var t=$(".filter-list dd:nth-child(2)");
+		t.each(function(){
+			var h=$(this).height();
+			if(h>30){
+				$(this).css("height","26px").next('dd').show();
+			}
+		})
+		$(".filter-list").hide();
+		$(".filter-list dd.last").live("click",function() {
+			$(this).addClass('cur').prev().css("height","auto");
+		});
+		$(".filter-list dd.last.cur").live("click",function() {
+			$(this).removeClass('cur').prev().css("height","26px");
+		});
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+/*皮肤*/
+/**默认绿色**/
+.s_tprice{color:#009836;}
+.s_tnum{color:#85d127;}
+.shops_banner{background:#009836;}
+.shops_tit{color:#fff;}
+.shops_tit_des{color:#e7efad;}
+.shops_rate{color:#fff;}
+.shops_percent{color:#ffe400;}
+.listPro_package span.current,.greenbox .listPro_package span:hover {color: #009836;border: 1px solid #009836;}
+.listPro li .des {background: url("../../images/icons/icon4.png") no-repeat left top;color: #038810;}
+
+/**blue**/
+.bluebox .shops_banner{background:#0098d8;}
+.bluebox .shop_c{background-position:-101px -54px;}
+.bluebox .shop_navbox{background-color:#31bdf8;}
+.bluebox .shops_rx{background-color:#0098d8;}
+.bluebox .shops_rxlist:hover{border-color:#00baec;}
+.bluebox .s_cIion{background-position:-131px -137px;}
+.bluebox .shop_i_tit{background-color:#00baec;}

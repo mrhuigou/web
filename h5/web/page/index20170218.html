@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>首页</title>
+    <link rel="stylesheet" href="assets/stylesheet/mobile.css">
+    <link rel="stylesheet" href="assets/stylesheet/flex.css">
+    <link rel="stylesheet" href="assets/stylesheet/swiper.min.css">
+    <style>
+        html {
+            font-size: 20px;
+        }
+
+        .nav2 i {
+            background: rgba(135,135,135,0.1);
+            -webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
+            -moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
+            transition: transform ease-out 0.1s, background 0.2s;
+        }
+
+        .nav2 i:after {
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            content: '';
+            -webkit-box-sizing: content-box; 
+            -moz-box-sizing: content-box; 
+            box-sizing: content-box;
+
+            top: 0;
+            left: 0;
+            padding: 0;
+            z-index: -1;
+            box-shadow: 0 0 0 2px rgba(135,135,135,0.1);
+            opacity: 0;
+            -webkit-transform: scale(0.9);
+            -moz-transform: scale(0.9);
+            -ms-transform: scale(0.9);
+            transform: scale(0.9);
+        }
+
+        .nav2 i:hover,.nav2 i.cur {
+            background: rgba(135,135,135,0.05);
+            -webkit-transform: scale(0.93);
+            -moz-transform: scale(0.93);
+            -ms-transform: scale(0.93);
+            transform: scale(0.93);
+            color: #fff;
+        }
+
+        .nav2 i:hover:after,.nav2 i.cur:after {
+            -webkit-animation: sonarEffect 1.3s ease-out 75ms;
+            -moz-animation: sonarEffect 1.3s ease-out 75ms;
+            animation: sonarEffect 1.3s ease-out 75ms;
+        }
+
+        @-webkit-keyframes sonarEffect {
+            0% {
+                opacity: 0.3;
+            }
+            40% {
+                opacity: 1;
+                box-shadow: 0 0 0px 2px #ddd, 0 0 2px 3px #f00, 0 0 2px 5px #ddd;
+                transform: scale(1.2);
+            }
+            100% {
+                box-shadow: 0 0 0px 2px #ddd, 0 0 2px 3px #f00, 0 0 2px 5px #ddd;
+                -webkit-transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+        @-moz-keyframes sonarEffect {
+            0% {
+                opacity: 0.3;
+            }
+            40% {
+                opacity: 1;
+                box-shadow: 0 0 0px 2px #ddd, 0 0 2px 3px #f00, 0 0 2px 5px #ddd;
+                transform: scale(1.2);
+            }
+            100% {
+                box-shadow: 0 0 0px 2px #ddd, 0 0 2px 3px #f00, 0 0 2px 5px #ddd;
+                -moz-transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+        @keyframes sonarEffect {
+            0% {
+                opacity: 0.3;
+            }
+            40% {
+                opacity: 1;
+                box-shadow: 0 0 0px 2px #ddd, 0 0 2px 3px #f00, 0 0 2px 5px #ddd;
+                transform: scale(1.2);
+            }
+            100% {
+                box-shadow: 0 0 0px 2px #ddd, 0 0 2px 3px #f00, 0 0 2px 5px #ddd;
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <article>
+
+        <header class="header">
+            <a href="/site/index" class="header-left">
+                <img src="https://m.365jiarun.com/assets/images/logo2.png" width="110">
+            </a>
+            
+            <div class="header-search clearfix pr">
+                <form action="/search/index" method="get" id="search_form">
+                    <input class="input-text s w fx-convert-tri" type="text" name="keyword" value="" autocomplete="off" tabindex="1">
+                    <a href="javascript:void(0)" class="search-btn iconfont">&#xe601;</a>
+                </form>
+            </div>
+            <!-- 消息 -->
+            <div class="dropdown1">
+                <div class="pa-rt tc w50 dropdown-t">
+                    <i class="iconfont green">&#xe670;</i>
+                    <em class="dots-o pa-tr r10 t10"></em>
+                </div>
+                <ul class="dropdown-c lh180" style="display: none;">
+                    <li>
+                        <a href="#">
+                            <i class="iconfont vm mr5">&#xe649;</i>
+                            <span class="vm">消息</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="iconfont vm mr5">&#xe65a;</i>
+                            <span class="vm">扫一扫</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="iconfont vm mr5">&#xe688;</i>
+                            <span class="vm">购物车</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="iconfont vm mr5">&#xe65e;</i>
+                            <span class="vm">帮助和反馈</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+     
+
+        <div class="content">
+            <section class="veiwport" style="max-width: inherit;">
+                <!-- 活动焦点图 -->
+                <div class="swiper-container" id="swiper-container_banner">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="http://m.365jiarun.com/act/EPP000793.html">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-original="http://img1.365jiarun.com/group1/M00/04/CF/wKgB7lfTdouAEn5-AAESJGD59yA600.jpg_640x266.jpg" title="中秋团圆 啤酒畅饮" alt="中秋团圆 啤酒畅饮" style="width: 32rem;height: 13.3rem;" class="lazy">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="http://m.365jiarun.com/act/EPP000796.html">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-original="http://img1.365jiarun.com/group1/M00/04/C4/wKgB7lfD3N2AFBVcAAHEz5rWS7Q765.jpg_640x266.jpg" title="蛋奶节" alt="蛋奶节" style="width: 32rem;height: 13.3rem;" class="lazy">
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="http://m.365jiarun.com/act/EPP000732.html">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-original="http://img1.365jiarun.com/group1/M00/04/CC/wKgB7lfM0MKAVRyzAAGzIbLR3RI319.jpg_640x266.jpg" title="优果汇" alt="优果汇" style="width: 32rem;height: 13.3rem;" class="lazy">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination swiper-pagination-white"></div>
+                </div>
+
+
+                <!-- 主导航 -->
+                <div class="nav2">
+    				<a href="/share/index" class="item col-5">
+                        <i class="iconfont " style="background-color: #ff8a66;">&#xe691;</i>
+                        <span>生鲜</span>
+                    </a>
+                    <a href="/coupon/index" class="item col-5">
+                        <i class="iconfont" style="background-color: #fccf64;">&#xe690;</i>
+                        <span>酒水</span>
+                    </a>
+                    <a href="/promotion/baoyou.html" class="item col-5">
+                        <i class="iconfont " style="background-color: #65c8f3;">&#xe68f;</i>
+                        <span>休食</span>
+                    </a>
+                    <a href="/news/list" class="item col-5" >
+                        <i class="iconfont " style="background-color: #ff6663;">&#xe693;</i>
+                        <span>粮油</span>
+                    </a>
+                    <a href="/order/index" class="item col-5">
+                        <i class="iconfont " style="background-color: #ff8fd8;">&#xe695;</i>
+                        <span>洗化</span>
+                    </a>
+    			</div>
+                <!-- 商品的二级分类 -->
+                <div class="cate-list bg-yellow- clearfix mb5">
+                    <a href="#">水果蔬菜</a>
+                    <a href="#">蛋奶</a>
+                    <a href="#">冷冻速食</a>
+                    <a href="#">水果蔬菜</a>
+                </div>
+
+
+                <!-- 优选 -->
+                <div class="row">
+                    <div class="col-3">
+                        <img src="assets/images/eg/u136.jpg" class="w">
+                    </div>
+                    <div class="col-3">
+                        <img src="assets/images/eg/u138.jpg" class="w">
+                    </div>
+                    <div class="col-3">
+                        <img src="assets/images/eg/u142.jpg" class="w">
+                    </div>
+                </div>
+                <!-- 点击更多展开更多优选-->
+                <div class="tc p5">
+                    <a href="#" class="btn btn-s btn-green">更多优选</a>
+                </div>  
+
+
+                <!--抢手货-->
+                <div class="tit1 tit1-red">
+                    <h2>抢手货</h2>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <img src="assets/images/eg/u144.jpg" class="w">
+                    </div>
+                    <div class="col-2">
+                        <img src="assets/images/eg/u144.jpg" class="w">
+                    </div>
+                    <div class="col-2">
+                        <img src="assets/images/eg/u146.jpg" class="w">
+                    </div>
+                    <div class="col-2">
+                        <img src="assets/images/eg/u148.jpg" class="w">
+                    </div>
+                </div>
+                
+        
+                <!-- 精选活鲜 -->
+                <div class="tit-- green">
+                    <i class="iconfont vm">&#xe684;</i><span class="vm">精选活鲜</span>
+                </div>
+                <a href="#"><img src="http://img1.365jiarun.com/group1/M00/05/76/wKgB7lilGh-AaBFlAAFgzBWl3I4039.png_640x200.png" class="w mb5"></a>
+                <div class="row tc bg-wh">
+                    <div class="col-4 p5 bdr">
+                        <img src="http://img1.365jiarun.com/group1/M00/04/CB/wKgB7lfKKr6ARafdAADJVGWY8q4015.jpg_500x500.jpg" class="w">
+                        <p class="row-two f12 mt2 mb2">
+                            标题标题标题标题标题标
+                        </p>
+                        <span class="red">￥23.56</span>
+                    </div>
+                    <div class="col-4 p5 bdr">
+                        <img src="http://img1.365jiarun.com/group1/M00/04/CB/wKgB7lfKKr6ARafdAADJVGWY8q4015.jpg_500x500.jpg" class="w">
+                        <p class="row-two f12 mt2 mb2">
+                            标题标题标题标题标题标
+                        </p>
+                        <span class="red">￥23.56</span>
+                    </div>
+                    <div class="col-4 p5 bdr">
+                        <img src="http://img1.365jiarun.com/group1/M00/04/CB/wKgB7lfKKr6ARafdAADJVGWY8q4015.jpg_500x500.jpg" class="w">
+                        <p class="row-two f12 mt2 mb2">
+                            标题标题标题标题标题标
+                        </p>
+                        <span class="red">￥23.56</span>
+                    </div>
+                    <div class="col-4 p5 bdr">
+                        <img src="http://img1.365jiarun.com/group1/M00/04/CB/wKgB7lfKKr6ARafdAADJVGWY8q4015.jpg_500x500.jpg" class="w">
+                        <p class="row-two f12 mt2 mb2">
+                            标题标题标题标题标题标
+                        </p>
+                        <span class="red">￥23.56</span>
+                    </div>
+                </div>
+                
+
+                <!-- 精选肉类 -->
+                <div class="tit-- org">
+                    <i class="iconfont vm">&#xe68b;</i><span class="vm">精选肉类</span>
+                </div>
+                <a href="#"><img src="http://img1.365jiarun.com/group1/M00/05/76/wKgB7lilGh-AaBFlAAFgzBWl3I4039.png_640x200.png" class="w mb5"></a>
+                <div class="row tc bg-wh">
+                    <div class="col-4 p5 bdr">
+                        <img src="http://img1.365jiarun.com/group1/M00/04/CB/wKgB7lfKKr6ARafdAADJVGWY8q4015.jpg_500x500.jpg" class="w">
+                        <p class="row-two f12 mt2 mb2">
+                            标题标题标题标题标题标
+                        </p>
+                        <span class="red">￥23.56</span>
+                    </div>
+                    <div class="col-4 p5 bdr">
+                        <img src="http://img1.365jiarun.com/group1/M00/04/CB/wKgB7lfKKr6ARafdAADJVGWY8q4015.jpg_500x500.jpg" class="w">
+                        <p class="row-two f12 mt2 mb2">
+                            标题标题标题标题标题标
+                        </p>
+                        <span class="red">￥23.56</span>
+                    </div>
+                    <div class="col-4 p5 bdr">
+                        <img src="http://img1.365jiarun.com/group1/M00/04/CB/wKgB7lfKKr6ARafdAADJVGWY8q4015.jpg_500x500.jpg" class="w">
+                        <p class="row-two f12 mt2 mb2">
+                            标题标题标题标题标题标
+                        </p>
+                        <span class="red">￥23.56</span>
+                    </div>
+                    <div class="col-4 p5 bdr">
+                        <img src="http://img1.365jiarun.com/group1/M00/04/CB/wKgB7lfKKr6ARafdAADJVGWY8q4015.jpg_500x500.jpg" class="w">
+                        <p class="row-two f12 mt2 mb2">
+                            标题标题标题标题标题标
+                        </p>
+                        <span class="red">￥23.56</span>
+                    </div>
+                </div>
+
+    		   
+            
+            </section>
+
+        </div>
+       
+        <!--主导航-->
+        <nav class="fx-bottom fx-convert-tar">
+            <div class="nav-main clearfix">
+                <a href="/site/index"><i class="iconfont">&#xe63f;</i>首页</a>
+                <a href="/product/category"><i class="iconfont">&#xe640;</i>分类</a>
+                <a href="/share/index"><i class="" style="margin-top:-19px;"><img src="/assets/images/fudai.png" width="30" class="shakesmall"></i><span class="f12 db org">新人专享</span></a>
+                <a href="/cart/index" class="pr ">
+                    <i class="iconfont">&#xe63b;</i>购物车
+                    <em class="info-point cart_qty">4</em> </a>
+                <a href="/user/index"><i class="iconfont">&#xe603;</i>我的</a>
+            </div>
+        </nav>
+
+       
+
+    </article>
+
+   
+
+
+    <script src="assets/js/jq.min.js"></script>
+	<script src="assets/script/jquery-migrate-1.2.1.js"></script>
+	<script src="assets/script/swiper.jquery.min.js"></script>
+	<script src="assets/script/jquery.scrollLoading.js?v=201600902"></script>
+    <script src="assets/script/page.js?v=201600903"></script>
+	<script src="assets/script/jquery.followit.js?v=201600903"></script>
+	<script src="assets/script/scrollfix.js?v=201600902"></script>
+    <script src="assets/script/jquery.nav.js?v=201600902"></script>
+	<script src="assets/script/TT.js?v=201600902"></script>
+
+
+    <script type="text/javascript">
+
+
+    /* rem计算 */
+    (function(doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function() {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+            };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+
+
+    /* 活动焦点图 */
+    var swiper_banner = new Swiper('#swiper-container_banner', {
+        pagination: '.swiper-pagination-banner',
+        paginationClickable: true,
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay: 4000,
+        autoplayDisableOnInteraction: false
+    });
+
+
+    </script>
+
+</body>
+
+</html>

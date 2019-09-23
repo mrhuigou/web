@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>商品详情</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+	<link rel="stylesheet" href="assets/stylesheet/flex-m.css">
+	<link rel="stylesheet" href="assets/script/layer.m/need/layer.css">
+</head>
+<body>
+	<article>
+
+		<section class="veiwport">
+			<div class="mb50">
+				
+				<div class="whitebg bdt bdb p10 mb10">
+					<!--标题-->
+					<div class="flex-col">
+						<div class="flex-item-10">
+			            	蒙牛利乐枕高钙牛奶230ml×16包 蒙牛牛奶蒙牛牛奶蒙牛牛奶
+						</div>
+						<div class="flex-item-2 bdl tc">
+							<i class="iconfont org f18">&#xe62d;</i>
+							<p class="f12 gray9">收藏</p>
+						</div>
+					</div>
+		            <!--卖点-->
+		            <p class="gray9 f12 mt5 mb5 red">高钙牛奶营养健康高钙牛奶营养健康</p>
+		            <div class="red fb mb5">￥<span class="f24">10.2</span></div>
+		            <div class="f12 gray9">
+						<span>1</span>天
+						<span>11</span>时
+						<span>5</span>分
+						<span>5</span>秒
+					</div>
+					<div class="mt5">
+						<span class="btn btn-xxs btn-bd-red">提示</span>
+						<span class="f12 org">该商品不支持7天无理由退货</span>
+					</div>
+			    </div>
+
+			    <!--优惠券-->
+			    <div class="whitebg bdt bdb pt10 pb10 mb10">
+			    	<div class="flex-col f12">
+			        	<div class="flex-item-2 tc gray9">
+			        		领券
+			        	</div>
+			        	<div class="flex-item-10 clearfix">
+			        		<div class="coupon_unit red">
+					            <div class="expe_disc">
+					                <div class="expeNum"> <span class="rmb">￥</span> <span class="actual-number">500</span> </div>
+					                <div class="condi_msg">满50可用</div>
+					            </div>
+					            <div class="coupon_icon"></div>
+					            <div class="oper_msg">
+					                <div class="up" id="1852827_3568412_up">领</div>
+					                <div class="down" id="1852827_3568412_down">取</div>
+					            </div> 
+					            <em class="left_m"></em>
+					        </div>
+					        <div class="coupon_unit red get">
+					            <div class="expe_disc">
+					                <div class="expeNum"> <span class="rmb">￥</span> <span class="actual-number">500</span> </div>
+					                <div class="condi_msg">满5000可用</div>
+					            </div>
+					            <div class="coupon_icon"></div>
+					            <div class="oper_msg">
+					                <div class="up" id="1852827_3568412_up">领</div>
+					                <div class="down" id="1852827_3568412_down">取</div>
+					            </div> 
+					            <em class="left_m"></em>
+					        </div>
+			        	</div>
+			        </div>
+			    </div>
+
+		        <!--促销-->
+		        <div class="whitebg bdt bdb pt10 pb10 mb10">
+			        <div class="flex-col f12">
+			        	<div class="flex-item-2 tc gray9">
+			        		促销
+			        	</div>
+			        	<div class="flex-item-10">
+			        		<p class="mb5">
+								<span class="bd-red red br2">&nbsp;限购&nbsp;</span> 		        		
+								每单限购1份
+			        		</p>
+			        		<p>
+								<span class="bd-red red br2">&nbsp;买赠&nbsp;</span> 		        		
+								赠雕牌透明皂(惊爆装)202g*2 洗衣皂肥皂衣物清洁 1件 买1赠1
+			        		</p>
+			        	</div>
+			        </div>
+			    </div>
+
+			    <!--数量-->
+			    <div class="whitebg bdt bdb pt10 pb10 mb10">
+			    	<div class="flex-col f12 mb5">
+			        	<div class="flex-item-2 tc gray9">
+			        		包装
+			        	</div>
+			        	<div class="flex-item-10">
+			        		<div class="package">
+								<a href="javascript:void(0)" class="sku"> 瓶</a>
+								<a href="javascript:void(0)" class="sku cur"> 瓶</a>
+								<a href="javascript:void(0)" class="sku"> 瓶</a>
+							</div>
+			        	</div>
+			        </div>
+			    	<div class="flex-col f12">
+			        	<div class="flex-item-2 tc gray9 pt2">
+			        		数量
+			        	</div>
+			        	<div class="flex-item-10">
+			        		<span class="num-lower iconfont"></span>
+							<input type="number" class="num-text" value="1">
+							<span class="num-add iconfont"></span>
+			        	</div>
+			        </div>
+			    </div>
+
+			    <!--送至-->
+		        <div class="whitebg bdt bdb pt10 pb10 mb10">
+			        <div class="flex-col f12" id="addressTri">
+			        	<div class="flex-item-2 tc gray9">
+			        		送至
+			        	</div>
+			        	<div class="flex-item-9">
+			        		四方区周口路97号
+			        		<p class="red pt5">现货，11:10前完成下单,预计今天(11月01日)送达</p>
+			        	</div>
+			        	<div class="flex-item-1 lh44">
+			        		<i class="iconfont f12 grayc fr mr5">&#xe60b;</i>
+			        	</div>
+			        </div>
+			    </div>
+
+			    <!--地址弹层-->
+			    <style type="text/css">
+			    	.layermchild{ position: absolute; left: 10px; right: 10px; bottom: 10px; top: 10px;}
+			    </style>
+		    	<div id="addressPop" style="display:none;">
+		    	   <div class="p10 which addresslist">
+	                   <div class="item cur">青岛青岛市-四方区周口路97号中航科技园10号楼 <i class="iconfont cur-item">&#xe631;</i></div>
+	                   <div class="item">青岛青岛市-四方区周口路97号中航科技园10号楼 <i class="iconfont cur-item">&#xe631;</i></div>
+	                   <div class="item">青岛青岛市-四方区周口路97号中航科技园10号楼 <i class="iconfont cur-item">&#xe631;</i></div>
+	                   <div class="item">青岛青岛市-四方区周口路97号中航科技园10号楼 <i class="iconfont cur-item">&#xe631;</i></div>
+
+	   
+	                </div>
+		        </div>
+
+
+			    <!--店鋪-->
+		        <div class="whitebg bdt bdb pt10 pb10 mb10">
+			        <div class="flex-col">
+			        	<div class="flex-item-2 tr gray9 pr10">
+			        		<i class="iconfont f25 mt2">&#xe635;</i>
+			        	</div>
+			        	<div class="flex-item-5 pt5">
+			        		<a href="#" class="fb">青岛家润店</a>
+			        	</div>
+			        	<div class="flex-item-5 tr pr15">
+			        		<a href="#" class="btn greenbtn mbtn w100">进店逛逛</a>
+			        	</div>
+			        </div>
+			    </div>
+
+				<div class='tabslet'>
+			        <ul class='horizontal flex-col tc'>
+			            <li class="flex-item-6 active"><a href="#tab-1">商品详情</a></li>
+			            <li class="flex-item-6"><a href="#tab-2">商品属性</a></li>
+			        </ul>
+			        <div id='tab-1'>
+			        	<p>Thisisthedefaulttabfunctionality.</p>
+			        	<p>Thisisthedefaulttabfunctionality.</p>
+			        	<p>Thisisthedefaulttabfunctionality.</p>
+			        	<p>Thisisthedefaulttabfunctionality.</p>
+			        	<p>Thisisthedefaulttabfunctionality.</p>
+			        	<p>Thisisthedefaulttabfunctionality.</p>
+			        	<p>Thisisthedefaulttabfunctionality.</p>
+			        	<p>Thisisthedefaulttabfunctionality.</p>
+			        	<p>Thisisthedefaulttabfunctionality.</p>
+			        </div>
+			        <div id='tab-2'>
+			        	<div class="p10">
+				        	<table class="tbp5 tb-bd w whitebg f12">
+				        		<tr>
+				        			<td class="graybg" width="20%">名字</td>
+				        			<td>内容</td>
+				        		</tr>
+				        		<tr>
+				        			<td class="graybg">名字</td>
+				        			<td>内容</td>
+				        		</tr>
+				        		<tr>
+				        			<td class="graybg">名字</td>
+				        			<td>内容</td>
+				        		</tr>
+				        		<tr>
+				        			<td class="graybg">名字</td>
+				        			<td>内容</td>
+				        		</tr>
+				        	</table>
+				        </div>
+			        	<p>Tab 2</p>
+			        	<p>Tab 2</p>
+			        	<p>Tab 2</p>
+			        	<p>Tab 2</p>
+			        	<p>Tab 2</p>
+			        	<p>Tab 2</p>
+			        	<p>Tab 2</p>
+			        	<p>Tab 2</p>
+			        	<p>Tab 2</p>
+			        	<p>Tab 2</p>
+			        	<p>Tab 2</p>
+			        	<p>Tab 2</p>
+			        	<p>Tab 2</p>
+			        </div>
+			    </div>
+
+
+			</div>
+
+
+
+			<div class="fx-bottom bs-top whbg">
+				<div class="flex-col tc">
+					<div class="flex-item-4 flex-col pt2">
+						<div class="flex-item-6">
+							<i class="iconfont f20">&#xe635;</i>
+							<p>店铺</p>
+						</div>
+						<div class="flex-item-6 pr">
+							<i class=iconfont>&#xe63b;</i> 
+							<p>购物车</p>
+							<em class="info-point pa-rt r5">2</em>
+						</div>
+					</div>
+					<div class="flex-item-4 lh44 redbg white f14">
+						加入购物车
+					</div>
+					<div class="flex-item-4 lh44 orgbg white f14">
+						立即购买						
+					</div>
+				</div>
+			</div>
+
+			<!--~~ 加入购物车、立即购买弹层 ~~-->
+			<div class="cart-pop" style="display:none;">
+				<div class="cart-top-goods clearfix">
+					<a href="#" class="fl">
+						<img src="assets/images/eg/img.jpg" alt="tu" width="50" class="db bc">
+					</a>
+					<p class="fl pr5">
+						<a href="#" class="mxh20 f12 db">水果水果水果水果水果水果水果水果水果水果水果</a>
+						<span class="f14 red fb db">￥128.00</span>
+					</p>
+					<a href="#" class="close-pop iconfont">&#xe612;</a>
+				</div>
+				<div class="clearfix p10">
+					<p class="fl f14">尺码：</p>
+					<p class="package clearfix"> 
+						<a href="javascript:void(0)" class="cur">1XL</a>
+						<a href="javascript:void(0)">2XL</a>
+						<a href="javascript:void(0)">3XL</a>
+					</p>
+				</div>
+				<p class="line"></p>
+				<div class="clearfix p10">
+					<p class="fl f14">数量：</p>
+					<p class="clearfix fl pl5 pr20 vm">
+						<span class="num-lower iconfont"></span>
+						<input type="number" class="num-text" value="1">
+						<span class="num-add iconfont"></span>
+					</p>
+				</div>
+				<div class="footer-cart clearfix static">
+					<a href="#" class="fl">立即购买</a>
+					<a href="#" class="fr">加入购物车</a>
+				</div>
+			</div>
+
+		</section>
+	</article>
+<div id="tong" class="hide" ><img src="images/tong.jpg"></div>   
+	<script src="assets/script/jq.min.js"></script>
+	<script src="assets/script/unslider.min.js"></script>
+	<script src="assets/script/ipop.js"></script>
+	<script src="assets/script/layer.m/layer.m.js"></script>
+	<script src="assets/script/jquery.tabslet.min.js"></script>
+	
+	<script>
+
+		//选择地址
+		$("#addressTri").click(function(){
+			layer.open({
+			  type: 1,
+			  title: "选择地址",
+			  closeBtn: 1,
+			  area: 'auto',
+			  skin: 'layui-layer-nobg',
+			  shadeClose: true,
+			  content: $('#addressPop').html()
+	
+			});
+		})
+		
+
+		$('.tabslet').tabslet();
+
+		//~~ 数量控制 ~~
+		$(".num-add").click(function(){
+			var a=$(".num-text").val();
+			a++;
+			$(".num-text").val(a);
+		});
+		
+		$(".num-lower").click(function(){
+			var a=$(".num-text").val();
+			if(a>1){
+				a--;
+			}
+			$(".num-text").val(a);
+		});
+
+		/*展开促销、包装详情*/
+		$("dl.line-a dt").toggle(function(){
+			$(this).addClass('cur').next("dd").show();
+		},function(){
+			$(this).removeClass('cur').next("dd").hide();
+		})
+
+		//包装
+		$(".package a").click(function(){
+			if($(this).hasClass("cur")){
+				$(this).removeClass("cur");
+			}else{
+				$(".package a").removeClass("cur");
+				$(this).addClass("cur");
+			}
+		});
+
+		/*弹层*/
+		$(".food_f2").click(function(){
+			maskdiv($(".dished_addPop"));
+			$(".close_btn2,.shareGoods_save").click(function(e){
+				e.stopPropagation();
+				$(".dished_addPop").hide();
+				$(".maskdiv").hide();
+			});
+		});
+
+		/*~~ 底部购物车弹层 ~~*/
+		$(".footer-cart.tri a").click(function() {
+			maskdiv($(".cart-pop"),"bottom");
+		});
+		$(".close-pop").click(function(e){
+			e.stopPropagation();
+			$(".cart-pop").slideUp();
+			$(".maskdiv").hide();
+		});
+
+	</script>
+
+</body>
+</html>

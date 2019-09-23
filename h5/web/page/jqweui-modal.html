@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="../assets/stylesheet/mobile.css">
+  <style type="text/css">
+    h3{
+      font-weight: bold;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+<body >
+
+  <h3 class="pb50">下拉刷新 pull-to-refresh</h3>
+  <div class="refresh">
+    <div class="weui-pull-to-refresh-layer">
+      <div class="pull-to-refresh-arrow"></div>
+      <div class="pull-to-refresh-preloader"></div>
+      <div class="down">下拉刷新</div>
+      <div class="up">释放刷新</div>
+      <div class="refresh">正在刷新...</div>
+    </div>
+    <div class='pt30' id='page-ptr'>
+      <p>当前时间: <strong id="time"></strong></p>
+      <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+      <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+      <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+      <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+      <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+      <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+      <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+      <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    </div>
+  </div>
+
+
+  <h3 class="pb50">地址选择</h3>
+  <div class="weui-cell__hd"><label for="name" class="weui-label">发出地</label></div>
+  <div class="weui-cell__bd">
+    <input class="input input-s" id="start" type="text" value="湖北省 武汉市 武昌区">
+  </div>
+
+
+  <h3>modal(dialog and toast)</h3>
+	<a href="javascript:;" id='show-alert' class="weui_btn weui_btn_primary">显示 Alert</a> <br>
+	<a href="javascript:;" id='show-confirm' class="weui_btn weui_btn_primary">显示 Confirm</a> <br>
+	<a href="javascript:;" id='show-prompt' class="weui_btn weui_btn_primary">显示 Prompt</a> <br>
+	<a href="javascript:;" id='show-login' class="weui_btn weui_btn_primary">显示登录弹窗</a> <br>
+	<a href="javascript:;" id='show-custom' class="weui_btn weui_btn_primary">显示自定义对话框</a>
+
+
+  <h3>loading</h3>
+  <a href="javascript:;" id='show-loading' class="weui_btn weui_btn_primary">显示 Loading</a>
+
+
+  <h3>popup</h3>
+  <!-- 属于比较复杂的弹层 html内容往往不定，so-->
+  <a href="javascript:;" class="open-popup" data-target="#full">显示全屏Popup</a> <br>
+  <a href="javascript:;" class="open-popup" data-target="#half">显示底屏Popup</a>
+
+  <!--基础形式及全屏-->
+  <div id="full" class="weui-popup-container">
+    <div class="weui-popup-overlay"></div>
+    <div class="weui-popup-modal">
+      这里是全屏popup <br>
+      <span class="close-popup">关闭popup</span>
+    </div>
+  </div>
+
+  <!-- 在基础形式添加一个类 popup-bottom -->
+  <div id="half" class="weui-popup-container popup-bottom">
+    <div class="weui-popup-overlay"></div>
+    <div class="weui-popup-modal">
+      这里是底屏popup <br>
+      这里是底屏popup <br>
+      这里是底屏popup <br>
+      这里是底屏popup <br>
+      这里是底屏popup <br>
+      这里是底屏popup <br>
+      <span class="close-popup">关闭popup</span>
+    </div>
+  </div>
+
+
+  <h3>通知</h3>
+  <a href="javascript:;" id='show-notification' >显示通知</a>
+
+
+  <h3>滚动加载</h3>
+  <div class='content-padded' id='list'>
+    <p>滚动加载</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+    <p>Quisque eget vestibulum nulla. Quisque quis dui quis ex ultricies efficitur vitae non felis. Phasellus quis nibh hendrerit</p>
+  </div>
+
+  <div class="weui-infinite-scroll" id='infinite-demo-1'>
+    <div class="infinite-preloader"></div>
+    正在加载...
+  </div>
+
+
+
+
+
+
+  
+
+
+
+
+
+  <script type="text/javascript" src="../assets/script/jq.min.js"></script>
+  <script type="text/javascript" src="../assets/script/jquery-extend.js"></script>
+	<script type="text/javascript" src="../assets/script/template7.js"></script>
+	<script type="text/javascript" src="../assets/script/toast.js"></script>
+  <script type="text/javascript" src="../assets/script/modal.js"></script>
+  <script type="text/javascript" src="../assets/script/pull-to-refresh.js"></script>
+  <script type="text/javascript" src="../assets/script/infinite.js"></script>
+  <script type="text/javascript" src="../assets/script/popup.js"></script>
+  <script type="text/javascript" src="../assets/script/notification.js"></script>
+  <!-- 地址选择 需添加一下两个文件 -->
+  <script type="text/javascript" src="../assets/script/jqweui-picker.js"></script>
+  <script type="text/javascript" src="../assets/script/jqweui-city-picker.js"></script>
+
+	<script>
+
+      /*地址选择*/
+      $("#start").cityPicker({
+        title: "选择地址",
+        onChange: function (picker, values, displayValues) {
+          console.log(values, displayValues);
+        }
+      });
+
+
+      /* dialog and toast */
+      $(document).on("click", "#show-alert", function() {
+        $.alert("AlphaGo 就是天网的前身，人类要完蛋了！", "警告！");
+      });
+
+      $(document).on("click", "#show-confirm", function() {
+        $.confirm("您确定要删除文件<<苍井空全集>>吗?", "确认删除?", function() {
+          $.toast("文件已经删除!");
+        }, function() {
+          //取消操作
+        });
+      });
+
+      $(document).on("click", "#show-prompt", function() {
+        $.prompt({
+          text: "名字不能超过6个字符，不得出现不和谐文字",
+          title: "输入姓名",
+          onOK: function(text) {
+            $.alert("您的名字是:"+text, "角色设定成功");
+          },
+          onCancel: function() {
+            console.log("取消了");
+          },
+          input: 'Mr Noone'
+        });
+      });
+
+      $(document).on("click", "#show-custom", function() {
+        $.modal({
+          title: "Hello",
+          text: "我是自定义的modal",
+          buttons: [
+            { text: "支付宝", onClick: function(){ $.alert("你选择了支付宝"); } },
+            { text: "微信支付", onClick: function(){ $.alert("你选择了微信支付"); } },
+            { text: "取消", className: "default"},
+          ]
+        });
+      });
+
+      $(document).on('click', '#show-login', function() {
+        $.login({
+          title: '登录',
+          text: '请输入用户名和密码',
+          onOK: function (username, password) {
+            console.log(username, password);
+            $.toast('登录成功!');
+          },
+          onCancel: function () {
+            $.toast('取消登录!', 'cancel');
+          }
+        });
+      });
+
+
+      /* loading */
+      $(document).on("click", "#show-loading", function() {
+        $.showLoading("正在加载");
+        setTimeout("$.hideLoading();",3000);
+      });
+
+
+      /* 下拉刷新 pull-to-refresh */
+      if($("#page-ptr")[0]) {
+        $("#time").text(new Date);
+        $(".refresh").pullToRefresh().on("pull-to-refresh", function() {
+          setTimeout(function() {
+            $("#time").text(new Date);
+            $(".refresh").pullToRefreshDone(); // 重置下拉刷新
+          }, 1500);   //模拟延迟
+        });
+      }
+
+
+      /* 滚动加载 */
+      //infinite scroll
+      if($("#infinite-demo-1")[0]) {
+        var loading = false;
+        $(document.body).infinite().on("infinite", function() {
+          if(loading) return;
+          loading = true;
+          setTimeout(function() {
+            $("#list").append("<p>我是新加载的内容</p><p>我是新加载的内容</p><p>我是新加载的内容</p><p>我是新加载的内容</p><p>我是新加载的内容</p>");
+            loading = false;
+          }, 1500);   //模拟延迟
+        });
+      }
+
+
+      /* 通知 */
+      $(document).on("click", "#show-notification", function(){
+          $.noti({
+            title: "得奖",
+            text: "点击领取qqqqqqq二等奖！",
+            media: "<img src='../assets/images/logo-.jpg'>",
+            data: {
+              message: "逗你玩的！"
+            },
+            time: 300000,
+            onClick: function(data){
+              $.alert(data.message);
+            }
+          });
+      })
+
+
+    </script>
+</body>
+</html>

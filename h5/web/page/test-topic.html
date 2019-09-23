@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="assets/stylesheet/mobile.css">
+	<style type="text/css">
+
+
+	body{
+		background-color: #cd154b;
+	}
+	.item-tit{color: #fff;padding: 15px;}
+	.item-inner{background-color: #fff;}
+
+
+	</style>
+</head>
+<body>
+
+	
+            <div class="cate1">
+                <div class="Items">
+                    <div class="item-tit">
+                    	一列
+                    </div>
+                    <div class="item-wrap item-1" id="cate1">
+                        <!--tpl-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="cate2">
+                <div class="Items">
+                    <div class="item-tit">
+                    	两列
+                    </div>
+                    <div class="item-wrap item-2" id="cate2">
+                        <!--tpl-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="cate3">
+                <div class="Items">
+                    <div class="item-tit">
+                    	三列
+                    </div>
+                    <div class="item-wrap item-3" id="cate3">
+                        <!--tpl-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="cate4">
+                <div class="Items">
+                    <div class="item-tit">
+                    	四列
+                    </div>
+                    <div class="item-wrap item-4" id="cate4">
+                        <!--tpl-->
+                    </div>
+                </div>
+            </div>
+
+
+
+            <script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+		    <script type="text/javascript" src="assets/script/template.js"></script>
+
+		    <script id="tpl" type="text/html">
+		        <% for(var i=from; i<=to; i++) {%>
+		            <div class="item">
+		                <div class="item-padding">
+		                    <div class="item-inner">
+		                        <div class="item-photo">
+		                            <a href="<%:=list[i].url%>"> <img src="<%:=list[i].image%>" alt="" /> </a>
+		                            <!--已售罄-->
+		                            <% if(list[i].stock <=0){ %>
+		                            <i class="item-tip iconfont">&#xe696;</i>
+		                            <%}%>
+
+		                        </div>
+		                        <div class="item-detail">
+		                            <a href="<%:=list[i].url%>" class="item-name">
+		                                <%:=list[i].name%>
+		                            </a>
+		                            <div class="item-des">
+		                                <%:=list[i].meta_description%>
+		                            </div>
+		                            <div class="item-price">
+		                                <div class="item-price-2">
+		                                    <span class="p-1">优惠价:</span><span class="p-2">￥</span><span class="p-3"><%:=list[i].cur_price%></span>
+		                                </div>
+		                                <div class="item-price-1">
+		                                    ￥<%:=list[i].vip_price%>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		            <% } %>
+		    </script>
+
+		    <script type="text/javascript">
+		    	var tpl = $('#tpl').html();
+		    	$.getJSON('http://open.365jiarun.com/mall/v1/promotion/product?callback=?',{product_code:["510400","510407","510416","510412","510401","510404","510405","510406","510411","510410"]}, function(result) {
+
+		        var html = template(tpl, { list: result.data, from: 0, to: 0 });
+		        $("#cate1").html(html);
+
+		        var html = template(tpl, { list: result.data, from: 1, to: 4 });
+		        $("#cate2").html(html);
+
+		        var html = template(tpl, { list: result.data, from: 3, to: 5 });
+		        $("#cate3").html(html);
+
+		        var html = template(tpl, { list: result.data, from: 6, to: 9 });
+		        $("#cate4").html(html);
+
+		        var html = template(tpl, { list: result.data, from: 10, to: 11 });
+		        $("#cate5").html(html);
+
+		    })
+		    </script>
+
+
+
+
+</body>
+</html>

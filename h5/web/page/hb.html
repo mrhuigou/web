@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>首页</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+	<style>
+		html{font-size:20px;}
+		.bribery{text-align: center;}
+		.bribery .q1{
+			padding-top: 3.75rem;
+			font-size:5rem;
+		}
+
+
+	</style>
+</head>
+<body>
+
+	<div class="bribery">
+		<div class="q1">￥20</div>
+		
+	</div>
+
+
+	<div class="hb">
+		<!-- <i class="iconfont c0 red">&#xe617;</i> -->
+		<div>
+			<div class="c1"><span>￥</span>20</div>
+			<div class="c2">
+				关注公众号体验一元购并使用红包
+			</div>
+			<div class="c3">
+				<img src="assets/images/wx.jpg" class="w">
+			</div>
+		</div>
+	</div>
+
+
+	<div class="hb hb2">
+		<div>
+			<div class="c1"><span>￥</span>20</div>
+			<div class="c2 mt2">
+				太幸运了
+			</div>
+			<div class="tc pt10">
+				<a href="#" class="btn mbtn fb yellowbtn w140">去使用</a>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="hb hb3">
+		<div>
+			<div class="c4">
+				<img src="assets/images/h5.png">
+			</div>
+			<div class="c2">
+				人品爆表！<br>
+				恭喜获得一个<span class="f14 yellow">未拆红包</span>
+			</div>
+			<div class="tc pt15">
+				<a href="#" class="btn mbtn fb yellowbtn w140">喊人拆红包</a>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="hb hb4">
+		<div>
+			<div class="c4">
+				<img src="assets/images/h5.png">
+			</div>
+			<p class="tc yellow pt5">用户名</p>
+			<div class="c2">
+				路见不平一声哄，<br>
+				该出手时就出手 <br>
+				你的朋友跪求拆红包！
+			</div>
+			<div class="tc pt5">
+				<a href="#" class="btn mbtn fb yellowbtn w140">帮Ta拆红包</a>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script src="assets/script/less-1.7.3.min.js"></script>
+	<script src="assets/script/jq.min.js"></script>
+	<script>
+		/* rem计算 */
+        (function (doc, win) {
+          var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+              var clientWidth = docEl.clientWidth;
+              if (!clientWidth) return;
+              docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+            };
+
+          if (!doc.addEventListener) return;
+          win.addEventListener(resizeEvt, recalc, false);
+          doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+	</script>
+
+
+
+
+</body>
+</html>
+

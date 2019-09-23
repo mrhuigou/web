@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="assets/stylesheet/mobile.css">
+</head>
+
+<body>
+    <!--新人专享-->
+    <div class="whitebg pb30">
+        <img src="assets/images/hongbao/new1.jpg" class="w mb10">
+        <a href="#"><img src="assets/images/hongbao/new2.jpg" class="w mb10"></a>
+        <a href="#"><img src="assets/images/hongbao/new3.jpg" class="w mb10"></a>
+        <a href="#"><img src="assets/images/hongbao/new4.jpg" class="w mb10"></a>
+        <a href="#"><img src="assets/images/hongbao/new5.jpg" class="w mb10"></a>
+        
+        <img src="assets/images/hongbao/hb-img1.png" class="w mt10">
+        <div class="pl20 pr20">
+            <div class="hb-note4-v3 tc">
+                <div style="background:#ffd5d6;">
+                    <p class="pb10 bdb-d">
+                        送好友<span class="red f20">98</span>元
+                        <br> 新会员专享大礼包
+                    </p>
+                    <p class="mt10 mb10">
+                        好友首次成功下单
+                        <br> 你可以获得
+                    </p>
+                    <img src="assets/images/hongbao/hb-img2.jpg" class="pw60 mb10">
+                    <a href="#" class="pw60 btn mbtn pinkbtn br5">分享给好友</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="http://m.365jiarun.com/assets/js/jq.min.js"></script>
+    <script type="text/javascript">
+    (function(doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function() {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) {
+                    return;
+                } else if (clientWidth > 640) {
+                    docEl.style.fontSize = 20 + 'px';
+                } else {
+                    docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+                }
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+    </script>
+</body>
+
+</html>

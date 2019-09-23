@@ -1,0 +1,36 @@
+.foucsBox {width: 713px; height: 150px; overflow: hidden; position: relative; -ms-zoom: 1;}
+.foucsBox .imgCon li {width:713px;height:150px;float:left;}
+.foucsBox .foucs {width:100%; bottom:15px; text-align: center; position: absolute; z-index:3;}
+.foucsBox .foucs span {background-color: #fff; margin: 0px 5px; width:15px; height: 15px;border-radius:8px;overflow:hidden;display:inline-block; cursor: pointer;}
+.foucsBox .foucs span.f{background-color: #ffb400;}
+
+.foucsBox .foucsButton {width:50px;height:50px;display: inline-block; cursor: pointer; position:absolute;top:35%; z-index:2;}
+.foucsBox .lBtn {float:left;left:10px;}
+.foucsBox .rBtn {float:right;right:10px;}
+
+/*首页图片展示*/
+.foucsBox1{border:1px solid #eee;}
+.foucsBox1 .imgCon li img{display:inline-block;}
+.foucsBox1 .imgCon li a{width:237px;display:block;float:left;border-right:1px solid #eee;}
+
+.foucsBox1 .foucsButton,.foucsBox2 .foucsButton{background:url(../images/spirit/v2_spirit.png) no-repeat;}
+.foucsBox1 .lBtn ,.foucsBox2 .lBtn{background-position:-32px top;}
+.foucsBox1 .lBtn.btnHover,.foucsBox2 .lBtn.btnHover{background-position:-32px -55px;}
+.foucsBox1 .rBtn,.foucsBox2 .rBtn{background-position:-91px top;}
+.foucsBox1 .rBtn.btnHover,.foucsBox2 .rBtn.btnHover{background-position:-91px -55px;}
+
+
+/*列表页图片展示*/
+.foucsBox2{width:888px;height:auto;}
+.foucsBox2 .imgCon li {width:888px;height:auto;}
+
+/*圈子首页*/
+.j_f1{width:298px;height:auto;}
+.j_f1 .imgCon li {width:298px;height:auto;}
+
+.j_f3{width:301px;height:auto;}
+.j_f3 .imgCon li {width:301px;height:auto;}
+
+/*体验详情*/
+#j_f_exp1{width:560px;}
+#j_f_exp1 .imgCon li{width:560px;}

@@ -1,0 +1,62 @@
+/*spirit*/
+.shop_quality li,.shop_c,.shops_tag1,.shops_contact,.s_cIion{background:url("../images/spirits/shop_spirit.png") no-repeat;}
+
+/*店铺首页*/
+.shopsbg{background:#f5e2b4 url(../images/shop_bg.jpg) no-repeat center bottom;padding-bottom:20px;}
+.shops_sear .header_search_input{width:270px;}
+.shops_rx{background:#83b842 url("../images/rx.png") no-repeat 10px 9px;padding-left:10px;padding-bottom:10px;}
+.shops_rx .foucsBox{width:1090px;height:auto;padding-top:45px;}
+.shops_rx .foucsBox li{width:1090px;height:auto;}
+.shops_rx .foucs{bottom:315px;text-align:right;right:10px;}
+.shops_rx .foucs span{width:10px;height:10px;}
+.shops_rxlist{width:186px;float:left;margin-right:8px;border:2px solid #fff;height:auto;background-color:#FFF;padding:10px;}
+.shops_rxlist:hover{border:2px solid #578919;}
+
+.shops_rxlist2,.shops_rxlist2:hover{margin-right:0;padding:10px 13px;margin-top:10px;margin-right:6px;border:0;width:186px;float:left;border:1px solid #eee!important;height:auto;background-color:#FFF;transition:all .1s;-moz-transition:all .1s;-webkit-transition:all .1s;}
+
+.shops_rxlist2:hover{box-shadow:0 0 1px 3px rgba(0,0,0,0.2)}
+
+.shops_cx .shops_rxlist{margin-right:12px;}
+.shops_rxlist.last{margin-right:0px;}
+.s_cIion{display:inline-block;position:absolute;height:36px;width:41px;background-position:0 -136px;top:-2px;left:-2px;}
+
+.shop_i_tit{background-color:#83b842;color:#fff;}
+.shops_i_rate{color:#2953a6;}
+.shops_i_compare{background-color:#217311;}
+.shops_i_percent{color:#217311;}
+
+.shop_sidebar dt{background-color:#f9f9f9;padding:4px 15px; cursor:pointer;border-bottom:1px solid #eee;font-weight:bold;}
+.shop_sidebar dt i{display:inline-block;overflow:hidden;text-align:center;line-height:7px;font-size:14px;width:10px;height:10px;color:#666;border:1px solid #999;border-radius:10px;margin-right:10px;vertical-align:-2px;*vertical-align:auto;}
+.shop_sidebar dd{padding:3px 15px 3px 18px;}
+.shop_sidebar dd i{font-size:14px;font-weight:bold;color:#999;display:inline-block;margin-right:10px;}
+.shop_sidebar dd a:hover{color:#83b842;}
+
+
+/*店铺列表*/
+.shop_quality li{float:left;width:25px;height:25px;background-position:left -102px;margin-right:10px;}
+.shop_quality .z{background-position:-34px -102px;}
+.shop_quality .l{background-position:-68px -102px;}
+.shop_quality .r{background-position:-102px -102px;}
+.shop_c{background-position:0 -54px;width:99px;height:40px;display:inline-block;}
+
+.shop_navbox{background-color:#004c1b;}
+.shop_nav a{display:block;float:left;padding:0 25px;line-height:40px;color:#fff;font-size:14px;}
+.shop_nav a:hover,.shop_nav a.current{text-decoration:none;color:#fff000;}
+
+.shops_tag1{width:94px;height:22px;background-position:0 0;display:inline-block;}
+.shops_contact{width:16px;height:18px;background-position:0 -25px;display:inline-block;}
+
+
+.header_search_input{width:300px;height:34px;line-height:34px;padding:0 10px;border:1px solid #ddd;border-right:0;float:left;border-radius:3px 0 0 3px;}
+.header_search_button{color:#fff;font-size:16px;display:inline-block;height:34px;background:#ccc url("../images/icons/icon11.png") no-repeat center center;padding:0 21px;line-height:34px;float:left!important;border-radius:0 3px 3px 0;position:relative;border:1px solid #ddd;border-left:0;}
+.header_search_button i{position:absolute;border-width:7px;border-color:transparent #eee transparent transparent;border-style:solid;width:0;left:-14px;top:11px;line-height:0;}
+.header_search_button.item2{background-image:url("../images/icons/icon011.png");}
+.header_search_button:hover{text-decoration:none;}
+
+/*页尾*/
+.v2_footer{background-color:#fff;box-shadow: inset 0 3px 7px rgba(0,0,0,0.1)}
+.v2_footer .fl{width:250px;}
+.v2_footer li{width: 175px;padding-left: 25px;float:left;line-height:28px;}
+.v2_footer dt{font-size:14px;margin-bottom:5px;font-weight:bold;color:#6eb706;}
+.tele{font-family:tahoma;font-weight:bold;color:#00a73c;font-size:22px;background:url("../images/spirit/v2_icons.png") no-repeat left -703px;padding:5px 15px 5px 30px;}
+.v2_footer a{color: #666;}

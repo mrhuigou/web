@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>注册</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+</head>
+<body>
+	<article>
+		<header class="header">
+			<a href="javascript:history.back();" class="his-back">返回</a>
+			<h2>注册新用户</h2>
+		</header>
+
+		<section class="login-bodyer">
+			<div class="pr">
+				<input class="input-text w" type="text" value="" placeholder="请输入手机号" maxlength="11" autocomplete="off" tabindex="1">
+				<p class="input-setup clearfix">
+					<a href="javascript:void(0);" class="input-del fr" style="display:none;"></a>
+				</p>
+			</div>
+
+			<div class="pt-15em clearfix">
+				<div class="pr w-per60 fl">
+					<input class="input-text w" type="text" value="" placeholder="请输入手机验证码" maxlength="4" autocomplete="off">
+					<p class="input-setup clearfix">
+						<a href="javascript:void(0);" class="input-del fr" style="display:none;"></a>
+					</p>
+				</div>
+				<a href="javascript:void(0)" class="appbtn graybtn w-per35 fr">获取验证码</a>
+			</div>
+
+			<p class="pt-15em clearfix">
+				<label><input type="checkbox" class="vm"> <span class="vm">同意<a href="#">慧生活服务协议</a></span></label>
+			</p>
+	
+			<button type="button" class="appbtn mt-15em w greenbtn">下一步</button>
+
+		</section>
+	</article>
+
+
+	<script src="assets/script/zepto.min.js"></script>
+	<script src="assets/script/less-1.7.3.min.js"></script>
+	
+	<script>
+
+	/*~~ 文本框输入内容时出现删除图标 ~~*/
+	$(".input-text").keyup(function() {
+		if($(this).val()){
+			$(this).next(".input-setup").find(".input-del").show();
+		}else{
+			$(this).next(".input-setup").find(".input-del").hide();
+		}
+	});
+	/*~~ 点击删除图标 重置文本框内容~~*/
+	$(".input-del").click(function() {
+		$(this).hide().parent(".input-setup").prev(".input-text").val("").focus();
+	});
+
+
+		
+
+	</script>
+</body>
+</html>

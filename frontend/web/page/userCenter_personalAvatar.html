@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>家润网</title>
+	<meta name="keywords" content="家润同城网购,家润网,酒水,饮料" />
+	<meta name="description" content="家润同城网购,家润网,酒水,饮料" />
+	<link rel="stylesheet" type="text/css" href="assets/stylesheets/global.css"  />
+	<link rel="stylesheet" type="text/css" href="assets/stylesheets/layout.css"  />
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/modules.css" />
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/icommon.css" />
+	<link rel="stylesheet" type="text/css" href="assets/stylesheets/page.css" />
+</head>
+<body>
+	<!--头部-->
+	<div class="graylinear">
+		<div class="w1100 tr bc p5">
+			<span class="green2">Hi，请<a href="#" class="green2">登录</a></span> <a href="#" class="ml10 mr10 gray6">免费注册</a>
+			<a href="#" class="l_iconCart mr10 gray6">购物车<i>12</i></a>
+			<a href="#" class="l_iconApp gray6">移动应用</a>
+		</div>
+	</div>
+	
+	<!--导航-->
+	<div class="l_navBox clearfix">
+		<div class="w1100 bc clearfix">
+			<a href="#" class="fl"><img src="../images/life/l_logo.jpg" alt="logo" width="243" height="80" class="db" /></a>
+			<div class="l_weather fl">
+				青岛<i class="ml5">晴 25~16℃</i>
+			</div>
+			<div class="l_nav fl ml30 clearfix">
+				<li>
+					<a href="#" class="item">生活日记</a> <i></i>
+					<div class="l_subnavBox whitebg pa none">
+						<div class="l_subnav pt5 pb5 clearfix">
+							<a href="#">生活轨迹</a>
+							<a href="#">我的体验</a>
+							<a href="#">我的专辑</a>
+							<a href="#">我的足迹</a>
+							<a href="#">心愿单</a>
+							<a href="#">纪念日</a>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href="#" class="item">生活圈</a> <i></i>
+					<div class="l_subnavBox whitebg pa none">
+						<div class="l_subnav pt5 pb5 clearfix">
+							<a href="#">生活轨迹</a>
+							<a href="#">我的体验</a>
+							<a href="#">我的专辑</a>
+							<a href="#">我的足迹</a>
+							<a href="#">心愿单</a>
+							<a href="#">纪念日</a>
+						</div>
+					</div>
+				</li>
+				<li><a href="#" class="item">订单中心</a> <i></i></li>
+				<li><a href="#" class="item">账户中心</a> <i></i></li>
+				<li><a href="#" class="item">消息</a> <i></i> <span class="l_iconMess">99</span></li>
+			</div>
+			<div class="l_nav_search fl">
+				<input type="text" placeholder="大家正在搜体验 活动 达人" value="大家正在搜体验 活动 达人" class="l_nav_sText placeholder vm" />
+				<a href="#" class="l_nav_sBtn vm"></a>
+			</div>
+		</div>
+	</div>
+	<div class="l_blank none"></div>
+	<div class="graybg2 pb50" style="min-width:1100px;">
+		<div class="w1100 bc pt15">
+			<!--面包屑导航-->
+			<p class="gray6 mb15">
+				<a href="#" class="f25">我的生活</a> &gt; <a href="#" class="f14"> 账户中心</a> &gt; <span class="f14">个人信息</span>
+			</p>
+
+			<div class="user_center shadowBox whitebg clearfix">
+				<ul class="orderStatus clearfix pl15 bdb pt15 pb10 mb20 f18">
+					<li>
+						<a href="#" class="f20 pl10 pr30">个人信息</a>
+						<div class="st-arrow none" style="top:14px;"><b></b></div>
+					</li>
+					<li>
+						<a href="#" class="f20 pl10 pr30">我的头像</a>
+						<div class="st-arrow" style="top:14px;"><b></b></div>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	
+	</div>
+	<p class="pt20 pb50 tc gray6">
+		<a href="#">关于我们</a> <a href="#">诚聘英才</a> <a href="#">联系我们</a> <a href="#">网站合作</a> 版权说明  举报邮箱：jiarun@kefu.com  仅限18周岁以上人士购买  网络社会征信网 <br>
+		Copyright© 2006-2013 家润网 www.365jiarun.com 版权所有 网站备案号：鲁ICP备13017153号
+	</p>
+		<script type="text/javascript" src="../scripts/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="../scripts/jquery.Jcrop.min.js"></script>
+		<script type="text/javascript" src="../scripts/jQuery.UtrialAvatarCutter.js"></script>
+		<script type="text/javascript">
+			var cutter = new jQuery.UtrialAvatarCutter(
+				{
+					//主图片所在容器ID
+					content : "picture_original",
+					
+					//缩略图配置,ID:所在容器ID;width,height:缩略图大小
+					purviews : [{id:"picture_100",width:100,height:100},{id:"picture_75",width:75,height:75},{id:"picture_37",width:37,height:37}],
+					
+					//选择器默认大小
+					selector : {width:200,height:200}
+				}
+			);
+	
+			$(window).load(function(){
+				cutter.init();
+
+				//确定按钮动作
+				$("#save_btn").click(
+					function(){
+						var data = cutter.submit();
+						alert("x="+data.x+"\ny="+data.y+"\nw="+data.w+"\nh="+data.h+"\ns="+data.s);
+					}
+				);
+			});
+			
+			/*切换图片*/
+			function change_img(){
+				var imgs = [
+					"http://files.jb51.net/demoimg/201003/203dda9bbc2fab3b6e068c1a.jpg",
+					"http://files.jb51.net/demoimg/201003/945f5df77dc5ac0d730eec20.jpg",
+					"http://files.jb51.net/demoimg/201003/0399073a6de2761097ddd8e1.jpg",
+					"http://files.jb51.net/demoimg/201003/6d5e420a3854923b95ca6bcd.jpg",
+					"http://files.jb51.net/demoimg/201003/20105I35641.jpg",
+					"http://files.jb51.net/demoimg/201003/29cf9566f40c5417ab184ce4.jpg",
+					"http://files.jb51.net/demoimg/201003/807ccafbaae1ce35a8d31184.jpg",
+					"http://files.jb51.net/demoimg/201003/200810201732108385.jpg",
+					"http://files.jb51.net/demoimg/201003/3e1af38d87c1efc9513d9219.jpg",
+					"http://files.jb51.net/demoimg/201003/12491XL456250-2H06.jpg"
+				];
+				var ra = (Math.random()+"").substr(3,1);
+				cutter.reload(imgs[ra]);
+			}
+
+		</script>
+
+		<script type="text/javascript">
+			/*导航*/
+			$(".l_nav li").hover(function(){
+				var _this=$(this);
+				if(_this.has(".l_subnavBox").length){
+					_this.find(".l_subnavBox").stop().show();
+					$(".l_blank").show();
+				}
+			},function(){
+				var _this=$(this);
+				_this.find(".l_subnavBox").hide();
+				$(".l_blank").hide();
+			});
+			/*上传头像*/
+			$(".avaUpload").hover(function(){
+				$(this).find(".pop").show();
+			},function(){
+				$(this).find(".pop").hide();
+			});
+		</script>
+</body>
+</html>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

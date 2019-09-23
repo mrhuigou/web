@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>拆红包</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+</head>
+<body>
+
+    <img src="../assets/images/hongbao/hb2-banner2.jpg" class="w">
+
+    <div style="background:#fffbc8;">
+        <div class="tc">
+            <div class="f16 pt10 fb">
+                抱歉,还没有人帮你拆红包哦 <br>
+                发给好友吧
+            </div>
+            <p class="mt5 mb10 f12">
+                距离未拆红包过期还有<span class="red">05:59:45</span>
+            </p>
+            <div class="btn btn-s btn-red">传递给好友</div>
+            <img src="../assets/images/hongbao/hb2-line.jpg" class="w">
+        </div>
+    </div>
+
+    <div class="hb-rule-v3 mb20">
+        <h3 class="fb mb5 tc f18 red">活动规则</h3>
+        <ul class="f12 ul ul-decimal">
+            <li>文字文字文字文字文字文字文字文字</li>
+            <li>文字文字文字文字文字文字文字文字文字文字</li>
+            <li>文字文字文字文字文字文字文字文字</li>
+            <li>文字文字文字文字文字文字文字文字文字</li>
+        </ul>
+    </div>
+
+    
+
+	
+
+
+
+
+	<script src="assets/script/jq.min.js"></script>
+    <script>
+        /* rem计算 */
+        (function (doc, win) {
+          var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+              var clientWidth = docEl.clientWidth;
+              if (!clientWidth) return;
+              docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+            };
+
+          if (!doc.addEventListener) return;
+          win.addEventListener(resizeEvt, recalc, false);
+          doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+
+</body>
+</html>
+

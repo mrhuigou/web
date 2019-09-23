@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>首页</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+	<link rel="stylesheet" href="assets/script/layer.m/need/layer.css">
+</head>
+<body>
+	<article>
+		<div class="shake-opacity"></div>
+		<div class="shake-box">
+			<div class="shake-redbag tc">
+				<h2 class="f22">家润·慧生活</h2>
+				<p class="pt10">给您发了一个红包</p>
+			</div>
+		</div>
+		
+		<div class="shake-windows">
+			<div class="shake-text">恭喜抽中棒棒糖一枚！</div>
+			<div class="shake-close"><img src="/assets/images/close.png" width="30" height="30" /></div>
+		</div>
+
+	</article>
+
+
+
+	<script src="assets/script/less-1.7.3.min.js"></script>
+	<script src="assets/script/jq.min.js"></script>
+	<script src="assets/script/layer.m/layer.m.js"></script>
+	<script type="text/javascript">
+		$(".shake-redbag").click(function(){
+			$(this).addClass("shake");
+			setTimeout(function(){
+				$(".shake-redbag").removeClass("shake");
+				layer.open({
+					type:1,
+					content: $(".shake-windows").html()
+				});
+			
+			},1000);
+		});
+		$(".shake-close").click(function(){$(this).parent().fadeOut();$(".shake-opacity").fadeOut()})
+
+	</script>
+
+</body>
+</html>
+

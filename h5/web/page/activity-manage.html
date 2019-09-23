@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>活动管理</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+</head>
+<body>
+	<article>
+		<header class="bs-bottom whbg lh44">
+			<div class="tit-left"><i class="iconfont leftarr"></i></div>
+			<h2 class="tc f18">标题标题标题</h2>
+		</header>
+		<section class="veiwport">
+			<ul class="filter blueFilter four mt10 mb10 clearfix">
+		        <li class="cur"><a href="#">管理活动</a></li>
+		        <li><a href="#">报名</a></li>
+		        <li><a href="#">评论</a></li>
+		        <li><a href="#">赞</a></li>
+		    </ul>
+
+			<div class="whitebg clearfix tc bdt bdb">
+				<div class="fl pw30 bdr pt25" style="padding-bottom:28px;">
+					报名
+					<p class="f14 gray9">0</p>
+				</div>
+				<div class="fl pw35 lh44 bdr">
+					<p class="bdb">阅读 <span class="gray9">32</span></p>
+					<p>评论 <span class="gray9">32</span></p>
+				</div>
+				<div class="fl pw35 lh44">
+					<p class="bdb">分享 <span class="gray9">32</span></p>
+					<p>赞 <span class="gray9">32</span></p>
+				</div>
+			</div>	
+
+			<p class="gray6 pt15 pl10 pb5">信息修改</p>
+			<div class="tc whitebg p15">
+				<p class="bdb pb10 tl mb15">hi~~~</p>
+				<a href="#" class="blue"><i class="iconfont pr5 vm-2">&#xe615;</i><span>修改</span></a>
+			</div>
+
+			<p class="gray6 pt15 pl10 pb5">您可以进行一下操作</p>		
+			<div class="row tc whitebg">
+				<div class="col-3 bdr bdb p10">
+					<i class="iconfont blue-">&#xe644;</i>
+					<p class="mt5">分享</p>
+				</div>
+				<div class="col-3 bdr bdb p10 exportTri">
+					<i class="iconfont blue-">&#xe657;</i>
+					<p class="mt5">导出名单</p>
+				</div>
+				<div class="col-3 bdr bdb p10">
+					<i class="iconfont blue-">&#xe658;</i>
+					<p class="mt5">查看</p>
+				</div>
+				<div class="col-3 bdr bdb p10">
+					<i class="iconfont blue-">&#xe649;</i>
+					<p class="mt5">群发消息</p>
+				</div>
+				<div class="col-3 bdr bdb p10">
+					<i class="iconfont blue-">&#xe621;</i>
+					<p class="mt5">再发一个</p>
+				</div>
+				<div class="col-3 bdr bdb p10">
+					<i class="iconfont blue-">&#xe659;</i>
+					<p class="mt5">下载二维码</p>
+				</div>
+				<div class="col-3 bdr bdb p10">
+					<i class="iconfont blue-">&#xe64b;</i>
+					<p class="mt5">添加封面</p>
+				</div>
+				<div class="col-3 bdr bdb p10">
+					<i class="iconfont blue-">&#xe65c;</i>
+					<p class="mt5">推广</p>
+				</div>
+			</div>
+		</section>
+	</article>
+
+	
+	<!--导出名单 弹层-->
+	<div class="p5 tc gray6 exportPop" style="display:none;">
+		<div class="whitebg">
+			<p class="bdb p10">发送到邮箱</p>
+		</div>
+		<span class="btn w mbtn transbtn mt5">取消</span>
+	</div>
+	<!--导出到邮箱 弹层-->
+	<div class="p5 tc gray6 exportEmailPop" style="display:none;">
+		<input type="text" class="input minput w" placeholder="输入你的邮箱" autofocus>
+		<a href="#" class="btn w mbtn transbtn mt5">发送到邮箱</a>
+		<span class="btn w mbtn transbtn mt5">取消</span>
+	</div>
+
+
+	<script src="assets/script/less-1.7.3.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="assets/script/ipop.js"></script>
+    <script>
+    	//导出名单
+	    $(".exportTri").click(function(){
+		    maskdiv($(".exportPop"),"bottom");
+	    })
+	    $(".exportPop .btn").click(function(){
+	    	$(".maskdiv").fadeOut();
+			$(".exportPop").slideUp();
+	    })
+
+	    $(".exportPop p").click(function(){
+	    	$(".exportPop").slideUp();
+	    	maskdiv($(".exportEmailPop"),"bottom");
+	    })
+	    $(".exportEmailPop .btn").click(function(){
+	    	$(".maskdiv").fadeOut();
+			$(".exportEmailPop").slideUp();
+	    })
+
+    </script>
+
+</head>
+
+<body>
+
+
+
+
+</body>
+</html>

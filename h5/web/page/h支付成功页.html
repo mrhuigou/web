@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>拆红包</title>
+    <link rel="stylesheet" href="assets/stylesheet/mobile.css">
+	<link rel="stylesheet" href="assets/script/layer.m/need/layer.css">
+
+    <style>
+        html{font-size:20px;}
+        
+    </style>
+</head>
+<body>
+
+<div class="hb2-bg2-pop" style="display: none;">
+    <div class="hb2-bg2">
+        <div class="white f16 fb lh150">
+            恭喜您 <br>
+            获得 <span class="yellow f24">1</span> 个未拆红包
+        </div>
+        <p class="yellow f12 mt10 mb5 fb">5个现金红包，送给身边好友</p>
+        <a href="#" class="btn btn-s btn-yellow">传递给好友 自己拿一个</a>
+    </div>
+</div>
+
+    
+
+    
+
+	
+
+
+
+    <script src="assets/script/jq.min.js"></script>
+	<script src="assets/script/layer.m/layer.m.js"></script>
+    <script>
+        layer.open({
+          type: 3,
+          content: $(".hb2-bg2-pop").html()
+        });
+
+        /* rem计算 */
+        (function (doc, win) {
+          var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+              var clientWidth = docEl.clientWidth;
+              if (!clientWidth) return;
+              docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+            };
+
+          if (!doc.addEventListener) return;
+          win.addEventListener(resizeEvt, recalc, false);
+          doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+
+</body>
+</html>
+

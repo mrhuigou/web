@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title></title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+</head>
+<body>
+	<article>
+		<header class="fx-top bs-bottom whbg lh44">
+			<div class="tit-left"><i class="iconfont leftarr"></i></div>
+			<h2 class="tc f18">发现</h2>
+		</header>
+
+		<section class="veiwport">
+			<div class="p10 whbg">
+				<div class="discovery-hd">
+					<div class="ava-box">
+						<img src="assets/images/defaul.png" alt="ava" width="45" height="45" class="ava sava fr">
+						<p class="fr white mr10 pt10 tr">
+							<span>Jimmy</span> <br>
+						</p>
+					</div>
+				</div>
+				
+				<!--动态-->
+				<div class="issuance">
+					<figure class="pt15">
+						<img src="assets/images/defaul.png" alt="ava" width="45" height="45" class="ava sava mr10 fl">
+						<figcaption class="ml50 pl5">
+							<p class="mb5 f14">用户名</p>
+							<p class="f12">好久没有和孩玩的这么开好久没有和孩玩的好</p>
+						</figcaption>
+					</figure>
+					<div class="clearfix mt10">
+						<span class="labeltag orglabel">味道好</span>
+						<span class="labeltag orglabel">味道不错</span>
+						<span class="labeltag orglabel">好</span>
+						<span class="labeltag orglabel">味道好</span>
+					</div>
+					<ul class="clearfix">
+						<li class="pw33 fl mt10">
+							<img src="assets/images/banner-3.jpg" alt="tu" class="db pw92 bc">
+						</li>
+						<li class="pw33 fl mt10">
+							<img src="assets/images/banner-3.jpg" alt="tu" class="db pw92 bc">
+						</li>
+						<li class="pw33 fl mt10">
+							<img src="assets/images/banner-3.jpg" alt="tu" class="db pw92 bc">
+						</li>
+					</ul>
+					
+
+					<!--回复-->
+					<div class="gray9 mt10 mb10">
+						<span class="fr">
+							<i class="mr10">赞</i>
+							<i class="reply-btn">回复</i>
+						</span>
+						<span class="tahoma">2015-6-30 19:00</span>
+					</div>
+					<div class="bd br5 bs p10 pr">
+						<!--箭头指向时间啊 ^ -->
+						<div class="arr-bd toparr-bd">
+							<span><i></i></span>
+						</div>
+
+						<p class="mb10">
+							<i class="iconfont f16 red">&#xe62a;</i>
+							<span>用户一</span>,
+							<span>用户二</span>,
+							<span>用户三</span>
+						</p>
+						<p class="mb5">
+							<i class="blue">用户一：</i><span>不错不错不错~</span>
+						</p>
+						<p class="mb5">
+							<i class="blue">用户二：</i><span>下次去玩算我一个哦~</span>
+						</p>
+					</div>
+
+				</div>
+				
+				<!--~~ 回复浮层 ~~-->
+				<div class="reply-pop whbg" style="display:none;">
+					<div class="p10">
+						<a href="javascript:void(0)" id="replySend" class="btn mbtn pw20 graybtn fr">发送</a>
+						<input type="text" class="minput pw75 bd br5">
+					</div>
+				</div>
+				
+
+			</div>
+
+		</section>
+	</article>
+
+	<script src="assets/script/less-1.7.3.min.js"></script>
+	<script src="assets/script/jq.min.js"></script>
+	<script src="assets/script/ipop.js"></script>
+	
+	<script>
+		/*~~ 回复评论 ~~*/
+		$(".reply-btn").click(function() {
+			maskdiv($(".reply-pop"),"bottom");
+		});
+
+		$("#replySend").click(function(e){
+				e.stopPropagation();
+				$(".reply-pop").slideUp();
+				$(".maskdiv").fadeOut();
+			});
+
+		
+	</script>
+
+
+</body>
+</html>

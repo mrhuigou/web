@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>吃货尝鲜</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+</head>
+<body>
+	<article>
+		<header class="fx-top bs-bottom whbg lh44">
+			<div class="tit-left"><i class="iconfont leftarr"></i></div>
+			<h2 class="tc f18">吃货尝鲜</h2>
+		</header>
+
+		<section class="veiwport">
+			<ul class="avalist pt15 whbg clearfix">
+				<li>
+					<div class="ava sava"><img src="assets/images/defaul.png" alt="ava" class="w"></div>
+					<p class="tc mt5">dfdf</p>
+				</li>
+				<li>
+					<div class="ava sava"><img src="assets/images/defaul.png" alt="ava" class="w"></div>
+					<p class="tc mt5">dfdf</p>
+				</li>
+				<li>
+					<div class="ava sava"><img src="assets/images/defaul.png" alt="ava" class="w"></div>
+					<p class="tc mt5">dfdf</p>
+				</li>
+				<li>
+					<div class="ava sava"><img src="assets/images/defaul.png" alt="ava" class="w"></div>
+					<p class="tc mt5">dfdf</p>
+				</li>
+				<li>
+					<div class="ava sava"><img src="assets/images/defaul.png" alt="ava" class="w"></div>
+					<p class="tc mt5">dfdf</p>
+				</li>
+				<li>
+					<div class="ava sava"><img src="assets/images/defaul.png" alt="ava" class="w"></div>
+					<p class="tc mt5">dfdf</p>
+				</li>
+				<li>
+					<div class="ava sava"><img src="assets/images/defaul.png" alt="ava" class="w"></div>
+					<p class="tc mt5">dfdf</p>
+				</li>
+				<li>
+					<div class="ava sava"><img src="assets/images/defaul.png" alt="ava" class="w"></div>
+					<p class="tc mt5">dfdf</p>
+				</li>
+				<li>
+					<div class="ava sava"><img src="assets/images/defaul.png" alt="ava" class="w"></div>
+					<p class="tc mt5">dfdf</p>
+				</li>
+				<li>
+					<div class="ava sava"><img src="assets/images/defaul.png" alt="ava" class="w"></div>
+					<p class="tc mt5">dfdf</p>
+				</li>
+
+
+			</ul>
+
+		</section>
+	</article>
+
+	<script src="assets/script/less-1.7.3.min.js"></script>
+	<script src="assets/script/jq.min.js"></script>
+	<script src="assets/script/ipop.js"></script>
+	
+	<script>
+		/*~~ 回复评论 ~~*/
+		$(".reply-btn").click(function() {
+			maskdiv($(".reply-pop"),"bottom");
+		});
+
+		$("#replySend").click(function(e){
+				e.stopPropagation();
+				$(".reply-pop").slideUp();
+				$(".maskdiv").fadeOut();
+			});
+
+		
+	</script>
+
+</body>
+</html>

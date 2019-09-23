@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="../assets/stylesheet/mobile.css">
+    <link rel="stylesheet" href="../assets/stylesheet/swiper.min.css">
+    <!-- 需要写到本页的style 以下-->
+    <style>
+        html {
+            font-size: 20px;
+        }
+  
+    </style>
+</head>
+
+<body>
+    <article> 
+
+
+        <div class="content">
+            <section class="veiwport" style="max-width: inherit;">
+
+            	<!-- 2017/9/8 -->
+            	<div class="tit2">
+            		<h2>标题</h2>
+            	</div>
+
+            	<!-- 2017/9/5 -->
+            	<a href="javascript:void(0)" class="btn btn-s btn-green layerTri">点击弹出图层</a>
+            	<div id="layerCon" style="display: none;">
+            		<div class="layer0">
+	            		<div class="flex-col">
+	            			<a href="#" class="flex-item-6 p2">
+	            				<img src="http://img1.365jiarun.com/group1/M00/02/F9/wKgB7lVil_GAULNeAAEFPeFiyeA366.jpg_500x500.jpg" class="w">
+	            			</a>
+	            			<a href="#" class="flex-item-6 p2">
+	            				<img src="http://img1.365jiarun.com/group1/M00/04/EE/wKgB7lgEY8WATQHBAABX-Kh6ZwQ091.jpg_500x500.jpg" class="w">
+	            			</a>
+	            		</div>
+	            		<!-- 关闭按钮 -->
+	            		<a class="layer-close iconfont" href="http://m.365jiarun.com">&#xe612;</a>
+	            	</div>
+            	</div>
+
+
+                <!-- 分类导航 -->
+                <div class="tab-box pr">
+                    <div class="tab-tit normal-items x os-x normal-items1">
+                        <a href="javascript:void(0)" class="tab-tit-tri item cur">休闲零食</a>
+                        <a href="javascript:void(0)" class="tab-tit-tri item">饼干糕点</a>
+                        <a href="javascript:void(0)" class="tab-tit-tri item">糖巧</a>
+                        <a href="javascript:void(0)" class="tab-tit-tri item">干果蜜饯</a>
+                        <a href="javascript:void(0)" class="tab-tit-tri item">肉干肉脯</a>
+                        <a href="javascript:void(0)" class="tab-tit-tri item">冲调茗茶</a>
+                        <a href="javascript:void(0)" class="tab-tit-tri item">滋补养生 </a>
+                    </div>
+                    <!-- 滑动查看更多 -->
+                    <i class="iconfont pa-tr t10 pt2 f12 grayc">&#xe68c;</i>
+                </div>
+
+                <div class="normal-items y normal-items2">
+                    <a class="item cur">分类</a><a class="item">分类</a><a class="item">分类</a><a class="item">分类</a><a class="item">分类</a><a class="item">分类</a><a class="item">分类</a><a class="item">分类</a><a class="item">分类</a>
+                    <i class="more iconfont" style="display: none;">&#xe60a;</i>
+                </div>
+
+
+                <!-- 小分类 -->
+                <div class="clearfix bg-wh pt10 pr5">
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片</a>
+                    <a href="#" class="label label-pill label-default label-danger fl ml10 mb10">薯片薯</a>
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片</a>
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片片</a>
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片</a>
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片</a>
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片</a>
+                    <a href="#" class="label label-pill label-default fl ml10 mb10">薯片</a>
+                </div>
+
+
+                <!--  -->
+                <div class="tab-box tab-box1">
+                    <div class="tab-tit">
+                        <a href="#" class="tab-tit-tri">
+                            <span class="btn btn-s btn-gray" id="brand">品牌 <i class="iconfont">&#xe61b;</i></span>
+                        </a>
+                        <a href="#" class="tab-tit-tri">
+                            <span class="btn btn-s btn-gray" id="size">屏幕尺寸 <i class="iconfont">&#xe61b;</i></span>
+                        </a>
+                    </div>
+                    <div class="tab-con">
+                        <div class="tab-con-list" style="display: none;">
+                            <form>
+                                <div class="flex-col">
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n1" class="vm">
+                                            <span class="vm">魅族</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n1" class="vm">
+                                            <span class="vm">华为</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n1" class="vm">
+                                            <span class="vm">小米</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n1" class="vm">
+                                            <span class="vm">华为</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n1" class="vm">
+                                            <span class="vm">小米</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n1" class="vm">
+                                            <span class="vm">Apple</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n1" class="vm">
+                                            <span class="vm">Apple</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n1" class="vm">
+                                            <span class="vm">魅族</span>
+                                        </label>
+                                    </div>
+                                </div> 
+                                <!-- 点击确认刷新 -->
+                                <div class="flex-col">
+                                    <div class="flex-item-6">
+                                        <!--<a class="btn btn-l btn-gray w">重置</a>-->
+                                        <button type="reset" value="" class="btn btn-l btn-gray w">重置</button>
+                                    </div>
+                                    <div class="flex-item-6">
+                                        <!--<a class="btn btn-l btn-green w">确认</a>-->
+                                        <button type="submit" value="" class="btn btn-l btn-green w">确认</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="tab-con-list" style="display: none;">
+                            <form>
+                                <div class="flex-col">
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n2" class="vm">
+                                            <span class="vm">华为</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n2" class="vm">
+                                            <span class="vm">小米</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n2" class="vm">
+                                            <span class="vm">Apple</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n2" class="vm">
+                                            <span class="vm">魅族</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n2" class="vm">
+                                            <span class="vm">华为</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n2" class="vm">
+                                            <span class="vm">小米</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n2" class="vm">
+                                            <span class="vm">Apple</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex-item-6 bdb p10">
+                                        <label class="db w">
+                                            <input type="radio" name="n2" class="vm">
+                                            <span class="vm">魅族</span>
+                                        </label>
+                                    </div>
+                                </div> 
+                                <!-- 点击确认刷新 -->
+                                <div class="flex-col">
+                                    <div class="flex-item-6">
+                                        <!--<a class="btn btn-l btn-gray w">重置</a>-->
+                                        <button type="reset" value="" class="btn btn-l btn-gray w">重置</button>
+                                    </div>
+                                    <div class="flex-item-6">
+                                        <!--<a class="btn btn-l btn-green w">确认</a>-->
+                                        <button type="submit" value="" class="btn btn-l btn-green w">确认</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="which">
+                    <span class="item">
+                        内容
+                        <i class="iconfont"></i>
+                    </span>
+                    <span class="item cur">
+                        内容
+                        <i class="iconfont"></i>
+                    </span>
+                    <span class="item">
+                        内容
+                        <i class="iconfont"></i>
+                    </span>
+                </div>
+
+
+        
+            </section>
+
+        </div>
+
+    </article>
+
+
+    <script src="../assets/js/jq.min.js"></script>
+    <script src="../assets/script/jquery-migrate-1.2.1.js"></script>
+	<script src="../assets/script/template.js"></script>
+    <script src="../assets/script/swiper.jquery.min.js"></script>
+    <script src="../assets/script/scrollfix.js"></script>
+	<script src="../assets/script/TT.js?v=201600902"></script>
+	<script type="text/javascript" src="../assets/script/layer.m/layer.m.js"></script>
+
+    <script type="text/javascript">
+    /* 弹出层 2017-9-5*/
+    $(".layerTri").click(function(){
+
+	    layer.open({
+		  type: 1,
+		  closeBtn: 2,
+		  title: false,
+		  shadeClose: true,
+		  content: $('#layerCon').html()
+		  //btn: ['确认']
+		});
+		
+		$(".layer-close").click(function(){
+			layer.closeAll();
+		})
+
+    });
+
+    /* rem计算 */
+    (function(doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function() {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+            };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+
+
+    /* 分类导航初始化行数，及显示隐藏 */
+    $('.normal-items2').rowMore(1);
+
+
+    /* tab */
+    $(".tab-box1").tab();
+
+
+    /* 返回顶部 */
+    $.backtop(".content");
+
+
+    </script>
+
+</body>
+
+</html>

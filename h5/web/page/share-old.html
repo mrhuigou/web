@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title></title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+	<link href="assets/stylesheet/swiper.min.css?v=20170422" rel="stylesheet">
+	
+</head>
+<body>
+
+	<img src="assets/images/share/share-banner.jpg" class="w">
+
+	<div class="pt20 pb30 whitebg">
+	<p class="f18 fb org mb15 tc">新会员专享福利券</p>
+
+		<!-- 券 -->
+		<div class="swiper-container pb10 shareQuan bc">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide bc" style="width:60%">
+                    <div class="green mb5">
+                    	<span class="fr m"><i class="f16">￥</i><i class="fb f30  vm-2">8.8</i></span>
+                    	<span class="f16">现金券</span>
+                    </div>
+                    <span class="gray6">无门槛使用</span>
+                    <i class="iconfont">&#xe698;</i>
+                </div>
+            </div>
+        </div>
+
+        <div class="tc pb10">
+			<p class="fb mb10">分享给新朋友，还有更多惊喜！</p>
+			<span class="btn mbtn orgbtn fb">立即分享</span>
+		</div>
+
+		<div class="mt10 flex-col p3">
+			<a href="#" class="flex-item-6 p3">
+				<img src="http://img1.365jiarun.com/group1/M00/05/C5/wKgB7lj2wD-AZBIrAABvo5b5Tnw471.jpg_300x247.jpg" class="w">
+			</a>
+			<a href="#" class="flex-item-6 p3">
+				<img src="http://img1.365jiarun.com/group1/M00/05/C8/wKgB7lj9X7aANueDAACLZAuV4iI844.jpg_300x247.jpg" class="w">
+			</a>
+		</div>
+
+		<!-- 爆品专区 -->
+		<div class="jb" style="padding-bottom: 0px;">
+	        <a href="https://m.365jiarun.com/page/1654.html" class="t"></a>
+	        <div class="tit1 tit1-red">
+	            <h2>爆品专区</h2>
+	        </div>
+	    	<div id="hot_content" style="max-width: inherit;overflow: hidden;" class="pl5 pr5"></div>
+	    </div>
+	    <script id="hot_content_tpl" type="text/html">
+		    <div class="swiper-container" id="swiper-container_ad">
+		        <div class="swiper-wrapper swiper-container-no-flexbox">
+		            <div class="swiper-slide clearfix row">
+		            <% for(var i=from; i<=to; i++) {%>
+		                <a href="<%:=list[i].url%>" class="db col-3 " >
+		                    <img src="<%:=list[i].image%>"  class="fl" style="height: 10.4rem;width: 10.4rem;border-left: 0.125rem solid #eee;border-bottom: 0.125rem solid #eee;">
+		                </a>
+		           <% if((i+1)%6==0 && (i+1)< to){ %>
+		            </div> <div class="swiper-slide clearfix row">
+		            <% } %>
+		            <% } %>
+		            </div>
+		        </div>
+		        <!-- Add Pagination -->
+		        <div class="swiper-pagination swiper-pagination-ad" style="position: relative;"></div>
+		    </div>
+	    </script>
+
+
+
+		<!-- 二维码 -->
+		<div class="tc mt30">
+			<span class="share-weixin">
+				<img src="http://m.365jiarun.com/assets/images/wx.jpg" width="130" height="130px">
+			</span>
+			<p class="f12 mt10">关注公众号，了解更多优惠活动</p>
+		</div>
+
+	</div>
+
+	<div class="f0bg tc pt15 pb20">
+		<img src="http://m.365jiarun.com/assets/images/logo2.png" width="110">
+		<p class="gray6 mt5">客服电话：4008-556-977</p>
+	</div>
+
+
+	<script src="assets/script/jq.min.js"></script>
+	<script src="assets/script/swiper.jquery.min.js?v=20170113"></script>
+	<script src="assets/js/template.js?v=20170101"></script>
+
+
+	<script type="text/javascript">
+		var hot_content_tpl = $('#hot_content_tpl').html();
+	    $.getJSON('https://open.365jiarun.com/mall/v1/ad/index?code=H5-0F-AD&callback=?', function(result){
+		    var html= template(hot_content_tpl, {list:result.data,from:0,to:(result.data.length-1)});
+		    $("#hot_content").html(html);
+
+		    //爆款滑动
+		    var swiper_ad = new Swiper('#swiper-container_ad', {
+		    pagination: '.swiper-pagination-ad',
+		    paginationType: 'progress',
+		    paginationClickable: true,
+		    autoplay: 6000,
+		    loop:true,
+		    });
+	    });
+
+	</script>
+
+
+</body>
+</html>

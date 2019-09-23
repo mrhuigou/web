@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>弹层</title>
+	<link rel="stylesheet" href="../assets/stylesheet/mobile.css">
+</head>
+<body>
+
+	<div class="popr" style="
+		width: 30.4rem;
+		height: 41.45rem;
+		background: url('../assets/images/popr-bg2.png') no-repeat center top;
+		background-size:100%;
+		padding-top:14rem;">
+
+		<p class="newhands-coupons">28元现金券</p>
+
+		<!-- 券 -->
+		<div class="newhands-coupons-item">
+
+			<div class="flex-col">
+
+				<div class="flex-item-5 tc" style="padding-top: 0.25rem;">
+					<span class="red-">
+						<i class="vm2" style="font-size:1.2rem;">￥</i>
+						<i style="font-size: 3rem;">8.80</i>
+					</span>
+				</div>
+
+				<div class="flex-item-7 pl5">
+					<p class="red-" style="font-size: 1.9rem;">现金券</p>
+					<p class="gray6" style="font-size: 1.4rem;">实付满10元使用</p>
+				</div>
+
+			</div>
+
+		</div>
+
+		<!-- 券 -->
+		<div class="newhands-coupons-item">
+
+			<div class="flex-col">
+
+				<div class="flex-item-5 tc" style="padding-top: 0.25rem;">
+					<span class="red-">
+						<i class="vm2" style="font-size:1.2rem;">￥</i>
+						<i style="font-size: 3rem;">8.80</i>
+					</span>
+				</div>
+
+				<div class="flex-item-7 pl5">
+					<p class="red-" style="font-size: 1.9rem;">现金券</p>
+					<p class="gray6" style="font-size: 1.4rem;">实付满10元使用</p>
+				</div>
+
+			</div>
+
+		</div>
+
+		<!-- 券 -->
+		<div class="newhands-coupons-item">
+
+			<div class="flex-col">
+
+				<div class="flex-item-5 tc" style="padding-top: 0.25rem;">
+					<span class="red-">
+						<i class="vm2" style="font-size:1.2rem;">￥</i>
+						<i style="font-size: 3rem;">8.80</i>
+					</span>
+				</div>
+
+				<div class="flex-item-7 pl5">
+					<p class="red-" style="font-size: 1.9rem;">现金券</p>
+					<p class="gray6" style="font-size: 1.4rem;">实付满10元使用</p>
+				</div>
+
+			</div>
+
+		</div>
+
+		
+
+		<!-- 领券按钮 -->
+		<a href="#">
+			<img src="../assets/images/popr-btn.png" class="w">
+		</a>
+
+		<a class="layer-close iconfont" href="http://m.365jiarun.com">&#xe612;</a>
+		
+	</div>
+
+	
+	<script src="/assets/js/jq.min.js"></script>
+
+	<script type="text/javascript">    
+		(function (doc, win) {
+		    var docEl = doc.documentElement,
+		    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+		    recalc = function () {
+		    var clientWidth = docEl.clientWidth;
+		    if (!clientWidth){
+		    return;
+		    }else if(clientWidth>640){
+		    docEl.style.fontSize =20 + 'px';
+		    }else{
+		    docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+		    }
+		    };
+		    if (!doc.addEventListener) return;
+		    win.addEventListener(resizeEvt, recalc, false);
+		    doc.addEventListener('DOMContentLoaded', recalc, false);
+	    })(document, window);
+    </script>
+
+
+</body>
+</html>
+

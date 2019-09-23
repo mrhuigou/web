@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title></title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+	<link rel="stylesheet" href="assets/stylesheet/layer.m/need/layer.css">
+
+
+	<!-- 请在当前页引入此段 -->
+	<style type="text/css">
+		html{
+			font-size: 20px;
+		}
+		/* 对layer弹层的重置 */
+		.layermchild{
+			background: none!important;
+		}
+		.layermcont{
+			padding: 0!important;
+			overflow: hidden;
+		}
+	</style>
+
+	
+</head>
+<body>
+
+	<div style="max-width:640px;margin:0 auto;">
+		<div class="gifts-bg" id="gifts">
+			<p class="gifts-t1">您有机会得到神秘大礼</p>
+
+			<!-- 礼包图片 -->
+			<img src="../assets/images/game/gifts/gifts2.png" class="gifts-img">
+
+			<!-- 左右箭头 -->
+			<i class="gifts-arr l iconfont"></i>
+			<i class="gifts-arr r iconfont"></i>
+
+			<!-- 选择 -->
+			<span class="gifts-circle l">不喜欢</span>
+			<span class="gifts-circle r">喜欢</span>
+
+			<p class="gifts-t2">左右滑动领取神秘大礼</p>
+
+			<!-- 摇一摇按钮 -->
+			<a href="javascript:void(0);" class="gifts-shake">摇一摇</a>
+
+		</div>
+
+		<!-- 活动规则 -->
+		<div class="p15">
+			<h2 class="fb pl10 mb2">活动规则</h2>
+			<ul class="ml25 pr10 ul ul-decimal gray6">
+				<li>内容内容内容内容内容内容内容</li>
+				<li>内容内容内容内容内容</li>
+				<li>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</li>
+			</ul>
+		</div>
+
+
+
+
+		<!-- 抽奖机会已用完 -->
+		<div class="gifts-bg">
+			<p class="gifts-t1">今天的机会已经用完了</p>
+
+			<!-- 礼包图片 -->
+			<img src="../assets/images/game/gifts/gifts2.png" class="gifts-img">
+
+			<p class="gifts-t2">明天再来试一试</p>
+		</div>
+
+		<!-- 活动规则 -->
+		<div class="p15">
+			<h2 class="fb pl10 mb2">活动规则</h2>
+			<ul class="ml25 pr10 ul ul-decimal gray6">
+				<li>内容内容内容内容内容内容内容</li>
+				<li>内容内容内容内容内容</li>
+				<li>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</li>
+			</ul>
+		</div>
+
+
+
+
+		<!-- 众弹层 -->
+
+		<!-- 没中奖也没关系 -->
+		<!-- 弹层展示以此为例 其他根据条件相应调取即可 -->
+		<div class="gifts-pop1 dn">
+			<div class="gifts-c gifts-c1">
+				<img src="../assets/images/game/gifts/gifts4.png" class="img">
+				<p class="tt1">没中奖也没关系</p>
+				<p class="tt2">
+					满121.2送价值68元葡萄酒一瓶 <br>
+					活动时间：12.8-12.20
+				</p>
+				<a href="#" class="button">去看看</a>
+			</div>
+		</div>
+
+		<!-- 轻松赢得价值68元 -->
+		<div class="gifts-pop2">
+			<div class="gifts-c gifts-c2">
+				<img src="../assets/images/game/gifts/gifts5.jpg" class="img">
+				<p class="tt1">轻松赢得价值68元</p>
+				<p class="tt2">意大利弗兰克高贵农场红葡萄酒750ml <br>
+					数量：1
+				</p>
+				<p class="tt3">（※奖品必须与商品订单一起配送）</p>
+
+				<a href="#" class="button">点击领取</a>
+			</div>
+		</div>
+
+		<!-- 轻松领取 -->
+		<div class="gifts-pop3">
+			<div class="gifts-c gifts-c3">
+				<p class="tt1">轻松赢取</p>
+
+				<img src="../assets/images/game/gifts/gifts6.png" class="img">
+
+				<p class="tt2">98元大礼包</p>
+
+				<a href="#" class="button">点击领取</a>
+			</div>
+		</div>
+
+		<!-- 关注后领取 -->
+		<div class="gifts-pop4">
+			<div class="gifts-c gifts-c4">
+				<p class="tt1">关注后才能领取</p>
+
+				<img src="../assets/images/wx.jpg" class="img">
+
+				<p class="tt2">长按识别二维码，关注领取奖品</p>
+			</div>
+		</div>
+	</div>
+
+
+
+	
+
+
+
+
+<script src="assets/script/jq.min.js"></script>
+<script src="assets/script/hammer.min.js"></script>
+<script type="text/javascript" src="../assets/script/toast.js"></script>
+<script type="text/javascript" src="../assets/script/modal.js"></script>
+<script type="text/javascript" src="../assets/script/layer.m/layer.m.js"></script>
+
+<script type="text/javascript">
+	(function(doc, win) {
+	    var docEl = doc.documentElement,
+	        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+	        recalc = function() {
+	            var clientWidth = docEl.clientWidth;
+	            if (!clientWidth) {
+	                return;
+	            } else if(clientWidth > 640){
+	            	 docEl.style.fontSize = 20
+	            }else {
+	                docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+	            }
+	        };
+	    if (!doc.addEventListener) return;
+	    win.addEventListener(resizeEvt, recalc, false);
+	    doc.addEventListener('DOMContentLoaded', recalc, false);
+	})(document, window);
+
+
+	/* 滑动 */
+	var gifts = new Hammer(document.getElementById('gifts'));
+	gifts.on('swipeleft swiperight swipeup tap press pressup', function(ev){
+		if(ev.type == 'swipeleft'){
+			$.toast("右滑");
+		}else if(ev.type == 'swiperight'){
+			$.toast("左滑");
+		}
+	});
+
+
+	/* 众弹层 */
+	layer.open({
+	  type: 3,
+	  title: false,
+	  content: $('.gifts-pop1').html()
+	});
+
+</script>
+
+
+
+</body>
+</html>

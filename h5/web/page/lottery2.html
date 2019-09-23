@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="../assets/stylesheet/mobile.css">
+    <script type="text/javascript">    
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth){
+        return;
+        }else if(clientWidth>640){
+        docEl.style.fontSize =20 + 'px';
+        }else{
+        docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+        }
+        };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+    </script>  
+
+    <style type="text/css">
+        html{
+            font-size: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <img src="../assets/images/game/baby/img/banner_1.jpg" style="width:32rem;" class="db bc" />
+    <div class="lottery-deadline">
+    	<p>
+    		活动时间：2月1日当天 <br/>
+    		抽奖须知：现金券使用有效期截至2月3日
+    	</p>
+    </div>
+
+    <div class="lottery-wrap">
+        <div class="pw80 bc">
+            <div id="lottery" class="clearfix">
+                <div class="lottery-unit lottery-unit-0">
+                    <img src="../assets/images/game/baby/img/i1.jpg" class="w db">
+                </div>
+                <div class="lottery-unit lottery-unit-1">
+                    <img src="../assets/images/game/baby/img/i1.jpg" class="w db">
+                </div>
+                <div class="lottery-unit lottery-unit-2">
+                    <img src="../assets/images/game/baby/img/i1.jpg" class="w db">
+                </div>
+                <div class="lottery-unit lottery-unit-7">
+                    <img src="../assets/images/game/baby/img/i1.jpg" class="w db">
+                </div>
+                <div class="lottery-btn">
+                    <a href="javascript:void(0);"><img src="../assets/images/game/baby/img/btn.gif" alt="抽奖按钮" class="w db"></a>
+                </div>
+                <div class="lottery-unit lottery-unit-3">
+                    <img src="../assets/images/game/baby/img/i1.jpg" class="w db">
+                </div>
+                <div class="lottery-unit lottery-unit-6">
+                    <img src="../assets/images/game/baby/img/i1.jpg" class="w db">
+                </div>
+                <div class="lottery-unit lottery-unit-5">
+                    <img src="../assets/images/game/baby/img/i1.jpg" class="w db">
+                </div>
+                <div class="lottery-unit lottery-unit-4">
+                    <img src="../assets/images/game/baby/img/i1.jpg" class="w db">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+   
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <script src="../assets/script/jq.min.js"></script>
+    <script src="../assets/script/lottery.js"></script>
+    <script type="text/javascript">
+
+
+
+    /* 抽奖 */
+    var click = false;
+    window.onload = function() {
+        lottery.init('lottery');
+        $("#lottery a").click(function() {
+            if (click) {
+                return false;
+            } else {
+                lottery.speed = 100;
+                roll();
+                click = true;
+                return false;
+            }
+        });
+    };
+
+
+
+
+    </script>
+</body>
+
+</html>

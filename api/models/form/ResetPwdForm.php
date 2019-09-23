@@ -1,0 +1,75 @@
+<?php
+namespace api\models\form;
+use common\models\User;
+use yii\base\InvalidParamException;
+use yii\base\Model;
+use Yii;
+
+/**
+ * Password reset form
+ */
+class ResetPwdForm extends Model
+{
+    public $password;
+    public $verifyPassword;
+
+    /**
+     * @var \common\models\User
+     */
+    private $_user;
+
+
+    /**
+     * Creates a form model given a token.
+     *
+     * @param  string                          $token
+     * @param  array                           $config name-value pairs that will be used to initialize the object properties
+     * @throws \yii\base\InvalidParamException if token is empty or not valid
+     */
+    public function __construct($token, $config = [])
+    {
+        if (empty($token) || !is_string($token)) {
+            throw new InvalidParamException('重置密码密钥不存在');
+        }
+        $this->_user = User::findByPasswordResetToken($token);
+        if (!$this->_user) {
+            throw new InvalidParamException('重置密码密钥错误');
+        }
+        parent::__construct($config);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['password','verifyPassword'], 'required'],
+            [['password','verifyPassword'], 'string',  'max'=>22, 'min'=>6 ],
+            ['verifyPassword', 'compare', 'compareAttribute'=>'password', 'message'=>'两次密码不一致！'],
+        ];
+    }
+
+    /**
+     * Resets password.
+     *
+     * @return boolean if password was reset.
+     */
+    public function resetPassword()
+    {
+        if ($this->validate()) {
+            $user = $this->_user;
+            $user->setPassword($this->password);
+            $user->removePasswordResetToken();
+            $user->save();
+            return $user;
+        }else{
+            return false;
+        }
+    }
+    public function attributeLabels(){
+        return ['password'=>'密码',
+            'verifyPassword'=>'确认密码',
+        ];
+    }
+}

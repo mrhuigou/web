@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title></title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+	<link rel="stylesheet" href="assets/stylesheet/flex-m.css">
+	<link rel="stylesheet" href="assets/stylesheet/swiper.min.css">
+	
+</head>
+<body>
+
+	<img src="assets/images/share/share-banner.jpg" class="w">
+
+	<div class="pt20 pb30 whitebg">
+		<div class="flex-col share-count">
+			<div class="flex-item-4 tc">
+				<img class="img-circle" width="85" height="85" src="" alt="头像"></img>
+			</div>
+			<div class="flex-item-8">
+				<div class="share-ava">
+					<h2 class="f18">我是..</h2>
+					<p>恭喜您获得98元大礼包！</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="swiper-container pt20 pb20 shareQuan" id="shareQuan">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="green mb5">
+                    	<span class="fr m"><i class="f16">￥</i><i class="f24 fb vm-2">12</i></span>
+                    	<span class="f16">免邮券</span>
+                    </div>
+                    <span class="gray6">全场包邮</span>
+                    <i class="iconfont">&#xe698;</i>
+                </div>
+                <div class="swiper-slide">
+                    <div class="green mb5">
+                    	<span class="fr m"><i class="f16">￥</i><i class="f24 fb vm-2">12</i></span>
+                    	<span class="f16">免邮券</span>
+                    </div>
+                    <span class="gray6">全场包邮</span>
+                    <i class="iconfont">&#xe698;</i>
+                </div>
+                <div class="swiper-slide">
+                    <div class="green mb5">
+                    	<span class="fr m"><i class="f16">￥</i><i class="f24 fb vm-2">12</i></span>
+                    	<span class="f16">免邮券</span>
+                    </div>
+                    <span class="gray6">全场包邮</span>
+                    <i class="iconfont">&#xe698;</i>
+                </div>
+
+            </div>
+        </div>
+
+		<div class="tc">
+			<span class="share-weixin">
+				<img src="http://m.365jiarun.com/assets/images/wx.jpg" width="130" height="130px">
+			</span>
+			<p class="mt10">长按识别二维码领取</p>
+		</div>
+	</div>
+
+	<div class="f0bg tc pt15 pb20">
+		<img src="http://m.365jiarun.com/assets/images/logo2.png" width="110">
+		<p class="gray6 mt5">客服电话：4008-556-977</p>
+	</div>
+
+	<script src="assets/script/jq.min.js"></script>
+	<script src="assets/script/swiper3.1.0.jquery.min.js"></script>
+
+	<script type="text/javascript">
+		//滑动
+		var selectItems = new Swiper('#shareQuan', {
+			slidesPerView: "auto"
+		});
+	</script>
+
+
+
+</body>
+</html>

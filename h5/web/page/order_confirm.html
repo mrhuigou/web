@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>订单确认</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+</head>
+<body>
+	<article>
+		<header class="header">
+			<a href="javascript:history.back();" class="his-back">返回</a>
+			<h2>订单确认</h2>
+		</header>
+		
+		<section class="veiwport">
+			<div class="colorbar"></div>
+			<div class="pt5 pb5 pl15 pr20 rarrow whitebg f14">
+				<p><em class="fr">15762298085</em>收货人：荆丽苹</p>
+				<p>中国  山东 青岛市 四方区</p>
+				<p>周口路97号中航科技园</p>
+			</div>
+			<div class="colorbar mb10"></div>
+			
+			<div class="tit1 mt15 mb5">
+				<h2>请选择配送时间</h2>
+			</div>
+			<div class=" mb10 row tc lh200">
+				<div class="col-4 p5">
+					<div class="bd p5 whitebg cp delivery-time cur">
+						<p class="pb5 bdb green" style="letter-spacing: 4px;">早间送</p>
+						<p class="pt5 pb5 f10 lh150">
+							周三 <br>
+							9:00-12:00
+						</p>
+					</div>
+				</div>
+				<div class="col-4 p5">
+					<div class="bd p5 whitebg cp delivery-time">
+						<p class="pb5 bdb org" style="letter-spacing: 4px;">午间送</p>
+						<p class="pt5 pb5 f10 lh150">
+							周三 <br>
+							12:00-18:00
+						</p>
+						
+					</div>
+				</div>
+				<div class="col-4 p5">
+					<div class="bd p5 whitebg cp delivery-time">
+						<p class="pb5 bdb blue" style="letter-spacing: 4px;">晚间送</p>
+						<p class="pt5 pb5 f10 lh150">
+							周三 <br>
+							18:00-22:00
+						</p>
+						
+					</div>
+				</div>
+				<div class="col-4 p5">
+					<div class="bd p5 whitebg cp delivery-time chooseTime">
+						<p class="pb5 bdb blue-" style="letter-spacing: 4px;">其他</p>
+						<p class="pt5 pb5 f10 lh150">
+							选择<br>其他时间
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<a href="#" class="line-a whitebg mb10 bdt">
+				<i class="iconfont fr"></i>
+				<span class="fb">收获时间：</span>
+				<em class="f12">不限</em>
+			</a>
+			
+			<a href="#" class="line-a whitebg mb10 bdt">
+				<i class="iconfont fr"></i>
+				<span class="fb">发票信息：</span>
+				<label class="mr10"><input type="radio" class="vm"><span class="f12 vm"> 不需要发票</span></label>
+				<label><input type="radio" class="vm"><span class="f12 vm"> 普通发票</span></label>
+			</a>
+
+			<div class="whitebg bdt bdb p15">
+				<p class="mb5">
+					<span class="fr">￥17.90</span>
+					<span>商品总金额：</span>     
+				</p>
+				<p>
+				    <span class="fr">￥5.00</span>
+				    <span>运费：</span>        
+				</p>
+			</div>
+
+			<!-- 选择优惠券 -->
+			<a href="javascript:void(0)" class="line-a whitebg mb10 mt10 bdt chooseCoupon">
+				<i class="iconfont fr"></i>
+				<span class="fb">使用优惠券：</span>
+				<em class="f12 red"></em>
+			</a>
+			
+			<div class="bd whitebg mt10 tc pb15">
+				<h3 class="f14 fb p10 mb10 bdb">微信扫码支付</h3>
+				<p class="mb15 f12">遇到不允许跨号支付？</p>
+				<img src="" alt="二维码" width="170" height="170">
+				<p class="pt10 f12">长按图片[识别二维码]付款</p>
+			</div>
+			
+			<button type="button" class="appbtn mt10 w redbtn">微信安全支付</button>
+			<button type="button" class="appbtn mt10 w graybtn">其他方式支付</button>
+		</section>
+		<!--时间选择 层-->
+		<div class="chooseTimePop p20 whitebg pw70 dn">
+			<div class="mb15">
+				<span class="fb">配送日期：</span>
+				<select class="p5">
+					<option>10-21</option>
+					<option>10-21</option>
+					<option>10-21</option>
+					<option>10-21</option>
+					<option>10-21</option>
+					<option>10-21</option>
+					<option>10-21</option>
+					<option>10-21</option>
+					<option>10-21</option>
+					<option>10-21</option>
+					<option>10-21</option>
+					<option>10-21</option>
+					<option>10-21</option>
+					<option>10-22</option>
+					<option>10-23</option>
+				</select>
+			</div>
+			<div class="mb20">
+				<span class="fb">配送时间：</span>
+				<select class="p5">
+					<option>18:00-20:00</option>
+					<option>18:00-20:00</option>
+				</select>
+			</div>
+			<a href="#" class="btn mbtn orgbtn w chooseTimeOk">确定</a>
+		</div>
+
+		<!--选择优惠券 层-->
+		<div class="ml5 mr5 tc gray6 chooseCouponPop" style="display:none;">
+			<div class="whitebg bdt brtl5 brtr5" style="height: 285px;overflow: auto;">
+				<p class="bdb p10">
+					<span class="red fb f14 money">20.5元</span>（家润网）
+					<span class="db gray9">有效期：2015.12.1——2016.1.30</span>
+				</p>
+				<p class="bdb p10">
+					<span class="red fb f14 money">30元</span>（家润网）
+					<span class="db gray9">有效期：2015.12.1——2016.1.30</span>
+				</p>
+				<p class="bdb p10">
+					<span class="red fb f14 money">30元</span>（家润网）
+					<span class="db gray9">有效期：2015.12.1——2016.1.30</span>
+				</p>
+				<p class="bdb p10">
+					<span class="red fb f14 money">30元</span>（家润网）
+					<span class="db gray9">有效期：2015.12.1——2016.1.30</span>
+				</p>
+				<p class="bdb p10">
+					<span class="red fb f14 money">30元</span>（家润网）
+					<span class="db gray9">有效期：2015.12.1——2016.1.30</span>
+				</p>
+				<p class="bdb p10">
+					<span class="red fb f14 money">30元</span>（家润网）
+					<span class="db gray9">有效期：2015.12.1——2016.1.30</span>
+				</p>
+				<p class="bdb p10">
+					<span class="red fb f14 money">30元</span>（家润网）
+					<span class="db gray9">有效期：2015.12.1——2016.1.30</span>
+				</p>
+				<p class="bdb p10">
+					<span class="red fb f14 money">50元</span>（家润网）
+					<span class="db gray9">有效期：2015.12.1——2016.1.30</span>
+				</p>
+			</div>
+			<span class="btn w mbtn transbtn mt5 mb5">取消</span>
+		</div>
+
+		<!--底部提交订单-->
+		<div class="fx-bottom row tc bs-top redbg f14">
+			<div class="col-2 whitebg p10">
+				金额总计：<span class="red f16 fb">￥99</span>
+			</div>
+			<a href="#" class="col-2 white p10">
+				确认提交订单
+			</a>
+		</div>
+		
+
+
+	</article>
+
+	<script src="assets/script/less-1.7.3.min.js"></script>
+	<script src="assets/script/jq.min.js"></script>
+	<script src="assets/script/ipop.js"></script>
+	<script>
+	$(".chooseTime").click(function(){
+		maskdiv($(".chooseTimePop"),"center");
+		$(".chooseTimeOk").click(function(){
+			$(".chooseTimePop,.maskdiv").fadeOut();
+
+		})
+	})
+
+	//选择优惠券
+    $(".chooseCoupon").click(function(){
+	    maskdiv($(".chooseCouponPop"),"bottom");
+    })
+    $(".chooseCouponPop p,.chooseCouponPop .btn").click(function(){
+    	$(".maskdiv").fadeOut();
+		$(".chooseCouponPop").slideUp();
+		if($(this).is("p")){
+			$(".chooseCoupon em").text($(this).find(".money").text());
+		}
+    })
+	</script>
+
+</body>
+</html>

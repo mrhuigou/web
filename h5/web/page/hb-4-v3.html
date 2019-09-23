@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title></title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+
+</head>
+<body>
+	<!--支付成功 红包显示页-->
+	<div class="tc pt30 pb30">
+		<i class="iconfont green f50 fb">&#xe61a;</i>
+		<p class="f16 pt5">订单支付成功</p>
+	</div>
+
+	<div class="hb-order-v3">
+		<h2>恭喜你获得一个大礼包</h2>
+		<div class="con">
+			<img src="assets/images/hongbao/hb-img4.jpg" class="pw80 mt20">
+			<p class="pb10">请<span class="red f20 mb20">3</span>位好友帮忙拆包！</p>
+			<a href="#" class="btn mbtn redbtn br5 pw40">分享给好友</a>
+			<p class="pt10 pb10">
+				助力好友均有红包相赠 <br>
+				好友首次成功下单再获得
+			</p>
+			<img src="assets/images/hongbao/hb-img2.jpg" class="pw60">
+
+			<p class="tc pt10 pb20">
+				<a href="#" class="gray9 unl f12">查看礼包规则&gt;&gt;</a>
+			</p>
+		</div>
+	</div>
+
+
+	
+	<script type="text/javascript" src="http://m.365jiarun.com/assets/js/jq.min.js"></script>
+	<script type="text/javascript">    (function (doc, win) {
+	    var docEl = doc.documentElement,
+	    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+	    recalc = function () {
+	    var clientWidth = docEl.clientWidth;
+	    if (!clientWidth){
+	    return;
+	    }else if(clientWidth>640){
+	    docEl.style.fontSize =20 + 'px';
+	    }else{
+	    docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
+	    }
+	    };
+	    if (!doc.addEventListener) return;
+	    win.addEventListener(resizeEvt, recalc, false);
+	    doc.addEventListener('DOMContentLoaded', recalc, false);
+	    })(document, window);
+    </script>
+
+
+</body>
+</html>
+
