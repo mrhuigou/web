@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>查看红包</title>
+	<link rel="stylesheet" href="assets/stylesheet/mobile.css">
+</head>
+<body>
+
+	<div class='hb-view'>
+        <ul class="filter two filter-green bdb f16">
+			<li class="active"><a href="#tab-1">我的红包</a></li>
+			<li><a href="#tab-2">我拆的红包</a></li>
+		</ul>
+        <div id='tab-1' class="p5">
+        	<div class="bg-wh bd-d-b pt10 pb10 flex-col">
+        		<div class="flex-item-3 tc">
+        			<img src="../assets/images/hongbao/hbicon2.jpg" width="66">
+        		</div>
+        		<div class="flex-item-5 pt5 mt2">
+        			<h3 class="f16 pb5">未拆红包</h3>
+        			<p class="f12">距过期还有<span class="red">05:59:45</span></p>
+        		</div>
+        		<div class="flex-item-4 pt10 tc">
+        			<a href="#" class="btn btn-m btn-org mt5">喊人来拆</a>
+        		</div>
+        	</div>
+        	<div class="bg-wh bd-d-b pt10 pb10 flex-col">
+        		<div class="flex-item-3 tc">
+        			<img src="../assets/images/hongbao/hbicon1.jpg" width="66">
+        		</div>
+        		<div class="flex-item-5 pt5 mt2">
+        			<h3 class="f16 pb5">已拆红包</h3>
+        			<p class="f12">有效期至<span class="red">2016.11.24</span></p>
+        		</div>
+        		<div class="flex-item-4 pt10 tc">
+        			<span class="red"><i class="f18">￥</i><i class="f30">8.8</i></span>
+        		</div>
+        	</div>
+        	<div class="bg-wh bd-d-b pt10 pb10 flex-col grayscale">
+        		<div class="flex-item-3 tc">
+        			<img src="../assets/images/hongbao/hbicon2.jpg" width="66">
+        		</div>
+        		<div class="flex-item-5 pt5 mt2">
+        			<h3 class="f16 pb5">未拆红包</h3>
+        			<p class="f12">距过期还有00:00:00</p>
+        		</div>
+        		<div class="flex-item-4 pt10 tc">
+        			<span class="dib pt10">已失效</span>
+        		</div>
+        	</div>
+        </div>
+        <div id='tab-2' class="p5">
+        	<div class="bg-wh bd-d-b pt10 pb10 flex-col">
+        		<div class="flex-item-3 tc">
+        			<img src="../assets/images/hongbao/hbicon1.jpg" width="66">
+        		</div>
+        		<div class="flex-item-5 pt5 mt2">
+        			<h3 class="f16 pb5">家润慧生活</h3>
+        			<p class="f12">11/15 13:56</p>
+        		</div>
+        		<div class="flex-item-4 pt10 tc">
+        			<span class="red"><i class="f18">￥</i><i class="f30">8.8</i></span>
+        		</div>
+        	</div>
+        	<div class="bg-wh bd-d-b pt10 pb10 flex-col">
+        		<div class="flex-item-3 tc">
+        			<img src="../assets/images/hongbao/hbicon1.jpg" width="66">
+        		</div>
+        		<div class="flex-item-5 pt5 mt2">
+        			<h3 class="f16 pb5">家润慧生活</h3>
+        			<p class="f12">11/15 13:56</p>
+        		</div>
+        		<div class="flex-item-4 pt10 tc">
+        			<span class="red"><i class="f18">￥</i><i class="f30">8.8</i></span>
+        		</div>
+        	</div>
+        	<div class="bg-wh bd-d-b pt10 pb10 flex-col">
+        		<div class="flex-item-3 tc">
+        			<img src="../assets/images/hongbao/hbicon1.jpg" width="66">
+        		</div>
+        		<div class="flex-item-5 pt5 mt2">
+        			<h3 class="f16 pb5">家润慧生活</h3>
+        			<p class="f12">11/15 13:56</p>
+        		</div>
+        		<div class="flex-item-4 pt10 tc">
+        			<span class="red"><i class="f18">￥</i><i class="f30">8.8</i></span>
+        		</div>
+        	</div>
+        </div>
+    </div>
+
+
+
+
+	<script src="assets/script/jq.min.js"></script>
+	<script src="assets/script/jquery.tabslet.min.js"></script>
+	<script>
+		$('.hb-view').tabslet();
+	</script>
+
+
+
+
+</body>
+</html>
+

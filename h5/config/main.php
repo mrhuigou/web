@@ -6,7 +6,7 @@ $params = array_merge(
     require(__DIR__ . '/params-local.php')
 );
 
-return [
+return [ 
     'id' => 'app-h5',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
