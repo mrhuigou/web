@@ -143,7 +143,7 @@ $("document").ready(function () {
 
                 //中奖号处理
                 var it = Number(it);
-                var r = '家润慧生活提供精美奖品（价值3000元）';
+                var r = '每日惠购提供精美奖品（价值3000元）';
 
                 // $('.ss ol').append('<li data-number=' + it + '>' + name + "：" + r + '</li>');
                 // r = '<img src="'+ photo +'" width="100" height="100" style="margin: 0 auto;display: block;"><h2>恭喜'+ name + " 获得" + r + '！</h2>';

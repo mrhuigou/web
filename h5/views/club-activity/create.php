@@ -65,7 +65,7 @@ $this->title='创建活动';
 			</a>
 			<?=$form->field($model,'description')->widget(h5\widgets\H5Editor\Widget::className(),['id'=>'activityform-description'])?>
 			<div class="p10">
-				<input type="checkbox" checked class="fl mt2 mr5">同意<a href="<?=\yii\helpers\Url::to(['/site/about'])?>" class="blue">《家润慧生活服务协议》</a>
+				<input type="checkbox" checked class="fl mt2 mr5">同意<a href="<?=\yii\helpers\Url::to(['/site/about'])?>" class="blue">《每日惠购服务协议》</a>
 			</div>
 			<?= $form->errorSummary($model,['header'=>'']); ?>
 			<div class="p10">

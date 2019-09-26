@@ -24,7 +24,7 @@ $this->title="绑定手机登录";
 		'template' => "<div class='pt-15em clearfix'><div class=\"pr w-per60 fl\">{input}</div><a href=\"javascript:;\" class=\"btn lbtn graybtn w-per40  f12  \"  id='send-vcode'>获取验证码</a></div>{error}",
 		"inputOptions"=>["maxlength"=>"6","autocomplete"=>"off",'placeholder'=>'验证码'],
 	]) ?>
-    <p class="gray9 pt15 pb5">家润慧生活通过语音播报验证码,请你接听来自0532/400/12590开头的来电.</p>
+    <p class="gray9 pt15 pb5">每日惠购通过语音播报验证码,请你接听来自0532/400/12590开头的来电.</p>
 	<?= Html::submitButton('确认登录', ['class' => 'btn lbtn greenbtn w mt10', 'name' => 'signup-button']) ?>
 	<?php ActiveForm::end(); ?>
     </div>

@@ -82,7 +82,7 @@ class PaymentController extends \yii\web\Controller
 	        $useragent=\Yii::$app->request->getUserAgent();
             if(strpos(strtolower($useragent), 'micromessenger') &&  ($open_id=\Yii::$app->session->get('open_id'))){
 	            $unifiedOrder->setParameter("openid", "$open_id");//用户ID
-	            $unifiedOrder->setParameter("body","家润慧生活");//商品描述
+	            $unifiedOrder->setParameter("body","每日惠购");//商品描述
 	            $unifiedOrder->setParameter("out_trade_no", "$order->merge_code");//商户订单号
 	            $unifiedOrder->setParameter("total_fee", $order->total * 100);//总金额
 	            $unifiedOrder->setParameter("notify_url", "https://open.mrhuigou.com/payment/weixin");//通知地址
@@ -96,12 +96,12 @@ class PaymentController extends \yii\web\Controller
 		            throw new NotFoundHttpException("微信支付网关异常！");
 	            }
             }else{
-	            $unifiedOrder->setParameter("body","家润慧生活");//商品描述
+	            $unifiedOrder->setParameter("body","每日惠购");//商品描述
 	            $unifiedOrder->setParameter("out_trade_no", "$order->merge_code");//商户订单号
 	            $unifiedOrder->setParameter("total_fee", $order->total * 100);//总金额
 	            $unifiedOrder->setParameter("notify_url", "https://open.mrhuigou.com/payment/weixin");//通知地址
 	            $unifiedOrder->setParameter("trade_type", "MWEB");//交易类型
-	            $unifiedOrder->setParameter('scene_info',Json::encode(['h5_info'=>['type'=>'Wap','wap_url'=>"https://m.mrhuigou.com","wap_name"=>"家润慧生活"]]));
+	            $unifiedOrder->setParameter('scene_info',Json::encode(['h5_info'=>['type'=>'Wap','wap_url'=>"https://m.mrhuigou.com","wap_name"=>"每日惠购"]]));
 	            $redirect_url = $unifiedOrder->getWapResult();
 	            if($redirect_url){
 		            return Json::encode(['status'=>1,'data'=>$redirect_url]);
@@ -237,7 +237,7 @@ class PaymentController extends \yii\web\Controller
             //商户网站订单系统中唯一订单号，必填
 
             //订单名称
-            $subject = "家润慧生活订单";
+            $subject = "每日惠购订单";
             //必填
 
             //付款金额
@@ -324,7 +324,7 @@ class PaymentController extends \yii\web\Controller
 			$order_no = $order->merge_code;;
 			//商户网站订单系统中唯一订单号，必填
 			//订单名称
-            $subject = "家润慧生活订单";
+            $subject = "每日惠购订单";
 			//必填
 			//付款金额
 			$amount = number_format($order['total'], 2,'.','');

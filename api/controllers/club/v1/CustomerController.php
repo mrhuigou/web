@@ -97,7 +97,7 @@ class CustomerController extends \yii\rest\Controller
             $validatecode=rand(10000,99999);
             $session = \Yii::$app->session;
            // $session->set()
-            $massage = "欢迎注册家润慧生活，您本次操作的验证码为：".$validatecode.";";
+            $massage = "欢迎注册每日惠购，您本次操作的验证码为：".$validatecode.";";
             if(Sms::send($phone,$massage)){
                 return $msg['msg'] = "success";
             }

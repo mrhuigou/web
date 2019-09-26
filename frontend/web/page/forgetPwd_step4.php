@@ -32,7 +32,7 @@
               <li class="sn-mobile">
                 APP
                 <div class="sn-qrcode">
-                    <img src="http://www.mrhuigou.com/catalog/view/theme/web3.0/images/weibo.png" alt="家润慧生活-微博二维码" width="120" height="120" class="db">
+                    <img src="http://www.mrhuigou.com/catalog/view/theme/web3.0/images/weibo.png" alt="每日惠购-微博二维码" width="120" height="120" class="db">
                     <b></b>
                 </div>    
               </li>

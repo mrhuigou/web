@@ -184,7 +184,7 @@ class PaymentController extends \yii\web\Controller
             //商户网站订单系统中唯一订单号，必填
 
             //订单名称
-            $subject = "家润慧生活订单";
+            $subject = "每日惠购订单";
             //必填
 
             //付款金额

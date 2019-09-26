@@ -1,5 +1,5 @@
 <?php
-$this->title =  $information->description->title.'- 家润慧生活（mrhuigou.com）- 青岛首选综合性同城网购-发现达人体验-分享同城生活';;
+$this->title =  $information->description->title.'- 每日惠购（mrhuigou.com）- 青岛首选综合性同城网购-发现达人体验-分享同城生活';;
 ?>
 <div class="" style="min-width:1100px;">
     <div class="w1100 bc pt10 tshop-pbsm-tmall-srch-list">

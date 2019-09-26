@@ -353,12 +353,12 @@ class ClubActivityController extends \yii\web\Controller
             $writer->writeToFile('/tmp/'.$pre.'.xlsx');
 
             if(isset($data['email']) && preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/', $data['email'])){
-                $message="附件是您创建的活动「".$model->title."」的已报名用户名单，请注意查收。感谢使用家润慧生活，祝您生活愉快。";
+                $message="附件是您创建的活动「".$model->title."」的已报名用户名单，请注意查收。感谢使用每日惠购，祝您生活愉快。";
                 if(file_exists('/tmp/'.$pre.'.xlsx')){
                     $attachment = file_get_contents('/tmp/'.$pre.'.xlsx');
                     Yii::$app->mailer->compose()
                         ->setTo($data['email'])
-                        ->setFrom([\Yii::$app->params['supportEmail'] => "家润慧生活"])
+                        ->setFrom([\Yii::$app->params['supportEmail'] => "每日惠购"])
                         ->setSubject('活动「'.$model->title.'」已报名用户名单')
                         ->setTextBody('尊敬的会员：'.$message)
                         ->attachContent($attachment,['fileName'=>$pre.'.xlsx','contentType'=>'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'])

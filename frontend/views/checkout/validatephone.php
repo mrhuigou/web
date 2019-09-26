@@ -26,7 +26,7 @@ $this->title ='手机验证';
                     'template' => "<div class='pt-15em clearfix'><div class=\"pr w-per60 fl\">{input}<p class=\"input-setup clearfix\"><a href=\"javascript:void(0);\" class=\"input-del fr\" style=\"display:none;\"></a></p></div><button  type='button' class=\"btn btn_big grayBtn vm\" name='send-vcode' id='send-vcode'>获取验证码</button></div>{error}",
                     "inputOptions"=>["maxlength"=>"6","autocomplete"=>"off",'placeholder'=>'请输入语音验证码','class'=>'input_public input_big'],
                 ])->label("语音验证码") ?>
-                <p class="red lh150 p5">家润慧生活通过语音播报验证码,请你接听来自0532/400/12590开头的来电.</p>
+                <p class="red lh150 p5">每日惠购通过语音播报验证码,请你接听来自0532/400/12590开头的来电.</p>
             </td>
             <td><div id="verifyTip" style="margin: 0px; padding: 0px; background: transparent;"></div></td>
         </tr>

@@ -25,7 +25,7 @@ class quickpay_conf
         'merId'         => '104053257321591', //商户填写
         'acqCode'       => '',  //收单机构填写
         'merCode'       => '',  //收单机构填写
-        'merAbbr'       => '家润慧生活',
+        'merAbbr'       => '每日惠购',
     );
     static $front_pay_url   = "https://unionpaysecure.com/api/Pay.action";
     static $back_pay_url    = "https://besvr.unionpaysecure.com/api/BSPay.action";

@@ -197,7 +197,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 }else{
     $data = [
         'title' => $lottery->title.' ！！！',
-        'desc' => "家润慧生活，物美价廉，当日订单，当日送达。",
+        'desc' => "每日惠购，物美价廉，当日订单，当日送达。",
         'link' => \yii\helpers\Url::to(['/game/index'],true),
         'image' => 'https://m.mrhuigou.com/images/gift-icon.jpg'
     ];

@@ -157,7 +157,7 @@ class MainController extends Controller
                 \Yii::$app->mailer->compose()
                     ->setTo($username)
                     ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name])
-                    ->setSubject('家润慧生活邮箱验证码')
+                    ->setSubject('每日惠购邮箱验证码')
                     ->setTextBody('尊敬的会员：'.$message)
                     ->send();
                 $status=true;

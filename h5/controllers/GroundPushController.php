@@ -377,7 +377,7 @@ class GroundPushController extends \yii\web\Controller {
                     $Order_model->order_no = OrderSn::generateNumber();
                     $Order_model->order_type_code = 'GroundPush';
                     $Order_model->platform_id = $base['platform_id'];
-                    $Order_model->platform_name = "家润慧生活";
+                    $Order_model->platform_name = "每日惠购";
                     $Order_model->platform_url = \Yii::$app->request->getHostInfo();
                     $Order_model->store_id = $base['store_id'];
                     $Order_model->store_name = $base['name'];

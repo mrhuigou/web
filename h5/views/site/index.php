@@ -1,5 +1,5 @@
 <?php
-$this->title = "家润慧生活";
+$this->title = "每日惠购";
 \h5\assets\AppAsset::register($this);
 ?>
 <header class="header">

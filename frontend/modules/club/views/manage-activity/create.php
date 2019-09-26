@@ -177,7 +177,7 @@
                     </ul>
                 </div>
                 <div class="tc pb50">
-                    <p class="mb20"><input type="checkbox" class="vm"> <span class="vm">同意《家润慧生活全城互动协议》</span></p>
+                    <p class="mb20"><input type="checkbox" class="vm"> <span class="vm">同意《每日惠购全城互动协议》</span></p>
                     <a href="#" class="btn btn_middle orgBtn w60 mr5">发布活动</a> <a href="#" class="btn btn_middle grayBtn w60">预览</a>
                 </div>
             </div>

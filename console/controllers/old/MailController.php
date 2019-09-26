@@ -22,7 +22,7 @@ class MailController extends \yii\console\Controller
                 $attachment = file_get_contents($model->file_path);
                 Yii::$app->mailer->compose()
                     ->setTo($model->to)
-                    ->setFrom([\Yii::$app->params['supportEmail'] => "家润慧生活"])
+                    ->setFrom([\Yii::$app->params['supportEmail'] => "每日惠购"])
                     ->setSubject($model->subject)
                     ->setTextBody($model->message)
                     ->attachContent($attachment,unserialize($model->file_option))
@@ -33,7 +33,7 @@ class MailController extends \yii\console\Controller
             }else{
                 Yii::$app->mailer->compose()
                     ->setTo($model->to)
-                    ->setFrom([\Yii::$app->params['supportEmail'] => "家润慧生活"])
+                    ->setFrom([\Yii::$app->params['supportEmail'] => "每日惠购"])
                     ->setSubject($model->subject)
                     ->setTextBody($model->message)
                     ->send();

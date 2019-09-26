@@ -26,7 +26,7 @@
             <p class="gray9 pt15 pb5">您的朋友邀你一起参加抽奖活动</p>
     <?php }else{?>
             <img src="/assets/images/logo-.jpg" width="120" height="120" class="img-circle mt30">
-            <h3 class="pt5 f16">家润慧生活</h3>
+            <h3 class="pt5 f16">每日惠购</h3>
             <p class="gray9 pt15 pb5">关注家润公众号</p>
     <?php } ?>
         <p class="gray9 pt15 pb5" id="scan_code"></p>

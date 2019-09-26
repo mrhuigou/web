@@ -43,23 +43,23 @@
             <li class="sn-mobile">
                 <i class="iconfont green f14">&#xe613;</i> APP下载
                 <div class="sn-qrcode">
-                    <img src="/assets/images/app.png" alt="家润慧生活" width="120" height="120" class="db">
+                    <img src="/assets/images/app.png" alt="每日惠购" width="120" height="120" class="db">
                     <b></b>
                 </div>
             </li>
             <li class="sn-mobile"><a href="#"><i class="iconfont green f14">&#xe60e;</i> 微信</a>
                 <div class="sn-qrcode">
-                    <img src="/assets/images/wx.jpg" alt="家润慧生活" width="120" height="120" class="db">
+                    <img src="/assets/images/wx.jpg" alt="每日惠购" width="120" height="120" class="db">
                     <b></b>
                 </div>
             </li>
             <li class="sn-mobile"><a href="#"><i class="iconfont green f14">&#xe60f;</i> 微博</a>
                 <div class="sn-qrcode">
-                    <img src="/assets/images/weibo.png" alt="家润慧生活" width="120" height="120" class="db">
+                    <img src="/assets/images/weibo.png" alt="每日惠购" width="120" height="120" class="db">
                     <b></b>
                 </div>
             </li>
-            <li><a href="javascript:void(0)" onclick="addToFav('http://www.mrhuigou.com','家润慧生活')"><i class="iconfont green f14">&#xe614;</i> 收藏夹</a></li>
+            <li><a href="javascript:void(0)" onclick="addToFav('http://www.mrhuigou.com','每日惠购')"><i class="iconfont green f14">&#xe614;</i> 收藏夹</a></li>
         </ul>
     </div>
 </div>

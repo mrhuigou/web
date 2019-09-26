@@ -42,7 +42,7 @@ $this->title="每日抽奖有惊喜";
     <h2 class="fb pl10 mb2">活动规则</h2>
     <ul class="ml25 pr10 ul ul-decimal gray6">
         <li>每个用户每日仅限一次机会</li>
-        <li>最终解释权归家润慧生活所有</li>
+        <li>最终解释权归每日惠购所有</li>
     </ul>
 </div>
 

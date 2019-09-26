@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-param" content="_csrf">
     <meta name="csrf-token" content="UjJQUHNrOUkrRRQzFAh6Gx1fHx0lBngPY2UVNx07fiA.aGkEHVxAPg==">
-    <title>家润慧生活（mrhuigou.com）-青岛首选综合性同城网购-发现达人体验-分享同城生活</title>
+    <title>每日惠购（mrhuigou.com）-青岛首选综合性同城网购-发现达人体验-分享同城生活</title>
     <link href="assets/842d30b2/authchoice.css" rel="stylesheet">
 <link href="assets/stylesheets/global.css" rel="stylesheet">
 <link href="assets/stylesheets/layout.css" rel="stylesheet">
@@ -37,25 +37,25 @@
             <li class="sn-mobile">
                 APP下载
                 <div class="sn-qrcode">
-                    <img src="/assets/images/app.png" alt="家润慧生活-微博二维码" width="120" height="120" class="db">
+                    <img src="/assets/images/app.png" alt="每日惠购-微博二维码" width="120" height="120" class="db">
                     <b></b>
                 </div>
             </li>
             <li class="sn-mobile">
                 微信
                 <div class="sn-qrcode">
-                    <img src="/assets/images/wx.jpg" alt="家润慧生活-微信二维码" width="120" height="120" class="db">
+                    <img src="/assets/images/wx.jpg" alt="每日惠购-微信二维码" width="120" height="120" class="db">
                     <b></b>
                 </div>
             </li>
             <li class="sn-mobile">
                 微博
                 <div class="sn-qrcode">
-                    <img src="/assets/images/weibo.png" alt="家润慧生活-微博二维码" width="120" height="120" class="db">
+                    <img src="/assets/images/weibo.png" alt="每日惠购-微博二维码" width="120" height="120" class="db">
                     <b></b>
                 </div>
             </li>
-            <li><a href="javascript:void(0)" onclick="addToFav('http://www.mrhuigou.com','家润慧生活')">收藏网站</a></li>
+            <li><a href="javascript:void(0)" onclick="addToFav('http://www.mrhuigou.com','每日惠购')">收藏网站</a></li>
             <li><a onclick="if(navigator.userAgent.toLowerCase().indexOf('opera') != -1 &amp;&amp; window.event.preventDefault) window.event.preventDefault();this.newWindow = window.open('http://im.mrhuigou.com/client.php?locale=zh-cn&amp;pid=1&amp;url='+escape(document.location.href)+'&amp;referrer='+escape(document.referrer), 'mibew', 'toolbar=0,scrollbars=0,location=0,status=1,menubar=0,width=640,height=480,resizable=1');this.newWindow.focus();this.newWindow.opener=window;return false;" href="http://im.mrhuigou.com/client.php?locale=zh-cn&pid=1">联系客服</a></li>
         </ul>
     </div>

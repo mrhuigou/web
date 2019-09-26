@@ -63,7 +63,7 @@ class ValidatePhoneForm extends Model
                 $user->setPassword($password);
                 $user->generateAuthKey();
                 $user->save();
-                $message = "感谢您注册家润慧生活，您的账号为".$this->telephone.",密码为".$password."。";
+                $message = "感谢您注册每日惠购，您的账号为".$this->telephone.",密码为".$password."。";
                 Sms::send($this->telephone,$message);
                 Yii::$app->user->login($user, 3600 * 24 * 7); //登陆
                 return true;

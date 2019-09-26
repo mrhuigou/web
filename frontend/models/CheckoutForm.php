@@ -153,7 +153,7 @@ class CheckoutForm extends Model {
 					$Order_model->order_no = OrderSn::generateNumber();
 					$Order_model->order_type_code = $this->getOrderType($order_data['products']);
 					$Order_model->platform_id = $order_data['base']->platform_id;
-					$Order_model->platform_name = "家润慧生活";
+					$Order_model->platform_name = "每日惠购";
 					$Order_model->platform_url = "http://www.mrhuigou.com/";
 					$Order_model->store_id = $order_data['base']->store_id;
 					$Order_model->store_name = $order_data['base']->name;

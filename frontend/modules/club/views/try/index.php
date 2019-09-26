@@ -1,4 +1,4 @@
-<?php $this->title = '免费试吃'.'-生活圈- 家润慧生活（mrhuigou.com）- 青岛首选综合性同城网购-发现达人体验-分享同城生活';?>
+<?php $this->title = '免费试吃'.'-生活圈- 每日惠购（mrhuigou.com）- 青岛首选综合性同城网购-发现达人体验-分享同城生活';?>
 <div class="w1100 bc">
     <div class="layout grid-s5m0">
         <div class="col-m">

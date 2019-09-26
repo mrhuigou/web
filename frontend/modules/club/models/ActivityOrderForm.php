@@ -84,7 +84,7 @@ public function getTotal(){
             $Order_model->platform_name = "智慧生活";
             $Order_model->platform_url = "http://www.mrhuigou.com/";
             $Order_model->store_id = 1;
-            $Order_model->store_name = '家润慧生活自营店';
+            $Order_model->store_name = '每日惠购自营店';
             $Order_model->customer_group_id = Yii::$app->user->identity['customer_group_id'];
             $Order_model->customer_id = Yii::$app->user->getId();
             $Order_model->firstname = $this->username;

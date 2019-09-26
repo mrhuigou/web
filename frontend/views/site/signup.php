@@ -28,7 +28,7 @@ use yii\captcha\Captcha;
                             'template' => '{input}{image}',
                         ]) ?>
                         <?= $form->field($model, 'checkcode',['inputOptions' =>['class' => 'input linput db bd placeholder w checkcode'],'template' => "{label}{input}\n{hint}\n{error}"]) ?>
-                        <p class="red lh150 p5">家润慧生活通过语音播报验证码,请你接听来自0532/400/12590开头的来电.</p>
+                        <p class="red lh150 p5">每日惠购通过语音播报验证码,请你接听来自0532/400/12590开头的来电.</p>
                         <?= $form->field($model, 'password',['inputOptions' =>['class' => 'input linput bd w']])->passwordInput() ?>
                         <?= $form->field($model, 'password_repeat',['inputOptions' =>['class' => 'input linput bd w']])->passwordInput() ?>
 

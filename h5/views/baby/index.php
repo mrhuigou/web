@@ -1,5 +1,5 @@
 <?php
-$this->title = "家润慧生活";
+$this->title = "每日惠购";
 ?>
     <header class="header" >
         <a href="javascript:;" class="header-left" id="show-notification">
@@ -377,7 +377,7 @@ $this->title = "家润慧生活";
                 </footer>
             <?php }else{ ?>
                 <footer class="gray9 tc p10 f14">
-                    Copyright©2015家润慧生活 版权所有<br>
+                    Copyright©2015每日惠购 版权所有<br>
                     客服热线：4008-556-977
                 </footer>
             <?php }?>
@@ -468,7 +468,7 @@ $this->title = "家润慧生活";
     }else{
         $data = [
             'title' => '遇到好东西，总想分享给最亲爱的你。',
-            'desc' => "家润慧生活，物美价廉，当日订单，当日送达。",
+            'desc' => "每日惠购，物美价廉，当日订单，当日送达。",
             'link' => Yii::$app->request->getAbsoluteUrl(),
             'image' => Yii::$app->request->getHostInfo().'/assets/images/logo_300x300.png'
         ];

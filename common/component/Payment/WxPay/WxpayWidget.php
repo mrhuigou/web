@@ -12,7 +12,7 @@ use yii\web\AssetBundle;
 class WxpayWidget extends \yii\base\Widget{
     public $out_trade_no;
     public $total_fee;
-    public $body="家润慧生活订单";
+    public $body="每日惠购订单";
     public $notify_url="";
     public function init()
     {

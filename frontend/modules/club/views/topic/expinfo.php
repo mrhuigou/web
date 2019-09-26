@@ -1,5 +1,5 @@
 <?php
-$this->title=\yii\helpers\Html::encode($model->title)."-话题-全城互动 - 家润慧生活（mrhuigou.com）- 青岛首选综合性同城网购-发现达人体验-分享同城生活";
+$this->title=\yii\helpers\Html::encode($model->title)."-话题-全城互动 - 每日惠购（mrhuigou.com）- 青岛首选综合性同城网购-发现达人体验-分享同城生活";
 ?>
 <div class="w1100 bc">
     <div class="layout grid-m0s5">

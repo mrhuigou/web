@@ -27,7 +27,7 @@ $this->title = "忘记密码";
                     "imageOptions"=>["style"=>"width:45%;height:41px;",'class'=>'cp'],
                     'template' => '{input}{image}',
                 ]) ?>
-                <p class="red lh150 p5">家润慧生活通过语音播报验证码,请你接听来自0532/400/12590开头的来电.</p>
+                <p class="red lh150 p5">每日惠购通过语音播报验证码,请你接听来自0532/400/12590开头的来电.</p>
                 <?= $form->field($model, 'checkcode',['inputOptions' =>['class' => 'input linput db placeholder w checkcode'],'template' => "{label}{input}\n{hint}\n{error}"]) ?>
                 <div class="p5 tc"><button type="submit" class="btn lbtn greenbtn w">下一步</button></div>
                 <?php ActiveForm::end(); ?>
