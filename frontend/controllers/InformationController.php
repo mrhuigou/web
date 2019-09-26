@@ -103,7 +103,7 @@ class InformationController extends Controller
 
 
 
-            $email="biz@365jiarun.com";
+            $email="biz@mrhuigou.com";
             Yii::$app->mailer->compose()
                 ->setTo($email)
                 ->setFrom($fromemail)

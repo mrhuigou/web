@@ -41,8 +41,8 @@ return [
             'useFileTransport' => false,
 	    'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.365jiarun.com',
-                'username' => 'adm@365jiarun.com',
+                'host' => 'smtp.mrhuigou.com',
+                'username' => 'adm@mrhuigou.com',
                 'password' => 'adm321123',
                 'port' => '25',
                // 'encryption' => 'ssl',

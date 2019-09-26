@@ -182,7 +182,7 @@ class CheckoutOrder extends Model {
 									}
 									$coupon_msg[] = [
 										'customer_id' => $order->customer_id,
-										'url' => "http://m.365jiarun.com/user-coupon/index",
+										'url' => "http://m.mrhuigou.com/user-coupon/index",
 										'content' => ['title' => "恭喜您，获得了一张" . $order_coupon->coupon->name, 'total' => $order_coupon->coupon->getRealDiscountName(), 'exp_date' => $UserCoupon->end_time, 'remark' => "在帐户中心优惠券中查看,祝您购物愉快！"]
 									];
 								}
@@ -314,7 +314,7 @@ class CheckoutOrder extends Model {
 					$customer_coupon->save();
 					$message[] = [
 						'customer_id' => $customer_coupon->customer_id,
-						'url' => "http://m.365jiarun.com/site/index",
+						'url' => "http://m.mrhuigou.com/site/index",
 						'content' => ['title' => "您的好友[ " . $order->firstname . " ]首次成功下单，恭喜您，获得了5元现金红包", 'name' => "好友首单返现红包", 'content' => "在帐户中心优惠券中查看,祝您购物愉快！"]
 					];
 				}

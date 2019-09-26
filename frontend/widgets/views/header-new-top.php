@@ -59,7 +59,7 @@
                     <b></b>
                 </div>
             </li>
-            <li><a href="javascript:void(0)" onclick="addToFav('http://www.365jiarun.com','家润慧生活')"><i class="iconfont green f14">&#xe614;</i> 收藏夹</a></li>
+            <li><a href="javascript:void(0)" onclick="addToFav('http://www.mrhuigou.com','家润慧生活')"><i class="iconfont green f14">&#xe614;</i> 收藏夹</a></li>
         </ul>
     </div>
 </div>

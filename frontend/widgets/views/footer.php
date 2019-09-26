@@ -25,13 +25,13 @@
 <!--        </ul>-->
 <!--    </div>-->
     <div class=" pt10 w1100 tc bc gray6" style="border-top: 2px solid #eeedf2">
-        版权说明  举报邮箱：service@365jiarun.com  仅限18周岁以上人士购买  网络社会征信网 <br>
-        Copyright© 2006-2020 家润网 www.365jiarun.com 版权所有 网站备案号：鲁ICP备13017153号 <br>
-        客服电话：4008-556-977  客服邮箱：service@365jiarun.com
+        版权说明  举报邮箱：service@mrhuigou.com  仅限18周岁以上人士购买  网络社会征信网 <br>
+        Copyright© 2006-2020 家润网 www.mrhuigou.com 版权所有 网站备案号：鲁ICP备13017153号 <br>
+        客服电话：4008-556-977  客服邮箱：service@mrhuigou.com
     </div>
     <p class="tc gray6">
         <img src="/assets/images/licence.jpg" alt="营业许可" title="营业许可" class="mr10"><img border="0" alt="360安全认证" src="/assets/images/360safe.png">
-        <a href="http://pinggu.zx110.org/review_url_365jiarun.com" target="_blank" title="可信评估"><img height="47" alt="可信评估" src="/assets/images/xinyong.jpg" border="0"></a>
+        <a href="http://pinggu.zx110.org/review_url_mrhuigou.com" target="_blank" title="可信评估"><img height="47" alt="可信评估" src="/assets/images/xinyong.jpg" border="0"></a>
     </p>
 </div>
 

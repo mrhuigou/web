@@ -3,7 +3,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 use yii\widgets\LinkPager;
 use yii\helpers\Url;
-$this->title ='商品分类'.'- 家润慧生活（365jiarun.com）- 青岛首选综合性同城网购-发现达人体验-分享同城生活';
+$this->title ='商品分类'.'- 家润慧生活（mrhuigou.com）- 青岛首选综合性同城网购-发现达人体验-分享同城生活';
 
 ?>
 <div class="content" id="content">

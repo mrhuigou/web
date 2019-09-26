@@ -29,6 +29,6 @@ use \common\component\image\Image;
     <a style="margin-left: -100%;" class="fl"  target="_blank" href="<?=\yii\helpers\Url::to(['/club/try/info','id'=>$model->id])?>"><img width="200" height="200" class="db" alt="tu" src="<?=Image::resize($model->product?$model->product->image:'',200,200)?>"></a>
     <div style="margin-left:-200px;" class="fl tc bdl pl30 pt25 pb30">
         <p class="lh200 f14">微信扫一扫，分享给好友</p>
-        <p><img width="98" height="98" src="<?=\yii\helpers\Url::to(['/club/qrcode/index','data'=>'http://m.365jiarun.com/club-try/detail?id='.$model->id,true])?>"></p>
+        <p><img width="98" height="98" src="<?=\yii\helpers\Url::to(['/club/qrcode/index','data'=>'http://m.mrhuigou.com/club-try/detail?id='.$model->id,true])?>"></p>
     </div>
 </div>

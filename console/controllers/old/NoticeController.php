@@ -72,7 +72,7 @@ class NoticeController extends \yii\console\Controller {
 //            ->All();
 //        echo "---------Start--《" . date('Y-m-d H:i:s') . "》------>\r\n";
         $template_id = "XASlVqkbTJexDOrsWrcl6uY3afDCAZDtnAnFzSkALE4";//道具到期提醒
-        $url = 'https://m.365jiarun.com/user-coupon/index';
+        $url = 'https://m.mrhuigou.com/user-coupon/index';
         $command = CustomerCoupon::find()->select('customer_id')->where("unix_timestamp(end_time) - unix_timestamp(NOW()) > 3*60*60 AND unix_timestamp(end_time) <= unix_timestamp('" . $date . "') AND is_use = 0 and coupon_id<>21805 and coupon_id<>22954 and coupon_id<>22975 and coupon_id<>22966 and coupon_id<>22963 and coupon_id<>22948 and coupon_id<>22951 and coupon_id<>22984 and coupon_id<>22957 and is_notice = 0");
         $group_customer_coupons = $command->groupBy("customer_id")->limit(500)->all();//取出500个有到期提醒的优惠券的客户
         if ($group_customer_coupons) {
@@ -132,7 +132,7 @@ class NoticeController extends \yii\console\Controller {
 //		if ($results) {
 ////            $template_id = "VuG8rmsUhTBX345cyJ44CZv_RLri-7EaKtXM1u9eumM";
 //            $template_id = "XASlVqkbTJexDOrsWrcl6uY3afDCAZDtnAnFzSkALE4";//道具到期提醒
-//            $url = 'https://m.365jiarun.com/user-coupon/index';
+//            $url = 'https://m.mrhuigou.com/user-coupon/index';
 //
 //			foreach ($results as $key => $v) {
 //			    $data = CustomerCoupon::findOne(['customer_coupon_id'=>$v['customer_coupon_id']]);
@@ -214,7 +214,7 @@ class NoticeController extends \yii\console\Controller {
 	public function actionTemplate($status = "test")
 	{
 		$template_id = "sv0uTAFGs2DyJ1zplJM0OW4jIgNuSfgfS6yPacy86y8";
-		$url = 'https://m.365jiarun.com/DP0001-501074.html';
+		$url = 'https://m.mrhuigou.com/DP0001-501074.html';
 		$message = [
 			'first' => [
 				'value' => '亲：崂山白花蛇草水（玻璃瓶装）330ml*24原价96元，现价86元！',
@@ -257,7 +257,7 @@ class NoticeController extends \yii\console\Controller {
 	public function actionTemplateExp($status = "test")
 	{
 		$template_id = "5u0WptS6P5y9Iy7Y4L80fysAN0iEqD_xIP0fquFV1ic";
-		$url = 'https://m.365jiarun.com/user-coupon/index';
+		$url = 'https://m.mrhuigou.com/user-coupon/index';
 		$message = [
 			'first' => [
 				'value' => '亲，你有张【伊利金典立减8元券】优惠券，即将到期，请尽快使用！！！',

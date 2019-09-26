@@ -27,7 +27,7 @@ use yii\helpers\Url;
     <div class="header-box w990 bc">
         <div class="logo-search clearfix">
             <div class="logos fl">
-                <a href="<?=Yii::$app->homeUrl?>"><img src="http://www.365jiarun.com/catalog/view/theme/web3.0/images/2015/hlogo.jpg" alt="慧生活logo" /></a>
+                <a href="<?=Yii::$app->homeUrl?>"><img src="http://www.mrhuigou.com/catalog/view/theme/web3.0/images/2015/hlogo.jpg" alt="慧生活logo" /></a>
             </div>
             <div id="mallSearch" class="mall-search fr">
                 <form name="searchTop" action="http://api.jiarun.com/shop/category"  class="mallSearch-form">

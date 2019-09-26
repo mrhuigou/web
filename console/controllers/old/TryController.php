@@ -31,7 +31,7 @@ class TryController extends \yii\console\Controller
 				$Order_model->order_type_code = $value->try->product->bepresell == 1?'presell':'normal';
 				$Order_model->platform_id = 1;
 				$Order_model->platform_name = "智慧生活";
-				$Order_model->platform_url = "http://www.365jiarun.com/";
+				$Order_model->platform_url = "http://www.mrhuigou.com/";
 				$Order_model->store_id = 1;
 				$Order_model->customer_group_id = 1;
 				$Order_model->customer_id = $value->customer_id;

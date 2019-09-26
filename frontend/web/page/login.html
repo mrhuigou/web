@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-param" content="_csrf">
     <meta name="csrf-token" content="UjJQUHNrOUkrRRQzFAh6Gx1fHx0lBngPY2UVNx07fiA.aGkEHVxAPg==">
-    <title>家润慧生活（365jiarun.com）-青岛首选综合性同城网购-发现达人体验-分享同城生活</title>
+    <title>家润慧生活（mrhuigou.com）-青岛首选综合性同城网购-发现达人体验-分享同城生活</title>
     <link href="assets/842d30b2/authchoice.css" rel="stylesheet">
 <link href="assets/stylesheets/global.css" rel="stylesheet">
 <link href="assets/stylesheets/layout.css" rel="stylesheet">
@@ -55,8 +55,8 @@
                     <b></b>
                 </div>
             </li>
-            <li><a href="javascript:void(0)" onclick="addToFav('http://www.365jiarun.com','家润慧生活')">收藏网站</a></li>
-            <li><a onclick="if(navigator.userAgent.toLowerCase().indexOf('opera') != -1 &amp;&amp; window.event.preventDefault) window.event.preventDefault();this.newWindow = window.open('http://im.365jiarun.com/client.php?locale=zh-cn&amp;pid=1&amp;url='+escape(document.location.href)+'&amp;referrer='+escape(document.referrer), 'mibew', 'toolbar=0,scrollbars=0,location=0,status=1,menubar=0,width=640,height=480,resizable=1');this.newWindow.focus();this.newWindow.opener=window;return false;" href="http://im.365jiarun.com/client.php?locale=zh-cn&pid=1">联系客服</a></li>
+            <li><a href="javascript:void(0)" onclick="addToFav('http://www.mrhuigou.com','家润慧生活')">收藏网站</a></li>
+            <li><a onclick="if(navigator.userAgent.toLowerCase().indexOf('opera') != -1 &amp;&amp; window.event.preventDefault) window.event.preventDefault();this.newWindow = window.open('http://im.mrhuigou.com/client.php?locale=zh-cn&amp;pid=1&amp;url='+escape(document.location.href)+'&amp;referrer='+escape(document.referrer), 'mibew', 'toolbar=0,scrollbars=0,location=0,status=1,menubar=0,width=640,height=480,resizable=1');this.newWindow.focus();this.newWindow.opener=window;return false;" href="http://im.mrhuigou.com/client.php?locale=zh-cn&pid=1">联系客服</a></li>
         </ul>
     </div>
 </div>        <div id="login-header">
@@ -227,20 +227,20 @@
 </div>
 
 <p class="pt20 pb10 tc gray6">
-    <a href="http://www.365jiarun.com/aboutus">关于我们</a>
+    <a href="http://www.mrhuigou.com/aboutus">关于我们</a>
     <!-- -->
     <a href="javascript:void(0);">诚聘英才</a>
     <a href="javascript:void(0);">联系我们</a>
     <a href="javascript:void(0);">网站合作</a>
 
-    版权说明  举报邮箱：service@365jiarun.com  仅限18周岁以上人士购买  网络社会征信网 <br>
-    Copyright© 2006-2014 家润网 www.365jiarun.com 版权所有 网站备案号：鲁ICP备13017153号 <br>
-    客服电话：4008-556-977 时间:9:00-12:00 13:00-22:00 客服邮箱：service@365jiarun.com
+    版权说明  举报邮箱：service@mrhuigou.com  仅限18周岁以上人士购买  网络社会征信网 <br>
+    Copyright© 2006-2014 家润网 www.mrhuigou.com 版权所有 网站备案号：鲁ICP备13017153号 <br>
+    客服电话：4008-556-977 时间:9:00-12:00 13:00-22:00 客服邮箱：service@mrhuigou.com
 </p>
 
 <p class="pb50 tc gray6">
     <img src="/assets/images/licence.jpg" alt="营业许可" title="营业许可" class="mr10"><img border="0" alt="360安全认证" src="/assets/images/360safe.png">
-    <a href="http://pinggu.zx110.org/review_url_365jiarun.com" target="_blank" title="可信评估"><img height="47" alt="可信评估" src="/assets/images/xinyong.jpg" border="0"></a>
+    <a href="http://pinggu.zx110.org/review_url_mrhuigou.com" target="_blank" title="可信评估"><img height="47" alt="可信评估" src="/assets/images/xinyong.jpg" border="0"></a>
 </p>
 
 
@@ -252,7 +252,7 @@
 <!--浮动导航-->
 <div class="side-menu">
     <a href="/cart/index" class="iconfont gouwuche fb shopcart_num cart_fly">&#xe606;<i>0</i></a>
-    <a href="javascript:void(0);" title="在线客服" alt="在线客服" onclick="if(navigator.userAgent.toLowerCase().indexOf('opera') != -1 &amp;&amp; window.event.preventDefault) window.event.preventDefault();this.newWindow = window.open('http://im.365jiarun.com/client.php?locale=zh-cn&amp;pid=1&amp;url='+escape(document.location.href)+'&amp;referrer='+escape(document.referrer), 'mibew', 'toolbar=0,scrollbars=0,location=0,status=1,menubar=0,width=640,height=480,resizable=1');this.newWindow.focus();this.newWindow.opener=window;return false;" href="http://im.365jiarun.com/client.php?locale=zh-cn&pid=1" target="_blank" class="iconfont erji">&#xe600;</a>
+    <a href="javascript:void(0);" title="在线客服" alt="在线客服" onclick="if(navigator.userAgent.toLowerCase().indexOf('opera') != -1 &amp;&amp; window.event.preventDefault) window.event.preventDefault();this.newWindow = window.open('http://im.mrhuigou.com/client.php?locale=zh-cn&amp;pid=1&amp;url='+escape(document.location.href)+'&amp;referrer='+escape(document.referrer), 'mibew', 'toolbar=0,scrollbars=0,location=0,status=1,menubar=0,width=640,height=480,resizable=1');this.newWindow.focus();this.newWindow.opener=window;return false;" href="http://im.mrhuigou.com/client.php?locale=zh-cn&pid=1" target="_blank" class="iconfont erji">&#xe600;</a>
 
     <a href="javascript:void(0);" class="iconfont fanhui3 fb backTop">&#xe60a;</a>
 </div>

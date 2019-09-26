@@ -106,7 +106,7 @@ $this->title=\yii\helpers\Html::encode($model->title)."---免费试";
             <div class="bd p10 mb10">
                 <div class="tc bd_dashB">
                     <p class="lh150 f14">微信扫一扫，分享给好友</p>
-                    <p><img alt="" src="<?=\yii\helpers\Url::to(['/club/qrcode/index','data'=>'http://m.365jiarun.com/club-try/detail?id='.$model->id])?>" width="98" height="98" class="db bc"></p>
+                    <p><img alt="" src="<?=\yii\helpers\Url::to(['/club/qrcode/index','data'=>'http://m.mrhuigou.com/club-try/detail?id='.$model->id])?>" width="98" height="98" class="db bc"></p>
                 </div>
                 <?php if($user_invite&&$user_invite->log){ ?>
                 <div class="pt10 pb5 bd_dashB">

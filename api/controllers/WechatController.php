@@ -103,14 +103,14 @@ class WechatController extends Controller {
 						'title' => $value->title,
 						'description' => $value->content,
 						'picurl' => Image::resize($value->picurl, 360, 200),
-						'url' => $value->url ? $value->url : "https://m.365jiarun.com/news/detail?id=" . $value->id,
+						'url' => $value->url ? $value->url : "https://m.mrhuigou.com/news/detail?id=" . $value->id,
 					];
 				} else {
 					$data[] = [
 						'title' => $value->title,
 						'description' => $value->content,
 						'picurl' => Image::resize($value->picurl, 200, 200),
-						'url' => $value->url ? $value->url : "https://m.365jiarun.com/news/detail?id=" . $value->id,
+						'url' => $value->url ? $value->url : "https://m.mrhuigou.com/news/detail?id=" . $value->id,
 					];
 				}
 			}
@@ -136,14 +136,14 @@ class WechatController extends Controller {
 							'title' => $value->title,
 							'description' => $value->content,
 							'picurl' => Image::resize($value->picurl, 360, 200),
-							'url' => $value->url ? $value->url : "https://m.365jiarun.com/news/detail?id=" . $value->id,
+							'url' => $value->url ? $value->url : "https://m.mrhuigou.com/news/detail?id=" . $value->id,
 						];
 					} else {
 						$data[] = [
 							'title' => $value->title,
 							'description' => $value->content,
 							'picurl' => Image::resize($value->picurl, 200, 200),
-							'url' => $value->url ? $value->url : "https://m.365jiarun.com/news/detail?id=" . $value->id,
+							'url' => $value->url ? $value->url : "https://m.mrhuigou.com/news/detail?id=" . $value->id,
 						];
 					}
 				}
@@ -335,7 +335,7 @@ class WechatController extends Controller {
                         'title' => "亲，恭喜您获得新会员体验专属券,点击查看",
                         'description' => "",
                         'picurl' => Image::resize("group1/M00/00/6F/wKgB-ForYouACx3nAACgPMNzAS0878.jpg", 360, 200),
-                        'url' => 'https://m.365jiarun.com/user-coupon/index',
+                        'url' => 'https://m.mrhuigou.com/user-coupon/index',
                     ];
                     \Yii::$app->wechat->sendNews($openid, [$msg]);
                 }
@@ -393,7 +393,7 @@ class WechatController extends Controller {
 				if ($user_model = User::findIdentity($model->customer_id)) {
 					if ($openid = $user_model->getWxOpenId()) {
 						$wx = new WxNotice();
-						$wx->coupon($openid, 'https://m.365jiarun.com/user-coupon/index', $message);
+						$wx->coupon($openid, 'https://m.mrhuigou.com/user-coupon/index', $message);
 					}
 				}
 			}

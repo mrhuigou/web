@@ -1,5 +1,5 @@
 <?php
-$this->title=\yii\helpers\Html::encode($model->title)."-话题-全城互动 - 家润慧生活（365jiarun.com）- 青岛首选综合性同城网购-发现达人体验-分享同城生活";
+$this->title=\yii\helpers\Html::encode($model->title)."-话题-全城互动 - 家润慧生活（mrhuigou.com）- 青岛首选综合性同城网购-发现达人体验-分享同城生活";
 ?>
 <div class="w1100 bc">
     <div class="layout grid-m0s5">
@@ -26,7 +26,7 @@ $this->title=\yii\helpers\Html::encode($model->title)."-话题-全城互动 - �
         <div class="col-s">
             <div class="bd p10 mb10">
                 <p class="tc lh200 f14 pl20">微信扫一扫，分享给好友</p>
-                <p class="tc"><img alt="" src="<?=\yii\helpers\Url::to(['/club/qrcode/index','data'=>'http://m.365jiarun.com/'])?>" width="98" height="98"></p>
+                <p class="tc"><img alt="" src="<?=\yii\helpers\Url::to(['/club/qrcode/index','data'=>'http://m.mrhuigou.com/'])?>" width="98" height="98"></p>
             </div>
             <div class="mt10">
                 <?=frontend\modules\club\widgets\HotExp::widget()?>

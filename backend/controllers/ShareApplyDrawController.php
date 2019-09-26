@@ -92,7 +92,7 @@ class ShareApplyDrawController extends Controller{
 					}
 					$data = ['status' => 1, 'message' => '对账成功'];
 					$notice=new WxNotice();
-					$notice->translation($model->open_id,'https://m.365jiarun.com/user-share/commission',[
+					$notice->translation($model->open_id,'https://m.mrhuigou.com/user-share/commission',[
 						'title'=>'亲，你好，您有一笔'.$model->amount.'元提现金额已转入到你的微信钱包',
 						'date'=>date('Y-m-d H:i:s',time()),
 						'type'=>'收益提现',

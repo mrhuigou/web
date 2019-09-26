@@ -249,7 +249,7 @@ function showReadme() {
     }).show();
 }
 function loading() {
-    $.getJSON('https://open.365jiarun.com/game/lottery?callback=?',{last_id:lastID},function(res) {
+    $.getJSON('https://open.mrhuigou.com/game/lottery?callback=?',{last_id:lastID},function(res) {
         if(res){
             if(res.length>0){
             //创建item小方格

@@ -101,7 +101,7 @@ class WeixinPushController extends \yii\web\Controller
 //                }
                 if ($result = $command->limit(300)->all()) {
                     $template_id = "VuG8rmsUhTBX345cyJ44CZv_RLri-7EaKtXM1u9eumM";
-                    $url = 'https://m.365jiarun.com/user-coupon/index';
+                    $url = 'https://m.mrhuigou.com/user-coupon/index';
                     $count = 0;
                     foreach ($result as $key => $data) {
                         if ($user = User::findIdentity($data->customer_id)) {
@@ -156,7 +156,7 @@ class WeixinPushController extends \yii\web\Controller
 //                echo "---------Start--《" . date('Y-m-d H:i:s') . "》------>\r\n";
         if ($result = $command->all()) {
             $template_id = "VuG8rmsUhTBX345cyJ44CZv_RLri-7EaKtXM1u9eumM";
-            $url = 'https://m.365jiarun.com/user-coupon/index';
+            $url = 'https://m.mrhuigou.com/user-coupon/index';
             $count = 0;
             foreach ($result as $key => $data) {
                 if ($user = User::findIdentity($data->customer_id)) {

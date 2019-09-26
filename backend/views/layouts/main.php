@@ -81,7 +81,7 @@ AppAsset::register($this);
 <!-- BEGIN FOOTER -->
 <div class="footer">
     <div class="footer-inner">
-        2015 &copy; 365JIARUN.COM
+        2015 &copy; mrhuigou.com
     </div>
     <div class="footer-tools">
 		<span class="go-top">

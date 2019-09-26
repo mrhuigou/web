@@ -162,8 +162,8 @@ if(isset($data['data'])&&$data['data']) { ?>
                 <div class="tb-booth">
                     <span class="zoomIcon" style="">&#xf012c;</span>
                     <a href="javascript:;" rel="nofollow" target="_blank">
-                   <img id="J_ImgBooth"  data-ks-imagezoom="<?='http://img1.365jiarun.com/'.$data['data']['base']->image?>"
-                    alt="<?=$data['data']['description']->name?>" src="<?='http://img1.365jiarun.com/'.$data['data']['base']->image?>" >
+                   <img id="J_ImgBooth"  data-ks-imagezoom="<?='http://img1.mrhuigou.com/'.$data['data']['base']->image?>"
+                    alt="<?=$data['data']['description']->name?>" src="<?='http://img1.mrhuigou.com/'.$data['data']['base']->image?>" >
                     </a>
                 </div>
                 <?php if ($data['data']['images']) { ?>
@@ -171,8 +171,8 @@ if(isset($data['data'])&&$data['data']) { ?>
                     <?php foreach($data['data']['images'] as $image){ ?>
                     <li>
                         <a href="javascript:;">
-                            <img  data-bigimagewidth="700"  data-bigimageheight="700"   data-has-zoom="true"  data-ks-imagezoom="<?='http://img1.365jiarun.com/'.$image['image']?>"
-                                    src="<?='http://img1.365jiarun.com/'.$image['image']?>">
+                            <img  data-bigimagewidth="700"  data-bigimageheight="700"   data-has-zoom="true"  data-ks-imagezoom="<?='http://img1.mrhuigou.com/'.$image['image']?>"
+                                    src="<?='http://img1.mrhuigou.com/'.$image['image']?>">
                         </a>
                     </li>
                     <?php } ?>

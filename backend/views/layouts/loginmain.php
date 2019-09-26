@@ -36,7 +36,7 @@ AppAsset::register($this);
 <?= $content ?>
 <!-- BEGIN COPYRIGHT -->
 <div class="copyright">
-    2015 &copy; 365JIARUN.COM
+    2015 &copy; mrhuigou.com
 </div>
 <!-- END COPYRIGHT -->
 <?php $this->endBody() ?>

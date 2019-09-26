@@ -148,7 +148,7 @@ class PaymentController extends \yii\web\Controller
             $param['orderCurrency']         = quickpay_conf::CURRENCY_CNY;  //交易币种，CURRENCY_CNY=>人民币
             $param['customerIp']            = Yii::$app->request->getUserIP();  //用户IP
             $param['frontEndUrl']           = Url::to(['/checkout/complate','trade_no'=>$order->merge_code],true);   //前台回调URL
-            $param['backEndUrl']            ="https://open.365jiarun.com/payment/upop";   //后台回调URL
+            $param['backEndUrl']            ="https://open.mrhuigou.com/payment/upop";   //后台回调URL
             $pay_service = new quickpay_service($param, quickpay_conf::FRONT_PAY);
             return $pay_service->create_html();
         }catch (\Exception $e){
@@ -172,7 +172,7 @@ class PaymentController extends \yii\web\Controller
             $payment_type = "1";
             //必填，不能修改
             //服务器异步通知页面路径
-            $notify_url ="https://open.365jiarun.com/payment/alipay";   //后台回调URL
+            $notify_url ="https://open.mrhuigou.com/payment/alipay";   //后台回调URL
             //需http://格式的完整路径，不能加?id=123这类自定义参数
 
             //页面跳转同步通知页面路径
@@ -242,7 +242,7 @@ class PaymentController extends \yii\web\Controller
             $serverUrl ="https://service.allinpay.com/gateway/index.do";
             $inputCharset=1;
             $pickupUrl= Url::to('/checkout/complate',true);;   //前台回调URL
-            $receiveUrl="https://open.365jiarun.com/payment/allinpay";   ; //后台回调URL
+            $receiveUrl="https://open.mrhuigou.com/payment/allinpay";   ; //后台回调URL
             $version='v1.0';
             $language=1;
             $signType=1;

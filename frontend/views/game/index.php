@@ -27,7 +27,7 @@
     <p class="line"><label><input type="checkbox" id="reset" value="1"/>重置已产生的抽奖数据</label></p>
 </div>
 <a href="/" style="display:inline-block;vertical-align: middle;position: absolute;top:7px;left:20px;">
-    <img src="https://www.365jiarun.com/assets/images/logo3.png" alt="logo" width="300">
+    <img src="https://www.mrhuigou.com/assets/images/logo3.png" alt="logo" width="300">
 </a>
 <div class="top" style="color: white;font-weight: bold;">家润网祝万相年会圆满成功</div>
 <img src="/game/choujiang.png" width="140" height="140" style="position: absolute;top: 10px; right: 17px; cursor: pointer;" class="wcode">

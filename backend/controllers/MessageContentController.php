@@ -156,7 +156,7 @@ class MessageContentController extends Controller
 //                'image' => $model['image'],
 //                'time'=> date("Y-m-d H:i:s"),
 //            );
-//            $url = "http://api.365jiarun.com/index.php?a=push&c=push";
+//            $url = "http://api.mrhuigou.com/index.php?a=push&c=push";
 //            curl_file_get_contents($url,http_build_query($data));
 //            $model->is_push = 1;
 //            $model->send_date = date("Y-m-d H:i:s");

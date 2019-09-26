@@ -334,7 +334,7 @@ class ActivityController extends Controller
             $Order_model->order_type_code = strtoupper('activity');
             $Order_model->platform_id = 1;
             $Order_model->platform_name = "智慧生活";
-            $Order_model->platform_url = "http://m.365jiarun.com/";
+            $Order_model->platform_url = "http://m.mrhuigou.com/";
             $Order_model->store_id = 1;
             $Order_model->store_name = '家润慧生活自营店';
             $Order_model->store_url = '';

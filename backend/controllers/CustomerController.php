@@ -120,7 +120,7 @@ class CustomerController extends Controller
 				    $customer_model->save();
 				    $message[]=[
 					    'customer_id'=>$customer_id,
-					    'url'=>'http://m.365jiarun.com/user-coupon/index',
+					    'url'=>'http://m.mrhuigou.com/user-coupon/index',
 					    'content'=>['title'=>'亲，恭喜您获得了'.$coupon->name,'name'=>$description,'content'=>$coupon->name."，已经存入你的账户。"]
 				    ];
 			    }
@@ -162,7 +162,7 @@ class CustomerController extends Controller
                 $Model->generateAuthKey();
                 $Model->save();
             }
-            return $this->redirect('https://m.365jiarun.com/site/backend?token='.$Model->getAuthKey());
+            return $this->redirect('https://m.mrhuigou.com/site/backend?token='.$Model->getAuthKey());
         }
     }
 

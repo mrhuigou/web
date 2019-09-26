@@ -1,12 +1,12 @@
 <?php
 return [
-    'adminEmail' => 'admin@365jiarun.com',
-    'supportEmail' => 'support@365jiarun.com',
+    'adminEmail' => 'admin@mrhuigou.com',
+    'supportEmail' => 'support@mrhuigou.com',
     'user.passwordResetTokenExpire' => 3600,
-//    'HTTP_IMAGE'=>"https://img1.365jiarun.com/",
-    'HTTP_IMAGE'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ) ? "https://img1.365jiarun.com/" :  "http://img1.365jiarun.com/",
-    'ERP_SOAP_URL'=>'http://wms.365jiarun.com:7023/jiarunWebServer/services/web2sys?wsdl',
-	'API_URL' => 'https://open.365jiarun.com',
+//    'HTTP_IMAGE'=>"https://img1.mrhuigou.com/",
+    'HTTP_IMAGE'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ) ? "https://img1.mrhuigou.com/" :  "http://img1.mrhuigou.com/",
+    'ERP_SOAP_URL'=>'http://wms.mrhuigou.com:7023/mrhgWebServer/services/web2sys?wsdl',
+	'API_URL' => 'https://open.mrhuigou.com',
     'FDFS'=>[
         'tracker_addr'=>'192.168.1.240',
         'tracker_port'=>'22122',

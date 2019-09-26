@@ -232,7 +232,7 @@ class BaseUrl
             $url = Yii::$app->getRequest()->getUrl();
         }
         if(Yii::$app->session->get('source_from_agent_wx_xcx')){
-            $url = str_replace('m.365jiarun.com','mwx.365jiarun.com',$url);
+            $url = str_replace('m.mrhuigou.com','mwx.mrhuigou.com',$url);
         }
         if (!$scheme) {
             return $url;

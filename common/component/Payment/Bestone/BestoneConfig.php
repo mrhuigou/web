@@ -14,7 +14,7 @@ class BestoneConfig
     static $appid = "TqyJhQGpnUEN9khDitpl";//
     static $appkey = "sVP6kQzNwXfvBNNPXJx1KQf9KafIosup";//
     static $pay_url = "https://cashier.bestonepay.com:8443/gateway"; //  
-    static $notify_url = "https://open.365jiarun.com/payment/bestone";   //后台回调URL
+    static $notify_url = "https://open.mrhuigou.com/payment/bestone";   //后台回调URL
 
 
     //测试佰通卡号：8661080260001072608   密码:111111

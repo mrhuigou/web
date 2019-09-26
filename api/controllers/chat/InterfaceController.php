@@ -36,7 +36,7 @@ class InterfaceController extends \yii\rest\Controller{
         $result=[];
         if($customer){
           $result['customer']=$customer;
-          $result['customer']['photo']=$customer->photo ? Image::resize($customer->photo,100,100):"http://www.365jiarun.com/image/life/avatar_b.jpg";
+          $result['customer']['photo']=$customer->photo ? Image::resize($customer->photo,100,100):"http://www.mrhuigou.com/image/life/avatar_b.jpg";
           $result['customer']['password']='';
           $result['customer']['salt']='';
           $result['customer']['idcard']='';

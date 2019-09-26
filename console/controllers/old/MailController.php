@@ -43,7 +43,7 @@ class MailController extends \yii\console\Controller
         }
     }
     public function actionNotice(){
-	    $url='http://m.365jiarun.com/';
+	    $url='http://m.mrhuigou.com/';
 	    $message=[
 	    	'title'=>'家润网双11钜惠即将结束!!!',
 		    'name'=>'双11狂欢，1降到底',

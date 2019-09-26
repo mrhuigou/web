@@ -1,5 +1,5 @@
 <?php
-$this->title="活动-生活圈".'- 家润慧生活（365jiarun.com）- 青岛首选综合性同城网购-发现达人体验-分享同城生活';;
+$this->title="活动-生活圈".'- 家润慧生活（mrhuigou.com）- 青岛首选综合性同城网购-发现达人体验-分享同城生活';;
 ?>
 <div class="w1100 bc">
     <div class="layout grid-s5m0e5">

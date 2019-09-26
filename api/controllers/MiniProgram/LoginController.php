@@ -14,7 +14,7 @@ class LoginController extends  Controller{
     public function actionCodeRequest(){
         $code = \Yii::$app->request->get("code");
         $data = [];
-        $data['appid'] = 'wxb500456a0475600b';//arvinzhang@365jiarun.com 小程序appid 用于测试
+        $data['appid'] = 'wxb500456a0475600b';//arvinzhang@mrhuigou.com 小程序appid 用于测试
         $data['secret'] = '7c94df6236d651e80dff81aa03b7dba2';
         $data['js_code'] = $code;
         $data['grant_type'] = 'authorization_code';

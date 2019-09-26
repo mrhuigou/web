@@ -127,8 +127,8 @@ class WeixinMenuController extends Controller
     public function WeixinUrl($link){
       //  $appid=Yii::$app->params['weixin']['appid'];
       //  $base_url="https://open.weixin.qq.com/connect/oauth2/authorize?";
-      //  $base_url.="appid=".$appid."&redirect_uri=".urlencode("http://m.365jiarun.com/site/weixin?redirect=".$link)."&response_type=code&scope=snsapi_base&state=weixin#wechat_redirect";
-	  $base_url="https://m.365jiarun.com/site/login?redirect=".urlencode($link);
+      //  $base_url.="appid=".$appid."&redirect_uri=".urlencode("http://m.mrhuigou.com/site/weixin?redirect=".$link)."&response_type=code&scope=snsapi_base&state=weixin#wechat_redirect";
+	  $base_url="https://m.mrhuigou.com/site/login?redirect=".urlencode($link);
         return $base_url;
     }
     /**

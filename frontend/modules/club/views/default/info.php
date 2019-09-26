@@ -37,7 +37,7 @@ $this->title=\yii\helpers\Html::encode($model->title)."---全城互动";
                 </div>
                 <div class="fr bdl mr25 ">
                     <p class="tc lh200 f14 pl20">微信扫一扫，分享给好友</p>
-                    <p class="tc"><img alt="" src="<?=\yii\helpers\Url::to(['/club/qrcode/index','data'=>'http//m.365jiarun.com/club-activity/detail?id='.$model->id])?>" width="98" height="98"></p>
+                    <p class="tc"><img alt="" src="<?=\yii\helpers\Url::to(['/club/qrcode/index','data'=>'http//m.mrhuigou.com/club-activity/detail?id='.$model->id])?>" width="98" height="98"></p>
                 </div>
             </div>
             <div class="bd_dashB p5 mb10 f14 tit1">

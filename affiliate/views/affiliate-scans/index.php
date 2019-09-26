@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-md-12">
                 <div class="note note-info">
                     <h4 class="block">专属链接为：</h4>
-                    <p>https://m.365jiarun.com/site/index?sourcefrom=<?=Yii::$app->user->identity->code?></p>
+                    <p>https://m.mrhuigou.com/site/index?sourcefrom=<?=Yii::$app->user->identity->code?></p>
                     <p>若在微信内置浏览器中添加后缀 ?sourcefrom=<?=Yii::$app->user->identity->code?> </p>
                     <p>若在App嵌套使用时，请在内置浏览器中设置UserAgent中包含 <?=Yii::$app->user->identity->code?> </p>
                     <p>此链接可以嵌套在APP应用，微信公众号，微博等第三方应用中。</p>

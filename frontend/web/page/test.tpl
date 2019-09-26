@@ -104,7 +104,7 @@
                       <li class="sn-mobile">
                         APP
                         <div class="sn-qrcode">
-                            <img src="http://www.365jiarun.com/catalog/view/theme/web3.0/images/weibo.png" alt="家润慧生活-微博二维码" width="120" height="120" class="db">
+                            <img src="http://www.mrhuigou.com/catalog/view/theme/web3.0/images/weibo.png" alt="家润慧生活-微博二维码" width="120" height="120" class="db">
                             <b></b>
                         </div>    
                       </li>
@@ -120,7 +120,7 @@
                 <div class="header-box w990 bc">
                     <div class="logo-search clearfix">
                         <div class="logos fl">
-                            <a href="#"><img src="http://www.365jiarun.com/catalog/view/theme/web3.0/images/2015/hlogo.jpg" alt="慧生活logo" /></a>
+                            <a href="#"><img src="http://www.mrhuigou.com/catalog/view/theme/web3.0/images/2015/hlogo.jpg" alt="慧生活logo" /></a>
                         </div>
 
 

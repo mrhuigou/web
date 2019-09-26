@@ -18,7 +18,7 @@
         <div class="header-box w990 bc">
             <div class="logo-search clearfix">
                 <div class="logos fl">
-                    <a href="#"><img src="http://www.365jiarun.com/catalog/view/theme/web3.0/images/2015/hlogo.jpg" alt="慧生活logo" /></a>
+                    <a href="#"><img src="http://www.mrhuigou.com/catalog/view/theme/web3.0/images/2015/hlogo.jpg" alt="慧生活logo" /></a>
                 </div>
                 <div class="search-box fr clearfix">
                     <input type="text" class="fl" />

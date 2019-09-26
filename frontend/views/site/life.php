@@ -226,19 +226,19 @@
                 <?php }?>
                 <div class="clearfix" style="height:140px;">
                     <div class="w175 fl pl10">
-                        <a href="http://www.365jiarun.com/exp-4103.html" target="_blank"><img src="http://img1.365jiarun.com/group1/M00/00/F3/wKgB7lPkLlGAMpaKAABToRjk8W4917.jpg_175x110.jpg" alt="tu" width="175" height="110" /></a>
-                        <a href="http://www.365jiarun.com/exp-4103.html" class="gray6 pb5" target="_blank">“食物酸碱平衡论”有科学...</a>
+                        <a href="http://www.mrhuigou.com/exp-4103.html" target="_blank"><img src="http://img1.mrhuigou.com/group1/M00/00/F3/wKgB7lPkLlGAMpaKAABToRjk8W4917.jpg_175x110.jpg" alt="tu" width="175" height="110" /></a>
+                        <a href="http://www.mrhuigou.com/exp-4103.html" class="gray6 pb5" target="_blank">“食物酸碱平衡论”有科学...</a>
                     </div>
                     <div class="w175 fl cleafix index-lift-list pt15">
-                        <a href="http://www.365jiarun.com/club/experiencelist?sub_id=31" target="_blank">食在源头</a>
-                        <a href="http://www.365jiarun.com/club/experiencelist?sub_id=33" target="_blank">食脍经</a>
-                        <a href="http://www.365jiarun.com/club/experiencelist?sub_id=43" target="_blank">八杯水 </a>
-                        <a href="http://www.365jiarun.com/club/experiencelist?sub_id=35" target="_blank">烘焙物语</a>
-                        <a href="http://www.365jiarun.com/club/experiencelist?sub_id=37" target="_blank">红醇</a>
-                        <a href="http://www.365jiarun.com/club/experiencelist?sub_id=41" target="_blank">茶与咖 </a>
-                        <a href="http://www.365jiarun.com/club/experiencelist?sub_id=47" target="_blank">时尚前沿</a>
-                        <a href="http://www.365jiarun.com/club/experiencelist?sub_id=65" target="_blank">宠物园</a>
-                        <a href="http://www.365jiarun.com/club/home" target="_blank">更多... </a>
+                        <a href="http://www.mrhuigou.com/club/experiencelist?sub_id=31" target="_blank">食在源头</a>
+                        <a href="http://www.mrhuigou.com/club/experiencelist?sub_id=33" target="_blank">食脍经</a>
+                        <a href="http://www.mrhuigou.com/club/experiencelist?sub_id=43" target="_blank">八杯水 </a>
+                        <a href="http://www.mrhuigou.com/club/experiencelist?sub_id=35" target="_blank">烘焙物语</a>
+                        <a href="http://www.mrhuigou.com/club/experiencelist?sub_id=37" target="_blank">红醇</a>
+                        <a href="http://www.mrhuigou.com/club/experiencelist?sub_id=41" target="_blank">茶与咖 </a>
+                        <a href="http://www.mrhuigou.com/club/experiencelist?sub_id=47" target="_blank">时尚前沿</a>
+                        <a href="http://www.mrhuigou.com/club/experiencelist?sub_id=65" target="_blank">宠物园</a>
+                        <a href="http://www.mrhuigou.com/club/home" target="_blank">更多... </a>
                     </div>
                 </div>
             </div>

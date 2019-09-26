@@ -1,5 +1,5 @@
 <?php
-$this->title ='新品尝鲜 – 上架新品 新品预售 – 家润新品 - 家润慧生活（365jiarun.com）-青岛首选综合性同城网购-发现达人体验-分享同城生活';
+$this->title ='新品尝鲜 – 上架新品 新品预售 – 家润新品 - 家润慧生活（mrhuigou.com）-青岛首选综合性同城网购-发现达人体验-分享同城生活';
 ?>
 <div class="w1100 bc pb30 clearfix pr50 pl50">
 <div class="newpro">

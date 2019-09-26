@@ -17,7 +17,7 @@ class Image{
      * @param string $type 9=原大小图
      * @return string
      */
-    //const  HTTP_IMAGE ="http://img1.365jiarun.com/";
+    //const  HTTP_IMAGE ="http://img1.mrhuigou.com/";
     const  HTTP_IMAGE =HTTP_IMAGE;
     static function resize($filename, $width=0, $height=0, $type = 1)
     {
