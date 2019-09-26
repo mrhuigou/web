@@ -2,7 +2,7 @@
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'timeZone'=>'Asia/Chongqing',
-    'name'=>'家润慧生活',
+    'name'=>'每日惠购',
     'components' => [
         'elasticsearch' => [
             'class' => 'yii\elasticsearch\Connection',
