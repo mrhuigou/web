@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <section class="veiwport">
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
-            <p align="left">欢迎光临家润慧生活（网址：<a href="http://www.365jiarun.com/">www.365jiarun.com</a>）,家润慧生活<span>由青岛家润电子科技</span><span>有限公司（以下简称为"家润"）</span><span>所提供，您使用该网站功能或</span><span>相关服务时，已同意接受以下所有合约条</span><span>文，请您仔细阅读本注册协议，您点击"同</span><span>意并继续"按钮后，</span><span>本协议即构成对双方有约束力的法律文件。</span></p>
+            <p align="left">欢迎光临家润慧生活（网址：<a href="http://www.mrhuigou.com/">www.mrhuigou.com</a>）,家润慧生活<span>由青岛家润电子科技</span><span>有限公司（以下简称为"家润"）</span><span>所提供，您使用该网站功能或</span><span>相关服务时，已同意接受以下所有合约条</span><span>文，请您仔细阅读本注册协议，您点击"同</span><span>意并继续"按钮后，</span><span>本协议即构成对双方有约束力的法律文件。</span></p>
 
             <p align="left">&nbsp;</p>
 

@@ -107,7 +107,7 @@ $this->title = '分享有礼';
 		'title' =>'嘿！快来帮我拆红包，省钱秘密都在这。',
 		'desc' => '酸奶、水果、饮料、日常用品，助力红包，给我加油！！！',
 		'link' => \yii\helpers\Url::to(['/share/gift','hongbao_id'=>$hongbao->id],true),
-		'image' => 'https://m.365jiarun.com/images/gift-icon.jpg'
+		'image' => 'https://m.mrhuigou.com/images/gift-icon.jpg'
 	]
 ])?>
 <?php $this->beginBlock('JS_END') ?>

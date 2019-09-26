@@ -172,7 +172,7 @@ $("#weixin_wap_btn").bind("click",function(){
 //                ]
 //            });
             if (/iphone|ipad|ipod/.test(ua)) {
-                location.href=res.data+'&redirect_url=<?=urlencode('https://m.365jiarun.com/site/index?trade_no='.$model->merge_code)?>';
+                location.href=res.data+'&redirect_url=<?=urlencode('https://m.mrhuigou.com/site/index?trade_no='.$model->merge_code)?>';
             } else{
                 location.href=res.data;
             }

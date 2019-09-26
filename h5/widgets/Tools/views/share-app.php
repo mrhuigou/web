@@ -4,7 +4,7 @@ $this->beginBlock('JS_INIT')
 $(".share-guide").click(function(){
 var go_url='<?=isset($data['redirect'])?$data['redirect']:''?>';
 api.download({
-url: '<?=isset($data['image'])?$data['image']:"https://m.365jiarun.com/assets/images/logo_300x300.png"?>',
+url: '<?=isset($data['image'])?$data['image']:"https://m.mrhuigou.com/assets/images/logo_300x300.png"?>',
 report: true,
 cache: true,
 allowResume: true

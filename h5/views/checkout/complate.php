@@ -50,7 +50,7 @@ $this->title ='支付结果';
 		'title' => '红包来袭，手慢无！！！',
 		'desc' => "家润网，物美价廉，当日订单，当日送达。",
 		'link' => \yii\helpers\Url::to(['/share/subscription'],true),
-		'image' => 'https://m.365jiarun.com/images/gift-icon.jpg'
+		'image' => 'https://m.mrhuigou.com/images/gift-icon.jpg'
 	]
 ])?>
 

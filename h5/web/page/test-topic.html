@@ -105,7 +105,7 @@
 
 		    <script type="text/javascript">
 		    	var tpl = $('#tpl').html();
-		    	$.getJSON('http://open.365jiarun.com/mall/v1/promotion/product?callback=?',{product_code:["510400","510407","510416","510412","510401","510404","510405","510406","510411","510410"]}, function(result) {
+		    	$.getJSON('http://open.mrhuigou.com/mall/v1/promotion/product?callback=?',{product_code:["510400","510407","510416","510412","510401","510404","510405","510406","510411","510410"]}, function(result) {
 
 		        var html = template(tpl, { list: result.data, from: 0, to: 0 });
 		        $("#cate1").html(html);

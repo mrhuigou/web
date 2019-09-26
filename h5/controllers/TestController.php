@@ -155,18 +155,18 @@ echo "<br>";
         $request->setiOSApnsEnv("DEV");//iOS的通知是通过APNs中心来发送的，需要填写对应的环境信息。"DEV" : 表示开发环境 "PRODUCT" : 表示生产环境
         $request->setiOSRemind("false"); // 推送时设备不在线（既与移动推送的服务端的长连接通道不通），则这条推送会做为通知，通过苹果的APNs通道送达一次(发送通知时,Summary为通知的内容,Message不起作用)。注意：离线消息转通知仅适用于生产环境
         $request->setiOSRemindBody("iOSRemindBody");//iOS消息转通知时使用的iOS通知内容，仅当iOSApnsEnv=PRODUCT && iOSRemind为true时有效
-        $request->setiOSExtParameters("{'url':'https://m.365jiarun.com/user/index','k':'ios'}"); //自定义的kv结构,开发者扩展用 针对iOS设备
+        $request->setiOSExtParameters("{'url':'https://m.mrhuigou.com/user/index','k':'ios'}"); //自定义的kv结构,开发者扩展用 针对iOS设备
 // 推送配置: Android
         $request->setAndroidNotifyType("NONE");//通知的提醒方式 "VIBRATE" : 震动 "SOUND" : 声音 "BOTH" : 声音和震动 NONE : 静音
         $request->setAndroidNotificationBarType(1);//通知栏自定义样式0-100
         $request->setAndroidOpenType("URL");//点击通知后动作 "APPLICATION" : 打开应用 "ACTIVITY" : 打开AndroidActivity "URL" : 打开URL "NONE" : 无跳转
-        $request->setAndroidOpenUrl("https://www.365jiarun.com");//Android收到推送后打开对应的url,仅当AndroidOpenType="URL"有效
+        $request->setAndroidOpenUrl("https://www.mrhuigou.com");//Android收到推送后打开对应的url,仅当AndroidOpenType="URL"有效
         $request->setAndroidActivity("com.alibaba.push2.demo.XiaoMiPushActivity");//设定通知打开的activity，仅当AndroidOpenType="Activity"有效
         $request->setAndroidMusic("default");//Android通知音乐
         $request->setAndroidXiaoMiActivity("com.ali.demo.MiActivity");//设置该参数后启动小米托管弹窗功能, 此处指定通知点击后跳转的Activity（托管弹窗的前提条件：1. 集成小米辅助通道；2. StoreOffline参数设为true
         $request->setAndroidXiaoMiNotifyTitle("Mi Title");
         $request->setAndroidXiaoMiNotifyBody("Mi Body");
-        $request->setAndroidExtParameters("{'url':'https://m.365jiarun.com/user/index','k':'android'}"); // 设定android类型设备通知的扩展属性
+        $request->setAndroidExtParameters("{'url':'https://m.mrhuigou.com/user/index','k':'android'}"); // 设定android类型设备通知的扩展属性
 // 推送控制
         $pushTime = gmdate('Y-m-d\TH:i:s\Z', strtotime('+3 second'));//延迟3秒发送
         $request->setPushTime($pushTime);

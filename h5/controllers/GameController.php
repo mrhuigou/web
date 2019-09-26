@@ -217,7 +217,7 @@ class GameController extends \yii\web\Controller {
 						$total=$model->coupon->getRealDiscount() . ($model->coupon->type == 'F' ? "元" : "折");
 					}
 					$notice = new WxNotice();
-					$notice->coupon($open_id, "https://m.365jiarun.com/user-coupon/index",
+					$notice->coupon($open_id, "https://m.mrhuigou.com/user-coupon/index",
 						[
 							'title' => '亲，您的手气真不错，获得了' . $model->coupon->name.",有效期内再次购物自动使用。",
 							'total' =>$total,

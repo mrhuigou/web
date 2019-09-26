@@ -194,14 +194,14 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         'title' => $lottery->title.'！！！',
         'desc' => "物美价廉，当日订单，当日送达。",
         'link' => \yii\helpers\Url::to(['/game/index'],true),
-        'image' => 'https://m.365jiarun.com/images/gift-icon.jpg'
+        'image' => 'https://m.mrhuigou.com/images/gift-icon.jpg'
     ];
 }else{
     $data = [
         'title' => $lottery->title.' ！！！',
         'desc' => "家润慧生活，物美价廉，当日订单，当日送达。",
         'link' => \yii\helpers\Url::to(['/game/index'],true),
-        'image' => 'https://m.365jiarun.com/images/gift-icon.jpg'
+        'image' => 'https://m.mrhuigou.com/images/gift-icon.jpg'
     ];
 }
 ?>

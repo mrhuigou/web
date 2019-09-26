@@ -268,7 +268,7 @@ class GroundPushController extends \yii\web\Controller {
                 $base['platform_id'] = 1;
                 $base['store_id'] = 1;
                 $base['name'] = '青岛家润';
-                $base['url'] = 'https://m.365jiarun.com／ground-push/index';
+                $base['url'] = 'https://m.mrhuigou.com／ground-push/index';
                 $base['ground_push_point_id'] = $plan_info->ground_push_point_id;
                 $base['ground_push_plan_id'] = $ground_push_plan_id;
 

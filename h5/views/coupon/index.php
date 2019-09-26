@@ -109,14 +109,14 @@ $this->registerJs($this->blocks['JS_SKU'], \yii\web\View::POS_READY);
             'title' => '智慧青岛-'.$this->title,
             'desc' => "智慧青岛-生活用品，物美价廉，当天订单，当天送。",
             'link' => Yii::$app->request->getAbsoluteUrl(),
-             'image' =>'https://m.365jiarun.com/images/gift-icon.jpg'
+             'image' =>'https://m.mrhuigou.com/images/gift-icon.jpg'
         ];
     }else{
         $share_config = [
             'title' => '家润-'.$this->title,
             'desc' => "家润网-生活用品，物美价廉，当天订单，当天送。",
             'link' => Yii::$app->request->getAbsoluteUrl(),
-            'image' => 'https://m.365jiarun.com/assets/images/logo_300x300.png'
+            'image' => 'https://m.mrhuigou.com/assets/images/logo_300x300.png'
         ];
     }
 ?>

@@ -1,3 +1,3 @@
 <?php
-//'http://wms.365jiarun.com:8888'
-return ['TMS_API' => 'http://wms.365jiarun.com:8888'];
+//'http://wms.mrhuigou.com:8888'
+return ['TMS_API' => 'http://wms.mrhuigou.com:8888'];

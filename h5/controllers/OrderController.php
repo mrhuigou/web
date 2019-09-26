@@ -527,7 +527,7 @@ class OrderController extends \yii\web\Controller
         }
 //        if($flow_model->is_notice == 0){
 //            $template_id = 'i1q1M2mGcTEeFJySynB8FODHTNpwQ7QTGR3zU8SOuHk';//佣金提醒
-//            $url = 'https://m.365jiarun.com/user-share/index';
+//            $url = 'https://m.mrhuigou.com/user-share/index';
 //            if ( $user = User::findIdentity($flow_model->customer_id)) {
 //                if ($open_id = $user->getWxOpenId()) {
 //                    $msg = $this->getMessage("您获得了一笔新的佣金，点击消息查看收益情况", $flow_model);

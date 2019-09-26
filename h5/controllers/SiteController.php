@@ -101,7 +101,7 @@ class SiteController extends Controller {
 //		if (\Yii::$app->user->isGuest) {
 //		return $this->redirect(['/site/login','redirect'=>\Yii::$app->request->getAbsoluteUrl()]);
 //		}
-//        $url = "http://m.365jiarun.com/?sourcefrom=hssrwd&k=1&v=2";
+//        $url = "http://m.mrhuigou.com/?sourcefrom=hssrwd&k=1&v=2";
 //        $url = $this->removeSourceAff($url);
 //        print_r($url);exit;
 //        $return = ReturnBase::findOne(['return_id'=>10267]);

@@ -12,7 +12,7 @@
     </a>
 </div>
 <div class="f0bg tc pt15 pb20">
-    <img src="//m.365jiarun.com/assets/images/logo2.png" width="110">
+    <img src="//m.mrhuigou.com/assets/images/logo2.png" width="110">
     <p class="gray6 mt5">客服电话：4008-556-977</p>
 </div>
 

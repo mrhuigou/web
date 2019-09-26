@@ -23,8 +23,8 @@ class PageController extends Controller
 //            $referer = Yii::$app->request->referrer;
 //            if(strpos($referer,'weixinbridge')){
 //                //Yii::$app->request->absoluteUrl;
-//                $_SERVER['HTTP_REFERER'] = 'https://m.365jiarun.com/';
-//                $this->redirect('https://m.365jiarun.com/page/'.$page_id.'.html');
+//                $_SERVER['HTTP_REFERER'] = 'https://m.mrhuigou.com/';
+//                $this->redirect('https://m.mrhuigou.com/page/'.$page_id.'.html');
 //            }
             return $this->render("index",['page'=>$page]);
         }else{
