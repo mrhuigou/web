@@ -1,0 +1,36 @@
+/*~~~
+Author  fool
+Time    2015/7/16
+DO      some css
+~~~*/
+.clearfix{*zoom:1;}
+.clearfix:after{
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+	clear:both;
+}
+.fl{float: left;}
+.fr{float: right;}
+
+.mt5{margin-top: 5px;}
+.mt10{margin-top: 10px;}
+.mr10{margin-right: 10px;}
+.mr15{margin-right: 15px;}
+
+.activity_items{
+	float: left;
+	margin-right:20px;
+}
+
+.post_pay_item{margin-bottom: 10px;}
+.post_form_join_item{
+	list-style: none;
+	padding-left: 20px;
+  	font-size: 14px;
+}
+.post_form_join_item .join_item_static .item_title{
+	float: left;
+	width: 20%;
+}
