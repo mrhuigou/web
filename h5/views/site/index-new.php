@@ -88,7 +88,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     <div class="nav2" >
 	    <?php if($nav){?>
 		    <?php foreach ($nav as $value){?>
-                <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>" class="item col-5">
+                <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>" class="item col-4">
                     <img  src="<?= \common\component\image\Image::resize($value->source_url, 100, 100) ?>" class="img-circle bd" style="width: 45px;height: 45px;overflow: hidden;">
                     <span><?= $value->title ?></span>
                 </a>
@@ -242,10 +242,10 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     <a name="category_menu"></a>
         <div id="menu_content" class="mt10 pr">
         <div class="menu-tab">
-            <ul id="nav" class="filter blueFilter six clearfix mt10 top-list-tab tabs ">
+            <ul id="nav" class="filter blueFilter five clearfix mt10 top-list-tab tabs ">
                 <li class="cur"><a href="#shengxian">生鲜</a></li>
                 <li><a href="#jiushui">酒水</a></li>
-                <li><a href="#muying">母婴</a></li>
+<!--                <li><a href="#muying">母婴</a></li>-->
                 <li><a href="#liangyou">粮油</a></li>
                 <li><a href="#xihua">洗化</a></li>
                 <li><a href="#xiushi">休食</a></li>
@@ -364,63 +364,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                     </ul>
                 <?php } ?>
             </div>
-            <h2 class="tit">
-                <span class="green">母婴</span>
-            </h2>
-            <div class="panel" id="muying">
-                <!--产品组-->
-                <?php if ($fourthF_PRODUCT_SIX) { ?>
-                    <ul class="pro-list23">
-                        <?php foreach ($fourthF_PRODUCT_SIX as $key => $value) { ?>
-                            <?php if (in_array($value['advertise_media_type'],['PACK','IMAGE'])) { ?>
-                                <li class="clearfix mb5 pl5 pr5" style="width: 32rem;height: 12.5rem;overflow: hidden;">
-                                    <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>">
-                                        <img
-                                                data-original="<?= \common\component\image\Image::resize($value->source_url, 640, 250) ?>"
-                                                title="<?php echo $value->title; ?>" alt="<?= $value->title ?>"
-                                                class="db w lazy" >
-                                    </a>
-                                </li>
-                            <?php } ?>
-                        <?php } ?>
-                    </ul>
-                <?php } ?>
 
-                <!--品牌3个广告-->
-                <div class="row">
-                    <?php if ($fourthF_BRAND_SIX) { ?>
-                        <?php foreach ($fourthF_BRAND_SIX as $key => $value) { ?>
-                            <?php if ($key < 3) { ?>
-                                <div class="col-3">
-                                    <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>" class="db p2">
-                                        <img
-                                                data-original="<?= \common\component\image\Image::resize($value->source_url, 200, 200) ?>"
-                                                title="<?php echo $value->title; ?>" alt="<?= $value->title ?>"
-                                                class="db  lazy" style="width: 10rem;height: 10rem;">
-                                    </a>
-                                </div>
-                            <?php } ?>
-                        <?php } ?>
-                    <?php } ?>
-                </div>
-
-                <!--品牌logo组-->
-                <?php if ($fourthF_PLOGO_SIX) { ?>
-                    <ul class="pro-list shadowbd-box bdradius-box five clearfix whitebg bdb pt10"
-                        style="margin-top:0.4rem;">
-                        <?php foreach ($fourthF_PLOGO_SIX as $key => $value) { ?>
-                            <?php if ($key < 5) { ?>
-                                <li>
-                                    <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>"><img
-                                                data-original="<?= \common\component\image\Image::resize($value->source_url, 200, 200) ?>"
-                                                title="<?php echo $value->title; ?>" alt="<?= $value->title ?>"
-                                                class="lazy" ></a>
-                                </li>
-                            <?php } ?>
-                        <?php } ?>
-                    </ul>
-                <?php } ?>
-            </div>
             <h2 class="tit">
                 <span class="green">粮油</span>
             </h2>

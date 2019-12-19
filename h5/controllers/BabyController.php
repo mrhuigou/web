@@ -3,11 +3,14 @@ namespace h5\controllers;
 
 
 use api\models\V1\AdvertiseDetail;
+use yii\web\NotFoundHttpException;
 
 class BabyController extends \yii\web\Controller
 {
     public function actionIndex()
     {
+        throw new NotFoundHttpException();
+        return false;
             $all_show = 0;
             $all_show = \Yii::$app->request->get('all_show');
             if(time() >= strtotime('2017-10-10 00:00:00')){
