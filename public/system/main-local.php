@@ -50,8 +50,8 @@ return [
         ],
 	'wechat' => [
 		    'class' => 'common\component\weixin\Wechat',
-		    'appId' => 'wx587c246fefd26199',
-		    'appSecret' => '434835003061e422aec7f95716d49830',
+		    'appId' => 'wx538bb8de1b0f1074',
+		    'appSecret' => 'dcedb30a7ec916a09a9fc5e82fbbd6f7',
 		    'token' => '1q2w3e4r'
 	    ],
     ],

@@ -14,8 +14,8 @@ return [
     ],
     'weixin'=>[
         'token'=>'1q2w3e4r',
-        'appid'=>'wx587c246fefd26199',
-        'appsecret'=>'434835003061e422aec7f95716d49830',
+        'appid'=>'wx538bb8de1b0f1074',
+        'appsecret'=>'dcedb30a7ec916a09a9fc5e82fbbd6f7',
         'EncodingAESKey'=>'FIzkvAMXT7RcTGM0l1SenRxUAr8cwIy6wsP11NR8Qdn'
     ],
     'open_search'=>[
