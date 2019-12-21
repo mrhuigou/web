@@ -2,7 +2,7 @@
 /* @var $this yii\web\View */
 use yii\helpers\Html;
 /* @var $this yii\web\View */
-$this->title ="家润快报";
+$this->title ="每日惠购快报";
 ?>
 <?=h5\widgets\Header::widget(['title'=>$this->title])?>
 	<section class="veiwport  pb50">

@@ -11,7 +11,7 @@ $this->title ='订单物流跟踪';
         <div class="fl w-per77 f12 lh150">
             <p class="f14 mb5">订单编号：<?=$model->order_no?> <em class="fr fb"><?=$model->orderStatus->name;?></em></p>
             <p class="f14 mb5">订单金额(含运费):￥<?= number_format($model->total,2);?></p>
-            <p class="f14 mb5">配送公司: 家润自送</p>
+            <p class="f14 mb5">配送公司: 每日惠购自送</p>
         </div>
     </div>
     <?php if($order_path){?>

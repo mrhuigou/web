@@ -95,7 +95,7 @@ $this->title = '分享有礼';
                 <div class="tit-- mt15 mb10">活动规则</div>
                 <ul class="ul ul-decimal ml25 f14">
                     <li>红包新老用户同享，只能邀请他人拆，自己不能拆哟！</li>
-                    <li>红包仅限家润自营商品使用</li>
+                    <li>红包仅限每日惠购自营商品使用</li>
                     <li>每个用户只能领取一次</li>
                     <li>其他未尽事宜，请咨询客服</li>
                 </ul>

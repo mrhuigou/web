@@ -28,7 +28,7 @@ $this->registerJsFile("/assets/js/ad.js",['position' => \yii\web\View::POS_HEAD]
 }else{
     $data = [
         'title' =>$page->description->title,
-        'desc' => '家润网，物美价廉，当天订单，当天送。',
+        'desc' => '每日惠购网，物美价廉，当天订单，当天送。',
         'link' => Yii::$app->request->getAbsoluteUrl(),
         'image' => Yii::$app->request->getHostInfo().'/assets/images/logo_300x300.png'
     ];

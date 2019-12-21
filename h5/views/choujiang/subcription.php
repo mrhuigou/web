@@ -27,7 +27,7 @@
     <?php }else{?>
             <img src="/assets/images/logo-.jpg" width="120" height="120" class="img-circle mt30">
             <h3 class="pt5 f16">每日惠购</h3>
-            <p class="gray9 pt15 pb5">关注家润公众号</p>
+            <p class="gray9 pt15 pb5">关注每日惠购公众号</p>
     <?php } ?>
         <p class="gray9 pt15 pb5" id="scan_code"></p>
         <p class="gray9 pt15 pb5">请长按识别关注公众号,进入抽奖活动！</p>

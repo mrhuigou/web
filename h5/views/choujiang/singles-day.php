@@ -156,8 +156,8 @@ $this->registerJsFile("/assets/script/jquery.rowscroll.js",['depends'=>\h5\asset
 $this->registerJs($this->blocks['J_Reviews'],\yii\web\View::POS_END);
 ?>
 <?php echo h5\widgets\Tools\Share::widget(['data'=>[
-    'title' => '嗨翻双11，家润邀您来抽奖！',
-    'desc' => '酸奶、水果、饮料、日常用品。来家润就“购”了!',
+    'title' => '嗨翻双11，每日惠购邀您来抽奖！',
+    'desc' => '酸奶、水果、饮料、日常用品。来每日惠购就“购”了!',
     'link' => \yii\helpers\Url::to(['/choujiang/singles-day'],true),
     'image' => Yii::$app->request->getHostInfo() . '/assets/images/hongbao.png',
     //'hidden_status'=>'hidden',

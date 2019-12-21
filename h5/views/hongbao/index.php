@@ -45,7 +45,7 @@ $this->title = "喊人帮我拆红包";
 </div>
 <?php h5\widgets\Tools\Share::widget(['data'=>[
 	'title' => '帮我拆红包，我要买买买!',
-	'desc' => '酸奶、水果、饮料、日常用品。在家润1元就“购”了!',
+	'desc' => '酸奶、水果、饮料、日常用品。在每日惠购1元就“购”了!',
 	'link' => \yii\helpers\Url::to(['/hongbao/index','id'=>$model->id,'share_status'=>1],true),
 	'image' => Yii::$app->request->getHostInfo() . '/assets/images/hongbao_share.jpg'
 ]]);

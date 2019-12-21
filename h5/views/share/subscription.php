@@ -47,7 +47,7 @@ $this->title = '关注公众号';
             <!-- 活动规则 -->
             <div class="tit-- mt15 mb10">活动规则</div>
             <ul class="ul ul-decimal ml25 f14">
-                <li>红包仅限家润自营商品使用</li>
+                <li>红包仅限每日惠购自营商品使用</li>
                 <li>每个用户只能领取一次</li>
                 <li>其他未尽事宜，请咨询客服</li>
             </ul>

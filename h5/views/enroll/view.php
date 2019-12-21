@@ -32,6 +32,6 @@ $this->title = '报名结果';
 		<p class="tc">
 			<img src="/assets/images/wx.jpg" alt="二维码" width="150" height="150">
 		</p>
-		<p class="gray9 mt10 tc">关注家润公众号，了解更多资讯</p>
+		<p class="gray9 mt10 tc">关注每日惠购公众号，了解更多资讯</p>
 	</div>
 </section>

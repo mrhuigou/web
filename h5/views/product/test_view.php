@@ -98,7 +98,7 @@ $this->title = '商品详情';
                         <i class="iconfont f25 mt2">&#xe635;</i>
                     </div>
                     <div class="flex-item-5 pt5">
-                        <a href="#" class="fb">青岛家润店</a>
+                        <a href="#" class="fb">青岛每日惠购店</a>
                     </div>
                     <div class="flex-item-5 tr pr15">
                         <a href="#" class="btn greenbtn mbtn w100">进店逛逛</a>
@@ -325,7 +325,7 @@ $this->registerJs($this->blocks['JS_SKU'], \yii\web\View::POS_END);
 <?=\h5\widgets\Tools\Share::widget([
     'data'=>[
         'title' => $model->description->name,
-        'desc' => $model->description->meta_description?$model->description->meta_description:"家润网，物美价廉，当天订单，当天送。",
+        'desc' => $model->description->meta_description?$model->description->meta_description:"每日惠购网，物美价廉，当天订单，当天送。",
         'link' => Yii::$app->request->getAbsoluteUrl(),
         'image' => \common\component\image\Image::resize($model->image, 200, 200)
     ]

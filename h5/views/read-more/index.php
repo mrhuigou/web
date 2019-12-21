@@ -9,7 +9,7 @@ use yii\helpers\Url;
 if($new_category){
     $this->title = $new_category->name;
 }else{
-    $this->title = '家润快报';
+    $this->title = '每日惠购快报';
 }
 
 ?>

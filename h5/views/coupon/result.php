@@ -6,7 +6,7 @@
  * Time: 11:36
  */
 use yii\helpers\Html;
-$this->title ='家润优惠券';
+$this->title ='每日惠购优惠券';
 ?>
 <style>
     body{

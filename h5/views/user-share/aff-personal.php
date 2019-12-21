@@ -6,7 +6,7 @@
  * Time: 13:48
  */
 use yii\helpers\Html;
-$this->title ='家润合伙人福利';
+$this->title ='每日惠购合伙人福利';
 ?>
 <style>
     .activity-1-coupon::after, .activity-1-coupon::before {

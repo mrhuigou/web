@@ -23,7 +23,7 @@ $this->title ='申请合伙人';
 		<?= $form->field($model, 'username', ['inputOptions' => ["placeholder" => '请填写收货人姓名']]) ?>
 		<?= $form->field($model, 'telephone', ['inputOptions' => ["placeholder" => '请填写收货人电话号码']]) ?>
         <?php $url =  \yii\helpers\Url::to(["/user-share/xieyi"])?>
-		<?= $form->field($model, 'agree')->checkbox(['template' => "<div class='p5'>{input} {label}<a href='{$url}'class='blue'>《家润合伙人分享协议》</a></div>{error}"]) ?>
+		<?= $form->field($model, 'agree')->checkbox(['template' => "<div class='p5'>{input} {label}<a href='{$url}'class='blue'>《每日惠购合伙人分享协议》</a></div>{error}"]) ?>
 		</ul>
 		<div class=" bdt  p10 w tc ">
 			<?= Html::submitButton('提交', ['class' => 'btn mbtn greenbtn w', 'name' => 'save-button']) ?>

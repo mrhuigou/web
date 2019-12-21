@@ -62,7 +62,7 @@ $this->title = "收银台";
 <!--                <span class="img bestone"></span>-->
 <!--                <div class="fl">-->
 <!--                    <h3>佰通卡支付</h3>-->
-<!--                    <span class="gray9 f12 red">开卡时已提供发票,家润网不再提供发票</span>-->
+<!--                    <span class="gray9 f12 red">开卡时已提供发票,每日惠购网不再提供发票</span>-->
 <!--                </div>-->
 <!--                <i class="iconfont fr"></i>-->
 <!--            </a>-->
@@ -198,7 +198,7 @@ if($.cookie('h5_wx_cookie') && $.cookie('h5_wx_cookie')=='<?=$model->merge_code?
 $("#BestoneBtn").bind("click",function(){
     $.modal({
         title: "支付提示",
-        text: "您购买的佰通卡已经开具发票，家润网不再提供发票",
+        text: "您购买的佰通卡已经开具发票，每日惠购网不再提供发票",
         buttons: [
             { text: "取消", onClick: function(){
 

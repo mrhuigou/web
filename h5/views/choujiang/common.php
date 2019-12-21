@@ -181,7 +181,7 @@ $this->registerJs($this->blocks['J_Reviews'],\yii\web\View::POS_END);
 ?>
 <?php echo h5\widgets\Tools\Share::widget(['data'=>[
     'title' => $lottery->title,
-    'desc' => '酸奶、水果、饮料、日常用品。来家润就“购”了!',
+    'desc' => '酸奶、水果、饮料、日常用品。来每日惠购就“购”了!',
     'link' => \yii\helpers\Url::to(['/choujiang/common','id'=>Yii::$app->request->get("id")],true),
     'image' => Yii::$app->request->getHostInfo() . '/assets/images/hongbao.png',
     //'hidden_status'=>'hidden',

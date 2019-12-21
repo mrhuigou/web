@@ -37,7 +37,7 @@
 <?php if(Yii::$app->user->getId()==$model->customer_id){?>
 <?php h5\widgets\Wx\Share::widget([
 	'title'=>'帮我拆红包，我要买买买!',
-	'desc'=>'水果、饮料、日常用品。在家润1元就“购”了!',
+	'desc'=>'水果、饮料、日常用品。在每日惠购1元就“购”了!',
 	'link'=>Yii::$app->request->getAbsoluteUrl(),
 	'imgUrl'=>Yii::$app->request->getHostInfo().'/assets/images/hongbao_share.jpg'
 ]);
@@ -45,7 +45,7 @@
 <?php }else{ ?>
 <?php h5\widgets\Wx\Share::widget([
 	'title'=>'点我马上开始1元购物!',
-	'desc'=>'水果、饮料、日常用品。在家润1元就“购”了!',
+	'desc'=>'水果、饮料、日常用品。在每日惠购1元就“购”了!',
 	'link'=>Yii::$app->request->getAbsoluteUrl(),
 	'imgUrl'=>Yii::$app->request->getHostInfo().'/assets/images/fudai.png'
 ]);
