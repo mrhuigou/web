@@ -17,7 +17,7 @@ use \common\component\Helper\Datetime;
                     配送时间：
                 </div>
                 <div class="flex-item-7 delivery-default tr">
-                    家润配送<br>
+                    每日惠购配送<br>
                     <p class="delivery_time_des">时间不限</p>
                 </div>
                 <div class="flex-item-2 tr green">
@@ -35,7 +35,7 @@ use \common\component\Helper\Datetime;
                     配送时间：
                 </div>
                 <div class="flex-item-7 delivery-default tr">
-                    家润配送<br>
+                    每日惠购配送<br>
                     <p class="delivery_time_des"><?= date('m-d', strtotime($data['method_date'])) ?>
                         &nbsp;&nbsp;<?= Datetime::getWeekDay(strtotime($data['method_date'])) ?>
                         &nbsp;&nbsp;<?= $data['method_time'] ?></p>

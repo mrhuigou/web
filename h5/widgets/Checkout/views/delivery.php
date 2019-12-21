@@ -18,7 +18,7 @@ use \common\component\Helper\Datetime;
             配送时间：
         </div>
         <div class="flex-item-7 delivery-default tr">
-                家润配送<br>
+                每日惠购配送<br>
 				<?= date('m-d', strtotime($data['method_date'])) ?>&nbsp;&nbsp;<?= Datetime::getWeekDay(strtotime($data['method_date'])) ?>&nbsp;&nbsp;<?= $data['method_time'] ?>
         </div>
         <div class="flex-item-2 tr green">
@@ -98,7 +98,7 @@ customer_coupon.each(function(){
 customer_coupon_ids.push($(this).val());
 });
 }
-var html="家润配送<br/>";
+var html="每日惠购配送<br/>";
 html+=delivery_date+"&nbsp;&nbsp;"+delivery_time;
 $("#delivery_title_"+store_id).find(".delivery-default").html(html);
 $.showLoading("正在加载");

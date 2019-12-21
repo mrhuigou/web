@@ -7,10 +7,10 @@
  */
 ?>
 
-<!--家润快报-->
+<!--每日惠购快报-->
 <div class="breakingNews flex-col aui-border mt5 mb5 none" id="breakingNews">
 	<div class="bn-title flex-item-2">
-		<p>家润</p>
+		<p>每日惠购</p>
 		<p>快报</p>
 	</div>
 	<div class="flex-item-10 pl10 gray6">
