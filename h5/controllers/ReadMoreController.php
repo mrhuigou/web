@@ -17,7 +17,7 @@ class ReadMoreController extends \yii\web\Controller{
 		}
         $new_category_id = \Yii::$app->request->get("c");
 		if(!$new_category_id){
-            $new_category_id = 1; //默认家润快报
+            $new_category_id = 1; //默认每日惠购快报
         }
         $new_category = NewsCategory::findOne(['id'=>$new_category_id]);
 

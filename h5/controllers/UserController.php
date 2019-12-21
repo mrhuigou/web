@@ -145,7 +145,7 @@ class UserController extends \yii\web\Controller {
 				throw new ErrorException('用户还没有登录');
 			}
 			if (!$open_id = \Yii::$app->user->identity->getWxOpenId()) {
-				throw new ErrorException('您还没有关注家润公众号');
+				throw new ErrorException('您还没有关注每日惠购公众号');
 			}
 			if ($user_info = \Yii::$app->wechat->getMemberInfo($open_id)) {
 				if (isset($user_info['headimgurl']) && $user_info['headimgurl']) {

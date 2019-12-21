@@ -12,6 +12,7 @@ use common\component\Curl\Curl;
 use common\component\Helper\AuthState;
 use common\component\Helper\Encrypt3des;
 use common\component\Helper\Xcrypt;
+use common\component\Message\Sms;
 use common\component\Payment\WxPay\UnifiedOrder_pub;
 use common\component\Payment\WxPay\WxPayConf_pub;
 use common\component\Sms\VoiceVerify;
@@ -512,10 +513,10 @@ class SiteController extends Controller {
 			$model->status = 0;
 			$model->date_added = date('Y-m-d H:i:s', time());
 			$model->save();
-			$message = "您的家润验证码:" . $model->code . "，请勿将验证码泄露给其他人。";
-			//Sms::send($telephone,$message);
-			$voice = new VoiceVerify();
-			$voice->send($telephone, $code);
+			$message = "您的每日惠购验证码:" . $model->code . "，请勿将验证码泄露给其他人。";
+			Sms::send($telephone,$message);
+//			$voice = new VoiceVerify();
+//			$voice->send($telephone, $code);
             Yii::$app->session->set('telephone_send_limit', time() + 58);
             $msg = '发送成功';
             $status = true;
@@ -543,7 +544,7 @@ class SiteController extends Controller {
 				$model->date_added = date('Y-m-d H:i:s', time());
 				$model->save();
 			}
-			$message = "您的家润验证码:" . $model->code . "，请勿将验证码泄露给其他人。";
+			$message = "您的每日惠购验证码:" . $model->code . "，请勿将验证码泄露给其他人。";
 			Yii::$app->mailer->compose()
 				->setTo($data['email'])
 				->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name])
@@ -628,7 +629,7 @@ class SiteController extends Controller {
         $useragent = \Yii::$app->request->getUserAgent();
         if (strpos(strtolower($useragent), 'micromessenger')) {
             $state = AuthState::create($state_ext);
-            $base_url=Yii::$app->wechat->getOauth2AuthorizeUrl(Url::to(['site/weixin-base'], true),$state,'snsapi_base');//家润静默授权
+            $base_url=Yii::$app->wechat->getOauth2AuthorizeUrl(Url::to(['site/weixin-base'], true),$state,'snsapi_base');//每日惠购静默授权
             Yii::error('base_url:',json_encode($base_url));
             return $this->redirect($base_url);
         }
