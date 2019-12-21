@@ -13,8 +13,8 @@ return [
     ],
     'weixin'=>[
         'token'=>'1q2w3e4r',
-        'appid'=>'wxa8b041c2bffdd399',
-        'appsecret'=>'f1e244e247fb68971694079fd87aed26',
+        'appid'=>'wx538bb8de1b0f1074',
+        'appsecret'=>'dcedb30a7ec916a09a9fc5e82fbbd6f7',
         'EncodingAESKey'=>''
     ],
 //	'open_search'=>[ //测试搜索
