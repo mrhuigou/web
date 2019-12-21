@@ -515,10 +515,10 @@ class SiteController extends Controller {
 			$model->save();
 			$message = "您的每日惠购验证码:" . $model->code . "，请勿将验证码泄露给其他人。";
 //			Sms::send($telephone,$message);
-            $re = Sms::send_notice($telephone,$message);
+            $re = Sms::send_system($telephone,$message);
             print_r($re);
-//			$voice = new VoiceVerify();
-//			$voice->send($telephone, $code);
+			$voice = new VoiceVerify();
+			$voice->send($telephone, $code);
             Yii::$app->session->set('telephone_send_limit', time() + 58);
             $msg = '发送成功';
             $status = true;
