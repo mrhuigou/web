@@ -522,7 +522,7 @@ class SiteController extends Controller {
             Yii::$app->session->set('telephone_send_limit', time() + 58);
             $msg = '发送成功';
             $status = true;
-            $result['msg'] = $msg;
+            $result['msg'] = $re;
             $result['status'] = $status;
             return json_encode($result);
 		}
