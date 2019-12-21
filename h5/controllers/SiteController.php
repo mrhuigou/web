@@ -514,7 +514,8 @@ class SiteController extends Controller {
 			$model->date_added = date('Y-m-d H:i:s', time());
 			$model->save();
 			$message = "您的每日惠购验证码:" . $model->code . "，请勿将验证码泄露给其他人。";
-			Sms::send($telephone,$message);
+//			Sms::send($telephone,$message);
+            Sms::send_notice($telephone,$message);
 //			$voice = new VoiceVerify();
 //			$voice->send($telephone, $code);
             Yii::$app->session->set('telephone_send_limit', time() + 58);
