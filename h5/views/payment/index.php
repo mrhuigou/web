@@ -39,34 +39,34 @@ $this->title = "收银台";
                 </a>
         <?php }?>
         <?php if(strpos(strtolower(\Yii::$app->request->getUserAgent()), 'micromessenger') === false){ ?>
-            <a href="<?=\yii\helpers\Url::to(['/payment/alipay','trade_no'=>$model->merge_code])?>"  class="payment clearfix">
-            <span class="img zfb"></span>
-            <div class="fl">
-                <h3>支付宝支付</h3>
-                <span class="gray9 f12">安全、方便、快捷</span>
-            </div>
-            <i class="iconfont fr"></i>
-        </a>
+<!--            <a href="--><?php //echo \yii\helpers\Url::to(['/payment/alipay','trade_no'=>$model->merge_code])?><!--"  class="payment clearfix">-->
+<!--            <span class="img zfb"></span>-->
+<!--            <div class="fl">-->
+<!--                <h3>支付宝支付</h3>-->
+<!--                <span class="gray9 f12">安全、方便、快捷</span>-->
+<!--            </div>-->
+<!--            <i class="iconfont fr"></i>-->
+<!--        </a>-->
             <?php  } ?>
-        <a href="<?=\yii\helpers\Url::to(['/payment/upop-pay','trade_no'=>$model->merge_code])?>"  class="payment clearfix">
-            <span class="img yl"></span>
-            <div class="fl">
-                <h3>银联支付</h3>
-                <span class="gray9 f12">安全、方便、支持200多家银行</span>
-            </div>
-            <i class="iconfont fr"></i>
-        </a>
+<!--        <a href="--><?php //echo\yii\helpers\Url::to(['/payment/upop-pay','trade_no'=>$model->merge_code])?><!--"  class="payment clearfix">-->
+<!--            <span class="img yl"></span>-->
+<!--            <div class="fl">-->
+<!--                <h3>银联支付</h3>-->
+<!--                <span class="gray9 f12">安全、方便、支持200多家银行</span>-->
+<!--            </div>-->
+<!--            <i class="iconfont fr"></i>-->
+<!--        </a>-->
         <?php
-        if(!$model->recharge_status){ ?>
-            <a id="BestoneBtn" href="javascript:void(0)"  class="payment clearfix">
-                <span class="img bestone"></span>
-                <div class="fl">
-                    <h3>佰通卡支付</h3>
-                    <span class="gray9 f12 red">开卡时已提供发票,家润网不再提供发票</span>
-                </div>
-                <i class="iconfont fr"></i>
-            </a>
-            <?php }?>
+//        if(!$model->recharge_status){ ?>
+<!--            <a id="BestoneBtn" href="javascript:void(0)"  class="payment clearfix">-->
+<!--                <span class="img bestone"></span>-->
+<!--                <div class="fl">-->
+<!--                    <h3>佰通卡支付</h3>-->
+<!--                    <span class="gray9 f12 red">开卡时已提供发票,家润网不再提供发票</span>-->
+<!--                </div>-->
+<!--                <i class="iconfont fr"></i>-->
+<!--            </a>-->
+<!--            --><?php //}?>
        <?php if(bccomp(Yii::$app->user->identity->balance,$model->total,2)>=0 && !$model->recharge_status){?>
         <a href="<?=\yii\helpers\Url::to(['/payment/balance','trade_no'=>$model->merge_code])?>"  class="payment clearfix">
             <span class="img ye"></span>
