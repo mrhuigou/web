@@ -32,8 +32,6 @@ class WechatController extends Controller {
 
 	public function actionIndex()
 	{
-        $this->Valid();
-        exit;
 		if ($this->msg = \Yii::$app->wechat->parseRequestData()) {
 			$this->msgtype = $this->msg['MsgType'];
 			if ($this->msgtype == 'event') {
