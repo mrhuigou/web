@@ -98,7 +98,7 @@ class RechargeController extends Controller
                     'platform_name'=>'智慧生活',
                     'platform_url'=>'http://www.mrhuigou.com/',
                     'store_id'=> 1,
-                    'store_name'=> '青岛家润店',
+                    'store_name'=> '青岛每日惠购店',
                     'store_url'=> '',
                     'customer_id'=>Yii::$app->user->getId(),
                     'customer_group_id'=>'1',

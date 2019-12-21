@@ -307,13 +307,13 @@ class ContactsController extends \yii\rest\Controller
 
     }
 
-    //邀请通讯录好友 注册家润生活圈
+    //邀请通讯录好友 注册每日惠购生活圈
     public  function actionInvitecontactfriend(){
         $phone = \Yii::$app->request->post("phoneno");
         $customer_id = \Yii::$app->request->post("customer_id");
         $customer = Customer::findOne($customer_id);
         if(preg_match("/13\d{9}|15\d{9}|18\d{9}|17\d{9}/",$phone)){
-            $msg = "您的好友".$customer->nickname."(".$customer->firstname.") 邀请您加入家润生活圈";
+            $msg = "您的好友".$customer->nickname."(".$customer->firstname.") 邀请您加入每日惠购生活圈";
             if(Helper::Sendsmqxt($phone,$msg) == 'success'){
                 $result['msg'] = "success";
             }else{

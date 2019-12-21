@@ -2086,7 +2086,7 @@ class WebapiController extends \yii\rest\Controller {
 										if ($open_id = $order->customer->getWxOpenId()) {
 											$message = "感谢您此次购物，您可点击详情对本次服务进行评价！您的评价对物流小哥，很重要哟！祝您购物愉快！";
 											$notice = new \common\component\Notice\WxNotice();
-											$notice->shouhuo($open_id, "https://m.mrhuigou.com/order/delivery?order_no=" . $order->order_no, ['title' => '尊敬的家润会员,您的订单号' . $order->order_no . "已经收货！", 'address' => $order->orderShipping->shipping_address_1, 'date_time' => date('Y-m-d H:i:s', time()), 'remark' => $message]);
+											$notice->shouhuo($open_id, "https://m.mrhuigou.com/order/delivery?order_no=" . $order->order_no, ['title' => '尊敬的每日惠购会员,您的订单号' . $order->order_no . "已经收货！", 'address' => $order->orderShipping->shipping_address_1, 'date_time' => date('Y-m-d H:i:s', time()), 'remark' => $message]);
 										}
 									}
 								}
@@ -2159,7 +2159,7 @@ class WebapiController extends \yii\rest\Controller {
 //			'bankStoreage'=>1,
 //			'cert_no'=>date('YmdHis',time()),
 //			'rcv_bank_name'=>'交行水清沟支行',
-//			'rcv_acname'=>'青岛家润电子科技有限公司',
+//			'rcv_acname'=>'青岛每日惠购电子科技有限公司',
 //			'rcv_acno'=>'372005551018010059577',
 //			'cur_code'=>'CNY',
 //			'amt'=>'1.00',
@@ -2191,10 +2191,10 @@ class WebapiController extends \yii\rest\Controller {
 				];
 				$arrray['body'] = [
 					'pay_acno' => '372005500018010301879',
-					'pay_acname' => Helper::auto_charset('青岛家润电子科技有限公司', 'utf-8', 'gbk'),
+					'pay_acname' => Helper::auto_charset('青岛每日惠购电子科技有限公司', 'utf-8', 'gbk'),
 					'rcv_bank_name' => Helper::auto_charset($request_data['rcv_bank_name'], 'utf-8', 'gbk'),
 					'rcv_acno' => $request_data['rcv_acno'],//'372005551018010059577',
-					'rcv_acname' => Helper::auto_charset($request_data['rcv_acname'], 'utf-8', 'gbk'),//auto_charset('青岛家润电子科技有限公司','utf-8','gbk'),
+					'rcv_acname' => Helper::auto_charset($request_data['rcv_acname'], 'utf-8', 'gbk'),//auto_charset('青岛每日惠购电子科技有限公司','utf-8','gbk'),
 					'cur_code' => $request_data['cur_code'],//'CNY',
 					'amt' => sprintf("%.2f", $request_data['amt']),//'1.00',
 					'cert_no' => $request_data['cert_no'],//'201409190110',

@@ -67,7 +67,7 @@
 
     <div class="w190 fr whitebg h330">
         <div class="note-list">
-            <h2 class="p5 pl10 bd_dashB f14 mb5">家润快报</h2>
+            <h2 class="p5 pl10 bd_dashB f14 mb5">每日惠购快报</h2>
             <ul>
                 <?php if($data['news']){?>
                 <?php foreach($data['news'] as $news){?>

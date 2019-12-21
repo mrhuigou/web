@@ -30,7 +30,7 @@
             <a href="#">联系客服</a>
             <a href="#">开放平台</a>
             <a href="#">诚征英才</a>
-            <span class="grayc">家润电子科技有限公司版权所有</span>
+            <span class="grayc">每日惠购电子科技有限公司版权所有</span>
         </div>
     </div>
 </div>

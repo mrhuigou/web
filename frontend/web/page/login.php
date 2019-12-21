@@ -19,14 +19,14 @@
     <div class="site-nav">
     <div class="site-nav-bd clearfix" style="width: 1100px">
         <ul class="site-nav-bd-l clearfix" >
-            <li><a href="/">家润首页</a></li>
+            <li><a href="/">每日惠购首页</a></li>
                             <li><a href="/site/login">请登录</a></li>
                 <li><a href="/site/signup">免费注册</a></li>
                     </ul>
 
         <ul class="site-nav-bd-r clearfix">
             <li class="sn-menu">
-                <a href="/account" class="menu-hd" rel="nofollow">我的家润<b></b></a>
+                <a href="/account" class="menu-hd" rel="nofollow">我的每日惠购<b></b></a>
                 <div class="menu-bd">
                     <a href="/order/index" rel="nofollow">我的订单</a>
                     <a href="/collect/index" rel="nofollow">我的收藏</a>
@@ -61,7 +61,7 @@
     </div>
 </div>        <div id="login-header">
             <div class="w990 bc">
-                <a href="/" target="_self"><img src="/assets/images/logo1.png" width="200" alt="家润" class="db"></a>
+                <a href="/" target="_self"><img src="/assets/images/logo1.png" width="200" alt="每日惠购" class="db"></a>
             </div>
         </div>
     </div>
@@ -234,7 +234,7 @@
     <a href="javascript:void(0);">网站合作</a>
 
     版权说明  举报邮箱：service@mrhuigou.com  仅限18周岁以上人士购买  网络社会征信网 <br>
-    Copyright© 2006-2014 家润网 www.mrhuigou.com 版权所有 网站备案号：鲁ICP备13017153号 <br>
+    Copyright© 2006-2014 每日惠购网 www.mrhuigou.com 版权所有 网站备案号：鲁ICP备19003042号 <br>
     客服电话：4008-556-977 时间:9:00-12:00 13:00-22:00 客服邮箱：service@mrhuigou.com
 </p>
 

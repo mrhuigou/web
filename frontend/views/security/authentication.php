@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <h2 class="titStyle3 f14 green graybg2">实名认证</h2>
 
                         <p class="whitebg p15 bdb  ">
-                            <span class="icon_light org">友情提示：实名认证用于提升账户安全性和信任级别，可享受更多家润网服务，如货到卡付等。认证信息设置成功后不能修改，请务必填写真实信息。</span>
+                            <span class="icon_light org">友情提示：实名认证用于提升账户安全性和信任级别，可享受更多每日惠购网服务，如货到卡付等。认证信息设置成功后不能修改，请务必填写真实信息。</span>
                         </p>
                         <?php if (Yii::$app->getSession()->getFlash('error')) { ?>
                             <div class="login-msg bc w400">

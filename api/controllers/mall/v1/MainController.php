@@ -153,7 +153,7 @@ class MainController extends Controller
                     $model->date_added=date('Y-m-d H:i:s',time());
                     $model->save();
                 }
-                $message="您的家润验证码:".$model->code."，请勿将验证码泄露给其他人。";
+                $message="您的每日惠购验证码:".$model->code."，请勿将验证码泄露给其他人。";
                 \Yii::$app->mailer->compose()
                     ->setTo($username)
                     ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name])

@@ -180,9 +180,9 @@ class Store extends \yii\db\ActiveRecord
     }
     public function getShippingMethod(){
         if($this->is_delivery_station){
-            return ['any'=>'不限','delivery'=>'家润配送','self-delivery'=>'用户自提'];
+            return ['any'=>'不限','delivery'=>'每日惠购配送','self-delivery'=>'用户自提'];
         }else{
-            return ['any'=>'不限','delivery'=>'家润配送'];
+            return ['any'=>'不限','delivery'=>'每日惠购配送'];
         }
     }
     //自提点

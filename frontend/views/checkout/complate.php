@@ -13,7 +13,7 @@ $this->title ='支付完成';
         <p class="tc">
             <img src="/assets/images/wx.jpg" alt="二维码" width="200" height="200">
         </p>
-        <p class="gray9  tc">微信扫描二维码，关注家润公众号</p>
+        <p class="gray9  tc">微信扫描二维码，关注每日惠购公众号</p>
         <div class="p10 tc ">
             <a class="btn sbtn greenbtn " href="<?=\yii\helpers\Url::to(['/order/index'])?>">查看我的订单中心</a>
         </div>

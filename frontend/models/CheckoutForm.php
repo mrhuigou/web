@@ -207,7 +207,7 @@ class CheckoutForm extends Model {
 						if ($address = Address::findOne(['address_id' => $this->address_id, 'customer_id' => Yii::$app->user->getId()])) {
 							$address_formart=$address->address_1;
 							$shipping_address = [
-								'shipping_method' => '家润配送',
+								'shipping_method' => '每日惠购配送',
 								'shipping_code' => 'limit',
 								'delivery_code' =>  'limit',
 								'delivery_date' => $delivery['date'],

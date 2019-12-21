@@ -22,7 +22,7 @@ class InputController extends \yii\console\Controller {
 							$customer_coupon = new CustomerCoupon();
 							$customer_coupon->customer_id = $customer->customer_id;
 							$customer_coupon->coupon_id = $coupon->coupon_id;
-							$customer_coupon->description = "家润中秋福利";
+							$customer_coupon->description = "每日惠购中秋福利";
 							$customer_coupon->is_use = 0;
 							$customer_coupon->date_added = date('Y-m-d H:i:s', time());
 							$customer_coupon->save();
@@ -41,7 +41,7 @@ class InputController extends \yii\console\Controller {
 							$customer_coupon = new CustomerCoupon();
 							$customer_coupon->customer_id = $customer->customer_id;
 							$customer_coupon->coupon_id = $coupon->coupon_id;
-							$customer_coupon->description = "家润中秋福利";
+							$customer_coupon->description = "每日惠购中秋福利";
 							$customer_coupon->is_use = 0;
 							$customer_coupon->date_added = date('Y-m-d H:i:s', time());
 							$customer_coupon->save();

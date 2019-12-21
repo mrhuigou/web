@@ -16,14 +16,14 @@
         <div class="site-nav">
           <div class="site-nav-bd clearfix">
             <ul class="site-nav-bd-l clearfix">
-              <li><a href="#">家润首页</a></li>
+              <li><a href="#">每日惠购首页</a></li>
               <li><a href="#">请登录</a></li>
               <li><a href="#">免费注册</a></li>
             </ul>
 
             <ul class="site-nav-bd-r clearfix">
               <li class="sn-menu">
-                <a class="menu-hd" rel="nofollow">我的家润<b></b></a>
+                <a class="menu-hd" rel="nofollow">我的每日惠购<b></b></a>
                 <div class="menu-bd">
                     <a rel="nofollow">已买到的宝贝</a>
                     <a rel="nofollow">已卖出的宝贝</a>
@@ -95,7 +95,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td colspan="2"><label><input type="checkbox" class="vm_2"> 我已阅读并同意 <a href="#" class="green">家润网上商城用户协议</a></label></td>
+                            <td colspan="2"><label><input type="checkbox" class="vm_2"> 我已阅读并同意 <a href="#" class="green">每日惠购网上商城用户协议</a></label></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -117,7 +117,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td><label><input type="checkbox" class="vm_2"> 我已阅读并同意 <a href="#" class="green">家润网上商城用户协议</a></label></td>
+                            <td><label><input type="checkbox" class="vm_2"> 我已阅读并同意 <a href="#" class="green">每日惠购网上商城用户协议</a></label></td>
                         </tr>
                         <tr>
                             <td></td>

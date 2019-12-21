@@ -45,7 +45,7 @@ class SendCodeForm extends Model
                 $model->date_added=date('Y-m-d H:i:s',time());
                 $model->save();
             }
-           // $message="您的家润验证码:".$model->code."，请勿将验证码泄露给其他人。";
+           // $message="您的每日惠购验证码:".$model->code."，请勿将验证码泄露给其他人。";
             $voice=new VoiceVerify();
             if($voice->send($this->telephone,$model->code)){
                 return true;

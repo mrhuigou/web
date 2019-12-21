@@ -13,7 +13,7 @@
             <li>
                 <a href="/">
                     <i class="iconfont green">&#xe610;</i>
-                    家润首页
+                    每日惠购首页
                 </a>
             </li>
             <?php if(Yii::$app->user->isGuest){?>
@@ -33,7 +33,7 @@
                 </div>
             </li>
             <li class="sn-menu">
-                <a class="menu-hd" href="<?=\yii\helpers\Url::to('/account')?>" rel="nofollow">我的家润<b></b></a>
+                <a class="menu-hd" href="<?=\yii\helpers\Url::to('/account')?>" rel="nofollow">我的每日惠购<b></b></a>
                 <div class="menu-bd">
                     <a href="<?=\yii\helpers\Url::to('/order/index')?>" rel="nofollow">我的订单</a>
                     <a href="<?=\yii\helpers\Url::to('/collect/index')?>" rel="nofollow">我的收藏</a>

@@ -244,7 +244,7 @@
             </div>
             <div class="w175 fr">
                 <div class="note-list">
-                    <h2 class="p5 pl10 fb">家润新闻</h2>
+                    <h2 class="p5 pl10 fb">每日惠购新闻</h2>
                     <?php if(isset($data['public']) && !empty($data['public'])){?>
                         <ul>
                             <?php foreach($data['public'] as $v){ ?>

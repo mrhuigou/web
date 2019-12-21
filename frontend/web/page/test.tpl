@@ -95,7 +95,7 @@
 
                     <ul class="site-nav-bd-r clearfix">
                       <li class="sn-menu">
-                        <a class="menu-hd" rel="nofollow">我的家润<b></b></a>
+                        <a class="menu-hd" rel="nofollow">我的每日惠购<b></b></a>
                         <div class="menu-bd">
                             <a rel="nofollow">已买到的宝贝</a>
                             <a rel="nofollow">已卖出的宝贝</a>
@@ -260,7 +260,7 @@
                         <a href="#">联系客服</a>
                         <a href="#">开放平台</a>
                         <a href="#">诚征英才</a>
-                        <span class="grayc">家润电子科技有限公司版权所有</span>
+                        <span class="grayc">每日惠购电子科技有限公司版权所有</span>
                     </div>
                 </div>
 			</div>

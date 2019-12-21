@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }],
 					['attribute'=>'affiliate_id','label'=>'分销商','value'=>function($model){
 			            if($model->affiliate_id ==0){
-			                return '家润会员';
+			                return '每日惠购会员';
                         }else{
                             if($model->affiliate){
                                 return $model->affiliate->username;

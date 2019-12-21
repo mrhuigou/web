@@ -10,9 +10,10 @@ use common\component\Curl\Curl;
 class Sms{
 
     static public function send_system($send_tel,$send_str){
-        $UserName = "sdk2558";
+//        $UserName = "sdk2558";
+        $UserName = "NSZ00107";
         $PassWord  = "123456";
-        $Sign="家润同城";
+        $Sign="每日惠购同城";
         $Host="http://42.96.149.47:1086/sdk/batchsend.aspx";
         $send_str=trim($send_str);
         $send_str.="【".$Sign."】";
@@ -43,10 +44,12 @@ class Sms{
         }else{
             $telephone=$telephones;
         }
-        $Message="【家润同城】".$Message;
+        $Message="【每日惠购同城】".$Message;
         $data=[
-            'account'=>'SDK0172',
-            'pswd'=>'365@jiarun',
+//            'account'=>'SDK0172',
+//            'pswd'=>'365@jiarun',
+            'account'=>'NSZ00107',
+            'pswd'=>'123456',
             'mobile'=>urlencode($telephone),
             'msg'=>urlencode($Message),
             'needstatus'=>'true',
@@ -71,7 +74,7 @@ class Sms{
         $uid = '100017'; //用户账号
         $pwd = '258123';
         $http = 'http://115.29.37.184:8860/';//发送地址
-        $Message="【家润同城】".$Message;
+        $Message="【每日惠购同城】".$Message;
         $data = array
         (  'cust_code'=>$uid,
             'sp_code'=>'365',
@@ -88,9 +91,11 @@ class Sms{
         }
     }
     static public function send_notice($send_tel,$send_str){
-        $UserName = "NSZ2529";
+//        $UserName = "NSZ2529";
+//        $PassWord  = "123456";
+        $UserName = "NSZ00107";
         $PassWord  = "123456";
-        $Sign="家润同城";
+        $Sign="每日惠购同城";
         $Host="http://42.96.149.47:1086/sdk/batchsend.aspx";
         $send_str=trim($send_str);
         $send_str.="【".$Sign."】";

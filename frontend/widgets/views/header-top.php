@@ -9,7 +9,7 @@
 <div class="site-nav">
     <div class="site-nav-bd clearfix" style="width: 1100px">
         <ul class="site-nav-bd-l clearfix" >
-            <li><a href="/">家润首页</a></li>
+            <li><a href="/">每日惠购首页</a></li>
             <?php if(Yii::$app->user->isGuest){?>
                 <li><a href="<?=\yii\helpers\Url::to('/site/login')?>">请登录</a></li>
                 <li><a href="<?=\yii\helpers\Url::to('/site/signup')?>">免费注册</a></li>
@@ -27,7 +27,7 @@
                 </div>
             </li>
             <li class="sn-menu">
-                <a href="<?=\yii\helpers\Url::to('/account')?>" class="menu-hd" rel="nofollow">我的家润<b></b></a>
+                <a href="<?=\yii\helpers\Url::to('/account')?>" class="menu-hd" rel="nofollow">我的每日惠购<b></b></a>
                 <div class="menu-bd">
                     <a href="<?=\yii\helpers\Url::to('/order/index')?>" rel="nofollow">我的订单</a>
                     <a href="<?=\yii\helpers\Url::to('/collect/index')?>" rel="nofollow">我的收藏</a>

@@ -146,7 +146,7 @@ class ClubActivityForm extends Model{
             $Order_model->platform_name = "智慧生活";
             $Order_model->platform_url = Yii::$app->request->getHostInfo();
             $Order_model->store_id = 1;
-            $Order_model->store_name = '青岛家润';
+            $Order_model->store_name = '青岛每日惠购';
             $Order_model->store_url = '';
             $Order_model->customer_group_id = Yii::$app->user->identity['customer_group_id'];
             $Order_model->customer_id = Yii::$app->user->getId();

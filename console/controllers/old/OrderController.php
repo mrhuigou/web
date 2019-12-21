@@ -164,8 +164,8 @@ class OrderController extends \yii\console\Controller {
 										if ($order->orderShipping) {
 											if ($open_id = $order->customer->getWxOpenId()) {
 												$notice = new WxNotice();
-												$message = "亲:您的" . $order->order_no . "订单已发货，家润小哥正赶来，您的一缕微笑是我们更好服务的动力，您可在“账户中心”实时跟踪货物地图位置，祝您购物愉快";
-												$notice->order($open_id, "http://m.mrhuigou.com/order/shipping?order_no=" . $order->order_no, ['title' => '尊敬的家润会员', 'order_no' => $order->order_no, 'status' => '已发出', 'remark' => $message]);
+												$message = "亲:您的" . $order->order_no . "订单已发货，每日惠购小哥正赶来，您的一缕微笑是我们更好服务的动力，您可在“账户中心”实时跟踪货物地图位置，祝您购物愉快";
+												$notice->order($open_id, "http://m.mrhuigou.com/order/shipping?order_no=" . $order->order_no, ['title' => '尊敬的每日惠购会员', 'order_no' => $order->order_no, 'status' => '已发出', 'remark' => $message]);
 											}
 											if ($order->orderShipping->shipping_telephone !== $order->telephone) {
 												$msg = new Msg();
@@ -177,7 +177,7 @@ class OrderController extends \yii\console\Controller {
 //										if ($open_id = $order->customer->getWxOpenId()) {
 //											$message = "感谢您此次购物，您可点击详情对本次服务进行评价！您的评价对物流小哥，很重要哟！祝您购物愉快！";
 //											$notice = new WxNotice();
-//											$notice->shouhuo($open_id, "https://m.mrhuigou.com/order/delivery?order_no=" . $order->order_no, ['title' => '尊敬的家润会员,您的订单号' . $order->order_no . "已经收货！", 'address' => $order->orderShipping->shipping_address_1, 'date_time' => date('Y-m-d H:i:s', time()), 'remark' => $message]);
+//											$notice->shouhuo($open_id, "https://m.mrhuigou.com/order/delivery?order_no=" . $order->order_no, ['title' => '尊敬的每日惠购会员,您的订单号' . $order->order_no . "已经收货！", 'address' => $order->orderShipping->shipping_address_1, 'date_time' => date('Y-m-d H:i:s', time()), 'remark' => $message]);
 //										}
 //									}
 									if ($order->order_status_id == 11) {
@@ -855,7 +855,7 @@ class OrderController extends \yii\console\Controller {
 						if ($open_id = $model->customer->getWxOpenId()) {
 							$message = "";
 							$notice = new WxNotice();
-							$notice->order($open_id, "http://m.mrhuigou.com/order/index", ['title' => '尊敬的家润会员', 'order_no' => $model->order_no, 'status' => '订单超时，系统取消！', 'remark' => $message]);
+							$notice->order($open_id, "http://m.mrhuigou.com/order/index", ['title' => '尊敬的每日惠购会员', 'order_no' => $model->order_no, 'status' => '订单超时，系统取消！', 'remark' => $message]);
 						}
 //						if($model->use_points){
 //                            $point_customer_flows = PointCustomerFlow::find()->where(['type'=>'order','type_id'=>$model->order_id])->all();

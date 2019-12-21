@@ -51,7 +51,7 @@ class PointCustomer extends \yii\db\ActiveRecord
         return $this->hasMany(PointCustomerFlow::className(),['point_customer_id'=>'point_customer_id']);
     }
     public function getPoints(){
-        //积分记录在家润系统
+        //积分记录在每日惠购系统
         return $this->points;
     }
 }

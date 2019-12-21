@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>家润网祝万相年会圆满成功</title>
+    <title>每日惠购网祝万相年会圆满成功</title>
     <link href="/game/style.css" type="text/css" rel="stylesheet" media="screen, projection">
     <link href="/game/style1.css" type="text/css" rel="stylesheet" media="screen, projection">
     <link href="/game/ui-dialog.css" type="text/css" rel="stylesheet" media="screen, projection">
@@ -29,7 +29,7 @@
 <a href="/" style="display:inline-block;vertical-align: middle;position: absolute;top:7px;left:20px;">
     <img src="https://www.mrhuigou.com/assets/images/logo3.png" alt="logo" width="300">
 </a>
-<div class="top" style="color: white;font-weight: bold;">家润网祝万相年会圆满成功</div>
+<div class="top" style="color: white;font-weight: bold;">每日惠购网祝万相年会圆满成功</div>
 <img src="/game/choujiang.png" width="140" height="140" style="position: absolute;top: 10px; right: 17px; cursor: pointer;" class="wcode">
 <div class="wcode-pop" style="display: none;"><img src="choujiang.png"></div>
 <div class="tips">扫一扫，抽奖 <span style="font-size: 14px;">&gt;&gt;</span></div>

@@ -30,14 +30,14 @@ class Game{
                            $data['gift_id'] = $draw['info']['id'];
                            self::addGift($data); //
                            $return['status'] = 'success';
-                           $return['message'] = "恭喜您获得家润折扣券：".$draw['info']['name'];
+                           $return['message'] = "恭喜您获得每日惠购折扣券：".$draw['info']['name'];
                        }
                        if($draw['gift_from'] == 'product'){
                            $data['gift_from'] = 'product';
                            $data['gift_id'] = $draw['info']['id'];
                            self::addGift($data);
                            $return['status'] = 'success';
-                           $return['message'] = "恭喜您获得家润赠品：".$draw['info']['name'];
+                           $return['message'] = "恭喜您获得每日惠购赠品：".$draw['info']['name'];
                        }
                        if($draw['gift_from'] == 'none'){
                            $return['status'] = 'success';
@@ -106,7 +106,7 @@ class Game{
                 $customer_coupon = new CustomerCoupon();
                 $customer_coupon->customer_id = Yii::$app->user->getId();
                 $customer_coupon->coupon_id = $coupon->coupon_id;
-                $customer_coupon->description = '家润红包';
+                $customer_coupon->description = '每日惠购红包';
                 $customer_coupon->is_use = 0;
                 $customer_coupon->date_added = date('Y-m-d H:i:s');
                 $customer_coupon->save();

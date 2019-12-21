@@ -16,8 +16,8 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= Html::encode($this->title) ?></title>
-    <meta name="description" content="每日惠购（mrhuigou.com）- 青岛首选综合性同城网购-家润都市生活平台将城市生活分为吃、喝、穿、用、玩五大类，全面覆盖城市人生活的方方面面-家润生活圈开放30余个生活体验版块，发现达人体验、分享网购乐趣-每日惠购为您量身打造高品质、高性价比、24小时上门服务的同城网购体验" />
-    <meta name="keywords" content="家润网、同城网购、网上购物、网购、网上商城、生活圈、慧生活网、网购商城" />
+    <meta name="description" content="每日惠购（mrhuigou.com）- 青岛首选综合性同城网购-每日惠购都市生活平台将城市生活分为吃、喝、穿、用、玩五大类，全面覆盖城市人生活的方方面面-每日惠购生活圈开放30余个生活体验版块，发现达人体验、分享网购乐趣-每日惠购为您量身打造高品质、高性价比、24小时上门服务的同城网购体验" />
+    <meta name="keywords" content="每日惠购网、同城网购、网上购物、网购、网上商城、生活圈、慧生活网、网购商城" />
     <?= Html::csrfMetaTags() ?>
     <meta name="baidu-site-verification" content="QdIGxb2KIu" />
     <meta property="wb:webmaster" content="d1e6bf02c356ba52" />
@@ -47,7 +47,7 @@ AppAsset::register($this);
     <?=\frontend\widgets\HeaderTop::widget()?>
         <div id="login-header">
             <div class="w990 bc">
-                <a href="/" target="_self"><img src="/assets/images/logo1.png" width="200" alt="家润" class="db"></a>
+                <a href="/" target="_self"><img src="/assets/images/logo1.png" width="200" alt="每日惠购" class="db"></a>
             </div>
         </div>
     </div>

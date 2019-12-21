@@ -242,7 +242,7 @@ class Helper{
             'CORPID'=>$uid,                         //用户账号
             'CPPW'=>$pwd,                           //密码
             'PHONE'=>$mobile,                               //被叫号码
-            'CONTENT'=>$MessageContent."【家润同城】",                             //内容
+            'CONTENT'=>$MessageContent."【每日惠购同城】",                             //内容
         );
         $curl=new Curl();
         $curl->setHeader("Content-type","application/x-www-form-urlencoded");

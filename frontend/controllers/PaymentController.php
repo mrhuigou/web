@@ -258,11 +258,11 @@ class PaymentController extends \yii\web\Controller
             $orderDatetime=date('YmdHis');   //交易时间, YYYYmmhhddHHMMSS
             $orderCurrency='0';
             $orderExpireDatetime=60*24;
-            $productName='家润同城-交易编号：'.$order->merge_code;
+            $productName='每日惠购同城-交易编号：'.$order->merge_code;
             $productId='';
             $productPrice='';
             $productNum='';
-            $productDesc='家润同城-交易编号：'.$order->merge_code;
+            $productDesc='每日惠购同城-交易编号：'.$order->merge_code;
             $ext1='';
             $ext2='';
             $extTL='';
