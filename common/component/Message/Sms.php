@@ -112,6 +112,7 @@ class Sms{
         );
         $curl=new Curl();
         $str_rec=$curl->post($Host,$post_fields);
+        return $str_rec;
         if($str_rec<0){
             return false;
         }else{
