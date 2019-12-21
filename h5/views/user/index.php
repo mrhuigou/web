@@ -74,7 +74,7 @@ $this->title = '用户中心';
             <span class="fl"><em class="iconfont blue f18" style="line-height: 14px;">&#xe6af;</em>发票信息</span>
             <i class="iconfont fr green">发票管理</i>
         </a>
-        <?=\h5\widgets\Block\UserShareBlock::widget()?>
+<!--        --><?php //echo \h5\widgets\Block\UserShareBlock::widget()?>
 		<div class="mt5  whitebg p5 "><i class="aui-icon aui-icon-pay org f18"></i>我的钱包</div>
 		<div class="flex-col flex-center tc whitebg bdt bdb  p10 mb5">
             <?php if(Yii::$app->session->get('source_from_agent_wx_xcx')){?>
@@ -103,10 +103,10 @@ $this->title = '用户中心';
                     <i class="aui-icon aui-icon-redpacket red"></i>
                     红包
                 </a>
-                <a class="flex-item-3  flex-middle  p10  " href="<?php echo \yii\helpers\Url::to(['/site/go-to','code'=>'hssrwd']) ?>">
-                    <i class="iconfont vm green"> &#xe6b5;</i>
-                    <span class="vm">理财</span>
-                </a>
+<!--                <a class="flex-item-3  flex-middle  p10  " href="--><?php //echo \yii\helpers\Url::to(['/site/go-to','code'=>'hssrwd']) ?><!--">-->
+<!--                    <i class="iconfont vm green"> &#xe6b5;</i>-->
+<!--                    <span class="vm">理财</span>-->
+<!--                </a>-->
             <?php }?>
 
 

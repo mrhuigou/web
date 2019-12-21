@@ -126,28 +126,28 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         <div class="swiper-pagination swiper-pagination-ad" style="position: relative;"></div>
     </div>
     </script>
-    <div class="ts_1">
-        <div class="tit1 greentit1">
-            <h2>孕婴频道</h2>
-        </div>
-    </div>
+<!--    <div class="ts_1">-->
+<!--        <div class="tit1 greentit1">-->
+<!--            <h2>孕婴频道</h2>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <?php if ($ad_banner_1) { ?>
-        <ul class="pro-list23 pt10">
-            <?php foreach ($ad_banner_1 as $key => $value) { ?>
-                <?php if (in_array($value['advertise_media_type'],['PACK','IMAGE'])) { ?>
-                    <li class="clearfix mb5 pl5 pr5" style="overflow: hidden;">
-                        <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>">
-                            <img
-                                    data-original="<?= \common\component\image\Image::resize($value->source_url) ?>"
-                                    title="<?php echo $value->title; ?>" alt="<?= $value->title ?>"
-                                    class="db w lazy" >
-                        </a>
-                    </li>
-                <?php } ?>
-            <?php } ?>
-        </ul>
-    <?php } ?>
+<!--    --><?php //if ($ad_banner_1) { ?>
+<!--        <ul class="pro-list23 pt10">-->
+<!--            --><?php //foreach ($ad_banner_1 as $key => $value) { ?>
+<!--                --><?php //if (in_array($value['advertise_media_type'],['PACK','IMAGE'])) { ?>
+<!--                    <li class="clearfix mb5 pl5 pr5" style="overflow: hidden;">-->
+<!--                        <a href="--><?//= \yii\helpers\Url::to($value->link_url, true) ?><!--">-->
+<!--                            <img-->
+<!--                                    data-original="--><?//= \common\component\image\Image::resize($value->source_url) ?><!--"-->
+<!--                                    title="--><?php //echo $value->title; ?><!--" alt="--><?//= $value->title ?><!--"-->
+<!--                                    class="db w lazy" >-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                --><?php //} ?>
+<!--            --><?php //} ?>
+<!--        </ul>-->
+<!--    --><?php //} ?>
 
 <?=\h5\widgets\IndexHot::widget()?>
     <!--广告位-->
