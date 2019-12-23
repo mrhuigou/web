@@ -169,7 +169,7 @@ class OrderController extends \yii\console\Controller {
 											}
 											if ($order->orderShipping->shipping_telephone !== $order->telephone) {
 												$msg = new Msg();
-												$msg->sendTemplateSMS($order->orderShipping->shipping_telephone, [$order->order_no], 144101);
+												$msg->sendTemplateSMS($order->orderShipping->shipping_telephone, [$order->order_no], 492765);
 											}
 										}
 									}
