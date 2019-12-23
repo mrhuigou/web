@@ -6,6 +6,7 @@ return [
     'HTTP_IMAGE'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://img1.mrhuigou.com/" :  "http://img1.mrhuigou.com/",
 //    'ERP_SOAP_URL'  =>"http://wms.mrhuigou.com:7023/jiarunWebServer/services/web2sys?wsdl",//
     'ERP_SOAP_URL'=>'http://192.168.1.224:8080/mrhgWebServer/services/web2sys?wsdl',
+    'API_URL' => 'http://api.jiarun.com',
     'FDFS'=>[
         'tracker_addr'=>'119.167.153.84',
         'tracker_port'=>'22122',

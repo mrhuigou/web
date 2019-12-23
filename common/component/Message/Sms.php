@@ -10,8 +10,7 @@ use common\component\Curl\Curl;
 class Sms{
 
     static public function send_system($send_tel,$send_str){
-//        $UserName = "sdk2558";
-        $UserName = "NSZ00107";
+        $UserName = "sdk2558";
         $PassWord  = "123456";
         $Sign="每日惠购同城";
         $Host="http://42.96.149.47:1086/sdk/batchsend.aspx";
@@ -46,10 +45,8 @@ class Sms{
         }
         $Message="【每日惠购同城】".$Message;
         $data=[
-//            'account'=>'SDK0172',
-//            'pswd'=>'365@jiarun',
-            'account'=>'NSZ00107',
-            'pswd'=>'123456',
+            'account'=>'SDK0172',
+            'pswd'=>'365@jiarun',
             'mobile'=>urlencode($telephone),
             'msg'=>urlencode($Message),
             'needstatus'=>'true',
@@ -91,9 +88,7 @@ class Sms{
         }
     }
     static public function send_notice($send_tel,$send_str){
-//        $UserName = "NSZ2529";
-//        $PassWord  = "123456";
-        $UserName = "NSZ00107";
+        $UserName = "NSZ2529";
         $PassWord  = "123456";
         $Sign="每日惠购同城";
         $Host="http://42.96.149.47:1086/sdk/batchsend.aspx";
