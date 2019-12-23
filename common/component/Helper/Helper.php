@@ -23,6 +23,17 @@ use common\models\District;
 use yii\helpers\Json;
 
 class Helper{
+    static function  get_device_type(){
+         $agent = strtolower($_SERVER['HTTP_USER_AGENT']);
+         $type = 'other';
+         if(strpos($agent, 'iphone') || strpos($agent, 'ipad')){
+             $type = 'ios';
+         }
+        if(strpos($agent, 'android')){
+            $type = 'android';
+        }
+        return $type;
+    }
     static function genTree($items,$id='id',$pid='pid',$son = 'children'){
         $tree = array(); //格式化的树
         $tmpMap = array();  //临时扁平数据
