@@ -10,7 +10,7 @@ $this->title="幸运大抽奖";
 <style type="text/css">
 	* { margin: 0; padding: 0;}
 	body { font-family: "Microsoft Yahei"; background: #d30d42}
-	.rotary { position: relative;  width: 30rem; height: 30rem; margin: -45px 10px 10px 10px; background-image: url(/assets/images/choujiang/g_1.png) ;background-repeat:no-repeat;background-size:contain;}
+	.rotary { position: relative;  width: 30rem; height: 30rem; margin: -1px 10px 10px 10px; background-image: url(/assets/images/choujiang/g_1.png) ;background-repeat:no-repeat;background-size:contain;}
 	.hand { position: absolute; left: 11.49rem; top:  11.49rem; width: 7rem; height: 7rem; cursor: pointer;}
 </style>
 <header class="fx-top bs-bottom whitebg lh44">
@@ -54,55 +54,109 @@ $this->title="幸运大抽奖";
     <?php } ?>
 </div>
 <div class="m10 tc"><a class="btn lbtn greenbtn" href="/">点击立即使用</a></div>
-<div class="br5 opc-f p10 m10">
-	<div class="tit-- mt10 mb10">看看大家手气</div>
-    <div id="scrollDiv" style="height: 204px;min-height:68px;overflow: hidden;">
-	<ul id="user_list" >
-		<?php if($history){ ?>
-			<?php foreach ($history as $value){?>
-				<li class="flex-col activity-1-list">
-					<div class="flex-item-2 tc">
-						<img src="<?=\common\component\image\Image::resize($value->customer->photo,100,100)?>" alt="头像" width="47" height="47" class="img-circle">
-					</div>
-					<div class="flex-item-6 pl10">
-						<p class="pt5"><?=$value->customer->nickname?></p>
-						<p class="gray6 f12 pt2"><?=date('m/d',$value->creat_at)?></p>
-					</div>
-					<div class="flex-item-4 tr  org">
-						<?=$value->prize->title?>
-					</div>
-				</li>
-			<?php } ?>
-		<?php }else{ ?>
-			<p class="tc lh200" id="result_prize">暂时没有中奖信息</p>
-		<?php } ?>
-	</ul>
-    </div>
-	<!-- 活动规则 -->
-	<div class="tit-- mt15 mb10">活动规则</div>
-	<ul class="ul ul-decimal ml25 f14">
-		<li>活动时间：04-05 至 04-07</li>
-		<li>每个用户ID只能抽两次</li>
-		<li>购物无门槛使用，每次仅限一张</li>
-        <li>如有疑问请联系客服</li>
-	</ul>
-</div>
-<script id="tpl" type="text/html">
-    <div class="br5 opc-f p10 m10">
-	<div class="flex-col activity-1-list" id="my_self">
-		<div class="flex-item-2 tc">
-			<img src="<%:=list.photo%>" alt="头像" width="47" height="47" class="img-circle">
-		</div>
-		<div class="flex-item-6 pl10">
-			<p class="pt5"><%:=list.nickname%></p>
-			<p class="gray6 f12 pt2"><%:=list.datetime%></p>
-		</div>
-		<div class="flex-item-4 tr org">
-			<%:=list.des%>
-		</div>
-	</div>
+
+<div class="pt10 pb30 whitebg">
+<div class="ad-container Items" id="ad-container"></div>
+<script id="ad_content_tpl" type="text/html">
+    <div class="item-wrap item-3"  id="cate1">
+        <% for(var i=from; i<=to; i++) {%>
+        <div class="item">
+            <div class="item-padding">
+                <div class="item-inner">
+                    <div class="item-photo">
+                        <a href="<%:=list[i].url%>"> <img src="<%:=list[i].image%>" alt="" class="db w"> </a> <!--已售罄-->
+                    </div>
+                    <div class="item-detail">
+                        <a href="<%:=list[i].url%>" class="item-name"> <%:=list[i].name%> </a>
+                        <div class="item-des"> 					<%:=list[i].meta_description%>				</div>
+                        <div class="item-price">
+                            <div class="item-price-2">
+                                <span class="p-1">优惠价:</span><span class="p-2">￥</span><span class="p-3"><%:=list[i].cur_price%></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
     </div>
 </script>
+<!--爆款-->
+<div class="jb" style="padding-bottom: 0px;">
+    <a href="<?php echo \yii\helpers\Url::to(['/page/index','page_id'=>1654])?>" class="t"></a>
+    <div class="tit1  redtit1">
+        <h2>爆品专区</h2>
+    </div>
+    <div id="hot_content" style="max-width: 32rem;overflow: hidden;" class="pl5 pr5 bc"></div>
+</div>
+<script id="hot_content_tpl" type="text/html">
+    <div class="swiper-container" id="swiper-container_ad">
+        <div class="swiper-wrapper swiper-container-no-flexbox">
+            <div class="swiper-slide clearfix row">
+                <% for(var i=from; i<=to; i++) {%>
+                <a href="<%:=list[i].url%>" class="db col-3 " >
+                    <img src="<%:=list[i].image%>"  class="fl" style="height: 10.4rem;width: 10.4rem;border-left: 0.125rem solid #eee;border-bottom: 0.125rem solid #eee;">
+                </a>
+                <% if((i+1)%6==0 && (i+1)< to){ %>
+            </div> <div class="swiper-slide clearfix row">
+                <% } %>
+                <% } %>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-ad" style="position: relative;"></div>
+    </div>
+</script>
+</div>
+<!--<div class="br5 opc-f p10 m10">-->
+<!--	<div class="tit-- mt10 mb10">看看大家手气</div>-->
+<!--    <div id="scrollDiv" style="height: 204px;min-height:68px;overflow: hidden;">-->
+<!--	<ul id="user_list" >-->
+<!--		--><?php //if($history){ ?>
+<!--			--><?php //foreach ($history as $value){?>
+<!--				<li class="flex-col activity-1-list">-->
+<!--					<div class="flex-item-2 tc">-->
+<!--						<img src="<?php // echo\common\component\image\Image::resize($value->customer->photo,100,100)?>" alt="头像" width="47" height="47" class="img-circle">-->
+<!--					</div>-->
+<!--					<div class="flex-item-6 pl10">-->
+<!--						<p class="pt5"><?php // echo$value->customer->nickname?></p>-->
+<!--						<p class="gray6 f12 pt2"><?php//=date('m/d',$value->creat_at)?></p>-->
+<!--					</div>-->
+<!--					<div class="flex-item-4 tr  org">-->
+<!--					<?php//=$value->prize->title?>	-->
+<!--					</div>-->
+<!--				</li>-->
+<!--			--><?php //} ?>
+<!--		--><?php //}else{ ?>
+<!--			<p class="tc lh200" id="result_prize">暂时没有中奖信息</p>-->
+<!--		--><?php //} ?>
+<!--	</ul>-->
+<!--    </div>-->
+<!--	 活动规则 -->
+<!--	<div class="tit-- mt15 mb10">活动规则</div>-->
+<!--	<ul class="ul ul-decimal ml25 f14">-->
+<!--		<li>活动时间：2019-12-05 至 04-07</li>-->
+<!--		<li>每个用户ID只能抽一次</li>-->
+<!--		<li>购物无门槛使用，每次仅限一张</li>-->
+<!--        <li>如有疑问请联系客服</li>-->
+<!--	</ul>-->
+<!--</div>-->
+<!--<script id="tpl" type="text/html">-->
+<!--    <div class="br5 opc-f p10 m10">-->
+<!--	<div class="flex-col activity-1-list" id="my_self">-->
+<!--		<div class="flex-item-2 tc">-->
+<!--			<img src="<%:=list.photo%>" alt="头像" width="47" height="47" class="img-circle">-->
+<!--		</div>-->
+<!--		<div class="flex-item-6 pl10">-->
+<!--			<p class="pt5"><%:=list.nickname%></p>-->
+<!--			<p class="gray6 f12 pt2"><%:=list.datetime%></p>-->
+<!--		</div>-->
+<!--		<div class="flex-item-4 tr org">-->
+<!--			<%:=list.des%>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--    </div>-->
+<!--</script>-->
 <?php $this->beginBlock('J_Reviews') ?>
 var $hand = $('.hand');
 var time_count=0;
@@ -142,6 +196,29 @@ $("#my_result").html(html);
 }
 $("#scrollDiv").Scroll({line:3,speed:1500,timer:3000});
 
+wx_xcx = 0;
+var source = getSourceParms();
+var hot_content_tpl = $('#hot_content_tpl').html();
+$.getJSON('<?php echo Yii::$app->params["API_URL"]?>/mall/v1/ad/index?code=H5-0F-AD&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
+var html= template(hot_content_tpl, {list:result.data,from:0,to:(result.data.length-1)});
+$("#hot_content").html(html);
+$("img.lazy").scrollLoading({container:$(".content")});
+//爆款滑动
+var swiper_ad = new Swiper('#swiper-container_ad', {
+pagination: '.swiper-pagination-ad',
+paginationType: 'progress',
+paginationClickable: true,
+autoplay: 6000,
+loop:true,
+});
+});
+var ad_content_tpl = $('#ad_content_tpl').html();
+$.getJSON('<?php echo Yii::$app->params["API_URL"]?>/mall/v1/ad/product?code=H5-NEWS-DES1&'+wx_xcx+'&callback=?&'+source, function(result){
+var html= template(ad_content_tpl, {list:result.data,from:0,to:(result.data.length-1)});
+$("#ad-container").html(html);
+$("img.lazy").scrollLoading({container:$(".content")});
+
+});
 <?php $this->endBlock() ?>
 <?php
 \yii\web\YiiAsset::register($this);

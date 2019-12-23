@@ -94,11 +94,12 @@ class AdController extends Controller {
                 Yii::$app->session->remove('source_from_agent_wx_xcx');
             }
 			if($details){
+			    $count = 0;
 				foreach($details as $key=>$ad_detail){
 					if(!$ad_detail->product){
 						continue;
 					}
-					$data[$key] = [
+					$data[$count] = [
 						'item_id'=>$ad_detail->product->product_base_id,
 						'item_code'=>$ad_detail->product->product_base_code,
 						'name' => $ad_detail->product->description->name,
@@ -111,6 +112,7 @@ class AdController extends Controller {
 						'life'=>'',
 						'url'=>Url::to(['product/index','shop_code'=>$ad_detail->product->store_code,'product_code'=>$ad_detail->product->product_code]),//'/'.$ad_detail->product->store_code."-".$ad_detail->product->product_code.".html"
 					];
+                    $count ++ ;
 				}
 			}
 		} catch (\Exception $e) {
