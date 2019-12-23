@@ -22,8 +22,12 @@ use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
 class ChoujiangController extends \yii\web\Controller {
-	public function actionIndex($id = 7)
+	public function actionIndex($id = 41)
 	{
+        $lottery_id = \Yii::$app->request->get('id');
+        if($lottery_id){
+            $id = $lottery_id;
+        }
 		$this->layout = "main_other";
 		if (\Yii::$app->user->isGuest) {
 			return $this->redirect(['/site/login', 'redirect' => \Yii::$app->request->getAbsoluteUrl()]);
@@ -106,11 +110,11 @@ class ChoujiangController extends \yii\web\Controller {
             if($result_count >= $chances_per_customer){
                 throw  new ErrorException("您的抽奖机会已经用完！");
             }
-//			if ($lottery_count = LotteryResult::find()->where(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()])->count()) {
-//				if($lottery_count>=1){
-//					throw new ErrorException('您已经抽过了');
-//				}
-//			}
+			if ($lottery_count = LotteryResult::find()->where(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()])->count()) {
+				if($lottery_count>=1){
+					throw new ErrorException('您已经抽过了');
+				}
+			}
 			if (!$prize_box = LotteryPrize::find()->where(['lottery_id' => $lottery_id])->all()) {
 				throw new ErrorException('当前活动没有设置奖品');
 			}

@@ -20,18 +20,23 @@ class TopicController extends \yii\web\Controller
     }
     public function actionDetail()
     {
+
         if(($code=\Yii::$app->request->get('code')) && $model=Promotion::findOne(['code'=>$code]) ){
 
             if($status=\Yii::$app->request->get('status')){
+
                 if($model->subject){
                     $details=PromotionDetail::find()->joinWith([
                         'promotion'=>function($query){
                             $query ->andFilterWhere(['jr_promotion.status'=>1]);
                         }
-                    ])->where(['and',"jr_promotion_detail.begin_date>'".date('Y-m-d 00:00:00',strtotime("+1 day"))."'","jr_promotion_detail.begin_date<'".date('Y-m-d 23:59:59',strtotime("+1 day"))."'",'jr_promotion_detail.status=1',"jr_promotion.subject='".$model->subject."'"])->orderBy('jr_promotion_detail.priority desc,jr_promotion_detail.promotion_detail_id asc')->all();
+                    ])->where(['and',
+                        "jr_promotion_detail.begin_date<'".date('Y-m-d H:i:s')."'",
+                        "jr_promotion_detail.end_date>'".date('Y-m-d H:i:s')."'",'jr_promotion_detail.status=1',"jr_promotion.subject='".$model->subject."'"])->orderBy('jr_promotion_detail.priority desc,jr_promotion_detail.promotion_detail_id asc')->all();
                 }else{
                     $details=PromotionDetail::find()->where(['and','promotion_id='.$model->promotion_id,"begin_date>'".date('Y-m-d H:i:s',time())."'",'status=1'])->orderBy('priority desc,promotion_detail_id asc')->all();
                 }
+
             }else{
                 if($model->subject){
                     $details=PromotionDetail::find()->joinWith([
