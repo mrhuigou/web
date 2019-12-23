@@ -120,10 +120,10 @@ $this->title="幸运大抽奖";
 <!--					</div>-->
 <!--					<div class="flex-item-6 pl10">-->
 <!--						<p class="pt5"><?php // echo$value->customer->nickname?></p>-->
-<!--						<p class="gray6 f12 pt2"><?php//=date('m/d',$value->creat_at)?></p>-->
+<!--						<p class="gray6 f12 pt2"><?php //echo date('m/d',$value->creat_at)?></p>-->
 <!--					</div>-->
 <!--					<div class="flex-item-4 tr  org">-->
-<!--					<?php//=$value->prize->title?>	-->
+<!--					<?php // echo $value->prize->title?>	-->
 <!--					</div>-->
 <!--				</li>-->
 <!--			--><?php //} ?>
