@@ -47,8 +47,8 @@ if(strpos(strtolower(Yii::$app->request->getUserAgent()), 'jiaruncustomerapp')){
 	$this->registerJs($this->blocks['JS_START'],\yii\web\View::POS_END);
 	?>
 <?php }else{?>
-    <?php if(!Yii::$app->session->get('source_from_agent_wx_xcx')){?>
-        <a class="zhuan iconfont share-guide" href="javascript:void(0);" id="share_icon_btn">&#xe6a5;</a>
-        <?php }?>
+<!--    --><?php //if(!Yii::$app->session->get('source_from_agent_wx_xcx')){?>
+<!--        <a class="zhuan iconfont share-guide" href="javascript:void(0);" id="share_icon_btn">&#xe6a5;</a>-->
+<!--        --><?php //}?>
 <?php } ?>
 
