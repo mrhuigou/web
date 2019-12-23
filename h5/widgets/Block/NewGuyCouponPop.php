@@ -100,7 +100,7 @@ class NewGuyCouponPop extends Widget {
 //
 //        }
         if($customer_id == 17412){
-            return 1;
+            return 0;
         }
         if ($user_order = Order::find()->where(['and','customer_id='.$customer_id,'order_type_code <> "GroundPush"',['or',"order_status_id=2", "sent_to_erp='Y'"] ])->count("order_id")) {
             //有成功的订单 则不再发放新手券
