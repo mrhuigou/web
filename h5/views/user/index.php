@@ -91,15 +91,15 @@ $this->title = '用户中心';
                     红包
                 </a>
             <?php }else{?>
-                <a class="flex-item-3  flex-middle  p10 bdr " href="<?php echo \yii\helpers\Url::to(['/user/balance']) ?>">
+                <a class="flex-item-4  flex-middle  p10 bdr " href="<?php echo \yii\helpers\Url::to(['/user/balance']) ?>">
                     <i class="aui-icon aui-icon-recharge blue  "></i>
                     余额
                 </a>
-                <a class="flex-item-3  flex-middle bdr  p10" href="<?php echo \yii\helpers\Url::to(['/user-coupon/index']) ?>">
+                <a class="flex-item-4  flex-middle bdr  p10" href="<?php echo \yii\helpers\Url::to(['/user-coupon/index']) ?>">
                     <i class="aui-icon aui-icon-ticket org "></i>
                     优惠券
                 </a>
-                <a class="flex-item-3  flex-middle bdr p10" href="<?php echo \yii\helpers\Url::to(['/user-hongbao/index']) ?>">
+                <a class="flex-item-4  flex-middle bdr p10" href="<?php echo \yii\helpers\Url::to(['/user-hongbao/index']) ?>">
                     <i class="aui-icon aui-icon-redpacket red"></i>
                     红包
                 </a>

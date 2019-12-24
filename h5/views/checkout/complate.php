@@ -28,7 +28,7 @@ $this->title ='支付结果';
             <h2 class="f24 red">支付失败</h2>
             <p class="f18 gray9 mt10 mb10">付款金额：￥<?=floatval($model->total)?></p>
             <p class="gray9 mb10">支付遇到问题请联系客服 </p>
-            <a class="btn btn-m btn-bd-green btn-pill" href="tel:4008556977">联系客服</a>
+            <a class="btn btn-m btn-bd-green btn-pill" href="tel:053255729957">联系客服</a>
 	        <?php } ?>
         </div>
         <div class="tc pb5 " >

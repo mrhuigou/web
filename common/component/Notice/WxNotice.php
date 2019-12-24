@@ -9,7 +9,7 @@ class WxNotice {
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
 			'orderMoneySum' => ['value' => isset($message['total'])?$message['total']:'','color'=>'#173177'],
 			'orderProductName' => ['value' => isset($message['name'])?$message['name']:'','color'=>'#173177'],
-			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电400-855-6977或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
 		return $this->send($to,$template_id,$url,$data);
 	}
@@ -20,7 +20,7 @@ class WxNotice {
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
 			'ordeID' => ['value' => isset($message['order_no'])?$message['order_no']:'','color'=>'#173177'],
 			'ordertape' => ['value' => isset($message['order_date'])?$message['order_date']:'','color'=>'#173177'],
-			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电400-855-6977或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
 		return $this->send($to,$template_id,$url,$data);
 	}
@@ -31,7 +31,7 @@ class WxNotice {
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
 			'OrderSn' => ['value' => isset($message['order_no'])?$message['order_no']:'','color'=>'#173177'],
 			'OrderStatus' => ['value' => isset($message['status'])?$message['status']:'','color'=>'#173177'],
-			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电400-855-6977或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
 		return $this->send($to,$template_id,$url,$data);
 	}
@@ -41,7 +41,7 @@ class WxNotice {
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
 			'keynote1' => ['value' => isset($message['name'])?$message['name']:'','color'=>'#173177'],
 			'keynote2' => ['value' => isset($message['date_time'])?$message['date_time']:'','color'=>'#173177'],
-			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电400-855-6977或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
 		return $this->send($to,$template_id,$url,$data);
 	}
@@ -52,7 +52,7 @@ class WxNotice {
 			'keyword1' => ['value' => isset($message['name'])?$message['name']:'','color'=>'#173177'],
 			'keyword2' => ['value' => isset($message['date_time'])?$message['date_time']:'','color'=>'#173177'],
 			'keyword3' => ['value' => isset($message['special'])?$message['special']:'','color'=>'#173177'],
-			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电400-855-6977或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
 		return $this->send($to,$template_id,$url,$data);
 	}
@@ -62,7 +62,7 @@ class WxNotice {
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
 			'keyword1' => ['value' => isset($message['name'])?$message['name']:'','color'=>'#173177'],
 			'keyword2' => ['value' => isset($message['content'])?$message['content']:'','color'=>'#173177'],
-			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电400-855-6977或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
 		return $this->send($to,$template_id,$url,$data);
 	}
@@ -73,7 +73,7 @@ class WxNotice {
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#ff0000'],
 			'coupon' => ['value' => isset($message['total'])?$message['total']:'','color'=>'#ff0000'],
 			'expDate' => ['value' => isset($message['exp_date'])?$message['exp_date']:'','color'=>'#ff0000'],
-			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电400-855-6977或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
 		return $this->send($to,$template_id,$url,$data);
 	}
@@ -84,7 +84,7 @@ class WxNotice {
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
 			'name' => ['value' => isset($message['name'])?$message['name']:'','color'=>'#173177'],
 			'expDate' => ['value' => isset($message['exp_date'])?$message['exp_date']:'','color'=>'#173177'],
-			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电400-855-6977或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
 		return $this->send($to,$template_id,$url,$data);
 	}
@@ -94,7 +94,7 @@ class WxNotice {
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
 			'keyword1' => ['value' => isset($message['name'])?$message['name']:'','color'=>'#173177'],
 			'keyword2' => ['value' => isset($message['date_time'])?$message['date_time']:'','color'=>'#173177'],
-			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电400-855-6977或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
 		return $this->send($to,$template_id,$url,$data);
 	}
@@ -104,7 +104,7 @@ class WxNotice {
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
 			'keyword1' => ['value' => isset($message['address'])?$message['address']:'','color'=>'#173177'],
 			'keyword2' => ['value' => isset($message['date_time'])?$message['date_time']:'','color'=>'#173177'],
-			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电400-855-6977或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
 		return $this->send($to,$template_id,$url,$data);
 	}
@@ -115,7 +115,7 @@ class WxNotice {
 			'tradeDateTime' => ['value' => isset($message['date'])?$message['date']:'','color'=>'#173177'],
 			'tradeType' => ['value' => isset($message['type'])?$message['type']:'','color'=>'#173177'],
 			'curAmount' => ['value' => isset($message['amount'])?$message['amount']:'','color'=>'#173177'],
-			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电400-855-6977或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
 		return $this->send($to,$template_id,$url,$data);
 	}
@@ -125,7 +125,7 @@ class WxNotice {
             'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#ff0000'],
             'keyword1' => ['value' => isset($message['exp_date'])?$message['exp_date']:'','color'=>'#ff0000'],
             'keyword2' => ['value' => isset($message['nickname'])?$message['nickname']:'','color'=>'#ff0000'],
-            'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电400-855-6977或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+            'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
         ];
         return $this->send($to,$template_id,$url,$data);
     }

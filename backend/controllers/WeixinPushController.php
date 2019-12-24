@@ -224,7 +224,7 @@ class WeixinPushController extends \yii\web\Controller
                 'color' => '#173177'
             ],
             'remark' => [
-                'value' => $desc."\r\n专注同城，现在下单，今日送达！\r\n如有疑问请联系客服，客服热线4008556977。",
+                'value' => $desc."\r\n专注同城，现在下单，今日送达！\r\n如有疑问请联系客服，客服热线053255729957。",
                 'color' => '#173177'
             ]
         ];
