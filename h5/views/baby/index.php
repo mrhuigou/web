@@ -373,12 +373,12 @@ $this->title = "每日惠购";
 
             <?php if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){ ?>
                 <footer class="gray9 tc p10 f14">
-                    客服热线：4008-556-977
+                    客服热线：0532-55729957
                 </footer>
             <?php }else{ ?>
                 <footer class="gray9 tc p10 f14">
                     Copyright©2015每日惠购 版权所有<br>
-                    客服热线：4008-556-977
+                    客服热线：0532-55729957
                 </footer>
             <?php }?>
         </div>

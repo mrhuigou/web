@@ -139,7 +139,7 @@ $this->title = '分享有礼';
 </div>
 <?= h5\widgets\MainMenu::widget(); ?>
 	<div class="f0bg tc pt15 pb20">
-		<p class="gray6 mt5">客服电话：4008-556-977</p>
+		<p class="gray6 mt5">客服电话：0532-55729957</p>
 	</div>
 <?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     $share_image = Yii::$app->request->getHostInfo().'/assets/images/zhqd/logo_300x300.jpeg';
