@@ -519,11 +519,10 @@ class SiteController extends Controller {
 //            print_r($re);
 			$voice = new VoiceVerify();
             $re = $voice->send($telephone, $code);
-            print_r($re);
             Yii::$app->session->set('telephone_send_limit', time() + 58);
             $msg = '发送成功';
             $status = true;
-            $result['msg'] = $re;
+            $result['msg'] = $msg;
             $result['status'] = $status;
             return json_encode($result);
 		}
