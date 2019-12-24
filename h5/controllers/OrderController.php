@@ -165,8 +165,9 @@ class OrderController extends \yii\web\Controller
         $order_no = \Yii::$app->request->get("order_no");
         if($model = Order::findOne(['order_no'=>$order_no,'customer_id'=> \Yii::$app->user->getId()])){
             $curl=new Curl();
-            $pass_path=$curl->get(\Yii::$app->params['TMS_API'].'/jiarunTmsServer/getCoorByOrderCode.action',['orderCode'=>'O'.$model->order_id]);
-            $order_data=$curl->get(\Yii::$app->params['TMS_API'].'/jiarunTmsServer/getLocationsByOrderCode.action',['orderCode'=>'O'.$model->order_id]);
+            $pass_path=$curl->get(\Yii::$app->params['TMS_API'].'/mrhgTmsServer/getCoorByOrderCode.action',['orderCode'=>'O'.$model->order_id]);
+            $order_data=$curl->get(\Yii::$app->params['TMS_API'].'/mrhgTmsServer/getLocationsByOrderCode.action',['orderCode'=>'O'.$model->order_id]);
+
             if(($data=Json::decode($order_data)) && $data['success']==false){
                 $data=[];
             }
