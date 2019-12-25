@@ -95,7 +95,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 		    <?php }?>
 	    <?php }?>
     </div>
-<!--	--><?php //echo \h5\widgets\Block\News::widget()?>
+<?php // echo \h5\widgets\Block\News::widget()?>
     <!--爆款
     <a href="<?php //echo \yii\helpers\Url::to(['/page/index','page_id'=>'3340'])?>">
         <img class="w" src="../assets/images/skin/skin-0.jpg" />

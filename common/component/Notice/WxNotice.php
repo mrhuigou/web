@@ -4,6 +4,7 @@ namespace common\component\Notice;
 class WxNotice {
 	public function pay($to,$url,$message)
 	{
+	    //已申请模板2019-12-25
 		$template_id = "LoReehuDPcpcBT-ctBreshLyX0dz-dU1FrHA0LswWr8";
 		$data = [
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
@@ -14,7 +15,7 @@ class WxNotice {
 		return $this->send($to,$template_id,$url,$data);
 	}
 	public function no_pay($to,$url,$message)
-	{
+	{  //已申请模板2019-12-25
 		$template_id = "iDcSt2m4FdxMjHID8zRvImCmjckXwI_mqTEzHG3NNfg";
 		$data = [
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
@@ -25,7 +26,7 @@ class WxNotice {
 		return $this->send($to,$template_id,$url,$data);
 	}
 	 public function order($to,$url,$message)
-	{
+	{  //已申请模板2019-12-25
 		$template_id = "LoReehuDPcpcBT-ctBreshLyX0dz-dU1FrHA0LswWr8";
 		$data = [
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
@@ -57,6 +58,7 @@ class WxNotice {
 		return $this->send($to,$template_id,$url,$data);
 	}
 	public function zhongjiang($to,$url,$message){
+        //已申请模板2019-12-25
 		$template_id = "49-eY7aiNpqy2L01Atzx-REvjX1vHTjeA6Xo0ZzufqE";
 		$data = [
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
