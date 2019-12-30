@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel api\models\V1\CouponSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '折扣券';
+$this->title = '折扣券_new';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
