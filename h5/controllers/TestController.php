@@ -235,4 +235,15 @@ echo "<br>";
 //        }
 //    }
 
+
+        /**
+         * @测试下单后的抽奖
+         */
+        public function actionTestGame()
+        {
+            if(!$customer_id = \Yii::$app->request->get('customer_id')){
+                $customer_id = 23532;//默认
+            }
+            return $this->render('test-game',['customer_id' => $customer_id]);
+        }
 }
