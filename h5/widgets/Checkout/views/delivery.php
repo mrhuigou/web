@@ -25,14 +25,14 @@ use \common\component\Helper\Datetime;
             修改<i class="iconfont" style="color: #47b34f;"></i>
         </div>
     </div>
-    <div class="line-a flex-col w flex-middle red mb5" >
-        <div class="flex-item-12">
-            因系统改造升级，<span class="fb">暂停晚间配送！</span>
-            给您带来的不便，我们深感抱歉！
-            请确定合适的配送时间，感谢您的理解！
-        </div>
-
-    </div>
+<!--    <div class="line-a flex-col w flex-middle red mb5" >-->
+<!--        <div class="flex-item-12">-->
+<!--            因系统改造升级，<span class="fb">暂停晚间配送！</span>-->
+<!--            给您带来的不便，我们深感抱歉！-->
+<!--            请确定合适的配送时间，感谢您的理解！-->
+<!--        </div>-->
+<!---->
+<!--    </div>-->
 </a>
 <!--基础形式及全屏-->
 <div id="delivery_form_<?= $data['store_id'] ?>" data-source="<?= $data['store_id'] ?>" class="weui-popup-container">
