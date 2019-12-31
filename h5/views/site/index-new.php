@@ -447,22 +447,22 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                 <?php } ?>
 
                 <!--品牌3个广告-->
-                <div class="row">
-                    <?php if ($fourthF_BRAND_FOUR) { ?>
-                        <?php foreach ($fourthF_BRAND_FOUR as $key => $value) { ?>
-                            <?php if ($key < 3) { ?>
-                                <div class="col-3">
-                                    <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>" class="db p2">
-                                        <img
-                                              data-original="<?= \common\component\image\Image::resize($value->source_url, 200, 200) ?>"
-                                            title="<?php echo $value->title; ?>" alt="<?= $value->title ?>"
-                                            class="db  lazy" style="width: 10rem;height: 10rem;">
-                                    </a>
-                                </div>
-                            <?php } ?>
-                        <?php } ?>
-                    <?php } ?>
-                </div>
+<!--                <div class="row">-->
+<!--                    --><?php //if ($fourthF_BRAND_FOUR) { ?>
+<!--                        --><?php //foreach ($fourthF_BRAND_FOUR as $key => $value) { ?>
+<!--                            --><?php //if ($key < 3) { ?>
+<!--                                <div class="col-3">-->
+<!--                                    <a href="--><?//= \yii\helpers\Url::to($value->link_url, true) ?><!--" class="db p2">-->
+<!--                                        <img-->
+<!--                                              data-original="--><?//= \common\component\image\Image::resize($value->source_url, 200, 200) ?><!--"-->
+<!--                                            title="--><?php //echo $value->title; ?><!--" alt="--><?//= $value->title ?><!--"-->
+<!--                                            class="db  lazy" style="width: 10rem;height: 10rem;">-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                            --><?php //} ?>
+<!--                        --><?php //} ?>
+<!--                    --><?php //} ?>
+<!--                </div>-->
 
                 <!--品牌logo组-->
                 <?php if ($fourthF_PLOGO_FOUR) { ?>
@@ -503,42 +503,42 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                     </ul>
                 <?php } ?>
                 <!--品牌3个广告-->
-                <div class="row">
-
-                    <?php if ($fourthF_BRAND_FIVE) { ?>
-                        <?php foreach ($fourthF_BRAND_FIVE as $key => $value) { ?>
-                            <?php if ($key < 3) { ?>
-                                <div class="col-3">
-                                    <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>" class="db p2">
-                                        <img
-                                                data-original="<?= \common\component\image\Image::resize($value->source_url, 200, 200) ?>"
-                                                title="<?php echo $value->title; ?>" alt="<?= $value->title ?>"
-                                                class="db  lazy" style="width: 10rem;height: 10rem;">
-                                    </a>
-                                </div>
-                            <?php } ?>
-                        <?php } ?>
-                    <?php } ?>
-
-
-                </div>
+<!--                <div class="row">-->
+<!---->
+<!--                    --><?php //if ($fourthF_BRAND_FIVE) { ?>
+<!--                        --><?php //foreach ($fourthF_BRAND_FIVE as $key => $value) { ?>
+<!--                            --><?php //if ($key < 3) { ?>
+<!--                                <div class="col-3">-->
+<!--                                    <a href="--><?//= \yii\helpers\Url::to($value->link_url, true) ?><!--" class="db p2">-->
+<!--                                        <img-->
+<!--                                                data-original="--><?//= \common\component\image\Image::resize($value->source_url, 200, 200) ?><!--"-->
+<!--                                                title="--><?php //echo $value->title; ?><!--" alt="--><?//= $value->title ?><!--"-->
+<!--                                                class="db  lazy" style="width: 10rem;height: 10rem;">-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                            --><?php //} ?>
+<!--                        --><?php //} ?>
+<!--                    --><?php //} ?>
+<!---->
+<!---->
+<!--                </div>-->
 
                 <!--品牌logo组-->
-                <?php if ($fourthF_PLOGO_FIVE) { ?>
-                    <ul class="pro-list shadowbd-box bdradius-box five clearfix whitebg bdb pt10"
-                        style="margin-top:0.4rem;">
-                        <?php foreach ($fourthF_PLOGO_FIVE as $key => $value) { ?>
-                            <?php if ($key < 5) { ?>
-                                <li>
-                                    <a href="<?= \yii\helpers\Url::to(\yii\helpers\Url::to($value->link_url, true), true) ?>"><img
-                                                data-original="<?= \common\component\image\Image::resize($value->source_url, 200, 200) ?>"
-                                                title="<?php echo $value->title; ?>" alt="<?= $value->title ?>"
-                                                class="lazy" ></a>
-                                </li>
-                            <?php } ?>
-                        <?php } ?>
-                    </ul>
-                <?php } ?>
+<!--                --><?php //if ($fourthF_PLOGO_FIVE) { ?>
+<!--                    <ul class="pro-list shadowbd-box bdradius-box five clearfix whitebg bdb pt10"-->
+<!--                        style="margin-top:0.4rem;">-->
+<!--                        --><?php //foreach ($fourthF_PLOGO_FIVE as $key => $value) { ?>
+<!--                            --><?php //if ($key < 5) { ?>
+<!--                                <li>-->
+<!--                                    <a href="--><?//= \yii\helpers\Url::to(\yii\helpers\Url::to($value->link_url, true), true) ?><!--"><img-->
+<!--                                                data-original="--><?//= \common\component\image\Image::resize($value->source_url, 200, 200) ?><!--"-->
+<!--                                                title="--><?php //echo $value->title; ?><!--" alt="--><?//= $value->title ?><!--"-->
+<!--                                                class="lazy" ></a>-->
+<!--                                </li>-->
+<!--                            --><?php //} ?>
+<!--                        --><?php //} ?>
+<!--                    </ul>-->
+<!--                --><?php //} ?>
             </div>
 
         </div>
