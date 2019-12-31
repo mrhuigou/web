@@ -39,9 +39,29 @@ class ChoujiangController extends \yii\web\Controller {
 		$count = $model->count();
 		$history = $model->limit(100)->orderBy('id desc')->all();
 		$my_self = LotteryResult::find()->where(['lottery_id' => $id, 'customer_id' => \Yii::$app->user->getId()])->all();
-//		return $this->render('index', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
-		return $this->render('index-new', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
+		return $this->render('index', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
+//		return $this->render('index-new', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
 	}
+    public function actionIndexNew($id = 41)
+    {
+        $lottery_id = \Yii::$app->request->get('id');
+        if($lottery_id){
+            $id = $lottery_id;
+        }
+        $this->layout = "main_other";
+        if (\Yii::$app->user->isGuest) {
+            return $this->redirect(['/site/login', 'redirect' => \Yii::$app->request->getAbsoluteUrl()]);
+        }
+//		if(!\Yii::$app->user->identity->getSubcription()){
+//			return $this->redirect('/');
+//		}
+        $model = LotteryResult::find()->where(['lottery_id' => $id])->andWhere(['not in','customer_id',[\Yii::$app->user->getId()]]);
+        $count = $model->count();
+        $history = $model->limit(100)->orderBy('id desc')->all();
+        $my_self = LotteryResult::find()->where(['lottery_id' => $id, 'customer_id' => \Yii::$app->user->getId()])->all();
+//        return $this->render('index', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
+		return $this->render('index-new', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
+    }
     public function actionCommon($id=40)
     {
         $this->layout = "main_other";
