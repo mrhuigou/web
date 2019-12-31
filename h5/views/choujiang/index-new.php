@@ -22,6 +22,14 @@ $this->title="幸运大抽奖";
         /*margin-top: -1px;*/
         margin-top:2.9rem;
     }
+    .my_result1 {
+        background: url(/assets/images/choujiang/bg_new2.jpg);
+        /*background-size: 100%;padding-bottom: 10px;*/
+        /*background-repeat:no-repeat;*/
+        background-size:100%;
+        /*margin-top: -1px;*/
+        margin-top:2.9rem;
+    }
     .bg3 {
         background: url(/assets/images/choujiang/bg_new2.jpg);
         /*background-size: 100%;padding-bottom: 10px;*/
