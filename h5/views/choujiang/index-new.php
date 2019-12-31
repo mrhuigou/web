@@ -12,7 +12,7 @@ $this->title="幸运大抽奖";
 	/*body { font-family: "Microsoft Yahei"; background: #d30d42}*/
 	body { font-family: "Microsoft Yahei"; background: url(/assets/images/choujiang/bg3.jpg)
         background-size:100%;}
-	.rotary { overflow:hidden;position: relative;  width: 30rem; height: 30rem; margin: -33rem 10rem 0rem 10rem; background-image: url(/assets/images/choujiang/g_1.png) ;background-repeat:no-repeat;background-size:contain;}
+	.rotary { overflow:hidden;position: relative;  width: 30rem; height: 30rem; margin: -33rem 10rem 0rem 10rem; background-image: url(/assets/images/choujiang/zp_new.png) ;background-repeat:no-repeat;background-size:contain;}
 	.hand { position: absolute; left: 11.8rem; top:  11.8rem; width: 7rem; height: 7rem; cursor: pointer;}
     .bg3 {
         background: url(/assets/images/choujiang/bg_new2.jpg);
@@ -206,7 +206,7 @@ $(".click_coupon").on('click',function(){
 console.log($(this).data('content'));
 var obj=$(this);
 $.showLoading("正在加载");
-$.post('<?=\yii\helpers\Url::to('/coupon/ajax-apply',true)?>',{coupon_code:$(this).data('content')},function(data){
+$.post('<?=\yii\helpers\Url::to('/coupon/ajax-apply',true)?>',{coupon_id:$(this).data('content')},function(data){
 $.hideLoading();
 if(data.status){
 obj.hide();
