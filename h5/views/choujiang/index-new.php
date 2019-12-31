@@ -75,21 +75,23 @@ $this->title="幸运大抽奖";
 </div>
 <div class="pt10 pb30 whitebg bg3">
     <div class="ad-container Items" id="ad-container"></div>
-    <script id="ad_content_tpl" type="text/html">
+<!--    <script id="ad_content_tpl" type="text/html">-->
+    <?php if($coupon_info){?>
+    <?php foreach ($coupon_info as $value){?>
         <div class="item-wrap item-2"  id="cate1">
-            <% for(var i=from; i<=to; i++) {%>
             <div class="item">
                 <div class="item-padding">
                     <div class="item-inner">
                         <div class="item-photo">
-                            <img src="<%:=list[i].img%>" alt="" class="db w"> <!--已售罄-->
+<!--                           <a href="javascript:;" class="click_coupon"><img  src="--><?//= 'https://img1.mrhuigou.com/'.$value->coupon->image_url?><!--" data-content="--><?//=$value->coupon->coupon_id?><!--alt="" class="db w"></a>-->
+                           <a href="javascript:;" class="click_coupon" data-id="<?=$value->coupon_id?>" data-content="<?=$value->coupon->coupon_id?>"><img  src="<?= 'http://h5.mrhuiguserver.net'.'/assets/images/choujiang/coupon1.png'?>"  alt="" class="db w"></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <% } %>
-        </div>
-    </script>
+<!--    // </script>-->
+            <?php } ?>
+            <?php } ?>
 </div>
 
 <div class="bg_down">
@@ -199,15 +201,21 @@ autoplay: 6000,
 loop:true,
 });
 });
-var ad_content_tpl = $('#ad_content_tpl').html();
-$.getJSON('<?php echo Yii::$app->params["API_URL"]?>/mall/v1/coupon?'+wx_xcx+'&callback=?&'+source, function(result){
-var html= template(ad_content_tpl, {list:result.data,from:0,to:(result.data.length-1)});
-$("#ad-container").html(html);
-$("img.lazy").scrollLoading({container:$(".content")});
 
+$(".click_coupon").on('click',function(){
+console.log($(this).data('content'));
+var obj=$(this);
+$.showLoading("正在加载");
+$.post('<?=\yii\helpers\Url::to('/coupon/ajax-apply',true)?>',{coupon_code:$(this).data('content')},function(data){
+$.hideLoading();
+if(data.status){
+obj.hide();
+obj.siblings('.coupon-view-btn').show();
+}else{
+$.toast(data.message);
+}
+},'json');
 });
-
-
 
 <?php $this->endBlock() ?>
 <?php

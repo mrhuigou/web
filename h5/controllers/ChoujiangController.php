@@ -10,6 +10,8 @@ use api\models\V1\CustomerCoupon;
 use api\models\V1\Lottery;
 use api\models\V1\LotteryPrize;
 use api\models\V1\LotteryResult;
+use api\models\V1\CouponRules;
+use api\models\V1\CouponRulesDetail;
 use api\models\V1\Order;
 use api\models\V1\WeixinScans;
 use api\models\V1\WeixinScansNews;
@@ -60,7 +62,13 @@ class ChoujiangController extends \yii\web\Controller {
         $history = $model->limit(100)->orderBy('id desc')->all();
         $my_self = LotteryResult::find()->where(['lottery_id' => $id, 'customer_id' => \Yii::$app->user->getId()])->all();
 //        return $this->render('index', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
-		return $this->render('index-new', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
+
+        //查询所有的优惠券
+        $coupon_rules_id = 4;
+        $coupon_rules=CouponRules::findOne(['coupon_rules_id'=>$coupon_rules_id]);
+        $coupon_info=CouponRulesDetail::find()->where(['coupon_rules_id'=>$coupon_rules->coupon_rules_id])->all();
+
+		return $this->render('index-new', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self ,'coupon_info' => $coupon_info]);
     }
     public function actionCommon($id=40)
     {
