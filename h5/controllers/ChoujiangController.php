@@ -64,7 +64,7 @@ class ChoujiangController extends \yii\web\Controller {
 //        return $this->render('index', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
 
         //查询所有的优惠券
-        $coupon_rules_id = 4;
+        $coupon_rules_id = 5;
         $coupon_rules=CouponRules::findOne(['coupon_rules_id'=>$coupon_rules_id]);
         $coupon_info=CouponRulesDetail::find()->where(['coupon_rules_id'=>$coupon_rules->coupon_rules_id])->all();
 
