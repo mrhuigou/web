@@ -28,7 +28,7 @@ class CouponController extends Controller {
             $item_id=Yii::$app->request->get('item_id');
             $coupon_rules_id=Yii::$app->request->get('coupon_rules_id');
             if(!$coupon_rules_id){
-                $coupon_rules_id = 4;
+                $coupon_rules_id = 5;
             }
             if($coupon_rules=CouponRules::findOne(['coupon_rules_id'=>$coupon_rules_id])){
                 $coupon_info=CouponRulesDetail::find()->where(['coupon_rules_id'=>$coupon_rules->coupon_rules_id])->all();
@@ -42,10 +42,10 @@ class CouponController extends Controller {
                         if(!$ad_detail->img_url){
                             continue;
                         }
-                        $i++;
-                        if($i>=9){
-                            break;
-                        }
+//                        $i++;
+//                        if($i>=9){
+//                            break;
+//                        }
                         $data[] = [
                             'item_id'=>$ad_detail->coupon_rules_detail_id,
                             'img'=>$ad_detail->img_url,
