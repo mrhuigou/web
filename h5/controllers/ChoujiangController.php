@@ -44,7 +44,7 @@ class ChoujiangController extends \yii\web\Controller {
 		return $this->render('index', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
 //		return $this->render('index-new', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
 	}
-    public function actionIndexNew($id = 40)
+    public function actionIndexNew($id = 41)
     {
         $lottery_id = \Yii::$app->request->get('id');
         if($lottery_id){
