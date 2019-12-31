@@ -14,19 +14,21 @@ $this->title="幸运大抽奖";
         background-size:100%;}
 	.rotary { overflow:hidden;position: relative;  width: 30rem; height: 30rem; margin: -33rem 10rem 0rem 10rem; background-image: url(/assets/images/choujiang/zp_new.png) ;background-repeat:no-repeat;background-size:contain;}
 	.hand { position: absolute; left: 11.8rem; top:  11.8rem; width: 7rem; height: 7rem; cursor: pointer;}
+    .my_result1 {
+        background: url(/assets/images/choujiang/bg_new2.jpg);
+        /*background-size: 100%;padding-bottom: 10px;*/
+        /*background-repeat:no-repeat;*/
+        background-size:100%;
+        /*margin-top: -1px;*/
+        margin-top:2.9rem;
+    }
     .bg3 {
         background: url(/assets/images/choujiang/bg_new2.jpg);
         /*background-size: 100%;padding-bottom: 10px;*/
         /*background-repeat:no-repeat;*/
         background-size:100%;
         margin-top: -1px;
-    }
-    /*.item-wrap {*/
-        /*padding-left: 3.2rem;*/
-        /*padding-right: 3.4rem;*/
-    /*}*/
-    .bg_down{
-        margin-top: -20px;
+        /*margin-top:2.9rem;*/
     }
 </style>
 <!--<header class="fx-top bs-bottom whitebg lh44">-->
@@ -48,8 +50,8 @@ $this->title="幸运大抽奖";
 	<div class="rotary bc">
 		<img class="hand" src="/assets/images/choujiang/z_1.png" alt="">
 	</div>
-    <div class="bg3">
-    <div id="my_result" class="item-wrap">
+    <div class="my_result1">
+    <div id="my_result" class="item-wrap" >
         <?php if($my_self){?>
             <?php foreach ($my_self as $value){?>
                 <div class="br5 opc-f p10 m10" id="my_self">
