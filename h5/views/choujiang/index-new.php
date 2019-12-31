@@ -12,19 +12,19 @@ $this->title="幸运大抽奖";
 	/*body { font-family: "Microsoft Yahei"; background: #d30d42}*/
 	body { font-family: "Microsoft Yahei"; background: url(/assets/images/choujiang/bg3.jpg)
         background-size:100%;}
-	.rotary { overflow:hidden;position: relative;  width: 14rem; height: 14rem; margin: -16rem 10rem 0rem 10rem; background-image: url(/assets/images/choujiang/g_1.png) ;background-repeat:no-repeat;background-size:contain;}
-	.hand { position: absolute; left: 5.5rem; top:  5.5rem; width: 3rem; height: 3rem; cursor: pointer;}
+	.rotary { overflow:hidden;position: relative;  width: 30rem; height: 30rem; margin: -33rem 10rem 0rem 10rem; background-image: url(/assets/images/choujiang/g_1.png) ;background-repeat:no-repeat;background-size:contain;}
+	.hand { position: absolute; left: 11.8rem; top:  11.8rem; width: 7rem; height: 7rem; cursor: pointer;}
     .bg3 {
-        background: url(/assets/images/choujiang/bg3.jpg);
+        background: url(/assets/images/choujiang/bg_new2.jpg);
         /*background-size: 100%;padding-bottom: 10px;*/
         /*background-repeat:no-repeat;*/
         background-size:100%;
         margin-top: -1px;
     }
-    .item-wrap {
-        padding-left: 3.2rem;
-        padding-right: 3.4rem;
-    }
+    /*.item-wrap {*/
+        /*padding-left: 3.2rem;*/
+        /*padding-right: 3.4rem;*/
+    /*}*/
     .bg_down{
         margin-top: -20px;
     }
@@ -44,7 +44,7 @@ $this->title="幸运大抽奖";
 <!--</header>-->
 <!--<div class="pt50"></div>-->
 <div class="clearfix">
-	<img src="/assets/images/choujiang/bg_up.jpg" class="w">
+	<img src="/assets/images/choujiang/bg_new1.jpg" class="w">
 	<div class="rotary bc">
 		<img class="hand" src="/assets/images/choujiang/z_1.png" alt="">
 	</div>
@@ -53,7 +53,7 @@ $this->title="幸运大抽奖";
         <?php if($my_self){?>
             <?php foreach ($my_self as $value){?>
                 <div class="br5 opc-f p10 m10" id="my_self">
-                    <div class="flex-col activity-1-list">
+                    <div class="flex-col activity-1-list" style="margin-top: 28px">
                         <div class="flex-item-2 tc">
                             <img src="<?=\common\component\image\Image::resize($value->customer->photo,100,100)?>" alt="头像" width="47" height="47" class="img-circle">
                         </div>
@@ -81,7 +81,6 @@ $this->title="幸运大抽奖";
             <div class="item">
                 <div class="item-padding">
                     <div class="item-inner">
-
                         <div class="item-photo">
                             <img src="<%:=list[i].img%>" alt="" class="db w"> <!--已售罄-->
                         </div>
@@ -94,7 +93,7 @@ $this->title="幸运大抽奖";
 </div>
 
 <div class="bg_down">
-    <img src="/assets/images/choujiang/bg4.jpg" class="w">
+    <img src="/assets/images/choujiang/bg_new3.jpg" class="w">
 </div>
 <!--<div class="br5 opc-f p10 m10">-->
 <!--	<div class="tit-- mt10 mb10">看看大家手气</div>-->
@@ -207,6 +206,9 @@ $("#ad-container").html(html);
 $("img.lazy").scrollLoading({container:$(".content")});
 
 });
+
+
+
 <?php $this->endBlock() ?>
 <?php
 \yii\web\YiiAsset::register($this);
