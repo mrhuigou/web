@@ -151,7 +151,7 @@ var $hand = $('.hand');
 var time_count=0;
 $hand.click(function(){
 $.showLoading();
-$.post('/choujiang/apply',{v:new Date().getTime(),'id':'<?=$id?>'},function(res){
+$.post('/choujiang/apply-new',{v:new Date().getTime(),'id':'<?=$id?>'},function(res){
 $.hideLoading();
 if(res.status){
 time_count++;

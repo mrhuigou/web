@@ -222,6 +222,137 @@ class ChoujiangController extends \yii\web\Controller {
 		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 		return $data;
 	}
+
+    /**
+     * @desc申请抽奖新
+     */
+    public function actionApplyNew()
+    {
+
+        try {
+            if (\Yii::$app->user->isGuest) {
+                throw new ErrorException('您还没有登录');
+            }
+            if (!$lottery_id = \Yii::$app->request->post('id')) {
+                throw new ErrorException('参数错误');
+            }
+            if (!$lottery = Lottery::findOne($lottery_id)) {
+                throw new ErrorException('活动不存在');
+            }
+
+            if (strtotime($lottery->start_time) > time()) {
+                throw new ErrorException('抽奖活动暂未开始，稍后在试！');
+            }
+            if (strtotime($lottery->end_time) < time()) {
+                throw new ErrorException('抽奖活动已经结束！');
+            }
+            if(!$lottery->chances_per_customer ){
+                $chances_per_customer = 1;
+            }else{
+                $chances_per_customer = $lottery->chances_per_customer;
+            }
+
+            $result_count = LotteryResult::find()->where(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()])->count();
+
+            if($result_count >= $chances_per_customer){
+                throw  new ErrorException("您的抽奖机会已经用完！");
+            }
+            if ($lottery_count = LotteryResult::find()->where(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()])->count()) {
+//                if($lottery_count>=1){
+//                    throw new ErrorException('您已经抽过了');
+//                }
+            }
+            //判断今天是否已经抽奖
+            $day_result_count = LotteryResult::find()
+                ->where(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()])
+                ->andWhere(['>=','creat_at',strtotime(date("Y-m-d"),time())])
+                ->andWhere(['<=','creat_at',strtotime(date("Y-m-d"),time()) + 86399])
+                ->count();
+//
+            if($day_result_count >=1){
+                throw new ErrorException('今天已经参与抽奖活动');
+            }
+
+            if (!$prize_box = LotteryPrize::find()->where(['lottery_id' => $lottery_id])->all()) {
+                throw new ErrorException('当前活动没有设置奖品');
+            }
+            $prize_relust_count = LotteryResult::find()->where(['lottery_id' => $lottery_id])->count();
+            shuffle($prize_box); //打乱数组顺序
+            $arr = [];
+            foreach ($prize_box as $key => $val) {
+                if(!$val->quantity){
+                    $base_quantity = 0;
+                }else{
+                    $base_quantity = $val->quantity;
+                }
+                if($base_quantity <= $prize_relust_count){
+                    $arr[$val->id] = $val->probability;
+                }
+            }
+
+            $rid = $this->get_rand($arr); //根据概率获取奖项id
+//
+//			$order_count=Order::find()->where(['customer_id'=>\Yii::$app->user->getId(),'sent_to_erp'=>'Y'])->count();
+//			if(!$lottery_count){
+//				if($order_count==1){
+//					$rid=85;
+//				}elseif($order_count==2){
+//					$rid=82;
+//				}elseif ($order_count>=3 && $order_count<=5){
+//					$rid=79;
+//				}elseif ($order_count>=6 && $order_count<=9){
+//					$rid=76;
+//				}else{
+//					$rid=73;
+//				}
+//			}else{
+//				if($order_count<3){
+//					$rid=91;
+//				}else{
+//					$rid=88;
+//				}
+//			}
+            if ($result = LotteryPrize::findOne($rid)) {
+                $model = new LotteryResult();
+                $model->lottery_id = $lottery_id;
+                $model->customer_id = \Yii::$app->user->getId();
+                $model->lottery_prize_id = $rid;
+                $model->creat_at = time();
+                $model->save();
+                if ($result->coupon) {
+                    $customer_coupon = new CustomerCoupon();
+                    $customer_coupon->customer_id = \Yii::$app->user->getId();
+                    $customer_coupon->coupon_id = $result->coupon->coupon_id;
+                    $customer_coupon->description = "抽奖获得";
+                    $customer_coupon->is_use = 0;
+                    if ($result->coupon->date_type == 'DAYS') {
+                        $customer_coupon->start_time = date('Y-m-d H:i:s', time());
+                        $customer_coupon->end_time = date('Y-m-d 23:59:59', time() + $result->coupon->expire_seconds);
+                    } else {
+                        $customer_coupon->start_time = $result->coupon->date_start;
+                        $customer_coupon->end_time = $result->coupon->date_end;
+                    }
+                    $customer_coupon->date_added = date('Y-m-d H:i:s', time());
+                    $customer_coupon->save();
+                }
+//                $data = ['status' => 1, 'angle' => $result->angle,'title'=>$result->title,'description'=>$result->description, 'message' => '恭喜您获得' . $result->title."红包优惠券,".$result->description."！"];
+                $data = ['status' => 1, 'angle' => $result->angle,'title'=>$result->title,'description'=>$result->description, 'message' => '恭喜您获得' . $result->title."红包优惠券,请于1月6号开始使用！"];
+                $message[]=[
+                    'customer_id'=>\Yii::$app->user->getId(),
+                    'url'=>Url::to(['/user-coupon/index'],true),
+                    'content'=>['title'=>'亲，恭喜您获得'.$result->title."红包优惠券！请于1月6号开始使用",'name'=>'抽奖活动','content'=>'已经存入你的个人帐户。'],
+                ];
+                $this->sendMessage($message);
+            } else {
+                throw new ErrorException('网络超时,请重试！');
+            }
+        } catch (ErrorException $e) {
+            $data = ['status' => 0, 'message' => $e->getMessage()];
+        }
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $data;
+    }
+
     public function actionApplyBaby(){
         try {
             if (\Yii::$app->user->isGuest) {
