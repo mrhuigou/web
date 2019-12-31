@@ -10,7 +10,7 @@ $this->title="幸运大抽奖";
 <style type="text/css">
 	* { margin: 0; padding: 0;}
 	/*body { font-family: "Microsoft Yahei"; background: #d30d42}*/
-	body { font-family: "Microsoft Yahei"; background: url(/assets/images/choujiang/bg3.jpg)
+	body { font-family: "Microsoft Yahei"; background: url(/assets/images/choujiang/bg_new2.jpg)
         background-size:100%;}
 	.rotary { overflow:hidden;position: relative;  width: 30rem; height: 30rem; margin: -33rem 10rem 0rem 10rem; background-image: url(/assets/images/choujiang/zp_new.png) ;background-repeat:no-repeat;background-size:contain;}
 	.hand { position: absolute; left: 11.8rem; top:  11.8rem; width: 7rem; height: 7rem; cursor: pointer;}
@@ -44,7 +44,7 @@ $this->title="幸运大抽奖";
 <!--</header>-->
 <!--<div class="pt50"></div>-->
 <div class="clearfix">
-	<img src="/assets/images/choujiang/bg_new1.jpg" class="w">
+	<img src="/assets/images/choujiang/bg_new11.jpg" class="w">
 	<div class="rotary bc">
 		<img class="hand" src="/assets/images/choujiang/z_1.png" alt="">
 	</div>
@@ -70,9 +70,10 @@ $this->title="幸运大抽奖";
         <?php } ?>
     </div>
 <!--    <div class="tc" style="margin-top: 10px"><a class="btn lbtn greenbtn" href="/">请于1月6号开始使用</a></div>-->
-<!--    <div class="tc " style="text-align:center">请于1月6号开始使用</div>-->
     </div>
 </div>
+<!--<div class="tc" style="text-align:center; background-image: url(/assets/images/choujiang/bg_new2.jpg); margin-top: -1px;font-size: 17px; color="#FFFFFF""><font >手气一般没关系，还有优惠送给你！</font> </div>-->
+<div class="tc" style="text-align:center; background-image: url(/assets/images/choujiang/bg_new2.jpg);background-size:100%; margin-top: -1px;font-size: 17px; color:white">手气一般没关系，还有优惠送给你! </div>
 <div class="pt10 pb30 whitebg bg3">
     <div class="ad-container Items" id="ad-container"></div>
 <!--    <script id="ad_content_tpl" type="text/html">-->
@@ -93,10 +94,11 @@ $this->title="幸运大抽奖";
             <?php } ?>
             <?php } ?>
 </div>
-
-<div class="bg_down">
-    <img src="/assets/images/choujiang/bg_new3.jpg" class="w">
-</div>
+    <div style="text-align: center; font-size: 22px;font-weight:bold;color: white;">
+        每日<span style="color: #FFFF00">惠万家</span>  只需<span style="color: #FFFF00">新鲜达</span>
+    </div>
+    <div style="text-align:center; margin-top: -1px;font-size: 17px; color:white">市内四区配送入户，同城当日达</div>
+    <div style="text-align:center; margin-top: -1px;font-size: 17px; color:white">客服电话：0532-55729957</div>
 <!--<div class="br5 opc-f p10 m10">-->
 <!--	<div class="tit-- mt10 mb10">看看大家手气</div>-->
 <!--    <div id="scrollDiv" style="height: 204px;min-height:68px;overflow: hidden;">-->
