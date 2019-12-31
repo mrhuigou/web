@@ -83,7 +83,7 @@ $this->title="幸运大抽奖";
                 <div class="item-padding">
                     <div class="item-inner">
                         <div class="item-photo">
-                           <a href="javascript:;" class="click_coupon" data-id="<?=$value->coupon->coupon_id?>" data-content="<?=$value->coupon->coupon_id?>"><img  src="<?= 'https://img1.mrhuigou.com/'.$value->coupon->image_url?>"  alt="" class="db w"></a>
+                           <a href="javascript:;" class="click_coupon" data-id="<?=$value->coupon->coupon_id?>" data-content="<?=$value->coupon->coupon_id?>"><img  src="<?= 'https://img1.mrhuigou.com/'.$value->image_url?>"  alt="" class="db w"></a>
                         </div>
                     </div>
                 </div>
