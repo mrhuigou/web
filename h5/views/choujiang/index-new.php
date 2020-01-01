@@ -54,7 +54,7 @@ $this->title="幸运大抽奖";
 <!--</header>-->
 <!--<div class="pt50"></div>-->
 <div class="clearfix">
-	<img src="/assets/images/choujiang/bg_new111.jpg" class="w" style="height: 46rem">
+	<img src="/assets/images/choujiang/bg_new1111.jpg" class="w" style="height: 46rem">
 	<div class="rotary bc">
 		<img class="hand" src="/assets/images/choujiang/z_1.png" alt="">
 	</div>
