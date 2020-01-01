@@ -110,7 +110,7 @@ class CheckoutController extends \yii\web\Controller {
 				} else {
 					$customer_coupon_id = [];
 				}
-                $this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id);
+
 				//计算全局优惠券金额
 				$this->getGlobalCouponTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $comfirm_orders[$key]['coupon_gift'],$comfirm_orders[$key]['rate']);
 				//计算优惠金额
@@ -120,6 +120,7 @@ class CheckoutController extends \yii\web\Controller {
 				if($key ==1){
 //                    $this->getPointsTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data);
                 }
+                $this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id);
 				//应付订单金额
 				$this->getTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total']);
 
