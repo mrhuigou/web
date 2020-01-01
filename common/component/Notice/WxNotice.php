@@ -117,13 +117,13 @@ class WxNotice {
 		return $this->send($to,$template_id,$url,$data);
 	}
 	public function shouhuo($to,$url,$message){
-		$template_id = "o2o1MbrHI_3ja70i_be7W4oXf3XOpiYl8J-aYdeWcjQ";
-		$data = [
-			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
-			'keyword1' => ['value' => isset($message['address'])?$message['address']:'','color'=>'#173177'],
-			'keyword2' => ['value' => isset($message['date_time'])?$message['date_time']:'','color'=>'#173177'],
-			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
-		];
+//		$template_id = "o2o1MbrHI_3ja70i_be7W4oXf3XOpiYl8J-aYdeWcjQ";
+//		$data = [
+//			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
+//			'keyword1' => ['value' => isset($message['address'])?$message['address']:'','color'=>'#173177'],
+//			'keyword2' => ['value' => isset($message['date_time'])?$message['date_time']:'','color'=>'#173177'],
+//			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+//		];
 		$template_id = "Mf08ErsIHX4XewY86A7w_uX3WxYIxsiUdPXKmK2yOb4";
         $data = [
             'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],

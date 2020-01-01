@@ -174,7 +174,8 @@ class HongbaoController extends \yii\web\Controller {
 							$message[]=[
 								'customer_id'=>$banlance->customer_id,
 								'url'=>Url::to(['/hongbao/result','id'=>$model->id],true),
-								'content'=>['title'=>'亲，您的好友为你助力，恭喜您获得了'.$banlance->amount."元现金红包",'name'=>"好友帮我拆红包",'content'=>$banlance->amount."元现金，已经存入你的账户余额中。"]
+//								'content'=>['title'=>'亲，您的好友为你助力，恭喜您获得了'.$banlance->amount."元现金红包",'name'=>"好友帮我拆红包",'content'=>$banlance->amount."元现金，已经存入你的账户余额中。"]
+                                'content'=>['title'=>'亲，您的好友为你助力，恭喜您获得了'.$banlance->amount."元现金红包",'name'=>$banlance->amount."元现金红包",'content'=>$banlance->amount."元现金，已经存入你的账户余额中。"]
 							];
 						}
 						$this->sendMessage($message);

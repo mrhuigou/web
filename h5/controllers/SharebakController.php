@@ -240,7 +240,8 @@ class ShareBakController extends \yii\web\Controller {
                         $message[] = [
                             'customer_id' => $banlance->customer_id,
                             'url' => Url::to(['/hongbao/result', 'id' => $hongbao->id], true),
-                            'content' => ['title' => '亲，恭喜您获得了' . $banlance->amount . "元现金红包", 'name' => "拆红包通知", 'content' => "相应红包金额，已经存入你的账户余额中。"]
+//                            'content' => ['title' => '亲，恭喜您获得了' . $banlance->amount . "元现金红包", 'name' => "拆红包通知", 'content' => "相应红包金额，已经存入你的账户余额中。"]
+                            'content' => ['title' => '亲，恭喜您获得了' . $banlance->amount . "元现金红包", 'name' => $banlance->amount . "元现金红包", 'content' => "相应红包金额，已经存入你的账户余额中。"]
                         ];
                     }
                 }

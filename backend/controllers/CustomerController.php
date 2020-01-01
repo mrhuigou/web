@@ -121,7 +121,7 @@ class CustomerController extends Controller
 				    $message[]=[
 					    'customer_id'=>$customer_id,
 					    'url'=>'http://m.mrhuigou.com/user-coupon/index',
-					    'content'=>['title'=>'亲，恭喜您获得了'.$coupon->name,'name'=>$description,'content'=>$coupon->name."，已经存入你的账户。"]
+					    'content'=>['title'=>'亲，恭喜您获得了'.$coupon->name,'name'=>$coupon->name,'content'=>$coupon->name."，已经存入你的账户。"]
 				    ];
 			    }
 		    }else{
