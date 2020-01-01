@@ -28,7 +28,7 @@ class CouponRulesDetail extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [[ 'coupon_rules_id', 'coupon_id'], 'integer'],
+            [[ 'coupon_rules_id', 'coupon_id','sort'], 'integer'],
             [['name','img_url'], 'string'],
 
         ];
@@ -44,7 +44,8 @@ class CouponRulesDetail extends \yii\db\ActiveRecord
             'coupon_rules_id' => 'Coupon Rules ID',
             'coupon_id' => 'Coupon ID',
             'img_url' =>'展示图片',
-            'name' =>'展示名称'
+            'name' =>'展示名称',
+            'sort' =>'排序(数字越大越靠前)'
         ];
     }
     public function getCoupon(){
