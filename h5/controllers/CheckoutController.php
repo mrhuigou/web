@@ -103,7 +103,7 @@ class CheckoutController extends \yii\web\Controller {
 //                $shipping_cost = $stores_shipping[$key]['shipping_cost'];
 //                $comfirm_orders[$key]['totals'][] = $this->setTotalsData("固定运费",'shipping',$shipping_cost,2);
 //                $comfirm_orders[$key]['total'] = bcadd($comfirm_orders[$key]['total'],$shipping_cost,2);
-				$this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id);
+//				$this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id);
 
 				if ($coupons = Yii::$app->request->post('CheckoutForm')) {
 					$customer_coupon_id = isset($coupons['coupon'][$key]) ? $coupons['coupon'][$key] : [];
@@ -121,6 +121,7 @@ class CheckoutController extends \yii\web\Controller {
                 }
 				//应付订单金额
 				$this->getTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total']);
+                $this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id);
 			}
 		}
 		Yii::$app->session->set('comfirm_orders', $comfirm_orders);
