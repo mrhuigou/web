@@ -96,7 +96,10 @@ class ChoujiangController extends \yii\web\Controller {
 
         //查询所有的优惠券
         $coupon_rules=CouponRules::findOne(['coupon_rules_id'=>$coupon_rules_id]);
-        $coupon_info=CouponRulesDetail::find()->where(['coupon_rules_id'=>$coupon_rules->coupon_rules_id])->all();
+        $coupon_info=CouponRulesDetail::find()->where(['coupon_rules_id'=>$coupon_rules->coupon_rules_id])
+            ->orderBy('coupon_rules_detail_id desc')
+            ->orderBy('sort desc')
+            ->all();
 
         //对优惠券进行时间过滤处理
         foreach ($coupon_info as $key => &$value){
