@@ -63,7 +63,7 @@ $this->title="幸运大抽奖";
         <?php if($my_self){?>
             <?php foreach ($my_self as $value){?>
                 <div class="br5 opc-f p10 m10" id="my_self">
-                    <div class="flex-col activity-1-list" style="margin-top: 28px">
+                    <div class="flex-col activity-1-list">
                         <div class="flex-item-2 tc">
                             <img src="<?=\common\component\image\Image::resize($value->customer->photo,100,100)?>" alt="头像" width="47" height="47" class="img-circle">
                         </div>
@@ -91,14 +91,14 @@ $this->title="幸运大抽奖";
     <?php foreach ($coupon_info as $value){?>
 
             <div class="item">
-<!--                <div class="item-padding" >-->
+                <div class="item-padding" >
 <!--                    <div class="item-inner">-->
                         <div class="item-photo">
                            <a href="javascript:;" class="click_coupon" data-id="<?=$value->coupon->coupon_id?>" data-content="<?=$value->coupon->coupon_id?>"><img style="width: 13rem" src="<?= 'https://img1.mrhuigou.com/'.$value->img_url?>"  alt="" class="db w"></a>
 <!--                           <a href="javascript:;" class="click_coupon" data-id="--><?//=$value->coupon->coupon_id?><!--" data-content="--><?//=$value->coupon->coupon_id?><!--"><img  style="width: 13rem" src="--><?//= 'https://img1.mrhuigou.com/group1/M00/06/A5/wKgB7l4LCEKAOT-PAAAdltzVv8M507.png'?><!--"  alt="" class="db w"></a>-->
                         </div>
 <!--                    </div>-->
-<!--                </div>-->
+                </div>
             </div>
 
             <?php } ?>
