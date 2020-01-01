@@ -89,7 +89,7 @@ $this->title="璀璨上线红包大派送";
 <!--    <div class="tc" style="margin-top: 10px"><a class="btn lbtn greenbtn" href="/">请于1月6号开始使用</a></div>-->
     </div>
     <div class="bg_goods">
-        <img style="width: 100%; margin-bottom: -2.8rem" src="/assets/images/choujiang/zjpt2.jpg" alt="">
+        <img style="width: 100%; margin-bottom: -2.8rem" src="/assets/images/choujiang/zipt_new1.jpg" alt="">
     </div>
 </div>
 
@@ -226,6 +226,11 @@ paginationClickable: true,
 autoplay: 6000,
 loop:true,
 });
+});
+
+
+$(".bg_goods").on('click',function(){
+$.alert('1月6日9点18分盛大开启，请继续领取开业优惠券');
 });
 
 $(".click_coupon").on('click',function(){
