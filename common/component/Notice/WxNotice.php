@@ -34,13 +34,21 @@ class WxNotice {
 	}
 	 public function order($to,$url,$message)
 	{  //已申请模板2019-12-25
-		$template_id = "LoReehuDPcpcBT-ctBreshLyX0dz-dU1FrHA0LswWr8";
-		$data = [
-			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
-			'OrderSn' => ['value' => isset($message['order_no'])?$message['order_no']:'','color'=>'#173177'],
-			'OrderStatus' => ['value' => isset($message['status'])?$message['status']:'','color'=>'#173177'],
-			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
-		];
+//		$template_id = "LoReehuDPcpcBT-ctBreshLyX0dz-dU1FrHA0LswWr8";
+//		$data = [
+//			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
+//			'OrderSn' => ['value' => isset($message['order_no'])?$message['order_no']:'','color'=>'#173177'],
+//			'OrderStatus' => ['value' => isset($message['status'])?$message['status']:'','color'=>'#173177'],
+//			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+//		];
+        $template_id = "ZU1CfmLOIKx8lny9N4xV12ztvZuMHMBk9aObLxU16CE";
+        $data = [
+            'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
+            'keyword1' => ['value' => '订单编号 '.isset($message['order_no'])?$message['order_no']:'','color'=>'#173177'],
+            'keyword2' => ['value' => isset($message['total'])?$message['total']:'','color'=>'#173177'],
+            'keyword3' => ['value' => isset($message['status'])?$message['status']:'','color'=>'#173177'],
+            'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+        ];
 		return $this->send($to,$template_id,$url,$data);
 	}
 	public function party($to,$url,$message){
