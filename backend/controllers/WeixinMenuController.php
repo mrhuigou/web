@@ -108,12 +108,17 @@ class WeixinMenuController extends Controller
     public function actionPublish(){
         $model=WeixinMenu::find()->where(['status'=>1])->orderBy('sort asc')->asArray()->all();
         if($model) {
+
             foreach($model as $key=>$value){
                 if($value['url']){
                     $model[$key]['url']=$value['url'];
                 }
             }
-            $button = \common\component\Helper\Helper::genTree($model, 'id', 'pid', 'sub_button');
+            if(count($model) ==1){
+                $button = $model[0];
+            }else{
+                $button = \common\component\Helper\Helper::genTree($model, 'id', 'pid', 'sub_button');
+            }
             $result = Yii::$app->wechat->createMenu($button);
 	        if(isset($result['errmsg']) && $result['errmsg'] == 'ok'){
                 Yii::$app->getSession()->setFlash('success',"<b>发布成功:</b> 您可以取消关注查看效果！");
