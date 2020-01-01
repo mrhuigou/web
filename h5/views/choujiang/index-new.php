@@ -12,7 +12,7 @@ $this->title="幸运大抽奖";
 	/*body { font-family: "Microsoft Yahei"; background: #d30d42}*/
 	body { font-family: "Microsoft Yahei"; background: url(/assets/images/choujiang/bg_new2.jpg)
         background-size:100%;}
-	.rotary { overflow:hidden;position: relative;  width: 30rem; height: 30rem; margin: -33rem 10rem 0rem 10rem; background-image: url(/assets/images/choujiang/zp_new.png) ;background-repeat:no-repeat;background-size:contain;}
+	.rotary { overflow:hidden;position: relative;  width: 30rem; height: 30rem; margin: -31rem 10rem 0rem 10rem; background-image: url(/assets/images/choujiang/zp_new.png) ;background-repeat:no-repeat;background-size:contain;}
 	.hand { position: absolute; left: 11.8rem; top:  11.8rem; width: 7rem; height: 7rem; cursor: pointer;}
     .my_result1 {
         background: url(/assets/images/choujiang/bg_new2.jpg);
@@ -54,15 +54,15 @@ $this->title="幸运大抽奖";
 <!--</header>-->
 <!--<div class="pt50"></div>-->
 <div class="clearfix">
-	<img src="/assets/images/choujiang/bg_new11.jpg" class="w">
+	<img src="/assets/images/choujiang/bg_new111.jpg" class="w" style="height: 46rem">
 	<div class="rotary bc">
 		<img class="hand" src="/assets/images/choujiang/z_1.png" alt="">
 	</div>
     <div class="my_result1">
-    <div id="my_result" class="item-wrap" >
+    <div id="my_result" class="item-wrap" style="margin-top: -2rem">
         <?php if($my_self){?>
             <?php foreach ($my_self as $value){?>
-                <div class="br5 opc-f p10 m10" id="my_self">
+                <div class="br5 opc-f p8 m10" id="my_self">
                     <div class="flex-col activity-1-list">
                         <div class="flex-item-2 tc">
                             <img src="<?=\common\component\image\Image::resize($value->customer->photo,100,100)?>" alt="头像" width="47" height="47" class="img-circle">
