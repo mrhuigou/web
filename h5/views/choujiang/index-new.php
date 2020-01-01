@@ -12,8 +12,8 @@ $this->title="璀璨上线红包大派送";
 	/*body { font-family: "Microsoft Yahei"; background: #d30d42}*/
 	body { font-family: "Microsoft Yahei"; background: url(/assets/images/choujiang/bg_new2.jpg)
         background-size:100%;}
-	.rotary { overflow:hidden;position: relative;  width: 25rem; height: 25rem; margin: -26rem 10rem 0rem 10rem; background-image: url(/assets/images/choujiang/zp_new.png) ;background-repeat:no-repeat;background-size:contain;}
-	.hand { position: absolute; left: 9.5rem; top:  9.5rem; width: 6rem; height: 6rem; cursor: pointer;}
+	.rotary { overflow:hidden;position: relative;  width: 22rem; height: 22rem; margin: -23rem 10rem 0rem 10rem; background-image: url(/assets/images/choujiang/zp_new.png) ;background-repeat:no-repeat;background-size:contain;}
+	.hand { position: absolute; left: 8.5rem; top:  8.5rem; width: 5rem; height: 5rem; cursor: pointer;}
     .my_result1 {
         background: url(/assets/images/choujiang/bg_new2.jpg);
         /*background-size: 100%;padding-bottom: 10px;*/
@@ -54,7 +54,10 @@ $this->title="璀璨上线红包大派送";
 <!--</header>-->
 <!--<div class="pt50"></div>-->
 <div class="clearfix">
-	<img src="/assets/images/choujiang/bg_new1111.jpg" class="w" style="height: 37rem">
+    <div style="max-height: 42rem; overflow: hidden;">
+        <img src="/assets/images/choujiang/bg_new1111.jpg" class="w">
+    </div>
+<!--	<img src="/assets/images/choujiang/bg_new1111.jpg" class="w" style="height: 37rem">-->
 	<div class="rotary bc">
 		<img class="hand" src="/assets/images/choujiang/z_1.png" alt="">
 	</div>

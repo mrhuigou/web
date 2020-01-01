@@ -44,11 +44,42 @@ class ChoujiangController extends \yii\web\Controller {
 		return $this->render('index', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
 //		return $this->render('index-new', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
 	}
-    public function actionIndexNew($id = 41)
+//    public function actionIndexNew($id = 41)
+//    {
+//        $lottery_id = \Yii::$app->request->get('id');
+//        if($lottery_id){
+//            $id = $lottery_id;
+//        }
+//        $this->layout = "main_other";
+//        if (\Yii::$app->user->isGuest) {
+//            return $this->redirect(['/site/login', 'redirect' => \Yii::$app->request->getAbsoluteUrl()]);
+//        }
+////		if(!\Yii::$app->user->identity->getSubcription()){
+////			return $this->redirect('/');
+////		}
+//        $model = LotteryResult::find()->where(['lottery_id' => $id])->andWhere(['not in','customer_id',[\Yii::$app->user->getId()]]);
+//        $count = $model->count();
+//        $history = $model->limit(100)->orderBy('id desc')->all();
+//        $my_self = LotteryResult::find()->where(['lottery_id' => $id, 'customer_id' => \Yii::$app->user->getId()])->all();
+////        return $this->render('index', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
+//
+//        //查询所有的优惠券
+//        $coupon_rules_id = 5;
+//        $coupon_rules=CouponRules::findOne(['coupon_rules_id'=>$coupon_rules_id]);
+//        $coupon_info=CouponRulesDetail::find()->where(['coupon_rules_id'=>$coupon_rules->coupon_rules_id])->all();
+//
+//		return $this->render('index-new', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self ,'coupon_info' => $coupon_info]);
+//    }
+
+    public function actionIndexNew($id = 41,$coupon_rules_id = 5)
     {
         $lottery_id = \Yii::$app->request->get('id');
+        $coupon_rules_id1 = \Yii::$app->request->get('coupon_rules_id');//优惠券规则id
         if($lottery_id){
             $id = $lottery_id;
+        }
+        if($coupon_rules_id1){
+            $coupon_rules_id = $coupon_rules_id1;
         }
         $this->layout = "main_other";
         if (\Yii::$app->user->isGuest) {
@@ -64,12 +95,26 @@ class ChoujiangController extends \yii\web\Controller {
 //        return $this->render('index', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
 
         //查询所有的优惠券
-        $coupon_rules_id = 5;
         $coupon_rules=CouponRules::findOne(['coupon_rules_id'=>$coupon_rules_id]);
         $coupon_info=CouponRulesDetail::find()->where(['coupon_rules_id'=>$coupon_rules->coupon_rules_id])->all();
 
-		return $this->render('index-new', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self ,'coupon_info' => $coupon_info]);
+        //对优惠券进行时间过滤处理
+        foreach ($coupon_info as $key => &$value){
+            if(!$value->coupon_id){
+                unset($coupon_info[$key]);
+                continue;//优惠券不存在
+            }
+            if($value->coupon->date_end < date('Y-m-d H:i:s')){
+                unset($coupon_info[$key]);
+                continue;//优惠券过期
+            }
+        }
+
+        return $this->render('index-new', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self ,'coupon_info' => $coupon_info]);
     }
+
+
+
     public function actionCommon($id=40)
     {
         $this->layout = "main_other";
@@ -336,7 +381,7 @@ class ChoujiangController extends \yii\web\Controller {
                     $customer_coupon->save();
 
                     //$data = ['status' => 1, 'angle' => $result->angle,'title'=>$result->title,'description'=>$result->description, 'message' => '恭喜您获得' . $result->title."红包优惠券,".$result->description."！"];
-                    $data = ['status' => 1, 'angle' => $result->angle,'title'=>$result->title,'description'=>$result->description, 'message' => '恭喜您获得' . $result->title."红包优惠券,请于1月6号开始使用！"];
+                    $data = ['status' => 1, 'angle' => $result->angle,'title'=>$result->title,'description'=>$result->description, 'message' => '恭喜您获得' . $result->title.'红包优惠券,请于'.date("m月d",strtotime($customer_coupon->start_time)).'号开始使用!'];
                     $message[]=[
                         'customer_id'=>\Yii::$app->user->getId(),
                         'url'=>Url::to(['/user-coupon/index'],true),
