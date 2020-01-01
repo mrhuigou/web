@@ -156,14 +156,24 @@ class WxNotice {
     }
 	protected function send($to, $template_id, $url, $data)
 	{
-		$body = [
-			'touser' => $to,
-			'template_id' => $template_id,
+	    if(time() >= strtotime("2020-01-06 00:00:00")){
+            $body = [
+                'touser' => $to,
+                'template_id' => $template_id,
+			    'url' => $url,
+                'topcolor' => '#173177',
+                'data' => $data
+            ];
+        }else{
+            $body = [
+                'touser' => $to,
+                'template_id' => $template_id,
 //			'url' => $url,
-//            'url' => 'javascript:void(0)',
-			'topcolor' => '#173177',
-			'data' => $data
-		];
+                'topcolor' => '#173177',
+                'data' => $data
+            ];
+        }
+
 		return \Yii::$app->wechat->sendTemplateMessage($body);
 	}
 
