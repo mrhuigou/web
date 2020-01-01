@@ -65,7 +65,11 @@ $this->title="幸运大抽奖";
                 <div class="br5 opc-f p8 m10" id="my_self">
                     <div class="flex-col activity-1-list">
                         <div class="flex-item-2 tc">
-                            <img src="<?=\common\component\image\Image::resize($value->customer->photo,100,100)?>" alt="头像" width="47" height="47" class="img-circle">
+                            <?php if($value->customer->photo){?>
+                                <img src="<?=\common\component\image\Image::resize($value->customer->photo,100,100)?>" alt="头像" width="47" height="47" class="img-circle">
+                                <?php }else{ ?>
+                                <img style="width: 47px;height: 47px;" src="/assets/images/choujiang/zjtx.jpg" alt="头像" width="47" height="47" class="img-circle">
+                            <?php } ?>
                         </div>
                         <div class="flex-item-6 pl10">
                             <p class="pt5"><?=$value->customer->nickname?></p>
