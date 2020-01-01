@@ -5,10 +5,17 @@ class WxNotice {
 	public function pay($to,$url,$message)
 	{
 	    //已申请模板2019-12-25
-		$template_id = "LoReehuDPcpcBT-ctBreshLyX0dz-dU1FrHA0LswWr8";
-		$data = [
+//		$template_id = "LoReehuDPcpcBT-ctBreshLyX0dz-dU1FrHA0LswWr8";
+//		$data = [
+//			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
+//			'orderMoneySum' => ['value' => isset($message['total'])?$message['total']:'','color'=>'#173177'],
+//			'orderProductName' => ['value' => isset($message['name'])?$message['name']:'','color'=>'#173177'],
+//			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+//		];
+        $template_id = "wtKG8XasYSH0ATGGh53BgX84DWETm4mBCr32y1ACO8w";
+        $data = [
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
-			'orderMoneySum' => ['value' => isset($message['total'])?$message['total']:'','color'=>'#173177'],
+			'keyword1' => ['value' => isset($message['total'])?$message['total']:'','color'=>'#173177'],
 			'orderProductName' => ['value' => isset($message['name'])?$message['name']:'','color'=>'#173177'],
 			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
@@ -59,11 +66,12 @@ class WxNotice {
 	}
 	public function zhongjiang($to,$url,$message){
         //已申请模板2019-12-25
-		$template_id = "49-eY7aiNpqy2L01Atzx-REvjX1vHTjeA6Xo0ZzufqE";
+		$template_id = "D0sgE_N4uXlV3cfD7D4gq_sre_r22kvPH59Lk3TlqHw";//公用的模板
 		$data = [
 			'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
 			'keyword1' => ['value' => isset($message['name'])?$message['name']:'','color'=>'#173177'],
 			'keyword2' => ['value' => isset($message['content'])?$message['content']:'','color'=>'#173177'],
+            'keyword3' => ['value' => '无','color'=>'#173177'],
 			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
 		return $this->send($to,$template_id,$url,$data);

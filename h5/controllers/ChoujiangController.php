@@ -334,15 +334,17 @@ class ChoujiangController extends \yii\web\Controller {
                     }
                     $customer_coupon->date_added = date('Y-m-d H:i:s', time());
                     $customer_coupon->save();
+
+                    //$data = ['status' => 1, 'angle' => $result->angle,'title'=>$result->title,'description'=>$result->description, 'message' => '恭喜您获得' . $result->title."红包优惠券,".$result->description."！"];
+                    $data = ['status' => 1, 'angle' => $result->angle,'title'=>$result->title,'description'=>$result->description, 'message' => '恭喜您获得' . $result->title."红包优惠券,请于1月6号开始使用！"];
+                    $message[]=[
+                        'customer_id'=>\Yii::$app->user->getId(),
+                        'url'=>Url::to(['/user-coupon/index'],true),
+                        'content'=>['title'=>'亲，恭喜您获得优惠券！请于'.date("m月d",strtotime($customer_coupon->start_time)).'号开始使用','name'=>$result->title,'content'=>$result->title.'已经存入你的个人帐户。'],
+                    ];
+                    $this->sendMessage($message);
                 }
-//                $data = ['status' => 1, 'angle' => $result->angle,'title'=>$result->title,'description'=>$result->description, 'message' => '恭喜您获得' . $result->title."红包优惠券,".$result->description."！"];
-                $data = ['status' => 1, 'angle' => $result->angle,'title'=>$result->title,'description'=>$result->description, 'message' => '恭喜您获得' . $result->title."红包优惠券,请于1月6号开始使用！"];
-                $message[]=[
-                    'customer_id'=>\Yii::$app->user->getId(),
-                    'url'=>Url::to(['/user-coupon/index'],true),
-                    'content'=>['title'=>'亲，恭喜您获得'.$result->title."红包优惠券！请于1月6号开始使用",'name'=>'抽奖活动','content'=>'已经存入你的个人帐户。'],
-                ];
-                $this->sendMessage($message);
+
             } else {
                 throw new ErrorException('网络超时,请重试！');
             }

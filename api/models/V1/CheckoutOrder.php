@@ -192,8 +192,8 @@ class CheckoutOrder extends Model {
 							}
 							//新用户首单返现
 							$this->fanXian($order);
-							$this->sentToZhqd($order);
-							$this->points_notice($order);//积分变更通知
+//							$this->sentToZhqd($order);
+//							$this->points_notice($order);//积分变更通知
 						}
 
 					}
