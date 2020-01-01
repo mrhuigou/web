@@ -54,7 +54,10 @@ $this->title="璀璨上线红包大派送";
 <!--</header>-->
 <!--<div class="pt50"></div>-->
 <div class="clearfix">
-	<img src="/assets/images/choujiang/bg_new1111.jpg" class="w" style="height: 37rem">
+    <div style="max-height: 45rem; overflow: hidden;">
+        <img src="/assets/images/choujiang/bg_new1111.jpg" class="w">
+    </div>
+<!--	<img src="/assets/images/choujiang/bg_new1111.jpg" class="w" style="height: 37rem">-->
 	<div class="rotary bc">
 		<img class="hand" src="/assets/images/choujiang/z_1.png" alt="">
 	</div>
