@@ -58,9 +58,6 @@ $this->title="幸运大抽奖";
 	<div class="rotary bc">
 		<img class="hand" src="/assets/images/choujiang/z_1.png" alt="">
 	</div>
-    <div class="bg_goods">
-        <img style="width: 100%; margin-bottom: -2.8rem" src="/assets/images/choujiang/bg_goods.jpg" alt="">
-    </div>
     <div class="my_result1">
     <div id="my_result" class="item-wrap" >
         <?php if($my_self){?>
@@ -84,7 +81,11 @@ $this->title="幸运大抽奖";
     </div>
 <!--    <div class="tc" style="margin-top: 10px"><a class="btn lbtn greenbtn" href="/">请于1月6号开始使用</a></div>-->
     </div>
+    <div class="bg_goods">
+        <img style="width: 100%; margin-bottom: -2.8rem" src="/assets/images/choujiang/bg_goods.jpg" alt="">
+    </div>
 </div>
+
 <!--<div class="tc" style="text-align:center; background-image: url(/assets/images/choujiang/bg_new2.jpg); margin-top: -1px;font-size: 17px; color="#FFFFFF""><font >手气一般没关系，还有优惠送给你！</font> </div>-->
 <div class="tc" style="text-align:center; background-image: url(/assets/images/choujiang/bg_new2.jpg);background-size:100%; margin-top: -1px;font-size: 17px; color:white">手气一般没关系，还有优惠送给你! </div>
 <div class="pt10 pb30 bg3 ">
