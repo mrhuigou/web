@@ -84,7 +84,7 @@ $this->title="幸运大抽奖";
 </div>
 <!--<div class="tc" style="text-align:center; background-image: url(/assets/images/choujiang/bg_new2.jpg); margin-top: -1px;font-size: 17px; color="#FFFFFF""><font >手气一般没关系，还有优惠送给你！</font> </div>-->
 <div class="tc" style="text-align:center; background-image: url(/assets/images/choujiang/bg_new2.jpg);background-size:100%; margin-top: -1px;font-size: 17px; color:white">手气一般没关系，还有优惠送给你! </div>
-<div class="pt10 pb30 whitebg bg3">
+<div class="pt10 pb30 bg3 ">
     <div class="ad-container Items" id="ad-container"></div>
 <!--    <script id="ad_content_tpl" type="text/html">-->
     <?php if($coupon_info){?>
@@ -94,8 +94,8 @@ $this->title="幸运大抽奖";
                 <div class="item-padding">
                     <div class="item-inner">
                         <div class="item-photo">
-<!--                           <a href="javascript:;" class="click_coupon" data-id="--><?//=$value->coupon->coupon_id?><!--" data-content="--><?//=$value->coupon->coupon_id?><!--"><img  src="--><?//= 'https://img1.mrhuigou.com/'.$value->img_url?><!--"  alt="" class="db w"></a>-->
-                           <a href="javascript:;" class="click_coupon" data-id="<?=$value->coupon->coupon_id?>" data-content="<?=$value->coupon->coupon_id?>"><img  src="<?= 'https://img1.mrhuigou.com/group1/M00/06/A5/wKgB7l4LCEKAOT-PAAAdltzVv8M507.png'?>"  alt="" class="db w"></a>
+                           <a href="javascript:;" class="click_coupon" data-id="<?=$value->coupon->coupon_id?>" data-content="<?=$value->coupon->coupon_id?>"><img style="width: 13rem" src="<?= 'https://img1.mrhuigou.com/'.$value->img_url?>"  alt="" class="db w"></a>
+<!--                           <a href="javascript:;" class="click_coupon" data-id="--><?//=$value->coupon->coupon_id?><!--" data-content="--><?//=$value->coupon->coupon_id?><!--"><img  style="width: 13rem" src="--><?//= 'https://img1.mrhuigou.com/group1/M00/06/A5/wKgB7l4LCEKAOT-PAAAdltzVv8M507.png'?><!--"  alt="" class="db w"></a>-->
                         </div>
                     </div>
                 </div>
