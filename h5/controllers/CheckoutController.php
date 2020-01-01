@@ -999,11 +999,11 @@ class CheckoutController extends \yii\web\Controller {
 			$this->getOrderTotal($totals, $total, $data, $store_id, $promotion);
 
             $this->getPointsTotal($totals, $total, $data);
-
+            $this->getShippingTotal($totals, $total, $data, $store_id, $shipping_cost, $delivery_station_id);
 			//计算订单金额
 			$this->getTotal($totals, $total);
 
-            $this->getShippingTotal($totals, $total, $data, $store_id, $shipping_cost, $delivery_station_id);
+
 			$json = [
 				'status' => true,
 				'data' => $this->renderPartial('totals', ['model' => $totals,]),
