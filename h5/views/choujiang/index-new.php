@@ -86,7 +86,7 @@ $this->title="幸运大抽奖";
 <!--    <div class="tc" style="margin-top: 10px"><a class="btn lbtn greenbtn" href="/">请于1月6号开始使用</a></div>-->
     </div>
     <div class="bg_goods">
-        <img style="width: 100%; margin-bottom: -2.8rem" src="/assets/images/choujiang/bg_goods.jpg" alt="">
+        <img style="width: 100%; margin-bottom: -2.8rem" src="/assets/images/choujiang/zjpt.jpg" alt="">
     </div>
 </div>
 
@@ -118,7 +118,7 @@ $this->title="幸运大抽奖";
         每日<span style="color: #FFFF00">惠万家</span>  只需<span style="color: #FFFF00">新鲜达</span>
     </div>
     <div style="text-align:center; margin-top: -1px;font-size: 17px; color:white">市内四区配送入户，同城当日达</div>
-    <div style="text-align:center; margin-top: -1px;font-size: 17px; color:white">客服电话：0532-55729957</div>
+    <div style="text-align:center; margin-top: -1px;font-size: 17px; color:white">客服电话：13396398700</div>
 </div>
 <!--<div class="br5 opc-f p10 m10">-->
 <!--	<div class="tit-- mt10 mb10">看看大家手气</div>-->
