@@ -159,7 +159,8 @@ class WxNotice {
 		$body = [
 			'touser' => $to,
 			'template_id' => $template_id,
-			'url' => $url,
+//			'url' => $url,
+//            'url' => 'javascript:void(0)',
 			'topcolor' => '#173177',
 			'data' => $data
 		];
