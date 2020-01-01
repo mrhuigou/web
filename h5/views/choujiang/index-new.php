@@ -87,7 +87,7 @@ $this->title="幸运大抽奖";
 </div>
 
 <!--<div class="tc" style="text-align:center; background-image: url(/assets/images/choujiang/bg_new2.jpg); margin-top: -1px;font-size: 17px; color="#FFFFFF""><font >手气一般没关系，还有优惠送给你！</font> </div>-->
-<div class="tc" style="text-align:center; background-image: url(/assets/images/choujiang/bg_new2.jpg);background-size:100%; margin-top: -1px;font-size: 17px; color:white">手气一般没关系，还有优惠送给你! </div>
+<div class="tc" style="text-align:center; padding-top: 4rem;background-image: url(/assets/images/choujiang/bg_new2.jpg);background-size:100%; margin-top: -1px;font-size: 17px; color:white">手气一般没关系，还有优惠送给你! </div>
 <div class="pt10 pb30 bg3 ">
     <div class="ad-container Items" id="ad-container"></div>
     <div class="item-wrap item-2"  id="cate1">
