@@ -94,6 +94,7 @@ $this->title="幸运大抽奖";
                 <div class="item-padding" >
 <!--                    <div class="item-inner">-->
                         <div class="item-photo">
+
                            <a href="javascript:;" class="click_coupon" data-id="<?=$value->coupon->coupon_id?>" data-content="<?=$value->coupon->coupon_id?>"><img style="width: 13rem" src="<?= 'https://img1.mrhuigou.com/'.$value->img_url?>"  alt="" class="db w"></a>
 <!--                           <a href="javascript:;" class="click_coupon" data-id="--><?//=$value->coupon->coupon_id?><!--" data-content="--><?//=$value->coupon->coupon_id?><!--"><img  style="width: 13rem" src="--><?//= 'https://img1.mrhuigou.com/group1/M00/06/A5/wKgB7l4LCEKAOT-PAAAdltzVv8M507.png'?><!--"  alt="" class="db w"></a>-->
                         </div>
