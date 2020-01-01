@@ -258,20 +258,20 @@ class ChoujiangController extends \yii\web\Controller {
                 throw  new ErrorException("您的抽奖机会已经用完！");
             }
             if ($lottery_count = LotteryResult::find()->where(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()])->count()) {
-//                if($lottery_count>=1){
-//                    throw new ErrorException('您已经抽过了');
-//                }
+                if($lottery_count>=1){
+                    throw new ErrorException('您已经抽过了');
+                }
             }
             //判断今天是否已经抽奖
-            $day_result_count = LotteryResult::find()
-                ->where(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()])
-                ->andWhere(['>=','creat_at',strtotime(date("Y-m-d"),time())])
-                ->andWhere(['<=','creat_at',strtotime(date("Y-m-d"),time()) + 86399])
-                ->count();
-//
-            if($day_result_count >=1){
-                throw new ErrorException('今天已经参与抽奖活动');
-            }
+//            $day_result_count = LotteryResult::find()
+//                ->where(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()])
+//                ->andWhere(['>=','creat_at',strtotime(date("Y-m-d"),time())])
+//                ->andWhere(['<=','creat_at',strtotime(date("Y-m-d"),time()) + 86399])
+//                ->count();
+////
+//            if($day_result_count >=1){
+//                throw new ErrorException('今天已经参与抽奖活动');
+//            }
 
             if (!$prize_box = LotteryPrize::find()->where(['lottery_id' => $lottery_id])->all()) {
                 throw new ErrorException('当前活动没有设置奖品');
