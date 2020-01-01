@@ -5,7 +5,7 @@
  * Date: 2017/1/22
  * Time: 15:28
  */
-$this->title="幸运大抽奖";
+$this->title="璀璨上线红包大派送";
 ?>
 <style type="text/css">
 	* { margin: 0; padding: 0;}
@@ -86,7 +86,7 @@ $this->title="幸运大抽奖";
 <!--    <div class="tc" style="margin-top: 10px"><a class="btn lbtn greenbtn" href="/">请于1月6号开始使用</a></div>-->
     </div>
     <div class="bg_goods">
-        <img style="width: 100%; margin-bottom: -2.8rem" src="/assets/images/choujiang/zjpt.jpg" alt="">
+        <img style="width: 100%; margin-bottom: -2.8rem" src="/assets/images/choujiang/zjpt2.jpg" alt="">
     </div>
 </div>
 
