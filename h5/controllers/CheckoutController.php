@@ -110,6 +110,7 @@ class CheckoutController extends \yii\web\Controller {
 				} else {
 					$customer_coupon_id = [];
 				}
+                $this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id);
 				//计算全局优惠券金额
 				$this->getGlobalCouponTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $comfirm_orders[$key]['coupon_gift'],$comfirm_orders[$key]['rate']);
 				//计算优惠金额
@@ -117,11 +118,11 @@ class CheckoutController extends \yii\web\Controller {
 				//订单满减金额
 				$this->getOrderTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $comfirm_orders[$key]['promotion']);
 				if($key ==1){
-                    $this->getPointsTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data);
+//                    $this->getPointsTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data);
                 }
 				//应付订单金额
 				$this->getTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total']);
-                $this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id);
+
 			}
 		}
 		Yii::$app->session->set('comfirm_orders', $comfirm_orders);
@@ -987,7 +988,7 @@ class CheckoutController extends \yii\web\Controller {
 //            $shipping_cost = $stores_shipping[$store_id]['shipping_cost'];
 //            $totals[] = $this->setTotalsData("固定运费",'shipping',$shipping_cost,2);
 //            $total = bcadd($comfirm_orders[$store_id]['total'],$shipping_cost,2);
-			$this->getShippingTotal($totals, $total, $data, $store_id, $shipping_cost, $delivery_station_id);
+
 			$coupon_gift = [];
 			//计算全局优惠券金额
 			$this->getGlobalCouponTotal($totals, $total, $data, $store_id, $shipping_cost, $coupon_gift,$rate);
@@ -1001,6 +1002,8 @@ class CheckoutController extends \yii\web\Controller {
 
 			//计算订单金额
 			$this->getTotal($totals, $total);
+
+            $this->getShippingTotal($totals, $total, $data, $store_id, $shipping_cost, $delivery_station_id);
 			$json = [
 				'status' => true,
 				'data' => $this->renderPartial('totals', ['model' => $totals,]),
