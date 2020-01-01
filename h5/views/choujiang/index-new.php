@@ -58,6 +58,9 @@ $this->title="幸运大抽奖";
 	<div class="rotary bc">
 		<img class="hand" src="/assets/images/choujiang/z_1.png" alt="">
 	</div>
+    <div class="bg_goods">
+        <img style="width: 100%; margin-bottom: -2.8rem" src="/assets/images/choujiang/bg_goods.jpg" alt="">
+    </div>
     <div class="my_result1">
     <div id="my_result" class="item-wrap" >
         <?php if($my_self){?>
