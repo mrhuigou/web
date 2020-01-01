@@ -5,15 +5,15 @@
  * Date: 2017/1/22
  * Time: 15:28
  */
-$this->title="幸运大抽奖";
+$this->title="璀璨上线红包大派送";
 ?>
 <style type="text/css">
 	* { margin: 0; padding: 0;}
 	/*body { font-family: "Microsoft Yahei"; background: #d30d42}*/
 	body { font-family: "Microsoft Yahei"; background: url(/assets/images/choujiang/bg_new2.jpg)
         background-size:100%;}
-	.rotary { overflow:hidden;position: relative;  width: 30rem; height: 30rem; margin: -31rem 10rem 0rem 10rem; background-image: url(/assets/images/choujiang/zp_new.png) ;background-repeat:no-repeat;background-size:contain;}
-	.hand { position: absolute; left: 11.8rem; top:  11.8rem; width: 7rem; height: 7rem; cursor: pointer;}
+	.rotary { overflow:hidden;position: relative;  width: 25rem; height: 25rem; margin: -26rem 10rem 0rem 10rem; background-image: url(/assets/images/choujiang/zp_new.png) ;background-repeat:no-repeat;background-size:contain;}
+	.hand { position: absolute; left: 9.5rem; top:  9.5rem; width: 6rem; height: 6rem; cursor: pointer;}
     .my_result1 {
         background: url(/assets/images/choujiang/bg_new2.jpg);
         /*background-size: 100%;padding-bottom: 10px;*/
@@ -54,7 +54,7 @@ $this->title="幸运大抽奖";
 <!--</header>-->
 <!--<div class="pt50"></div>-->
 <div class="clearfix">
-	<img src="/assets/images/choujiang/bg_new1111.jpg" class="w" style="height: 46rem">
+	<img src="/assets/images/choujiang/bg_new1111.jpg" class="w" style="height: 37rem">
 	<div class="rotary bc">
 		<img class="hand" src="/assets/images/choujiang/z_1.png" alt="">
 	</div>
@@ -86,7 +86,7 @@ $this->title="幸运大抽奖";
 <!--    <div class="tc" style="margin-top: 10px"><a class="btn lbtn greenbtn" href="/">请于1月6号开始使用</a></div>-->
     </div>
     <div class="bg_goods">
-        <img style="width: 100%; margin-bottom: -2.8rem" src="/assets/images/choujiang/bg_goods.jpg" alt="">
+        <img style="width: 100%; margin-bottom: -2.8rem" src="/assets/images/choujiang/zjpt2.jpg" alt="">
     </div>
 </div>
 
@@ -118,7 +118,7 @@ $this->title="幸运大抽奖";
         每日<span style="color: #FFFF00">惠万家</span>  只需<span style="color: #FFFF00">新鲜达</span>
     </div>
     <div style="text-align:center; margin-top: -1px;font-size: 17px; color:white">市内四区配送入户，同城当日达</div>
-    <div style="text-align:center; margin-top: -1px;font-size: 17px; color:white">客服电话：0532-55729957</div>
+    <div style="text-align:center; margin-top: -1px;font-size: 17px; color:white">客服电话：0532-55769778</div>
 </div>
 <!--<div class="br5 opc-f p10 m10">-->
 <!--	<div class="tit-- mt10 mb10">看看大家手气</div>-->
