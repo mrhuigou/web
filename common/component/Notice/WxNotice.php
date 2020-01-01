@@ -124,6 +124,13 @@ class WxNotice {
 			'keyword2' => ['value' => isset($message['date_time'])?$message['date_time']:'','color'=>'#173177'],
 			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 		];
+		$template_id = "Mf08ErsIHX4XewY86A7w_uX3WxYIxsiUdPXKmK2yOb4";
+        $data = [
+            'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
+            'keyword1' => ['value' => isset($message['order_no'])?$message['order_no']:'','color'=>'#173177'],
+            'keyword2' => ['value' => isset($message['date_time'])?$message['date_time']:'','color'=>'#173177'],
+            'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55729957或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
+        ];
 		return $this->send($to,$template_id,$url,$data);
 	}
 	public function translation($to,$url,$message){
