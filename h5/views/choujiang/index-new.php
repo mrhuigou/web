@@ -86,29 +86,31 @@ $this->title="幸运大抽奖";
 <div class="tc" style="text-align:center; background-image: url(/assets/images/choujiang/bg_new2.jpg);background-size:100%; margin-top: -1px;font-size: 17px; color:white">手气一般没关系，还有优惠送给你! </div>
 <div class="pt10 pb30 bg3 ">
     <div class="ad-container Items" id="ad-container"></div>
-<!--    <script id="ad_content_tpl" type="text/html">-->
+    <div class="item-wrap item-2"  id="cate1">
     <?php if($coupon_info){?>
     <?php foreach ($coupon_info as $value){?>
-        <div class="item-wrap item-2"  id="cate1">
+
             <div class="item">
-                <div class="item-padding">
-                    <div class="item-inner">
+<!--                <div class="item-padding" >-->
+<!--                    <div class="item-inner">-->
                         <div class="item-photo">
                            <a href="javascript:;" class="click_coupon" data-id="<?=$value->coupon->coupon_id?>" data-content="<?=$value->coupon->coupon_id?>"><img style="width: 13rem" src="<?= 'https://img1.mrhuigou.com/'.$value->img_url?>"  alt="" class="db w"></a>
 <!--                           <a href="javascript:;" class="click_coupon" data-id="--><?//=$value->coupon->coupon_id?><!--" data-content="--><?//=$value->coupon->coupon_id?><!--"><img  style="width: 13rem" src="--><?//= 'https://img1.mrhuigou.com/group1/M00/06/A5/wKgB7l4LCEKAOT-PAAAdltzVv8M507.png'?><!--"  alt="" class="db w"></a>-->
                         </div>
-                    </div>
-                </div>
+<!--                    </div>-->
+<!--                </div>-->
             </div>
-<!--    // </script>-->
+
             <?php } ?>
             <?php } ?>
-</div>
+    </div>
+
     <div style="text-align: center; font-size: 22px;font-weight:bold;color: white;">
         每日<span style="color: #FFFF00">惠万家</span>  只需<span style="color: #FFFF00">新鲜达</span>
     </div>
     <div style="text-align:center; margin-top: -1px;font-size: 17px; color:white">市内四区配送入户，同城当日达</div>
     <div style="text-align:center; margin-top: -1px;font-size: 17px; color:white">客服电话：0532-55729957</div>
+</div>
 <!--<div class="br5 opc-f p10 m10">-->
 <!--	<div class="tit-- mt10 mb10">看看大家手气</div>-->
 <!--    <div id="scrollDiv" style="height: 204px;min-height:68px;overflow: hidden;">-->
