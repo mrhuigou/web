@@ -13,6 +13,7 @@ use common\extensions\widgets\fileapi\Widget as FileAPI;
 
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'sort')->textInput(['maxlength' => true]) ?>
 
         <?php echo $form->field($model, 'img_url')->widget(
             FileAPI::className(),

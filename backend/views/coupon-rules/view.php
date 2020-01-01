@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <th>详情名称</th>
             <th>详情图片</th>
             <th>对应折扣券ID</th>
+            <th>排序</th>
             <th ></th>
         </tr>
         </thead>
@@ -54,6 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td><?php echo $detail->name;?></td>
                     <td><?php echo $detail->img_url;?></td>
                     <td><?php echo $detail->coupon_id;?></td>
+                    <td><?php echo $detail->sort;?></td>
                     <td><a href="<?php echo \yii\helpers\Url::to(['coupon-rules/detail-update','id'=>$detail->coupon_rules_detail_id]);?>">[更新]</a></td>
                 </tr>
             <?php }?>
