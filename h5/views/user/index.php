@@ -78,9 +78,13 @@ $this->title = '用户中心';
 		<div class="mt5  whitebg p5 "><i class="aui-icon aui-icon-pay org f18"></i>我的钱包</div>
 		<div class="flex-col flex-center tc whitebg bdt bdb  p10 mb5">
             <?php if(Yii::$app->session->get('source_from_agent_wx_xcx')){?>
-                <a class="flex-item-4  flex-middle  p10 bdr " href="<?php echo \yii\helpers\Url::to(['/user/balance']) ?>">
+<!--                <a class="flex-item-4  flex-middle  p10 bdr " href="--><?php //echo \yii\helpers\Url::to(['/user/balance']) ?><!--">-->
+<!--                    <i class="aui-icon aui-icon-recharge blue  "></i>-->
+<!--                    余额-->
+<!--                </a>-->
+                <a class="flex-item-4  flex-middle  p10 bdr " href="<?php echo \yii\helpers\Url::to(['/user-coupon/index-delivery']) ?>">
                     <i class="aui-icon aui-icon-recharge blue  "></i>
-                    余额
+                    提货券
                 </a>
                 <a class="flex-item-4  flex-middle bdr  p10" href="<?php echo \yii\helpers\Url::to(['/user-coupon/index']) ?>">
                     <i class="aui-icon aui-icon-ticket org "></i>
@@ -91,9 +95,13 @@ $this->title = '用户中心';
                     红包
                 </a>
             <?php }else{?>
-                <a class="flex-item-4  flex-middle  p10 bdr " href="<?php echo \yii\helpers\Url::to(['/user/balance']) ?>">
-                    <i class="aui-icon aui-icon-recharge blue  "></i>
-                    余额
+<!--                <a class="flex-item-4  flex-middle  p10 bdr " href="--><?php //echo \yii\helpers\Url::to(['/user/balance']) ?><!--">-->
+<!--                    <i class="aui-icon aui-icon-recharge blue  "></i>-->
+<!--                    余额-->
+<!--                </a>-->
+                <a class="flex-item-4  flex-middle  p10 bdr " href="<?php echo \yii\helpers\Url::to(['/user-coupon/index-delivery']) ?>">
+                    <i class="aui-icon aui-icon-ticket org  "></i>
+                    提货券
                 </a>
                 <a class="flex-item-4  flex-middle bdr  p10" href="<?php echo \yii\helpers\Url::to(['/user-coupon/index']) ?>">
                     <i class="aui-icon aui-icon-ticket org "></i>
@@ -143,7 +151,7 @@ $this->title = '用户中心';
             </a>
 		</div>
 		<a class="line-a db w clearfix p10 " href="tel:4008556977" target="_blank">
-			客服热线：0532-55729957
+			客服热线：0532-55769778
 			<i class="iconfont fr"></i>
 		</a>
         <?php if(Yii::$app->user->getId()==17412){?>

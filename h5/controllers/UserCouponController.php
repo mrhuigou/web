@@ -28,6 +28,30 @@ class UserCouponController extends \yii\web\Controller {
 		return $this->render('index', ['model' => $model, 'dataProvider' => $dataProvider]);
 	}
 
+    /**
+     * @desc 查看提货券
+     */
+	public function actionIndexDelivery()
+	{
+		if (\Yii::$app->user->isGuest) {
+			return $this->redirect('/site/login');
+		}
+		$model = CustomerCoupon::find()->joinWith(['coupon' => function ($query) {
+			$query->andFilterWhere([">=", "jr_coupon.status", 1]);
+		}])->where(['customer_id' => \Yii::$app->user->identity->getId(), 'is_use' => 0])
+			->andWhere([">=", "end_time", date('Y-m-d H:i:s', time())]);
+        echo "<pre>";
+        var_dump($model);die;
+		$dataProvider = new ActiveDataProvider([
+			'query' => $model->orderBy('jr_coupon.is_entity desc,end_time asc,discount desc,customer_coupon_id asc'),
+			'pagination' => [
+				'pagesize' => '4',
+			]
+		]);
+
+		return $this->render('index-delivery', ['model' => $model, 'dataProvider' => $dataProvider]);
+	}
+
 	public function actionCard()
 	{
 		if (\Yii::$app->user->isGuest) {
@@ -49,6 +73,34 @@ class UserCouponController extends \yii\web\Controller {
 
 		}
 		return $this->render('card', ['model' => $model]);
+	}
+
+    /**
+     * @desc 提货券
+     */
+	public function actionDeliveryCard()
+	{
+		if (\Yii::$app->user->isGuest) {
+			return $this->redirect('/site/login');
+		}
+		if (!Yii::$app->user->identity->telephone_validate) {
+			return $this->redirect(['/user/security-set-telephone', 'redirect' => '/user-coupon/card']);
+		}
+		$model = new CouponCardForm();
+//		echo "<pre>";
+//		var_dump(Yii::$app->request->post());die;
+		if ($model->load(Yii::$app->request->post()) && $customer_coupon=$model->save()) {
+			$this->SendNotice($customer_coupon->customer_coupon_id);
+			$coupon = Coupon::findOne(['coupon_id'=>$customer_coupon->coupon_id]);
+			if($coupon->is_entity == 1 && strtoupper($coupon->model) == 'ORDER'){
+			    //
+                  return $this->redirect(['/user-coupon/index']);
+            }else{
+                return $this->redirect(['/coupon/view','id'=>$customer_coupon->coupon_id]);
+            }
+
+		}
+		return $this->render('delivery-card', ['model' => $model]);
 	}
 	public function SendNotice($customer_coupon_id)
 	{
