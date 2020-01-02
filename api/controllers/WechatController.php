@@ -32,6 +32,8 @@ class WechatController extends Controller {
 
 	public function actionIndex()
 	{
+        Yii::warning('start calculating average revenue5947597575027','test');
+
 		if ($this->msg = \Yii::$app->wechat->parseRequestData()) {
 			$this->msgtype = $this->msg['MsgType'];
 			if ($this->msgtype == 'event') {
