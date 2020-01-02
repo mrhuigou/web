@@ -547,12 +547,12 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 
     <?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){  ?>
         <footer class="gray9 tc p10 f14">
-            客服热线：0532-55729957
+            客服热线：0532-55769778
         </footer>
     <?php }else{ ?>
         <footer class="gray9 tc p10 f14">
             Copyright©2015每日惠购 版权所有<br>
-            客服热线：0532-55729957
+            客服热线：0532-55769778
         </footer>
     <?php }?>
 </div>

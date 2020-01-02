@@ -13,6 +13,6 @@
 </div>
 <div class="f0bg tc pt15 pb20">
     <img src="//m.mrhuigou.com/assets/images/logo2.png" width="110">
-    <p class="gray6 mt5">客服电话：0532-55729957</p>
+    <p class="gray6 mt5">客服电话：0532-55769778</p>
 </div>
 

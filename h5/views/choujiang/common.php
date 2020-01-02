@@ -92,7 +92,7 @@ $this->title = $lottery->title;
         <li>每个用户ID只能抽1次</li>
 <!--        <li>自领取之日起至12月29日内有效</li>-->
         <li>每笔订单限使用1张</li>
-        <li>如有疑问请联系客服 0532-55729957</li>
+        <li>如有疑问请联系客服 0532-55769778</li>
     </ul>
 </div>
 <div id="result" class="none">
