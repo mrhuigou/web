@@ -67,28 +67,31 @@ $this->title = "收银台";
 <!--                <i class="iconfont fr"></i>-->
 <!--            </a>-->
 <!--            --><?php //}?>
-       <?php if(bccomp(Yii::$app->user->identity->balance,$model->total,2)>=0 && !$model->recharge_status){?>
-        <a href="<?=\yii\helpers\Url::to(['/payment/balance','trade_no'=>$model->merge_code])?>"  class="payment clearfix">
-            <span class="img ye"></span>
-            <div class="fl">
-                <h3>账户余额</h3>
-                <span class="gray9 f12">当前：￥<?=Yii::$app->user->identity->balance?></span>
-            </div>
-            <?php if(Yii::$app->user->identity->paymentpwd){ ?>
-               <i class="iconfont fr"></i>
-               <?php }else{ ?>
-               <i class="iconfont fr"><em class="f12 p10 gray9">设置支付密码</em></i>
-            <?php } ?>
-</a>
-            <?php }elseif(Yii::$app->user->identity->balance >= 0 && !$model->recharge_status){  ?>
-            <a href="<?=\yii\helpers\Url::to(['/account-recharge/index'])?>"  class="payment clearfix">
-                <span class="img ye"></span>
-                <div class="fl">
-                    <h3>余额支付</h3>
-                    <span class="gray9 f12">当前：￥<?=Yii::$app->user->identity->balance?></span>
-                </div>
-            </a>
-        <?php } ?>
+
+            //-------------------------------------------余额支付----------------------------------------- ch
+<!--       --><?php //if(bccomp(Yii::$app->user->identity->balance,$model->total,2)>=0 && !$model->recharge_status){?>
+<!--        <a href="--><?//=\yii\helpers\Url::to(['/payment/balance','trade_no'=>$model->merge_code])?><!--"  class="payment clearfix">-->
+<!--            <span class="img ye"></span>-->
+<!--            <div class="fl">-->
+<!--                <h3>账户余额</h3>-->
+<!--                <span class="gray9 f12">当前：￥--><?//=Yii::$app->user->identity->balance?><!--</span>-->
+<!--            </div>-->
+<!--            --><?php //if(Yii::$app->user->identity->paymentpwd){ ?>
+<!--               <i class="iconfont fr"></i>-->
+<!--               --><?php //}else{ ?>
+<!--               <i class="iconfont fr"><em class="f12 p10 gray9">设置支付密码</em></i>-->
+<!--            --><?php //} ?>
+<!--</a>-->
+<!--            --><?php //}elseif(Yii::$app->user->identity->balance >= 0 && !$model->recharge_status){  ?>
+<!--            <a href="--><?//=\yii\helpers\Url::to(['/account-recharge/index'])?><!--"  class="payment clearfix">-->
+<!--                <span class="img ye"></span>-->
+<!--                <div class="fl">-->
+<!--                    <h3>余额支付</h3>-->
+<!--                    <span class="gray9 f12">当前：￥--><?//=Yii::$app->user->identity->balance?><!--</span>-->
+<!--                </div>-->
+<!--            </a>-->
+<!--        --><?php //} ?>
+            //------------------------------------------余额支付结束---------------------------------------------------
             <?php
             $can_use_cod = false;
             $orders = $model->order;
