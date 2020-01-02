@@ -16,7 +16,8 @@ class UserCouponController extends \yii\web\Controller {
 			return $this->redirect('/site/login');
 		}
 		$model = CustomerCoupon::find()->joinWith(['coupon' => function ($query) {
-			$query->andFilterWhere([">=", "jr_coupon.status", 1]);
+			$query->andFilterWhere([">=", "jr_coupon.status", 1])
+                ->andFilterWhere(["!=", "jr_coupon.is_entity", 1]);
 		}])->where(['customer_id' => \Yii::$app->user->identity->getId(), 'is_use' => 0])
 			->andWhere([">=", "end_time", date('Y-m-d H:i:s', time())]);
 		$dataProvider = new ActiveDataProvider([
@@ -39,9 +40,8 @@ class UserCouponController extends \yii\web\Controller {
 		$model = CustomerCoupon::find()->joinWith(['coupon' => function ($query) {
 			$query->andFilterWhere([">=", "jr_coupon.status", 1]);
 		}])->where(['customer_id' => \Yii::$app->user->identity->getId(), 'is_use' => 0])
-			->andWhere([">=", "end_time", date('Y-m-d H:i:s', time())]);
-        echo "<pre>";
-        var_dump($model);die;
+			->andWhere([">=", "end_time", date('Y-m-d H:i:s', time())])
+            ->andFilterWhere(["=", "jr_coupon.is_entity", 1]);
 		$dataProvider = new ActiveDataProvider([
 			'query' => $model->orderBy('jr_coupon.is_entity desc,end_time asc,discount desc,customer_coupon_id asc'),
 			'pagination' => [
