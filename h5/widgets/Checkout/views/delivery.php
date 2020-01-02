@@ -63,13 +63,13 @@ use \common\component\Helper\Datetime;
                             </div>
 					    <?php } ?>
                     </div>
-                    <div>
-                        <div class="col-12 bd m5 p5 whitebg cp f16 red">
-                            因系统改造升级，<span class="fb">暂停晚间配送！</span>
-                            给您带来的不便，我们深感抱歉！
-                            请确定合适的配送时间，感谢您的理解！
-                        </div>
-                    </div>
+<!--                    <div>-->
+<!--                        <div class="col-12 bd m5 p5 whitebg cp f16 red">-->
+<!--                            因系统改造升级，<span class="fb">暂停晚间配送！</span>-->
+<!--                            给您带来的不便，我们深感抱歉！-->
+<!--                            请确定合适的配送时间，感谢您的理解！-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                 </div>
 
