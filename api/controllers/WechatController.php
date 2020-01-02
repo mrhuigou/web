@@ -32,6 +32,7 @@ class WechatController extends Controller {
 
 	public function actionIndex()
 	{
+	    file_put_contents('1.txt',json_encode(\Yii::$app->wechat->parseRequestData()));
 		if ($this->msg = \Yii::$app->wechat->parseRequestData()) {
 			$this->msgtype = $this->msg['MsgType'];
 			if ($this->msgtype == 'event') {
