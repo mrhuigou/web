@@ -43,7 +43,7 @@
 <?php if($type){?>
 $.modal({
 title: "",
-text: '<img src="/images/subcription_pic.png" class="w">',
+text: '<img src="/images/subcription_pic_mrhuigou.png" class="w">',
 buttons: []
 });
 <?php }else{?>
@@ -58,7 +58,7 @@ buttons: []
         <?php }else{?>
         $.modal({
         title: "",
-        text: '<img src="/images/subcription_pic.png" class="w">',
+        text: '<img src="/images/subcription_pic_mrhuigou.png" class="w">',
         buttons: []
         });
         <?php }?>
