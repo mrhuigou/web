@@ -115,7 +115,7 @@ class WeixinMenuController extends Controller
                 }
             }
             if(count($model) ==1){
-                $button = $model[0];
+                $button[] = $model[0];
             }else{
                 $button = \common\component\Helper\Helper::genTree($model, 'id', 'pid', 'sub_button');
             }
