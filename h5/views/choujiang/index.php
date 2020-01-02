@@ -56,7 +56,7 @@ $this->title="幸运大抽奖";
 <div class="m10 tc"><a class="btn lbtn greenbtn" href="/">点击立即使用</a></div>
 
 <div class="pt10 pb30 whitebg">
-<div class="ad-container Items" id="ad-container"></div>
+<!--<div class="ad-container Items" id="ad-container"></div>-->
 <script id="ad_content_tpl" type="text/html">
     <div class="item-wrap item-3"  id="cate1">
         <% for(var i=from; i<=to; i++) {%>
