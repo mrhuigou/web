@@ -255,8 +255,8 @@ $this->registerJsFile("/assets/script/jquery.rowscroll.js",['depends'=>\h5\asset
 $this->registerJs($this->blocks['J_Reviews'],\yii\web\View::POS_END);
 ?>
 <?php h5\widgets\Tools\Share::widget(['data'=>[
-	'title' => '璀璨上线红包大派送！',
-	'desc' => '1月6日9点18分盛大开启!',
+	'title' => '家润每日惠购1月6日璀璨上线！',
+	'desc' => '现金红包大派送',
 	'link' => \yii\helpers\Url::to(['/choujiang/index-new'],true),
 	'image' => Yii::$app->request->getHostInfo() . '/assets/images/hongbao_share.jpg',
 //    'hidden_status'=>'hidden',
