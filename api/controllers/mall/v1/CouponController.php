@@ -25,8 +25,6 @@ class CouponController extends Controller {
         $data = [];
         $i=0;
         try {
-            file_put_contents('1.txt',23523);
-            Yii::trace('ceshi 2020-0101');die;
             $item_id=Yii::$app->request->get('item_id');
             $coupon_rules_id=Yii::$app->request->get('coupon_rules_id');
             if(!$coupon_rules_id){

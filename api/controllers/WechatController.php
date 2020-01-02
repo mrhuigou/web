@@ -32,6 +32,7 @@ class WechatController extends Controller {
 
 	public function actionIndex()
 	{
+        file_put_contents('1.txt',11111);
         Yii::trace('start calculating average revenue1111');
         Yii::trace(\Yii::$app->wechat->parseRequestData());
 		if ($this->msg = \Yii::$app->wechat->parseRequestData()) {
