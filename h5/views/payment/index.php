@@ -220,4 +220,5 @@ $("#BestoneBtn").bind("click",function(){
 \yii\web\YiiAsset::register($this);
 $this->registerJs($this->blocks['JS_END'],\yii\web\View::POS_END);
 ?>
-<?=\h5\widgets\Block\Start::widget(['type'=>1]);?>
+<?//=\h5\widgets\Block\Start::widget(['type'=>1]);?>
+<?=\h5\widgets\Block\Start::widget(['type'=>0]);?><!--测试弹窗修改-->
