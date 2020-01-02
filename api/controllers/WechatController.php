@@ -32,6 +32,7 @@ class WechatController extends Controller {
 
 	public function actionIndex()
 	{
+        Yii::info('wec 2020-0101');
         Yii::info(\Yii::$app->wechat->parseRequestData());
 		if ($this->msg = \Yii::$app->wechat->parseRequestData()) {
 			$this->msgtype = $this->msg['MsgType'];
