@@ -82,6 +82,45 @@ class CouponController extends \yii\web\Controller
 
     }
 
+    /**
+     * @desc 提货券详情
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionViewDelivery(){
+
+        if($id = Yii::$app->request->get("id")){
+            $model = Coupon::findOne(['status'=>1,'coupon_id'=>$id]);
+        }
+        if($code =Yii::$app->request->get("code") ){
+            $model = Coupon::findOne(['status'=>1,'code'=>$code]);
+        }
+        if($model){
+            if(in_array($model->model,['ORDER','BUY_GIFTS'])){
+                if(!empty($model->redirect_url)){
+                    return $this->redirect($model->redirect_url);
+                }
+            }
+            $coupon_product=[];
+            if($model->product){
+                foreach($model->product as $product){
+                    if($product->status){
+                        $coupon_product[]=$product;
+                    }
+                }
+            }
+            if($coupon_product){
+                $customer_coupon=CustomerCoupon::findOne(['customer_id'=>Yii::$app->user->getId(),'coupon_id'=>$id]);
+                return $this->render('view_delivery',['model'=>$model,'coupon_product'=>$coupon_product,'customer_coupon'=>$customer_coupon]);
+            }else{
+                return $this->redirect('/');
+            }
+        }else{
+            throw new NotFoundHttpException('没有找到相关页面');
+        }
+
+    }
+
     public function actionAjaxCart(){
         $data =[];
         $max_buy_quantity = [];

@@ -21,7 +21,7 @@ $this->title = '我的提货券';
 		'options' => ['class' => 'list-view'],
 		'itemOptions' => ['class' => 'item m10 '],
 		'emptyText' => '<figure class="info-tips  gray9 p10"><i class="iconfont "></i><figcaption class="m10"> 当前没有信息</figcaption></figure>',
-		'itemView' => '_item_view',
+		'itemView' => '_item_delivery_view',
 		'pager' => ['class' => \kop\y2sp\ScrollPager::className(),
 			'enabledExtensions' => ['IASSpinnerExtension', 'IASNoneLeftExtension'],
 			'triggerTemplate' => '<div class="w tc mt10 "><button class="ias-trigger appbtn pr10 pl10  ">加载更多</button></div>',
