@@ -111,6 +111,18 @@ class CouponController extends \yii\web\Controller
             }
             if($coupon_product){
                 $customer_coupon=CustomerCoupon::findOne(['customer_id'=>Yii::$app->user->getId(),'coupon_id'=>$id]);
+
+                $all_range = false;
+                if(Yii::$app->request->get('range') == 'all_range'){
+                    $all_range = true;
+                }
+
+                if($all_range){
+                    $model->in_range = 0;
+                }else{
+                    $model->in_range = 1;
+                }
+
                 return $this->render('view-delivery',['model'=>$model,'coupon_product'=>$coupon_product,'customer_coupon'=>$customer_coupon]);
             }else{
                 return $this->redirect('/');

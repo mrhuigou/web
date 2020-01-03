@@ -74,21 +74,6 @@ $this->title ='优惠券详情';
 		<?php } ?>
 	</div>
 </section>
-<div class="pf-b  bs-t whitebg">
-	<div id="coupon-product-list"></div>
-	<div class="flex-col p10">
-		<div class="flex-item-5 f12">
-			<p id="coupon_msg" class="red fb"></p>
-		</div>
-		<div class="flex-item-3 tr pt2 pr5">
-			<span class="f20 red" >￥<em id="sub_total">0.00</em></span>
-		</div>
-		<div class="flex-item-4 tc pt2">
-			<a href="javascript:;" class="btn graybtn mbtn f12 disbtn" id="coupon_btn_submit">提交订单</a>
-		</div>
-	</div>
-</div>
-
 
 <?php if(!$model->in_range == 1){?>
     <!--		<p class="mb5 p5 lh130 whitebg bd-green"> 配送区域仅限：<span class="red">市南区、市北区、崂山区、李沧区、四方区、城阳区、黄岛区</span>。其它区域暂时尚未开通，敬请谅解。-->
@@ -112,28 +97,22 @@ $this->title ='优惠券详情';
     </div>
 <?php } ?>
 
-<div class="flex-col tc whitebg bdb">
-    <!--	    <a class="flex-item-6 p5 cur bdr f14">手工输入</a>-->
-    <!--	    <a class="flex-item-6 p5 f14 gray9 " id="pop-map">-->
-    <!--		    <i class="iconfont vm f14">&#xe622;</i>地图定位-->
-    <!--	    </a>-->
-</div>
-<?php $action = \yii\helpers\Url::to([Yii::$app->request->getUrl()])?>
+<?php $action = \yii\helpers\Url::to([Yii::$app->request->getUrl()]);?>
 <?php $form = ActiveForm::begin(['id' => 'form-address', 'action'=>  $action,'fieldConfig' => [
     'template' => '<li><div class="t">{label}：</div><div class="c">{input}</div></li>{error}',
     'inputOptions' => ["class" => 'w f14'],
     'errorOptions' => ['class' => 'red pl5']
 ],]); ?>
-<?= $form->field($model, 'lat', ['template' => '{input}'])->hiddenInput(['id' => 'address-lat'])->label(false) ?>
-<?= $form->field($model, 'lng', ['template' => '{input}'])->hiddenInput(['id' => 'address-lng'])->label(false) ?>
-<?= $form->field($model, 'province', ['template' => '{input}'])->hiddenInput(['id' => 'province'])->label(false) ?>
-<?= $form->field($model, 'city', ['template' => '{input}'])->hiddenInput(['id' => 'city'])->label(false) ?>
-<?= $form->field($model, 'postcode', ['template' => '{input}'])->hiddenInput(['value' => '266001']) ?>
-<?= $form->field($model, 'poiaddress', ['template' => '{input}'])->hiddenInput(['id' => 'poiaddress'])?>
-<?= $form->field($model, 'poiname',['template' => '{input}'])->hiddenInput(['id' => 'poiname']) ?>
-<?= $form->field($model, 'district',['template' => '{input}'])->hiddenInput(['id' => 'district'])?>
+<?//= $form->field($model, 'lat', ['template' => '{input}'])->hiddenInput(['id' => 'address-lat'])->label(false) ?>
+<?//= $form->field($model, 'lng', ['template' => '{input}'])->hiddenInput(['id' => 'address-lng'])->label(false) ?>
+<?//= $form->field($model, 'province', ['template' => '{input}'])->hiddenInput(['id' => 'province'])->label(false) ?>
+<?//= $form->field($model, 'city', ['template' => '{input}'])->hiddenInput(['id' => 'city'])->label(false) ?>
+<?//= $form->field($model, 'postcode', ['template' => '{input}'])->hiddenInput(['value' => '266001']) ?>
+<?//= $form->field($model, 'poiaddress', ['template' => '{input}'])->hiddenInput(['id' => 'poiaddress'])?>
+<?//= $form->field($model, 'poiname',['template' => '{input}'])->hiddenInput(['id' => 'poiname']) ?>
+<?//= $form->field($model, 'district',['template' => '{input}'])->hiddenInput(['id' => 'district'])?>
 <??>
-<ul class="line-book mt5">
+    <ul class="line-book mt5">
     <?php if(!$model->in_range == 1){?>
         <li>
             <div class="t">选择地区：</div>
@@ -164,25 +143,26 @@ $this->title ='优惠券详情';
         </li>
         <p class="red pl5 error_district"></p>
     <?php }?>
-    <?= $form->field($model, 'address',['template' => '{label}<li>{input}</li>{error}'])->textarea(["placeholder" => '小区/写字楼/街道+楼号+楼层等','id'=>'address','class'=>'w f14 ','rows'=>2,'style'=>"height:45px;padding:5px;"])?>
-    <?= $form->field($model, 'username', ['inputOptions' => ["placeholder" => '请填写收货人姓名']]) ?>
-    <?= $form->field($model, 'telephone', ['inputOptions' => ["placeholder" => '请填写收货人电话号码']]) ?>
+    <?= $form->field($model, 'address',['template' => '{label}<li>{input}</li>{error}'])->textarea(["placeholder" => '小区/写字楼/街道+楼号+楼层等','id'=>'address','class'=>'w f14 ','rows'=>2,'style'=>"height:45px;padding:5px;"])->label('详细地址')?>
+    <?= $form->field($model, 'username', ['inputOptions' => ["placeholder" => '请填写收货人姓名']])->label('收货人') ?>
+    <?= $form->field($model, 'telephone', ['inputOptions' => ["placeholder" => '请填写收货人电话号码']])->label('手机号') ?>
     <?php if(!$model->in_range == 1){?> <??>
         <?= $form->field($model, 'is_default',['template' => "<div class='p5'>{input} {label}</div>",])->hiddenInput([
             'template' => "<div class='p5'>{input} {label}</div>",
             'value'=>0
         ])->label(false) ?>
     <?php }else{?>
-        <?= $form->field($model, 'is_default')->checkbox(['template' => "<div class='p5'>{input} {label}</div>"]) ?>
+        <?= $form->field($model, 'is_default')->checkbox(['template' => "<div class='p5'>{input} {label}</div>"])->label('默认地址') ?>
     <?php }?>
 </ul>
-<div class=" bdt  p10 w tc ">
-
-    <a href="javascript:void(0)"  class='btn mbtn greenbtn w SubmitBtn'>保存地址 </a>
-</div>
-<?php ActiveForm::end(); ?>
 <?php $store_id = 1;//家润?>
 <?= h5\widgets\Checkout\Delivery::widget(['store_id' => $store_id]) ?>
+<div class=" bdt  p10 w tc ">
+    <a href="javascript:void(0)"  class='btn mbtn greenbtn w SubmitBtn'>提交订单 </a>
+</div>
+<?php ActiveForm::end(); ?>
+
+
 <script type="text/html" id="goodlist_tpl">
 	<div class=" w bdb  ellipsis "  style="overflow-x: auto;white-space: nowrap;">
 		<% $.each(coupon_data,
@@ -193,9 +173,7 @@ $this->title ='优惠券详情';
 	</div>
 </script>
 <script>
-<?php
-$this->beginBlock('JS_SKU')
-?>
+<?php $this->beginBlock('JS_SKU')?>
 
 $('.add-click').click(function(){
     $(this).hide();
@@ -385,6 +363,42 @@ $("body").on('click','#coupon_btn_submit',function(){
     //},'json');
 });
 
+});
+<?php $this->endBlock() ?>
+</script>
+<script>
+<?php $this->beginBlock("JS_QQDiTu") ?>
+//window.addEventListener('message', function(event) {
+//    $("#map-contain").hide();
+//    $.showIndicator();
+//// 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
+//    var loc = event.data;
+//    console.log(loc);
+//    if (loc && loc.module == 'locationPicker') {//防止其他应用也会向该页面post信息，需判断module是否为'locationPicker'
+//        $.post('<?//=\yii\helpers\Url::to('/address/geo')?>//',{lat:loc.latlng.lat,lng:loc.latlng.lng},function(data){
+//            if(data){
+//                if(loc.poiname=="我的位置"){
+//                    $("#poiname").val(data.title);
+//                    $("#poiaddress").val(data.address);
+//                    $("#address").val(data.address+data.title);
+//                }else{
+//                    $("#poiname").val(loc.poiname);
+//                    $("#poiaddress").val(loc.poiaddress.replace(data.province+data.city,""));
+//                    $("#address").val(loc.poiaddress.replace(data.province+data.city,"")+loc.poiname);
+//                }
+//                $("#province").val(data.province);
+//                $("#city").val(data.city);
+//                $("#district").val(data.district);
+//                $("#address-lat").val(data.lat);
+//                $("#address-lng").val(data.lng);
+//            }
+//        });
+//        $.hideIndicator();
+//    }
+//}, false);
+$("#pop-map").click(function(){
+    $("#map-contain").show();
+});
 /*地址选择*/
 $("#start").cityPicker({
     title: "选择地址",
@@ -414,8 +428,20 @@ $("body").on("click",".SubmitBtn",function () {
 
     $("#form-address").submit();
 });
+
+
+
 <?php $this->endBlock() ?>
+</script>
+
+
+
 <?php
 $this->registerJs($this->blocks['JS_SKU'], \yii\web\View::POS_END);
 ?>
-</script>
+<?php
+$this->registerJs($this->blocks['JS_QQDiTu'], \yii\web\View::POS_READY);
+$this->registerJsFile("/assets/script/jqweui-picker.js",['depends'=>\h5\assets\AppAsset::className()]);
+$this->registerJsFile("/assets/script/jqweui-city-picker.js",['depends'=>\h5\assets\AppAsset::className()]);
+?>
+

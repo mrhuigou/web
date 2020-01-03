@@ -41,6 +41,15 @@ use Yii;
  */
 class Coupon extends \yii\db\ActiveRecord
 {
+    public $in_range;
+    public $province;
+    public $city;
+    public $district;
+    public $address;
+    public $username;
+    public $telephone;
+    public $is_default;
+
     /**
      * @inheritdoc
      */
