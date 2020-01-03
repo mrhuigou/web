@@ -146,6 +146,7 @@ class CartController extends \yii\web\Controller {
                     Track::add($cart[$value]->product->product_base_id, 'submit_cart');
                 }
             }
+            var_dump($cart);die;die;
             if($status){
                 \Yii::$app->session->set('confirm_cart', $cart);
             }
