@@ -24,6 +24,12 @@ class MainMenu extends Widget {
 			case "product/category":
 				$cur="category";
 				break;
+            case "/coupon/index":
+				$cur="coupon";
+				break;
+            case "/cart/index":
+				$cur="cart";
+				break;
 			case "user/index":
 				$cur="user";
 				break;
