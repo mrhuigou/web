@@ -8,6 +8,7 @@ use api\models\V1\CouponRulesDetail;
 use api\models\V1\Order;
 use api\models\V1\Product;
 use common\component\Track\Track;
+use h5\models\ViewDeliveryForm;
 use Yii;
 use api\models\V1\CustomerCoupon;
 use yii\base\ErrorException;
@@ -90,20 +91,20 @@ class CouponController extends \yii\web\Controller
     public function actionViewDelivery(){
 
         if($id = Yii::$app->request->get("id")){
-            $model = Coupon::findOne(['status'=>1,'coupon_id'=>$id]);
+            $coupon = Coupon::findOne(['status'=>1,'coupon_id'=>$id]);
         }
         if($code =Yii::$app->request->get("code") ){
-            $model = Coupon::findOne(['status'=>1,'code'=>$code]);
+            $coupon = Coupon::findOne(['status'=>1,'code'=>$code]);
         }
-        if($model){
-            if(in_array($model->model,['ORDER','BUY_GIFTS'])){
-                if(!empty($model->redirect_url)){
-                    return $this->redirect($model->redirect_url);
+        if($coupon){
+            if(in_array($coupon->model,['ORDER','BUY_GIFTS'])){
+                if(!empty($coupon->redirect_url)){
+                    return $this->redirect($coupon->redirect_url);
                 }
             }
             $coupon_product=[];
-            if($model->product){
-                foreach($model->product as $product){
+            if($coupon->product){
+                foreach($coupon->product as $product){
                     if($product->status){
                         $coupon_product[]=$product;
                     }
@@ -117,14 +118,26 @@ class CouponController extends \yii\web\Controller
                     $all_range = true;
                 }
 
+                $model = new ViewDeliveryForm();
+
                 if($all_range){
                     $model->in_range = 0;
                 }else{
                     $model->in_range = 1;
                 }
+                $model->coupon_id = $id;
+//                echo "<pre>";
+//                var_dump(Yii::$app->request->post());die;
+                if ($model->load(Yii::$app->request->post()) && $model->submit()) {
+                    if(empty(Yii::$app->request->post()['Coupon']['address'])){
+                        exit('hfshofh');
+                    }
+                    return $this->redirect('/');
+                } else {
+                    return $this->render('view-delivery',['model'=>$model,'coupon_product'=>$coupon_product,'customer_coupon'=>$customer_coupon]);
 
-                return $this->render('view-delivery',['model'=>$model,'coupon_product'=>$coupon_product,'customer_coupon'=>$customer_coupon]);
-            }else{
+                }
+             }else{
                 return $this->redirect('/');
             }
         }else{

@@ -103,14 +103,15 @@ $this->title ='优惠券详情';
     'inputOptions' => ["class" => 'w f14'],
     'errorOptions' => ['class' => 'red pl5']
 ],]); ?>
-<?//= $form->field($model, 'lat', ['template' => '{input}'])->hiddenInput(['id' => 'address-lat'])->label(false) ?>
-<?//= $form->field($model, 'lng', ['template' => '{input}'])->hiddenInput(['id' => 'address-lng'])->label(false) ?>
-<?//= $form->field($model, 'province', ['template' => '{input}'])->hiddenInput(['id' => 'province'])->label(false) ?>
-<?//= $form->field($model, 'city', ['template' => '{input}'])->hiddenInput(['id' => 'city'])->label(false) ?>
-<?//= $form->field($model, 'postcode', ['template' => '{input}'])->hiddenInput(['value' => '266001']) ?>
-<?//= $form->field($model, 'poiaddress', ['template' => '{input}'])->hiddenInput(['id' => 'poiaddress'])?>
-<?//= $form->field($model, 'poiname',['template' => '{input}'])->hiddenInput(['id' => 'poiname']) ?>
-<?//= $form->field($model, 'district',['template' => '{input}'])->hiddenInput(['id' => 'district'])?>
+<?= $form->field($model, 'lat', ['template' => '{input}'])->hiddenInput(['id' => 'address-lat'])->label(false) ?>
+<?= $form->field($model, 'lng', ['template' => '{input}'])->hiddenInput(['id' => 'address-lng'])->label(false) ?>
+<?= $form->field($model, 'province', ['template' => '{input}'])->hiddenInput(['id' => 'province'])->label(false) ?>
+<?= $form->field($model, 'city', ['template' => '{input}'])->hiddenInput(['id' => 'city'])->label(false) ?>
+<?= $form->field($model, 'postcode', ['template' => '{input}'])->hiddenInput(['value' => '266001']) ?>
+<?= $form->field($model, 'poiaddress', ['template' => '{input}'])->hiddenInput(['id' => 'poiaddress'])?>
+<?= $form->field($model, 'poiname',['template' => '{input}'])->hiddenInput(['id' => 'poiname']) ?>
+<?= $form->field($model, 'district',['template' => '{input}'])->hiddenInput(['id' => 'district'])?>
+<?= $form->field($model, 'coupon_id',['template' => '{input}'])->hiddenInput(['id' => 'coupon_id'])?>
 <??>
     <ul class="line-book mt5">
     <?php if(!$model->in_range == 1){?>
@@ -171,200 +172,6 @@ $this->title ='优惠券详情';
 		<img src="<%:=value.src%>" height="50" width="50" class="m5">
 		<% }); %>
 	</div>
-</script>
-<script>
-<?php $this->beginBlock('JS_SKU')?>
-
-$('.add-click').click(function(){
-    $(this).hide();
-    var wrap = $(this).parent(".num-wrap");
-    wrap.find('.num-add').show();
-    wrap.find('.num-lower').show();
-    wrap.find('.num-add').click();
-});
-var coupon_data={};
-/*数量*/
-//基础代码
-$(".num-add").click(function(){
-    var _this = $(this);
-    var wrap = _this.parent(".num-wrap");
-    var text = wrap.find(".num-text");
-    var lower = wrap.find(".num-lower");
-    var a=text.val();
-    a++;
-    text.val(a);
-    if(text.val() == 1){
-        lower.addClass("first");
-    }else{
-        lower.removeClass("first");
-    }
-    var key=_this.parents(".coupon-product").data('id');
-    var img_url=_this.parents(".coupon-product").find("img").attr('src');
-    var price=_this.parents(".coupon-product").data('param');
-    var qty=_this.parents(".coupon-product").find('.num-text').val();
-    var total=FloatMul(price,qty);
-//console.log("1111111=>"+qty);
-    Gooddisplaywiget(key,qty,price,total,img_url,text);
-
-    $.showLoading("正在提交");
-});
-function Gooddisplaywiget(key,qty,price,total,img_url,text){
-
-
-    $.post("<?=\yii\helpers\Url::to(['/coupon/ajax-cart'],true)?>",{'data':[{'id':key,'qty':qty}]},function(data){
-        $.hideLoading();
-        if(!data.status){
-            $.alert(data.message);
-            qty = data.max_buy_quantity.max_quantity;
-
-            text.val(qty);
-            if(coupon_data[key]){
-                if(qty==0){
-                    delete coupon_data[key];
-                }else{
-                    coupon_data[key].qty=qty;
-                    coupon_data[key].price=price;
-                    coupon_data[key].total=total;
-                }
-            }else{
-                coupon_data[key]={
-                    id:key,
-                    price:price,
-                    qty:qty,
-                    total:total,
-                    src:img_url
-                };
-            }
-            fillingHtml(coupon_data);
-            return false;
-        }else{
-            //console.log("222222=>"+qty);
-            if(coupon_data[key]){
-               // console.log("333333=>"+qty);
-                if(qty==0){
-                    delete coupon_data[key];
-                }else{
-                    coupon_data[key].qty=qty;
-                    coupon_data[key].price=price;
-                    coupon_data[key].total=total;
-                }
-            }else{
-                coupon_data[key]={
-                    id:key,
-                    price:price,
-                    qty:qty,
-                    total:total,
-                    src:img_url
-                };
-            }
-            console.log(coupon_data);
-            fillingHtml(coupon_data);
-        }
-    },'json');
-
-
-
-}
- function fillingHtml(carts) {
-     console.log(carts);
-     var sub_total=0;
-     var sub_qty=0;
-     var list_data=new Array();
-     $.each(carts,
-         function(index, value)
-         {
-             sub_total=FloatAdd(sub_total,value.total);
-             sub_qty=FloatAdd(sub_qty,value.qty);
-             list_data.push(value);
-         }
-     );
-     console.log('subtotal=>'+sub_total);
-    var tpl=$("#goodlist_tpl").html();
-    var html_data= template(tpl, {list:list_data});
-    if(list_data.length){
-        $('#coupon-product-list').html(html_data);
-        $(".veiwport").addClass("pb100");
-    }else{
-        $('#coupon-product-list').html("");
-        $(".veiwport").removeClass("pb100");
-    }
-    var status=true;
-    if(sub_total < <?=$model->total?>){
-        status=false;
-        $("#coupon_msg").html("还差￥"+FloatSub(<?=$model->total?>,sub_total)+'元可用');
-    }
-    if(sub_qty < <?=$model->limit_min_quantity?$model->limit_min_quantity:0?>){
-        status=false;
-        $("#coupon_msg").html("还差￥"+FloatSub(<?=$model->limit_min_quantity?>,sub_qty)+'个数量可用');
-    }
-    if(status){
-        $("#coupon_btn_submit").removeClass('disbtn graybtn').addClass("greenbtn");
-        $("#coupon_msg").html("");
-    }else{
-        $("#coupon_btn_submit").addClass('disbtn graybtn').removeClass("greenbtn");
-    }
-    $("#sub_total").html(sub_total);
-    
-}
-$(".num-lower").click(function(){
-    var _this = $(this);
-    var wrap = _this.parent(".num-wrap");
-    var text = wrap.find(".num-text");
-    var lower = wrap.find(".num-lower");
-    var a=text.val();
-    if(a>0){
-        a--;
-    }
-    text.val(a);
-    if(text.val() == 1){
-        lower.addClass("first");
-    }else{
-        lower.removeClass("first");
-    }
-    var key=_this.parents(".coupon-product").data('id');
-    var img_url=_this.parents(".coupon-product").find("img").attr('src');
-    var price=_this.parents(".coupon-product").data('param');
-    var qty=_this.parents(".coupon-product").find('.num-text').val();
-    var total=FloatMul(price,qty);
-    Gooddisplaywiget(key,qty,price,total,img_url,text);
-});
-$(".numDynamic .num-add").click(function(){
-    var text = $(this).siblings(".num-text");
-    if(parseInt(text.val()) > 0){
-        $(this).siblings(".num-lower").show();
-        $(this).siblings(".num-text").show();
-    }else{
-        $(this).siblings(".num-lower").hide();
-        $(this).siblings(".num-text").hide();
-    }
-})
-$(".numDynamic .num-lower").click(function(){
-    var text = $(this).siblings(".num-text");
-    if(parseInt(text.val()) > 0){
-        $(this).show();
-        $(this).siblings(".num-text").show();
-    }else{
-        $(this).hide();
-        $(this).siblings(".num-text").hide();
-        $(this).siblings(".num-add").hide();
-        $(this).siblings(".add-click").show();
-    }
-})
-$("body").on('click','#coupon_btn_submit',function(){
-    alert('提交订单成功 （测试）');
-    //$.showLoading("正在加载");
-    //$.post("<?//=\yii\helpers\Url::to(['/coupon/ajax-cart','is_push'=>1],true)?>//",{'data':coupon_data},function(data){
-    //    $.hideLoading();
-    //    if(data.status){
-    //        location.href=data.redirect;
-    //    }else{
-    //        $.alert(data.message);
-    //    }
-    //},'json');
-});
-
-});
-<?php $this->endBlock() ?>
 </script>
 <script>
 <?php $this->beginBlock("JS_QQDiTu") ?>
