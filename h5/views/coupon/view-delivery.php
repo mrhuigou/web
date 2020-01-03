@@ -241,11 +241,6 @@ $("body").on("click",".SubmitBtn",function () {
 <?php $this->endBlock() ?>
 </script>
 
-
-
-<?php
-$this->registerJs($this->blocks['JS_SKU'], \yii\web\View::POS_END);
-?>
 <?php
 $this->registerJs($this->blocks['JS_QQDiTu'], \yii\web\View::POS_READY);
 $this->registerJsFile("/assets/script/jqweui-picker.js",['depends'=>\h5\assets\AppAsset::className()]);
