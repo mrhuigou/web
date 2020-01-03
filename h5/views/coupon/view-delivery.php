@@ -87,6 +87,8 @@ $this->title ='优惠券详情';
 		</div>
 	</div>
 </div>
+<?php $store_id = 1;//家润?>
+<?= h5\widgets\Checkout\Delivery::widget(['store_id' => $store_id]) ?>
 <script type="text/html" id="goodlist_tpl">
 	<div class=" w bdb  ellipsis "  style="overflow-x: auto;white-space: nowrap;">
 		<% $.each(coupon_data,
