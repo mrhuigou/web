@@ -150,6 +150,12 @@ $("#checkoutBtn").click(function(){
             data.push($(this).val());
         }
     });
+
+    console.log(111);
+    console.log(data);
+    alert(111);
+    alert(data);
+
     if(data.length>0){
     $.showLoading("正在提交");
     $('#form-checkout').submit();
