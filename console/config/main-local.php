@@ -34,6 +34,9 @@ return [
 				'old/order/cancel' => [
 					'cron'      => '*/3 * * * *',
 				],
+                'old/order/payment-notice' => [
+					'cron'      => '*/3 * * * *',
+				],
 				'old/stock/auto' => [
 					'cron'      => '*/3 * * * *',
 				],

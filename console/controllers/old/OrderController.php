@@ -788,6 +788,26 @@ class OrderController extends \yii\console\Controller {
 			echo "complate:" . date("Y-m-d H:i:s", time()) . "-----" . count($input_data);
 		}
 
+		//发送未支付订单订单（超过20分钟未支付）payment-notice
+        public function actionPaymentNotice()
+        {
+            $hour = 0.33;//提示时间
+            $order_datas = Order::find()->Where(['and', 'order_status_id=1', 'UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(date_added) >=' . $hour * 3600])
+                ->orderBy(['order_id' => 'SORT_ASC'])->asArray()->all();
+            if ($order_datas) {
+                foreach ($order_datas as $order_data) {
+                    if ($model = Order::findOne(['order_id' => $order_data['order_id']])) {
+                        if ($open_id = $model->customer->getWxOpenId()) {
+                            $message = "";
+                            $notice = new WxNotice();
+                            $notice->order($open_id, "http://m.mrhuigou.com/order/index", ['title' => '尊敬的每日惠购会员', 'order_no' => $model->order_no, 'total' => $model->total, 'status' => '订单超时，系统取消！', 'remark' => $message]);
+                        }
+                    }
+                }
+            }
+            echo "run time" . date("Y-m-d H:i:s", time());
+        }
+
 		//取消订单数据
 		public	function actionCancel()
 		{
