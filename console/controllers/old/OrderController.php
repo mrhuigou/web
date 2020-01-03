@@ -800,7 +800,7 @@ class OrderController extends \yii\console\Controller {
                         if ($open_id = $model->customer->getWxOpenId()) {
                             $message = "";
                             $notice = new WxNotice();
-                            $notice->order($open_id, "http://m.mrhuigou.com/order/index", ['title' => '尊敬的每日惠购会员', 'order_no' => $model->order_no, 'total' => $model->total, 'status' => '订单超时，系统取消！', 'remark' => $message]);
+                            $notice->order($open_id, "http://m.mrhuigou.com/order/index", ['title' => '尊敬的每日惠购会员', 'order_no' => $model->order_no, 'total' => $model->total, 'status' => '订单未支付，请及时支付！', 'remark' => $message]);
                         }
                     }
                 }
