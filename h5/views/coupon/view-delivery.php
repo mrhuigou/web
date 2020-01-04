@@ -44,7 +44,7 @@ $this->title ='优惠券详情';
 <!--        </div>-->
 		<?php if($coupon_product){ ?>
 			<?php foreach($coupon_product as $value){?>
-                <?php if($value->product->stockCount >0){ ?>
+<!--                --><?php //if($value->product->stockCount >0){ ?>
 		<div class="flex-col mb5 br5 whitebg f12 bs coupon-product ml10 mr10" data-id="<?=$value->product->product_id?>" data-param="<?=$value->product->getPrice()?>">
 			<div class="flex-item-4 tc pt5 pb5">
 				<a href="<?=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product->product_code,'shop_code'=>$value->product->store_code])?>"><img src="<?=\common\component\image\Image::resize($value->product->image,100,100)?>" alt="商品图片" width="95" height="95"></a>
@@ -69,7 +69,7 @@ $this->title ='优惠券详情';
 				</div>
 			</div>
 		</div>
-                <?php } ?>
+<!--                --><?php //} ?>
 			<?php } ?>
 		<?php } ?>
 	</div>
