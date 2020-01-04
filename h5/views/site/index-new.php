@@ -19,7 +19,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         </div>
     <?php }else{?>
     <a href="javascript:;" class="header-left" id="show-notification">
-        <img src="/assets/images/logo2.png" width="110" style="margin-top: -6px;">
+        <img src="/assets/images/logo2.jpg" width="110" style="margin-top: -6px;">
     </a>
     <!--20150609-->
     <div class="header-search clearfix pr">
