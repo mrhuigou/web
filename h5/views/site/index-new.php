@@ -651,7 +651,7 @@ $this->registerCssFile('https://code.jquery.com/ui/1.11.4/themes/smoothness/jque
 $this->registerJsFile('/assets/script/auto_product_name.js',['depends'=>['h5\assets\AppAsset'],'position' => \yii\web\View::POS_END]);
 ?>
 <?= h5\widgets\MainMenu::widget(); ?>
-<?=\h5\widgets\Block\Share::widget();?>
+<?//=\h5\widgets\Block\Share::widget();?>
 <?php
 if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     $data = [
