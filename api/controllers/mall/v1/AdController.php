@@ -23,22 +23,22 @@ class AdController extends Controller {
 			if ($code = \Yii::$app->request->get('code')) {
 				/*获取滚动banner*/
 				$advertise = new AdvertiseDetail();
-				if($code == "H5-0F-AD"){//首页爆品
+//				if($code == "H5-0F-AD"){//首页爆品
 //                    $advertise_detail = AdvertiseDetail::find()->where(["and", "date_start<'" . date('Y-m-d H:i:s') . "'", "date_end>'" . date('Y-m-d H:i:s') . "'", 'status=1'])->andWhere(['advertise_position_code' => $code])->orderBy("sort_order ASC, position_priority ASC")->all();
-                    $details = '[
-                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""},
-                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
-                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
-                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
-                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
-                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
-                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
-                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
-                        ]';
-                    $details = json_decode($details);
-                }else{
+//                    $details = '[
+//                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""},
+//                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
+//                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
+//                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
+//                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
+//                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
+//                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
+//                        {"title":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}
+//                        ]';
+//                    $details = json_decode($details);
+//                }else{
                     $details = $advertise->getAdvertiserDetailByPositionCode($code);
-                }
+//                }
 
 
 			} else {
