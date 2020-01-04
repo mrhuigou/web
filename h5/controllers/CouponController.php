@@ -134,6 +134,7 @@ class CouponController extends \yii\web\Controller
                     }
                     return $this->redirect('/');
                 } else {
+                    var_dump($coupon_product);die;
                     return $this->render('view-delivery',['model'=>$model,'coupon_product'=>$coupon_product,'customer_coupon'=>$customer_coupon]);
 
                 }
