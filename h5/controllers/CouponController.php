@@ -167,6 +167,8 @@ class CouponController extends \yii\web\Controller
 
                 if ($model->load(Yii::$app->request->post()) && $order_no = $model->submit()) {
 
+                    echo "<pre>";
+                    var_dump(Yii::$app->request->post());die;
                     return $this->redirect('/');
                 } else {
                     return $this->render('view-delivery',['model'=>$model,'coupon_product'=>$coupon_product,'customer_coupon'=>$customer_coupon]);

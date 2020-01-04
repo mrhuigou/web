@@ -7,7 +7,7 @@
  */
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-$this->title ='优惠券详情';
+$this->title ='提货券详情';
 ?>
 <style>
     .activity-1-coupon::after, .activity-1-coupon::before {
