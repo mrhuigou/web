@@ -28,6 +28,10 @@ class AdController extends Controller {
                     $details = '[
                         {"id":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""},
                         {"id":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}    
+                        {"id":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}    
+                        {"id":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}    
+                        {"id":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}    
+                        {"id":"01","source_url":"group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg","link_url":"https://m.mrhuigou.com/DP0001-508140.html","width":"","height":""}    
                         ]';
                     $details = json_decode($details);
                 }else{
