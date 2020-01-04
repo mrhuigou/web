@@ -56,7 +56,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
             </li>
             <?php }?>
             <li>
-                <a href="tel:4008556977">
+                <a href="tel:0532-55769778">
                     <i class="iconfont vm mr5">&#xe65e;</i>
                     <span class="vm">客服</span>
                 </a>

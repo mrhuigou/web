@@ -8,7 +8,8 @@
 ?>
 <div class="ts">
 <div class="tit1 bluetit1">
-	<h2>特色栏目 <a class="fr f12 red mt2" href="<?=\yii\helpers\Url::to(['/read-more/index','subject'=>'PANIC'])?>">更多&gt;&gt;</a></h2>
+	<h2>特色栏目
+<!--        <a class="fr f12 red mt2" href="--><?//=\yii\helpers\Url::to(['/read-more/index','subject'=>'PANIC'])?><!--">更多&gt;&gt;</a></h2>-->
 
 </div>
 <div class="bg-wh pt15" style="padding-left:0.75rem;">
