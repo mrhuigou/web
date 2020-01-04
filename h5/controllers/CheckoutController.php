@@ -25,6 +25,7 @@ use yii\base\ErrorException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\httpclient\Client;
+use yii\web\NotFoundHttpException;
 
 class CheckoutController extends \yii\web\Controller {
 	public $order_product_rate = [];
