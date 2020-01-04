@@ -16,32 +16,7 @@ $this->title ='优惠券详情';
 </style>
 <?=h5\widgets\Header::widget(['title'=>$this->title])?>
 <section class="veiwport">
-	<div class=" pb50 mb20">
-<!--        <div class="br5 bg-wh mb10 activity-1-coupon m10">-->
-<!--            <div class="flex-col bd-d-b">-->
-<!--                <div class="flex-item-7">-->
-<!--                    <h3 class="red pt5 mt1">--><?//=$model->name?><!--</h3>-->
-<!--                    <span class="gray9">--><?//=$model->comment?$model->comment:$model->description?><!--</span>-->
-<!--					--><?php //if($model->max_discount){?>
-<!--                        <span class="red">最高抵用￥--><?//=$model->max_discount?><!--</span>-->
-<!--					--><?php //} ?>
-<!--                </div>-->
-<!--                <div class="flex-item-5 red tr">-->
-<!--	                --><?php //if($model->model!=='BUY_GIFTS'){?>
-<!--		                --><?php //if($model->type=='F'){?>
-<!--                            <span class="f25">￥</span><span class="f40">--><?//=$model->getRealDiscount()?><!--</span>-->
-<!--		                --><?php //}else{?>
-<!--                            <span class="f40">--><?//=$model->getRealDiscount()?><!--</span><span class="f25">折</span>-->
-<!--		                --><?php //} ?>
-<!--	                --><?php //}?>
-<!--                </div>-->
-<!--            </div>-->
-<!--	        --><?php //if($customer_coupon){?>
-<!--            <div class="f14 pt5">-->
-<!--            <span class="gray9">截止：--><?//=date('m-d',strtotime($customer_coupon->start_time))?><!--~--><?//=date('m-d H:i',strtotime($customer_coupon->end_time))?><!--</span>-->
-<!--            </div>-->
-<!--	        --><?php //} ?>
-<!--        </div>-->
+	<div class=" pb40 mb20">
 		<?php if($coupon_product){ ?>
 			<?php foreach($coupon_product as $value){?>
 <!--                --><?php //if($value->product->stockCount >0){ ?>
@@ -56,12 +31,12 @@ $this->title ='优惠券详情';
                 <p class="row-one red f13 mt5"><?php echo $value->product->description->meta_description?></p>
                 <div class="pt10">
 
-					<div class="num-wrap num2 fr pr10 mt2 numDynamic ">
-						<span class="num-lower iconfont"  style="display:none;"></span>
-						<input type="text" value="0" class="num-text" style="display:none;">
-						<span class="num-add iconfont" style="display:none;"></span>
-                        <div class="add-click"><i class="iconfont"></i></div>
-					</div>
+<!--					<div class="num-wrap num2 fr pr10 mt2 numDynamic ">-->
+<!--						<span class="num-lower iconfont"  style="display:none;"></span>-->
+<!--						<input type="text" value="0" class="num-text" style="display:none;">-->
+<!--						<span class="num-add iconfont" style="display:none;"></span>-->
+<!--                        <div class="add-click"><i class="iconfont"></i></div>-->
+<!--					</div>-->
 					<p>
 						<span class="red f20 mr5 ">￥<?=$value->product->getPrice()?></span>
 						<span class="gray9 del">￥<?=$value->product->price?></span>
@@ -112,6 +87,7 @@ $this->title ='优惠券详情';
 <?= $form->field($model, 'poiname',['template' => '{input}'])->hiddenInput(['id' => 'poiname']) ?>
 <?= $form->field($model, 'district',['template' => '{input}'])->hiddenInput(['id' => 'district'])?>
 <?= $form->field($model, 'coupon_id',['template' => '{input}'])->hiddenInput(['id' => 'coupon_id'])?>
+<?= $form->field($model, 'product_id',['template' => '{input}'])->hiddenInput(['id' => 'product_id'])?>
 <??>
     <ul class="line-book mt5">
     <?php if(!$model->in_range == 1){?>
@@ -147,14 +123,6 @@ $this->title ='优惠券详情';
     <?= $form->field($model, 'address',['template' => '{label}<li>{input}</li>{error}'])->textarea(["placeholder" => '小区/写字楼/街道+楼号+楼层等','id'=>'address','class'=>'w f14 ','rows'=>2,'style'=>"height:45px;padding:5px;"])->label('详细地址')?>
     <?= $form->field($model, 'username', ['inputOptions' => ["placeholder" => '请填写收货人姓名']])->label('收货人') ?>
     <?= $form->field($model, 'telephone', ['inputOptions' => ["placeholder" => '请填写收货人电话号码']])->label('手机号') ?>
-    <?php if(!$model->in_range == 1){?> <??>
-        <?= $form->field($model, 'is_default',['template' => "<div class='p5'>{input} {label}</div>",])->hiddenInput([
-            'template' => "<div class='p5'>{input} {label}</div>",
-            'value'=>0
-        ])->label(false) ?>
-    <?php }else{?>
-        <?= $form->field($model, 'is_default')->checkbox(['template' => "<div class='p5'>{input} {label}</div>"])->label('默认地址') ?>
-    <?php }?>
 </ul>
 <?php $store_id = 1;//家润?>
 <?= h5\widgets\Checkout\Delivery::widget(['store_id' => $store_id]) ?>
@@ -173,36 +141,24 @@ $this->title ='优惠券详情';
 		<% }); %>
 	</div>
 </script>
+
 <script>
 <?php $this->beginBlock("JS_QQDiTu") ?>
-//window.addEventListener('message', function(event) {
-//    $("#map-contain").hide();
-//    $.showIndicator();
-//// 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
-//    var loc = event.data;
-//    console.log(loc);
-//    if (loc && loc.module == 'locationPicker') {//防止其他应用也会向该页面post信息，需判断module是否为'locationPicker'
-//        $.post('<?//=\yii\helpers\Url::to('/address/geo')?>//',{lat:loc.latlng.lat,lng:loc.latlng.lng},function(data){
-//            if(data){
-//                if(loc.poiname=="我的位置"){
-//                    $("#poiname").val(data.title);
-//                    $("#poiaddress").val(data.address);
-//                    $("#address").val(data.address+data.title);
-//                }else{
-//                    $("#poiname").val(loc.poiname);
-//                    $("#poiaddress").val(loc.poiaddress.replace(data.province+data.city,""));
-//                    $("#address").val(loc.poiaddress.replace(data.province+data.city,"")+loc.poiname);
-//                }
-//                $("#province").val(data.province);
-//                $("#city").val(data.city);
-//                $("#district").val(data.district);
-//                $("#address-lat").val(data.lat);
-//                $("#address-lng").val(data.lng);
-//            }
-//        });
-//        $.hideIndicator();
-//    }
-//}, false);
+
+var key = 515537;
+var qty = 1;
+$.post("<?=\yii\helpers\Url::to(['/coupon/ajax-cart-new'],true)?>",{'data':[{'id':key,'qty':qty}]},function(data){
+    $.hideLoading();
+    alert(data.status);
+    if(!data.status){
+        alert('false')
+        return false;
+    }else{
+        alert('true')
+    }
+},'json');
+
+
 $("#pop-map").click(function(){
     $("#map-contain").show();
 });
@@ -246,4 +202,6 @@ $this->registerJs($this->blocks['JS_QQDiTu'], \yii\web\View::POS_READY);
 $this->registerJsFile("/assets/script/jqweui-picker.js",['depends'=>\h5\assets\AppAsset::className()]);
 $this->registerJsFile("/assets/script/jqweui-city-picker.js",['depends'=>\h5\assets\AppAsset::className()]);
 ?>
+
+
 

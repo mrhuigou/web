@@ -7,6 +7,7 @@ use api\models\V1\CouponRules;
 use api\models\V1\CouponRulesDetail;
 use api\models\V1\Order;
 use api\models\V1\Product;
+use api\models\V1\Store;
 use common\component\Track\Track;
 use h5\models\ViewDeliveryForm;
 use Yii;
@@ -103,10 +104,12 @@ class CouponController extends \yii\web\Controller
                 }
             }
             $coupon_product=[];
+            $product_id=[];
             if($coupon->product){
-                foreach($coupon->product as $product){
+                foreach($coupon->product as $key => $product){
                     if($product->status){
                         $coupon_product[]=$product;
+                        $product_id[] = $product->product_id;
                     }
                 }
             }
@@ -125,9 +128,41 @@ class CouponController extends \yii\web\Controller
                 }else{
                     $model->in_range = 1;
                 }
-                $model->coupon_id = $id;
-//                echo "<pre>";
-//                var_dump(Yii::$app->request->post());die;
+
+                $model->product_id = 3532;
+//                    echo "<pre>";
+//                    var_dump(Yii::$app->request->post());die;
+
+                $cart = json_decode($model->product_id,true);
+//                $cart = [
+//                    [
+//                        'store_id' => 1,
+//                        'product_id' => 16209,
+//                    ],
+//                    [
+//                        'store_id' => 1,
+//                        'product_id' => 16208,
+//                    ],
+//
+//                ];
+//                foreach ($cart as $value) {
+////                    var_dump($value);die;;
+////                    if (!$value->hasStock()) {
+////                        return $this->redirect(['/cart/index']);
+////                    }
+//                    $cart_datas[$value['store_id']][] = $value;
+//
+//                    $product = Product::findOne(['product_id'=>$value['product_id']]);
+////                    var_dump($product);die;
+//                    if($product && $product->warehouseStock){
+//                        $cart_warehouses[$product->warehouseStock->warehouse_id][] = $value;//按仓库id分组
+//                    }
+//                }
+                $comfirm_orders = [];
+
+
+
+
                 if ($model->load(Yii::$app->request->post()) && $model->submit()) {
                     if(empty(Yii::$app->request->post()['Coupon']['address'])){
                         exit('hfshofh');
@@ -201,6 +236,73 @@ class CouponController extends \yii\web\Controller
                         }
                     }
 	            $data= ['status' => 1, 'redirect' =>Url::to(['/cart/index'])];
+            }else{
+                throw new ErrorException('请选以下商品加入购物车！');
+            }
+
+        } catch (ErrorException $e) {
+
+            $data = ['status' => 0, 'message' => $e->getMessage(),'max_buy_quantity'=>$max_buy_quantity];
+        }
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $data;
+    }
+
+    public function actionAjaxCartNew(){
+        $data =[];
+        $max_buy_quantity = [];
+        try{
+            if (\Yii::$app->user->isGuest) {
+                throw new ErrorException('登录后领取哦~');
+            }
+            if($data=Yii::$app->request->post('data')){
+
+                foreach($data as $value){
+                    $max_buy_quantity = [];
+                    if($model=Product::findOne(['product_id'=>$value['id']])){
+                        $qty = $value['qty'];
+                        if ($model) {
+                            if ($stock_count = $model->getStockCount()) {
+                                if ($limit_max_qty = $model->getLimitMaxQty(\Yii::$app->user->getId())) {
+                                    $stock_count = min($limit_max_qty, $stock_count);
+                                }
+                            }
+                        }
+                        if ($stock_count > 0) {
+                            if (\Yii::$app->cart->hasPosition($model->getCartPosition()->getId())) {
+                                $position = \Yii::$app->cart->getPositionById($model->getCartPosition()->getId());
+                                // \Yii::$app->cart->remove($model->getCartPosition());
+                                //$quantity = $qty + $position->getQuantity();
+                                if ($qty > 100 || $qty > $stock_count) {
+                                    $max_buy_quantity['product_id'] = $model->product_id;
+                                    $max_buy_quantity['max_quantity'] = min($stock_count, 100);
+                                    throw new ErrorException('最大可购买数' . min($stock_count, 100) . '件');
+                                }
+                            } else {
+                                if ($qty > 100 || $qty > $stock_count) {
+                                    $max_buy_quantity['product_id'] = $model->product_id;
+                                    $max_buy_quantity['max_quantity'] = min($stock_count, 100);
+                                    throw new ErrorException('最大可购买' . min($stock_count, 100) . '件');
+                                }
+                            }
+
+
+                            if(\Yii::$app->cart->hasPosition($model->getCartPosition()->getId())){
+                                \Yii::$app->cart->update($model->getCartPosition(), $value['qty']);
+                            }else{
+                                \Yii::$app->cart->put($model->getCartPosition(), $value['qty']);
+                            }
+                            //if(Yii::$app->request->get('is_push')){
+                            //\Yii::$app->cart->put($model->getCartPosition(), $qty);
+                            //}
+                            $data = ['status' => 1, 'data' => \Yii::$app->cart->getCount()];
+                        }else {
+                            throw new ErrorException('库存不足');
+                        }
+
+                    }
+                }
+                $data= ['status' => 1, 'redirect' =>Url::to(['/cart/index'])];
             }else{
                 throw new ErrorException('请选以下商品加入购物车！');
             }
