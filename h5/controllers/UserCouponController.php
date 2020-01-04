@@ -17,7 +17,7 @@ class UserCouponController extends \yii\web\Controller {
 		}
 		$model = CustomerCoupon::find()->joinWith(['coupon' => function ($query) {
 			$query->andFilterWhere([">=", "jr_coupon.status", 1])
-//                ->andFilterWhere(["!=", "jr_coupon.is_entity", 1])
+                ->andFilterWhere(["!=", "jr_coupon.is_entity", 1])
             ;
 		}])->where(['customer_id' => \Yii::$app->user->identity->getId(), 'is_use' => 0])
 			->andWhere([">=", "end_time", date('Y-m-d H:i:s', time())]);
