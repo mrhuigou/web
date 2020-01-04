@@ -872,11 +872,12 @@ class OrderController extends \yii\console\Controller {
 						$order_history->comment = "订单超时，系统取消订单";
 						$order_history->date_added = date("Y-m-d H:i:s", time());
 						$order_history->save();
-						if ($open_id = $model->customer->getWxOpenId()) {
-							$message = "";
-							$notice = new WxNotice();
-							$notice->order($open_id, "http://m.mrhuigou.com/order/index", ['title' => '尊敬的每日惠购会员', 'order_no' => $model->order_no,'total' => $model->total, 'status' => '订单超时，系统取消！', 'remark' => $message]);
-						}
+						//取消发送
+//						if ($open_id = $model->customer->getWxOpenId()) {
+//							$message = "";
+//							$notice = new WxNotice();
+//							$notice->order($open_id, "http://m.mrhuigou.com/order/index", ['title' => '尊敬的每日惠购会员', 'order_no' => $model->order_no,'total' => $model->total, 'status' => '订单超时，系统取消！', 'remark' => $message]);
+//						}
 //						if($model->use_points){
 //                            $point_customer_flows = PointCustomerFlow::find()->where(['type'=>'order','type_id'=>$model->order_id])->all();
 //                            if($point_customer_flows){
