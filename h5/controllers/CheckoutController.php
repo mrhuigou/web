@@ -17,6 +17,7 @@ use api\models\V1\PromotionOrder;
 use common\behavior\NoCsrf;
 use common\component\Helper\Xcrypt;
 use h5\models\CheckoutForm;
+use h5\models\ViewDeliveryForm;
 use h5\widgets\Checkout\StorePromotion;
 use Yii;
 use api\models\V1\Store;
@@ -166,6 +167,172 @@ class CheckoutController extends \yii\web\Controller {
             'checkout_ad' => $checkout_ad
 		]);
 	}
+
+    /**
+     * @desc 提货券详情
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionViewDelivery(){
+
+        if($id = Yii::$app->request->get("id")){
+            $coupon = Coupon::findOne(['status'=>1,'coupon_id'=>$id]);
+        }
+
+        if($code =Yii::$app->request->get("code") ){
+            $coupon = Coupon::findOne(['status'=>1,'code'=>$code]);
+        }
+        if($coupon){
+            if(in_array($coupon->model,['ORDER','BUY_GIFTS'])){
+                if(!empty($coupon->redirect_url)){
+                    return $this->redirect($coupon->redirect_url);
+                }
+            }
+            $coupon_product=[];
+            $product_id=[];
+            if($coupon->product){
+                foreach($coupon->product as $key => $product){
+                    if($product->status){
+                        $coupon_product[]=$product;
+                        $product_id[] = $product->product_id;
+                    }
+                }
+            }
+            if($coupon_product){
+                $customer_coupon=CustomerCoupon::findOne(['customer_id'=>Yii::$app->user->getId(),'coupon_id'=>$id]);
+
+                $all_range = false;
+                if(Yii::$app->request->get('range') == 'all_range'){
+                    $all_range = true;
+                }
+
+                $model = new ViewDeliveryForm();
+
+                if($all_range){
+                    $model->in_range = 0;
+                }else{
+                    $model->in_range = 1;
+                }
+
+                $model->product_id = json_encode($product_id);
+//                    echo "<pre>";
+//                    var_dump(Yii::$app->request->post());die;
+
+
+                echo "<pre>";
+                var_dump(\Yii::$app->session->get('confirm_cart'));die;
+                if (!$cart = \Yii::$app->session->get('confirm_cart')){
+                    return $this->redirect('/cart/index');
+                }
+
+                $cart = json_decode($model->product_id,true);
+                $cart = [
+                    [
+                        'store_id' => 1,
+                        'product_id' => 16209,
+                    ],
+                    [
+                        'store_id' => 1,
+                        'product_id' => 16208,
+                    ],
+
+                ];
+                foreach ($cart as $value) {
+//                    var_dump($value);die;;
+//                    if (!$value->hasStock()) {
+//                        return $this->redirect(['/cart/index']);
+//                    }
+                    $cart_datas[$value['store_id']][] = $value;
+
+                    $product = Product::findOne(['product_id'=>$value['product_id']]);
+//                    var_dump($product);die;
+                    if($product && $product->warehouseStock){
+                        $cart_warehouses[$product->warehouseStock->warehouse_id][] = $value;//按仓库id分组
+                    }
+                }
+                $comfirm_orders = [];
+                if ($cart_datas) {
+//                    echo "<pre>";
+//                    var_dump($cart_datas);die;
+                    //分别统计每家店铺的数据
+                    foreach ($cart_datas as $key => $cart_data) {
+                        $comfirm_orders[$key]['base'] = Store::findOne(['store_id' => $key]);
+                        $comfirm_orders[$key]['products'] = $cart_data;
+                        $comfirm_orders[$key]['total'] = 0;
+                        $comfirm_orders[$key]['totals'] = [];
+                        $comfirm_orders[$key]['rate']=[];
+                        $comfirm_orders[$key]['promotion'] = [];
+                        $comfirm_orders[$key]['coupon_gift'] = [];
+
+                        //计算商品金额
+                        $this->getSubTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data);
+                        //计算运费金额
+                        $shipping_cost = 0;
+                        if ($deliveries = Yii::$app->request->post('CheckoutForm')) {
+                            $delivery = isset($deliveries['delivery'][$key]['type']) ? $deliveries['delivery'][$key]['type'] : 'delivery';
+                            if ($delivery == 'delivery') {
+                                $delivery_station_id = 0;
+                            } else {
+                                $delivery_station_id = isset($deliveries['delivery'][$key]['station_id']) ? $deliveries['delivery'][$key]['station_id'] : 0;
+                            }
+                        } else {
+                            $delivery_station_id = 0;
+                        }
+
+//                $shipping_cost = $stores_shipping[$key]['shipping_cost'];
+//                $comfirm_orders[$key]['totals'][] = $this->setTotalsData("固定运费",'shipping',$shipping_cost,2);
+//                $comfirm_orders[$key]['total'] = bcadd($comfirm_orders[$key]['total'],$shipping_cost,2);
+//				$this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id);
+
+                        if ($coupons = Yii::$app->request->post('CheckoutForm')) {
+                            $customer_coupon_id = isset($coupons['coupon'][$key]) ? $coupons['coupon'][$key] : [];
+                        } else {
+                            $customer_coupon_id = [];
+                        }
+
+                        //计算全局优惠券金额
+                        $this->getGlobalCouponTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $comfirm_orders[$key]['coupon_gift'],$comfirm_orders[$key]['rate']);
+                        //计算优惠金额
+                        $this->getCouponTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $customer_coupon_id, $shipping_cost, $comfirm_orders[$key]['coupon_gift'],$comfirm_orders[$key]['rate']);
+                        //订单满减金额
+                        $this->getOrderTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $comfirm_orders[$key]['promotion']);
+                        if($key ==1){
+//                    $this->getPointsTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data);
+                        }
+                        $this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id);
+                        //应付订单金额
+                        $this->getTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total']);
+
+                    }
+                }
+
+
+
+                if ($model->load(Yii::$app->request->post()) && $model->submit()) {
+                    if(empty(Yii::$app->request->post()['Coupon']['address'])){
+                        exit('hfshofh');
+                    }
+                    return $this->redirect('/');
+                } else {
+                    return $this->render('view-delivery',['model'=>$model,'coupon_product'=>$coupon_product,'customer_coupon'=>$customer_coupon]);
+
+                }
+            }else{
+                return $this->redirect('/');
+            }
+        }else{
+            throw new NotFoundHttpException('没有找到相关页面');
+        }
+
+    }
+
+
+
+
+
+
+
+
 
 	public function actionComplate()
 	{

@@ -17,7 +17,7 @@ if(in_array($model->coupon->code,$can_not_use_arr) && time() < strtotime('2017-1
 <?php if($can_not_use){?>
     <a href="javascript:void(0)" onclick="alert('母婴类折扣券，10月10日即可查看')">
 <?php }else{?>
-<a href="<?=\yii\helpers\Url::to(['/coupon/view-delivery','id'=>$model->coupon_id])?>">
+<a href="<?=\yii\helpers\Url::to(['/checkout/view-delivery','id'=>$model->coupon_id])?>">
 <?php }?>
 
 <div class="br5 bg-wh mb10 activity-1-coupon">
