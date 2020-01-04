@@ -147,6 +147,15 @@ $this->title ='优惠券详情';
 
 var key = 515537;
 var qty = 1;
+
+$.post('<?php echo \yii\helpers\Url::to(["/cart/submit-new"])?>',{data:data},function(res){
+    if(res.status){
+        alert(true)
+    }else{
+        $.hideLoading();
+        $.alert(res.message);
+    }
+},'json');
 $.post("<?=\yii\helpers\Url::to(['/coupon/ajax-cart-new'],true)?>",{'data':[{'id':key,'qty':qty}]},function(data){
     $.hideLoading();
     alert(data.status);
