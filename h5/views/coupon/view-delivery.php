@@ -145,27 +145,27 @@ $this->title ='优惠券详情';
 <script>
 <?php $this->beginBlock("JS_QQDiTu") ?>
 
-var key = 515537;
-var qty = 1;
-
-$.post('<?php echo \yii\helpers\Url::to(["/cart/submit-new"])?>',{data:data},function(res){
-    if(res.status){
-        alert(true)
-    }else{
-        $.hideLoading();
-        $.alert(res.message);
-    }
-},'json');
-$.post("<?=\yii\helpers\Url::to(['/coupon/ajax-cart-new'],true)?>",{'data':[{'id':key,'qty':qty}]},function(data){
-    $.hideLoading();
-    alert(data.status);
-    if(!data.status){
-        alert('false')
-        return false;
-    }else{
-        alert('true')
-    }
-},'json');
+// var key = 515537;
+// var qty = 1;
+// var data = [];
+//$.post('<?php //echo \yii\helpers\Url::to(["/cart/submit-new"])?>//',{data:data},function(res){
+//    if(res.status){
+//        alert(true)
+//    }else{
+//        $.hideLoading();
+//        $.alert(res.message);
+//    }
+//},'json');
+//$.post("<?//=\yii\helpers\Url::to(['/coupon/ajax-cart-new'],true)?>//",{'data':[{'id':key,'qty':qty}]},function(data){
+//    $.hideLoading();
+//    alert(data.status);
+//    if(!data.status){
+//        alert('false')
+//        return false;
+//    }else{
+//        alert('true')
+//    }
+//},'json');
 
 
 $("#pop-map").click(function(){

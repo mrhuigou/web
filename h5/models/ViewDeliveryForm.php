@@ -9,6 +9,7 @@
 namespace h5\models;
 
 
+use yii\base\InvalidParamException;
 use yii\base\Model;
 use api\models\V1\Address;
 use common\models\User;
@@ -55,7 +56,11 @@ class ViewDeliveryForm extends  Model
     public $delivery;
     public $cart_data;
     public $product_id;
-    public function __construct($config = [])
+    public $invoice_id;
+    public $comment;
+    public $order_product_paytotal;
+    public $order_coupon_product_rate;
+    public function __construct($comfirm_orders,$order_coupon_product_rate = [],$order_product_paytotal = [],$config = [])
     {
         if (\Yii::$app->session->get('checkout_address_id')) {
             $this->address_id = \Yii::$app->session->get('checkout_address_id');
@@ -107,8 +112,20 @@ class ViewDeliveryForm extends  Model
         }
         $this->has_other_zone=false;
 
-        //商品id
+        if (\Yii::$app->session->get('checkout_invoice_id')) {
+            $this->invoice_id = \Yii::$app->session->get('checkout_invoice_id');
+        }else{
+            $this->invoice_id = 0;//不需要发票
+        }
 
+        if ($comfirm_orders) {
+            $this->cart_data = $comfirm_orders;
+        } else {
+            throw new InvalidParamException("数据错误");
+        }
+
+        $this->order_product_paytotal = $order_product_paytotal;
+        $this->order_coupon_product_rate = $order_coupon_product_rate;
         parent::__construct($config);
     }
 
@@ -133,22 +150,30 @@ class ViewDeliveryForm extends  Model
     }
 
     public function submit()
-    {   //交易号
+    {
+
+        //交易号
         $trade_no = "";
 //		print_r($this->order_coupon_product_rate);
 //		print_r($this->order_product_rate);exit;
+
         if ($this->validate()) {
             $merge_order_ids = [];
             $merge_total = 0;
             $product_stock = [];
             $transaction = \Yii::$app->db->beginTransaction();
+            $post_data = json_decode(json_encode(Yii::$app->request->post()['ViewDeliveryForm']));
+//            echo "<pre>";
+//            var_dump($post_data);die;
             try {
-
                 foreach ($this->cart_data as $k => $order_data) {
                     $invoice_temp = ['不需要发票', '个人发票', '企业增值税普票','企业增值税专票'];
                     //订单主数据
                     $Order_model = new Order();
                     $Order_model->order_no = OrderSn::generateNumber();
+
+//                    echo "<pre>";
+//                    var_dump($order_data['products']);die;
                     $Order_model->order_type_code = $this->getOrderType($order_data['products']);
                     $Order_model->platform_id = $order_data['base']->platform_id;
                     $Order_model->platform_name = "每日惠购";
@@ -168,7 +193,6 @@ class ViewDeliveryForm extends  Model
                     $Order_model->total = $order_data['total'];
                     $Order_model->comment = $this->comment[$k];
                     $Order_model->order_status_id = 1;
-
                     if($affiliate_id = Yii::$app->session->get("from_affiliate_uid",0)){
                         $affiliate = Affiliate::findOne(['affiliate_id'=>$affiliate_id]);
                         if($affiliate && $affiliate->status ){//非智慧青岛
@@ -234,38 +258,40 @@ class ViewDeliveryForm extends  Model
 
                     //订单地址表数据
                     $shipping_address = [];
-                    if (($this->address_id) && isset($this->delivery[$k]) && ($delivery = $this->delivery[$k])) {
-                        if ($address = Address::findOne(['address_id' => $this->address_id, 'customer_id' => Yii::$app->user->getId()])) {
-                            $address_formart=$address->address_1;
+//                    if (($this->address_id) && isset($this->delivery[$k]) && ($delivery = $this->delivery[$k])) {
+//                        if ($address = Address::findOne(['address_id' => $this->address_id, 'customer_id' => Yii::$app->user->getId()])) {
+//                            $address_formart=$address->address_1;
                             $shipping_address = [
                                 'shipping_method' => '每日惠购配送',
                                 'shipping_code' => 'limit',
                                 'delivery_code' => 'limit',
-                                'delivery_date' => $delivery['date'],
-                                'delivery_time' => $delivery['time'],
+                                'delivery_date' => $post_data->delivery_date,
+                                'delivery_time' => $post_data->delivery_time,
                                 'delivery_station_id' => 0,
                                 'delivery_station_code' => '',
-                                'username' => $address->firstname,
-                                'telephone' => $address->telephone,
-                                'address' => $address_formart,
-                                'postcode' => $address->postcode,
-                                'zone' => $address->zone->name,
-                                'zone_code' => $address->zone->code,
-                                'zone_id' => $address->zone_id,
-                                'city' => $address->citys ? $address->citys->name : "",
-                                'city_code' => $address->citys ? $address->citys->code : "",
-                                'city_id' => $address->city_id,
-                                'district' => $address->district ? $address->district->name : "",
-                                'district_code' => $address->district ? $address->district->code : "",
-                                'district_id' => $address->district_id,
-                                'lat' => $address->lat,
-                                'lng' => $address->lng,
+                                'username' => $post_data->username,
+                                'telephone' => $post_data->telephone,
+                                'address' => $post_data->address,
+
+                                'postcode' => $post_data->postcode, //邮编
+                                'zone' => $post_data->province,
+                                'zone_code' => '',
+                                'zone_id' => '',
+                                'city' => $post_data->city ? $post_data->city : "",
+                                'city_code' => '',
+                                'city_id' => '',
+                                'district' => $post_data->district ? $post_data->district->name : "",
+                                'district_code' =>  '',
+                                'district_id' => '',
+                                'lat' => $post_data->lat,
+                                'lng' => $post_data->lng,
+
                                 'is_delivery' => 1,
                             ];
-                        } else {
-                            throw new \Exception("收货地址不存在");
-                        }
-                    }
+//                        } else {
+//                            throw new \Exception("收货地址不存在");
+//                        }
+
                     if ($shipping_address) {
                         $Order_Shipping = new OrderShipping();
                         $Order_Shipping->order_id = $Order_model->order_id;
@@ -302,16 +328,16 @@ class ViewDeliveryForm extends  Model
                     if (isset($order_data['products']) && $order_data['products']) {
                         foreach ($order_data['products'] as $product) {
 
-                            if(!$product->product->getStockCount()){
-                                throw new \Exception("库存不足");
-                            }
-                            $order_products_array[] = $product->product->product_id;
+//                            if(!$product->getStockCount()){
+//                                throw new \Exception("库存不足");
+//                            }
+                            $order_products_array[] = $product->product_id;
                             $product_price = $product->getPrice();
-                            $product_total = $product->getCost();
+                            $product_total = $product->getPrice() * 1;
                             $promotion_id = 0;
                             $promotion_detail_id = 0;
                             if ($product->promotion) {
-                                $promotion_id = $product->promotion->promotion_id;
+                                $promotion_id = $product->promotion_id;
                                 $promotion_detail_id = $product->promotion->promotion_detail_id;
                             }
 //							$product_base  = ProductBase::findOne(['product_base_id'=>$product->product->product_base_id]);
@@ -319,34 +345,35 @@ class ViewDeliveryForm extends  Model
 //                            $product_base->save();
                             $Order_product = new OrderProduct();
                             $Order_product->order_id = $Order_model->order_id;
-                            $Order_product->product_base_id = $product->product->product_base_id;
-                            $Order_product->product_base_code = $product->product->product_base_code;
-                            $Order_product->product_id = $product->product->product_id;
-                            $Order_product->product_code = $product->product->product_code;
-                            $Order_product->model = $product->product->model;
-                            $Order_product->name = $product->product->description->name;
+                            $Order_product->product_base_id = $product->product_base_id;
+                            $Order_product->product_base_code = $product->product_base_code;
+                            $Order_product->product_id = $product->product_id;
+                            $Order_product->product_code = $product->product_code;
+                            $Order_product->model = $product->model;
+                            $Order_product->name = $product->description->name;
                             $Order_product->quantity = $product->quantity;
                             $Order_product->price = $product_price;
                             $Order_product->total = $product_total;
-                            $Order_product->reward = $product->product->points;
-                            $Order_product->unit = $product->product->unit;
-                            $Order_product->format = $product->product->format;
-                            $Order_product->sku_name = $product->product->getSku();
-                            $Order_product->pay_total = $this->getOrderProductPayTotal($product->product->product_id, $product_total, $Order_model->store_id);
+                            $Order_product->reward = $product->points;
+                            $Order_product->unit = $product->unit;
+                            $Order_product->format = $product->format;
+                            $Order_product->sku_name = $product->getSku();
+                            $Order_product->pay_total = $this->getOrderProductPayTotal($product->product_id, $product_total, $Order_model->store_id);
                             $Order_product->refund_qty = 0;
                             $Order_product->promotion_id = $promotion_id;
                             $Order_product->promotion_detail_id = $promotion_detail_id;
-                            $Order_product->commission=$product->product->getCommission($Order_model->source_customer_id,$Order_product->pay_total);
+                            $Order_product->commission=$product->getCommission($Order_model->source_customer_id,$Order_product->pay_total);
                             if (!$Order_product->save(false)) {
                                 throw new \Exception("商品创建失败");
                             }
-                            $this->ProductPromotion($Order_product, $product, $Order_model, $product_stock);
+//                            $this->ProductPromotion($Order_product, $product, $Order_model, $product_stock);
                             $product_stock[] = [
                                 'product_code' => $Order_product->product_code,
                                 'qty' => $Order_product->quantity
                             ];
                         }
                     }
+
                     if(Yii::$app->session->get('source_from_uid')){
 
                         if(Yii::$app->session->get('source_from_uid')['value'] != Yii::$app->user->getId()){ //自己不能推荐给自己
@@ -384,6 +411,7 @@ class ViewDeliveryForm extends  Model
                     if (isset($order_data['coupon_gift']) && $order_data['coupon_gift']) {
                         $this->CouponGift($order_data['coupon_gift'], $Order_model->order_id, $product_stock);
                     }
+
                     //添加订单总计信息
                     if ($order_data['totals']) {
                         foreach ($order_data['totals'] as $total) {
@@ -425,6 +453,7 @@ class ViewDeliveryForm extends  Model
 
                         }
                     }
+
                     //添加订单历史记录
                     $Order_history = new OrderHistory();
                     $Order_history->order_id = $Order_model->order_id;
@@ -496,7 +525,14 @@ class ViewDeliveryForm extends  Model
                 }
                 $trade_no = $model->merge_code;
 
+                //直接更新订单状态
+//                $Order_model->order_status_id = 2;
+//                if (!$Order_model->save(false)) {
+//                    throw new \Exception("订单数据异常");
+//                }
+
                 $transaction->commit();
+
             } catch (\Exception $e) {
                 $transaction->rollBack();
                 throw new NotFoundHttpException($e->getMessage().' line:'.$e->getLine().' code:'.$e->getCode());
@@ -509,11 +545,100 @@ class ViewDeliveryForm extends  Model
     {
         $type = "normal";
         foreach ($cart as $product) {
-            if ($product->product->bepresell) {
+            if ($product->bepresell) {
                 $type = "presell";
                 break;
             }
         }
         return $type;
+    }
+
+    protected function getOrderCommission($total,$affiliate_id){
+        $commission=0;
+        if($model=Affiliate::findOne(['affiliate_id'=>$affiliate_id,'status'=>1])){
+            if($model->settle_type == 'order'){
+                if($model->settle_commission == 'P'){
+                    $commission = bcmul($model->commission,$total,2);
+                }else{
+                    $commission = $model->commission;
+                }
+            }elseif($model->settle_type == 'customer'){
+                $order_status_ids = [2,3,5,9,10,11];
+                $order_count = Order::find()->where(['customer_id'=>Yii::$app->user->getId(),'order_status_id'=>$order_status_ids])->andWhere(['and','date_added <"'.date("Y-m-d H:i:s", time()).'"'])->count();
+                if($order_count<1){
+                    if($model->settle_commission == 'P'){
+                        $commission = bcmul($model->commission,$total,2);
+                    }else{
+                        $commission = $model->commission;
+                    }
+                }
+            }
+        }
+        return $commission;
+    }
+
+    //订单商品进行折扣摊销
+    protected function getOrderProductPayTotal($product_id, $product_total, $store_id)
+    {
+        $order_product_paytotal = $this->order_product_paytotal;
+        if (isset($order_product_paytotal[$store_id]) && ($rate_datas = $order_product_paytotal[$store_id])) {
+            if (isset($rate_datas[$product_id])) {
+                $product_total = $rate_datas[$product_id];
+            }
+        }
+        return $product_total;//返回实付金额
+
+    }
+
+    private function notice_points($Order_model){  //添加 PointCustomerFlow 并未进行通知，通知应在支付成功时候通知
+        try{
+            if($Order_model && $Order_model->use_points){
+                $order_totals = $Order_model->orderTotals;
+                foreach ($order_totals as $total){
+                    if($total->code == 'points'){
+                        $point_customer = PointCustomer::findOne(['point_customer_id'=>$total->customer_code_id]);
+                        $use_point_balance = abs($total->value);
+                        $use_point = bcdiv($use_point_balance,$point_customer->point->rate,0);
+
+                        $user_points = $point_customer->point->pointByCurl;//获取该用户可用积分
+                        if($user_points >= $use_point){ //
+                            $point_customer_flow = new PointCustomerFlow();
+                            $point_customer_flow->point_customer_id = $total->customer_code_id;
+                            $point_customer_flow->customer_id = Yii::$app->user->getId();
+                            $point_customer_flow->description = '购物消费';
+                            $point_customer_flow->amount = -$use_point;
+                            $point_customer_flow->status = 1;//
+                            $point_customer_flow->points = 0;//没有实际意义，以后可以删除
+                            $point_customer_flow->remark = json_encode(['point_customer_id'=>$point_customer->point_customer_id,'order_id'=>$Order_model->order_id]);
+                            $point_customer_flow->date_added = date('Y-m-d H:i:s');
+                            $point_customer_flow->type = 'order';
+                            $point_customer_flow->type_id = $Order_model->order_id;
+                            $point_customer_flow->save(false);
+//                            if ($point_customer_flow->save(false)) {
+//                                $data['telephone'] = $Order_model->telephone;
+//                                $data['changeType'] = 2; //1增加 2扣除
+//                                $data['description'] = '订单消费';
+//                                $data['orderId'] = $Order_model->order_id;
+//                                $data['count'] = 1;
+//                                $data['status'] = 1;//扣减积分
+//                                $data['creditValue'] = $point_customer_flow->amount;
+//                                $data['changeDate'] = date('Y-m-d H:i:s');
+//                                $data['changeResource'] = 6;
+//                                $data['point_customer_flow_id'] = $point_customer_flow->point_customer_flow_id;
+//                                $point_customer->point->notice($data);
+//                            }
+                        }else{
+                            throw new \Exception("积分不足，请重新下单");
+                        }
+                    }
+
+                }
+            }
+
+
+        }catch (Exception $e){
+            throw new \Exception("积分异常:".$e->getMessage());
+        }
+
     }
 }
