@@ -23,7 +23,23 @@ class AdController extends Controller {
 			if ($code = \Yii::$app->request->get('code')) {
 				/*获取滚动banner*/
 				$advertise = new AdvertiseDetail();
-				$details = $advertise->getAdvertiserDetailByPositionCode($code);
+				if($code == "H5-0F-AD"){//首页爆品
+//                    $advertise_detail = AdvertiseDetail::find()->where(["and", "date_start<'" . date('Y-m-d H:i:s') . "'", "date_end>'" . date('Y-m-d H:i:s') . "'", 'status=1'])->andWhere(['advertise_position_code' => $code])->orderBy("sort_order ASC, position_priority ASC")->all();
+                    $details = [
+                        [   'title' => '79347537',
+                            'image' => Image::resize('group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg', '', ''),
+                            'url'=> Url::to('https://m.mrhuigou.com/DP0001-508140.html')
+                        ],
+                        [   'title' => '79347537',
+                            'image' => Image::resize('group1/M00/06/A2/wKgB7l4AW3KAC56WAABlWzmn_b4235.jpg', '', ''),
+                            'url'=> Url::to('https://m.mrhuigou.com/DP0001-508140.html')
+                        ],
+                        ];
+                }else{
+                    $details = $advertise->getAdvertiserDetailByPositionCode($code);
+                }
+
+
 			} else {
 				throw new BadRequestHttpException('错误请求', '1001');
 			}
