@@ -100,7 +100,9 @@ $this->title = '用户中心';
 <!--                    余额-->
 <!--                </a>-->
                 <a class="flex-item-4  flex-middle  p10 bdr " href="<?php echo \yii\helpers\Url::to(['/user-coupon/index-delivery']) ?>">
-                    <i class="aui-icon aui-icon-ticket org  "></i>
+                    <i class="aui-icon  org  ">
+                        <img src="/assets/images/thq.png" style="width: 23px;height: 23px;" alt="">
+                    </i>
                     提货券
                 </a>
                 <a class="flex-item-4  flex-middle bdr  p10" href="<?php echo \yii\helpers\Url::to(['/user-coupon/index']) ?>">
