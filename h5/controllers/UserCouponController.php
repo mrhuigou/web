@@ -77,7 +77,7 @@ class UserCouponController extends \yii\web\Controller {
 	}
 
     /**
-     * @desc 提货券
+     * @desc 提货券 激活
      */
 	public function actionDeliveryCard()
 	{
@@ -88,8 +88,6 @@ class UserCouponController extends \yii\web\Controller {
 			return $this->redirect(['/user/security-set-telephone', 'redirect' => '/user-coupon/card']);
 		}
 		$model = new CouponCardForm();
-//		echo "<pre>";
-//		var_dump(Yii::$app->request->post());die;
 		if ($model->load(Yii::$app->request->post()) && $customer_coupon=$model->save()) {
 			$this->SendNotice($customer_coupon->customer_coupon_id);
 			$coupon = Coupon::findOne(['coupon_id'=>$customer_coupon->coupon_id]);
@@ -97,7 +95,8 @@ class UserCouponController extends \yii\web\Controller {
 			    //
                   return $this->redirect(['/user-coupon/index']);
             }else{
-                return $this->redirect(['/coupon/view','id'=>$customer_coupon->coupon_id]);
+//                return $this->redirect(['/coupon/view-delivery','id'=>$customer_coupon->coupon_id]);
+                return $this->redirect(['/coupon/view-delivery','customer_coupon_id'=>$customer_coupon->customer_coupon_id]);
             }
 
 		}
