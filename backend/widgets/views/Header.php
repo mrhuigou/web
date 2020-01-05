@@ -4,7 +4,7 @@
     <div class="header-inner">
         <!-- BEGIN LOGO -->
         <a class="navbar-brand" href="<?=Yii::$app->homeUrl?>" style="padding: 5px 0;">
-            <img src="/assets/img/logo.png" alt="logo" class="img-responsive" />
+            <img src="/assets/img/logo_mrhg.jpg" alt="logo" class="img-responsive" />
         </a>
         <!-- END LOGO -->
         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
