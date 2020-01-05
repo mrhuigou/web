@@ -106,7 +106,7 @@ $this->context->layout = 'main_other';
 <?=\h5\widgets\Tools\Share::widget([
     'data'=>[
         'title' => '红包来袭，手慢无！！！',
-        'desc' => "每日惠购网，物美价廉，当日订单，当日送达。",
+        'desc' => "家润每日惠购网，物美价廉，当日订单，当日送达。",
         'link' => \yii\helpers\Url::to(['/share/subscription'],true),
         'image' => 'https://m.mrhuigou.com/images/gift-icon.jpg'
     ]
