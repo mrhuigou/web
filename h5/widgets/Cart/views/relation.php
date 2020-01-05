@@ -11,7 +11,7 @@
     <dt class=" f14 whitebg org fb tc bdt bdb">
     <div class="tit1 orgtit1 clearfix">
         <h2 class="fl f14">任选一件整单包邮</h2>
-        <a class="fr  org lh200 fn" href="<?php echo \yii\helpers\Url::to(['/page/index','page_id'=>1693]);?>">更多&gt;&gt;</a>
+        <a class="fr  org lh200 fn" href="https://m.mrhuigou.com/topic/detail?code=EPP001514">更多&gt;&gt;</a>
     </div>
     </dt>
     <dd>
