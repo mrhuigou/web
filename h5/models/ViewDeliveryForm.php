@@ -9,6 +9,11 @@
 namespace h5\models;
 
 
+use api\models\V1\City;
+use api\models\V1\District;
+use api\models\V1\Zone;
+use common\component\Curl\Curl;
+use common\component\Helper\Map;
 use yii\base\InvalidParamException;
 use yii\base\Model;
 use api\models\V1\Address;
@@ -60,6 +65,7 @@ class ViewDeliveryForm extends  Model
     public $comment;
     public $order_product_paytotal;
     public $order_coupon_product_rate;
+    public $store_id;
     public function __construct($comfirm_orders,$order_coupon_product_rate = [],$order_product_paytotal = [],$config = [])
     {
         if (\Yii::$app->session->get('checkout_address_id')) {
@@ -132,11 +138,18 @@ class ViewDeliveryForm extends  Model
     public function rules()
     {
         return [
-            [['province','city','district','address','username','telephone','is_default'], 'required'],
-            [['province','city','district','address','username','telephone','is_default'], 'safe'],
+            [['province','city','district','address','username','telephone'], 'required'],
+            [['province','city','district','address','username','telephone'], 'safe'],
             [['address_id', 'delivery'], 'safe'],
 //            [['address_id', 'delivery'], 'FormValidate'],
             //[['invoice_type'],'ValidateInvoice']
+            ['telephone', 'string', 'length' => 11],
+            ['username', 'string', 'min' => 1,'max'=>20],
+            ['address', 'string', 'min' => 1,'max'=>255],
+            [['address'],'poiValidate'],
+            [['postcode'], 'string', 'length' => 6],
+            [['lat','lng'],'safe'],
+            [['province','city','district'], 'string', 'min' => 1,'max'=>50],
         ];
     }
 
@@ -163,6 +176,7 @@ class ViewDeliveryForm extends  Model
             $product_stock = [];
             $transaction = \Yii::$app->db->beginTransaction();
             $post_data = json_decode(json_encode(Yii::$app->request->post()['ViewDeliveryForm']));
+            $post_delivery = Yii::$app->request->post()['CheckoutForm'];
 //            echo "<pre>";
 //            var_dump($post_data);die;
             try {
@@ -258,40 +272,36 @@ class ViewDeliveryForm extends  Model
 
                     //订单地址表数据
                     $shipping_address = [];
-//                    if (($this->address_id) && isset($this->delivery[$k]) && ($delivery = $this->delivery[$k])) {
-//                        if ($address = Address::findOne(['address_id' => $this->address_id, 'customer_id' => Yii::$app->user->getId()])) {
-//                            $address_formart=$address->address_1;
-                            $shipping_address = [
-                                'shipping_method' => '每日惠购配送',
-                                'shipping_code' => 'limit',
-                                'delivery_code' => 'limit',
-                                'delivery_date' => $post_data->delivery_date,
-                                'delivery_time' => $post_data->delivery_time,
-                                'delivery_station_id' => 0,
-                                'delivery_station_code' => '',
-                                'username' => $post_data->username,
-                                'telephone' => $post_data->telephone,
-                                'address' => $post_data->address,
-
-                                'postcode' => $post_data->postcode, //邮编
-                                'zone' => $post_data->province,
-                                'zone_code' => '',
-                                'zone_id' => '',
-                                'city' => $post_data->city ? $post_data->city : "",
-                                'city_code' => '',
-                                'city_id' => '',
-                                'district' => $post_data->district ? $post_data->district->name : "",
-                                'district_code' =>  '',
-                                'district_id' => '',
-                                'lat' => $post_data->lat,
-                                'lng' => $post_data->lng,
-
-                                'is_delivery' => 1,
-                            ];
-//                        } else {
-//                            throw new \Exception("收货地址不存在");
-//                        }
-
+                    if (($this->address_id) && isset($this->delivery[$k]) && ($delivery = $this->delivery[$k])) {
+                        $zone=Zone::findOne(['name'=>$this->province]);
+                        $city=City::findOne(['name'=>$this->city,'zone_id'=>$zone?$zone->zone_id:0]);
+                        $district=District::findOne(['name'=>$this->district,'city_id'=>$city?$city->city_id:0]);
+                        $shipping_address = [
+                            'shipping_method' => '每日惠购配送',
+                            'shipping_code' => 'limit',
+                            'delivery_code' => 'limit',
+                            'delivery_date' => $delivery['date'],
+                            'delivery_time' => $delivery['time'],
+                            'delivery_station_id' => 0,
+                            'delivery_station_code' => '',
+                            'username' => $this->username,
+                            'telephone' => $this->telephone,
+                            'address' => $this->address,
+                            'postcode' => $this->postcode, //邮编
+                            'zone' => $this->province,
+                            'zone_code' => $zone->code,
+                            'zone_id' => $zone?$zone->zone_id:0,
+                            'city' => $this->city ? $this->city : "",
+                            'city_code' => $city->code,
+                            'city_id' => $city?$city->city_id:0,
+                            'district' => $this->district ? $this->district : "",
+                            'district_code' => $district->code,
+                            'district_id' => $district?$district->district_id:0,
+                            'lat' => $this->lat,
+                            'lng' => $this->lng,
+                            'is_delivery' => 1,
+                        ];
+                    }
                     if ($shipping_address) {
                         $Order_Shipping = new OrderShipping();
                         $Order_Shipping->order_id = $Order_model->order_id;
@@ -638,6 +648,70 @@ class ViewDeliveryForm extends  Model
 
         }catch (Exception $e){
             throw new \Exception("积分异常:".$e->getMessage());
+        }
+
+    }
+
+
+    public function poiValidate($attribute, $params){
+        $center_lat=36.1516;
+        $center_lng=120.39822;
+        if(!$this->address) {
+            $this->addError($attribute,'请输入小区/写字楼/学校/街道等');
+        }
+        if($this->district == '请选择' || empty($this->district)){
+            $this->addError($attribute,'您的地址错误，请选择区域');
+        }
+        $curl=new Curl();
+        $url='http://apis.map.qq.com/ws/geocoder/v1/';
+        $result=$curl->get($url,['address'=>$this->city.$this->district.$this->address,'key'=>'GNWBZ-7FSAR-JL5WY-WIDVS-FHLY2-JVBEC']);
+        if($result && $result->status==0 && $result->result){
+            $this->lat=$result->result->location->lat;
+            $this->lng=$result->result->location->lng;
+            if($result->result->address_components->province){
+                $this->province=trim($result->result->address_components->province);
+            }
+            if($result->result->address_components->city){
+                $this->city=trim($result->result->address_components->city);
+            }
+//			if($result->result->address_components->district){
+//				$this->district=trim($result->result->address_components->district);
+//			}
+            if(!$this->poiname){
+                $this->poiname=$result->result->title;
+            }
+            if(!$this->poiaddress){
+                $this->poiaddress=$result->result->address_components->street.$result->result->address_components->street_number;
+            }
+        }else{
+            $this->addError($attribute,'您输入的地址不在配送范围之内!');
+        }
+        if($this->in_range == 1){
+            if($this->lat && $this->lng){
+                if($this->has_other_zone){
+                    if(($distance=Map::GetShortDistance($center_lng,$center_lat,$this->lng,$this->lat))>35*1000){
+                        $this->addError($attribute,'您输入的地址超出配送范围！');
+                    }
+                }else{
+                    if(($distance=Map::GetShortDistance($center_lng,$center_lat,$this->lng,$this->lat))>15*1000){
+                        $this->addError($attribute,'您输入的地址超出配送范围！');
+                    }
+                }
+            }
+            if($this->province && !in_array($this->province,['山东省'])){
+                $this->addError($attribute,'['.$this->province.']'.'超出配送范围，请重新选择！');
+            }
+            if($this->city && !in_array($this->city,['青岛市'])){
+                $this->addError($attribute,'['.$this->city.']'.'超出配送范围，请重新选择！');
+            }
+            // $district_array=['市南区','市北区','四方区','李沧区','崂山区','黄岛区'];
+            $active_districts = District::find()->select('name')->where(['is_use'=>1])->all();
+            foreach ($active_districts as $active_district){
+                $district_array[] = $active_district->name;
+            }
+            if($this->district && !in_array($this->district,$district_array)){
+                $this->addError($attribute,'['.$this->district.']'.'超出配送范围，请重新选择！');
+            }
         }
 
     }

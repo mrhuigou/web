@@ -21,15 +21,17 @@ $this->title ='提货券详情';
 			<?php foreach($coupon_product as $value){?>
 <!--                --><?php //if($value->product->stockCount >0){ ?>
 		<div class="flex-col mb5 br5 whitebg f12 bs coupon-product ml10 mr10" data-id="<?=$value->product->product_id?>" data-param="<?=$value->product->getPrice()?>">
-			<div class="flex-item-4 tc pt5 pb5">
-				<a href="<?=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product->product_code,'shop_code'=>$value->product->store_code])?>"><img src="<?=\common\component\image\Image::resize($value->product->image,100,100)?>" alt="商品图片" width="95" height="95"></a>
-
+			<div class="flex-item tc pt5 pb5">
+<!--				<a href="--><?//=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product->product_code,'shop_code'=>$value->product->store_code])?><!--">-->
+                    <img src="<?=\common\component\image\Image::resize($value->product->image,300,300)?>" alt="商品图片" width=100% >
+<!--                </a>-->
             </div>
-
-			<div class="flex-item-8 pt10">
-				<a href="<?=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product->product_code,'shop_code'=>$value->product->store_code])?>" class="f14"><?=$value->product->description->name?> <?php if($value->product->format){?>[<i class="format fb red"><?=$value->product->format?></i>]<?php }?></a>
-                <p class="row-one red f13 mt5"><?php echo $value->product->description->meta_description?></p>
-                <div class="pt10">
+			<div class="flex-item tc pt10">
+<!--				<a href="--><?//=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product->product_code,'shop_code'=>$value->product->store_code])?><!--" class="f14">-->
+<!--                    --><?//=$value->product->description->name?><!-- --><?php //if($value->product->format){?><!--[<i class="format fb red">--><?//=$value->product->format?><!--</i>]--><?php //}?>
+<!--                </a>-->
+                <p class="row-one red f30 mt5"><?php echo $value->product->description->meta_description?></p>
+<!--                <div class="pt10">-->
 
 <!--					<div class="num-wrap num2 fr pr10 mt2 numDynamic ">-->
 <!--						<span class="num-lower iconfont"  style="display:none;"></span>-->
@@ -37,11 +39,11 @@ $this->title ='提货券详情';
 <!--						<span class="num-add iconfont" style="display:none;"></span>-->
 <!--                        <div class="add-click"><i class="iconfont"></i></div>-->
 <!--					</div>-->
-					<p>
-						<span class="red f20 mr5 ">￥<?=$value->product->getPrice()?></span>
-						<span class="gray9 del">￥<?=$value->product->price?></span>
-					</p>
-				</div>
+<!--					<p>-->
+<!--						<span class="red f20 mr5 ">￥--><?//=$value->product->getPrice()?><!--</span>-->
+<!--						<span class="gray9 del">￥--><?//=$value->product->price?><!--</span>-->
+<!--					</p>-->
+<!--				</div>-->
 			</div>
 		</div>
 <!--                --><?php //} ?>
@@ -54,7 +56,7 @@ $this->title ='提货券详情';
     <!--		<p class="mb5 p5 lh130 whitebg bd-green"> 配送区域仅限：<span class="red">市南区、市北区、崂山区、李沧区、四方区、城阳区、黄岛区</span>。其它区域暂时尚未开通，敬请谅解。-->
     <!--		</p>-->
 <?php } else { ?>
-    <div class=" mb5 p5 lh130 whitebg bd-green"> 配送区域仅限：<span class="red">市南区、市北区、四方区、李沧区(部分)、崂山区(部分)、<span class="fb">黄岛(暂停配送)</span></span>。其它区域暂时尚未开通，敬请谅解。
+    <div class=" mb5 p5 lh130 whitebg bd-green"> 配送区域仅限：<span class="red">市南区、市北区、李沧区(部分)、崂山区(部分)、<span class="fb">黄岛(暂停配送)</span></span>。其它区域暂时尚未开通，敬请谅解。
         <span class="cp showM h unl green f12">查看详细</span>
         <p class="aboutAd dn">市区配送区域介绍： <span class="red">
                 1、西至西镇沿海/
@@ -72,7 +74,7 @@ $this->title ='提货券详情';
     </div>
 <?php } ?>
 
-<?php $action = \yii\helpers\Url::to([Yii::$app->request->getUrl()]);?>
+<?php $action = \yii\helpers\Url::to([Yii::$app->request->getUrl()]); ?>
 <?php $form = ActiveForm::begin(['id' => 'form-address', 'action'=>  $action,'fieldConfig' => [
     'template' => '<li><div class="t">{label}：</div><div class="c">{input}</div></li>{error}',
     'inputOptions' => ["class" => 'w f14'],
@@ -124,8 +126,7 @@ $this->title ='提货券详情';
     <?= $form->field($model, 'username', ['inputOptions' => ["placeholder" => '请填写收货人姓名']])->label('收货人') ?>
     <?= $form->field($model, 'telephone', ['inputOptions' => ["placeholder" => '请填写收货人电话号码']])->label('手机号') ?>
 </ul>
-<?php $store_id = 1;//家润?>
-<?= h5\widgets\Checkout\Delivery::widget(['store_id' => $store_id]) ?>
+<?= h5\widgets\Coupon\Delivery::widget(['store_id' => $model->store_id]) ?>
 <div class=" bdt  p10 w tc ">
     <a href="javascript:void(0)"  class='btn mbtn greenbtn w SubmitBtn'>提交订单 </a>
 </div>
@@ -192,12 +193,6 @@ $("body").on("click",".showM.s",function () {
     $(".aboutAd").hide();
 });
 $("body").on("click",".SubmitBtn",function () {
-    if( !$("#district").val() ||  $("#district").val() == '请选择'){
-        $('.error_district').html("请选择地区");
-        $('.error_district').show();
-
-    }
-
     $("#form-address").submit();
 });
 

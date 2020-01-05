@@ -94,11 +94,22 @@ class CouponController extends \yii\web\Controller
      */
     public function actionViewDelivery(){
 
-        if($id = Yii::$app->request->get("id")){
-            $coupon = Coupon::findOne(['status'=>1,'coupon_id'=>$id]);
+//        if($id = Yii::$app->request->get("id")){//提货券id
+//            $coupon = Coupon::findOne(['status'=>1,'coupon_id'=>$id]);
+//        }
+//        if($code =Yii::$app->request->get("code") ){
+//            $coupon = Coupon::findOne(['status'=>1,'code'=>$code]);
+//        }
+
+        if($customer_coupon_id =Yii::$app->request->get("customer_coupon_id") ){//用户券id
+            //用户券详细信息
+            $customer_coupon = CustomerCoupon::findOne(['customer_coupon_id'=>$customer_coupon_id]);
         }
-        if($code =Yii::$app->request->get("code") ){
-            $coupon = Coupon::findOne(['status'=>1,'code'=>$code]);
+
+        if($customer_coupon && $customer_coupon->is_use == 0 && $customer_coupon->end_time >= date('Y-m-d')){
+            $coupon = Coupon::findOne(['status'=>1,'coupon_id'=>$customer_coupon->coupon_id]);
+        }else{
+            throw new NotFoundHttpException('提货券已经使用或已经过期！');
         }
         if($coupon){
             if(in_array($coupon->model,['ORDER','BUY_GIFTS'])){
@@ -119,7 +130,6 @@ class CouponController extends \yii\web\Controller
                     }
                 }
             }
-            $customer_coupon=CustomerCoupon::findOne(['customer_id'=>Yii::$app->user->getId(),'coupon_id'=>$id]);
 
             $key =  $store_id = 1;//店铺默认为家润每日惠购
             if ($product_id) {
@@ -141,15 +151,13 @@ class CouponController extends \yii\web\Controller
                 //计算运费金额
                 $shipping_cost = 0;
                 $comfirm_orders[$key]['totals'][] = $this->setTotalsData("固定运费",'shipping',$shipping_cost,2);
-                $comfirm_orders[$key]['totals'][] = $this->setTotalsData($customer_coupon->coupon->name,'coupon',$customer_coupon->coupon->discount,2,['customer_code_id'=> $id]);
+                $comfirm_orders[$key]['totals'][] = $this->setTotalsData($customer_coupon->coupon->name,'coupon','-'.$customer_coupon->coupon->discount,2,['customer_code_id'=> $customer_coupon->customer_coupon_id ,'code_id' => $customer_coupon->coupon_id]);
                 $comfirm_orders[$key]['totals'][] = $this->setTotalsData("订单总计",'total',0,2);
 
             }
 
 
             if($coupon_product){
-                $customer_coupon=CustomerCoupon::findOne(['customer_id'=>Yii::$app->user->getId(),'coupon_id'=>$id]);
-
                 $all_range = false;
                 if(Yii::$app->request->get('range') == 'all_range'){
                     $all_range = true;
@@ -164,6 +172,7 @@ class CouponController extends \yii\web\Controller
                 }
                 $model->product_id = json_encode($product_id);
                 $model->coupon_id = $coupon->coupon_id;
+                $model->store_id = 1; //店铺id 默认为1 家润
 
                 if ($model->load(Yii::$app->request->post()) && $order_no = $model->submit()) {
 
@@ -171,7 +180,7 @@ class CouponController extends \yii\web\Controller
                     var_dump(Yii::$app->request->post());die;
                     return $this->redirect('/');
                 } else {
-                    return $this->render('view-delivery',['model'=>$model,'coupon_product'=>$coupon_product,'customer_coupon'=>$customer_coupon]);
+                    return $this->render('view-delivery',['model'=>$model,'coupon_product'=>$coupon_product]);
 
                 }
              }else{
