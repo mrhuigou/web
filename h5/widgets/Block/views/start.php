@@ -50,7 +50,7 @@ buttons: []
     <?php if(!$status){?>
     $.modal({
     title: "长按识别关注",
-    text: '<img src="/images/subcription_red.png" class="w"><i class="iconfont dialog-close weui_btn_dialog">&#xe612;</i>',
+    text: '<img src="/images/sub_rednew.jpg" class="w"><i class="iconfont dialog-close weui_btn_dialog">&#xe612;</i>',
     buttons: [
     { text: "<span>逛一逛，稍后在说</span>", className: "default"},
     ]

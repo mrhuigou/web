@@ -334,7 +334,7 @@ class WechatController extends Controller {
                     $msg = [
                         'title' => "亲，恭喜您获得新会员体验专属券,点击查看",
                         'description' => "",
-                        'picurl' => Image::resize("group1/M00/00/6F/wKgB-ForYouACx3nAACgPMNzAS0878.jpg", 360, 200),
+                        'picurl' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.jpg',
                         'url' => 'https://m.mrhuigou.com/user-coupon/index',
                     ];
                     \Yii::$app->wechat->sendNews($openid, [$msg]);

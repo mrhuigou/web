@@ -116,7 +116,7 @@ $this->registerJs($this->blocks['JS_SKU'], \yii\web\View::POS_READY);
             'title' => '每日惠购-'.$this->title,
             'desc' => "每日惠购网-生活用品，物美价廉，当天订单，当天送。",
             'link' => Yii::$app->request->getAbsoluteUrl(),
-            'image' => 'https://m.mrhuigou.com/assets/images/logo_300x300.png'
+            'image' => 'https://m.mrhuigou.com/assets/images/mrhuigou_logo.jpg'
         ];
     }
 ?>
