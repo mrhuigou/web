@@ -94,13 +94,6 @@ class CouponController extends \yii\web\Controller
      */
     public function actionViewDelivery(){
 
-//        if($id = Yii::$app->request->get("id")){//提货券id
-//            $coupon = Coupon::findOne(['status'=>1,'coupon_id'=>$id]);
-//        }
-//        if($code =Yii::$app->request->get("code") ){
-//            $coupon = Coupon::findOne(['status'=>1,'code'=>$code]);
-//        }
-
         if($customer_coupon_id =Yii::$app->request->get("customer_coupon_id") ){//用户券id
             //用户券详细信息
             $customer_coupon = CustomerCoupon::findOne(['customer_coupon_id'=>$customer_coupon_id]);
@@ -148,6 +141,7 @@ class CouponController extends \yii\web\Controller
 
                 //计算商品金额
                 $this->getSubTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $products);
+
                 //计算运费金额
                 $shipping_cost = 0;
                 $comfirm_orders[$key]['totals'][] = $this->setTotalsData("固定运费",'shipping',$shipping_cost,2);
@@ -696,7 +690,8 @@ class CouponController extends \yii\web\Controller
             'value' => $sub_total,
             'sort_order' => 1
         ];
-        $total = bcadd($total, $sub_total, 2);
+//        $total = bcadd($total, $sub_total, 2);
+        $total = bcadd($total, 0, 2); //团购商品总额为0
     }
 
     public function getGlobalCouponTotal(&$total_data, &$total, $cart, $store_id, $shipping_cost = 0, &$coupon_gift,&$rate){

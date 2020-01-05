@@ -175,10 +175,6 @@ class ViewDeliveryForm extends  Model
             $merge_total = 0;
             $product_stock = [];
             $transaction = \Yii::$app->db->beginTransaction();
-            $post_data = json_decode(json_encode(Yii::$app->request->post()['ViewDeliveryForm']));
-            $post_delivery = Yii::$app->request->post()['CheckoutForm'];
-//            echo "<pre>";
-//            var_dump($post_data);die;
             try {
                 foreach ($this->cart_data as $k => $order_data) {
                     $invoice_temp = ['不需要发票', '个人发票', '企业增值税普票','企业增值税专票'];
@@ -342,8 +338,9 @@ class ViewDeliveryForm extends  Model
 //                                throw new \Exception("库存不足");
 //                            }
                             $order_products_array[] = $product->product_id;
-                            $product_price = $product->getPrice();
-                            $product_total = $product->getPrice() * 1;
+                            $product_price = $product->getPrice();//单价
+                            $product_total = $product->getPrice() * 1;//总价
+                            $quantity = 1;//商品数量默认为1
                             $promotion_id = 0;
                             $promotion_detail_id = 0;
                             if ($product->promotion) {
@@ -361,14 +358,15 @@ class ViewDeliveryForm extends  Model
                             $Order_product->product_code = $product->product_code;
                             $Order_product->model = $product->model;
                             $Order_product->name = $product->description->name;
-                            $Order_product->quantity = $product->quantity;
+                            $Order_product->quantity = $quantity;//商品数量默认为1
                             $Order_product->price = $product_price;
                             $Order_product->total = $product_total;
                             $Order_product->reward = $product->points;
                             $Order_product->unit = $product->unit;
                             $Order_product->format = $product->format;
                             $Order_product->sku_name = $product->getSku();
-                            $Order_product->pay_total = $this->getOrderProductPayTotal($product->product_id, $product_total, $Order_model->store_id);
+//                            $Order_product->pay_total = $this->getOrderProductPayTotal($product->product_id, $product_total, $Order_model->store_id);
+                            $Order_product->pay_total = 0;//订单实付金额
                             $Order_product->refund_qty = 0;
                             $Order_product->promotion_id = $promotion_id;
                             $Order_product->promotion_detail_id = $promotion_detail_id;
