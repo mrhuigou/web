@@ -456,7 +456,7 @@ $this->title = "每日惠购";
     $this->registerJs($this->blocks['JS'], \yii\web\View::POS_READY);
     ?>
     <?= h5\widgets\MainMenu::widget(); ?>
-    <?=\h5\widgets\Block\Share::widget();?>
+<!--    --><?//=\h5\widgets\Block\Share::widget();?>
     <?php
      if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         $data = [

@@ -9,7 +9,7 @@ $this->title =  $page->description->title;
 </div>
 </section>
 <?= h5\widgets\MainMenu::widget(); ?>
-<?=\h5\widgets\Block\Share::widget();?>
+<?//=\h5\widgets\Block\Share::widget();?>
 <?php
 $this->registerJsFile("/assets/js/template.js",['position' => \yii\web\View::POS_HEAD]);
 $this->registerJsFile("/assets/js/jq.min.js",['position' => \yii\web\View::POS_HEAD]);

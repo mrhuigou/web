@@ -124,4 +124,4 @@ $this->registerJs($this->blocks['JS_SKU'], \yii\web\View::POS_READY);
 <?=\h5\widgets\Tools\Share::widget([
     'data'=>$share_config
 ])?>
-<?=\h5\widgets\Block\Share::widget();?>
+<?//=\h5\widgets\Block\Share::widget();?>

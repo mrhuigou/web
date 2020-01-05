@@ -330,4 +330,4 @@ $this->registerJs($this->blocks['JS_SKU'], \yii\web\View::POS_END);
         'image' => \common\component\image\Image::resize($model->image, 200, 200)
     ]
 ])?>
-<?=\h5\widgets\Block\Share::widget();?>
+<?//=\h5\widgets\Block\Share::widget();?>

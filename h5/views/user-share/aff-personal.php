@@ -66,7 +66,7 @@ $this->title ='每日惠购合伙人福利';
         <?php } ?>
     </div>
 </section>
-<?=\h5\widgets\Block\Share::widget();?>
+<?//=\h5\widgets\Block\Share::widget();?>
 <script>
     <?php
     $this->beginBlock('JS_SKU')
