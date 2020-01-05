@@ -8,7 +8,7 @@ use yii\bootstrap\ActiveForm;
 <!--		<p class="mb5 p5 lh130 whitebg bd-green"> 配送区域仅限：<span class="red">市南区、市北区、崂山区、李沧区、四方区、城阳区、黄岛区</span>。其它区域暂时尚未开通，敬请谅解。-->
 <!--		</p>-->
 	<?php } else { ?>
-        <div class=" mb5 p5 lh130 whitebg bd-green"> 配送区域仅限：<span class="red">市南区、市北区、四方区、李沧区(部分)、崂山区(部分)、<span class="fb">黄岛(暂停配送)</span></span>。其它区域暂时尚未开通，敬请谅解。
+        <div class=" mb5 p5 lh130 whitebg bd-green"> 配送区域仅限：<span class="red">市南区、市北区、李沧区(部分)、崂山区(部分)、<span class="fb">黄岛(暂停配送)</span></span>。其它区域暂时尚未开通，敬请谅解。
             <span class="cp showM h unl green f12">查看详细</span>
             <p class="aboutAd dn">市区配送区域介绍： <span class="red">
                 1、西至西镇沿海/
