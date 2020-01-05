@@ -168,11 +168,9 @@ class CouponController extends \yii\web\Controller
                 $model->coupon_id = $coupon->coupon_id;
                 $model->store_id = 1; //店铺id 默认为1 家润
 
-                if ($model->load(Yii::$app->request->post()) && $order_no = $model->submit()) {
+                if ($model->load(Yii::$app->request->post()) && $trade_no = $model->submit()) {
 
-                    echo "<pre>";
-                    var_dump(Yii::$app->request->post());die;
-                    return $this->redirect('/');
+                    return $this->redirect(['payment/index', 'trade_no' => $trade_no, 'showwxpaytitle' => 1]);
                 } else {
                     return $this->render('view-delivery',['model'=>$model,'coupon_product'=>$coupon_product]);
 
