@@ -101,22 +101,8 @@ customer_coupon_ids.push($(this).val());
 var html="每日惠购配送<br/>";
 html+=delivery_date+"&nbsp;&nbsp;"+delivery_time;
 $("#delivery_title_"+store_id).find(".delivery-default").html(html);
-$.showLoading("正在加载");
-$.post('<?= \yii\helpers\Url::to('/checkout/order-ajax', true) ?>',{'store_id':store_id,'customer_coupon_id':customer_coupon_ids},function(data){
-$.hideLoading();
-if(data && data.status){
-$("#store_contain_"+store_id).find(".store_totals").html(data.data);
-$("#store_contain_"+store_id).find(".store-promotion").html(data.store_promotion);
-var pay_total=0;
-$(".total").each(function(){
-pay_total=FloatAdd(pay_total,$(this).html());
 });
-$("#pay_total").html(pay_total);
-}else{
-$.alert(data.data);
-}
-},'json');
-});
+
 <?php $this->endBlock() ?>
 <?php
 $this->registerJs($this->blocks['JS_END'], \yii\web\View::POS_READY);
