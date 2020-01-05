@@ -12,9 +12,9 @@ $this->title = '我的提货券';
 </style>
 <?= h5\widgets\Header::widget(['title' => $this->title]) ?>
 <section class="veiwport  pb50">
-	<div class="p10 ">
-		<a class="btn mbtn bluebtn pr10 pl10 w" href="<?= \yii\helpers\Url::to(['/user-coupon/delivery-card']) ?>"> 我要激活提货券 </a>
-	</div>
+<!--	<div class="p10 ">-->
+<!--		<a class="btn mbtn bluebtn pr10 pl10 w" href="--><?//= \yii\helpers\Url::to(['/user-coupon/delivery-card']) ?><!--"> 我要激活提货券 </a>-->
+<!--	</div>-->
 	<?= \yii\widgets\ListView::widget([
 		'layout' => "{items}\n{pager}",
 		'dataProvider' => $dataProvider,
