@@ -42,7 +42,7 @@ AppAsset::register($this);
             var _hmt = _hmt || [];
             (function() {
                 var hm = document.createElement("script");
-                hm.src = "https://hm.baidu.com/hm.js?50f47cde70b91b7737b15ad98b41dd41";
+                hm.src = "https://hm.baidu.com/hm.js?b5eebc3bd201f8ba90e451ecb457a265";
                 var s = document.getElementsByTagName("script")[0];
                 s.parentNode.insertBefore(hm, s);
             })();
