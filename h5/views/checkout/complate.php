@@ -19,7 +19,7 @@ $this->title ='支付结果';
 </header>
 <section class="pt50">
     <div class="bg-wh">
-        <img src="/assets/images/order-ok.png" class="w">
+        <img src="/assets/images/order-ok2.png" class="w">
         <div class="tc pb5 " style="margin-top: -12px;">
 	        <?php if($model->status){ ?>
             <h2 class="f24 green">支付成功</h2>
