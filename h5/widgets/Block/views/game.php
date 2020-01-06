@@ -63,7 +63,7 @@
             <p class="p5  tc">有效期内下次购物自动使用</p>
             <?php if(!Yii::$app->session->get('source_from_agent_wx_xcx')){?>
             <p class="tc">
-                <img src="/images/share-banner.jpg" class="w">
+                <img src="/images/share-banner2.jpg" class="w">
             </p>
 			<a class="share-guide" href="javascript:;"></a>
             <?php }?>
