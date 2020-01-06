@@ -177,6 +177,21 @@ $this->title = '用户中心';
 </div>
 <?= h5\widgets\MainMenu::widget(); ?>
 
+<?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
+    $data = [
+        'title' =>$this->title,
+        'desc' => '口袋超市，物美价廉，当天订单，当天送。',
+        'link' => Yii::$app->request->getAbsoluteUrl(),
+        'image' => Yii::$app->request->getHostInfo().'/assets/images/zhqd/logo_300x300.jpeg'
+    ];
+}else{
+    $data = [
+        'title' =>$this->title,
+        'desc' => '家润每日惠购，物美价廉，当天订单，当天送。',
+        'link' => Yii::$app->request->getAbsoluteUrl(),
+        'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.jpg'
+    ];
+}?>
 
 <script>
     <?php if(Yii::$app->user->getId()==17412){?>
