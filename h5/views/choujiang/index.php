@@ -10,7 +10,7 @@ $this->title="幸运大抽奖";
 <style type="text/css">
 	* { margin: 0; padding: 0;}
 	body { font-family: "Microsoft Yahei"; background: #d30d42}
-	.rotary { position: relative;  width: 30rem; height: 30rem; margin: -1px 10px 10px 10px; background-image: url(/assets/images/choujiang/g_1.png) ;background-repeat:no-repeat;background-size:contain;}
+	.rotary { position: relative;  width: 30rem; height: 30rem; margin: -1px 10px 10px 10px; background-image: url(/assets/images/choujiang/zp_new.png) ;background-repeat:no-repeat;background-size:contain;}
 	.hand { position: absolute; left: 11.49rem; top:  11.49rem; width: 7rem; height: 7rem; cursor: pointer;}
 </style>
 <header class="fx-top bs-bottom whitebg lh44">
