@@ -13,7 +13,7 @@ $this->title = '商品详情';
 					<?php foreach ($model->imagelist as $value) { ?>
 						<div class="swiper-slide">
                             <div class="item-photo">
-							<img src="<?= \common\component\image\Image::resize($value, 500, 500) ?>" class="w">
+							<img src="<?= \common\component\image\Image::resize($value, 320, 320) ?>" class="w">
 
                             </div>
 						</div>
