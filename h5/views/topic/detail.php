@@ -76,4 +76,20 @@ $this->title = $model->name;
 
 		</div>
 	</section>
+<?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
+    $data = [
+        'title' =>$model->name,
+        'desc' => '口袋超市，物美价廉，当天订单，当天送。',
+        'link' => Yii::$app->request->getAbsoluteUrl(),
+        'image' => Yii::$app->request->getHostInfo().'/assets/images/zhqd/logo_300x300.jpeg'
+    ];
+}else{
+    $data = [
+        'title' =>$model->name,
+        'desc' => '家润每日惠购，物美价廉，当天订单，当天送。',
+        'link' => Yii::$app->request->getAbsoluteUrl(),
+        'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.jpg'
+    ];
+}?>
+<?php h5\widgets\Tools\Share::widget(['data'=>$data]);?>
 <?= h5\widgets\MainMenu::widget(); ?>
