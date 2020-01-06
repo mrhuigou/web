@@ -353,8 +353,8 @@ $this->registerJs($this->blocks['JS_SKU'], \yii\web\View::POS_END);
 	        'title' => $model->description->name,
 	        'desc' => $model->description->meta_description?$model->description->meta_description:"每日惠购网，物美价廉，当天订单，当天送。",
 	        'link' => Yii::$app->request->getAbsoluteUrl(),
-//	        'image' => \common\component\image\Image::resize($model->image, 200, 200)
-            'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.jpg'
+	        'image' => \common\component\image\Image::resize($model->image, 200, 200)
+//            'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.jpg'
         ]
 ])?>
 <?//=\h5\widgets\Block\Share::widget();?>
