@@ -478,11 +478,12 @@ class ViewDeliveryForm extends  Model
                     $this->notice_points($Order_model);
                 }
                 if ($product_stock) {
+//                    var_dump($product_stock);die;
                     foreach ($product_stock as $stock) {
 
                         $fn = function ($product_code,$qty) use (&$fn){
                             $product = Product::findOne(['product_code'=>$product_code]);
-                            if(!$product->bepresell){
+//                            if(!$product->bepresell){
                                 if ($model = WarehouseStock::findOne(['product_code' => $product_code])) {
                                     try {
                                         $model->tmp_qty = $model->tmp_qty + $qty;
@@ -491,15 +492,15 @@ class ViewDeliveryForm extends  Model
                                         $fn($product_code,$qty);
                                     }
 
-                                    if(!$product->bepresell && !$product->begift) {
-                                        if(($model->quantity-$model->tmp_qty)<0){
-                                            throw new \Exception("[".$product->product_code."]库存不足");
-                                        }
-                                    }
+//                                    if(!$product->bepresell && !$product->begift) {
+//                                        if(($model->quantity-$model->tmp_qty)<0){
+//                                            throw new \Exception("[".$product->product_code."]库存不足");
+//                                        }
+//                                    }
                                 }else{
-                                    throw new \Exception("[".$product_code."]库存不足");
+//                                    throw new \Exception("[".$product_code."]库存不足");
                                 }
-                            }
+//                            }
 
 
                             //\Yii::$app->log->logger->log("code:".$product_code." ; version:".$model->version,Logger::LEVEL_ERROR);
