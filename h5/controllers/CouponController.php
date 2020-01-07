@@ -140,8 +140,8 @@ class CouponController extends \yii\web\Controller
                 $comfirm_orders[$key]['coupon_gift'] = [];
 
                 //计算商品金额
-                $this->getSubTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $products);
-
+//                $this->getSubTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $products);
+                $comfirm_orders[$key]['totals'][] = $this->setTotalsData("商品总额",'sub_total',$customer_coupon->coupon->discount,1);
                 //计算运费金额
                 $shipping_cost = 0;
                 $comfirm_orders[$key]['totals'][] = $this->setTotalsData("固定运费",'shipping',$shipping_cost,2);
