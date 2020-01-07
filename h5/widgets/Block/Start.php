@@ -42,7 +42,8 @@ class Start extends Widget{
 							}
 						}
 						\Yii::$app->session->set('ad_pop_flag',1);
-						return $this->render('start',['type'=>$this->type,'status'=>$this->getUserStatus(),'share_logo' => $this->getShareLogo()]);
+//						return $this->render('start',['type'=>$this->type,'status'=>$this->getUserStatus(),'share_logo' => $this->getShareLogo()]);
+						return $this->render('start',['type'=>$this->type,'status'=>$this->getUserStatus()]);
 					}
 			}
 		}
