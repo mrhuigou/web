@@ -9,6 +9,7 @@
 namespace h5\widgets\Block;
 use api\models\V1\CustomerCoupon;
 use api\models\V1\Order;
+use api\models\V1\ShareLogoScans;
 use yii\bootstrap\Widget;
 
 class Start extends Widget{
@@ -41,7 +42,7 @@ class Start extends Widget{
 							}
 						}
 						\Yii::$app->session->set('ad_pop_flag',1);
-						return $this->render('start',['type'=>$this->type,'status'=>$this->getUserStatus()]);
+						return $this->render('start',['type'=>$this->type,'status'=>$this->getUserStatus(),'share_logo' => $this->getShareLogo()]);
 					}
 			}
 		}
@@ -67,4 +68,40 @@ class Start extends Widget{
 		}
 		return $status;
 	}
+
+	public function getShareLogo(){
+        $cur_param=\Yii::$app->request->getPathInfo();
+
+        //匹配促销方案
+        if(preg_match('/topic\/detail\?code=(?<code>\w+)/', $cur_param,$matches)){
+            $type = 2;
+            $parameter = $matches['code'];
+        };
+        //商品详情匹配
+        if(preg_match('/(?<shop_code>\w+)-(?<product_code>\w+).html/', $cur_param,$matches)){
+            $type = 3;
+            $parameter = $matches['product_code'];
+        };
+        //匹配页面专题
+        if(preg_match('/page\/(?<page_id>\w+).html/', $cur_param,$matches)){
+            $type = 4;
+            $parameter = $matches['page_id'];
+        };
+
+        if($type && $parameter){
+            if( $model = ShareLogoScans::findOne(['type' => $type?$type:0 ,'parameter' => $parameter?$parameter:0])){
+                if($model && $model->logo_url && $model->weixin_scans_id){
+                    $share_logo = $model->logo_url;
+                }else{
+                    $share_logo = '/images/subcription_pic_mrhuigou.png';
+                }
+            }else{
+                $share_logo = '/images/subcription_pic_mrhuigou.png';
+            }
+        }else{
+            $share_logo = '/images/subcription_pic_mrhuigou.png';
+        }
+
+        return $share_logo;
+    }
 }
