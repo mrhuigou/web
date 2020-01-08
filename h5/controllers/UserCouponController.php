@@ -59,7 +59,7 @@ class UserCouponController extends \yii\web\Controller {
 			return $this->redirect('/site/login');
 		}
 		if (!Yii::$app->user->identity->telephone_validate) {
-			return $this->redirect(['/user/security-set-telephone', 'redirect' => '/user-coupon/card']);
+			return $this->redirect(['/user/security-set-telephone', 'redirect' => '/user-coupon/delivery-card']);
 		}
 		$model = new CouponCardForm();
 		if ($model->load(Yii::$app->request->post()) && $customer_coupon=$model->save()) {
