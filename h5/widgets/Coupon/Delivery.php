@@ -64,6 +64,14 @@ class Delivery extends Widget
 	}
 	public function getList($store){
 		$time=time();
+
+		//配送时间 从1月11号上午开始  配送
+        //-----------------------------------------------
+        if(time() <= strtotime("2020-01-10 12:00:00")){
+            $time = strtotime("2020-01-10 12:00:00");
+        }
+        //-----------------------------------------------
+
 		if($store->store_code!=='DP0001'){
 			$this->time=strtotime(date('Y-m-d', strtotime('+ 1 day',$this->time)));
 		}
