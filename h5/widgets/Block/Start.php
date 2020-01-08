@@ -42,8 +42,8 @@ class Start extends Widget{
 							}
 						}
 						\Yii::$app->session->set('ad_pop_flag',1);
-//						return $this->render('start',['type'=>$this->type,'status'=>$this->getUserStatus(),'share_logo' => $this->getShareLogo()]);
-						return $this->render('start',['type'=>$this->type,'status'=>$this->getUserStatus()]);
+						return $this->render('start',['type'=>$this->type,'status'=>$this->getUserStatus(),'share_logo' => $this->getShareLogo()]);
+//						return $this->render('start',['type'=>$this->type,'status'=>$this->getUserStatus()]);
 					}
 			}
 		}
@@ -73,35 +73,37 @@ class Start extends Widget{
 	public function getShareLogo(){
         $cur_param=\Yii::$app->request->getPathInfo();
 
+        $logo_type = 1;//默认类型
+        $parameter = 0;
         //匹配促销方案
         if(preg_match('/topic\/detail\?code=(?<code>\w+)/', $cur_param,$matches)){
-            $type = 2;
+            $logo_type = 2;
             $parameter = $matches['code'];
         };
         //商品详情匹配
         if(preg_match('/(?<shop_code>\w+)-(?<product_code>\w+).html/', $cur_param,$matches)){
-            $type = 3;
+            $logo_type = 3;
             $parameter = $matches['product_code'];
         };
         //匹配页面专题
         if(preg_match('/page\/(?<page_id>\w+).html/', $cur_param,$matches)){
-            $type = 4;
+            $logo_type = 4;
             $parameter = $matches['page_id'];
         };
 
-        if($type && $parameter){
-            if( $model = ShareLogoScans::findOne(['type' => $type?$type:0 ,'parameter' => $parameter?$parameter:0])){
-                if($model && $model->logo_url && $model->weixin_scans_id){
+//        if($logo_type && $parameter){
+            if( $model = ShareLogoScans::findOne(['type' => $logo_type?$logo_type:0 ,'parameter' => $parameter?$parameter:0])){
+                if(!empty($model) && $model->logo_url && $model->weixin_scans_id){
                     $share_logo = $model->logo_url;
                 }else{
-                    $share_logo = '/images/subcription_pic_mrhuigou.png';
+                    $share_logo = '/group1/M00/06/AF/wKgB7l4Vh4aAC6R0AAI4qqO0gas539.png';
                 }
             }else{
-                $share_logo = '/images/subcription_pic_mrhuigou.png';
+                $share_logo = '/group1/M00/06/AF/wKgB7l4Vh4aAC6R0AAI4qqO0gas539.png';
             }
-        }else{
-            $share_logo = '/images/subcription_pic_mrhuigou.png';
-        }
+//        }else{
+//            $share_logo = '/group1/M00/06/AF/wKgB7l4Vh4aAC6R0AAI4qqO0gas539.png';
+//        }
 
         return $share_logo;
     }
