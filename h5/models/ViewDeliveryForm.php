@@ -268,7 +268,8 @@ class ViewDeliveryForm extends  Model
 
                     //订单地址表数据
                     $shipping_address = [];
-                    if (($this->address_id) && isset($this->delivery[$k]) && ($delivery = $this->delivery[$k])) {
+//                    if (($this->address_id) && isset($this->delivery[$k]) && ($delivery = $this->delivery[$k])) {
+                    if (isset($this->delivery[$k]) && ($delivery = $this->delivery[$k])) {
                         $zone=Zone::findOne(['name'=>$this->province]);
                         $city=City::findOne(['name'=>$this->city,'zone_id'=>$zone?$zone->zone_id:0]);
                         $district=District::findOne(['name'=>$this->district,'city_id'=>$city?$city->city_id:0]);
@@ -297,6 +298,8 @@ class ViewDeliveryForm extends  Model
                             'lng' => $this->lng,
                             'is_delivery' => 1,
                         ];
+                    }else{
+                        throw new \Exception("订单收货地址异常");
                     }
                     if ($shipping_address) {
                         $Order_Shipping = new OrderShipping();
