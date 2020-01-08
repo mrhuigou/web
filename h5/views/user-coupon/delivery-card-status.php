@@ -15,8 +15,8 @@ $this->title ='提货券详情';
     }
 </style>
 <?=h5\widgets\Header::widget(['title'=>$this->title])?>
-<figure class="info-tips  gray9 p10"><i class="iconfont "></i><figcaption class="m10" style="font-size: 20px;"> 请于1月10号激活使用</figcaption></figure>
-
+<!--<figure class="info-tips  gray9 p10"><i class="iconfont "></i><figcaption class="m10" style="font-size: 20px;"> 请于1月10号激活使用</figcaption></figure>-->
+<img src="/assets/images/delivery-card.jpg" alt="" class="w">
 
 
 

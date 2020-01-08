@@ -81,11 +81,6 @@ class UserCouponController extends \yii\web\Controller {
      */
 	public function actionDeliveryCard()
 	{
-	    //判断时间  1月10号开启------------------------------
-        if(time() <= strtotime("2020-01-09 23:59:59")){
-            return $this->render('delivery-card-status');
-        }
-        //判断时间  1月10号开启------------------------------
 
 		if (\Yii::$app->user->isGuest) {
 			return $this->redirect('/site/login');
@@ -93,6 +88,14 @@ class UserCouponController extends \yii\web\Controller {
 		if (!Yii::$app->user->identity->telephone_validate) {
 			return $this->redirect(['/user/security-set-telephone', 'redirect' => '/user-coupon/card']);
 		}
+
+        //判断时间  1月10号开启------------------------------
+        $customer_id = ['32204'];
+        if(!in_array(Yii::$app->user->getId(),$customer_id) &&  time() <= strtotime("2020-01-09 23:59:59")){
+            return $this->render('delivery-card-status');
+        }
+        //判断时间  1月10号开启------------------------------
+
 		$model = new CouponCardForm();
 		if ($model->load(Yii::$app->request->post()) && $customer_coupon=$model->save()) {
 			$this->SendNotice($customer_coupon->customer_coupon_id);
