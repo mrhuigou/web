@@ -81,6 +81,12 @@ class UserCouponController extends \yii\web\Controller {
      */
 	public function actionDeliveryCard()
 	{
+	    //判断时间  1月10号开启------------------------------
+        if(time() <= strtotime("2020-01-09 23:59:59")){
+            return $this->render('delivery-card-status');
+        }
+        //判断时间  1月10号开启------------------------------
+
 		if (\Yii::$app->user->isGuest) {
 			return $this->redirect('/site/login');
 		}
