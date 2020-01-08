@@ -19,7 +19,7 @@ class ShareLogoScansSearch extends ShareLogoScans
     {
         return [
             [['share_logo_scans_id', 'weixin_scans_id', 'type'], 'integer'],
-            [['title','parameter', 'logo_url'], 'safe'],
+            [['title','parameter', 'description','logo_url'], 'safe'],
         ];
     }
 
@@ -65,6 +65,7 @@ class ShareLogoScansSearch extends ShareLogoScans
         ]);
 
         $query->andFilterWhere(['like', 'parameter', $this->parameter])
+            ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'logo_url', $this->logo_url]);
 

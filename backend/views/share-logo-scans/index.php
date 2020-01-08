@@ -9,6 +9,12 @@ use yii\grid\GridView;
 
 $this->title = '分享场景二维码';
 $this->params['breadcrumbs'][] = $this->title;
+$logo_type = array(
+    1 => '默认',
+    2 => '促销方案',
+    3 => '商品详情',
+    4 => '页面专题',
+);
 ?>
 <div class="page-content">
 
@@ -41,7 +47,29 @@ $this->params['breadcrumbs'][] = $this->title;
             'weixin_scans_id',
             'scan.title',
             'title',
-            'type',
+            'description:ntext',
+//            'type',
+            [
+                'attribute' => 'type',
+                'value' => function($model){
+                    $logo_type = array(
+                        1 => '默认',
+                        2 => '促销方案',
+                        3 => '商品详情',
+                        4 => '页面专题',
+                    );
+                    return $logo_type[$model->type];
+                },
+                'filter' => Html::activeDropDownList($searchModel,
+                    'type',
+                    $logo_type,
+                    [
+                        'prompt' => '全部',
+                        'class' => 'form-control'
+                    ]
+                )
+
+            ],
             'parameter',
             'logo_url:url',
 

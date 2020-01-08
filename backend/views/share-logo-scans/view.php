@@ -46,6 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'share_logo_scans_id',
             'title',
             'scan.title',
+            'description',
             'type',
             'parameter',
             'logo_url:url',

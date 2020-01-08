@@ -30,6 +30,7 @@ class ShareLogoScans extends \yii\db\ActiveRecord
     {
         return [
             [['weixin_scans_id', 'type'], 'integer'],
+            [['description'], 'string'],
             [['title','parameter', 'logo_url'], 'string', 'max' => 255],
         ];
     }
@@ -42,6 +43,7 @@ class ShareLogoScans extends \yii\db\ActiveRecord
         return [
             'share_logo_scans_id' => 'ID',
             'title' => '标题',
+            'description' => '描述',
             'weixin_scans_id' => '二维码场景',
             'type' => '类型',
             'parameter' => '参数',
