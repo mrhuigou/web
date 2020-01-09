@@ -38,7 +38,17 @@ $this->title = $model->name;
 				<?php foreach($details as $detail){?>
 					<div class="whitebg mb10">
 						<h2 class="f16 pl10 lh200 "><?= $detail->product->description->name ?></h2>
-						<p class="red pl10 lh150"><?= $detail->product->description->meta_keyword ?></p>
+						<p class="red pl10 lh150">
+                            <!--促销方案详情-->
+                            <?php if($detail->product->Promotions){?>
+                                <?php foreach ($detail->product->Promotions as $promotion) { ?>
+                                    <?php if ($promotion->promotion_detail_title) { ?>
+                                        <?= Html::encode($promotion->promotion_detail_title) ?></p>
+                                    <?php }?>
+                                <?php }?>
+                            <?php }?>
+
+                            <?= $detail->product->description->meta_keyword ?></p>
 						<?php if($detail->product->productBase->bedisplaylife){?>
 							<p class="pl10 mt5" >
 								<span class="p2 bd-green green lh150 f12">保质期 :<?=$detail->product->productBase->life?></span>
