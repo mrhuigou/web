@@ -141,11 +141,21 @@ class PromotionController extends Controller {
             }
 			if ($details) {
 				foreach ($details as $key => $detail) {
+
+				    //------------------------促销方案描述---------------------
+                    $promotion_detail_title = '';
+				    if($detail->Promotions){
+				        foreach ($detail->Promotions as $promotion){
+                            $promotion_detail_title = $promotion_detail_title.$promotion->promotion_detail_title;
+                        }
+                    }
+                    //------------------------促销方案描述---------------------
+
 					$data[$key] = [
 						'item_id'=>$detail->product_base_id,
 						'product_code'=>$detail->product_code,
 						'name' => $detail->description->name,
-						'meta_description' => $detail->description->meta_description,
+						'meta_description' => $promotion_detail_title.$detail->description->meta_description,
 						'image' => $detail->image?Image::resize($detail->image, 500, 500):Image::resize($detail->productBase->image, 500, 500),
 						'sale_price' => $detail->price,
 						'vip_price' => $detail->vip_price,
