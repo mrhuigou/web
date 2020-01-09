@@ -116,11 +116,29 @@ class AdController extends Controller {
 					if(!$ad_detail->product){
 						continue;
 					}
+
+                    //------------------------促销方案描述---------------------
+                    $promotion_detail_title = '';
+                    if($ad_detail->product->promotions){
+                        foreach ($ad_detail->product->promotions as $promotion){
+                            $promotion_detail_title = '[促]'.$promotion->promotion_detail_title;
+                        }
+                    }
+                    //------------------------促销方案描述---------------------
+                    //------------------------优惠券描述---------------------
+                    $coupon_title = '';
+                    if($ad_detail->product->productBase->coupon){
+                        foreach ($ad_detail->product->productBase->coupon as $coupon){
+                            $coupon_title = '[券]'.$coupon->comment;
+                        }
+                    }
+                    //------------------------优惠券描述---------------------
+
 					$data[$count] = [
 						'item_id'=>$ad_detail->product->product_base_id,
 						'item_code'=>$ad_detail->product->product_base_code,
 						'name' => $ad_detail->product->description->name,
-						'meta_description' => $ad_detail->product->description->meta_description,
+						'meta_description' => $promotion_detail_title.$coupon_title.$ad_detail->product->description->meta_description,
 						'image' => Image::resize($ad_detail->product->image,200,200),
 						'sale_price' => $ad_detail->product->price,
 						'vip_price' => $ad_detail->product->vip_price,
