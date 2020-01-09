@@ -41,7 +41,14 @@ $this->title = '商品详情';
                             <?= Html::encode($model->description->name) ?> <span class="control-format">[<i class="format fb red"></i>]</span></p>
 						<?php if ($model->description->meta_description) { ?>
 							<!--卖点-->
-						<p class="gray9 f12 lh150 red"><?= Html::encode($model->description->meta_description) ?></p>
+						<p class="gray9 f12 lh150 red">
+                            <!--促销方案详情-->
+						        <?php foreach ($model->promotion as $promotion) { ?>
+                                        <?php if ($promotion->promotion_detail_title) { ?>
+                                            <?= Html::encode($promotion->promotion_detail_title) ?></p>
+						                <?php }?>
+						        <?php }?>
+                            <?= Html::encode($model->description->meta_description) ?></p>
 						<?php } ?>
 					</div>
 					<div class="flex-item-2 bdl tc" onclick="addToWishList(<?=$model->product_base_id?>,'product');">
