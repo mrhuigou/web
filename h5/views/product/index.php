@@ -46,7 +46,7 @@ $this->title = '商品详情';
                                 <?php if ($model->promotion) { ?>
                                     <?php foreach ($model->promotion as $promotion) { ?>
                                             <?php if ($promotion->promotion_detail_title) { ?>
-                                                <?= Html::encode('[促]'.$promotion->promotion_detail_title) ?></p>
+                                                <?= Html::encode('[促]'.$promotion->promotion_detail_title) ?>
                                             <?php }?>
                                     <?php }?>
                                 <?php }?>
@@ -57,8 +57,9 @@ $this->title = '商品详情';
                                     <?php }?>
                                 <?php }?>
                                 <?php if ($model->description->meta_description) { ?>
-                                    <?= Html::encode($model->description->meta_description) ?></p>
+                                    <?= Html::encode($model->description->meta_description) ?>
                                 <?php } ?>
+                        </p>
 					</div>
 					<div class="flex-item-2 bdl tc" onclick="addToWishList(<?=$model->product_base_id?>,'product');">
 						<i class="iconfont org f18">&#xe62d;</i>
