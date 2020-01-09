@@ -28,7 +28,8 @@
 							<?= $coupon->name ?>
 						<?php } ?>
 					</div>
-					<div class="condi_msg ellipsis" style="max-width: 200px;"><?=$coupon->comment?$coupon->comment:$coupon->description?></div>
+<!--					<div class="condi_msg ellipsis" style="max-width: 200px;">--><?//=$coupon->comment?$coupon->comment:$coupon->description?><!--</div>-->
+					<div class="condi_msg ellipsis" style="max-width: 200px;"><?=$coupon->name?$coupon->name:$coupon->description?></div>
 				</div>
 				<div class="coupon_icon"></div>
 				<div class="oper_msg">
