@@ -49,6 +49,12 @@ class WeixinController extends \yii\web\Controller
             if(strpos($out_trade_no,"_NATIVE")){
                 $out_trade_no=str_replace("_NATIVE","",$out_trade_no);
             }
+            if(strpos($out_trade_no,"_MWEB")){
+                $out_trade_no=str_replace("_MWEB","",$out_trade_no);
+            }
+            if(strpos($out_trade_no,"_JSAPI")){
+                $out_trade_no=str_replace("_JSAPI","",$out_trade_no);
+            }
             //支付流水号
             $transaction_id=$notify->data["transaction_id"];
             $model=new CheckoutOrder();

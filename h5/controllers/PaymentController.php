@@ -83,7 +83,7 @@ class PaymentController extends \yii\web\Controller
             if(strpos(strtolower($useragent), 'micromessenger') &&  ($open_id=\Yii::$app->session->get('open_id'))){
 	            $unifiedOrder->setParameter("openid", "$open_id");//用户ID
 	            $unifiedOrder->setParameter("body","每日惠购");//商品描述
-	            $unifiedOrder->setParameter("out_trade_no", "$order->merge_code");//商户订单号
+	            $unifiedOrder->setParameter("out_trade_no", "$order->merge_code"."_JSAPI");//商户订单号
 	            $unifiedOrder->setParameter("total_fee", $order->total * 100);//总金额
 	            $unifiedOrder->setParameter("notify_url", "https://open.mrhuigou.com/payment/weixin");//通知地址
 	            $unifiedOrder->setParameter("trade_type", "JSAPI");//交易类型
@@ -97,7 +97,7 @@ class PaymentController extends \yii\web\Controller
 	            }
             }else{
 	            $unifiedOrder->setParameter("body","每日惠购");//商品描述
-	            $unifiedOrder->setParameter("out_trade_no", "$order->merge_code");//商户订单号
+	            $unifiedOrder->setParameter("out_trade_no", "$order->merge_code"."_MWEB");//商户订单号
 	            $unifiedOrder->setParameter("total_fee", $order->total * 100);//总金额
 	            $unifiedOrder->setParameter("notify_url", "https://open.mrhuigou.com/payment/weixin");//通知地址
 	            $unifiedOrder->setParameter("trade_type", "MWEB");//交易类型
