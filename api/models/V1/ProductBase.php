@@ -373,7 +373,7 @@ class ProductBase extends \yii\db\ActiveRecord
     public function getCoupon(){
         $ids = [];
         if ($this->getProduct()) {
-            foreach ($this->getProduct() as $product) {
+            foreach ($this->product as $product) {
                 $ids[] = $product->product_id;
             }
         }

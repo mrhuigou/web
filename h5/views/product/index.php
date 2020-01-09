@@ -39,7 +39,7 @@ $this->title = '商品详情';
 						<p class="lh150">
                             <?php if($model->baoyou){?><span class="bd-red red  br5">包邮</span><?php }?>
                             <?= Html::encode($model->description->name) ?> <span class="control-format">[<i class="format fb red"></i>]</span></p>
-						<?php if ($model->description->meta_description) { ?>
+
 							<!--卖点-->
 						<p class="gray9 f12 lh150 red">
                                 <!--促销方案详情-->
@@ -51,21 +51,22 @@ $this->title = '商品详情';
                                     <?php }?>
                                 <?php }?>
                                 <!--优惠券详情-->
-<!--                                --><?php //if ($model->coupon) { ?>
-<!--                                    --><?php //foreach ($model->coupon as $coupon) { ?>
-<!--                                        --><?php //if ($coupon->model!=='BUY_GIFTS') { ?>
-<!--                                            --><?php //if($coupon->type == 'F'){ ?>
-<!--                                                ￥--><?//=$coupon->getRealDiscount()?>
-<!--                                            --><?php //}else{ ?>
-<!--                                                --><?//=$coupon->getRealDiscount()?><!-- 折-->
-<!--                                            --><?php //} ?>
-<!--                                        --><?php //} else { ?>
-<!--                                            --><?//= $coupon->name ?>
-<!--                                        --><?php //} ?>
-<!--                                    --><?php //}?>
-<!--                                --><?php //}?>
-                            <?= Html::encode($model->description->meta_description) ?></p>
-						<?php } ?>
+                                <?php if ($model->coupon) { ?>
+                                    <?php foreach ($model->coupon as $coupon) { ?>
+                                        <?php if ($coupon->model!=='BUY_GIFTS') { ?>
+                                            <?php if($coupon->type == 'F'){ ?>
+                                                ￥<?=$coupon->getRealDiscount()?>
+                                            <?php }else{ ?>
+                                                <?=$coupon->getRealDiscount()?> 折
+                                            <?php } ?>
+                                        <?php } else { ?>
+                                            <?= $coupon->name ?>
+                                        <?php } ?>
+                                    <?php }?>
+                                <?php }?>
+                                <?php if ($model->description->meta_description) { ?>
+                                    <?= Html::encode($model->description->meta_description) ?></p>
+                                <?php } ?>
 					</div>
 					<div class="flex-item-2 bdl tc" onclick="addToWishList(<?=$model->product_base_id?>,'product');">
 						<i class="iconfont org f18">&#xe62d;</i>
