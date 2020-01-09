@@ -146,7 +146,7 @@ class PromotionController extends Controller {
                     $promotion_detail_title = '';
 				    if($detail->Promotions){
 				        foreach ($detail->Promotions as $promotion){
-                            $promotion_detail_title = $promotion_detail_title.$promotion->promotion_detail_title;
+                            $promotion_detail_title = '[促]'.$promotion->promotion_detail_title;
                         }
                     }
                     //------------------------促销方案描述---------------------
@@ -154,15 +154,7 @@ class PromotionController extends Controller {
                     $coupon_title = '';
 				    if($detail->productBase->coupon){
 				        foreach ($detail->productBase->coupon as $coupon){
-                            if ($coupon->model!=='BUY_GIFTS') {
-                                if($coupon->type == 'F'){
-                                    $coupon_title = $coupon_title .'￥'.$coupon->getRealDiscount();
-                                }else{
-                                    $coupon_title = $coupon_title .$coupon->getRealDiscount() .'折';
-                                }
-                            }else{
-                                $coupon_title = $coupon_title .$coupon->name;
-                            }
+                                $coupon_title = '[券]'.$coupon->comment;
                         }
                     }
                     //------------------------优惠券描述---------------------
