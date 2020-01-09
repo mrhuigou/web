@@ -370,4 +370,27 @@ class ProductBase extends \yii\db\ActiveRecord
         return $this->hasOne(Store::className(),['store_id'=>'store_id']);
     }
 
+    public function getCoupon(){
+        $ids = [];
+        if ($this->getProduct()) {
+            foreach ($this->getProduct() as $product) {
+                $ids[] = $product->product_id;
+            }
+        }
+        $coupon_products = CouponProduct::find()->joinWith(['coupon' => function ($query) {
+            $query->andFilterWhere(["<=", "jr_coupon.date_start", date('Y-m-d H:i:s', time())]);
+            $query->andFilterWhere([">=", "jr_coupon.date_end", date('Y-m-d H:i:s', time())]);
+            $query->andFilterWhere(["=", "jr_coupon.is_open", 1]);
+            $query->andFilterWhere(["=", "jr_coupon.status", 1]);
+        }])->where(['product_id' => $ids])->all();
+        if ($coupon_products) {
+            foreach ($coupon_products as $coupon_product) {
+                if($coupon_product->status){
+                    $coupon[$coupon_product->coupon_id]=$coupon_product->coupon;
+                }
+            }
+
+        }
+        return $coupon;
+    }
 }

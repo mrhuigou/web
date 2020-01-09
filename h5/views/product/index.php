@@ -42,12 +42,28 @@ $this->title = '商品详情';
 						<?php if ($model->description->meta_description) { ?>
 							<!--卖点-->
 						<p class="gray9 f12 lh150 red">
-                            <!--促销方案详情-->
-						        <?php foreach ($model->promotion as $promotion) { ?>
-                                        <?php if ($promotion->promotion_detail_title) { ?>
-                                            <?= Html::encode($promotion->promotion_detail_title) ?></p>
-						                <?php }?>
-						        <?php }?>
+                                <!--促销方案详情-->
+                                <?php if ($model->promotion) { ?>
+                                    <?php foreach ($model->promotion as $promotion) { ?>
+                                            <?php if ($promotion->promotion_detail_title) { ?>
+                                                <?= Html::encode($promotion->promotion_detail_title) ?></p>
+                                            <?php }?>
+                                    <?php }?>
+                                <?php }?>
+                                <!--优惠券详情-->
+                                <?php if ($model->coupon) { ?>
+                                    <?php foreach ($model->coupon as $coupon) { ?>
+                                        <?php if ($coupon->model!=='BUY_GIFTS') { ?>
+                                            <?php if($coupon->type == 'F'){ ?>
+                                                ￥<?=$coupon->getRealDiscount()?>
+                                            <?php }else{ ?>
+                                                <?=$coupon->getRealDiscount()?> 折
+                                            <?php } ?>
+                                        <?php } else { ?>
+                                            <?= $coupon->name ?>
+                                        <?php } ?>
+                                    <?php }?>
+                                <?php }?>
                             <?= Html::encode($model->description->meta_description) ?></p>
 						<?php } ?>
 					</div>
