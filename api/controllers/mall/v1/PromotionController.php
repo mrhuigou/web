@@ -150,12 +150,28 @@ class PromotionController extends Controller {
                         }
                     }
                     //------------------------促销方案描述---------------------
+                    //------------------------优惠券描述---------------------
+                    $coupon_title = '';
+				    if($detail->productBase->coupon){
+				        foreach ($detail->productBase->coupon as $coupon){
+                            if ($coupon->model!=='BUY_GIFTS') {
+                                if($coupon->type == 'F'){
+                                    $coupon_title = $coupon_title .'￥'.$coupon->getRealDiscount();
+                                }else{
+                                    $coupon_title = $coupon_title .$coupon->getRealDiscount() .'折';
+                                }
+                            }else{
+                                $coupon_title = $coupon_title .$coupon->name;
+                            }
+                        }
+                    }
+                    //------------------------优惠券描述---------------------
 
 					$data[$key] = [
 						'item_id'=>$detail->product_base_id,
 						'product_code'=>$detail->product_code,
 						'name' => $detail->description->name,
-						'meta_description' => $promotion_detail_title.$detail->description->meta_description,
+						'meta_description' => $promotion_detail_title.$coupon_title.$detail->description->meta_description,
 						'image' => $detail->image?Image::resize($detail->image, 500, 500):Image::resize($detail->productBase->image, 500, 500),
 						'sale_price' => $detail->price,
 						'vip_price' => $detail->vip_price,
