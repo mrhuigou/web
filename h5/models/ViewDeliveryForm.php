@@ -10,6 +10,7 @@ namespace h5\models;
 
 
 use api\models\V1\City;
+use api\models\V1\Coupon;
 use api\models\V1\District;
 use api\models\V1\Zone;
 use common\component\Curl\Curl;
@@ -453,12 +454,18 @@ class ViewDeliveryForm extends  Model
                             }
                             if (isset($total['customer_code_id']) && $total['customer_code_id']) {
                                 $customer_coupon = CustomerCoupon::findOne(['customer_coupon_id' => $total['customer_code_id']]);
-                                if ($customer_coupon) {
-                                    $customer_coupon->is_use = 1;
-                                    $customer_coupon->date_used = $Order_model->date_added;
-                                    if (!$customer_coupon->save(false)) {
-                                        throw new \Exception("用户优惠券更新失败");
+
+                                //验证券是否已经使用
+                                if($customer_coupon && $customer_coupon->is_use == 0 && $customer_coupon->end_time >= date('Y-m-d')){
+                                    if ($customer_coupon) {
+                                        $customer_coupon->is_use = 1;
+                                        $customer_coupon->date_used = $Order_model->date_added;
+                                        if (!$customer_coupon->save(false)) {
+                                            throw new \Exception("用户优惠券更新失败");
+                                        }
                                     }
+                                }else{
+                                    throw new NotFoundHttpException('提货券已经使用或已经过期！');
                                 }
                             }
 
