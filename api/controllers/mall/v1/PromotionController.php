@@ -144,9 +144,11 @@ class PromotionController extends Controller {
 
 				    //------------------------促销方案描述---------------------
                     $promotion_detail_title = '';
+                    $promotion_detail_image = '';
 				    if($detail->Promotions){
 				        foreach ($detail->Promotions as $promotion){
                             $promotion_detail_title = '[促]'.$promotion->promotion_detail_title;
+                            $promotion_detail_image = $promotion->promotion_detail_image;
                         }
                     }
                     //------------------------促销方案描述---------------------
@@ -164,7 +166,7 @@ class PromotionController extends Controller {
 						'product_code'=>$detail->product_code,
 						'name' => $detail->description->name,
 						'meta_description' => $promotion_detail_title.$coupon_title.$detail->description->meta_description,
-						'image' => $detail->image?Image::resize($detail->image, 500, 500):Image::resize($detail->productBase->image, 500, 500),
+						'image' => $promotion_detail_image?Image::resize($promotion_detail_image, 500, 500):($detail->image?Image::resize($detail->image, 500, 500):Image::resize($detail->productBase->image, 500, 500)),
 						'sale_price' => $detail->price,
 						'vip_price' => $detail->vip_price,
 						'cur_price' => $detail->getPrice(),
