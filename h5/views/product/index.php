@@ -13,7 +13,7 @@ $this->title = '商品详情';
 
                     <?php if ($model->promotion) { ?>
                         <?php foreach ($model->promotion as $promotion) { ?>
-                            <?php if ($promotion->promotion_detail_title) { ?>
+                            <?php if ($promotion->promotion_detail_image) { ?>
                                 <div class="swiper-slide">
                                     <div class="item-photo">
                                         <img src="<?= \common\component\image\Image::resize($promotion->promotion_detail_image, 320, 320) ?>" class="w">
