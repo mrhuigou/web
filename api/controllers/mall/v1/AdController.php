@@ -119,9 +119,11 @@ class AdController extends Controller {
 
                     //------------------------促销方案描述---------------------
                     $promotion_detail_title = '';
+                    $promotion_detail_image = '';
                     if($ad_detail->product->promotions){
                         foreach ($ad_detail->product->promotions as $promotion){
                             $promotion_detail_title = '[促]'.$promotion->promotion_detail_title;
+                            $promotion_detail_image = $promotion->promotion_detail_image;
                         }
                     }
                     //------------------------促销方案描述---------------------
@@ -139,7 +141,7 @@ class AdController extends Controller {
 						'item_code'=>$ad_detail->product->product_base_code,
 						'name' => $ad_detail->product->description->name,
 						'meta_description' => $promotion_detail_title.$coupon_title.$ad_detail->product->description->meta_description,
-						'image' => Image::resize($ad_detail->product->image,200,200),
+						'image' => Image::resize($promotion_detail_image ? :$ad_detail->product->image,200,200),
 						'sale_price' => $ad_detail->product->price,
 						'vip_price' => $ad_detail->product->vip_price,
 						'cur_price' => $ad_detail->product->getPrice(),
