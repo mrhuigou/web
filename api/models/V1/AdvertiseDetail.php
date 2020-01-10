@@ -116,7 +116,16 @@ class AdvertiseDetail extends \yii\db\ActiveRecord {
 
     public function getAdvertiserDetailByPositionCode($code = '')
     {
-        $advertise_detail = AdvertiseDetail::find()->where(["and", "date_start<'" . date('Y-m-d H:i:s') . "'", "date_end>'" . date('Y-m-d H:i:s') . "'", 'status=1'])->andWhere(['advertise_position_code' => $code])->orderBy("sort_order ASC, position_priority ASC")->all();
+        $advertise_detail = AdvertiseDetail::find()
+            ->joinWith([
+                'product'=>function($query){
+                    $query ->andFilterWhere(['jr_product.beintoinv'=>1]);//选择已经上架的
+                }
+            ])
+            ->where(["and", "jr_advertise_detail.date_start<'" . date('Y-m-d H:i:s') . "'", "jr_advertise_detail.date_end>'" . date('Y-m-d H:i:s') . "'", 'jr_advertise_detail.status=1'])
+            ->andWhere(['jr_advertise_detail.advertise_position_code' => $code])
+            ->orderBy("jr_advertise_detail.sort_order ASC, jr_advertise_detail.position_priority ASC")
+            ->all();
         return $advertise_detail;
     }
     public function getProduct(){
