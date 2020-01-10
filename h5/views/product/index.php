@@ -10,6 +10,19 @@ $this->title = '商品详情';
 		<div class="mb50">
 			<div class="swiper-container" id="swiper-container_banner">
 				<div class="swiper-wrapper">
+
+                    <?php if ($model->promotion) { ?>
+                        <?php foreach ($model->promotion as $promotion) { ?>
+                            <?php if ($promotion->promotion_detail_title) { ?>
+                                <div class="swiper-slide">
+                                    <div class="item-photo">
+                                        <img src="<?= \common\component\image\Image::resize($promotion->promotion_detail_image, 320, 320) ?>" class="w">
+                                    </div>
+                                </div>
+                            <?php }?>
+                        <?php }?>
+                    <?php }?>
+
 					<?php foreach ($model->imagelist as $value) { ?>
 						<div class="swiper-slide">
                             <div class="item-photo">
