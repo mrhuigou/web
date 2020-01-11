@@ -21,7 +21,8 @@ $this->title ='购物车';
 <section class="veiwport pt5 mb50">
     <div id="cart-list">
     <?php foreach ( $cart as $val){ ?>
-        <div class="store_content mb10">
+<!--        <div class="store_content mb10">-->
+        <div class="store_content mb5">
         <h2 class="p10 db bdb whitebg clearfix ">
             <a class="fl " href="<?=\yii\helpers\Url::to(['/shop/index','shop_code'=>$val['base']->store_code],true)?>">
                 店铺：<span class="gray6 mr5"><?=$val['base']['name']?></span>

@@ -7,11 +7,12 @@
  */
 ?>
 <!--<div class="tc f16  w green p5 lh200 pt10"> // // 买 了 又 看 // // </div>-->
-<div class="">
-    <a class="btn mbtn greenbtn-bd tc w" style="font-size: 17px" href="/site/index">点击继续购物</a>
+<div>
+    <a class="btn mbtn tc w" style="font-size: 17px; border: 1px solid #404040; background-color: #fff;color: red;" href="/site/index">点 击 继 续 购 物</a>
 </div>
 
-<dl class="mt10">
+<!--<dl class="mt10">-->
+<dl class="mt5">
     <dt class=" f14 whitebg org fb tc bdt bdb">
     <div class="tit1 orgtit1 clearfix">
         <h2 class="fl f14">任选一件整单包邮</h2>
