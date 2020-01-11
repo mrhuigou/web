@@ -7,8 +7,8 @@
  */
 ?>
 <!--<div class="tc f16  w green p5 lh200 pt10"> // // 买 了 又 看 // // </div>-->
-<div class="p5">
-    <a class="btn mbtn greenbtn-bd tc w" href="/site/index">点击继续购物</a>
+<div class="">
+    <a class="btn mbtn greenbtn-bd tc w" style="font-size: 17px" href="/site/index">点击继续购物</a>
 </div>
 
 <dl class="mt10">
