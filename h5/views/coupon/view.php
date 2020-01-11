@@ -83,7 +83,7 @@ $this->title ='优惠券详情';
 			<span class="f20 red" >￥<em id="sub_total">0.00</em></span>
 		</div>
 		<div class="flex-item-4 tc pt2">
-			<a href="javascript:;" class="btn graybtn mbtn f12 disbtn" id="coupon_btn_submit">去结算</a>
+			<a href="javascript:;" class="btn graybtn mbtn f12 disbtn" id="coupon_btn_submit">加入购物车</a>
 		</div>
 	</div>
 </div>

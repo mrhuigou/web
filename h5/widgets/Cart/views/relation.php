@@ -6,7 +6,8 @@
  * Time: 21:49
  */
 ?>
-<div class="tc f16  w green p5 lh200 pt10"> // // 买 了 又 看 // // </div>
+<!--<div class="tc f16  w green p5 lh200 pt10"> // // 买 了 又 看 // // </div>-->
+<a class="tc f16  w green p5 lh200 pt10" href="https://m.mrhuigou.com/site/index">// // 点击继续购物 // //</a>
 <dl class="mt10">
     <dt class=" f14 whitebg org fb tc bdt bdb">
     <div class="tit1 orgtit1 clearfix">
