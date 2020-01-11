@@ -8,7 +8,7 @@
 ?>
 <!--<div class="tc f16  w green p5 lh200 pt10"> // // 买 了 又 看 // // </div>-->
 <div class="tc f16  w green p5 lh200 pt10">
-    <a href="https://m.mrhuigou.com/site/index">
+    <a class="green" href="https://m.mrhuigou.com/site/index">
         // // 点击继续购物 // //
     </a>
 </div>
