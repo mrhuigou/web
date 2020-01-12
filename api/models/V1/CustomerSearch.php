@@ -51,7 +51,8 @@ class CustomerSearch extends Customer
         $subQuery = Customer::find();
 //        print_r($query->limit(30)->all());exit;
         $subQuery->andFilterWhere([
-            'customer_id' => $this->customer_id,
+//            'customer_id' => $this->customer_id,
+            'customer_id' => $params?$this->customer_id:0,
 //            'store_id' => $this->store_id,
 //            'email_validate' => $this->email_validate,
 //            'telephone_validate' => $this->telephone_validate,
