@@ -123,12 +123,18 @@ $this->title ='提货券详情';
         <p class="red pl5 error_district"></p>
     <?php }?>
     <?= $form->field($model, 'address',['template' => '{label}<li>{input}</li>{error}'])->textarea(["placeholder" => '小区/写字楼/街道+楼号+楼层等','id'=>'address','class'=>'w f14 ','rows'=>2,'style'=>"height:45px;padding:5px;"])->label('详细地址')?>
-    <?= $form->field($model, 'username', ['inputOptions' => ["placeholder" => '请填写收货人姓名']])->label('收货人') ?>
-    <?= $form->field($model, 'telephone', ['inputOptions' => ["placeholder" => '请填写收货人电话号码']])->label('手机号') ?>
+        <p class="red pl5 error_address"></p>
+    <?= $form->field($model, 'username', ['inputOptions' => ["placeholder" => '请填写收货人姓名','id'=>'username']])->label('收货人') ?>
+        <p class="red pl5 error_username"></p>
+    <?= $form->field($model, 'telephone', ['inputOptions' => ["placeholder" => '请填写收货人电话号码','id'=>'telephone']])->label('手机号') ?>
+        <p class="red pl5 error_telephone"></p>
 </ul>
 <?= h5\widgets\Coupon\Delivery::widget(['store_id' => $model->store_id]) ?>
-<div class=" bdt  p10 w tc ">
+<div class=" bdt  p10 w tc " id="submitbtn1">
     <a href="javascript:void(0)"  class='btn mbtn greenbtn w SubmitBtn'>提交订单 </a>
+</div>
+<div class=" bdt  p10 w tc " id="submitbtn2" hidden>
+    <a href="javascript:void(0)"  class='btn mbtn greenbtn w'>提交成功</a>
 </div>
 <?php ActiveForm::end(); ?>
 
@@ -193,7 +199,50 @@ $("body").on("click",".showM.s",function () {
     $(".aboutAd").hide();
 });
 $("body").on("click",".SubmitBtn",function () {
+    var submit_success = true;
+    if( !$("#district").val() ||  $("#district").val() == '请选择'){
+        $('.error_district').html("请选择地区");
+        $('.error_district').show();
+        submit_success = false;
+        return false;
+    }else{
+        $('.error_district').hide();
+    }
+    if( !$("#address").val()){
+        $.alert('请输入详细地址');
+        // $('.error_address').html("详细地址不能为空");
+        // $('.error_address').show();
+        submit_success = false;
+        return false;
+    }
+    if( !$("#username").val()){
+        $.alert('请输入收货人姓名');
+        // $('.error_username').html("收货人不能为空");
+        // $('.error_username').show();
+        submit_success = false;
+        return false;
+    }
+    var mobile_myreg=   /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+    // if (!mobile_myreg.test($poneInput.val())) {
+    if( !$("#telephone").val()){
+        $.alert('请输入收货人手机号');
+        // $('.error_telephone').html("手机号不能为空");
+        // $('.error_telephone').show();
+        submit_success = false;
+        return false;
+    }else if(!mobile_myreg.test($("#telephone").val())){
+        $.alert('请输入正确的手机号');
+        submit_success = false;
+        return false;
+    }
+    // return false;
+if(submit_success){
     $("#form-address").submit();
+    $("#submitbtn1").hide();
+    $("#submitbtn2").show();
+}
+
+
 });
 
 

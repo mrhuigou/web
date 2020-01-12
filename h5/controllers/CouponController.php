@@ -2,12 +2,14 @@
 
 namespace h5\controllers;
 use api\models\V1\AdvertiseDetail;
+use api\models\V1\CheckoutOrder;
 use api\models\V1\Coupon;
 use api\models\V1\CouponCate;
 use api\models\V1\CouponHistory;
 use api\models\V1\CouponRules;
 use api\models\V1\CouponRulesDetail;
 use api\models\V1\Order;
+use api\models\V1\OrderMerge;
 use api\models\V1\Product;
 use api\models\V1\Store;
 use common\component\image\Image;
@@ -170,7 +172,49 @@ class CouponController extends \yii\web\Controller
 
                 if ($model->load(Yii::$app->request->post()) && $trade_no = $model->submit()) {
 
-                    return $this->redirect(['payment/index', 'trade_no' => $trade_no, 'showwxpaytitle' => 1]);
+                    try{
+                        if($OrderMergeModel=OrderMerge::findOne(['merge_code'=>$trade_no])) {
+                            if ($OrderMergeModel->status == 1) {
+                                return $this->redirect(['/checkout/complate', 'trade_no' => $OrderMergeModel->merge_code]);
+                            } else {
+                                if (bccomp($OrderMergeModel->getMergeTotal(), $OrderMergeModel->total) !== 0) {
+                                    $OrderMergeModel->status = -1;
+                                    $OrderMergeModel->date_modified = date("Y-m-d H:i:s");
+                                    $OrderMergeModel->save();
+                                    throw new NotFoundHttpException("交易订单已经过期！");
+                                }
+                                if (!$OrderMergeModel->getPayStatus()) {
+                                    throw new NotFoundHttpException("交易订单已经过期！");
+                                }
+                            }
+
+                            //-----------------------------支付-------------------------------
+                            if (!$OrderMergeOrder = OrderMerge::findOne(['merge_code' => $trade_no, 'customer_id' => Yii::$app->user->getId()])) {
+                                throw new NotFoundHttpException("非法操作！");
+                            }
+                            if ($OrderMergeOrder->status) {
+                                return $this->redirect('/order/index');
+                            }
+                            Yii::$app->session->set('Pay_trade_no', $OrderMergeOrder->merge_code);
+                            if ($OrderMergeOrder->MergeTotal == 0) {
+                                $CheckoutOrderModel = new CheckoutOrder();
+                                $CheckoutOrderModel->out_trade_no = $OrderMergeOrder->merge_code;
+                                $CheckoutOrderModel->transaction_id = $OrderMergeOrder->merge_code;
+                                $CheckoutOrderModel->staus = 2;
+                                $CheckoutOrderModel->payment_method = "免费支付";
+                                $CheckoutOrderModel->payment_code = "free_checkout";
+                                $CheckoutOrderModel->remak = $OrderMergeOrder->merge_code;
+                                $CheckoutOrderModel->save();
+                                return $this->redirect(['/checkout/complate', 'trade_no' => $OrderMergeOrder->merge_code]);
+                            } else {
+                                throw new NotFoundHttpException("交易订单不存在！");
+                            }
+                        }
+                    }catch (NotFoundHttpException $e){
+                        throw new NotFoundHttpException($e->getMessage());
+                    }
+
+//                    return $this->redirect(['payment/index', 'trade_no' => $trade_no, 'showwxpaytitle' => 1]);
                 } else {
                     return $this->render('view-delivery',['model'=>$model,'coupon_product'=>$coupon_product]);
 
