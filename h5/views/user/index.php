@@ -152,7 +152,7 @@ $this->title = '用户中心';
                 <p>账户绑定</p>
             </a>
 		</div>
-		<a class="line-a db w clearfix p10 " href="tel:4008556977" target="_blank">
+		<a class="line-a db w clearfix p10 " href="tel:0532-55769778" target="_blank">
 			客服热线：0532-55769778
 			<i class="iconfont fr"></i>
 		</a>
