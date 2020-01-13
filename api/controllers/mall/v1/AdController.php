@@ -147,7 +147,7 @@ class AdController extends Controller {
 						'name' => $ad_detail->product->description->name,
 						'meta_description' => $promotion_detail_title.$coupon_title.$ad_detail->product->description->meta_description,
 //						'image' => Image::resize(($ad_detail->source_url ?: $promotion_detail_image )? :$ad_detail->product->image,320,320),
-                        'image' => Image::resize($ad_detail->product->image,320,320),
+						'image' => Image::resize($promotion_detail_image ? :$ad_detail->product->image,320,320),
                         'sale_price' => $ad_detail->product->price,
 						'vip_price' => $ad_detail->product->vip_price,
 						'cur_price' => $ad_detail->product->getPrice(),
