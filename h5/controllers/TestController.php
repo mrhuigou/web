@@ -246,4 +246,11 @@ echo "<br>";
             }
             return $this->render('test-game',['customer_id' => $customer_id]);
         }
+
+        public function actionTestMobile()
+        {
+            $useragent=\Yii::$app->request->getUserAgent();
+//            echo "<pre>";
+            print_r($useragent);die;
+        }
 }
