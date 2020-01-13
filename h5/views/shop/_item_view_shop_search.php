@@ -1,6 +1,16 @@
 <li class="clearfix">
             <a href="<?=\yii\helpers\Url::to(['/product/index',"product_base_id"=>$model->product_base_id])?>" class="db w-per30 fl">
-                <img src="<?=\common\component\image\Image::resize($model->image,180,180)?>" alt="tu" class="db w fl mr15" >
+
+<!--                //促销方案的 图片-->
+                <?php if ($model->promotion) { ?>
+                    <?php foreach ($model->promotion as $promotion) { ?>
+                        <?php if ($promotion->promotion_detail_image) { ?>
+                            <img src="<?=\common\component\image\Image::resize($promotion->promotion_detail_image,180,180)?>" alt="tu" class="db w fl mr15" >
+                        <?php }?>
+                    <?php }?>
+                <?php }else {?>
+                    <img src="<?=\common\component\image\Image::resize($model->image,180,180)?>" alt="tu" class="db w fl mr15" >
+                <?php }?>
             </a>
             <div class="w-per65 fr">
                 <a href="<?=\yii\helpers\Url::to(['/product/index',"product_base_id"=>$model->product_base_id])?>" class="db pt10 pb5" ><?=$model->description->name?></a>
