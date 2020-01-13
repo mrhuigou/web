@@ -78,7 +78,7 @@ class CouponController extends \yii\web\Controller
                 }
             }
             if($coupon_product){
-                $customer_coupon=CustomerCoupon::findOne(['customer_id'=>Yii::$app->user->getId(),'coupon_id'=>$id]);
+                $customer_coupon=CustomerCoupon::findOne(['customer_id'=>Yii::$app->user->getId(),'coupon_id'=>$id ,'is_use' => 0,'end_time' >= date('Y-m-d H:i:s')] );
                 return $this->render('view',['model'=>$model,'coupon_product'=>$coupon_product,'customer_coupon'=>$customer_coupon]);
             }else{
                 return $this->redirect('/');
