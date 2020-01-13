@@ -73,7 +73,7 @@ $this->title = '订单确认';
                 <div class="store-promotion  mb5"><?= h5\widgets\Checkout\StorePromotion::widget(['promotion' => $val['promotion'], 'coupon_gift' => $val['coupon_gift']]) ?></div>
 				<?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products']]) ?>
                 <?php if($is_jiarun){?>
-                <?php $shipping = 0;$sub_total = 0;?>
+                <?php $shipping = 0;$sub_total = 0;$total = 0;?>
                 <?php if ($val['totals']) {
                      foreach ($val['totals'] as $value) {
                          if($value['code'] == 'shipping'){
@@ -84,12 +84,12 @@ $this->title = '订单确认';
 //                         }
                          //------------------实际付款68元包邮-------------------------
                          if($value['code'] == 'total'){
-//                             $sub_total = $value['value'] - $shipping;
-                             $sub_total = bcsub($value['value'],$shipping,2);
+                             $total = $value['value'];
                          }
                          //------------------实际付款68元包邮-------------------------
 
                      }
+                        $sub_total = bcsub($total,$shipping,2);
                  } ?>
                 <?php if ($shipping > 0 && $sub_total < 68 && count($checkout_ad) >0) { ?>
                 <script>
