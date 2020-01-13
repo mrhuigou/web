@@ -33,7 +33,7 @@
             <input type="text" class="num-text item-num-text" value="1" name="qty" max="100" min="1">
             <span class="num-add item-num-add iconfont"></span>
         </p>
-        <em id="J_EmStock"  style="display: inline;">库存<?=$product_base->stockCount?>件</em>
+<!--        <em id="J_EmStock"  style="display: inline;">库存--><?//=$product_base->stockCount?><!--件</em>-->
     </div>
     <div class="footer-cart clearfix static">
         <?php if($product_base->online_status){?>
