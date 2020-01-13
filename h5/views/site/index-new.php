@@ -101,9 +101,9 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         <img class="w" src="../assets/images/skin/skin-0.jpg" />
     </a>-->
     <div class="jb" style="padding-bottom: 0px;">
-        <a href="https://m.mrhuigou.com/page/2581.html" class="t"></a>
+        <a href="https://m.mrhuigou.com/page/3538.html" class="t"></a>
         <div class="tit1  redtit1">
-            <h2>爆品专区<a class="fr f12 red mt2" href="<?php echo \yii\helpers\Url::to(['/page/index','page_id'=>2581])?>">更多&gt;&gt;</a>
+            <h2>爆品专区<a class="fr f12 red mt2" href="<?php echo \yii\helpers\Url::to(['/page/index','page_id'=>3538])?>">更多&gt;&gt;</a>
             </h2>
         </div>
     <div id="hot_content" style="max-width: inherit;overflow: hidden;" class="pl5 pr5"></div>

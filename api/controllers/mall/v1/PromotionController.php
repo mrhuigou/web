@@ -143,9 +143,9 @@ class PromotionController extends Controller {
 				foreach ($details as $key => $detail) {
 
                     //过滤 已经下架的商品
-                    if($detail->beintoinv != 1){
-                        continue;
-                    }
+//                    if($detail->beintoinv != 1){
+//                        continue;
+//                    }
 
 				    //------------------------促销方案描述---------------------
                     $promotion_detail_title = '';
