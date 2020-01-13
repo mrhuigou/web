@@ -55,7 +55,8 @@ class AdController extends Controller {
                             $data[$count] = [
                                 'title' => $detail->title,
                                 'image' => Image::resize($detail->source_url, $detail->width, $detail->height),
-                                'url'=> Url::to($detail->link_url)
+//                                'url'=> Url::to($detail->link_url)
+                                'url'=> $detail->link_url ? Url::to($detail->link_url):(Url::to(['product/index','shop_code'=>$detail->store_code,'product_code'=>$detail->product_code]))
                             ];
                             $count++;
                         }
@@ -69,7 +70,9 @@ class AdController extends Controller {
                         $data[$key] = [
                             'title' => $detail->title,
                             'image' => Image::resize($detail->source_url, $detail->width, $detail->height),
-                            'url'=> Url::to($detail->link_url)
+//                            'url'=> Url::to($detail->link_url),
+                            'url'=> $detail->link_url ? Url::to($detail->link_url):(Url::to(['product/index','shop_code'=>$detail->store_code,'product_code'=>$detail->product_code]))
+
                         ];
 
                     }
