@@ -7,7 +7,8 @@ use yii\helpers\Html;
 /* @var $message string */
 /* @var $exception Exception */
 
-$this->title = "系统繁忙";
+//$this->title = "系统繁忙";
+$this->title = "每日惠购";
 ?>
 
 <header class="header w" id="header">
