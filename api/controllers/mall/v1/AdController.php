@@ -146,13 +146,13 @@ class AdController extends Controller {
 						'item_code'=>$ad_detail->product->product_base_code,
 						'name' => $ad_detail->product->description->name,
 						'meta_description' => $promotion_detail_title.$coupon_title.$ad_detail->product->description->meta_description,
-						'image' => Image::resize($promotion_detail_image ? :$ad_detail->product->image,200,200),
+						'image' => Image::resize(($ad_detail->source_url ?: $promotion_detail_image )? :$ad_detail->product->image,200,200),
 						'sale_price' => $ad_detail->product->price,
 						'vip_price' => $ad_detail->product->vip_price,
 						'cur_price' => $ad_detail->product->getPrice(),
 						'stock'=>$ad_detail->product->getStockCount(),
 						'life'=>'',
-						'url'=>Url::to(['product/index','shop_code'=>$ad_detail->product->store_code,'product_code'=>$ad_detail->product->product_code]),//'/'.$ad_detail->product->store_code."-".$ad_detail->product->product_code.".html"
+						'url'=>$ad_detail->link_url ?:(Url::to(['product/index','shop_code'=>$ad_detail->product->store_code,'product_code'=>$ad_detail->product->product_code])),//'/'.$ad_detail->product->store_code."-".$ad_detail->product->product_code.".html"
 					];
                     $count ++ ;
 				}
