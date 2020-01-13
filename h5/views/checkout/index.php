@@ -79,9 +79,16 @@ $this->title = '订单确认';
                          if($value['code'] == 'shipping'){
                              $shipping = $value['value'];
                          }
-                         if($value['code'] == 'sub_total'){
-                             $sub_total = $value['value'];
+//                         if($value['code'] == 'sub_total'){
+//                             $sub_total = $value['value'];
+//                         }
+                         //------------------实际付款68元包邮-------------------------
+                         if($value['code'] == 'total'){
+//                             $sub_total = $value['value'] - $shipping;
+                             $sub_total = bcsub($value['value'],$shipping,2);
                          }
+                         //------------------实际付款68元包邮-------------------------
+
                      }
                  } ?>
                 <?php if ($shipping > 0 && $sub_total < 68 && count($checkout_ad) >0) { ?>
