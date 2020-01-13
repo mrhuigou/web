@@ -89,7 +89,8 @@ $this->title = '订单确认';
                          //------------------实际付款68元包邮-------------------------
 
                      }
-                        $sub_total = bcsub($total,$shipping,2);
+                        $sub_total = $total - $shipping;
+//                        $sub_total = bcsub($total,$shipping,2);
                  } ?>
                 <?php if ($shipping > 0 && $sub_total < 68 && count($checkout_ad) >0) { ?>
                 <script>
