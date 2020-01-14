@@ -2,12 +2,35 @@
 <div class="cart-pop" style="display:none;">
     <div class="cart-top-goods clearfix">
         <a href="javascript:;" class="fl">
-            <img src="<?=\common\component\image\Image::resize($product_base->defaultImage,50,50)?>"  width="50" class="db bc">
+            <?php $promotion_detail_image= '';$promotion_detail_title = '';?>
+            <?php if ($product_base->promotion) { ?>
+                <?php foreach ($product_base->promotion as $promotion) { ?>
+                    <?php if ($promotion->promotion_detail_image) { ?>
+                        <?php $promotion_detail_image= $promotion->promotion_detail_image;?>
+                        <?php $promotion_detail_title= $promotion->promotion_detail_title;?>
+                    <?php }?>
+                <?php }?>
+            <?php }?>
+            <img src="<?=\common\component\image\Image::resize($promotion_detail_image ?:$product_base->defaultImage,50,50)?>"  width="50" class="db bc">
         </a>
         <p class="fl pr5">
             <a href="<?=\yii\helpers\Url::to(['/product/index','product_base_id'=>$product_base->product_base_id])?>" class="mxh20 f12 db"><?=$product_base->description->name?></a>
             <span class="f14 red fb db" id="J_VipPrice">￥<em class="price"><?=$product_base->getPrice()?></em> </span>
-            <span class="f12 red  db"><?=$product_base->description->meta_description?></span>
+            <span class="f12 red  db">
+                 <!--促销方案详情-->
+                <?php if ($promotion_detail_title) { ?>
+                    <?= '[促]'.$promotion_detail_title ?>
+                <?php }?>
+                <!--优惠券详情-->
+                <?php if ($product_base->coupon) { ?>
+                    <?php foreach ($product_base->coupon as $coupon) { ?>
+                        <?= '[券]'.$coupon->comment; ?>
+                    <?php }?>
+                <?php }?>
+                <?php if ($product_base->description->meta_description) { ?>
+                    <?=$product_base->description->meta_description?>
+                <?php } ?>
+            </span>
         </p>
         <a href="javascript:;" class="close-pop iconfont">&#xe612;</a>
     </div>
