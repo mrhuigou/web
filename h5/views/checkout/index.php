@@ -79,18 +79,11 @@ $this->title = '订单确认';
                          if($value['code'] == 'shipping'){
                              $shipping = $value['value'];
                          }
-//                         if($value['code'] == 'sub_total'){
-//                             $sub_total = $value['value'];
-//                         }
-                         //------------------实际付款68元包邮-------------------------
                          if($value['code'] == 'total'){
                              $total = $value['value'];
                          }
-                         //------------------实际付款68元包邮-------------------------
-
                      }
-                        $sub_total = $total - $shipping;
-//                        $sub_total = bcsub($total,$shipping,2);
+                        $sub_total = bcsub($total,$shipping,2);
                  } ?>
                 <?php if ($shipping > 0 && $sub_total < 68 && count($checkout_ad) >0) { ?>
                 <script>
@@ -125,7 +118,7 @@ $this->title = '订单确认';
                         <div class="layer0" style="padding: 5px;">
                             <h2 class="f14 row-two-max mb10">
                                 <span class="btn btn-xxs btn-bd-red">免邮</span>
-                                满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red"><?php echo $val['base']->minbookcash- $sub_total?></i>元，即可以享受包邮！</h2>
+                                满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red"><?php echo bcsub($val['base']->minbookcash,$sub_total,2)?></i>元，即可以享受包邮！</h2>
 
                             <div class="flex-col">
                                     <?php
