@@ -3,7 +3,16 @@
         <?php if($model && $model['productBase']){?>
 <li class="clearfix">
             <a data-content="<?php echo $page?>" data-filter="<?php echo \yii\helpers\Url::to(['/product/index',"product_code"=>$model['productBase']->product_base_code,'shop_code'=>$model['productBase']->store_code])?>" href="javascript:void(0)" class="db w-per30 fl urlgoto">
-                <img data-original="<?=\common\component\image\Image::resize($model['productBase']->defaultImage,180,180)?>" alt="<?=$model['productBase']->description->name?>" class="lazy db w fl mr15" >
+                <?php $promotion_detail_image= '';?>
+                <?php if ($model['productBase']->promotion) { ?>
+                    <?php foreach ($model['productBase']->promotion as $promotion) { ?>
+                        <?php if ($promotion->promotion_detail_image) { ?>
+                            <?php $promotion_detail_image= $promotion->promotion_detail_image;?>
+                        <?php }?>
+                    <?php }?>
+                <?php }?>
+
+                <img data-original="<?=\common\component\image\Image::resize($promotion_detail_image ?:$model['productBase']->defaultImage,180,180)?>" alt="<?=$model['productBase']->description->name?>" class="lazy db w fl mr15" >
             </a>
             <div class="w-per65 fr">
                 <a data-content="<?php echo $page?>" href="javascript:void(0)" data-filter="<?php echo \yii\helpers\Url::to(['/product/index',"product_code"=>$model['productBase']->product_base_code,'shop_code'=>$model['productBase']->store_code])?>" class="db pt10 pb5 urlgoto" >
