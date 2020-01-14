@@ -56,7 +56,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
             </li>
             <?php }?>
             <li>
-                <a href="tel:0532-55769778">
+                <a href="tel:400-968-9870">
                     <i class="iconfont vm mr5">&#xe65e;</i>
                     <span class="vm">客服</span>
                 </a>
@@ -547,12 +547,12 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 
     <?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){  ?>
         <footer class="gray9 tc p10 f14">
-            客服热线：0532-55769778
+            客服热线：400-968-9870
         </footer>
     <?php }else{ ?>
         <footer class="gray9 tc p10 f14">
             Copyright©2015每日惠购 版权所有<br>
-            客服热线：0532-55769778
+            客服热线：400-968-9870
         </footer>
     <?php }?>
 </div>

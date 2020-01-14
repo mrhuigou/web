@@ -27,7 +27,7 @@
     <div class=" pt10 w1100 tc bc gray6" style="border-top: 2px solid #eeedf2">
         版权说明  举报邮箱：service@mrhuigou.com  仅限18周岁以上人士购买  网络社会征信网 <br>
         Copyright© 2006-2020 每日惠购网 www.mrhuigou.com 版权所有 网站备案号：鲁ICP备19003042号 <br>
-        客服电话：0532-55769778  客服邮箱：service@mrhuigou.com
+        客服电话：400-968-9870  客服邮箱：service@mrhuigou.com
     </div>
     <p class="tc gray6">
         <img src="/assets/images/licence.jpg" alt="营业许可" title="营业许可" class="mr10"><img border="0" alt="360安全认证" src="/assets/images/360safe.png">

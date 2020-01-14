@@ -18,7 +18,7 @@ $this->title = $name;
         <p class="lh180 mt50 ml10">
             非常抱歉给您造成不便，我们建议您：<br />
             <span class="f18">&middot;</span> 返回 <a href="/" class="green">每日惠购同城网购首页</a> <br />
-            <span class="f18">&middot;</span> 联系我们的客服人员 <span class="green">0532-55769778</span>
+            <span class="f18">&middot;</span> 联系我们的客服人员 <span class="green">400-968-9870</span>
         </p>
     </div>
 </div>

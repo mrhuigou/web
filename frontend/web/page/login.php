@@ -235,7 +235,7 @@
 
     版权说明  举报邮箱：service@mrhuigou.com  仅限18周岁以上人士购买  网络社会征信网 <br>
     Copyright© 2006-2014 每日惠购网 www.mrhuigou.com 版权所有 网站备案号：鲁ICP备19003042号 <br>
-    客服电话：0532-55769778 时间:9:00-12:00 13:00-22:00 客服邮箱：service@mrhuigou.com
+    客服电话：400-968-9870 时间:9:00-12:00 13:00-22:00 客服邮箱：service@mrhuigou.com
 </p>
 
 <p class="pb50 tc gray6">
