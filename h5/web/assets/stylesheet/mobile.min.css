@@ -1287,7 +1287,7 @@ hr{margin-top:10px;margin-bottom:10px;border:0;border-top:1px solid #ddd}
 .BreakingNewsController ul li{padding:2px 5px;display:none}
 .BreakingNewsController ul li a{font-size:14px;display:inline-block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;line-height:25px;height:25px}
 .easing a,.easing span{-o-transition:.25s linear;transition:.25s linear;-moz-transition:.25s linear;-webkit-transition:.25s linear}
-.layer-close{position:absolute;top:-12px;right:-12px;background-color:rgba(0,0,0,.5);color:#fff;width:26px;height:26px;line-height:24px;font-size:13px;text-align:center;cursor:pointer;border-radius:50%}
+.layer-close{position:absolute;top:2px;right:1px;background-color:rgba(0,0,0,.5);color:#fff;width:26px;height:26px;line-height:24px;font-size:13px;text-align:center;cursor:pointer;border-radius:50%}
 .layermchild{margin:0 auto}
 .layer0{position:relative}
 @media screen and (min-width:420px){.panels .tit span{font-size:18px}
