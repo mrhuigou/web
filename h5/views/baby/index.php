@@ -470,7 +470,7 @@ $this->title = "每日惠购";
             'title' => '遇到好东西，总想分享给最亲爱的你。',
             'desc' => "每日惠购，物美价廉，当日订单，当日送达。",
             'link' => Yii::$app->request->getAbsoluteUrl(),
-            'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.jpg'
+            'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.png'
         ];
     }
     ?>

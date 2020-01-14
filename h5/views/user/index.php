@@ -189,7 +189,7 @@ $this->title = '用户中心';
         'title' =>$this->title,
         'desc' => '家润每日惠购，物美价廉，当天订单，当天送。',
         'link' => Yii::$app->request->getAbsoluteUrl(),
-        'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.jpg'
+        'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.png'
     ];
 }?>
 

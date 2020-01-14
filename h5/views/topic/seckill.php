@@ -86,7 +86,7 @@ $this->title = $model->name;
         'title' =>$model->name,
         'desc' => '家润每日惠购，物美价廉，当天订单，当天送。',
         'link' => Yii::$app->request->getAbsoluteUrl(),
-        'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.jpg'
+        'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.png'
     ];
 }?>
 <?php $this->beginBlock("JS") ?>
