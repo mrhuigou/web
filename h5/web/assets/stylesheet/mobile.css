@@ -5888,8 +5888,8 @@ hr {
 /* 移动端layer 没有右上角的关闭按钮参数，统一写 */
 .layer-close {
   position: absolute;
-  top: -12px;
-  right: -12px;
+  top: 1px;
+  right: 1px;
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   width: 26px;
