@@ -3,11 +3,12 @@
         <?php if($model && $model['productBase']){?>
 <li class="clearfix">
             <a data-content="<?php echo $page?>" data-filter="<?php echo \yii\helpers\Url::to(['/product/index',"product_code"=>$model['productBase']->product_base_code,'shop_code'=>$model['productBase']->store_code])?>" href="javascript:void(0)" class="db w-per30 fl urlgoto">
-                <?php $promotion_detail_image= '';?>
+                <?php $promotion_detail_image= '';$promotion_detail_title = '';?>
                 <?php if ($model['productBase']->promotion) { ?>
                     <?php foreach ($model['productBase']->promotion as $promotion) { ?>
                         <?php if ($promotion->promotion_detail_image) { ?>
                             <?php $promotion_detail_image= $promotion->promotion_detail_image;?>
+                            <?php $promotion_detail_title= $promotion->promotion_detail_title;?>
                         <?php }?>
                     <?php }?>
                 <?php }?>
@@ -18,7 +19,21 @@
                 <a data-content="<?php echo $page?>" href="javascript:void(0)" data-filter="<?php echo \yii\helpers\Url::to(['/product/index',"product_code"=>$model['productBase']->product_base_code,'shop_code'=>$model['productBase']->store_code])?>" class="db pt10 pb5 urlgoto" >
                     <?=$model['product_name'];?>
                 </a>
-                 <p class="red "><?=$model['productBase']->description->meta_description?></p>
+                 <p class="red ">
+                     <!--促销方案详情-->
+                     <?php if ($promotion_detail_title) { ?>
+                         <?= '[促]'.$promotion_detail_title ?>
+                     <?php }?>
+                     <!--优惠券详情-->
+                     <?php if ($model['productBase']->coupon) { ?>
+                         <?php foreach ($model['productBase']->coupon as $coupon) { ?>
+                             <?= '[券]'.$coupon->comment; ?>
+                         <?php }?>
+                     <?php }?>
+                     <?php if ($model['productBase']->description->meta_description) { ?>
+                         <?=$model['productBase']->description->meta_description?>
+                     <?php } ?>
+                 </p>
                 <p class="red fb">￥<?=$model['productBase']->price?> <span class="del pl10 gray9">￥<?=$model['productBase']->sale_price?></span></p>
                 <p class="mt10 mb10">
                     <?php if($model['productBase']->online_status){?>
