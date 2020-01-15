@@ -73,7 +73,7 @@ $this->title = '订单确认';
                 <div class="store-promotion  mb5"><?= h5\widgets\Checkout\StorePromotion::widget(['promotion' => $val['promotion'], 'coupon_gift' => $val['coupon_gift']]) ?></div>
 				<?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products']]) ?>
                 <?php if($is_jiarun){?>
-                <?php $shipping = 0;$sub_total = 0;$coupon_total = 0;$pay_total=0;?>
+                <?php $shipping = 0;$sub_total = 0;$discount_coupon=0;$coupon_total = 0;$pay_total=0;?>
                 <?php if ($val['totals']) {
                      foreach ($val['totals'] as $value) {
                          if($value['code'] == 'shipping'){
@@ -83,9 +83,12 @@ $this->title = '订单确认';
                              $sub_total = $value['value'];
                          }
                          if($value['code'] == 'coupon'){
-                             $coupon_total = $value['value'];
+//                             $coupon_total = bcadd($discount_coupon,$value['value'],2);
+                             $coupon_total = number_format(bcadd($discount_coupon,$value['value'],2),2,'.','');
+//                             $coupon_total = $value['value'];
                          }
-                         $pay_total = bcsub($sub_total,$coupon_total,2);
+//                         $pay_total = bcsub($sub_total,$coupon_total,2);
+                         $pay_total = bcadd($sub_total,$coupon_total,2);
                      }
 
                  } ?>
