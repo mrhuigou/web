@@ -33,7 +33,7 @@ $this->title = '商品详情';
 					<?php } ?>
 				</div>
 			</div>
-			<?php if ($model->bedisplaylife) { ?>
+			<?php if ($model->bedisplaylife && $model->getStockCount()>0) { ?>
 				<div style="margin-top: -25px;position: absolute;z-index: 999;" class="pl5">
                     <?php if($product){?>
                         <span class="p2 greenbg bd-green white lh150  f12">生产日期：<?= $product->productDate ?></span>
