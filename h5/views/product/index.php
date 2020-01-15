@@ -43,6 +43,30 @@ $this->title = '商品详情';
                         <?php } ?>
                     <?php } ?>
 					<span class="p2 bd-green green whitebg lh150 f12">保质期 :<?= $model->life ?></span>
+
+                    <!--对保质期过滤-->
+                    <?php
+                    if($date_index = strpos($model->life,'天')){
+                        $num = substr($model->life , 0 , $date_index);
+                        $date = 'day';
+                    }
+                    if($date_index = strpos($model->life,'月')){
+                        $num = substr($model->life , 0 , $date_index);
+                        $date = 'month';
+                    }
+                    if($date_index = strpos($model->life,'年')){
+                        $num = substr($model->life , 0 , $date_index);
+                        $date = 'year';
+                    }
+                    ?>
+
+                    <?php if($product && $model->life){?>
+                        <span class="p2 greenbg bd-green white lh150  f12">到期日期：<?= date('Y-m-d',strtotime('+'.$num.$date .'-1days',strtotime($product->productDate))) ?></span>
+                    <?php }else{?>
+                        <?php if ($model->productDate && $model->life) { ?>
+                            <span class="p2 greenbg bd-green white lh150  f12">到期日期：<?= date('Y-m-d',strtotime('+'.$num.$date .'-1days',strtotime($model->productDate))) ?></span>
+                        <?php } ?>
+                    <?php } ?>
 				</div>
 			<?php } ?>
 			<div class="whitebg bdt bdb p5 mb5">
