@@ -83,11 +83,9 @@ $this->title = '订单确认';
                              $sub_total = $value['value'];
                          }
                          if($value['code'] == 'coupon'){
-//                             $coupon_total = bcadd($discount_coupon,$value['value'],2);
-                             $coupon_total = number_format(bcadd($discount_coupon,$value['value'],2),2,'.','');
-//                             $coupon_total = $value['value'];
+                             $discount_coupon=bcadd($discount_coupon,$value['value'],2);
+                             $coupon_total = number_format($discount_coupon,2,'.','');
                          }
-//                         $pay_total = bcsub($sub_total,$coupon_total,2);
                          $pay_total = bcadd($sub_total,$coupon_total,2);
                      }
 
@@ -115,7 +113,7 @@ $this->title = '订单确认';
                         <?php if( count($checkout_ad) < 1){?>
                             <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
                         <?php }else{?>
-                            <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">满68包邮，去凑单<?=$sub_total?> 付<?= $pay_total;?>券<?= $coupon_total;?>差<?= bcsub($val['base']->minbookcash,$pay_total,2)?></a>
+                            <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">满68包邮，去凑单</a>
                         <?php }?>
 
                     </div>
