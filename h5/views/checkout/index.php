@@ -4,7 +4,7 @@ use \yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-$this->title = '订单确认';
+$this->title = '订单确认1';
 ?>
 <header class="header">
     <div class="flex-col tc">
