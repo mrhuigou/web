@@ -108,7 +108,7 @@ $this->title = '订单确认';
                         <?php if( count($checkout_ad) < 1){?>
                             <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
                         <?php }else{?>
-                            <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">满68包邮，去凑单</a>
+                            <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">满68包邮，去凑单<?php '总'.$total.'定'.$sub_total?></a>
                         <?php }?>
 
                     </div>
