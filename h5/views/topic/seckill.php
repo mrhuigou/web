@@ -36,11 +36,31 @@ $this->title = $model->name;
 	<?php foreach($details as $detail){?>
 		<div class="clearfix p10 bdb">
 			<a href="<?=Url::to(['/product/index','product_code'=>$detail->product->product_code,'shop_code'=>$detail->product->store_code])?>" class="db pw30 fl">
-				<img data-original="<?= \common\component\image\Image::resize($detail->product->image, 180, 180) ?>" class="lazy db w fl mr15" >
+
+                <!--促销方案详情-->
+                <?php $promotion_detail_title = '';$promotion_detail_image = '';?>
+                <?php if($detail->product->Promotions){?>
+                    <?php foreach ($detail->product->Promotions as $promotion) { ?>
+                        <?php if ($promotion->promotion_detail_title) { ?>
+                            <?php $promotion_detail_title = $promotion->promotion_detail_title;?>
+                        <?php }?>
+                        <?php if ($promotion->promotion_detail_image) { ?>
+                            <?php $promotion_detail_image = $promotion->promotion_detail_image;?>
+                        <?php }?>
+                    <?php }?>
+                <?php }?>
+
+                <img data-original="<?= \common\component\image\Image::resize($promotion_detail_image ?:$detail->product->image, 180, 180) ?>" class="lazy db w fl mr15" >
 			</a>
 			<div class="pw66 fr">
 				<a href="<?=Url::to(['/product/index','product_code'=>$detail->product->product_code,'shop_code'=>$detail->product->store_code])?>" class="db pb10"> <?= $detail->product->description->name ?></a>
-				<p class="red mb5"><?= $detail->product->description->meta_keyword ?></p>
+				<p class="red mb5">
+                    <!--促销方案详情-->
+                    <?php if($promotion_detail_title){?>
+                        <?= '[促]'.$promotion_detail_title ?>
+                    <?php }?>
+                    <?= $detail->product->description->meta_keyword ?>
+                </p>
 				<?php if($detail->product->productBase->bedisplaylife){?>
 					<p class="mb5">
 						<span class="p2 bd-green green lh150 f12">保质期 :<?=$detail->product->productBase->life?></span>
