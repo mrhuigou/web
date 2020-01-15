@@ -175,16 +175,49 @@ $this->title = '订单确认';
                 <?php } ?>
 
 
+<!--                <div class="graybg p10 store_totals">-->
+<!--					--><?php //if ($val['totals']) { ?>
+<!--						--><?php //foreach ($val['totals'] as $value) { ?>
+<!--                            <p class="mb5 clearfix lh150 total_line" id = "--><?php //if($value['code'] =='points'){ echo 'point_customer_total_'.$value['customer_code_id'];}?><!--" >-->
+<!--                                <span class="fr red fb">￥<em-->
+<!--                                            class="--><?//= $value['code'] ?><!--">--><?//= $value['value'] ?><!--</em></span>-->
+<!--                                <span class="fl fb">--><?//= $value['title'] ?><!--：</span>-->
+<!--                            </p>-->
+<!--						--><?php //} ?>
+<!--					--><?php //} ?>
+<!---->
+<!--                </div>-->
+
                 <div class="graybg p10 store_totals">
-					<?php if ($val['totals']) { ?>
-						<?php foreach ($val['totals'] as $value) { ?>
+                    <?php if ($val['totals']) { ?>
+                        <?php foreach ($val['totals'] as $value) { ?>
+                            <?php
+                            if($value['code'] == 'total' || $value['code'] == 'shipping') {
+                                continue;
+                            }
+                            ?>
                             <p class="mb5 clearfix lh150 total_line" id = "<?php if($value['code'] =='points'){ echo 'point_customer_total_'.$value['customer_code_id'];}?>" >
                                 <span class="fr red fb">￥<em
                                             class="<?= $value['code'] ?>"><?= $value['value'] ?></em></span>
                                 <span class="fl fb"><?= $value['title'] ?>：</span>
                             </p>
-						<?php } ?>
-					<?php } ?>
+                        <?php } ?>
+                    <?php } ?>
+
+                </div>
+
+                <div class="graybg p10 store_totals">
+                    <?php if ($val['totals']) { ?>
+                        <?php foreach ($val['totals'] as $value) { ?>
+                            <?php if($value['code'] == 'total' || $value['code'] == 'shipping') {?>
+                                <p class="mb5 clearfix lh150 total_line" id = "<?php if($value['code'] =='points'){ echo 'point_customer_total_'.$value['customer_code_id'];}?>" >
+                                    <span class="fr red fb">￥<em
+                                                class="<?= $value['code'] ?>"><?= $value['value'] ?></em></span>
+                                    <span class="fl fb"><?= $value['title'] ?>：</span>
+                                </p>
+                            <?php } ?>
+                        <?php } ?>
+                    <?php } ?>
 
                 </div>
             </div>
