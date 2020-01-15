@@ -73,19 +73,22 @@ $this->title = '订单确认';
                 <div class="store-promotion  mb5"><?= h5\widgets\Checkout\StorePromotion::widget(['promotion' => $val['promotion'], 'coupon_gift' => $val['coupon_gift']]) ?></div>
 				<?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products']]) ?>
                 <?php if($is_jiarun){?>
-                <?php $shipping = 0;$sub_total = 0;$total = 0;?>
+                <?php $shipping = 0;$sub_total = 0;$coupon_total = 0;$pay_total=0;?>
                 <?php if ($val['totals']) {
                      foreach ($val['totals'] as $value) {
                          if($value['code'] == 'shipping'){
                              $shipping = $value['value'];
                          }
-                         if($value['code'] == 'total'){
-                             $total = $value['value'];
+                         if($value['code'] == 'sub_total'){
+                             $sub_total = $value['value'];
+                         }
+                         if($value['code'] == 'coupon'){
+                             $coupon_total = $value['value'];
                          }
                      }
-                        $sub_total = bcsub($total,$shipping,2);
+                        $pay_total = bcsub($sub_total,$coupon_total,2);
                  } ?>
-                <?php if ($shipping > 0 && $sub_total < 68 && count($checkout_ad) >0) { ?>
+                <?php if ($shipping > 0 && $pay_total < 68 && count($checkout_ad) >0) { ?>
                 <script>
                     <?php $this->beginBlock('JS_END') ?>
                         layer.open({
@@ -106,9 +109,9 @@ $this->title = '订单确认';
                 </script>
                     <div class="p5">
                         <?php if( count($checkout_ad) < 1){?>
-                            <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单11</a>
+                            <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
                         <?php }else{?>
-                            <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">满68包邮，去凑单1<?= '总'.$total.'定'.$sub_total?></a>
+                            <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">满68包邮，去凑单</a>
                         <?php }?>
 
                     </div>
@@ -118,7 +121,7 @@ $this->title = '订单确认';
                         <div class="layer0" style="padding: 5px;">
                             <h2 class="f14 row-two-max mb10">
                                 <span class="btn btn-xxs btn-bd-red">免邮</span>
-                                满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red"><?php echo bcsub($val['base']->minbookcash,$sub_total,2)?></i>元，即可以享受包邮！</h2>
+                                满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red"><?php echo bcsub($val['base']->minbookcash,$pay_total,2)?></i>元，即可以享受包邮！</h2>
 
                             <div class="flex-col">
                                     <?php
