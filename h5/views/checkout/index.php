@@ -90,25 +90,10 @@ $this->title = '订单确认';
                      }
 
                  } ?>
-                <?php if ($shipping > 0 && $pay_total < 68 && count($checkout_ad) >0) { ?>
-                <script>
-                    <?php $this->beginBlock('JS_END') ?>
-                        layer.open({
-                            type: 1,
-                            closeBtn: 2,
-                            title: false,
-                            shadeClose: true,
-                            shade:0.3,
-                            content: $('#layerCon').html(),
-                            // btn: ['去结算']
-                        });
-                        $(".layer-close").click(function(){
-                            layer.closeAll();
-                        })
-                    <?php $this->endBlock();
-                    $this->registerJs($this->blocks['JS_END'], \yii\web\View::POS_READY);?>
+<!--                --><?php //if ($shipping > 0 && $pay_total < 68 && count($checkout_ad) >0) { ?>
+                <?php if (count($checkout_ad) >0) { ?>
+                    <div id="shipping_script" hidden>
 
-                </script>
                     <div class="p5">
                         <?php if( count($checkout_ad) < 1){?>
                             <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
@@ -123,7 +108,7 @@ $this->title = '订单确认';
                         <div class="layer0" style="padding: 5px;">
                             <h2 class="f14 row-two-max mb10">
                                 <span class="btn btn-xxs btn-bd-red">免邮</span>
-                                满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red"><?php echo bcsub($val['base']->minbookcash,$pay_total,2)?></i>元，即可以享受包邮！</h2>
+                                满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red" id="diff_free"><?php echo bcsub($val['base']->minbookcash,$pay_total,2)?></i>元，即可以享受包邮！</h2>
 
                             <div class="flex-col">
                                     <?php
@@ -148,6 +133,7 @@ $this->title = '订单确认';
                         </div>
                     </div>
 				<?php } ?>
+                    </div>
                     <?php } ?>
                 <?php if($val['base']->store_id == 1){?>
                         <?php  $point_customers = \api\models\V1\PointCustomer::find()->where(['customer_id'=>Yii::$app->user->getId()])->all();?>

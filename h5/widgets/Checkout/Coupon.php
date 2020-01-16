@@ -12,6 +12,8 @@ use yii\bootstrap\Widget;
 
 class Coupon extends Widget {
 	public $store_id;
+	public $minbookcash;
+	public $shipping;
 	public $product;
 	private $model;
 
@@ -19,7 +21,9 @@ class Coupon extends Widget {
 	{
 		if (!$store = Store::findOne(['store_id' => $this->store_id])) {
 			throw new InvalidParamException("参数错误");
-		}
+		}else{
+		    $this->minbookcash = $store->minbookcash;
+        }
 		$user_copons = $this->getUserCoupon($store);
 		if ($user_copons) {
 			$group_data = [];
@@ -209,7 +213,7 @@ class Coupon extends Widget {
 	public function run()
 	{
 		if ($this->model) {
-			return $this->render('coupon', ['model' => $this->model, 'store_id' => $this->store_id]);
+			return $this->render('coupon', ['model' => $this->model, 'store_id' => $this->store_id,'minbookcash' => $this->minbookcash,'shipping' =>$this->shipping]);
 		}
 	}
 } 

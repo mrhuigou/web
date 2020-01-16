@@ -145,10 +145,36 @@
                 }
 
                 var pay_total=0;
+                var diff_free=0;
+                var pay_total1=0;
+                var minbookcash = <?=$minbookcash?>;
+                var shipping = data.shipping_cost;
                 $(".total").each(function(){
                     pay_total=FloatAdd(pay_total,$(this).html());
+                    pay_total1 = FloatSub(pay_total,shipping);
+                    diff_free=FloatSub(minbookcash,pay_total1);
                 });
+                $("#diff_free").html(diff_free);
                 $("#pay_total").html(pay_total);
+
+                if(shipping > 0 && pay_total1 < 68){
+                    layer.open({
+                        type: 1,
+                        closeBtn: 2,
+                        title: false,
+                        shadeClose: true,
+                        shade:0.3,
+                        content: $('#layerCon').html(),
+                        // btn: ['去结算']
+                    });
+                    $(".layer-close").click(function(){
+                        layer.closeAll();
+                    })
+                    $('#shipping_script').show();
+                }else{
+                    $('#shipping_script').hide();
+                }
+
             }else{
                 $.alert(data.data);
             }
@@ -178,10 +204,37 @@
                     $("#store_contain_"+store_id).find("#coupon-item-"+data.coupon_array[item]).attr('checked', true);
                 }
                 var pay_total=0;
+                var diff_free=0;
+                var pay_total1=0;
+                var minbookcash = <?=$minbookcash?>;
+                var shipping = data.shipping_cost;
+
                 $(".total").each(function(){
                     pay_total=FloatAdd(pay_total,$(this).html());
+                    pay_total1 = FloatSub(pay_total,shipping);
+                    diff_free=FloatSub(minbookcash,pay_total1);
                 });
+                $("#diff_free").html(diff_free);
                 $("#pay_total").html(pay_total);
+                if(shipping > 0 && pay_total1 < 68){
+                    layer.open({
+                           type: 1,
+                           closeBtn: 2,
+                           title: false,
+                           shadeClose: true,
+                           shade:0.3,
+                           content: $('#layerCon').html(),
+                           // btn: ['去结算']
+                       });
+                       $(".layer-close").click(function(){
+                           layer.closeAll();
+                       })
+                    $('#shipping_script').show();
+                }else{
+                    $('#shipping_script').hide();
+                }
+
+
             }else{
                 $.alert(data.data);
             }

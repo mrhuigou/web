@@ -1011,7 +1011,8 @@ class CheckoutController extends \yii\web\Controller {
 				'status' => true,
 				'data' => $this->renderPartial('totals', ['model' => $totals,]),
 				'store_promotion' => StorePromotion::widget(['promotion' => $promotion, 'coupon_gift' => $coupon_gift]),
-                'coupon_array'=>$coupon_array
+                'coupon_array'=>$coupon_array,
+                'shipping_cost'=>$shipping_cost,
 			];
 		} else {
 			$json = [
