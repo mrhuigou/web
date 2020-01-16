@@ -101,10 +101,10 @@ $this->title = '订单确认';
                     <?php if( count($checkout_ad) >0 ){?>
                     <div id="layerCon" style="display: none;">
 
-                        <div class="layer0" style="padding: 5px; max-width: 260px">
+                        <div class="layer0" style="padding: 5px;">
                             <h2 class="f14 row-two-max mb10">
                                 <span class="btn btn-xxs btn-bd-red">免邮</span>
-                                满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red" id="diff_free"><?php echo bcsub($val['base']->minbookcash,$sub_total,2)?></i>元！</h2>
+                                满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red" id="diff_free"><?php echo bcsub($val['base']->minbookcash,$sub_total,2)?></i>元,即可以享受包邮！</h2>
 
                             <div class="flex-col">
                                     <?php
@@ -117,8 +117,7 @@ $this->title = '订单确认';
                                      }
                                     ?>
                                     <?php foreach ($checkout_ad as $ad){?>
-<!--                                        <a href="--><?//= \yii\helpers\Url::to($ad->link_url, true) ?><!--" class="flex-item---><?php //echo $items?><!--">-->
-                                        <a href="<?= \yii\helpers\Url::to($ad->link_url, true) ?>" class="flex-item-12">
+                                        <a href="<?= \yii\helpers\Url::to($ad->link_url, true) ?>" class="flex-item-<?php echo $items?>">
                                             <img src="<?= \common\component\image\Image::resize($ad->source_url) ?>" class="w bd m2">
                                         </a>
                                     <?php }?>
