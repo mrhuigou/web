@@ -85,7 +85,7 @@ $this->title = '订单确认';
                      }
 
                  } ?>
-                    <?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products'],'sub_total' => $sub_total]) ?>
+                    <?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products'],'sub_total' => $sub_total,'shipping' => $shipping]) ?>
 <!--                --><?php //if ($shipping > 0 && $sub_total < 68 && count($checkout_ad) >0) { ?>
                 <?php if (count($checkout_ad) >0) { ?>
                     <div id="shipping_script" hidden>

@@ -216,7 +216,7 @@ class Coupon extends Widget {
 		if ($this->model) {
 			return $this->render('coupon', ['model' => $this->model, 'store_id' => $this->store_id,'minbookcash' => $this->minbookcash,'shipping' =>$this->shipping]);
 		}else{
-            return $this->render('coupon-empty',['sub_total'=> $this->sub_total]);
+            return $this->render('coupon-empty',['sub_total'=> $this->sub_total,'shipping'=> $this->shipping]);
         }
 	}
 } 

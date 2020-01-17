@@ -10,8 +10,9 @@
     <?php $this->beginBlock('JS_END') ?>
 
     var sub_total1 = <?= $sub_total;?>;
+    var shipping1 = <?= $shipping;?>;
 
-    if(sub_total1 < 68){
+    if(shipping1 > 0 && sub_total1 < 68){
         layer.open({
             type: 1,
             closeBtn: 2,
