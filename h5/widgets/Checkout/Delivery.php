@@ -23,10 +23,10 @@ class Delivery extends Widget
             throw new InvalidParamException("参数错误");
         }
         $this->exclude=[
-            'start_time'=>strtotime('2018-10-01'),
+            'start_time'=>strtotime('2020-01-22'),
 	        'start_index'=>0, //配送时间段，0为早间 1为午间，2为午间 3为晚间
-            'end_time'=>strtotime('2018-10-05'),
-	        'end_index'=>3
+            'end_time'=>strtotime('2020-01-31'),
+	        'end_index'=>2
         ];
         $method_times=$this->getList($store);
         if(($order_delivery_dates=\Yii::$app->request->post('CheckoutForm')) && isset($order_delivery_dates['delivery'][$store->store_id]['date']) && $order_delivery_dates['delivery'][$store->store_id]['date']){
