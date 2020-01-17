@@ -22,6 +22,7 @@ class ReportOrderCustomerSearch extends Model {
 	public $end_date;
 	public $group = 'product';
 	public $group_value;
+	public $user_agent = 'all';
 	public $order_status_id = "complete";
 
 	/**
@@ -30,7 +31,7 @@ class ReportOrderCustomerSearch extends Model {
 	public function rules()
 	{
 		return [
-			[['begin_date', 'end_date','group', 'group_value', 'order_status_id'], 'safe'],
+			[['begin_date', 'end_date','group', 'group_value', 'user_agent','order_status_id'], 'safe'],
 		];
 	}
 
@@ -55,6 +56,10 @@ class ReportOrderCustomerSearch extends Model {
 				$subQuery->andFilterWhere(['o.sent_to_erp' => 'Y']);
 			} elseif ($this->order_status_id) {
 				$subQuery->andFilterWhere(['o.order_status_id' => $this->order_status_id]);
+			}
+			if ($this->user_agent == 'all') {
+			} else{
+				$subQuery->andFilterWhere(['like','user_agent','%'.$this->mobile.'%']);
 			}
 			if ($this->group == 'data' && $this->group_value) {
 				$sub_data = explode("\r\n", $this->group_value);
@@ -103,6 +108,7 @@ class ReportOrderCustomerSearch extends Model {
 			'end_date' => '结束时间',
 			'group' => '类型',
 			'group_value' => '类型值',
+            'user_agent' => '手机型号',
 			'order_status_id' => '订单状态'
 		];
 

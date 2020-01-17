@@ -28,6 +28,7 @@ use api\models\V1\ReturnStatus;
 	<?php echo $form->field($model, 'end_date')->widget(\yii\jui\DatePicker::className(), ['language' => 'zh-CN',
 		'dateFormat' => 'yyyy-MM-dd','options'=>['class'=>'form-control']]);
 	?>
+    <?=$form->field($model, 'user_agent')->dropDownList(['iPhone'=>'苹果','Android'=>'安卓','all'=> '全部']);?>
     <?=$form->field($model, 'group')->dropDownList(['data'=>'指定内容','all'=> '全部']);?>
     <div class="form-group field-group_value">
         <label class="col-md-1 control-label" style="width:90px;" for="reportordercustomersearch-end_date">检索内容</label>
