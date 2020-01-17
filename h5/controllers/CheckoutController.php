@@ -113,16 +113,17 @@ class CheckoutController extends \yii\web\Controller {
 					$customer_coupon_id = [];
 				}
 
+                $shipping_cost_free = 0; //判断是否有免邮属性的优惠券
 				//计算全局优惠券金额
 				$this->getGlobalCouponTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $comfirm_orders[$key]['coupon_gift'],$comfirm_orders[$key]['rate']);
 				//计算优惠金额
-				$this->getCouponTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $customer_coupon_id, $shipping_cost, $comfirm_orders[$key]['coupon_gift'],$comfirm_orders[$key]['rate']);
+				$this->getCouponTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $customer_coupon_id, $shipping_cost, $comfirm_orders[$key]['coupon_gift'],$comfirm_orders[$key]['rate'],$shipping_cost_free);
 				//订单满减金额
 				$this->getOrderTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $comfirm_orders[$key]['promotion']);
 				if($key ==1){
 //                    $this->getPointsTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data);
                 }
-                $this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id);
+                $this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id,$shipping_cost_free);
 				//应付订单金额
 				$this->getTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total']);
 
@@ -230,7 +231,7 @@ class CheckoutController extends \yii\web\Controller {
 
         return $sub_total;
     }
-	public function getShippingTotal(&$total_data, &$total, $cart, $store_id = 0, &$shipping_cost, $delivery_station_id = 0)
+	public function getShippingTotal(&$total_data, &$total, $cart, $store_id = 0, &$shipping_cost, $delivery_station_id = 0,$shipping_cost_free = 0)
 	{
 		//进行运费计算
 		$sub_total = 8;
@@ -271,6 +272,9 @@ class CheckoutController extends \yii\web\Controller {
 				}
 			}
 		}
+		if($shipping_cost_free){
+            $sub_total = 0;
+        }
 		$shipping_cost = $sub_total;
 		$total_data[] = [
 			'code' => 'shipping',
@@ -491,7 +495,7 @@ class CheckoutController extends \yii\web\Controller {
 			}
 		}
 	}
-	public function getCouponTotal(&$total_data, &$total, $cart, $customer_coupon_ids = [], $shipping_cost = 0, &$coupon_gift,&$rate)
+	public function getCouponTotal(&$total_data, &$total, $cart, $customer_coupon_ids = [], $shipping_cost = 0, &$coupon_gift,&$rate,&$shipping_cost_free = 0)
 	{
 		if ($customer_coupon_ids = $this->FormartCouponIds($customer_coupon_ids)) {
             $coupon_array = [];
@@ -571,8 +575,11 @@ class CheckoutController extends \yii\web\Controller {
 					if ($coupon_info->max_discount && $coupon_info->max_discount < $discount_total) {
 						$discount_total = $coupon_info->max_discount;
 					}
-					if ($coupon_info->shipping && $shipping_cost) {
-						$discount_total += $shipping_cost;
+//					if ($coupon_info->shipping && $shipping_cost) {
+//						$discount_total += $shipping_cost;
+//					}
+					if ($coupon_info->shipping) {
+                        $shipping_cost_free = 1;
 					}
 					// If discount greater than total
 					if ($discount_total > $total) {
@@ -992,17 +999,18 @@ class CheckoutController extends \yii\web\Controller {
 //            $totals[] = $this->setTotalsData("固定运费",'shipping',$shipping_cost,2);
 //            $total = bcadd($comfirm_orders[$store_id]['total'],$shipping_cost,2);
 
+            $shipping_cost_free = 0;
 			$coupon_gift = [];
 			//计算全局优惠券金额
 			$this->getGlobalCouponTotal($totals, $total, $data, $store_id, $shipping_cost, $coupon_gift,$rate);
 			//计算优惠金额
-            $coupon_array = $this->getCouponTotal($totals, $total, $data, $customer_coupon_id, $shipping_cost, $coupon_gift,$rate);
+            $coupon_array = $this->getCouponTotal($totals, $total, $data, $customer_coupon_id, $shipping_cost, $coupon_gift,$rate,$shipping_cost_free);
 			//计算订单优惠金额
 			$promotion = [];
 			$this->getOrderTotal($totals, $total, $data, $store_id, $promotion);
 
             $this->getPointsTotal($totals, $total, $data);
-            $this->getShippingTotal($totals, $total, $data, $store_id, $shipping_cost, $delivery_station_id);
+            $this->getShippingTotal($totals, $total, $data, $store_id, $shipping_cost, $delivery_station_id,$shipping_cost_free);
 			//计算订单金额
 			$this->getTotal($totals, $total);
 
