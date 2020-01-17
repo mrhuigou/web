@@ -59,7 +59,7 @@ class ReportOrderCustomerSearch extends Model {
 			}
 			if ($this->user_agent == 'all') {
 			} else{
-				$subQuery->andFilterWhere(['like','user_agent','%'.$this->user_agent.'%']);
+				$subQuery->andFilterWhere(['like','o.user_agent',$this->user_agent]);
 			}
 			if ($this->group == 'data' && $this->group_value) {
 				$sub_data = explode("\r\n", $this->group_value);
