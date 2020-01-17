@@ -90,14 +90,14 @@ $this->title = '订单确认';
                 <?php if (count($checkout_ad) >0) { ?>
                     <div id="shipping_script" hidden>
 
-                    <div class="p5">
-                        <?php if( count($checkout_ad) < 1){?>
-                            <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
-                        <?php }else{?>
-                            <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">满68包邮，去凑单</a>
-                        <?php }?>
-
-                    </div>
+<!--                    <div class="p5">-->
+<!--                        --><?php //if( count($checkout_ad) < 1){?>
+<!--                            <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>-->
+<!--                        --><?php //}else{?>
+<!--                            <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">满68包邮，去凑单</a>-->
+<!--                        --><?php //}?>
+<!---->
+<!--                    </div>-->
                     <?php if( count($checkout_ad) >0 ){?>
                     <div id="layerCon" style="display: none;">
 
@@ -169,6 +169,14 @@ $this->title = '订单确认';
 					<?php } ?>
 
                 </div>
+
+            </div>
+            <div class="p5" id="free_return" style="display: none">
+                <?php if( count($checkout_ad) < 1){?>
+                    <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
+                <?php }else{?>
+                    <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">满68包邮，去凑单</a>
+                <?php }?>
 
             </div>
             <div class="mt5 mb50">

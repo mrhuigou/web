@@ -26,6 +26,7 @@
             layer.closeAll();
         })
         $('#shipping_script').show();
+        $('#free_return').show();
     }
     <?php $this->endBlock() ?>
 </script>

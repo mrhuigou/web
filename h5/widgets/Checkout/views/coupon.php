@@ -171,8 +171,10 @@
                         layer.closeAll();
                     })
                     $('#shipping_script').show();
+                    $('#free_return').show();
                 }else{
                     $('#shipping_script').hide();
+                    $('#free_return').hide();
                 }
 
             }else{
@@ -230,8 +232,10 @@
                            layer.closeAll();
                        })
                     $('#shipping_script').show();
+                    $('#free_return').show();
                 }else{
                     $('#shipping_script').hide();
+                    $('#free_return').hide();
                 }
 
 
