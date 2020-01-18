@@ -234,7 +234,7 @@ class CheckoutController extends \yii\web\Controller {
 	public function getShippingTotal(&$total_data, &$total, $cart, $store_id = 0, &$shipping_cost, $delivery_station_id = 0,$shipping_cost_free = 0)
 	{
 		//进行运费计算
-		$sub_total = 8;
+		$sub_total = 10;
 		$total_fee = $total;
 //        if($cart){
 //            foreach($cart as $value){
@@ -931,7 +931,7 @@ class CheckoutController extends \yii\web\Controller {
 	{
 		$total_data[] = [
 			'code' => 'total',
-			'title' => "订单总计",
+			'title' => "实付总计",
 			'value' => max(0, $total),
 			'sort_order' => 10
 		];
