@@ -13,7 +13,7 @@ class InvoiceForm extends Invoice {
             $this->address_and_phone = $model->address_and_phone;
             $this->bank_and_account = $model->bank_and_account;
         }else{
-            $this->type_invoice = 3;
+            $this->type_invoice = 2;
         }
         parent::__construct($config);
     }

@@ -19,7 +19,7 @@ use yii\bootstrap\ActiveForm;
 	],]); ?>
     <ul class="line-book mt5">
         <div class="line-b whitebg p10 bd mt5 mb10">
-            <?= $form->field($model, 'type_invoice', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 1=>'个人', 2=>'增值税普票',3=>'增值税专票'], [
+            <?= $form->field($model, 'type_invoice', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 1=>'个人', 2=>'增值税普票'], [
                 'itemOptions' => ['labelOptions' => ['class' => 'radio-inline p10']],
                 'onchange' => 'if( ($(this).find(":radio:checked").val() ==1)){ 
 				$(".tab_1").show();$(".tab_2").show();$(".tab_3").hide();
@@ -46,6 +46,7 @@ use yii\bootstrap\ActiveForm;
                         </div>
                     </div>
                 </div>
+                <p class="org f12 lh150">需要增值税专票，请联系客服，400-968-9870</p>
             </div>
 
         </div>
