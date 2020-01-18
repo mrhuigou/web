@@ -160,11 +160,32 @@ $this->title = '订单确认';
                 <div class="graybg p10 store_totals">
 					<?php if ($val['totals']) { ?>
 						<?php foreach ($val['totals'] as $value) { ?>
-                            <p class="mb5 clearfix lh150 total_line" id = "<?php if($value['code'] =='points'){ echo 'point_customer_total_'.$value['customer_code_id'];}?>" >
-                                <span class="fr red fb">￥<em
-                                            class="<?= $value['code'] ?>"><?= $value['value'] ?></em></span>
-                                <span class="fl fb"><?= $value['title'] ?>：</span>
-                            </p>
+                            <?php   if($value['code'] == 'shipping'){?>
+                                <div style="border:1px dashed #000;margin-top: 30px;"></div>
+
+                                <p class="mb5 clearfix lh150">
+                                    <span class="fr red fb">￥<em class="<?=$value['code']?>"><?=$value['value']?></em></span>
+                                    <span class="fl fb"><?=$value['title']?>：</span>
+                                </p>
+
+                            <?php }else{?>
+                                <?php if($value['code']=='sub_total'){?>
+                                    <p class="mb5 clearfix lh150">
+                                        <span class="fr red fb">￥<em class="<?=$value['code']?>"><?=$value['value']?></em></span>
+                                        <span class="fl fb"><?=$value['title']?>：</span>
+                                    </p>
+                                    <p class="mb5 clearfix lh150">
+                                        <span class="fr red fb">￥<em><?=$value['value']?></em></span>
+                                        <span class="fl fb">订单金额：</span>
+                                    </p>
+                                <?php }else{?>
+                                    <p class="mb5 clearfix lh150 total_line" id = "<?php if($value['code'] =='points'){ echo 'point_customer_total_'.$value['customer_code_id'];}?>" >
+                                    <span class="fr red fb">￥<em
+                                                class="<?= $value['code'] ?>"><?= $value['value'] ?></em></span>
+                                        <span class="fl fb"><?= $value['title'] ?>：</span>
+                                    </p>
+                                <?php }?>
+						    <?php } ?>
 						<?php } ?>
 					<?php } ?>
 

@@ -8,8 +8,10 @@
 $models=[];
 $discount=0;
 $sub_total_old = 0;
+$is_coupon = false;
 foreach($model as $total){
     if($total['code']=='coupon'){
+        $is_coupon = true;
         $discount=bcadd($discount,$total['value'],2);
         $models[$total['code']]=[
             'title'=>'优惠券金额',
@@ -64,10 +66,21 @@ foreach($model as $total){
             </p>
         <?php } else{?>
 
+            <?php if(!$is_coupon && $total['code']=='sub_total'){?>
+                <p class="mb5 clearfix lh150">
+                    <span class="fr red fb">￥<em class="<?=$total['code']?>"><?=$total['value']?></em></span>
+                    <span class="fl fb"><?=$total['title']?>：</span>
+                </p>
+                <p class="mb5 clearfix lh150">
+                    <span class="fr red fb">￥<em><?=$sub_total_old + $discount?></em></span>
+                    <span class="fl fb">订单金额：</span>
+                </p>
+                <?php }else{?>
             <p class="mb5 clearfix lh150">
                 <span class="fr red fb">￥<em class="<?=$total['code']?>"><?=$total['value']?></em></span>
                 <span class="fl fb"><?=$total['title']?>：</span>
             </p>
+        <?php }?>
 
     <?php } ?>
     <?php } ?>
