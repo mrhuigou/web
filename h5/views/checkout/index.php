@@ -43,7 +43,7 @@ $this->title = '订单确认';
                         <span class="fl ">店铺：<em class="org"><?= $val['base']->name ?></em></span>
                         <span class="fr red"><?php if ($val['base']->befreepostage == 1) { //是否包邮（满X元包邮）
 								if ($val['base']->minbookcash > 0) {
-									echo '店铺满' . $val['base']->minbookcash . '元包邮';
+									echo '店铺订单金额满' . $val['base']->minbookcash . '元包邮';
 								} else {
 									echo '店铺包邮';
 								}
@@ -104,7 +104,7 @@ $this->title = '订单确认';
                         <div class="layer0" style="padding: 5px;">
                             <h2 class="f14 row-two-max mb10">
                                 <span class="btn btn-xxs btn-bd-red">免邮</span>
-                                满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red" id="diff_free"><?php echo bcsub($val['base']->minbookcash,$sub_total,2)?></i>元,即可以享受包邮！</h2>
+                                订单金额满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red" id="diff_free"><?php echo bcsub($val['base']->minbookcash,$sub_total,2)?></i>元,即可以享受包邮！</h2>
 
                             <div class="flex-col">
                                     <?php
