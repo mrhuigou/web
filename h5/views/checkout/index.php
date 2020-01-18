@@ -178,6 +178,14 @@ $this->title = '订单确认';
                                         <span class="fr red fb">￥<em><?=$value['value']?></em></span>
                                         <span class="fl fb">订单金额：</span>
                                     </p>
+                                                <div class="p5" id="free_return" style="display: none">
+                                                    <?php if( count($checkout_ad) < 1){?>
+                                                        <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
+                                                    <?php }else{?>
+                                                        <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">订单金额满68元免运费，去凑单</a>
+                                                    <?php }?>
+
+                                                </div>
                                 <?php }else{?>
                                     <p class="mb5 clearfix lh150 total_line" id = "<?php if($value['code'] =='points'){ echo 'point_customer_total_'.$value['customer_code_id'];}?>" >
                                     <span class="fr red fb">￥<em
@@ -192,14 +200,14 @@ $this->title = '订单确认';
                 </div>
 
             </div>
-            <div class="p5" id="free_return" style="display: none">
-                <?php if( count($checkout_ad) < 1){?>
-                    <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
-                <?php }else{?>
-                    <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">订单金额满68元免运费，去凑单</a>
-                <?php }?>
-
-            </div>
+<!--            <div class="p5" id="free_return" style="display: none">-->
+<!--                --><?php //if( count($checkout_ad) < 1){?>
+<!--                    <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>-->
+<!--                --><?php //}else{?>
+<!--                    <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">订单金额满68元免运费，去凑单</a>-->
+<!--                --><?php //}?>
+<!---->
+<!--            </div>-->
             <div class="mt5 mb50">
                 <input type="text" class="w p10 gray6 bd" name="CheckoutForm[comment][<?= $k ?>]" placeholder="备注：如有特殊需求请填写" maxlength="50">
             </div>
@@ -319,6 +327,20 @@ $(".layerTri").click(function(){
         layer.closeAll();
     })
 });
+
+$("body").on('click','.layerTri', function () { layer.open({
+    type: 1,
+    closeBtn: 2,
+    title: false,
+    shadeClose: true,
+    shade:0.3,
+    content: $('#layerCon').html(),
+    // btn: ['去结算']
+});
+    $(".layer-close").click(function(){
+        layer.closeAll();
+    })  });
+
 
 <?php $this->endBlock() ?>
 </script>

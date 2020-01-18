@@ -8,6 +8,7 @@
 $models=[];
 $discount=0;
 $sub_total_old = 0;
+$checkout_ad = 2;
 $is_coupon = false;
 foreach($model as $total){
     if($total['code']=='coupon'){
@@ -64,6 +65,14 @@ foreach($model as $total){
                 <span class="fr red fb">￥<em><?=$sub_total_old + $discount?></em></span>
                 <span class="fl fb">订单金额：</span>
             </p>
+            <div class="p5" id="free_return" style="display: none">
+                <?php if( count($checkout_ad) < 1){?>
+                    <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
+                <?php }else{?>
+                    <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">订单金额满68元免运费，去凑单</a>
+                <?php }?>
+
+            </div>
         <?php } else{?>
 
             <?php if(!$is_coupon && $total['code']=='sub_total'){?>
@@ -75,6 +84,14 @@ foreach($model as $total){
                     <span class="fr red fb">￥<em><?=$sub_total_old + $discount?></em></span>
                     <span class="fl fb">订单金额：</span>
                 </p>
+                <div class="p5" id="free_return" style="display: none">
+                    <?php if( count($checkout_ad) < 1){?>
+                        <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
+                    <?php }else{?>
+                        <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">订单金额满68元免运费，去凑单</a>
+                    <?php }?>
+
+                </div>
                 <?php }else{?>
             <p class="mb5 clearfix lh150">
                 <span class="fr red fb">￥<em class="<?=$total['code']?>"><?=$total['value']?></em></span>
