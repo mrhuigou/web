@@ -76,7 +76,22 @@ $this->title="璀璨上线红包大派送";
                         </div>
                         <div class="flex-item-6 pl10">
                             <p class="pt5"><?=$value->customer->nickname?></p>
-                            <p class="gray6 f12 pt2"><?=date('m/d H:i:s',$value->creat_at)?></p>
+<!--                            <p class="gray6 f12 pt2">--><?//=date('m/d H:i:s',$value->creat_at)?><!--</p>-->
+
+                            <?php
+                            $coupon_id = $value->prize->coupon->coupon_id;
+                            $customer_id = $value->customer->customer_id;
+                            $customer_coupon_info = \api\models\V1\CustomerCoupon::find()->where(['customer_id'=>$customer_id,'coupon_id'=>$coupon_id])->one();
+                            ?>
+                            <?php if($customer_coupon_info){?>
+                                <?php if($customer_coupon_info->is_use == 2){?>
+                                    <p class="gray6 f12 pt2">已使用</p>
+                                <?php }elseif($customer_coupon_info->is_use == 0 && $customer_coupon_info->end_time <= date('Y-m-d H:i:s')){?>
+                                    <p class="gray6 f12 pt2">已过期</p>
+                                <?php }else{?>
+                                    <p class="gray6 f12 pt2">截止：<?=date('m-d',strtotime($customer_coupon_info->start_time))?>~<?=date('m-d H:i',strtotime($customer_coupon_info->end_time))?></p>
+                                <?php }?>
+                            <?php }?>
                         </div>
                         <div class="flex-item-4 tr  org">
                             <?=$value->prize->title?>
