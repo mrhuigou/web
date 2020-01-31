@@ -28,7 +28,7 @@ use \common\component\Helper\Datetime;
     <div>
         <div class="col-12 bd m5 p5 whitebg cp f16 red">
             <span class="fb">春节配送通知：</span>
-            1月22号-1月31号暂停配送;
+            1月22号-2月3号暂停配送;
         </div>
     </div>
 <!--    <div class="line-a flex-col w flex-middle red mb5" >-->
@@ -80,7 +80,7 @@ use \common\component\Helper\Datetime;
                                         <div>
                                             <div class="col-12 bd m5 p5 whitebg cp f16 red">
                                                 <span class="fb">春节配送通知：</span>
-                                                1月22号-1月31号暂停配送;
+                                                1月22号-2月3号暂停配送;
                                             </div>
                                         </div>
                 </div>
