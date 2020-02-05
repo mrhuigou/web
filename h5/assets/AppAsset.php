@@ -36,7 +36,7 @@ class AppAsset extends AssetBundle
         'assets/script/jquery.tabslet.min.js?v=20170101',
         'assets/script/jquery.scrollLoading.js?v=20170101',
         'assets/script/ipop.js?v=20170101',
-        'assets/script/page.js?v=20171116',
+        'assets/script/page.js?v=20200205',
         'assets/script/layer.m/layer.m.js?v=20170101',
         'assets/script/scrollfix.js?v=20170101',
         'assets/script/jquery.nav.js?v=20170101',
