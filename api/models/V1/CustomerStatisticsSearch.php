@@ -60,6 +60,7 @@ class CustomerStatisticsSearch extends Customer
 		FROM
 			jr_order
 		WHERE
+		sent_to_erp="Y" and
 			customer_id = tmp.customer_id
 	) AS sale_total']);
 
