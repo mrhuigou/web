@@ -109,8 +109,8 @@ class SiteController extends Controller
         if($Model=User::findOne(['user_id'=>Yii::$app->user->getId()])){
             $Model->show_stock_token = Yii::$app->security->generateRandomString();
             $Model->save();
-//            return $this->redirect('https://m.mrhuigou.com/site/show-stock?token='.$Model->show_stock_token);
-            $this->openUrlOnNewTab('https://m.mrhuigou.com/site/show-stock?token='.$Model->show_stock_token);
+            return $this->redirect('https://m.mrhuigou.com/site/show-stock?token='.$Model->show_stock_token);
+//            $this->openUrlOnNewTab('https://m.mrhuigou.com/site/show-stock?token='.$Model->show_stock_token);
         }
     }
 
