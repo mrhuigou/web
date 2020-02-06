@@ -202,7 +202,8 @@ $("#selectDel").click(function(){
                             car_total=FloatAdd(pt,car_total);
                         }
                     });
-                    $("#cart_total").html(car_total.toFixed(2));
+<!--                    $("#cart_total").html(car_total.toFixed(2));-->
+                    $("#cart_total").html(car_total);
                 }else{
                     location.reload(true);
                 }
@@ -238,7 +239,8 @@ $("#selectAll").click(function () {//全选
     car_total=FloatAdd(pt,car_total);
     }
     });
-    $("#cart_total").html(car_total.toFixed(2));
+<!--    $("#cart_total").html(car_total.toFixed(2));-->
+    $("#cart_total").html(car_total);
 });
 $(".item").on("click",function(){
     var car_total=0;
@@ -248,7 +250,8 @@ $(".item").on("click",function(){
     car_total=FloatAdd(pt,car_total);
     }
     });
-    $("#cart_total").html(car_total.toFixed(2));
+<!--    $("#cart_total").html(car_total.toFixed(2));-->
+    $("#cart_total").html(car_total);
     });
 $(".cart-num-text").blur(function(){
     var num_obj=$(this);
@@ -287,7 +290,8 @@ $(".cart-num-text").blur(function(){
     car_total=FloatAdd(pt,car_total);
     }
     });
-    $("#cart_total").html(car_total.toFixed(2));
+<!--    $("#cart_total").html(car_total.toFixed(2));-->
+    $("#cart_total").html(car_total);
     if(data.stock_status){
     obj.find('.stock_status').html(data.stock_status).fadeIn();
     setTimeout(function() {
@@ -335,7 +339,8 @@ $(".cart-num-add").click(function(){
     car_total=FloatAdd(pt,car_total);
     }
     });
-    $("#cart_total").html(car_total.toFixed(2));
+<!--    $("#cart_total").html(car_total.toFixed(2));-->
+    $("#cart_total").html(car_total);
     if(data.stock_status){
     obj.find('.stock_status').html(data.stock_status).fadeIn();
     setTimeout(function() {
@@ -383,7 +388,8 @@ $(".cart-num-lower").click(function(){
     car_total=FloatAdd(pt,car_total);
     }
     });
-    $("#cart_total").html(car_total.toFixed(2));
+<!--    $("#cart_total").html(car_total.toFixed(2));-->
+    $("#cart_total").html(car_total);
     if(data.stock_status){
     obj.find('.stock_status').html(data.stock_status).fadeIn();
     setTimeout(function() {
