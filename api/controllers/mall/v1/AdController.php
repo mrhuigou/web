@@ -155,6 +155,7 @@ class AdController extends Controller {
 						'vip_price' => $ad_detail->product->vip_price,
 						'cur_price' => $ad_detail->product->getPrice(),
 						'stock'=>$ad_detail->product->getStockCount(),
+						'beintoinv'=>$ad_detail->product->beintoinv,//判断是否下架 1上架
 						'life'=>'',
 						'url'=>$ad_detail->link_url ?:(Url::to(['product/index','shop_code'=>$ad_detail->product->store_code,'product_code'=>$ad_detail->product->product_code])),//'/'.$ad_detail->product->store_code."-".$ad_detail->product->product_code.".html"
 					];

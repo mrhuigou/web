@@ -321,6 +321,8 @@ img{vertical-align:middle}
 .item-3 .p-3,.item-4 .p-3,.item-5 .p-3{font-size:16px;line-height:normal}
 .item-tip{text-indent:-9999px;font-size:67px;position:absolute;top:0;bottom:0;left:0;right:0;color:#ccc;background:rgba(0,0,0,.5)}
 .item-tip:after{text-indent:0;content:"\e696";display:line-block;position:absolute;top:0;bottom:0;right:0;left:0;width:67px;height:82px;line-height:82px;margin:auto}
+.item-tip2{text-indent:-9999px;font-size:67px;position:absolute;top:0;bottom:0;left:0;right:0;color:#ccc;background:rgba(0,0,0,.5)}
+.item-tip2:after{text-indent:0;content:"\e601";display:line-block;position:absolute;top:0;bottom:0;right:0;left:0;width:67px;height:82px;line-height:82px;margin:auto}
 @media screen and (min-width:1099px){.item-wrap{width:100%;max-width:1100px}
 }
 .item-hori .item-photo{float:left;width:33%}
