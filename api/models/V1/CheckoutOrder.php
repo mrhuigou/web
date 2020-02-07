@@ -297,7 +297,7 @@ class CheckoutOrder extends Model {
 			if ($customer_share = CustomerFollower::findOne(['follower_id' => $order->customer_id, 'status' => 0])) {
 				$customer_share->status = 1;
 				$customer_share->save();
-				if ($coupon = Coupon::findOne(['code' => 'ECP161025007'])) {
+				if ($coupon = Coupon::findOne(['code' => 'ECP161025007','status' => 1])) {
 					$customer_coupon = new CustomerCoupon();
 					$customer_coupon->customer_id = $customer_share->customer_id;
 					$customer_coupon->coupon_id = $coupon->coupon_id;
