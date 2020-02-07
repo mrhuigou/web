@@ -79,7 +79,8 @@ class StockController extends \yii\console\Controller
                 $model->product_code=$data['PUCODE'];
                 $model->quantity=intval($data['QUANTITY']);
                 $model->cycle_period=$data['CYCLEPERIOD'];
-                $model->product_date=isset($data['PRODUCEDATE'])?$data['PRODUCEDATE']:"";
+//                $model->product_date=isset($data['PRODUCEDATE'])?$data['PRODUCEDATE']:"";
+                $model->product_date=max(0, intval($data['QUANTITY']) - $model->tmp_qty?:0) > 0 ? (isset($data['PRODUCEDATE'])?$data['PRODUCEDATE']:""):"";
                 if (!$model->save()) {
                     throw new \Exception(json_encode($model->errors));
                 }
