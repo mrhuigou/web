@@ -46,7 +46,7 @@
         <?php if(!Yii::$app->session->get('source_from_agent_wx_xcx')){?>
         <div class="  p5 tc ">
         <a href="javascript:;" class="w share-guide">
-            <img src="/assets/images/tuijian.jpg" class="pw80">
+            <img src="/assets/images/tuijian2.jpg" class="pw80">
         </a>
         </div>
         <?php }?>
