@@ -368,7 +368,7 @@ class WechatController extends Controller {
 	protected function sendFatherGift($customer_id)
 	{
 		if ($model = CustomerFollower::findOne(['follower_id' => $customer_id])) {
-			if ($coupon_model = Coupon::findOne(['code' => 'ECP170418004'])) {
+			if ($coupon_model = Coupon::findOne(['code' => 'ECP170418004','status' => 1])) {
 				$customer_coupon = new CustomerCoupon();
 				$customer_coupon->customer_id = $model->customer_id;
 				$customer_coupon->coupon_id = $coupon_model->coupon_id;
