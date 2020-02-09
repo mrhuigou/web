@@ -25,12 +25,12 @@ use \common\component\Helper\Datetime;
             修改<i class="iconfont" style="color: #47b34f;"></i>
         </div>
     </div>
-<!--    <div>-->
-<!--        <div class="col-12 bd m5 p5 whitebg cp f16 red">-->
-<!--            <span class="fb">春节配送通知：</span>-->
-<!--            1月22号-2月3号暂停配送;-->
-<!--        </div>-->
-<!--    </div>-->
+    <div>
+        <div class="col-12 bd m5 p5 whitebg cp f16 red">
+            <span class="fb">配送通知：</span>
+            安全你、我、他，无接触配送，请到小区门口或楼下收货，共抗疫情，配送小哥不进入楼宇，敬请谅解！
+        </div>
+    </div>
 <!--    <div class="line-a flex-col w flex-middle red mb5" >-->
 <!--        <div class="flex-item-12">-->
 <!--            因系统改造升级，<span class="fb">暂停晚间配送！</span>-->
@@ -77,12 +77,12 @@ use \common\component\Helper\Datetime;
 <!--                        </div>-->
 <!--                    </div>-->
 
-<!--                                        <div>-->
-<!--                                            <div class="col-12 bd m5 p5 whitebg cp f16 red">-->
-<!--                                                <span class="fb">春节配送通知：</span>-->
-<!--                                                1月22号-2月3号暂停配送;-->
-<!--                                            </div>-->
-<!--                                        </div>-->
+                                        <div>
+                                            <div class="col-12 bd m5 p5 whitebg cp f16 red">
+                                                <span class="fb">配送通知：</span>
+                                                安全你、我、他，无接触配送，请到小区门口或楼下收货，共抗疫情，配送小哥不进入楼宇，敬请谅解！
+                                            </div>
+                                        </div>
                 </div>
 <!--                2) 2月1日恢复配送;-->
 <!--                3) 1月21日11点之前的订单，1月21日下午送达，1月21日11:00至1月31日的订单，2月1日统一配送。-->
