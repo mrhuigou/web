@@ -27,7 +27,8 @@ class NewGuyCouponPop extends Widget {
     {
 
         if (!\Yii::$app->user->isGuest) {
-            if (!$user_status = $this->valiated(Yii::$app->user->getId())) {
+//            if (!$user_status = $this->valiated(Yii::$app->user->getId())) {
+                if (!($user_status = $this->valiated(Yii::$app->user->getId())) && !($user_status_old = $this->getUserStatusOld(Yii::$app->user->getId()))) {
                 //新手券实效了，但还未下过单
                 //重新发放一张新手券
                 $customer_coupons = $this->sendGift(Yii::$app->user->getId());
@@ -126,6 +127,28 @@ class NewGuyCouponPop extends Widget {
 
         return $status;
     }
+
+    private function getUserStatusOld($customer_id)
+    {
+        $old_gifts_coupon_id = ['23197', '23200', '23203'];//之前赠送的新人注册券id
+
+        $status = 0;//该用户没有 该coupon
+
+        if ($user_coupon = CustomerCoupon::find()->where(['customer_id' => $customer_id])->andWhere(['in','coupon_id',$old_gifts_coupon_id])->all()) {
+            foreach ($user_coupon as $coupon) {
+                if ($coupon->is_use == 0 && strtotime($coupon->end_time) < time()) {
+                    //已经失效且还未使用  应重新发放新手券
+
+                }else{
+                    $status = 1;
+                    break;
+                }
+            }
+        }
+
+        return $status;
+    }
+
     //已经不用改方法，继续用PrizeBox
     private function couponRulesStatus($coupon_rules_id){
         $coupon_rules  =  CouponRules::findOne(['coupon_rules_id'=>$coupon_rules_id]);
