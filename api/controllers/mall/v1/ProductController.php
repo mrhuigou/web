@@ -82,7 +82,8 @@ class ProductController extends Controller {
                         if($model->manufacturer_id == 0  && $model->category_id ==0){
 
                         }else{
-                            $relation=ProductBase::find()->where(['or',"manufacturer_id='".$model->manufacturer_id."'","category_id='".$model->category_id."'"])->andWhere("product_base_id<>'".$model->manufacturer_id."'")->all();
+//                            $relation=ProductBase::find()->where(['or',"manufacturer_id='".$model->manufacturer_id."'","category_id='".$model->category_id."'"])->andWhere("product_base_id<>'".$model->manufacturer_id."'")->all();
+                            $relation=ProductBase::find()->where(['manufacturer_id'=>$model->manufacturer_id,'category_id'=>$model->category_id])->andWhere("product_base_id<>'".$model->manufacturer_id."'")->all();
                             if($relation){
                                 foreach ($relation as $detail){
                                     if(!$detail->getOnline_status()){
