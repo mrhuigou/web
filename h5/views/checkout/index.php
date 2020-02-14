@@ -344,7 +344,7 @@ $("body").on('click','.layerTri', function () { layer.open({
         layer.closeAll();
     })  });
 
-
+Ad_Sys_Code();
 <?php $this->endBlock() ?>
 </script>
 <?php
