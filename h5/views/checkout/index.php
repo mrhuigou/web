@@ -241,9 +241,17 @@ $this->title = '订单确认';
         <div id="confirm_form_shippingtime" class="flex-col w flex-middle bg-green white p10 ">
         </div>
     </div>
+
+    <?php if(time() >= strtotime('2020-02-14 23:00:00') && time() <= strtotime('2020-02-15 11:30:00')){?>
+        <div class="col-12 bd m5 p5 whitebg cp f18 red">
+            受雨雪影响配送受限,订单最早于2月16日8:00-12:00送达,敬请谅解!
+        </div>
+    <?php }else{?>
         <div class="col-12 bd m5 p5 whitebg cp f18 red">
             安全你、我、他，无接触配送，请到小区门口或楼下收货，共抗疫情，配送小哥不进入楼宇，敬请谅解！
         </div>
+    <?php }?>
+
     <div class="flex-col">
         <a class="flex-item-6 tc red fb p15 bg-wh" href="javascript:;" id="confirm_cannel">去修改</a>
         <a class="flex-item-6 tc greenbg white fb p15 " href="javascript:;" id="confirm_pay">去支付</a>
