@@ -144,7 +144,7 @@ $this->title = '分享有礼';
 <?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     $share_image = Yii::$app->request->getHostInfo().'/assets/images/zhqd/logo_300x300.jpeg';
 }else{
-    $share_image = Yii::$app->request->getHostInfo().'/assets/images/logo_300x300.png';
+    $share_image = Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.png';
 }?>
 <?=\h5\widgets\Tools\Share::widget([
 	'data'=>[
