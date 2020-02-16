@@ -38,11 +38,13 @@ $this->title ='申请整单售后';
         </div>
     <?php }?>
     <div class="whitebg bdb p10 mb10">
-	<?=$form->field($model,'return_model')->dropDownList(['RETURN_GOODS'=>'退货','RESHIP'=>'换货','RETURN_PAY'=>'仅退款'])?>
+<!--	--><?//=$form->field($model,'return_model')->dropDownList(['RETURN_GOODS'=>'退货','RESHIP'=>'换货','RETURN_PAY'=>'仅退款'])?>
+<!--	--><?//=$form->field($model,'return_model')->dropDownList(['RETURN_GOODS'=>'退货'])?>
 	<?= $form->field($model, 'comment')->textarea(['class'=>'textarea w'])?>
     <?= $form->field($model, 'username') ?>
     <?= $form->field($model, 'telephone') ?>
-    <?= $form->field($model, 'paymethod')->radioList(['0'=>'退回账户余额','1'=>'原支付方式返回']); ?>
+<!--    --><?//= $form->field($model, 'paymethod')->radioList(['0'=>'退回账户余额','1'=>'原支付方式返回']); ?>
+<!--    --><?//= $form->field($model, 'paymethod')->radioList(['1'=>'原支付方式返回']); ?>
     <?= Html::submitButton('提交申请', ['class' => 'btn lbtn  w greenbtn', 'name' => 'login-button']) ?>
     </div>
     <?php ActiveForm::end(); ?>

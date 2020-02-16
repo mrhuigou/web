@@ -21,7 +21,8 @@ class ReturnAllForm extends Model
     public $username;
     public $total;
     public $comment;
-    public $paymethod=0;
+//    public $paymethod=0;
+    public $paymethod=1;
     public $return_type;
     public $return_model="RETURN_GOODS";
     public $order;
