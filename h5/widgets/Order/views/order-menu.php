@@ -18,8 +18,28 @@
 		],
 	])?>
 <?php }else{?>
-        <?php if($return = \api\models\V1\ReturnBase::findOne(['order_id'=>$model->order_id])){ ?>
-            <span class="vm fl">退货：<i class="org"><?php echo $return->returnStatus->name;?></i></span>
+<!--        --><?php //if($return = \api\models\V1\ReturnBase::findOne(['order_id'=>$model->order_id])){ ?>
+<!--            <span class="vm fl">退货：<i class="org">--><?php //echo $return->returnStatus->name;?><!--</i></span>-->
+<!--        --><?php //}?>
+
+        <?php if($return = \api\models\V1\ReturnBase::find()->where(['order_id'=>$model->order_id])->all()){?>
+            <?php
+                $return_status = false;//退货状态 （取消退货）
+                foreach ($return as $key => &$value){
+                    if($value->return_status_id == 6){
+                        $return_status = true;
+                        continue;
+                    }else{
+                        $return_status = false;
+                        $returnStatusName = $value->returnStatus->name;//die;
+                    }
+
+                }
+                if($return_status){
+                    $returnStatusName = "取消退货";
+                }
+            ?>
+            <span class="vm fl">退货：<i class="org"><?php echo $returnStatusName;?></i></span>
         <?php }?>
 	<?php if(in_array($model->order_status_id,[2,3,5,9])){?>
 		<a class="btn sbtn bluebtn pr10 pl10" href="<?=\yii\helpers\Url::to(['/order/shipping','order_no'=>$model->order_no],true)?>" > 查看物流 </a>
