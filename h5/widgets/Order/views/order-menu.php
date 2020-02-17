@@ -25,6 +25,7 @@
         <?php if($return = \api\models\V1\ReturnBase::find()->where(['order_id'=>$model->order_id])->all()){?>
             <?php
                 $return_status = false;//退货状态 （取消退货）
+                $returnStatusName = '';
                 foreach ($return as $key => &$value){
                     if($value->return_status_id == 6){
                         $return_status = true;
@@ -35,7 +36,7 @@
                     }
 
                 }
-                if($return_status){
+                if($return_status && empty($returnStatusName)){
                     $returnStatusName = "取消退货";
                 }
             ?>
