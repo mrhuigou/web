@@ -87,6 +87,14 @@ class ReturnAllForm extends Model
             $return->date_added = date("Y-m-d H:i:s");
             $return->date_modified = date("Y-m-d H:i:s");
             $return->send_status =  0;
+
+            //检测退货订单编号是否重复=====================================
+            $ReturnBaseInfo =ReturnBase::findOne(['return_code'=> $return->return_code, 'order_id' => $return->order_id]);
+            if($ReturnBaseInfo){
+                throw new \Exception('退货订单重复');
+            }
+            //检测退货订单编号是否重复======================================
+
             if(!$return->save(false)){
                 throw new \Exception(json_encode($return->errors));
             }
