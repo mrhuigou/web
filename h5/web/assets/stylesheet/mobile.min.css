@@ -302,7 +302,7 @@ img{vertical-align:middle}
 .item-detail{padding:10px 5px 5px 5px}
 .item-name{margin-bottom:8px;display:block;font-size:13px;line-height:1.32em;height:1.3em;overflow:hidden}
 .item-name:hover{text-decoration:underline}
-.item-des{margin-bottom:8px;height:1.3em;line-height:1.34em;font-size:14px;overflow:hidden;color:#00f}
+.item-des{margin-bottom:8px;height:1.3em;line-height:1.34em;font-size:12px;overflow:hidden;color:#00f}
 .item-price-1{margin-bottom:8px;text-decoration:line-through;color:#999}
 .item-price-2{margin-bottom:8px;color:#f6001a}
 .item-price-2 .p-1{float:left}

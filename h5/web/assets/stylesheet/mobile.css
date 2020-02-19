@@ -1725,7 +1725,7 @@ img {
   height: 1.3em;
   line-height: 1.34em;
   /* 如果和height一致的话，手机上有时下一行文字会露出一点点 */
-  font-size: 14px;
+  font-size: 12px;
   overflow: hidden;
   color: #0000ff;
 }
