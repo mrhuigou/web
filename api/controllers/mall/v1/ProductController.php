@@ -120,7 +120,13 @@ class ProductController extends Controller {
 			$status = 0;
 			$message = $e->getMessage();
 		}
-		$data = ['status' => $status, 'data' => $data, 'message' => $message];
+
+        //根据字段stock对数组$data进行降序排列
+        $last_names = array_column($data,'stock');
+        array_multisort($last_names,SORT_DESC,$data);
+
+
+        $data = ['status' => $status, 'data' => $data, 'message' => $message];
 		if (Yii::$app->request->get('callback')) {
 			Yii::$app->getResponse()->format = "jsonp";
 			return [
