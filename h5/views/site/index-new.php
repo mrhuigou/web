@@ -628,10 +628,10 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     });
 
 
-
-    if($.cookie('home_scroll')){
-    $(".content").scrollTop($.cookie('home_scroll'));
-    }
+//首页关闭缓存
+    // if($.cookie('home_scroll')){
+    // $(".content").scrollTop($.cookie('home_scroll'));
+    // }
     $(".content").on('scroll',function(){
         var scroll=$(this).scrollTop();
         $.cookie('home_scroll', scroll);
