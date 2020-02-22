@@ -1367,6 +1367,7 @@ class WebapiController extends \yii\rest\Controller {
 						$coupon_product->coupon_id = $coupon_id;
 						$coupon_product->product_id = $product_id;
 						$coupon_product->status = $value['DETAIL_STATUS'] == 'EXECUTING' ? 1 : 0;
+						$coupon_product->sort_order = isset($value['DETAIL_PRIORITYE'])? $value['DETAIL_PRIORITYE'] : "";
 						if (!$coupon_product->save()) {
 							throw new \Exception(serialize($coupon_product->errors));
 						}
