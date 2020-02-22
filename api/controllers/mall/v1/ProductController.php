@@ -121,6 +121,9 @@ class ProductController extends Controller {
 			$message = $e->getMessage();
 		}
 
+		//去重复
+		$data = $this->uniquArr($data);
+
         //根据字段stock对数组$data进行降序排列
         $last_names = array_column($data,'stock');
         array_multisort($last_names,SORT_DESC,$data);
@@ -138,4 +141,27 @@ class ProductController extends Controller {
 			return ['data' => $data];
 		}
 	}
+
+
+    /**
+     * 二维数组根据某个字段去重
+     * @param array $array  二维数组
+     * @para array  去重后的数组
+     */
+    public function uniquArr($array){
+        $result = array();
+        foreach($array as $k=>$val){
+            $code = false;
+            foreach($result as $_val){
+                if($_val['url'] == $val['url']){
+                    $code = true;
+                    break;
+                }
+            }
+            if(!$code){
+                $result[]=$val;
+            }
+        }
+        return $result;
+    }
 }
