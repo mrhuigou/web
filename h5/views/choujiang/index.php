@@ -246,6 +246,6 @@ $this->registerJs($this->blocks['J_Reviews'],\yii\web\View::POS_END);
 	'desc' => '酸奶、水果、饮料、日常用品。来每日惠购就“购”了!',
 	'link' => \yii\helpers\Url::to(['/site/index'],true),
 	'image' => Yii::$app->request->getHostInfo() . '/assets/images/hongbao_share.jpg',
-    'hidden_status'=>'hidden',
+//    'hidden_status'=>'hidden',
 ]]);
 ?>
