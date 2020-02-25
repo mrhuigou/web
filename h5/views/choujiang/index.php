@@ -66,9 +66,10 @@ $this->title="每日惠购 幸运大抽奖";
         </div>
     </div>
 	    <?php } ?>
+        <div class="m10 tc"><a class="btn lbtn greenbtn" href="/">点击立即使用</a></div>
     <?php } ?>
 </div>
-<div class="m10 tc"><a class="btn lbtn greenbtn" href="/">点击立即使用</a></div>
+<!--<div class="m10 tc"><a class="btn lbtn greenbtn" href="/">点击立即使用</a></div>-->
 
 <div class="pt10 pb30 whitebg">
 <!--<div class="ad-container Items" id="ad-container"></div>-->
