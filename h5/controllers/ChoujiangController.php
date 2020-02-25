@@ -24,7 +24,7 @@ use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
 class ChoujiangController extends \yii\web\Controller {
-	public function actionIndex($id = 41)
+	public function actionIndex($id = 42)
 	{
         $lottery_id = \Yii::$app->request->get('id');
         if($lottery_id){
@@ -71,7 +71,7 @@ class ChoujiangController extends \yii\web\Controller {
 //		return $this->render('index-new', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self ,'coupon_info' => $coupon_info]);
 //    }
 
-    public function actionIndexNew($id = 41,$coupon_rules_id = 5)
+    public function actionIndexNew($id = 42,$coupon_rules_id = 5)
     {
         $lottery_id = \Yii::$app->request->get('id');
         $coupon_rules_id1 = \Yii::$app->request->get('coupon_rules_id');//优惠券规则id
