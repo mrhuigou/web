@@ -33,6 +33,9 @@ class MainMenu extends Widget {
 			case "user/index":
 				$cur="user";
 				break;
+            case "page/3538.html":
+				$cur="page";
+				break;
 			default:
 				$cur="home";
 				break;
