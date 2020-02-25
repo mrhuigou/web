@@ -184,6 +184,7 @@ $.hideLoading();
 if(res.status){
 time_count++;
 rotateFunc(res.angle,res.message);
+window.opener.document.location.reload()
 }else{
 $.alert(res.message);
 }
