@@ -5,7 +5,7 @@
  * Date: 2017/1/22
  * Time: 15:28
  */
-$this->title="幸运大抽奖";
+$this->title="每日惠购 幸运大抽奖";
 ?>
 <style type="text/css">
 	* { margin: 0; padding: 0;}
