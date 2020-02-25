@@ -158,22 +158,22 @@ $this->title="每日惠购 幸运大抽奖";
 <!--        <li>如有疑问请联系客服</li>-->
 <!--	</ul>-->
 <!--</div>-->
-<!--<script id="tpl" type="text/html">-->
-<!--    <div class="br5 opc-f p10 m10">-->
-<!--	<div class="flex-col activity-1-list" id="my_self">-->
-<!--		<div class="flex-item-2 tc">-->
-<!--			<img src="<%:=list.photo%>" alt="头像" width="47" height="47" class="img-circle">-->
-<!--		</div>-->
-<!--		<div class="flex-item-6 pl10">-->
-<!--			<p class="pt5"><%:=list.nickname%></p>-->
-<!--			<p class="gray6 f12 pt2"><%:=list.datetime%></p>-->
-<!--		</div>-->
-<!--		<div class="flex-item-4 tr org">-->
-<!--			<%:=list.des%>-->
-<!--		</div>-->
-<!--	</div>-->
-<!--    </div>-->
-<!--</script>-->
+<script id="tpl" type="text/html">
+    <div class="br5 opc-f p10 m10">
+	<div class="flex-col activity-1-list" id="my_self">
+		<div class="flex-item-2 tc">
+			<img src="<%:=list.photo%>" alt="头像" width="47" height="47" class="img-circle">
+		</div>
+		<div class="flex-item-6 pl10">
+			<p class="pt5"><%:=list.nickname%></p>
+			<p class="gray6 f12 pt2"><%:=list.datetime%></p>
+		</div>
+		<div class="flex-item-4 tr org">
+			<%:=list.des%>
+		</div>
+	</div>
+    </div>
+</script>
 <?php $this->beginBlock('J_Reviews') ?>
 var $hand = $('.hand');
 var time_count=0;
@@ -198,7 +198,7 @@ duration: 5000,
 animateTo: angle + 2880,
 callback: function(){
 $.alert(text);
-window.location.href="https://m.mrhuigou.com/choujiang/index";
+<!--window.location.href="https://m.mrhuigou.com/choujiang/index";-->
 loading();
 $("#user_count").text(Number($("#user_count").text())+1);
 }
