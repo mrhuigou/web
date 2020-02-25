@@ -28,7 +28,7 @@ $this->title="每日惠购 幸运大抽奖";
 </header>
 <div class="pt50"></div>
 <div class="clearfix">
-	<img src="/assets/images/choujiang/banner.png" class="w">
+<!--	<img src="/assets/images/choujiang/banner.png" class="w">-->
 	<div class="rotary bc">
 		<img class="hand" src="/assets/images/choujiang/z_1.png" alt="">
 	</div>
@@ -184,7 +184,7 @@ $.hideLoading();
 if(res.status){
 time_count++;
 rotateFunc(res.angle,res.message);
-window.opener.document.location.reload()
+window.location.href="https://m.mrhuigou.com/choujiang/index";
 }else{
 $.alert(res.message);
 }
