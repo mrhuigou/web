@@ -173,6 +173,7 @@ $this->title="每日惠购 幸运大抽奖";
 		</div>
 	</div>
     </div>
+    <div class="m10 tc"><a class="btn lbtn greenbtn" href="/">点击立即使用</a></div>
 </script>
 <?php $this->beginBlock('J_Reviews') ?>
 var $hand = $('.hand');
