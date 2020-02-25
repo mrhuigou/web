@@ -184,7 +184,7 @@ $.hideLoading();
 if(res.status){
 time_count++;
 rotateFunc(res.angle,res.message);
-window.location.href="https://m.mrhuigou.com/choujiang/index";
+<!--window.location.href="https://m.mrhuigou.com/choujiang/index";-->
 }else{
 $.alert(res.message);
 }
@@ -198,6 +198,7 @@ duration: 5000,
 animateTo: angle + 2880,
 callback: function(){
 $.alert(text);
+window.location.href="https://m.mrhuigou.com/choujiang/index";
 loading();
 $("#user_count").text(Number($("#user_count").text())+1);
 }
