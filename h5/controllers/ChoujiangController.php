@@ -488,11 +488,31 @@ class ChoujiangController extends \yii\web\Controller {
 		$data = [];
 		$model = LotteryResult::findOne(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()]);
 		if ($model) {
+
+            $datetime = date('m/d H:i:s', $model->creat_at);
+		    //抽奖结果======================日期显示
+            $LotteryPrize = LotteryPrize::findOne(['id' => $model->lottery_prize_id]);
+            $coupon_id = $LotteryPrize->coupon_id;
+            $customer_id = \Yii::$app->user->getId();
+            $customer_coupon_info = \api\models\V1\CustomerCoupon::find()->where(['customer_id'=>$customer_id,'coupon_id'=>$coupon_id])->orderBy('customer_coupon_id desc')->one();
+
+            if($customer_coupon_info){
+                if($customer_coupon_info->is_use == 2){
+                    $datetime = '已使用';
+                }elseif($customer_coupon_info->is_use == 0 && $customer_coupon_info->end_time <= date('Y-m-d H:i:s')){
+                    $datetime= "已过期";
+                }else{
+                    $datetime = "截止：".date('m-d',strtotime($customer_coupon_info->start_time))."~".date('m-d H:i',strtotime($customer_coupon_info->end_time));
+                }
+            }
+            //抽奖结果======================日期显示
+
 			$data = [
 				'id' => $model->id,
 				'nickname' => $model->customer->nickname,
 				'photo' => Image::resize($model->customer->photo, 100, 100),
-				'datetime' => date('m/d H:i:s', $model->creat_at),
+//				'datetime' => date('m/d H:i:s', $model->creat_at),
+				'datetime' => $datetime,
 				'des' => $model->prize->title,
 			];
 		}
