@@ -47,7 +47,7 @@ $this->title="每日惠购 幸运大抽奖";
                 <?php
                 $coupon_id = $value->prize->coupon->coupon_id;
                 $customer_id = $value->customer->customer_id;
-                $customer_coupon_info = \api\models\V1\CustomerCoupon::find()->where(['customer_id'=>$customer_id,'coupon_id'=>$coupon_id])->one();
+                $customer_coupon_info = \api\models\V1\CustomerCoupon::find()->where(['customer_id'=>$customer_id,'coupon_id'=>$coupon_id])->orderBy('customer_coupon_id desc')->one();
                 ?>
                 <?php if($customer_coupon_info){?>
                     <?php if($customer_coupon_info->is_use == 2){?>
