@@ -101,7 +101,8 @@ $this->title="每日惠购 幸运大抽奖";
 <div class="jb" style="padding-bottom: 0px;">
     <a href="<?php echo \yii\helpers\Url::to(['/page/index','page_id'=>1654])?>" class="t"></a>
     <div class="tit1  redtit1">
-        <h2>爆品专区</h2>
+        <h2>爆品专区<a class="fr f12 red mt2" href="<?php echo \yii\helpers\Url::to(['/page/index','page_id'=>3538])?>">更多&gt;&gt;</a>
+        </h2>
     </div>
     <div id="hot_content" style="max-width: 32rem;overflow: hidden;" class="pl5 pr5 bc"></div>
 </div>
