@@ -65,7 +65,7 @@ $this->title = '分享有礼';
                     <?php  } else {?>
                         <!-- 未关注公众号 -->
                         <p class="f16 fb mt10 mb5">长按识别二维码 关注公众号领取</p>
-                        <img src="https://m.mrhuigou.com/assets/images/wx.jpg" width="200">
+                        <img src="https://m.mrhuigou.com/assets/images/wx2.png" width="200">
                     <?php   }
                 }
                 ?>
