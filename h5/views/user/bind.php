@@ -11,7 +11,7 @@ $this->title ='帐户绑定';
     <a href="<?php echo \yii\helpers\Url::to(['/user/index'])?>" class="header-cate iconfont">&#xe603;</a>
 </header>
 <section class="login-bodyer">
-    <p class="bd p5 tc red whitebg">微信账户一旦绑定登陆帐户将无法取消，请慎重操作！</p>
+<!--    <p class="bd p5 tc red whitebg">微信账户一旦绑定登陆帐户将无法取消，请慎重操作！</p>-->
     <?php $form = ActiveForm::begin(['id' => 'login-form','fieldConfig' => [
         'template' => "<div class='pr pt-15em'>{input}<p class=\"input-setup clearfix\"><a href=\"javascript:void(0);\" class=\"input-del fr\" style=\"display:none;\"></a></p></div>{error}",
         'inputOptions' => ['class' => 'input-text w',"autocomplete"=>"off"],
