@@ -44,12 +44,49 @@ $this->params['breadcrumbs'][] = $this->title;
 					['class' => 'yii\grid\SerialColumn'],
 					'order_id',
                     ['label'=>'退货状态','format'=>'raw','value'=>function($model){
-			            $return = \api\models\V1\ReturnBase::findOne(['order_id'=>$model->order_id]);
-			            if($return){
-                            return '['.Html::a($return->returnStatus->name,['refund/view','id'=>$return->return_id]).']';
-                        }else{
-			                return "无";
-                        }
+//			            $return = \api\models\V1\ReturnBase::findOne(['order_id'=>$model->order_id]);
+//			            if($return){
+//                            return '['.Html::a($return->returnStatus->name,['refund/view','id'=>$return->return_id]).']';
+//                        }else{
+//			                return "无";
+//                        }
+
+                         if($return = \api\models\V1\ReturnBase::find()->where(['order_id'=>$model->order_id])->all()){
+
+                            $return_status6 = false;//退货状态 （取消退货）  1.4.6
+                            $return_status1 = false;//退货状态 （待处理）
+                            $return_id = '';
+                            foreach ($return as $key => &$value){
+                                //待处理判断
+                                if($value->return_status_id == 1){
+                                    $return_status1 = true;
+                                    $return_id = $value->return_id;
+                                    break;
+                                }
+                                //取消退货处理
+                                if($value->return_status_id == 6){
+                                    $return_status6 = true;
+                                    $return_id6 = $value->return_id;
+                                }else{
+                                    $return_status6 = false;
+                                    $return_id4 = $value->return_id;
+                                    break;
+                                }
+                            }
+
+                             if(!$return_status1) {//不存在待处理
+                                 if (!$return_status6 && !empty($return_id4)) {//完成退货
+                                     $return_id = $return_id4;
+                                 } else {
+                                     $return_id = $return_id6;
+                                 }
+                             }
+                            $return_info = \api\models\V1\ReturnBase::findOne(['return_id'=>$return_id]);
+                            return '['.Html::a($return_info->returnStatus->name,['refund/view','id'=>$return_id]).']';
+
+                         }else{
+                             return "无";
+                         }
 
                     }],
 					['attribute'=>'affiliate_id','label'=>'分销商','value'=>function($model){
