@@ -57,6 +57,12 @@ class CouponController extends \yii\web\Controller
     }
     public function actionView(){
 
+        if($is_not_open = Yii::$app->request->get("is_not_open")){//不公开
+            $is_not_open = true;
+        }else{
+            $is_not_open = false;
+        }
+
         if($id = Yii::$app->request->get("id")){
             $model = Coupon::findOne(['status'=>1,'coupon_id'=>$id]);
         }
@@ -80,7 +86,7 @@ class CouponController extends \yii\web\Controller
             if($coupon_product){
 //                $customer_coupon=CustomerCoupon::findOne(['customer_id'=>Yii::$app->user->getId(),'coupon_id'=>$id ,'is_use' => 0,'end_time' >= date('Y-m-d H:i:s')] );
                 $customer_coupon=CustomerCoupon::find()->where(['customer_id'=>Yii::$app->user->getId(),'coupon_id'=> $id,'is_use' => 0])->andWhere(['>=','end_time',date('Y-m-d H:i:s')])->orderBy('customer_coupon_id desc')->one();
-                return $this->render('view',['model'=>$model,'coupon_product'=>$coupon_product,'customer_coupon'=>$customer_coupon]);
+                return $this->render('view',['model'=>$model,'coupon_product'=>$coupon_product,'customer_coupon'=>$customer_coupon,'is_not_open' => $is_not_open]);
             }else{
                 return $this->redirect('/');
             }

@@ -308,9 +308,11 @@ $("body").on('click','#coupon_btn_submit',function(){
 
 $(".coupon-item-btn").on('click',function(){
     var obj=$(this);
+    var is_not_open = <?=$is_not_open;?>
+        // console.log(is_not_open);
     $.showLoading("正在加载");
-    //$.post('<?//='/coupon/ajax-apply'?>//',{coupon_code:$(this).data('content'),is_not_open:true},function(data){
-    $.post('<?=\yii\helpers\Url::to('/coupon/ajax-apply',true)?>',{coupon_code:$(this).data('content'),is_not_open:true},function(data){
+    //$.post('<?//='/coupon/ajax-apply'?>//',{coupon_code:$(this).data('content'),is_not_open:is_not_open},function(data){
+    $.post('<?=\yii\helpers\Url::to('/coupon/ajax-apply',true)?>',{coupon_code:$(this).data('content'),is_not_open:is_not_open},function(data){
         $.hideLoading();
         if(data.status){
             obj.hide();
