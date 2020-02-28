@@ -28,8 +28,8 @@ $this->title ='家润每日惠购优惠券';
                 <div class="flex-item-5 red tr">
                     <?php if($model->getUsedStatus(Yii::$app->user->getId())){?>
                         <a href="javascript:;" class="btn  f12 coupon-item-btn" data-id="<?=$model->coupon_id?>" data-content="<?=$model->code?>">
-                            <img src="https://m.mrhuigou.com/assets/images/lijilingqu.gif" alt="" style="width: 12rem">
-<!--                            <img src="http://h5.mrhuiguserver.net/assets/images/lijilingqu.gif" alt="" style="width: 12rem">-->
+                            <img src="https://m.mrhuigou.com/assets/images/lijilingqu1.gif" alt="" style="width: 12rem">
+<!--                            <img src="http://h5.mrhuiguserver.net/assets/images/lijilingqu1.gif" alt="" style="width: 12rem">-->
                         </a>
                         <?php if($model->model!=='BUY_GIFTS'){?>
                             <?php if($model->type=='F'){?>
