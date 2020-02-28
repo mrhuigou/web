@@ -57,6 +57,10 @@ class CouponController extends \yii\web\Controller
     }
     public function actionView(){
 
+        if (\Yii::$app->user->isGuest) {
+            return $this->redirect(['/site/login', 'redirect' => \Yii::$app->request->getAbsoluteUrl()]);
+        }
+
         if($is_not_open = Yii::$app->request->get("is_not_open")){//不公开
             $is_not_open = true;
         }else{
