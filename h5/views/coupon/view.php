@@ -26,13 +26,19 @@ $this->title ='优惠券详情';
 					<?php } ?>
                 </div>
                 <div class="flex-item-5 red tr">
-	                <?php if($model->model!=='BUY_GIFTS'){?>
-		                <?php if($model->type=='F'){?>
-                            <span class="f25">￥</span><span class="f40"><?=$model->getRealDiscount()?></span>
-		                <?php }else{?>
-                            <span class="f40"><?=$model->getRealDiscount()?></span><span class="f25">折</span>
-		                <?php } ?>
-	                <?php }?>
+                    <?php if($model->getUsedStatus(Yii::$app->user->getId())){?>
+                        <a href="javascript:;" class="btn graybtn sbtn f12 coupon-item-btn" data-id="<?=$model->coupon_id?>" data-content="<?=$model->code?>">立即领取</a>
+                    <?php }else{?>
+                        <?php if($model->model!=='BUY_GIFTS'){?>
+                            <?php if($model->type=='F'){?>
+                                <span class="f25 coupon-view-btn">￥</span><span class="f40 coupon-view-btn"><?=$model->getRealDiscount()?></span>
+                            <?php }else{?>
+                                <span class="f40 coupon-view-btn"><?=$model->getRealDiscount()?></span><span class="f25 coupon-view-btn">折</span>
+                            <?php } ?>
+                        <?php }else{?>
+                            <span class="f40 coupon-view-btn">买赠</span>
+                        <?php }?>
+                    <?php }?>
                 </div>
             </div>
 	        <?php if($customer_coupon){?>
@@ -284,6 +290,20 @@ $("body").on('click','#coupon_btn_submit',function(){
             location.href=data.redirect;
         }else{
             $.alert(data.message);
+        }
+    },'json');
+});
+
+$(".coupon-item-btn").on('click',function(){
+    var obj=$(this);
+    $.showLoading("正在加载");
+    $.post('<?=\yii\helpers\Url::to('/coupon/ajax-apply',true)?>',{coupon_code:$(this).data('content')},function(data){
+        $.hideLoading();
+        if(data.status){
+            obj.hide();
+            obj.siblings('.coupon-view-btn').show();
+        }else{
+            $.toast(data.message);
         }
     },'json');
 });
