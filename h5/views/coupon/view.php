@@ -118,15 +118,13 @@ $this->title ='家润每日惠购优惠券';
 <?php
 $this->beginBlock('JS_SKU')
 ?>
-var  user_status = <?=$model->getUsedStatus(Yii::$app->user->getId());?>;
-if(user_status){
-    $.alert('请先领取优惠券!');
-}
+
 $('.add-click').click(function(){
-    //var  user_status = <?//=$model->getUsedStatus(Yii::$app->user->getId());?>//;
-    //if(user_status){
-    //    $.alert('请先领取优惠券!');
-    //}
+    var  user_status = <?=$model->getUsedStatus(Yii::$app->user->getId());?>;
+    if(user_status){
+        $.alert('请先领取优惠券!');
+        user_status = false;
+    }
     $(this).hide();
     var wrap = $(this).parent(".num-wrap");
     wrap.find('.num-add').show();
