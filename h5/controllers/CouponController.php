@@ -370,11 +370,20 @@ class CouponController extends \yii\web\Controller
             }
             $coupon_id=Yii::$app->request->post('coupon_id');
             $coupon_code=Yii::$app->request->post('coupon_code');
-			if($coupon_id){
-				$model=Coupon::findOne(['coupon_id'=>$coupon_id,'is_open'=>1,'status'=>1]);
-			}else{
-				$model=Coupon::findOne(['code'=>$coupon_code,'is_open'=>1,'status'=>1]);
-			}
+            $is_not_open=Yii::$app->request->post('is_not_open');//券是否公开
+            if($is_not_open){//不公开
+                if($coupon_id){
+                    $model=Coupon::findOne(['coupon_id'=>$coupon_id,'is_open'=>0,'status'=>1]);
+                }else{
+                    $model=Coupon::findOne(['code'=>$coupon_code,'is_open'=>0,'status'=>1]);
+                }
+            }else{
+                if($coupon_id){
+                    $model=Coupon::findOne(['coupon_id'=>$coupon_id,'is_open'=>1,'status'=>1]);
+                }else{
+                    $model=Coupon::findOne(['code'=>$coupon_code,'is_open'=>1,'status'=>1]);
+                }
+            }
 
             if($model){
                 if(!$model->getUsedStatus(Yii::$app->user->getId())){

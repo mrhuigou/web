@@ -27,7 +27,19 @@ $this->title ='家润每日惠购优惠券';
                 </div>
                 <div class="flex-item-5 red tr">
                     <?php if($model->getUsedStatus(Yii::$app->user->getId())){?>
-                        <a href="javascript:;" class="btn graybtn sbtn f12 coupon-item-btn" data-id="<?=$model->coupon_id?>" data-content="<?=$model->code?>">立即领取</a>
+                        <a href="javascript:;" class="btn  f12 coupon-item-btn" data-id="<?=$model->coupon_id?>" data-content="<?=$model->code?>">
+                            <img src="https://m.mrhuigou.com/assets/images/lijilingqu.gif" alt="" style="width: 12rem">
+<!--                            <img src="http://h5.mrhuiguserver.net/assets/images/lijilingqu.gif" alt="" style="width: 12rem">-->
+                        </a>
+                        <?php if($model->model!=='BUY_GIFTS'){?>
+                            <?php if($model->type=='F'){?>
+                                <span class="f25 coupon-view-btn" style="display: none;">￥</span><span class="f40 coupon-view-btn" style="display: none;"><?=$model->getRealDiscount()?></span>
+                            <?php }else{?>
+                                <span class="f40 coupon-view-btn" style="display: none;"><?=$model->getRealDiscount()?></span><span class="f25 coupon-view-btn" style="display: none;">折</span>
+                            <?php } ?>
+                        <?php }else{?>
+                            <span class="f40 coupon-view-btn" style="display: none;">买赠</span>
+                        <?php }?>
                     <?php }else{?>
                         <?php if($model->model!=='BUY_GIFTS'){?>
                             <?php if($model->type=='F'){?>
@@ -297,7 +309,8 @@ $("body").on('click','#coupon_btn_submit',function(){
 $(".coupon-item-btn").on('click',function(){
     var obj=$(this);
     $.showLoading("正在加载");
-    $.post('<?=\yii\helpers\Url::to('/coupon/ajax-apply',true)?>',{coupon_code:$(this).data('content')},function(data){
+    //$.post('<?//='/coupon/ajax-apply'?>//',{coupon_code:$(this).data('content'),is_not_open:true},function(data){
+    $.post('<?=\yii\helpers\Url::to('/coupon/ajax-apply',true)?>',{coupon_code:$(this).data('content'),is_not_open:true},function(data){
         $.hideLoading();
         if(data.status){
             obj.hide();
