@@ -123,10 +123,10 @@ if(user_status){
     $.alert('请先领取优惠券!');
 }
 $('.add-click').click(function(){
-    var  user_status = <?=$model->getUsedStatus(Yii::$app->user->getId());?>;
-    if(user_status){
-        $.alert('请先领取优惠券!');
-    }
+    //var  user_status = <?//=$model->getUsedStatus(Yii::$app->user->getId());?>//;
+    //if(user_status){
+    //    $.alert('请先领取优惠券!');
+    //}
     $(this).hide();
     var wrap = $(this).parent(".num-wrap");
     wrap.find('.num-add').show();
