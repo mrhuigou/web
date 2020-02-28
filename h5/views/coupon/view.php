@@ -320,7 +320,7 @@ $("body").on('click','#coupon_btn_submit',function(){
 <?php $this->beginBlock('J_Reviews') ?>
 $(".coupon-item-btn").on('click',function(){
     var obj=$(this);
-    var is_not_open = <?=$is_not_open;?>;
+    var is_not_open = <?=$is_not_open?:0;?>;
     var tpl = $('#tpl').html();
     // console.log(is_not_open);
     $.showLoading("正在加载");
