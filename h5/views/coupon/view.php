@@ -128,8 +128,23 @@ $this->title ='家润每日惠购优惠券';
 $this->beginBlock('JS_SKU')
 ?>
 
-$('.add-click').click(function(){
+function loading(){
+    $.post('<?='/coupon/ajax-apply-result'?>',{'coupon_id':'<?=$model->coupon_id?>'},function(res){
+    //$.post('<?//=\yii\helpers\Url::to(['/coupon/ajax-apply-result'])?>//',{'coupon_id':'<?//=$model->coupon_id?>//'},function(res){
+        if(res){
+            if(res.data.used_status == 1){
+                $.alert('请先领取优惠券!');
+            }
+        }
+    },'json');
+}
 
+$('.add-click').click(function(){
+    var  user_status = <?=$user_status ?: 0?>;
+    if(user_status){
+        // 判断是否领取优惠券
+        loading();
+    }
     $(this).hide();
     var wrap = $(this).parent(".num-wrap");
     wrap.find('.num-add').show();
@@ -305,6 +320,7 @@ $(".numDynamic .num-lower").click(function(){
     }
 })
 $("body").on('click','#coupon_btn_submit',function(){
+    loading();
     $.showLoading("正在加载");
     $.post("<?=\yii\helpers\Url::to(['/coupon/ajax-cart','is_push'=>1],true)?>",{'data':coupon_data},function(data){
         $.hideLoading();

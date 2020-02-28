@@ -434,6 +434,23 @@ class CouponController extends \yii\web\Controller
         return $data;
     }
 
+    public function actionAjaxApplyResult(){
+        $coupon_id = \Yii::$app->request->post('coupon_id');
+        $data = [];
+        $model=Coupon::findOne(['coupon_id'=>$coupon_id,'status'=>1]);
+        if ($model) {
+            $used_status = $model->getUsedStatus(Yii::$app->user->getId());
+
+            $data = [
+                'used_status' => $used_status,
+            ];
+        }
+        \Yii::$app->getResponse()->format = "json";
+        return ['data' => $data];
+    }
+
+
+
     public function actionApply(){
 	    if (\Yii::$app->user->isGuest) {
 		    return $this->redirect(['/site/login','redirect'=>Yii::$app->request->getAbsoluteUrl()]);
