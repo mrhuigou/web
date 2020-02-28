@@ -28,8 +28,8 @@ $this->title ='家润每日惠购优惠券';
                 <div class="flex-item-5 red tr">
                     <?php if($model->getUsedStatus(Yii::$app->user->getId())){?>
                         <a href="javascript:;" class="btn  f12 coupon-item-btn" data-id="<?=$model->coupon_id?>" data-content="<?=$model->code?>">
-                            <img src="https://m.mrhuigou.com/assets/images/lijilingqu1.gif" alt="" style="width: 12rem">
-<!--                            <img src="http://h5.mrhuiguserver.net/assets/images/lijilingqu1.gif" alt="" style="width: 12rem">-->
+                            <img src="https://m.mrhuigou.com/assets/images/lijilingqu2.gif" alt="" style="width: 12rem">
+<!--                            <img src="http://h5.mrhuiguserver.net/assets/images/lijilingqu2.gif" alt="" style="width: 12rem">-->
                         </a>
                         <?php if($model->model!=='BUY_GIFTS'){?>
                             <?php if($model->type=='F'){?>
@@ -118,8 +118,15 @@ $this->title ='家润每日惠购优惠券';
 <?php
 $this->beginBlock('JS_SKU')
 ?>
-
+var  user_status = <?=$model->getUsedStatus(Yii::$app->user->getId());?>;
+if(user_status){
+    $.alert('请先领取优惠券!');
+}
 $('.add-click').click(function(){
+    var  user_status = <?=$model->getUsedStatus(Yii::$app->user->getId());?>;
+    if(user_status){
+        $.alert('请先领取优惠券!');
+    }
     $(this).hide();
     var wrap = $(this).parent(".num-wrap");
     wrap.find('.num-add').show();
