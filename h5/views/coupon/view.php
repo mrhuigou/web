@@ -26,7 +26,8 @@ $this->title ='家润每日惠购优惠券';
 					<?php } ?>
                 </div>
                 <div class="flex-item-5 red tr">
-                    <?php if($model->getUsedStatus(Yii::$app->user->getId())){?>
+                    <?php $user_status = 0;?>
+                    <?php if($user_status = $model->getUsedStatus(Yii::$app->user->getId())){?>
                         <a href="javascript:;" class="btn  f12 coupon-item-btn" data-id="<?=$model->coupon_id?>" data-content="<?=$model->code?>">
                             <img src="https://m.mrhuigou.com/assets/images/lijilingqu2.gif" alt="" style="width: 12rem">
 <!--                            <img src="http://h5.mrhuiguserver.net/assets/images/lijilingqu2.gif" alt="" style="width: 12rem">-->
@@ -120,10 +121,10 @@ $this->beginBlock('JS_SKU')
 ?>
 
 $('.add-click').click(function(){
-    var  user_status = <?=$model->getUsedStatus(Yii::$app->user->getId());?>;
+    var  user_status = <?=$user_status;?>;
     if(user_status){
         $.alert('请先领取优惠券!');
-        user_status = false;
+        user_status = 0;
     }
     $(this).hide();
     var wrap = $(this).parent(".num-wrap");
