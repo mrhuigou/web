@@ -320,9 +320,9 @@ $(".numDynamic .num-lower").click(function(){
     }
 })
 $("body").on('click','#coupon_btn_submit',function(){
-    loading();
     $.showLoading("正在加载");
-    $.post("<?=\yii\helpers\Url::to(['/coupon/ajax-cart','is_push'=>1],true)?>",{'data':coupon_data},function(data){
+    //$.post("<?//='/coupon/ajax-cart?is_push=1 '?>//",{'data':coupon_data,'coupon_id':'<?//=$model->coupon_id?>//'},function(data){
+    $.post("<?=\yii\helpers\Url::to(['/coupon/ajax-cart','is_push'=>1],true)?>",{'data':coupon_data,'coupon_id':'<?=$model->coupon_id?>'},function(data){
         $.hideLoading();
         if(data.status){
             location.href=data.redirect;

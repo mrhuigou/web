@@ -242,6 +242,18 @@ class CouponController extends \yii\web\Controller
             if (\Yii::$app->user->isGuest) {
                 throw new ErrorException('登录后领取哦~');
             }
+
+            //判断是否领取优惠券
+            if($coupon_id=Yii::$app->request->post('coupon_id')) {
+                $model=Coupon::findOne(['coupon_id'=>$coupon_id,'status'=>1]);
+                if ($model) {
+                    $used_status = $model->getUsedStatus(Yii::$app->user->getId());
+                    if($used_status){
+                        throw new ErrorException('请先领取优惠券！');
+                    }
+                }
+            }
+
             if($data=Yii::$app->request->post('data')){
 
                     foreach($data as $value){
