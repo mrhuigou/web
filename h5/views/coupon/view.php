@@ -6,7 +6,7 @@
  * Time: 13:48
  */
 use yii\helpers\Html;
-$this->title ='优惠券详情';
+$this->title ='家润每日惠购优惠券';
 ?>
 <style>
     .activity-1-coupon::after, .activity-1-coupon::before {
@@ -312,3 +312,25 @@ $(".coupon-item-btn").on('click',function(){
 $this->registerJs($this->blocks['JS_SKU'], \yii\web\View::POS_END);
 ?>
 </script>
+
+<?php
+if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
+    $data = [
+        'title' => '遇到好东西，总想分享给最亲爱的你。',
+        'desc' => "口袋超市，物美价廉，当日订单，当日送达。",
+        'link' => Yii::$app->request->getAbsoluteUrl(),
+        'image' => Yii::$app->request->getHostInfo().'/assets/images/zhqd/logo_300x300.jpeg'
+    ];
+}else{
+    $data = [
+//        'title' => $this->title,
+        'title' => '家润每日惠购优惠券',
+        'desc' => "每日惠购，物美价廉，当日订单，当日送达。",
+        'link' => Yii::$app->request->getAbsoluteUrl(),
+        'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.png'
+    ];
+}
+?>
+<?=\h5\widgets\Tools\Share::widget([
+    'data'=>$data
+])?>
