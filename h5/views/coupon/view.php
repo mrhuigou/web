@@ -121,11 +121,7 @@ $this->beginBlock('JS_SKU')
 ?>
 
 $('.add-click').click(function(){
-    var  user_status = <?=$model->getUsedStatus(Yii::$app->user->getId());?>;
-    if(user_status){
-        $.alert('请先领取优惠券!');
-        user_status = 0;
-    }
+
     $(this).hide();
     var wrap = $(this).parent(".num-wrap");
     wrap.find('.num-add').show();
