@@ -411,10 +411,12 @@ class CouponController extends \yii\web\Controller
                                 $customer_coupon->end_time = $model->date_end;
                             }
                             $customer_coupon->date_added=date('Y-m-d H:i:s',time());
+
+                            $date = '截止：'.date('m-d',strtotime($customer_coupon->start_time)).'~'.date('m-d H:i',strtotime($customer_coupon->end_time));
                             if(!$customer_coupon->save(false)){
                                 throw new ErrorException("数据提交错误!");
                             }
-                            $data= ['status' => 1, 'message' =>'领取成功！'];
+                            $data= ['status' => 1, 'message' =>'领取成功！','date' => $date];
                         }else{
                             throw new ErrorException("你已经领过了！!");
                         }

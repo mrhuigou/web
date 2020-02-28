@@ -49,7 +49,7 @@ $this->title ='家润每日惠购优惠券';
                                 <span class="f40 coupon-view-btn"><?=$model->getRealDiscount()?></span><span class="f25 coupon-view-btn">折</span>
                             <?php } ?>
                         <?php }else{?>
-                            <span class="f40 coupon-view-btn">买赠</span>
+                            <span class="f30 coupon-view-btn">买赠</span>
                         <?php }?>
                     <?php }?>
                 </div>
@@ -59,7 +59,15 @@ $this->title ='家润每日惠购优惠券';
             <span class="gray9">截止：<?=date('m-d',strtotime($customer_coupon->start_time))?>~<?=date('m-d H:i',strtotime($customer_coupon->end_time))?></span>
             </div>
 	        <?php } ?>
+            <div id="my_result" class="f14 pt5" style="display: none">
+            </div>
+
         </div>
+
+        <script id="tpl" type="text/html">
+                <span class="gray9"><%:=list%></span>
+        </script>
+
 		<?php if($coupon_product){ ?>
 			<?php foreach($coupon_product as $value){?>
                 <?php if($value->product->stockCount >0){ ?>
@@ -308,17 +316,24 @@ $("body").on('click','#coupon_btn_submit',function(){
     },'json');
 });
 
+<?php $this->endBlock() ?>
+<?php $this->beginBlock('J_Reviews') ?>
 $(".coupon-item-btn").on('click',function(){
     var obj=$(this);
-    var is_not_open = <?=$is_not_open;?>
-        // console.log(is_not_open);
+    var is_not_open = <?=$is_not_open;?>;
+    var tpl = $('#tpl').html();
+    // console.log(is_not_open);
     $.showLoading("正在加载");
     //$.post('<?//='/coupon/ajax-apply'?>//',{coupon_code:$(this).data('content'),is_not_open:is_not_open},function(data){
-    $.post('<?=\yii\helpers\Url::to('/coupon/ajax-apply',true)?>',{coupon_code:$(this).data('content'),is_not_open:is_not_open},function(data){
+        $.post('<?=\yii\helpers\Url::to('/coupon/ajax-apply',true)?>',{coupon_code:$(this).data('content'),is_not_open:is_not_open},function(data){
         $.hideLoading();
         if(data.status){
             obj.hide();
             obj.siblings('.coupon-view-btn').show();
+            var html= template(tpl, {list:data.date});
+            console.log(html)
+            $("#my_result").html(html);
+            $('#my_result').show();
         }else{
             $.toast(data.message);
         }
@@ -327,6 +342,7 @@ $(".coupon-item-btn").on('click',function(){
 <?php $this->endBlock() ?>
 <?php
 $this->registerJs($this->blocks['JS_SKU'], \yii\web\View::POS_END);
+$this->registerJs($this->blocks['J_Reviews'],\yii\web\View::POS_END);
 ?>
 </script>
 
