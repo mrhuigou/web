@@ -48,6 +48,7 @@ text: '<img src="<?= 'https://img1.mrhuigou.com/'.$share_logo?>" class="w">',
 buttons: []
 });
 <?php }else{?>
+    <?php $status = 1;//添加默认值不弹送28优惠券的?>
     <?php if(!$status){?>
     $.modal({
     title: "长按识别关注",
