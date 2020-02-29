@@ -44,7 +44,7 @@
 $.modal({
 title: "",
 <!--text: '<img src="/images/subcription_pic_mrhuigou1.png" class="w">',-->
-text: '<img src="<?= 'https://img1.mrhuigou.com/'.$share_logo?>" class="w">',
+text: '<img src="<?= 'https://img1.mrhuigou.com/'.$share_logo?>" class="w"><a class="layer-close iconfont" href="javascript:;">&#xe612;</a>',
 buttons: []
 });
 <?php }else{?>
@@ -61,11 +61,16 @@ buttons: []
         $.modal({
         title: "",
 <!--        text: '<img src="/images/subcription_pic_mrhuigou1.png" class="w">',-->
-        text: '<img src="<?= 'https://img1.mrhuigou.com/'.$share_logo?>" class="w">',
+        text: '<div class="layer-status"><img src="<?= 'https://img1.mrhuigou.com/'.$share_logo?>" class="w"><a class="layer-close iconfont" href="javascript:;">&#xe612;</a></div>',
         buttons: []
         });
         <?php }?>
 <?php }?>
+
+$(".layer-close").click(function(){
+    $('.weui_mask').remove();//去掉遮罩层
+    $('.layer-status').hide();
+})
 <?php $this->endBlock() ?>
 <?php
 \yii\web\YiiAsset::register($this);
