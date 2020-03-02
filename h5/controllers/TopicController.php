@@ -32,9 +32,9 @@ class TopicController extends \yii\web\Controller
                         }
                     ])->where(['and',
                         "jr_promotion_detail.begin_date<'".date('Y-m-d H:i:s')."'",
-                        "jr_promotion_detail.end_date>'".date('Y-m-d H:i:s')."'",'jr_promotion_detail.status=1',"jr_promotion.subject='".$model->subject."'"])->orderBy('jr_promotion_detail.sort_order asc,jr_promotion_detail.priority desc,jr_promotion_detail.promotion_detail_id asc')->all();
+                        "jr_promotion_detail.end_date>'".date('Y-m-d H:i:s')."'",'jr_promotion_detail.status=1',"jr_promotion.subject='".$model->subject."'"])->orderBy('jr_promotion_detail.sort_order asc,jr_promotion_detail.priority asc,jr_promotion_detail.promotion_detail_id asc')->all();
                 }else{
-                    $details=PromotionDetail::find()->where(['and','promotion_id='.$model->promotion_id,"begin_date>'".date('Y-m-d H:i:s',time())."'",'status=1'])->orderBy('sort_order asc,priority desc,promotion_detail_id asc')->all();
+                    $details=PromotionDetail::find()->where(['and','promotion_id='.$model->promotion_id,"begin_date>'".date('Y-m-d H:i:s',time())."'",'status=1'])->orderBy('sort_order asc,priority asc,promotion_detail_id asc')->all();
                 }
 
             }else{
@@ -47,14 +47,14 @@ class TopicController extends \yii\web\Controller
                             'product'=>function($query){
                                 $query ->andFilterWhere(['jr_product.beintoinv'=>1]);//选择已经上架的
                             }
-                        ])->where(['and',"jr_promotion_detail.begin_date<='".date('Y-m-d H:i:s',time())."'","jr_promotion_detail.end_date>='".date('Y-m-d H:i:s',time())."'",'jr_promotion_detail.status=1',"jr_promotion.subject='".$model->subject."'"])->orderBy('jr_promotion_detail.sort_order asc,jr_promotion_detail.priority desc,jr_promotion_detail.promotion_detail_id asc')->all();
+                        ])->where(['and',"jr_promotion_detail.begin_date<='".date('Y-m-d H:i:s',time())."'","jr_promotion_detail.end_date>='".date('Y-m-d H:i:s',time())."'",'jr_promotion_detail.status=1',"jr_promotion.subject='".$model->subject."'"])->orderBy('jr_promotion_detail.sort_order asc,jr_promotion_detail.priority asc,jr_promotion_detail.promotion_detail_id asc')->all();
                 }else{
                     $details=PromotionDetail::find()
                         ->joinWith([
                             'product'=>function($query){
                                 $query ->andFilterWhere(['jr_product.beintoinv'=>1]);//选择已经上架的
                             }
-                        ])->where(['and','promotion_id='.$model->promotion_id,"begin_date<='".date('Y-m-d H:i:s',time())."'","end_date>='".date('Y-m-d H:i:s',time())."'",'status=1'])->orderBy('sort_order asc,priority desc,promotion_detail_id asc')->all();
+                        ])->where(['and','promotion_id='.$model->promotion_id,"begin_date<='".date('Y-m-d H:i:s',time())."'","end_date>='".date('Y-m-d H:i:s',time())."'",'status=1'])->orderBy('sort_order asc,priority asc,promotion_detail_id asc')->all();
                 }
             }
             if($model->subject=='PANIC'){
