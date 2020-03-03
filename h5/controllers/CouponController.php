@@ -74,6 +74,10 @@ class CouponController extends \yii\web\Controller
             $model = Coupon::findOne(['status'=>1,'code'=>$code]);
         }
         if($model){
+            if($model->status && strtotime($model->receive_begin_date)<=time() && strtotime($model->receive_end_date)>=time() ){
+            }else{
+                return $this->redirect('/coupon/index');
+            }
             if(in_array($model->model,['ORDER','BUY_GIFTS'])){
                 if(!empty($model->redirect_url)){
                     return $this->redirect($model->redirect_url);
