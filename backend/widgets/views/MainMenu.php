@@ -31,4 +31,13 @@ use yii\bootstrap\Nav;
         'items' => MenuHelper::getAssignedMenu(Yii::$app->user->getId()),
         'options'=>['class'=>'page-sidebar-menu'],
     ]);?>
+    <ul class="page-sidebar-menu">
+        <li class="">
+            <a href="<?= \yii\helpers\Url::to('/site/go-show-stock')?>" target="_blank">
+                <span class="title">
+                            库存展示
+                        </span>
+            </a>
+        </li>
+    </ul>
 </div>
