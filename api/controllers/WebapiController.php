@@ -7,6 +7,8 @@ use api\models\V1\AdvertisePosition;
 use api\models\V1\AdvertiseRelated;
 use api\models\V1\AffiliatePersonal;
 use api\models\V1\AffiliatePersonalDetail;
+use api\models\V1\AffiliatePlan;
+use api\models\V1\AffiliatePlanDetail;
 use api\models\V1\AffiliatePlanType;
 use api\models\V1\Appuser;
 use api\models\V1\Attribute;
@@ -2719,6 +2721,63 @@ class WebapiController extends \yii\rest\Controller {
                 $model->update_at = time();
                 if (!$model->save()) {
                     throw new \Exception(serialize($model->errors));
+                }
+            }
+            $transaction->commit();
+        } catch (\Exception $e) {
+            $status = false;
+            $this->message = $e->getMessage();
+            $transaction->rollBack();
+        }
+        return $status;
+    }
+
+    //分销方案信息
+    public function actionAffiliateplan($datas)
+    {
+        $transaction = \Yii::$app->db->beginTransaction();
+        $status = true;
+        try {
+            foreach ($datas as $data) {
+                if (!$model = AffiliatePlan::findOne(['code' => $data['CODE']])) {
+                    $model = new AffiliatePlan();
+                }
+                $model->code = $data['CODE'];
+                $model->name = $data['NAME'];
+                $model->type = $data['PLANTYPE'];
+                $model->description = $data['DESCRIPTION'];
+                $model->status = $data['STATUS'] == "ACTIVE" ? 1 : 0;
+                $model->date_start = $data['BEGIN_DATE'];
+                $model->date_end = $data['END_DATE'];
+                $model->ship_end = $data['SHIP_DATE'];
+                $model->minbookcash = $data['MINBOOKCASH'];
+                $model->deliverycash = $data['DELIVERYCASH'];
+                $Store = Store::findOne(['store_code' => isset($data['SHOP_CODE']) ? $data['SHOP_CODE'] : 0]);
+                $model->store_id = $Store ? $Store->store_id : 0;
+                $model->store_code = isset($data['SHOP_CODE']) ? $data['SHOP_CODE'] : "";
+                if (!$model->save()) {
+                    throw new \Exception(json_encode($model->errors));
+                }
+                $affiliate_plan_id = $model->affiliate_plan_id;
+                foreach ($data['DETAILS'] as $value) {
+                    if (!$model = AffiliatePlanDetail::findOne(['affiliate_plan_id' => $affiliate_plan_id, 'code' => $value['DETAIL_CODE']])) {
+                        $model = new AffiliatePlanDetail();
+                    }
+                    $model->code = strval($value['DETAIL_CODE']);
+                    $model->plan_code = $value['AFFILIATE_PLAN_CODE'];
+                    $model->affiliate_plan_id = $affiliate_plan_id;
+                    $model->product_code = $value['PRODUCT_CODE'];
+                    $model->pu_code = $value['PUCODE'];
+                    $model->price_type = isset($value['PRICE_TYPE']) && $value['PRICE_TYPE'] == 'FIXED' ? 1 : 0;
+                    $model->price = isset($value['PRICE_TYPE']) && $value['PRICE_TYPE'] == 'FIXED' ? $value['PRICE'] : 0;
+                    $model->affiliate_price = $value['AFFILIATE_PRICE'];
+                    $model->max_buy_qty = $value['MAX_LIMIT_QUANTITY'];
+                    $model->priority = $value['PRIORITY'];
+                    $model->image_url = $value['SOURCE_URL'];
+                    $model->status = $value['DETAIL_STATUS'] == 'ACTIVE' ? 1 : 0;
+                    if (!$model->save()) {
+                        throw new \Exception(json_encode($model->errors));
+                    }
                 }
             }
             $transaction->commit();
