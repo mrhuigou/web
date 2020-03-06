@@ -7,6 +7,7 @@ use api\models\V1\AdvertisePosition;
 use api\models\V1\AdvertiseRelated;
 use api\models\V1\AffiliatePersonal;
 use api\models\V1\AffiliatePersonalDetail;
+use api\models\V1\AffiliatePlanType;
 use api\models\V1\Appuser;
 use api\models\V1\Attribute;
 use api\models\V1\AttributeDescription;
@@ -2696,6 +2697,35 @@ class WebapiController extends \yii\rest\Controller {
         } catch (\Exception $e) {
             $transaction->rollBack();
             throw new \Exception($e->getMessage());
+        }
+        return $status;
+    }
+
+    //========================================分销方案===========================================
+    //分销方案类型
+    public function actionAffiliateplantype($datas)
+    {
+        $transaction = \Yii::$app->db->beginTransaction();
+        $status = true;
+        try {
+            foreach ($datas as $data) {
+                if (!$model = AffiliatePlanType::findOne(['code' => trim($data['CODE'])])) {
+                    $model = new AffiliatePlanType();
+                    $model->creat_at = time();
+                }
+                $model->code = trim($data['CODE']);
+                $model->name = $data['NAME'];
+                $model->status = $data['STATUS'] == 'ACTIVE' ? 1 : 0;
+                $model->update_at = time();
+                if (!$model->save()) {
+                    throw new \Exception(serialize($model->errors));
+                }
+            }
+            $transaction->commit();
+        } catch (\Exception $e) {
+            $status = false;
+            $this->message = $e->getMessage();
+            $transaction->rollBack();
         }
         return $status;
     }
