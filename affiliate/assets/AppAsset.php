@@ -20,7 +20,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'assets/plugins/font-awesome/css/font-awesome.min.css',
         'assets/plugins/uniform/css/uniform.default.css',
-        'assets/stylesheet/mobile.min.css?v=20200219',
+//        'assets/stylesheet/mobile.min.css?v=20200219',
         'assets/stylesheet/swiper.min.css?v=20170724',
         'assets/script/layer.m/need/layer.css?v=20171216'
     ];
