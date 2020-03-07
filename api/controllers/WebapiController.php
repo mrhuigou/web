@@ -5,6 +5,7 @@ use api\models\V1\AdvertiseDetail;
 use api\models\V1\AdvertiseMedia;
 use api\models\V1\AdvertisePosition;
 use api\models\V1\AdvertiseRelated;
+use api\models\V1\Affiliate;
 use api\models\V1\AffiliatePersonal;
 use api\models\V1\AffiliatePersonalDetail;
 use api\models\V1\AffiliatePlan;
@@ -2788,4 +2789,46 @@ class WebapiController extends \yii\rest\Controller {
         }
         return $status;
     }
+
+    //分销商
+    public function actionAffiliate($datas)
+    {
+        $transaction = \Yii::$app->db->beginTransaction();
+        $status = true;
+        try {
+            foreach ($datas as $data) {
+                if (!$model = Affiliate::findOne(['code' => trim($data['CODE']),'telephone' => trim($data['TELEPHONE'])])) {
+                    $model = new Affiliate();
+                }
+                $model->code = trim($data['CODE']);
+                $model->name = $data['NAME'];
+                $model->username = $data['DISPLAY_NAME'];
+                $model->status = $data['STATUS'] == 'ACTIVE' ? 1 : 0;
+                $model->plan_type = $data['PLAN_TYPE'];
+                $model->type = $data['TYPE'];
+                $model->mode = $data['MODE'];
+                $model->rebate_type = $data['REBATE_TYPE'];
+                if(isset($data['REBATE_TYPE']) && $data['REBATE_TYPE'] == 'ORDER'){
+                    $model->rebate = $data['REBATE'];
+                    $model->commission = $data['REBATE'];
+                }
+                $model->description = $data['DESCRIPTION'];
+                $model->contact_name = $data['CONTACT_NAME'];
+                $model->telephone = $data['TELEPHONE'];
+                $model->address = $data['ADDRESS'];
+                $model->is_deliver_home = $data['IS_DELIVER_HOME'];
+
+                if (!$model->save()) {
+                    throw new \Exception(serialize($model->errors));
+                }
+            }
+            $transaction->commit();
+        } catch (\Exception $e) {
+            $status = false;
+            $this->message = $e->getMessage();
+            $transaction->rollBack();
+        }
+        return $status;
+    }
+
 }
