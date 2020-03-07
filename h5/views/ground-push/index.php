@@ -253,7 +253,8 @@ function resetTotal(){
             car_total=FloatAdd(pt,car_total);
         }
     });
-    $("#cart_total").html(car_total.toFixed(2));
+    // $("#cart_total").html(car_total.toFixed(2));
+    $("#cart_total").html(car_total);
 }
 
 
