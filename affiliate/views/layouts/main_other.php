@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Html;
-use h5\assets\AppAsset;
+use affiliate\assets\AppAsset;
 /* @var $this \yii\web\View */
 /* @var $content string */
 AppAsset::register($this);
