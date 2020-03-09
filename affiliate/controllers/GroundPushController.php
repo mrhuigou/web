@@ -49,8 +49,15 @@ class GroundPushController extends \yii\web\Controller {
                 }
             }
         }
-        if (\Yii::$app->user->isGuest) {
-            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index?push_code='.$code]);
+
+        $fx_user_login_status = false;
+        //获取用户登录状态 session 缓存 user_login_status
+        if(\Yii::$app->session->get("fx_user_login_status")){
+            $fx_user_login_status = \Yii::$app->session->get("fx_user_login_status");
+        }
+
+        if (!$fx_user_login_status) {
+            return $this->redirect(['/site-mobile/login', 'redirect' => '/ground-push/index?push_code='.$code]);
         }
 
         $cart = [];

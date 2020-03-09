@@ -42,6 +42,7 @@ class SiteMobileController extends Controller {
 	/**
 	 * @inheritdoc
 	 */
+    public $layout = 'main_mobile';
 	public function behaviors()
 	{
 		return [
@@ -353,6 +354,8 @@ class SiteMobileController extends Controller {
 
 		if ($model->load(Yii::$app->request->post()) && $model->login()) {
 			\Yii::$app->cart->loadFromLogin();
+			//用户登录fx 状态
+            \Yii::$app->session->set("fx_user_login_status",true);
 			return $this->redirect($url);
 		} else {
 			return $this->render('login', [
