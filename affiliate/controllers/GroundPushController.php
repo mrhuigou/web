@@ -196,8 +196,16 @@ class GroundPushController extends \yii\web\Controller {
 	public function actionSubmit(){
 	    \Yii::$app->session->remove("confirm_push");
 	    \Yii::$app->session->remove("ground_push_base");
-        if (\Yii::$app->user->isGuest) {
-            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
+//        if (\Yii::$app->user->isGuest) {
+//            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
+//        }
+        $fx_user_login_status = false;
+        //获取用户登录状态 session 缓存 user_login_status
+        if(\Yii::$app->session->get("fx_user_login_status")){
+            $fx_user_login_status = \Yii::$app->session->get("fx_user_login_status");
+        }
+        if (!$fx_user_login_status) {
+            return $this->redirect(['/site-mobile/login', 'redirect' => '/ground-push/index']);
         }
 
         $ground_push_plan_id = \Yii::$app->request->post('ground_push_plan_id');
@@ -297,8 +305,16 @@ class GroundPushController extends \yii\web\Controller {
     //提货确认页面
     public function actionConfirm(){
 	    $cart = [];
-        if (\Yii::$app->user->isGuest) {
-            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
+//        if (\Yii::$app->user->isGuest) {
+//            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
+//        }
+        $fx_user_login_status = false;
+        //获取用户登录状态 session 缓存 user_login_status
+        if(\Yii::$app->session->get("fx_user_login_status")){
+            $fx_user_login_status = \Yii::$app->session->get("fx_user_login_status");
+        }
+        if (!$fx_user_login_status) {
+            return $this->redirect(['/site-mobile/login', 'redirect' => '/ground-push/index']);
         }
 	    if(\Yii::$app->session->get("confirm_push")){
             $cart = \Yii::$app->session->get("confirm_push");
