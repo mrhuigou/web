@@ -151,12 +151,14 @@ class AdController extends Controller {
 						'meta_description' => $promotion_detail_title.$coupon_title.$ad_detail->product->description->meta_description,
 //						'image' => Image::resize(($ad_detail->source_url ?: $promotion_detail_image )? :$ad_detail->product->image,320,320),
 						'image' => Image::resize($promotion_detail_image ? :$ad_detail->product->image,320,320),
+						'ad_image' => Image::resize($ad_detail->source_url ?: $promotion_detail_image),
                         'sale_price' => $ad_detail->product->price,
 						'vip_price' => $ad_detail->product->vip_price,
 						'cur_price' => $ad_detail->product->getPrice(),
 						'stock'=>$ad_detail->product->getStockCount(),
 						'beintoinv'=>$ad_detail->product->beintoinv,//判断是否下架 1上架
-						'life'=>'',
+                        'product_date'=>$ad_detail->product->productBase->bedisplaylife && $ad_detail->product->productDate ? $ad_detail->product->productDate:"",
+                        'life'=>$ad_detail->product->productBase->bedisplaylife?$ad_detail->product->productBase->life:" ",
 						'url'=>$ad_detail->link_url ?:(Url::to(['product/index','shop_code'=>$ad_detail->product->store_code,'product_code'=>$ad_detail->product->product_code])),//'/'.$ad_detail->product->store_code."-".$ad_detail->product->product_code.".html"
 					];
                     $count ++ ;
