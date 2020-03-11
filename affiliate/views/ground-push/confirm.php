@@ -38,12 +38,11 @@ $this->title = '订单确认';
                 <div class="mt5">
                     <div class="flex-row ">
                         <div class="flex-item-2 p5 pt10 pl10"><i class="red">*</i>姓名</div>
-<!--                        <div class="flex-item-10 mt5 "><input type="text" class="input-text w" id="firstname" name="firstname" value="--><?php //echo Yii::$app->user->identity ? Yii::$app->user->identity->firstname : "";?><!--"></div>-->
-                        <div class="flex-item-10 mt5 "><input type="text" class="input-text w" id="firstname" name="firstname" value="<?php echo Yii::$app->user->identity ? '测试姓名' : "";?>"></div>
+                        <div class="flex-item-10 mt5 "><input type="text" class="input-text w" id="firstname" name="firstname" value="<?php echo $fx_user_info['firstname'] ? $fx_user_info['firstname'] : "";?>"></div>
                     </div>
                     <div class="flex-row mt10 ">
                         <div class="flex-item-2 pt10 pl10"><i class="red">*</i>手机</div>
-                        <div class="flex-item-10 mb10 "><input type="text" class="input-text w " id="telephone" name="telephone" value="<?php echo Yii::$app->user->identity ? Yii::$app->user->identity->telephone: "";?>">     </div>
+                        <div class="flex-item-10 mb10 "><input type="text" class="input-text w " id="telephone" name="telephone" value="<?php echo $fx_user_info['telephone'] ? $fx_user_info['telephone']: "";?>">     </div>
                     </div>
                 </div>
             </div>

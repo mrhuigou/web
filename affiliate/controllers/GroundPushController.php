@@ -52,6 +52,7 @@ class GroundPushController extends \yii\web\Controller {
 
         $fx_user_login_status = false;
         //获取用户登录状态 session 缓存 user_login_status
+//        \Yii::$app->session->remove("fx_user_login_status");
         if(\Yii::$app->session->get("fx_user_login_status")){
             $fx_user_login_status = \Yii::$app->session->get("fx_user_login_status");
         }
@@ -321,7 +322,9 @@ class GroundPushController extends \yii\web\Controller {
         }else{
 	        return $this->redirect('/order/index');
         }
-        if($user = Customer::findOne(['customer_id'=>\Yii::$app->user->getId()])){
+
+        $fx_user_info = json_decode(\Yii::$app->session->get("fx_user_info"),true);
+        if($user = Customer::findOne(['customer_id'=>$fx_user_info['customer_id']])){
 	        if(!$user->telephone || !$user->telephone_validate){
                 return $this->redirect(['/user/security-set-telephone', 'redirect' => \Yii::$app->request->getAbsoluteUrl()]);
             }
@@ -374,7 +377,7 @@ class GroundPushController extends \yii\web\Controller {
 
                 return $this->redirect(['payment/index', 'trade_no' => $trade_no, 'showwxpaytitle' => 1]);
             }
-            return $this->render('confirm', ['point' => $point, 'plan'=>$plan,'carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total]);
+            return $this->render('confirm', ['point' => $point, 'plan'=>$plan,'carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'fx_user_info' => $fx_user_info]);
         }else{
             return $this->redirect('/order/index');
         }
@@ -389,6 +392,9 @@ class GroundPushController extends \yii\web\Controller {
     private function submit($base,$cart)
     {   //交易号
         $trade_no = "";
+
+        //分销用户信息
+        $fx_user_info = json_decode(\Yii::$app->session->get("fx_user_info"),true);
         if ($this->validate()) {
             $merge_order_ids = [];
             $merge_total = 0;
@@ -405,13 +411,13 @@ class GroundPushController extends \yii\web\Controller {
                     $Order_model->store_id = $base['store_id'];
                     $Order_model->store_name = $base['name'];
                     $Order_model->store_url = $base['url'];
-                    $Order_model->customer_group_id = \Yii::$app->user->identity['customer_group_id'];
-                    $Order_model->customer_id = \Yii::$app->user->getId();
-                    $Order_model->firstname = \Yii::$app->user->identity['firstname'] ? \Yii::$app->user->identity['firstname'] :\Yii::$app->request->post("firstname");;
-                    $Order_model->lastname = \Yii::$app->user->identity['lastname'];
-                    $Order_model->email = \Yii::$app->user->identity['email'];
-                    $Order_model->telephone = \Yii::$app->user->identity['telephone'];
-                    $Order_model->gender = \Yii::$app->user->identity['gender'];
+                    $Order_model->customer_group_id = $fx_user_info['customer_group_id'];
+                    $Order_model->customer_id = $fx_user_info['customer_id'];
+                    $Order_model->firstname = $fx_user_info['firstname'] ? $fx_user_info['firstname'] :\Yii::$app->request->post("firstname");
+                    $Order_model->lastname = $fx_user_info['lastname'];
+                    $Order_model->email = $fx_user_info['email'];
+                    $Order_model->telephone = $fx_user_info['telephone'];
+                    $Order_model->gender = $fx_user_info['gender'];
                     $Order_model->payment_method = "";
                     $Order_model->payment_code = "";
                     $Order_model->total = $base['total'];
@@ -438,7 +444,7 @@ class GroundPushController extends \yii\web\Controller {
                     if (!$Order_model->save(false)) {
                         throw new \Exception("订单数据异常");
                     }
-                    $point_to_customer = GroundPushPointToCustomer::find()->where(['point_id'=>$base['ground_push_point_id'],'customer_id'=>\Yii::$app->user->getId()])->all();
+                    $point_to_customer = GroundPushPointToCustomer::find()->where(['point_id'=>$base['ground_push_point_id'],'customer_id'=>$fx_user_info['customer_id']])->all();
                     if($point_to_customer ){
                         $buyed = false;//未购买过
 
@@ -453,7 +459,7 @@ class GroundPushController extends \yii\web\Controller {
                             $point_to_customer = new GroundPushPointToCustomer();
                             $point_to_customer->point_id = $base['ground_push_point_id'];
                             $point_to_customer->order_id = $Order_model->order_id;
-                            $point_to_customer->customer_id = \Yii::$app->user->getId();
+                            $point_to_customer->customer_id = $fx_user_info['customer_id'];
                             if(!$point_to_customer->save(false)){
                                 throw new Exception("运行错误，请重试");
                             }
@@ -463,7 +469,7 @@ class GroundPushController extends \yii\web\Controller {
                         $point_to_customer = new GroundPushPointToCustomer();
                         $point_to_customer->point_id = $base['ground_push_point_id'];
                         $point_to_customer->order_id = $Order_model->order_id;
-                        $point_to_customer->customer_id = \Yii::$app->user->getId();
+                        $point_to_customer->customer_id = $fx_user_info['customer_id'];
                         if(!$point_to_customer->save(false)){
                             throw new Exception("运行错误，请重试");
                         }
@@ -479,8 +485,8 @@ class GroundPushController extends \yii\web\Controller {
                             'delivery_time' => $delivery_time,
                             'delivery_station_id' => 0,
                             'delivery_station_code' => '',
-                            'username' => \Yii::$app->user->identity->nickname,
-                            'telephone' => \Yii::$app->user->identity->telephone,
+                            'username' => $fx_user_info['username'],
+                            'telephone' => $fx_user_info['telephone'],
                             'address' => $point->address,
                             'postcode' => 266000,
                             'zone' => $point->zone ? $point->zone->name : "",
@@ -650,7 +656,7 @@ class GroundPushController extends \yii\web\Controller {
                 $model = new OrderMerge();
                 $model->merge_code = OrderSn::generateNumber();
                 $model->order_ids = implode(',', $merge_order_ids);
-                $model->customer_id = \Yii::$app->user->getId();
+                $model->customer_id = $fx_user_info['customer_id'];
                 $model->total = $merge_total;
                 $model->status = 0;
                 $model->date_added = date("Y-m-d H:i:s");

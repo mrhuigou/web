@@ -356,6 +356,9 @@ class SiteMobileController extends Controller {
 			\Yii::$app->cart->loadFromLogin();
 			//用户登录fx 状态
             \Yii::$app->session->set("fx_user_login_status",true);
+            $fx_user_info = Customer::findOne(['customer_id'=> \Yii::$app->user->getId()])->toArray();
+            \Yii::$app->session->set("fx_user_info",json_encode($fx_user_info));
+
 			return $this->redirect($url);
 		} else {
 			return $this->render('login', [
