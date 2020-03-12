@@ -58,6 +58,7 @@ class GroundPushController extends \yii\web\Controller {
         }else{
             \Yii::$app->session->remove("fx_user_login_status");
         }
+        \Yii::$app->session->set("fx_user_login_status",true);
         var_dump(\Yii::$app->session->get("fx_user_info"));//die;
         var_dump(\Yii::$app->session->get("fx_user_login_status"));//die;
         var_dump($fx_user_login_status);die;
