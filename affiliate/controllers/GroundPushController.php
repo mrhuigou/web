@@ -56,7 +56,7 @@ class GroundPushController extends \yii\web\Controller {
         if(\Yii::$app->session->get("fx_user_login_status")){
             $fx_user_login_status = \Yii::$app->session->get("fx_user_login_status");
         }
-
+        var_dump($fx_user_login_status);die;
         if (!$fx_user_login_status) {
             return $this->redirect(['/site-mobile/login', 'redirect' => '/ground-push/index?push_code='.$code]);
         }
