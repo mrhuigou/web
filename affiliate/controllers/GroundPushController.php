@@ -52,7 +52,6 @@ class GroundPushController extends \yii\web\Controller {
 
         $fx_user_login_status = false;
         //获取用户登录状态 session 缓存 user_login_status
-        \Yii::$app->session->remove("fx_user_login_status");
         if(\Yii::$app->session->get("fx_user_login_status")){
             $fx_user_login_status = \Yii::$app->session->get("fx_user_login_status");
         }else{
