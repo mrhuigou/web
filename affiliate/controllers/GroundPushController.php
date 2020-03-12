@@ -52,10 +52,10 @@ class GroundPushController extends \yii\web\Controller {
 
         $fx_user_login_status = false;
         //获取用户登录状态 session 缓存 user_login_status
-        if(\Yii::$app->session->get("fx_user_login_status")){
-            $fx_user_login_status = \Yii::$app->session->get("fx_user_login_status");
+        if(\Yii::$app->redis->get("fx_user_login_status")){
+            $fx_user_login_status = \Yii::$app->redis->get("fx_user_login_status");
         }else{
-            \Yii::$app->session->remove("fx_user_login_status");
+//            \Yii::$app->session->remove("fx_user_login_status");
         }
 
         if (!$fx_user_login_status) {
@@ -203,8 +203,8 @@ class GroundPushController extends \yii\web\Controller {
 //        }
         $fx_user_login_status = false;
         //获取用户登录状态 session 缓存 user_login_status
-        if(\Yii::$app->session->get("fx_user_login_status")){
-            $fx_user_login_status = \Yii::$app->session->get("fx_user_login_status");
+        if(\Yii::$app->redis->get("fx_user_login_status")){
+            $fx_user_login_status = \Yii::$app->redis->get("fx_user_login_status");
         }
         if (!$fx_user_login_status) {
             return $this->redirect(['/site-mobile/login', 'redirect' => '/ground-push/index']);
@@ -312,8 +312,8 @@ class GroundPushController extends \yii\web\Controller {
 //        }
         $fx_user_login_status = false;
         //获取用户登录状态 session 缓存 user_login_status
-        if(\Yii::$app->session->get("fx_user_login_status")){
-            $fx_user_login_status = \Yii::$app->session->get("fx_user_login_status");
+        if(\Yii::$app->redis->get("fx_user_login_status")){
+            $fx_user_login_status = \Yii::$app->redis->get("fx_user_login_status");
         }
         if (!$fx_user_login_status) {
             return $this->redirect(['/site-mobile/login', 'redirect' => '/ground-push/index']);
@@ -324,7 +324,7 @@ class GroundPushController extends \yii\web\Controller {
 	        return $this->redirect('/order/index');
         }
 
-        $fx_user_info = json_decode(\Yii::$app->session->get("fx_user_info"),true);
+        $fx_user_info = json_decode(\Yii::$app->redis->get("fx_user_info"),true);
         if($user = Customer::findOne(['customer_id'=>$fx_user_info['customer_id']])){
 	        if(!$user->telephone || !$user->telephone_validate){
                 return $this->redirect(['/user/security-set-telephone', 'redirect' => \Yii::$app->request->getAbsoluteUrl()]);
@@ -395,7 +395,7 @@ class GroundPushController extends \yii\web\Controller {
         $trade_no = "";
 
         //分销用户信息
-        $fx_user_info = json_decode(\Yii::$app->session->get("fx_user_info"),true);
+        $fx_user_info = json_decode(\Yii::$app->redis->get("fx_user_info"),true);
         if ($this->validate()) {
             $merge_order_ids = [];
             $merge_total = 0;
