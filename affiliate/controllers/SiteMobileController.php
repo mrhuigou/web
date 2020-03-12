@@ -348,6 +348,7 @@ class SiteMobileController extends Controller {
             $fx_user_login_status = \Yii::$app->session->get("fx_user_login_status");
         }
         if ($fx_user_login_status) {
+            var_dump($url);die;
             return $this->redirect($url);
         }
 		$model = new LoginForm();
