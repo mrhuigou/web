@@ -64,4 +64,8 @@ class AffiliatePlanDetail extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
+
+    public function getProduct(){
+        return $this->hasOne(Product::className(),['product_code'=>'product_code']);
+    }
 }

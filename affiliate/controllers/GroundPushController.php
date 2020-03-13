@@ -6,6 +6,9 @@
  * Time: 15:52
  */
 namespace affiliate\controllers;
+use api\models\V1\AffiliatePlan;
+use api\models\V1\AffiliatePlanDetail;
+use api\models\V1\AffiliatePlanType;
 use api\models\V1\Customer;
 use api\models\V1\GroundPushPlan;
 use api\models\V1\GroundPushPlanView;
@@ -36,19 +39,7 @@ class GroundPushController extends \yii\web\Controller {
 	public function actionIndex()
 	{
 
-        $code = \Yii::$app->request->get('push_code');
-        if(!$code){
-            $leaflet = \Yii::$app->request->get('leaflet');
-            $points = GroundPushPoint::find()->where(['leaflet'=>$leaflet,'status'=>1])->all();
-            if($points){
-                foreach ($points as $point){
-                    $plan = GroundPushPlan::find()->where(['status'=>1,'ground_push_point_id'=>$point->id])->andWhere(['and','begin_date_time < NOW()','end_date_time > NOW()'])->one();
-                    if($plan){
-                        $code = $point->code;
-                    }
-                }
-            }
-        }
+        $code = \Yii::$app->request->get('plan_code');
 
         $fx_user_login_status = false;
         //获取用户登录状态 session 缓存 user_login_status
@@ -66,39 +57,33 @@ class GroundPushController extends \yii\web\Controller {
         if(\Yii::$app->session->get("confirm_push")){
             $cart = \Yii::$app->session->get("confirm_push");
         }
-        $point_lists = [];
-        $ground_push_plans = GroundPushPlan::find()->where(['status'=>1])->andWhere(['and','begin_date_time < NOW()','end_date_time > NOW()'])->all();
-        if($ground_push_plans){
-            foreach ($ground_push_plans as $ground_push_plan){
-                $point_lists[] = $ground_push_plan->point;
-            }
-        }
-		if ($model = GroundPushPoint::findOne(['code' => $code, 'status' => 1])) {
-			$info = GroundPushPlan::find()->where(['status' => 1,'ground_push_point_id'=>$model->id])->andWhere(['<', 'begin_date_time', date('Y-m-d H:i:s')])->andWhere(['>', 'end_date_time', date('Y-m-d H:i:s')])->one();
+
+//		if ($model = AffiliatePlanType::findOne(['code' => $code, 'status' => 1])) {
+			$info = AffiliatePlan::find()->where(['status' => 1,'code'=>$code])->andWhere(['<', 'date_start', date('Y-m-d H:i:s')])->andWhere(['>', 'date_end', date('Y-m-d H:i:s')])->one();
             $products = [];
             $product_outofstock = [];
 			if ($info) {
-				$products_views = GroundPushPlanView::find()->where(['status' => 1, 'ground_push_plan_id' => $info->id])->orderBy('sort_order asc')->all();
+				$products_views = AffiliatePlanDetail::find()->where(['status' => 1, 'affiliate_plan_id' => $info->affiliate_plan_id])->orderBy('priority asc')->all();
 				if($products_views){
 				    foreach ($products_views as $product){
-				        if($product && $product->stock){
-                            if($product->stock->quantity > 0){
-                                $products[] = $product;
-                            }else{
-                                $product_outofstock[] = $product;
-                            }
-                        }
+                        $products[] = $product;
+//				        if($product && $product->stock){
+//                            if($product->stock->quantity > 0){
+//                                $products[] = $product;
+//                            }else{
+//                                $product_outofstock[] = $product;
+//                            }
+//                        }
 
                     }
                 }
 			} else {
-                return $this->redirect(['/coupon/coupon-rules','id'=>4]);
+                throw new NotFoundHttpException("没有找到相关分销方案");
 			}
-			return $this->render('index', ['model' => $model, 'info' => $info, 'products' => $products,'product_outofstock'=>$product_outofstock,'cart'=>$cart,'point_lists'=>$point_lists]);
-		} else {
-            return $this->redirect(['/coupon/coupon-rules','id'=>4]);
-			//throw new NotFoundHttpException("没有找到相关地推点");
-		}
+			return $this->render('index', ['info' => $info, 'products' => $products,'product_outofstock'=>$product_outofstock,'cart'=>$cart]);
+//		} else {
+//			throw new NotFoundHttpException("没有找到相关分销方案");
+//		}
 
 	}
 	//地推人员 登录列表
@@ -165,25 +150,21 @@ class GroundPushController extends \yii\web\Controller {
 				$code=\Yii::$app->request->post('item');
 				$qty=\Yii::$app->request->post('qty');
 				$push_id=\Yii::$app->request->post('id');
-				if($model=GroundPushStock::findOne(['product_code'=>$code,'ground_push_point_id'=>$push_id])){
-					if($model->quantity>=$qty){
-						$info = GroundPushPlan::find()->where(['status' => 1,'ground_push_point_id'=>$push_id])->andWhere(['<', 'begin_date_time', date('Y-m-d H:i:s')])->andWhere(['>', 'end_date_time', date('Y-m-d H:i:s')])->one();
-						if($info){
-							if($product=GroundPushPlanView::findOne(['ground_push_plan_id'=>$info->id,'product_code'=>$code,'status'=>1])){
-								if($product->max_buy_qty && $product->max_buy_qty<$qty ){
-									throw new ErrorException('此商品最大限购'.$product->max_buy_qty.'个');
-								}else{
-									$data = ['status' => 1, 'sub_total' =>$product->price*$qty,'qty'=>$qty];
-								}
-							}else{
-								throw new ErrorException('此商品已经下架');
-							}
-						}else{
-							throw new ErrorException('地推方案已失效');
-						}
-					}else{
-						throw new ErrorException('库存不足');
-					}
+				if($model=AffiliatePlanDetail::findOne(['product_code'=>$code,'affiliate_plan_detail_id'=>$push_id])){
+                    $info = AffiliatePlan::find()->where(['status' => 1,'affiliate_plan_id'=>$model->affiliate_plan_id])->andWhere(['<', 'date_start', date('Y-m-d H:i:s')])->andWhere(['>', 'date_end', date('Y-m-d H:i:s')])->one();
+                    if($info){
+                        if($product=AffiliatePlanDetail::findOne(['affiliate_plan_detail_id'=>$push_id,'product_code'=>$code,'status'=>1])){
+                            if($product->max_buy_qty && $product->max_buy_qty<$qty ){
+                                throw new ErrorException('此商品最大限购'.$product->max_buy_qty.'个');
+                            }else{
+                                $data = ['status' => 1, 'sub_total' =>$product->price*$qty,'qty'=>$qty];
+                            }
+                        }else{
+                            throw new ErrorException('此商品已经下架');
+                        }
+                    }else{
+                        throw new ErrorException('分销方案已失效');
+                    }
 				}else{
 					throw new ErrorException('库存异常');
 				}

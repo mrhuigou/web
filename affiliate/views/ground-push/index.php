@@ -5,7 +5,7 @@
  * Date: 2017/8/4
  * Time: 15:54
  */
-$this->title = "地推现场";
+$this->title = "团购分销";
 ?>
 <header class="fx-top bs-bottom whitebg lh44">
     <div class="flex-col tc">
@@ -45,53 +45,46 @@ $this->title = "地推现场";
         <p class="p5 tc red f12">现在线上下单，<?php echo $deliver_time?></p>
 
     </div>
-    <div class="bg-wh mb5 pb5">
-
-        <div class="p10 pb5">
-            <!-- 地址选择 -->
-            <div class="ditui-sele">
-                <i class="iconfont icon-l">&#xe65f;</i>
-
-                <div class="dropdown" >
-                    <?php if($point_lists){?>
-
-                    <select name="select_option" id="select_option" class="input-m w" style=" border: 0px;">
-                        <?php foreach ($point_lists as $point_list){?>
-                            <?php if($model->id == $point_list->id){?>
-                                <option value="<?php echo $point_list->code?>" readonly="readonly" <?php if($model->id == $point_list->id){ echo "selected='selected'";}?>><?php echo $point_list->name?></option>
-                            <?php }?>
-                            <?php }?>
-
-                        </select>
-                    <?php }?>
-                </div>
-
-            </div>
-
-            <p class="mt10 mb2">地推商品仅限现场自提（ 不提供配送服务）</p>
-
-        </div>
-
-        <img src="../assets/images/ditui/ditui1.jpg" class="w" />
-
-    </div>
+<!--    <div class="bg-wh mb5 pb5">-->
+<!---->
+<!--        <div class="p10 pb5">-->
+           <!-- 地址选择 -->
+<!--            <div class="ditui-sele">-->
+<!--                <i class="iconfont icon-l">&#xe65f;</i>-->
+<!---->
+<!--                <div class="dropdown" >-->
+<!--                    --><?php //if($point_lists){?>
+<!---->
+<!--                    <select name="select_option" id="select_option" class="input-m w" style=" border: 0px;">-->
+<!--                        --><?php //foreach ($point_lists as $point_list){?>
+<!--                            --><?php //if($model->id == $point_list->id){?>
+<!--                                <option value="--><?php //echo $point_list->code?><!--" readonly="readonly" --><?php //if($model->id == $point_list->id){ echo "selected='selected'";}?><!--><?php //echo $point_list->name?><!--</option>-->
+<!--                            --><?php //}?>
+<!--                            --><?php //}?>
+<!---->
+<!--                        </select>-->
+<!--                    --><?php //}?>
+<!--                </div>-->
+<!---->
+<!--            </div>-->
+<!---->
+<!--            <p class="mt10 mb2">地推商品仅限现场自提（ 不提供配送服务）</p>-->
+<!---->
+<!--        </div>-->
+<!---->
+<!--        <img src="../assets/images/ditui/ditui1.jpg" class="w" />-->
+<!---->
+<!--    </div>-->
     <?php if ($info) { ?>
 
         <div id="cart-list">
 <!--            <p class="mt5 bg-wh pt10 pb10 pl10">自提点地址：<i class="red">--><?php //echo $model->address?><!--</i></p>-->
-            <p class=" mb5 bg-wh pt5 pb5 pl10">最晚提货时间：<i class="red"><?php echo '当日 '.$info->shipping_end_time?></i></p>
+            <p class=" mb5 bg-wh pt5 pb5 pl10">最晚提货时间：<i class="red"><?php echo '当日 '.$info->ship_end?></i></p>
 
             <?php foreach ($products as $key=>$value) { ?>
-                <div class="flex-col flex-center store-item bdb  whitebg pr" data-content="<?=$value->product_code?>">
-                    <?php if(!$value->stock || ($value->stock && $value->stock->quantity <=0)){?>
-                        <i class="item-tip iconfont">&#xe696;</i>
-                    <?php }?>
-
+                <div class="flex-col flex-center store-item bdb  whitebg pr" data-content="<?=$value->product_code?>" data-id="<?=$value->affiliate_plan_detail_id?>">
                     <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center tc"
                            style="line-height:79px;">
-                        <?php if(!$value->stock || ($value->stock && $value->stock->quantity <=0)){?>
-                            <input type="checkbox" value="<?=$value->product_code?>" name="item"  class="item" disabled id="<?=$key?>">
-                        <?php }else{?>
                             <?php if(empty($cart)){?>
                                 <input type="checkbox" value="<?=$value->product_code?>" name="item"  class="item" id="<?=$key?>">
                             <?php }else{ ?>
@@ -101,15 +94,11 @@ $this->title = "地推现场";
                                     <input type="checkbox" value="<?=$value->product_code?>" name="item" class="item" id="<?=$key?>">
                                 <?php }?>
                             <?php }?>
-
-
-                        <?php }?>
-
                         <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
                     </label>
                     <div class="flex-item-2 flex-row flex-middle flex-center p5 item-img img_click">
                         <a href="#">
-                            <img src="<?=\common\component\image\Image::resize($value->product->image,100,100)?>"
+                            <img src="<?=\common\component\image\Image::resize($value->image_url,100,100)?>"
                                  class="bd w">
                         </a>
                     </div>
@@ -139,55 +128,11 @@ $this->title = "地推现场";
 
                                     <span class="num-add iconfont cart-num-add"></span>
                                 </p>
-                                <?php if(!$value->stock || ($value->stock && $value->stock->quantity <=0)){?>
-                                    <p class="redbg white stock_status tc p5" style="display: block">库存不足</p>
-                                <?php }?>
-
                             </div>
                         </div>
                     </div>
                 </div>
             <?php } ?>
-            <?php foreach ($product_outofstock as $key=>$value) { ?>
-                <div class="flex-col flex-center store-item bdb  whitebg pr" data-content="<?=$value->product_code?>">
-                    <?php if(!$value->stock || ($value->stock && $value->stock->quantity <=0)){?>
-                        <i class="item-tip iconfont">&#xe696;</i>
-                    <?php }?>
-
-
-                    <div class="flex-item-2 flex-row flex-middle flex-center p5 item-img">
-                        <a href="#">
-                            <img src="<?=\common\component\image\Image::resize($value->product->image,100,100)?>"
-                                 class="bd w">
-                        </a>
-                    </div>
-                    <?php if(empty($cart)){
-                        $quantity = 1;
-                    }else{
-                        if(isset($cart[$value->product_code]) && $cart[$value->product_code] >0){ //购物车内有该商品
-                            $quantity = $cart[$value->product_code];
-                        }else{
-                            $quantity = 1;
-                        }
-                    }?>
-                    <div class="flex-item-9 flex-row   p5">
-                        <div class="w">
-                            <h2 class="row-one"><?=$value->product->description->name?></h2>
-                            <p class="gray9  mt2"><?=$value->product->getSku()?></p>
-                        </div>
-                        <div class="flex-col w">
-                            <div class="red  fb lh200 f14 flex-item-4">
-                                <p>￥<i class="product_total"><?=round(bcmul($value->price,$quantity,4),2)?></i></p>
-                            </div>
-                            <div class="flex-item-8 flex-row  flex-center">
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-
         </div>
     <?php }else{ ?>
         <div id="cart-list">暂无活动商品</div>
@@ -281,9 +226,10 @@ $(".cart-num-add").click(function(){
     }
     $(this).parents('.store-item').find(".qty").text(qty);
     var item=$(this).parents('.store-item').attr("data-content");
+    var item_id=$(this).parents('.store-item').attr("data-id");
     var obj=$(this).parents(".store-item");
     $.showLoading("正在加载");
-    $.post('/ground-push/update-item',{id:'<?=$model->id?>',item:item,'qty':qty},function(data){
+    $.post('/ground-push/update-item',{id:item_id,item:item,'qty':qty},function(data){
         $.hideLoading();
         if(data.status){
             obj.find(".cart-num-text").val(data.qty);
@@ -320,9 +266,10 @@ $(".cart-num-lower").click(function(){
     }
     $(this).parents('.store-item').find(".qty").text(qty);
     var item=$(this).parents('.store-item').attr("data-content");
+    var item_id=$(this).parents('.store-item').attr("data-id");
     var obj=$(this).parents(".store-item");
     $.showLoading("正在加载");
-    $.post('/ground-push/update-item',{id:'<?=$model->id?>',item:item,'qty':qty},function(data){
+    $.post('/ground-push/update-item',{id:item_id,item:item,'qty':qty},function(data){
         $.hideLoading();
         if(data.status){
             obj.find(".cart-num-text").val(data.qty);
@@ -355,7 +302,7 @@ $("#checkoutBtn").click(function(){
         $.showLoading("正在提交");
         $('#form-checkout').submit();
 
-        $.post('/ground-push/submit',{data:data_string,ground_push_plan_id:<?php echo $info? $info->id :0;?>},function(result){
+        $.post('/ground-push/submit',{data:data_string,ground_push_plan_id:<?php echo $info? $info->affiliate_plan_id :0;?>},function(result){
             //location.href='ground-push/checkout';
 
             if(result && !result.status){
