@@ -115,7 +115,7 @@ $this->title ='家润每日惠购优惠券';
 
 		<?php }else{ ?>
             <div id="lijishiyong">
-                <a  href="javascript:;"> <img class="w " src="https://img1.mrhuigou.com/group1/M00/05/0B/wKgB7lghYoiANWd7AACRS4y8xLQ901.jpg" /> </a>
+                <a  href="javascript:;"> <img class="w" style="height: 90px;" src="http://img1.mrhuigou.com/group1/M00/06/C0/wKgB7l5wUwGAfNPoAABY8G8b69c926.png" /> </a>
             </div>
 		<?php } ?>
 	</div>
@@ -365,8 +365,8 @@ $(".coupon-item-btn").on('click',function(){
 
 $("#lijishiyong").on('click',function(){
     $.showLoading("正在加载");
-    $.post('<?='/coupon/ajax-apply-result'?>',{'coupon_id':'<?=$model->coupon_id?>'},function(res){
-        //$.post('<?//=\yii\helpers\Url::to(['/coupon/ajax-apply-result'])?>//',{'coupon_id':'<?//=$model->coupon_id?>//'},function(res){
+    //$.post('<?//='/coupon/ajax-apply-result'?>//',{'coupon_id':'<?//=$model->coupon_id?>//'},function(res){
+        $.post('<?=\yii\helpers\Url::to(['/coupon/ajax-apply-result'])?>',{'coupon_id':'<?=$model->coupon_id?>'},function(res){
         $.hideLoading();
         if(res){
             if(res.data.used_status == 1){
