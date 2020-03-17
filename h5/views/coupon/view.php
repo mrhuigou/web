@@ -114,8 +114,8 @@ $this->title ='家润每日惠购优惠券';
 
 
 		<?php }else{ ?>
-            <div id="lijishiyong">
-                <a  href="javascript:;"> <img class="w" style="height: 90px;" src="http://img1.mrhuigou.com/group1/M00/06/C0/wKgB7l5wUwGAfNPoAABY8G8b69c926.png" /> </a>
+            <div id="lijishiyong" style="text-align: center;">
+                <a  href="javascript:;"> <img class="w" style="height: 40px" src="http://img1.mrhuigou.com/group1/M00/06/C0/wKgB7l5wZmGAA9cZAAAi9npiRf4890.png" /> </a>
             </div>
 		<?php } ?>
 	</div>
