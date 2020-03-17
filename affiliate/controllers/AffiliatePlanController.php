@@ -50,7 +50,7 @@ class AffiliatePlanController extends \yii\web\Controller {
         }
 
         if (!$fx_user_login_status) {
-            return $this->redirect(['/site-mobile/login', 'redirect' => '/ground-push/index?plan_code='.$code]);
+            return $this->redirect(['/site-mobile/login', 'redirect' => '/affiliate-plan/index?plan_code='.$code]);
         }
 
         $cart = [];
@@ -188,10 +188,10 @@ class AffiliatePlanController extends \yii\web\Controller {
             $fx_user_login_status = \Yii::$app->redis->get("fx_user_login_status");
         }
         if (!$fx_user_login_status) {
-            return $this->redirect(['/site-mobile/login', 'redirect' => '/ground-push/index']);
+            return $this->redirect(['/site-mobile/login', 'redirect' => '/affiliate-plan/index']);
         }
 
-        $ground_push_plan_id = \Yii::$app->request->post('ground_push_plan_id');
+        $affiliate_plan_id = \Yii::$app->request->post('affiliate_plan_id');
 	    $data_string = \Yii::$app->request->post("data");
 	    trim($data_string,';');
 	    $data_array = explode(';',$data_string);
@@ -208,56 +208,33 @@ class AffiliatePlanController extends \yii\web\Controller {
         \Yii::$app->session->set('confirm_push', $cart);
         try {
 
-            $plan_info = GroundPushPlan::find()->where(['id' => $ground_push_plan_id, 'status' => 1])->one();
-            if (strtotime($plan_info->begin_date_time) > strtotime(date('Y-m-d H:i:s'))) {
-                throw new Exception("地推活动未开始");
+            $plan_info = AffiliatePlan::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1])->one();
+            if (strtotime($plan_info->date_start) > strtotime(date('Y-m-d H:i:s'))) {
+                throw new Exception("分销活动未开始");
             }
-            if (strtotime($plan_info->end_date_time) < strtotime(date('Y-m-d H:i:s'))) {
-                throw  new  Exception("地推活动已结束");
+            if (strtotime($plan_info->date_end) < strtotime(date('Y-m-d H:i:s'))) {
+                throw  new  Exception("分销活动已结束");
             }
 
-            if (strtotime($plan_info->end_date_time) < strtotime(date('Y-m-d H:i:s'))) {
-                throw  new  Exception("地推活动已结束");
-            }
             $time = time();
-            $end_time = strtotime(date("Y-m-d").' '. $plan_info->shipping_end_time);
+            $end_time = strtotime(date("Y-m-d").' '. $plan_info->date_end);
 
-            if( time() > strtotime(date("Y-m-d").' '. $plan_info->shipping_end_time) ){
-                throw  new  Exception("超过今日自提货物时间，请不要下单");
-            }
-            $point_to_customer = GroundPushPointToCustomer::find()->where(['point_id'=>$plan_info->ground_push_point_id,'customer_id'=>\Yii::$app->user->getId()])->all();
-            if($point_to_customer ){
-                $buyed = false;//未购买过
-
-                foreach ($point_to_customer as $point_order){
-                    if($point_order && $point_order->order && $point_order->order->order_status_id !=7){ //只要有一条记录不是已经取消状态，则该用户已经买过
-                        $buyed = true;
-                        break;
-                    }
-                }
-                if ($buyed){
-                    throw new Exception("已经购买过了");
-                }
+            if( time() > strtotime( $plan_info->ship_end) ){
+                throw  new  Exception("超过配送时间，请不要下单");
             }
 
-            //检查库存
+            //检查库存（无库存处理）
             if ($cart) {
                 $total = 0;
                 foreach ($cart as $code => $qty) {
-                    $push_plan_view = GroundPushPlanView::find()->where(['ground_push_plan_id' => $ground_push_plan_id, 'status' => 1, 'product_code' => $code])->one();
-                    if ($push_plan_view->max_buy_qty < $qty) {
+                    $affiliate_plan_detail = AffiliatePlanDetail::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1, 'product_code' => $code])->one();
+                    if ($affiliate_plan_detail->max_buy_qty < $qty) {
                         //购买数量超过最大购买数量
-                        throw new Exception("最多购买".$push_plan_view->max_buy_qty.'件');
+                        throw new Exception("最多购买".$affiliate_plan_detail->max_buy_qty.'件');
                     }
-                    $price = $push_plan_view->price;
+                    $price = $affiliate_plan_detail->price;
                     $total = round(bcadd($total, bcmul($price, $qty,4),4),2);
 
-                    $point_stock = GroundPushStock::find()->where(['ground_push_point_id' => $plan_info->ground_push_point_id, 'product_code' => $code])->one();
-
-                    if (!$point_stock || !($point_stock->quantity >= $qty)) {
-                        //库存不足
-                        throw new Exception("库存不足");
-                    }
                     //$this->submit();
                 }
 
@@ -266,14 +243,13 @@ class AffiliatePlanController extends \yii\web\Controller {
                 $base['platform_id'] = 1;
                 $base['store_id'] = 1;
                 $base['name'] = '青岛每日惠购';
-                $base['url'] = 'https://m.mrhuigou.com／ground-push/index';
-                $base['ground_push_point_id'] = $plan_info->ground_push_point_id;
-                $base['ground_push_plan_id'] = $ground_push_plan_id;
+                $base['url'] = 'https://m.mrhuigou.com/affiliate-plan/index';
+                $base['affiliate_plan_id'] = $affiliate_plan_id;
 
                 \Yii::$app->session->set('ground_push_base',$base);
 
                 //$this->submit($base, $cart, $ground_push_plan_id);
-                return $this->redirect(['/ground-push/confirm','plan_id'=>$ground_push_plan_id]);
+                return $this->redirect(['/affiliate-plan/confirm','plan_id'=>$affiliate_plan_id]);
             }
 
 
@@ -297,7 +273,7 @@ class AffiliatePlanController extends \yii\web\Controller {
             $fx_user_login_status = \Yii::$app->redis->get("fx_user_login_status");
         }
         if (!$fx_user_login_status) {
-            return $this->redirect(['/site-mobile/login', 'redirect' => '/ground-push/index']);
+            return $this->redirect(['/site-mobile/login', 'redirect' => '/affiliate-plan/index']);
         }
 	    if(\Yii::$app->session->get("confirm_push")){
             $cart = \Yii::$app->session->get("confirm_push");
@@ -323,14 +299,14 @@ class AffiliatePlanController extends \yii\web\Controller {
             return $this->redirect('/order/index');
         }
 
-        $plan = GroundPushPlan::findOne(['id'=>$plan_id]);
-        $point = GroundPushPoint::findOne(['id'=>$plan->ground_push_point_id]);
+        $plan = AffiliatePlan::findOne(['affiliate_plan_id'=>$plan_id]);
+
         $sub_total = 0;
         if($cart){
             $carts = [];
             $count = 0;
             foreach ($cart as $code => $qty){
-                $plan_view = GroundPushPlanView::findOne(['ground_push_plan_id'=>$plan->id,'product_code'=>$code,'status'=>1]);
+                $plan_view = AffiliatePlanDetail::findOne(['affiliate_plan_id'=>$plan->affiliate_plan_id,'product_code'=>$code,'status'=>1]);
                 $product_total = 0;
                 if($plan_view){
                     $product_total = bcmul($qty,$plan_view->price,4);
@@ -359,7 +335,7 @@ class AffiliatePlanController extends \yii\web\Controller {
 
                 return $this->redirect(['payment/index', 'trade_no' => $trade_no, 'showwxpaytitle' => 1]);
             }
-            return $this->render('confirm', ['point' => $point, 'plan'=>$plan,'carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'fx_user_info' => $fx_user_info]);
+            return $this->render('confirm', ['plan'=>$plan,'carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'fx_user_info' => $fx_user_info]);
         }else{
             return $this->redirect('/order/index');
         }
@@ -386,7 +362,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                     //订单主数据
                     $Order_model = new Order();
                     $Order_model->order_no = OrderSn::generateNumber();
-                    $Order_model->order_type_code = 'GroundPush';
+                    $Order_model->order_type_code = 'AffiliatePlan';
                     $Order_model->platform_id = $base['platform_id'];
                     $Order_model->platform_name = "每日惠购";
                     $Order_model->platform_url = \Yii::$app->request->getHostInfo();
@@ -426,37 +402,8 @@ class AffiliatePlanController extends \yii\web\Controller {
                     if (!$Order_model->save(false)) {
                         throw new \Exception("订单数据异常");
                     }
-                    $point_to_customer = GroundPushPointToCustomer::find()->where(['point_id'=>$base['ground_push_point_id'],'customer_id'=>$fx_user_info['customer_id']])->all();
-                    if($point_to_customer ){
-                        $buyed = false;//未购买过
 
-                        foreach ($point_to_customer as $point_order){
-                            if($point_order && $point_order->order && $point_order->order->order_status_id !=7){ //只要有一条记录不是已经取消状态，则该用户已经买过
-                                $buyed = true;
-                            }
-                        }
-                        if ($buyed){
-                            throw new Exception("已经购买过了");
-                        }else{
-                            $point_to_customer = new GroundPushPointToCustomer();
-                            $point_to_customer->point_id = $base['ground_push_point_id'];
-                            $point_to_customer->order_id = $Order_model->order_id;
-                            $point_to_customer->customer_id = $fx_user_info['customer_id'];
-                            if(!$point_to_customer->save(false)){
-                                throw new Exception("运行错误，请重试");
-                            }
-                        }
-
-                    }else{
-                        $point_to_customer = new GroundPushPointToCustomer();
-                        $point_to_customer->point_id = $base['ground_push_point_id'];
-                        $point_to_customer->order_id = $Order_model->order_id;
-                        $point_to_customer->customer_id = $fx_user_info['customer_id'];
-                        if(!$point_to_customer->save(false)){
-                            throw new Exception("运行错误，请重试");
-                        }
-                    }
-                    $point = GroundPushPoint::findOne($base['ground_push_point_id']);
+                    $point = AffiliatePlan::findOne($base['affiliate_plan_id']);
                     if($point){
                         $delivery_time = '不限';
                         $shipping_address = [
@@ -469,21 +416,22 @@ class AffiliatePlanController extends \yii\web\Controller {
                             'delivery_station_code' => '',
                             'username' => $fx_user_info['username'],
                             'telephone' => $fx_user_info['telephone'],
-                            'address' => $point->address,
-                            'postcode' => 266000,
-                            'zone' => $point->zone ? $point->zone->name : "",
-                            'zone_code' => $point->zone ? $point->zone->code : "",
-                            'zone_id' => $point->zone->zone_id,
-                            'city' => $point->city ? $point->city->name : "",
-                            'city_code' => $point->city ? $point->city->code : "",
-                            'city_id' => $point->city ? $point->city->city_id:"",
-                            'district' => $point->district ? $point->district->name : "",
-                            'district_code' => $point->district ? $point->district->code : "",
-                            'district_id' => $point->district ? $point->district->district_id : "",
+//                            'address' => $point->address,
+//                            'postcode' => 266000,
+//                            'zone' => $point->zone ? $point->zone->name : "",
+//                            'zone_code' => $point->zone ? $point->zone->code : "",
+//                            'zone_id' => $point->zone->zone_id,
+//                            'city' => $point->city ? $point->city->name : "",
+//                            'city_code' => $point->city ? $point->city->code : "",
+//                            'city_id' => $point->city ? $point->city->city_id:"",
+//                            'district' => $point->district ? $point->district->name : "",
+//                            'district_code' => $point->district ? $point->district->code : "",
+//                            'district_id' => $point->district ? $point->district->district_id : "",
                             'lat' => "",
                             'lng' => "",
                             'is_delivery' => 1,
                         ];
+
                         if ($shipping_address) {
                             $Order_Shipping = new OrderShipping();
                             $Order_Shipping->order_id = $Order_model->order_id;
@@ -526,11 +474,11 @@ class AffiliatePlanController extends \yii\web\Controller {
                             $product_total = 0;
 
                             //$product_price = $product->getPrice();
-                            $push_plan_view = GroundPushPlanView::find()->where(['ground_push_plan_id'=>$base['ground_push_plan_id'],'status'=>1,'product_code'=>$code])->one();
-                            if($push_plan_view->max_buy_qty < $qty){
+                            $affiliate_plan_detail = AffiliatePlanDetail::find()->where(['affiliate_plan_id'=>$base['affiliate_plan_id'],'status'=>1,'product_code'=>$code])->one();
+                            if($affiliate_plan_detail->max_buy_qty < $qty){
                                 //购买数量超过最大购买数量
                             }
-                            $price = $push_plan_view->price;
+                            $price = $affiliate_plan_detail->price;
                             $product_total =  round(bcmul($price , $qty,4),2);
                             $sum_product_total = bcadd($sum_product_total,$product_total,4);
 
@@ -544,30 +492,30 @@ class AffiliatePlanController extends \yii\web\Controller {
 //                            $tmp_qty = $tmp_qty + $qty;
 //                            $point_stock->tmp_qty = $tmp_qty;
 
-                            $fn = function ($product_code,$point_id,$qty) use (&$fn){
-
-                                $point_stock = GroundPushStock::find()->where(['ground_push_point_id'=>$point_id,'product_code'=>$product_code])->one();
-
-                                \Yii::$app->log->logger->log("code:".$product_code." ; version:".$point_stock->version,Logger::LEVEL_ERROR);
-                                if(!$point_stock->quantity >= $qty){
-                                    //库存不足
-                                    throw new Exception("库存不足");
-                                }
-                                try{
-                                    $tmp_qty =  $point_stock->tmp_qty;
-                                    $tmp_qty = $tmp_qty + $qty;
-                                    $point_stock->tmp_qty = $tmp_qty;
-                                    $point_stock->last_time = date("Y-m-d H:i:s");
-                                    $point_stock->save(false);
-
-
-                                }catch (StaleObjectException $e){
-                                    //重新验证下库存
-                                    $fn($product_code,$point_id,$qty);
-                                }
-                            };
-
-                            $fn($code,$point->id,$qty);
+//                            $fn = function ($product_code,$point_id,$qty) use (&$fn){
+//
+//                                $point_stock = GroundPushStock::find()->where(['ground_push_point_id'=>$point_id,'product_code'=>$product_code])->one();
+//
+//                                \Yii::$app->log->logger->log("code:".$product_code." ; version:".$point_stock->version,Logger::LEVEL_ERROR);
+//                                if(!$point_stock->quantity >= $qty){
+//                                    //库存不足
+//                                    throw new Exception("库存不足");
+//                                }
+//                                try{
+//                                    $tmp_qty =  $point_stock->tmp_qty;
+//                                    $tmp_qty = $tmp_qty + $qty;
+//                                    $point_stock->tmp_qty = $tmp_qty;
+//                                    $point_stock->last_time = date("Y-m-d H:i:s");
+//                                    $point_stock->save(false);
+//
+//
+//                                }catch (StaleObjectException $e){
+//                                    //重新验证下库存
+//                                    $fn($product_code,$point_id,$qty);
+//                                }
+//                            };
+//
+//                            $fn($code,$point->affiliate_plan_id,$qty);
 
 
 

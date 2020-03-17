@@ -1354,7 +1354,7 @@ html{height:100%}
 .header-right{left:auto;right:0;padding-right:15px}
 .fixed-bottom{-webkit-box-shadow:0 -1px 1px #eee;box-shadow:0 -1px 1px #eee;padding:8px 15px;background-color:#fff}
 .header{z-index:1001;background:#fff;border-bottom:1px solid #eee;line-height:44px;overflow:hidden;top:0;left:0;right:0}
-.header h2{padding:0 40px;font-size:18px;font-weight:400;text-align:center}
+.header h2{padding:0 40px;font-size:18px;font-weight:400;text-align:center;line-height:44px;}
 .line-a{background-color:#fff;display:block;padding:.7em;border-bottom:1px solid #eee}
 .line-a i{font-size:14px;color:#cdcdcd}
 .line-a i:after{content:"\e60b"}

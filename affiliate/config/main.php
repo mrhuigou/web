@@ -29,7 +29,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'site-mobile/error',
         ],
     ],
     'params' => $params,

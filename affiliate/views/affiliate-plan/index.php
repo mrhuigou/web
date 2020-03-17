@@ -301,8 +301,7 @@ $("#checkoutBtn").click(function(){
     if(data.length>0){
         $.showLoading("正在提交");
         $('#form-checkout').submit();
-
-        $.post('/ground-push/submit',{data:data_string,ground_push_plan_id:<?php echo $info? $info->affiliate_plan_id :0;?>},function(result){
+        $.post('/affiliate-plan/submit',{data:data_string,affiliate_plan_id:<?php echo $info? $info->affiliate_plan_id :0;?>},function(result){
             //location.href='ground-push/checkout';
 
             if(result && !result.status){

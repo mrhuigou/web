@@ -88,7 +88,7 @@ doc.addEventListener('DOMContentLoaded', recalc, false);
 <?php $this->endBlock()?>
 <?php
 $this->registerJs($this->blocks['JS'],\yii\web\View::POS_HEAD);
-$this->registerCssFile("/assets/stylesheet/mobile.min.css?v=20200220",['depends'=>[\affiliate\assets\AppAsset::className()]]);
+$this->registerCssFile("/assets/stylesheet/mobile.min.css?v=20200221",['depends'=>[\affiliate\assets\AppAsset::className()]]);
 ?>
 <?php
 $this->endBody() ;
