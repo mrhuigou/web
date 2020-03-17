@@ -32,7 +32,7 @@ use yii\helpers\Url;
 use yii\log\Logger;
 use yii\web\NotFoundHttpException;
 
-class GroundPushController extends \yii\web\Controller {
+class AffiliatePlanController extends \yii\web\Controller {
     private $key = 'C7CAED85F4C0B90876BF891FA5220C00';//加密密钥
     private $iv = '15A705E0DAD32735569AD606D93CABC7';
     public $layout = 'main_other';
@@ -50,7 +50,7 @@ class GroundPushController extends \yii\web\Controller {
         }
 
         if (!$fx_user_login_status) {
-            return $this->redirect(['/site-mobile/login', 'redirect' => '/ground-push/index?push_code='.$code]);
+            return $this->redirect(['/site-mobile/login', 'redirect' => '/ground-push/index?plan_code='.$code]);
         }
 
         $cart = [];
