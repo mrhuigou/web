@@ -229,7 +229,7 @@ $(".cart-num-add").click(function(){
     var item_id=$(this).parents('.store-item').attr("data-id");
     var obj=$(this).parents(".store-item");
     $.showLoading("正在加载");
-    $.post('/ground-push/update-item',{id:item_id,item:item,'qty':qty},function(data){
+    $.post('/affiliate-plan/update-item',{id:item_id,item:item,'qty':qty},function(data){
         $.hideLoading();
         if(data.status){
             obj.find(".cart-num-text").val(data.qty);
@@ -269,7 +269,7 @@ $(".cart-num-lower").click(function(){
     var item_id=$(this).parents('.store-item').attr("data-id");
     var obj=$(this).parents(".store-item");
     $.showLoading("正在加载");
-    $.post('/ground-push/update-item',{id:item_id,item:item,'qty':qty},function(data){
+    $.post('/gaffiliate-plan/update-item',{id:item_id,item:item,'qty':qty},function(data){
         $.hideLoading();
         if(data.status){
             obj.find(".cart-num-text").val(data.qty);
@@ -302,7 +302,7 @@ $("#checkoutBtn").click(function(){
         $.showLoading("正在提交");
         $('#form-checkout').submit();
         $.post('/affiliate-plan/submit',{data:data_string,affiliate_plan_id:<?php echo $info? $info->affiliate_plan_id :0;?>},function(result){
-            //location.href='ground-push/checkout';
+            //location.href='affiliate-plan/checkout';
 
             if(result && !result.status){
                 $.hideLoading();
@@ -318,7 +318,7 @@ $(".ditui-sele .dropdown").dropdown('toggle');
 
 $("#select_option").change(function(){
     var point_code = $(this).val();
-    window.location.href = "<?php echo \yii\helpers\Url::to(['ground-push/index'])?>" + "?push_code="+ point_code;
+    window.location.href = "<?php echo \yii\helpers\Url::to(['affiliate-plan/index'])?>" + "?plan_code="+ point_code;
 });
 
 <?php $this->endBlock() ?>
