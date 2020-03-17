@@ -374,7 +374,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                     $Order_model->firstname = $fx_user_info['firstname'] ? $fx_user_info['firstname'] :\Yii::$app->request->post("firstname");
                     $Order_model->lastname = $fx_user_info['lastname'];
                     $Order_model->email = $fx_user_info['email'];
-                    $Order_model->telephone = $fx_user_info['telephone'];
+                    $Order_model->telephone = $fx_user_info['telephone'] ? $fx_user_info['telephone'] :\Yii::$app->request->post("telephone");
                     $Order_model->gender = $fx_user_info['gender'];
                     $Order_model->payment_method = "";
                     $Order_model->payment_code = "";
@@ -414,8 +414,8 @@ class AffiliatePlanController extends \yii\web\Controller {
                             'delivery_time' => $delivery_time,
                             'delivery_station_id' => 0,
                             'delivery_station_code' => '',
-                            'username' => $fx_user_info['username'],
-                            'telephone' => $fx_user_info['telephone'],
+                            'username' => $fx_user_info['firstname'] ? $fx_user_info['firstname'] :\Yii::$app->request->post("firstname"),
+                            'telephone' => $fx_user_info['telephone'] ? $fx_user_info['telephone'] :\Yii::$app->request->post("telephone"),
 //                            'address' => $point->address,
 //                            'postcode' => 266000,
 //                            'zone' => $point->zone ? $point->zone->name : "",
