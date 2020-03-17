@@ -97,23 +97,30 @@ $this->title ='家润每日惠购优惠券';
 		</div>
                 <?php } ?>
 			<?php } ?>
+            <div class="pf-b  bs-t whitebg">
+                <div id="coupon-product-list"></div>
+                <div class="flex-col p10">
+                    <div class="flex-item-5 f12">
+                        <p id="coupon_msg" class="red fb"></p>
+                    </div>
+                    <div class="flex-item-3 tr pt2 pr5">
+                        <span class="f20 red" >￥<em id="sub_total">0.00</em></span>
+                    </div>
+                    <div class="flex-item-4 tc pt2">
+                        <a href="javascript:;" class="btn graybtn mbtn f12 disbtn" id="coupon_btn_submit">加入购物车</a>
+                    </div>
+                </div>
+            </div>
+
+
+		<?php }else{ ?>
+            <div id="lijishiyong">
+                <a  href="javascript:;"> <img class="w " src="https://img1.mrhuigou.com/group1/M00/05/0B/wKgB7lghYoiANWd7AACRS4y8xLQ901.jpg" /> </a>
+            </div>
 		<?php } ?>
 	</div>
 </section>
-<div class="pf-b  bs-t whitebg">
-	<div id="coupon-product-list"></div>
-	<div class="flex-col p10">
-		<div class="flex-item-5 f12">
-			<p id="coupon_msg" class="red fb"></p>
-		</div>
-		<div class="flex-item-3 tr pt2 pr5">
-			<span class="f20 red" >￥<em id="sub_total">0.00</em></span>
-		</div>
-		<div class="flex-item-4 tc pt2">
-			<a href="javascript:;" class="btn graybtn mbtn f12 disbtn" id="coupon_btn_submit">加入购物车</a>
-		</div>
-	</div>
-</div>
+
 <script type="text/html" id="goodlist_tpl">
 	<div class=" w bdb  ellipsis "  style="overflow-x: auto;white-space: nowrap;">
 		<% $.each(coupon_data,
@@ -129,8 +136,8 @@ $this->beginBlock('JS_SKU')
 ?>
 
 function loading(){
-    $.post('<?='/coupon/ajax-apply-result'?>',{'coupon_id':'<?=$model->coupon_id?>'},function(res){
-    //$.post('<?//=\yii\helpers\Url::to(['/coupon/ajax-apply-result'])?>//',{'coupon_id':'<?//=$model->coupon_id?>//'},function(res){
+    //$.post('<?//='/coupon/ajax-apply-result'?>//',{'coupon_id':'<?//=$model->coupon_id?>//'},function(res){
+    $.post('<?=\yii\helpers\Url::to(['/coupon/ajax-apply-result'])?>',{'coupon_id':'<?=$model->coupon_id?>'},function(res){
         if(res){
             if(res.data.used_status == 1){
                 $.alert('请先领取优惠券!');
@@ -355,6 +362,22 @@ $(".coupon-item-btn").on('click',function(){
         }
     },'json');
 });
+
+$("#lijishiyong").on('click',function(){
+    $.showLoading("正在加载");
+    $.post('<?='/coupon/ajax-apply-result'?>',{'coupon_id':'<?=$model->coupon_id?>'},function(res){
+        //$.post('<?//=\yii\helpers\Url::to(['/coupon/ajax-apply-result'])?>//',{'coupon_id':'<?//=$model->coupon_id?>//'},function(res){
+        $.hideLoading();
+        if(res){
+            if(res.data.used_status == 1){
+                $.alert('请先领取优惠券!');
+            }else{
+                location.href='https://m.mrhuigou.com/';
+            }
+        }
+    },'json');
+});
+
 <?php $this->endBlock() ?>
 <?php
 $this->registerJs($this->blocks['JS_SKU'], \yii\web\View::POS_END);

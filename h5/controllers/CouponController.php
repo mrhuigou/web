@@ -91,13 +91,15 @@ class CouponController extends \yii\web\Controller
                     }
                 }
             }
-            if($coupon_product){
+
+            //=======================================商品为空时也跳转页面===========================================
+//            if($coupon_product){
 //                $customer_coupon=CustomerCoupon::findOne(['customer_id'=>Yii::$app->user->getId(),'coupon_id'=>$id ,'is_use' => 0,'end_time' >= date('Y-m-d H:i:s')] );
                 $customer_coupon=CustomerCoupon::find()->where(['customer_id'=>Yii::$app->user->getId(),'coupon_id'=> $id,'is_use' => 0])->andWhere(['>=','end_time',date('Y-m-d H:i:s')])->orderBy('customer_coupon_id desc')->one();
                 return $this->render('view',['model'=>$model,'coupon_product'=>$coupon_product,'customer_coupon'=>$customer_coupon,'is_not_open' => $is_not_open]);
-            }else{
-                return $this->redirect('/');
-            }
+//            }else{
+//                return $this->redirect('/');
+//            }
         }else{
             throw new NotFoundHttpException('没有找到相关页面');
         }
