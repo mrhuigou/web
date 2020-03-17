@@ -419,7 +419,7 @@ class CouponController extends \yii\web\Controller
                 }
                 if(count($model->users)<$model->quantity){
                     if($model->user_limit){
-                        $count=CustomerCoupon::find()->where(['customer_id'=>Yii::$app->user->getId(),'coupon_id'=>$model->coupon_id])->count();
+                        $count=CustomerCoupon::find()->where(['customer_id'=>Yii::$app->user->getId(),'coupon_id'=>$model->coupon_id])->andWhere(['>',"end_time",date('Y-m-d H:i:s',time())])->count();
                         if($count<$model->user_limit){
                             $customer_coupon=new CustomerCoupon();
                             $customer_coupon->customer_id=Yii::$app->user->getId();
@@ -440,7 +440,7 @@ class CouponController extends \yii\web\Controller
                             }
                             $data= ['status' => 1, 'message' =>'领取成功！','date' => $date];
                         }else{
-                            throw new ErrorException("你已经领过了！!");
+                            throw new ErrorException("你已经领过或领取数量达到上限!");
                         }
                     }
                 }else{
