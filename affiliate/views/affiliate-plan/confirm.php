@@ -34,7 +34,7 @@ $this->title = '订单确认';
 
 
 		<?php if ($carts) { ?>
-            <div class="store_contain whitebg " id="store_contain_<?= $point->id ?>">
+            <div class="store_contain whitebg " id="store_contain_<?= $plan->affiliate_plan_id ?>">
                 <div class="mt5">
                     <div class="flex-row ">
                         <div class="flex-item-2 p5 pt10 pl10"><i class="red">*</i>姓名</div>
@@ -49,10 +49,10 @@ $this->title = '订单确认';
 
 
 
-            <div class="store_contain whitebg " id="store_contain_<?= $point->id ?>">
+            <div class="store_contain whitebg " id="store_contain_<?= $plan->affiliate_plan_id ?>">
                 <div class="mt5">
                     <h2 class="clearfix p10">
-                        <span class="fl ">地推点：<em class="org"><?= $point->name ?></em></span>
+                        <span class="fl ">地推点：<em class="org"><?= '默认收货地址' ?></em></span>
 
                     </h2>
                 </div>
