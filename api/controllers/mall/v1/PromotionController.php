@@ -75,7 +75,7 @@ class PromotionController extends Controller {
 		try {
 			if ($subject = \Yii::$app->request->get('subject')) {
 				$promotion=Promotion::find()->where(['and',"subject='".strtoupper($subject)."'",'date_start<=NOW()','date_end>=NOW()','status=1'])->one();
-				$details = PromotionDetail::find()->where(['and', "promotion_id='" .($promotion?$promotion->promotion_id:0)."'", "begin_date<='" . date('Y-m-d H:i:s', time()) . "'", "end_date>='" . date('Y-m-d H:i:s', time()) . "'", 'status=1'])->orderBy('priority desc,promotion_detail_id asc')->all();
+				$details = PromotionDetail::find()->where(['and', "promotion_id='" .($promotion?$promotion->promotion_id:0)."'", "begin_date<='" . date('Y-m-d H:i:s', time()) . "'", "end_date>='" . date('Y-m-d H:i:s', time()) . "'", 'status=1'])->orderBy('priority asc,promotion_detail_id asc')->all();
 			} else {
 				throw new BadRequestHttpException('错误请求', '1001');
 			}
