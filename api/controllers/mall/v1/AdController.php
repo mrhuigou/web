@@ -69,7 +69,7 @@ class AdController extends Controller {
                         //$data 的键值必须0，1,2，3,4如此递增
                         $data[$key] = [
                             'title' => $detail->title,
-                            'image' => Image::resize($detail->source_url, $detail->width, $detail->height),
+                            'image' => Image::resize(($detail->source_url?:$detail->product->image)?:$detail->product->productBase->image, $detail->width, $detail->height),
 //                            'url'=> Url::to($detail->link_url),
                             'url'=> $detail->link_url ? Url::to($detail->link_url):(Url::to(['product/index','shop_code'=>$detail->store_code,'product_code'=>$detail->product_code]))
 
