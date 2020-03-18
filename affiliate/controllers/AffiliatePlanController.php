@@ -219,6 +219,12 @@ class AffiliatePlanController extends \yii\web\Controller {
         try {
 
             $plan_info = AffiliatePlan::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1])->one();
+
+            if ($model = AffiliatePlanType::findOne(['code' => $plan_info->type, 'status' => 1])) {
+            }else{
+                throw new NotFoundHttpException("没有找到相关分销方案类型");
+            }
+
             if (strtotime($plan_info->date_start) > strtotime(date('Y-m-d H:i:s'))) {
                 throw new Exception("分销活动未开始");
             }
@@ -331,6 +337,10 @@ class AffiliatePlanController extends \yii\web\Controller {
             }
             $pay_total = $sub_total;
             $totals = $this->getPushOrderTotals($sub_total);
+
+            $affiliate_id = \Yii::$app->session->get('from_affiliate_uid');
+            $affiliate_info = Affiliate::find()->where(['status'=>1,'affiliate_id'=>$affiliate_id])->one();
+
             if(\Yii::$app->request->isPost){
                 //$this->submit();
                 $telephone = \Yii::$app->request->post("telephone");
@@ -345,7 +355,7 @@ class AffiliatePlanController extends \yii\web\Controller {
 
                 return $this->redirect(['payment/index', 'trade_no' => $trade_no, 'showwxpaytitle' => 1]);
             }
-            return $this->render('confirm', ['plan'=>$plan,'carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'fx_user_info' => $fx_user_info]);
+            return $this->render('confirm', ['plan'=>$plan,'carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'fx_user_info' => $fx_user_info,'affiliate_info'=>$affiliate_info]);
         }else{
             return $this->redirect('/order/index');
         }

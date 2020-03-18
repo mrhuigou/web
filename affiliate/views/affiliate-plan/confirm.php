@@ -52,10 +52,48 @@ $this->title = '订单确认';
             <div class="store_contain whitebg " id="store_contain_<?= $plan->affiliate_plan_id ?>">
                 <div class="mt5">
                     <h2 class="clearfix p10">
-                        <span class="fl ">地推点：<em class="org"><?= '默认收货地址' ?></em></span>
-
+                        <span class="fl ">收货地址：<em class="org"><?= '默认收货地址' ?></em></span>
                     </h2>
                 </div>
+
+                <ul class="line-book mt5">
+                    <?php if(!$model->in_range == 1){?>
+                        <li>
+                            <div class="t">选择地区：</div>
+                            <div class="c">
+                                <div class="weui-cell__bd">
+                                    <?php $p = $model->province ? $model->province : '山东省';
+                                    $c = $model->city ? $model->city : '青岛市';
+                                    $d = $model->district ? $model->district : '市北区';
+                                    ?>
+                                    <input class="w f14" id="start" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
+                                </div>
+                            </div>
+
+                        </li>
+                    <?php }else{?>
+                        <!--            <li><div class="t">所在城市：</div><div class="c">青岛市</div><div class="d">青岛市</div> </li>-->
+                        <li>
+                            <div class="t">选择地区：</div>
+                            <div class="c">
+                                <div class="weui-cell__bd">
+                                    <?php $p = $model->province ? $model->province : '山东省';
+                                    $c = $model->city ? $model->city : '青岛市';
+                                    $d = $model->district ? $model->district : '市北区';
+                                    ?>
+                                    <input class="w f14" id="start" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
+                                </div>
+                            </div>
+                        </li>
+                        <p class="red pl5 error_district"></p>
+                    <?php }?>
+<!--                    --><?//= $form->field($model, 'address',['template' => '{label}<li>{input}</li>{error}'])->textarea(["placeholder" => '小区/写字楼/街道+楼号+楼层等','id'=>'address','class'=>'w f14 ','rows'=>2,'style'=>"height:45px;padding:5px;"])->label('详细地址')?>
+<!--                    <p class="red pl5 error_address"></p>-->
+<!--                    --><?//= $form->field($model, 'username', ['inputOptions' => ["placeholder" => '请填写收货人姓名','id'=>'username']])->label('收货人') ?>
+<!--                    <p class="red pl5 error_username"></p>-->
+<!--                    --><?//= $form->field($model, 'telephone', ['inputOptions' => ["placeholder" => '请填写收货人电话号码','id'=>'telephone']])->label('手机号') ?>
+<!--                    <p class="red pl5 error_telephone"></p>-->
+                </ul>
 				<?php foreach ($carts as $key => $value) { ?>
                     <?php
                         $product = \api\models\V1\Product::findOne(['product_code'=>$value['pv']->product_code ]);
@@ -176,9 +214,22 @@ $("#confirm_pay").click(function(){
         $('#form-checkout').submit();
     }
 });
+
+/*地址选择*/
+$("#start").cityPicker({
+    title: "选择地址",
+    onChange: function (picker, values, displayValues) {
+        $("#province").val(displayValues[0]);
+        $("#city").val(displayValues[1]);
+        $("#district").val(displayValues[2]);
+
+    }
+});
 <?php $this->endBlock() ?>
 </script>
 <?php
 \yii\web\YiiAsset::register($this);
 $this->registerJs($this->blocks['JS_END'], \yii\web\View::POS_READY);
+$this->registerJsFile("/assets/script/jqweui-picker.js",['depends'=>\h5\assets\AppAsset::className()]);
+$this->registerJsFile("/assets/script/jqweui-city-picker.js",['depends'=>\h5\assets\AppAsset::className()]);
 ?>
