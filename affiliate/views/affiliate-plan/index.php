@@ -5,7 +5,7 @@
  * Date: 2017/8/4
  * Time: 15:54
  */
-$this->title = "团购分销";
+$this->title = "一起团";
 ?>
 <header class="fx-top bs-bottom whitebg lh44">
     <div class="flex-col tc">
@@ -23,63 +23,35 @@ $this->title = "团购分销";
 <div class="content  bc">
     <!-- 新改图片 -->
     <div class="bg-wh pb5 mb5">
-        <a href="<?php echo \yii\helpers\Url::to(['coupon/coupon-rules','id'=>4])?>">
+        <a href="#">
         <img src="../assets/images/ditui/gp-top.jpeg" class="w" />
         </a>
-
-        <?php
-        if(time()>strtotime(date('Y-m-d 16:00:00',time()))){
-            if(time()<strtotime(date('Y-m-d 23:00:00',time()))){
-                $deliver_time="预计明天".date('m月d日',time()+60*60*24)." 08:00-13:00 送达";
-            }else{
-                $deliver_time="预计次日(".date('m月d日',time()+60*60*24).") 13:00-18:00 送达";
-            }
-        }else{
-            if(time()<strtotime(date('Y-m-d 11:30:00',time()))){
-                $deliver_time="预计今天(".date('m月d日',time()).") 13:00-18:00 送达";
-            }else{
-                $deliver_time="预计今晚(".date('m月d日',time()).") 18:00-22:00 送达";
-            }
-        }
-        ?>
-        <p class="p5 tc red f12">现在线上下单，<?php echo $deliver_time?></p>
-
     </div>
-<!--    <div class="bg-wh mb5 pb5">-->
-<!---->
-<!--        <div class="p10 pb5">-->
-           <!-- 地址选择 -->
-<!--            <div class="ditui-sele">-->
-<!--                <i class="iconfont icon-l">&#xe65f;</i>-->
-<!---->
-<!--                <div class="dropdown" >-->
-<!--                    --><?php //if($point_lists){?>
-<!---->
-<!--                    <select name="select_option" id="select_option" class="input-m w" style=" border: 0px;">-->
-<!--                        --><?php //foreach ($point_lists as $point_list){?>
-<!--                            --><?php //if($model->id == $point_list->id){?>
-<!--                                <option value="--><?php //echo $point_list->code?><!--" readonly="readonly" --><?php //if($model->id == $point_list->id){ echo "selected='selected'";}?><!--><?php //echo $point_list->name?><!--</option>-->
-<!--                            --><?php //}?>
-<!--                            --><?php //}?>
-<!---->
-<!--                        </select>-->
-<!--                    --><?php //}?>
-<!--                </div>-->
-<!---->
-<!--            </div>-->
-<!---->
-<!--            <p class="mt10 mb2">地推商品仅限现场自提（ 不提供配送服务）</p>-->
-<!---->
-<!--        </div>-->
-<!---->
-<!--        <img src="../assets/images/ditui/ditui1.jpg" class="w" />-->
-<!---->
-<!--    </div>-->
+    <div class="bg-wh mb5 pb5">
+
+        <div class="p10 pb5">
+<!--            地址选择-->
+            <div class="ditui-sele">
+                <i class="iconfont icon-l">&#xe65f;</i>
+
+                <div class="dropdown" >
+                    <?php if($affiliate_info){?>
+                        <select name="select_option" id="select_option" class="input-m w" style=" border: 0px;">
+                            <option value="<?php echo $affiliate_info->code?>" readonly="readonly" selected ><?php echo $affiliate_info->username?></option>
+                        </select>
+                    <?php }?>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <?php if ($info) { ?>
 
         <div id="cart-list">
-<!--            <p class="mt5 bg-wh pt10 pb10 pl10">自提点地址：<i class="red">--><?php //echo $model->address?><!--</i></p>-->
-            <p class=" mb5 bg-wh pt5 pb5 pl10">最晚提货时间：<i class="red"><?php echo '当日 '.$info->ship_end?></i></p>
+            <?php if($affiliate_info && $affiliate_info->mode == 'DOWN_LINE'){?>
+                <p class="mt5 bg-wh pt10 pb10 pl10">自提点地址：<i class="red"><?php echo $affiliate_info->address?></i></p>
+            <?php }?>
+            <p class=" mb5 bg-wh pt5 pb5 pl10">配送时间：<i class="red"><?php echo $info->ship_end?></i></p>
 
             <?php foreach ($products as $key=>$value) { ?>
                 <div class="flex-col flex-center store-item bdb  whitebg pr" data-content="<?=$value->product_code?>" data-id="<?=$value->affiliate_plan_detail_id?>">
@@ -327,3 +299,23 @@ $("#select_option").change(function(){
 //\yii\web\YiiAsset::register($this);
 $this->registerJs($this->blocks['JS_END'],\yii\web\View::POS_END);
 ?>
+<?php
+if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
+    $data = [
+        'title' => '遇到好东西，总想分享给最亲爱的你。',
+        'desc' => "口袋超市，物美价廉，当日订单，当日送达。",
+        'link' => Yii::$app->request->getAbsoluteUrl(),
+        'image' => Yii::$app->request->getHostInfo().'/assets/images/zhqd/logo_300x300.jpeg'
+    ];
+}else{
+    $data = [
+        'title' => '遇到好东西，总想分享给最亲爱的你。',
+        'desc' => "每日惠购，物美价廉，当日订单，当日送达。",
+        'link' => Yii::$app->request->getAbsoluteUrl(),
+        'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.png'
+    ];
+}
+?>
+<?=\affiliate\widgets\Tools\Share::widget([
+    'data'=>$data
+])?>

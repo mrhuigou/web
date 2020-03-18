@@ -6,6 +6,7 @@
  * Time: 15:52
  */
 namespace affiliate\controllers;
+use api\models\V1\Affiliate;
 use api\models\V1\AffiliatePlan;
 use api\models\V1\AffiliatePlanDetail;
 use api\models\V1\AffiliatePlanType;
@@ -40,7 +41,23 @@ class AffiliatePlanController extends \yii\web\Controller {
 	{
 
         $code = \Yii::$app->request->get('plan_code');
+        $type_code = \Yii::$app->request->get('type_code');
 
+        //获取分销方案code编码
+        if(!$code){
+            if ($model = AffiliatePlanType::findOne(['code' => $type_code, 'status' => 1])) {
+                $plans = AffiliatePlan::find()->where(['type'=>$model->code,'status'=>1])->andWhere(['and','date_start < NOW()','date_end > NOW()'])->all();
+                if($plans){
+                    foreach ($plans as $plan){
+                        if($plan){
+                            $code = $plan->code;
+                        }
+                    }
+                }
+            }else{
+                throw new NotFoundHttpException("没有找到相关分销方案类型");
+            }
+        }
         $fx_user_login_status = false;
         //获取用户登录状态 session 缓存 user_login_status
         if(\Yii::$app->redis->get("fx_user_login_status")){
@@ -58,32 +75,25 @@ class AffiliatePlanController extends \yii\web\Controller {
             $cart = \Yii::$app->session->get("confirm_push");
         }
 
-//		if ($model = AffiliatePlanType::findOne(['code' => $code, 'status' => 1])) {
-			$info = AffiliatePlan::find()->where(['status' => 1,'code'=>$code])->andWhere(['<', 'date_start', date('Y-m-d H:i:s')])->andWhere(['>', 'date_end', date('Y-m-d H:i:s')])->one();
-            $products = [];
-            $product_outofstock = [];
-			if ($info) {
-				$products_views = AffiliatePlanDetail::find()->where(['status' => 1, 'affiliate_plan_id' => $info->affiliate_plan_id])->orderBy('priority asc')->all();
-				if($products_views){
-				    foreach ($products_views as $product){
-                        $products[] = $product;
-//				        if($product && $product->stock){
-//                            if($product->stock->quantity > 0){
-//                                $products[] = $product;
-//                            }else{
-//                                $product_outofstock[] = $product;
-//                            }
-//                        }
+        //进入页面自动绑定分销商信息分销商ID
+        $affiliate_id = \Yii::$app->session->get('from_affiliate_uid');
+        //获取当前分销商的分销商信息
+        $affiliate_info = Affiliate::find()->where(['status'=>1,'affiliate_id'=>$affiliate_id])->one();
 
-                    }
-                }
-			} else {
-                throw new NotFoundHttpException("没有找到相关分销方案");
-			}
-			return $this->render('index', ['info' => $info, 'products' => $products,'product_outofstock'=>$product_outofstock,'cart'=>$cart]);
-//		} else {
-//			throw new NotFoundHttpException("没有找到相关分销方案");
-//		}
+        $info = AffiliatePlan::find()->where(['status' => 1,'code'=>$code])->andWhere(['<', 'date_start', date('Y-m-d H:i:s')])->andWhere(['>', 'date_end', date('Y-m-d H:i:s')])->one();
+
+        $products = [];
+        if ($info) {
+            if ($model = AffiliatePlanType::findOne(['code' => $info->type, 'status' => 1])) {
+            }else{
+                throw new NotFoundHttpException("没有找到相关分销方案类型");
+            }
+            $products = AffiliatePlanDetail::find()->where(['status' => 1, 'affiliate_plan_id' => $info->affiliate_plan_id])->orderBy('priority asc')->all();
+
+        } else {
+            throw new NotFoundHttpException("没有找到相关分销方案");
+        }
+        return $this->render('index', ['info' => $info, 'products' => $products,'cart'=>$cart,'affiliate_info' => $affiliate_info]);
 
 	}
 	//地推人员 登录列表

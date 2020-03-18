@@ -33,4 +33,5 @@ return [
         ],
     ],
     'params' => $params,
+    'on beforeAction'=>['affiliate\events\InitShare','assign'],
 ];
