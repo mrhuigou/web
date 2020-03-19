@@ -13,7 +13,9 @@ use api\models\V1\OrderMerge;
 use api\models\V1\Product;
 use api\models\V1\Store;
 use common\component\image\Image;
+use common\component\Notice\WxNotice;
 use common\component\Track\Track;
+use common\models\User;
 use h5\models\ViewDeliveryForm;
 use Yii;
 use api\models\V1\CustomerCoupon;
@@ -439,6 +441,16 @@ class CouponController extends \yii\web\Controller
                                 throw new ErrorException("数据提交错误!");
                             }
                             $data= ['status' => 1, 'message' =>'领取成功！','date' => $date];
+
+                            if(in_array($model->model,['ORDER'])){
+                                $message[]=[
+                                    'customer_id'=>\Yii::$app->user->getId(),
+                                    'url'=>Url::to(['/user-coupon/index'],true),
+                                    'content'=>['title'=>'亲，恭喜您获得'.$model->name."红包优惠券！",'name'=>'领券活动','content'=>'已经存入你的个人帐户。'],
+                                ];
+                                $this->sendMessage($message);
+                            }
+
                         }else{
                             throw new ErrorException("你已经领过或领取数量达到上限!");
                         }
@@ -1244,6 +1256,20 @@ class CouponController extends \yii\web\Controller
             return $coupon;
         }else{
             return null;
+        }
+    }
+
+    protected function sendMessage($message = [])
+    {
+        if ($message) {
+            foreach ($message as $value) {
+                if ($user = User::findIdentity($value['customer_id'])) {
+                    if ($open_id = $user->getWxOpenId()) {
+                        $notice = new WxNotice();
+                        $notice->zhongjiang($open_id, $value['url'], $value['content']);
+                    }
+                }
+            }
         }
     }
 }
