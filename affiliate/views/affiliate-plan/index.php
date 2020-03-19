@@ -45,13 +45,37 @@ $this->title = "一起团";
             </div>
         </div>
     </div>
-    <?php if ($info) { ?>
 
+
+        <div id="swiper_content" style="max-width: inherit;width: 32rem;min-height: 2rem;overflow: hidden;"></div>
+        <script id="swiper_content_tpl" type="text/html">
+            <div class="swiper-container" id="swiper-container_banner">
+                <div class="swiper-wrapper">
+                    <% for(var i=from; i<=to; i++) {%>
+                    <div class="swiper-slide" >
+                        <p class=" mb5 bg-wh pt5 pb5 pl10">方案名称：<i class="red"><%:=list[i].name%></i></p>
+                        <p class=" mb5 bg-wh pt5 pb5 pl10">开团时间：<i class="red"><%:=list[i].date_start%></i></p>
+                        <p class=" mb5 bg-wh pt5 pb5 pl10">闭团时间：<i class="red"><%:=list[i].date_end%></i></p>
+                        <p class=" mb5 bg-wh pt5 pb5 pl10">配送时间：<i class="red"><%:=list[i].ship_end%></i></p>
+
+
+
+
+
+
+                        <p class=" mb5 bg-wh pt5 pb5 pl10"></p>
+                    </div>
+
+
+                    <% } %>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination swiper-pagination-red swiper-pagination-banner"></div>
+            </div>
+        </script>
+
+    <?php if ($info) { ?>
         <div id="cart-list">
-            <?php if($affiliate_info && $affiliate_info->mode == 'DOWN_LINE'){?>
-                <p class="mt5 bg-wh pt10 pb10 pl10">自提点地址：<i class="red"><?php echo $affiliate_info->address?></i></p>
-            <?php }?>
-            <p class=" mb5 bg-wh pt5 pb5 pl10">配送时间：<i class="red"><?php echo $info->ship_end?></i></p>
 
             <?php foreach ($products as $key=>$value) { ?>
                 <div class="flex-col flex-center store-item bdb  whitebg pr" data-content="<?=$value->product_code?>" data-id="<?=$value->affiliate_plan_detail_id?>">
@@ -291,6 +315,39 @@ $(".ditui-sele .dropdown").dropdown('toggle');
 $("#select_option").change(function(){
     var point_code = $(this).val();
     window.location.href = "<?php echo \yii\helpers\Url::to(['affiliate-plan/index'])?>" + "?plan_code="+ point_code;
+});
+
+var wx_xcx = <?php echo Yii::$app->session->get('source_from_agent_wx_xcx') ? 1:0  ?>;
+var host = document.domain;
+if(host.indexOf('mwx.') >=0){
+    wx_xcx = 1;
+}else{
+    wx_xcx = 0;
+}
+var source = getSourceParms();
+
+
+var swiper_content_tpl = $('#swiper_content_tpl').html();
+// var source = getSourceParms();
+//$.getJSON('<?php //echo Yii::$app->params["API_URL"]?>///mall/v1/ad/index?code=H5-0F-SLIDE&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
+    $.getJSON('/affiliate-plan/plan-info?type_code=DEFAULT&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
+    if(!result.status){
+        return;
+    }
+
+    var html= template(swiper_content_tpl, {list:result.data,from:0,to:(result.data.length-1)});
+
+    $("#swiper_content").html(html);
+    $("img.lazy").scrollLoading({container:$(".content")});
+    var swiper_banner = new Swiper('#swiper-container_banner', {
+        pagination: '.swiper-pagination-banner',
+        paginationClickable: true,
+        loop:true,
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay: 4000,
+        autoplayDisableOnInteraction: false
+    });
 });
 
 <?php $this->endBlock() ?>

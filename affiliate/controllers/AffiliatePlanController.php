@@ -31,7 +31,9 @@ use yii\base\Exception;
 use yii\db\StaleObjectException;
 use yii\helpers\Url;
 use yii\log\Logger;
+use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
+use Yii;
 
 class AffiliatePlanController extends \yii\web\Controller {
     private $key = 'C7CAED85F4C0B90876BF891FA5220C00';//加密密钥
@@ -96,6 +98,57 @@ class AffiliatePlanController extends \yii\web\Controller {
         return $this->render('index', ['info' => $info, 'products' => $products,'cart'=>$cart,'affiliate_info' => $affiliate_info]);
 
 	}
+
+	//分销方案  列表
+    public function actionPlanInfo(){
+        $status = 1;
+        $message = "";
+        $data = [];
+        try {
+            if ($type_code = \Yii::$app->request->get('type_code')) {
+                /*获取滚动方案*/
+                $plan_type = AffiliatePlanType::findOne(['code' => $type_code, 'status' => 1]);
+                $plans = AffiliatePlan::find()->where(['affiliate_plan_type_id'=>$plan_type->id,'status'=>1])->andWhere(['and','date_start < NOW()','date_end > NOW()'])->all();
+
+            } else {
+                throw new BadRequestHttpException('错误请求', '1001');
+            }
+            if($wx_xcx = Yii::$app->request->get('wx_xcx',0)){
+
+            }else{
+                Yii::$app->session->remove('source_from_agent_wx_xcx');
+                if ($plans) {
+                    foreach ($plans as $key => $plan) {
+                        //$data 的键值必须0，1,2，3,4如此递增
+                        $data[$key] = [
+                            'name' => $plan->name,
+                            'date_start' => $plan->date_start,
+                            'date_end' => $plan->date_end,
+                            'ship_end' => $plan->ship_end,
+                        ];
+
+                    }
+                }
+            }
+
+        } catch (\Exception $e) {
+            $status = 0;
+            $message = $e->getMessage();
+        }
+        $data = ['status' => $status, 'data' => $data, 'message' => $message];
+        if (Yii::$app->request->get('callback')) {
+            Yii::$app->getResponse()->format = "jsonp";
+            return [
+                'data' => $data,
+                'callback' => \Yii::$app->request->get('callback')
+            ];
+        } else {
+            Yii::$app->getResponse()->format = "json";
+            return ['data' => $data];
+        }
+    }
+
+
 	//地推人员 登录列表
 	public function actionList(){
         $point_lists = [];
