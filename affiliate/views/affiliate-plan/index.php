@@ -60,6 +60,27 @@ $this->title = "一起团";
 
 
 
+                        <% if(list[i].products){%>
+                            <div id="cart-list">
+                                <% for(var ii=list[i].products; ii<=list[i].products.length-1; ii++) {%>
+                                    <div class="flex-col flex-center store-item bdb  whitebg pr" data-content="<%:=list[i].products.product_code%>" data-id="<%:=list[i].products.affiliate_plan_detail_id%>">
+                                        <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center tc"
+                                               style="line-height:79px;">
+                                            <% if(cart != null){%>
+                                            543534
+                                                <input type="checkbox" value="<%:=list[i].products.product_code%>" name="item"  class="item" id="<% ii%>">
+                                            <% }else{ %>
+                                                5345345345
+                                            <% }%>
+                                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                        </label>
+                                    </div>
+                                <% }%>
+                            </div>
+                        <% }else {%>
+                            <div id="cart-list">暂无活动商品</div>
+                        <% }%>
+
 
 
 
@@ -335,7 +356,7 @@ var swiper_content_tpl = $('#swiper_content_tpl').html();
         return;
     }
 
-    var html= template(swiper_content_tpl, {list:result.data,from:0,to:(result.data.length-1)});
+    var html= template(swiper_content_tpl, {list:result.data,from:0,to:(result.data.length-1),cart:result.cart});
 
     $("#swiper_content").html(html);
     $("img.lazy").scrollLoading({container:$(".content")});

@@ -104,6 +104,7 @@ class AffiliatePlanController extends \yii\web\Controller {
         $status = 1;
         $message = "";
         $data = [];
+        $cart = [];
         try {
             if ($type_code = \Yii::$app->request->get('type_code')) {
                 /*获取滚动方案*/
@@ -120,22 +121,29 @@ class AffiliatePlanController extends \yii\web\Controller {
                 if ($plans) {
                     foreach ($plans as $key => $plan) {
                         //$data 的键值必须0，1,2，3,4如此递增
+
+                        $products = AffiliatePlanDetail::find()->where(['status' => 1, 'affiliate_plan_id' => $plan->affiliate_plan_id])->orderBy('priority asc')->all();
                         $data[$key] = [
                             'name' => $plan->name,
                             'date_start' => $plan->date_start,
                             'date_end' => $plan->date_end,
                             'ship_end' => $plan->ship_end,
+                            'products' => $products,
                         ];
 
                     }
                 }
             }
 
+            if(\Yii::$app->session->get("confirm_push")){
+                $cart = \Yii::$app->session->get("confirm_push");
+            }
         } catch (\Exception $e) {
             $status = 0;
             $message = $e->getMessage();
         }
-        $data = ['status' => $status, 'data' => $data, 'message' => $message];
+
+        $data = ['status' => $status, 'data' => $data, 'message' => $message, "cart" => $cart];
         if (Yii::$app->request->get('callback')) {
             Yii::$app->getResponse()->format = "jsonp";
             return [
