@@ -106,6 +106,9 @@ class AffiliatePlanController extends \yii\web\Controller {
         $data = [];
         $cart = [];
         try {
+            if(\Yii::$app->session->get("confirm_push")){
+                $cart = \Yii::$app->session->get("confirm_push");
+            }
             if ($type_code = \Yii::$app->request->get('type_code')) {
                 /*获取滚动方案*/
                 $plan_type = AffiliatePlanType::findOne(['code' => $type_code, 'status' => 1]);
@@ -122,7 +125,28 @@ class AffiliatePlanController extends \yii\web\Controller {
                     foreach ($plans as $key => $plan) {
                         //$data 的键值必须0，1,2，3,4如此递增
 
-                        $products = AffiliatePlanDetail::find()->where(['status' => 1, 'affiliate_plan_id' => $plan->affiliate_plan_id])->orderBy('priority asc')->all();
+                        $products_old = AffiliatePlanDetail::find()->where(['status' => 1, 'affiliate_plan_id' => $plan->affiliate_plan_id])->orderBy('priority asc')->all();
+                        $products = AffiliatePlanDetail::find()->where(['status' => 1, 'affiliate_plan_id' => $plan->affiliate_plan_id])->orderBy('priority asc')->asArray()->all();
+                        if($products_old){
+                            foreach ($products_old as $key1 => $value){
+                                $products[$key1]['product_name'] = $value->product->description->name;
+                                $products[$key1]['product_sku'] = $value->product->getSku();
+                                $products[$key1]['image_url'] = \common\component\image\Image::resize($value->image_url,100,100);
+
+                                if(empty($cart)){
+                                    $quantity = 1;
+                                }else{
+                                    if(isset($cart[$value->product_code]) && $cart[$value->product_code] >0){ //购物车内有该商品
+                                        $quantity = $cart[$value->product_code];
+                                    }else{
+                                        $quantity = 1;
+                                    }
+                                }
+                                $products[$key1]['product_price'] =  round(bcmul($value->price,$quantity,4),2);
+                                $products[$key1]['quantity'] =  $quantity;
+                            }
+                        }
+
                         $data[$key] = [
                             'name' => $plan->name,
                             'date_start' => $plan->date_start,
@@ -135,9 +159,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                 }
             }
 
-            if(\Yii::$app->session->get("confirm_push")){
-                $cart = \Yii::$app->session->get("confirm_push");
-            }
+
         } catch (\Exception $e) {
             $status = 0;
             $message = $e->getMessage();

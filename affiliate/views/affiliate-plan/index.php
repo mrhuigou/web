@@ -47,33 +47,64 @@ $this->title = "一起团";
     </div>
 
 
-        <div id="swiper_content" style="max-width: inherit;width: 32rem;min-height: 2rem;overflow: hidden;"></div>
+        <div id="swiper_content" style="max-width: inherit;width: 32rem;overflow: hidden;"></div>
         <script id="swiper_content_tpl" type="text/html">
             <div class="swiper-container" id="swiper-container_banner">
                 <div class="swiper-wrapper">
                     <% for(var i=from; i<=to; i++) {%>
-                    <div class="swiper-slide" >
+                    <div class="swiper-slide"  style="min-height: 2rem;">
                         <p class=" mb5 bg-wh pt5 pb5 pl10">方案名称：<i class="red"><%:=list[i].name%></i></p>
                         <p class=" mb5 bg-wh pt5 pb5 pl10">开团时间：<i class="red"><%:=list[i].date_start%></i></p>
                         <p class=" mb5 bg-wh pt5 pb5 pl10">闭团时间：<i class="red"><%:=list[i].date_end%></i></p>
                         <p class=" mb5 bg-wh pt5 pb5 pl10">配送时间：<i class="red"><%:=list[i].ship_end%></i></p>
 
-
-
                         <% if(list[i].products){%>
                             <div id="cart-list">
-                                <% for(var ii=list[i].products; ii<=list[i].products.length-1; ii++) {%>
-                                    <div class="flex-col flex-center store-item bdb  whitebg pr" data-content="<%:=list[i].products.product_code%>" data-id="<%:=list[i].products.affiliate_plan_detail_id%>">
+                                <% for(var ii=0; ii<=list[i].products.length-1; ii++) {%>
+                                    <div class="flex-col flex-center store-item bdb  whitebg pr" data-content="<%:=list[i].products[ii].product_code%>" data-id="<%:=list[i].products[ii].affiliate_plan_detail_id%>">
+
                                         <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center tc"
                                                style="line-height:79px;">
-                                            <% if(cart != null){%>
-                                            543534
-                                                <input type="checkbox" value="<%:=list[i].products.product_code%>" name="item"  class="item" id="<% ii%>">
+                                            <% if(Object.keys(cart).length == 0){%>
+                                                <input type="checkbox" value="<%:=list[i].products[ii].product_code%>" name="item"  class="item" id="<%ii%>">
                                             <% }else{ %>
-                                                5345345345
+                                                <% if((cart[list[i].products[ii].product_code]) && cart[list[i].products[ii].product_code] >0){ %>
+                                                    <input type="checkbox" value="<%:=list[i].products[ii].product_code%>" name="item" checked class="item" id="<%ii%>">
+                                                <% }else{ %>
+                                                    <input type="checkbox" value="<%:=list[i].products[ii].product_code%>" name="item" class="item" id="<%ii%>">
+                                                <% }%>
                                             <% }%>
+
                                             <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
                                         </label>
+
+                                        <div class="flex-item-2 flex-row flex-middle flex-center p5 item-img img_click">
+                                            <a href="#">
+                                                <img src="<%:=list[i].products[ii].image_url%>"
+                                                     class="bd w">
+                                            </a>
+                                        </div>
+                                        <div class="flex-item-9 flex-row   p5">
+                                            <div class="w">
+                                                <h2 class="row-one"><%:=list[i].products[ii].product_name%></h2>
+                                                <p class="gray9  mt2"><%:=list[i].products[ii].product_sku%></p>
+                                            </div>
+                                            <div class="flex-col w">
+                                                <div class="red  fb lh200 f14 flex-item-4">
+                                                    <p>￥<i class="product_total"><%:=list[i].products[ii].product_price%></i></p>
+                                                </div>
+                                                <div class="flex-item-8 flex-row  flex-center">
+                                                    <p class="clearfix">
+                                                        <span class="num-lower iconfont cart-num-lower"></span>
+
+                                                        <input type="text" class="num-text cart-num-text" readonly value="<%:=list[i].products[ii].quantity%>"  max="<%:=list[i].products[ii].max_buy_qty%>" min="1">
+
+                                                        <span class="num-add iconfont cart-num-add"></span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 <% }%>
                             </div>
@@ -176,7 +207,8 @@ $this->title = "一起团";
 <?php $this->beginBlock('JS_END') ?>
 resetTotal();
 var select_cart_all=false;
-$(".item").change(function(){
+// $(".item").change(function(){
+$("body").bind('click','.item', function () {
     if($(".item:checked").length==$(".item").length){
         select_cart_all=true;
         $("#selectAll").attr("checked", true);
@@ -186,7 +218,7 @@ $(".item").change(function(){
     }
     resetTotal();
 });
-$(".img_click").click(function () {
+$("body").on('click','.img_click', function () {
     var _this = $(this);
     _this.parent(".store-item").find(".item").trigger('click');
 });
@@ -220,7 +252,7 @@ function resetTotal(){
 }
 
 
-$(".cart-num-add").click(function(){
+$("body").on('click','.cart-num-add', function () {
     var num_obj=$(this).siblings(".cart-num-text");
     var max=num_obj.attr('max');
     var min=num_obj.attr('min');
@@ -261,7 +293,7 @@ $(".cart-num-add").click(function(){
 });
 
 
-$(".cart-num-lower").click(function(){
+$("body").on('click','.cart-num-lower', function () {
     var num_obj=$(this).siblings(".cart-num-text");
     var max=num_obj.attr('max');
     var min=num_obj.attr('min');
@@ -286,7 +318,7 @@ $(".cart-num-lower").click(function(){
     var item_id=$(this).parents('.store-item').attr("data-id");
     var obj=$(this).parents(".store-item");
     $.showLoading("正在加载");
-    $.post('/gaffiliate-plan/update-item',{id:item_id,item:item,'qty':qty},function(data){
+    $.post('/affiliate-plan/update-item',{id:item_id,item:item,'qty':qty},function(data){
         $.hideLoading();
         if(data.status){
             obj.find(".cart-num-text").val(data.qty);
