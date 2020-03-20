@@ -29,7 +29,7 @@
 	<dt class="whitebg blue fb tc bdt bdb">
 	<div class="tit1 bluetit1 clearfix">
 		<h2 class="fl f14">大家都在买</h2>
-		<a class="fr  blue lh200 fn" href="<?=\yii\helpers\Url::to(['page/3534.html'])?>">更多&gt;&gt;</a>
+		<a class="fr  blue lh200 fn" href="<?=\yii\helpers\Url::to(['page/3538.html'])?>">更多&gt;&gt;</a>
 	</div>
 	</dt>
 	<dd>
