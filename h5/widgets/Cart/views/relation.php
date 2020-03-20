@@ -66,7 +66,7 @@
 <?php $this->beginBlock('JS_END') ?>
 var source = getSourceParms();
 var wx_xcx = <?php echo Yii::$app->session->get('source_from_agent_wx_xcx') ? 1:0  ?>;
-$.getJSON('<?php echo Yii::$app->params['API_URL']?>/mall/v1/ad/product?callback=?&'+source,{code:'H5-GWC-DES1',wx_xcx:wx_xcx}, function(result){
+$.getJSON('<?php echo Yii::$app->params['API_URL']?>/mall/v1/ad/product?callback=?&'+source,{code:'H5-0F-AD',wx_xcx:wx_xcx}, function(result){
 var html_content= template($('#tpl').html(), {list:result.data,from:0,to:result.data.length-1,index:'all_sider'});
 $("#tlp_content_2").html(html_content);
 //爆款滑动
