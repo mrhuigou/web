@@ -69,7 +69,8 @@ $this->title = "一起团";
         <?php if($affiliate_info){?>
             <?php  foreach ($affiliate_plans as $affiliate_plan_value){?>
                 <li class="<?=($affiliate_plan->affiliate_plan_id == $affiliate_plan_value->affiliate_plan_id) ?'cur':''?>">
-                    <a href="<?php echo \yii\helpers\Url::to(['affiliate-plan/index']).'&plan_code='.$affiliate_plan_value->code?>"><?php echo $affiliate_plan_value->name?></a>
+                    <a href="#" class="select_option" data-content="<?= $affiliate_plan_value->code ?>"><?php echo $affiliate_plan_value->name?></a>
+
                 </li>
             <?php }?>
         <?php }?>
@@ -91,11 +92,15 @@ $this->title = "一起团";
                            style="line-height:79px;">
                             <?php if(empty($cart)){?>
                                 <input type="checkbox" value="<?=$value->product_code?>" name="item"  class="item" id="<?=$key?>">
-                            <?php }else{ ?>
-                                <?php if(isset($cart[$value->product_code]) && $cart[$value->product_code] >0){ //购物车内有该商品?>
-                                    <input type="checkbox" value="<?=$value->product_code?>" name="item" checked class="item" id="<?=$key?>">
-                                <?php }else{?>
-                                    <input type="checkbox" value="<?=$value->product_code?>" name="item" class="item" id="<?=$key?>">
+                            <?php }else{?>
+                                <?php if(empty($cart[$affiliate_plan->affiliate_plan_id])){?>
+                                    <input type="checkbox" value="<?=$value->product_code?>" name="item"  class="item" id="<?=$key?>">
+                                <?php }else{ ?>
+                                    <?php if(isset($cart[$affiliate_plan->affiliate_plan_id][$value->product_code]) && $cart[$affiliate_plan->affiliate_plan_id][$value->product_code] >0){ //购物车内有该商品?>
+                                        <input type="checkbox" value="<?=$value->product_code?>" name="item" checked class="item" id="<?=$key?>">
+                                    <?php }else{?>
+                                        <input type="checkbox" value="<?=$value->product_code?>" name="item" class="item" id="<?=$key?>">
+                                    <?php }?>
                                 <?php }?>
                             <?php }?>
                         <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
@@ -106,15 +111,23 @@ $this->title = "一起团";
                                  class="bd w">
                         </a>
                     </div>
-                    <?php if(empty($cart)){
+                    <?php
+                    if(empty($cart)){
                         $quantity = 1;
                     }else{
-                        if(isset($cart[$value->product_code]) && $cart[$value->product_code] >0){ //购物车内有该商品
-                            $quantity = $cart[$value->product_code];
-                        }else{
+                        if(empty($cart[$affiliate_plan->affiliate_plan_id])){
                             $quantity = 1;
+                        }else{
+                            if(isset($cart[$affiliate_plan->affiliate_plan_id][$value->product_code]) && $cart[$affiliate_plan->affiliate_plan_id][$value->product_code] >0){ //购物车内有该商品
+                                $quantity = $cart[$affiliate_plan->affiliate_plan_id][$value->product_code];
+                            }else{
+                                $quantity = 1;
+                            }
                         }
-                    }?>
+                    }
+
+
+                    ?>
                     <div class="flex-item-9 flex-row   p5">
                         <div class="w">
                             <h2 class="row-one"><?=$value->product->description->name?></h2>
@@ -327,6 +340,37 @@ $(".ditui-sele .dropdown").dropdown('toggle');
 $("#select_option").change(function(){
     var point_code = $(this).val();
     window.location.href = "<?php echo \yii\helpers\Url::to(['affiliate-plan/index'])?>" + "&plan_code="+ point_code;
+});
+$(".select_option").click(function(){
+    var point_code = $(this).attr("data-content");
+    var data=[];
+    var data_string = "";
+    $(".item").each(function () {
+        var sing_data = [];
+        if($(this).attr("checked")){
+            data.push($(this).val());
+            var content = $(this).parents(".store-item");
+            var product_code = $(this).val();
+            var qty = parseInt(content.find(".cart-num-text").val());
+
+            data_string = data_string + product_code + ',' + qty + ';';
+        }
+    });
+    $.showLoading("正在提交");
+    // $('#form-checkout').submit();
+    $.post('/affiliate-plan/switch-plan-submit',{data:data_string,affiliate_plan_id:<?php echo $affiliate_plan? $affiliate_plan->affiliate_plan_id :0;?>},function(result){
+        if(result && !result.status){
+            $.hideLoading();
+            $.alert(result.message);
+        }else {
+            $.hideLoading();
+            window.location.href = "<?php echo \yii\helpers\Url::to(['affiliate-plan/index'])?>" + "&plan_code="+ point_code;
+        }
+
+    },'json');
+
+
+
 });
 
 <?php $this->endBlock() ?>

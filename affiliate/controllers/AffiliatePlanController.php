@@ -268,6 +268,107 @@ class AffiliatePlanController extends \yii\web\Controller {
 		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 		return $data;
 	}
+    //团长分销 切换分销方案 选中的商品自动 加入购物车
+    public function actionSwitchPlanSubmit(){
+//        \Yii::$app->session->remove("confirm_push");
+//        \Yii::$app->session->remove("ground_push_base");
+//        if (\Yii::$app->user->isGuest) {
+//            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
+//        }
+        $fx_user_login_status = false;
+        //获取用户登录状态 session 缓存 user_login_status
+        if(\Yii::$app->redis->get("fx_user_login_status")){
+            $fx_user_login_status = \Yii::$app->redis->get("fx_user_login_status");
+        }
+        if (!$fx_user_login_status) {
+            return $this->redirect(['/site-mobile/login', 'redirect' => '/affiliate-plan/index']);
+        }
+
+        $affiliate_plan_id = \Yii::$app->request->post('affiliate_plan_id');
+
+        $data_string = \Yii::$app->request->post("data");
+        trim($data_string,';');
+        $data_array = explode(';',$data_string);
+        $cart = [];
+        if(\Yii::$app->session->get('confirm_push')){
+            $cart = \Yii::$app->session->get('confirm_push');
+            if($cart[$affiliate_plan_id]){
+                unset($cart[$affiliate_plan_id]);
+            }
+        }
+        if ($data_array) {
+            foreach ($data_array as $key => $value) {
+                if ($value) {
+                    $items = explode(',', $value);
+                    list($product_code, $qty) = $items;
+                    $cart[$affiliate_plan_id][$product_code] = $qty;
+                }
+            }
+        }
+
+        \Yii::$app->session->set('confirm_push', $cart);
+        try {
+
+            $plan_info = AffiliatePlan::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1])->one();
+
+            if ($model = AffiliatePlanType::findOne(['code' => $plan_info->type, 'status' => 1])) {
+            }else{
+                throw new Exception("没有找到相关分销方案类型");
+            }
+
+            if (strtotime($plan_info->date_start) > strtotime(date('Y-m-d H:i:s'))) {
+                throw new Exception("分销活动未开始");
+            }
+            if (strtotime($plan_info->date_end) < strtotime(date('Y-m-d H:i:s'))) {
+                throw  new  Exception("分销活动已结束");
+            }
+
+            $time = time();
+            $end_time = strtotime(date("Y-m-d").' '. $plan_info->date_end);
+
+            if( time() > strtotime( $plan_info->ship_end) ){
+                throw  new  Exception("超过配送时间，请不要下单");
+            }
+
+            //检查库存（无库存处理）
+            if ($cart && $cart[$affiliate_plan_id]) {
+                $total = 0;
+                foreach ($cart[$affiliate_plan_id] as $code => $qty) {
+                    $affiliate_plan_detail = AffiliatePlanDetail::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1, 'product_code' => $code])->one();
+                    if ($affiliate_plan_detail->max_buy_qty < $qty) {
+                        //购买数量超过最大购买数量
+                        throw new Exception("最多购买".$affiliate_plan_detail->max_buy_qty.'件');
+                    }
+                    $price = $affiliate_plan_detail->price;
+                    $total = round(bcadd($total, bcmul($price, $qty,4),4),2);
+
+                    //$this->submit();
+                }
+
+                $base['total'] = $total;
+                $base['platform_id'] = 1;
+                $base['store_id'] = 1;
+                $base['name'] = '青岛每日惠购';
+                $base['url'] = 'https://m.mrhuigou.com/affiliate-plan/index';
+                $base['affiliate_plan_id'] = $affiliate_plan_id;
+
+                \Yii::$app->session->set('ground_push_base',$base);
+
+                //$this->submit($base, $cart, $ground_push_plan_id);
+            }
+
+
+        }catch (Exception $e){
+            $e->getMessage();
+            $json['status']= false;
+            $json['message'] = $e->getMessage();
+            return json_encode($json);
+        }
+
+    }
+
+
+
 	//地推活动购物车提交页面
 	public function actionSubmit(){
 	    \Yii::$app->session->remove("confirm_push");
