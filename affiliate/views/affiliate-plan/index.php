@@ -46,145 +46,70 @@ $this->title = "一起团";
         </div>
     </div>
 
-
-        <div id="swiper_content" style="max-width: inherit;width: 32rem;overflow: hidden;"></div>
-        <script id="swiper_content_tpl" type="text/html">
-            <div class="swiper-container" id="swiper-container_banner">
-                <div class="swiper-wrapper">
-                    <% for(var i=from; i<=to; i++) {%>
-                    <div class="swiper-slide"  style="min-height: 2rem;">
-                        <p class=" mb5 bg-wh pt5 pb5 pl10">方案名称：<i class="red"><%:=list[i].name%></i></p>
-                        <p class=" mb5 bg-wh pt5 pb5 pl10">开团时间：<i class="red"><%:=list[i].date_start%></i></p>
-                        <p class=" mb5 bg-wh pt5 pb5 pl10">闭团时间：<i class="red"><%:=list[i].date_end%></i></p>
-                        <p class=" mb5 bg-wh pt5 pb5 pl10">配送时间：<i class="red"><%:=list[i].ship_end%></i></p>
-
-                        <% if(list[i].products){%>
-                            <div id="cart-list">
-                                <% for(var ii=0; ii<=list[i].products.length-1; ii++) {%>
-                                    <div class="flex-col flex-center store-item bdb  whitebg pr" data-content="<%:=list[i].products[ii].product_code%>" data-id="<%:=list[i].products[ii].affiliate_plan_detail_id%>">
-
-                                        <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center tc"
-                                               style="line-height:79px;">
-                                            <% if(Object.keys(cart).length == 0){%>
-                                                <input type="checkbox" value="<%:=list[i].products[ii].product_code%>" name="item"  class="item" id="<%ii%>">
-                                            <% }else{ %>
-                                                <% if((cart[list[i].products[ii].product_code]) && cart[list[i].products[ii].product_code] >0){ %>
-                                                    <input type="checkbox" value="<%:=list[i].products[ii].product_code%>" name="item" checked class="item" id="<%ii%>">
-                                                <% }else{ %>
-                                                    <input type="checkbox" value="<%:=list[i].products[ii].product_code%>" name="item" class="item" id="<%ii%>">
-                                                <% }%>
-                                            <% }%>
-
-                                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
-                                        </label>
-
-                                        <div class="flex-item-2 flex-row flex-middle flex-center p5 item-img img_click">
-                                            <a href="#">
-                                                <img src="<%:=list[i].products[ii].image_url%>"
-                                                     class="bd w">
-                                            </a>
-                                        </div>
-                                        <div class="flex-item-9 flex-row   p5">
-                                            <div class="w">
-                                                <h2 class="row-one"><%:=list[i].products[ii].product_name%></h2>
-                                                <p class="gray9  mt2"><%:=list[i].products[ii].product_sku%></p>
-                                            </div>
-                                            <div class="flex-col w">
-                                                <div class="red  fb lh200 f14 flex-item-4">
-                                                    <p>￥<i class="product_total"><%:=list[i].products[ii].product_price%></i></p>
-                                                </div>
-                                                <div class="flex-item-8 flex-row  flex-center">
-                                                    <p class="clearfix">
-                                                        <span class="num-lower iconfont cart-num-lower"></span>
-
-                                                        <input type="text" class="num-text cart-num-text" readonly value="<%:=list[i].products[ii].quantity%>"  max="<%:=list[i].products[ii].max_buy_qty%>" min="1">
-
-                                                        <span class="num-add iconfont cart-num-add"></span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                <% }%>
-                            </div>
-                        <% }else {%>
-                            <div id="cart-list">暂无活动商品</div>
-                        <% }%>
+    <?php if ($info) { ?>
+        <div id="cart-list">
+            <?php if($affiliate_info && $affiliate_info->mode == 'DOWN_LINE'){?>
+                <p class="mt5 bg-wh pt10 pb10 pl10">自提点地址：<i class="red"><?php echo $affiliate_info->address?></i></p>
+            <?php }?>
+            <p class=" mb5 bg-wh pt5 pb5 pl10">配送时间：<i class="red"><?php echo $info->ship_end?></i></p>
 
 
-
-
-                        <p class=" mb5 bg-wh pt5 pb5 pl10"></p>
+            <?php foreach ($products as $key=>$value) { ?>
+                <div class="flex-col flex-center store-item bdb  whitebg pr" data-content="<?=$value->product_code?>" data-id="<?=$value->affiliate_plan_detail_id?>">
+                    <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center tc"
+                           style="line-height:79px;">
+                            <?php if(empty($cart)){?>
+                                <input type="checkbox" value="<?=$value->product_code?>" name="item"  class="item" id="<?=$key?>">
+                            <?php }else{ ?>
+                                <?php if(isset($cart[$value->product_code]) && $cart[$value->product_code] >0){ //购物车内有该商品?>
+                                    <input type="checkbox" value="<?=$value->product_code?>" name="item" checked class="item" id="<?=$key?>">
+                                <?php }else{?>
+                                    <input type="checkbox" value="<?=$value->product_code?>" name="item" class="item" id="<?=$key?>">
+                                <?php }?>
+                            <?php }?>
+                        <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                    </label>
+                    <div class="flex-item-2 flex-row flex-middle flex-center p5 item-img img_click">
+                        <a href="#">
+                            <img src="<?=\common\component\image\Image::resize($value->image_url,100,100)?>"
+                                 class="bd w">
+                        </a>
                     </div>
+                    <?php if(empty($cart)){
+                        $quantity = 1;
+                    }else{
+                        if(isset($cart[$value->product_code]) && $cart[$value->product_code] >0){ //购物车内有该商品
+                            $quantity = $cart[$value->product_code];
+                        }else{
+                            $quantity = 1;
+                        }
+                    }?>
+                    <div class="flex-item-9 flex-row   p5">
+                        <div class="w">
+                            <h2 class="row-one"><?=$value->product->description->name?></h2>
+                            <p class="gray9  mt2"><?=$value->product->getSku()?></p>
+                        </div>
+                        <div class="flex-col w">
+                            <div class="red  fb lh200 f14 flex-item-4">
+                                <p>￥<i class="product_total"><?=round(bcmul($value->price,$quantity,4),2)?></i></p>
+                            </div>
+                            <div class="flex-item-8 flex-row  flex-center">
+                                <p class="clearfix">
+                                    <span class="num-lower iconfont cart-num-lower"></span>
 
+                                    <input type="text" class="num-text cart-num-text" readonly value="<?php echo $quantity?>"  max="<?=$value->max_buy_qty?>" min="1">
 
-                    <% } %>
+                                    <span class="num-add iconfont cart-num-add"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination swiper-pagination-red swiper-pagination-banner"></div>
-            </div>
-        </script>
-
-<!--    --><?php //if ($info) { ?>
-<!--        <div id="cart-list">-->
-<!---->
-<!--            --><?php //foreach ($products as $key=>$value) { ?>
-<!--                <div class="flex-col flex-center store-item bdb  whitebg pr" data-content="--><?//=$value->product_code?><!--" data-id="--><?//=$value->affiliate_plan_detail_id?><!--">-->
-<!--                    <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center tc"-->
-<!--                           style="line-height:79px;">-->
-<!--                            --><?php //if(empty($cart)){?>
-<!--                                <input type="checkbox" value="--><?//=$value->product_code?><!--" name="item"  class="item" id="--><?//=$key?><!--">-->
-<!--                            --><?php //}else{ ?>
-<!--                                --><?php //if(isset($cart[$value->product_code]) && $cart[$value->product_code] >0){ //购物车内有该商品?>
-<!--                                    <input type="checkbox" value="--><?//=$value->product_code?><!--" name="item" checked class="item" id="--><?//=$key?><!--">-->
-<!--                                --><?php //}else{?>
-<!--                                    <input type="checkbox" value="--><?//=$value->product_code?><!--" name="item" class="item" id="--><?//=$key?><!--">-->
-<!--                                --><?php //}?>
-<!--                            --><?php //}?>
-<!--                        <div class="item-media"><i class="icon icon-form-checkbox"></i></div>-->
-<!--                    </label>-->
-<!--                    <div class="flex-item-2 flex-row flex-middle flex-center p5 item-img img_click">-->
-<!--                        <a href="#">-->
-<!--                            <img src="--><?//=\common\component\image\Image::resize($value->image_url,100,100)?><!--"-->
-<!--                                 class="bd w">-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                    --><?php //if(empty($cart)){
-//                        $quantity = 1;
-//                    }else{
-//                        if(isset($cart[$value->product_code]) && $cart[$value->product_code] >0){ //购物车内有该商品
-//                            $quantity = $cart[$value->product_code];
-//                        }else{
-//                            $quantity = 1;
-//                        }
-//                    }?>
-<!--                    <div class="flex-item-9 flex-row   p5">-->
-<!--                        <div class="w">-->
-<!--                            <h2 class="row-one">--><?//=$value->product->description->name?><!--</h2>-->
-<!--                            <p class="gray9  mt2">--><?//=$value->product->getSku()?><!--</p>-->
-<!--                        </div>-->
-<!--                        <div class="flex-col w">-->
-<!--                            <div class="red  fb lh200 f14 flex-item-4">-->
-<!--                                <p>￥<i class="product_total">--><?//=round(bcmul($value->price,$quantity,4),2)?><!--</i></p>-->
-<!--                            </div>-->
-<!--                            <div class="flex-item-8 flex-row  flex-center">-->
-<!--                                <p class="clearfix">-->
-<!--                                    <span class="num-lower iconfont cart-num-lower"></span>-->
-<!---->
-<!--                                    <input type="text" class="num-text cart-num-text" readonly value="--><?php //echo $quantity?><!--"  max="--><?//=$value->max_buy_qty?><!--" min="1">-->
-<!---->
-<!--                                    <span class="num-add iconfont cart-num-add"></span>-->
-<!--                                </p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            --><?php //} ?>
-<!--        </div>-->
-<!--    --><?php //}else{ ?>
-<!--        <div id="cart-list">暂无活动商品</div>-->
-<!--    --><?php //} ?>
+            <?php } ?>
+        </div>
+    <?php }else{ ?>
+        <div id="cart-list">暂无活动商品</div>
+    <?php } ?>
 
 
 </div>
@@ -207,8 +132,7 @@ $this->title = "一起团";
 <?php $this->beginBlock('JS_END') ?>
 resetTotal();
 var select_cart_all=false;
-// $(".item").change(function(){
-$("body").bind('click','.item', function () {
+$(".item").change(function(){
     if($(".item:checked").length==$(".item").length){
         select_cart_all=true;
         $("#selectAll").attr("checked", true);
@@ -218,7 +142,7 @@ $("body").bind('click','.item', function () {
     }
     resetTotal();
 });
-$("body").on('click','.img_click', function () {
+$(".img_click").click(function () {
     var _this = $(this);
     _this.parent(".store-item").find(".item").trigger('click');
 });
@@ -251,8 +175,7 @@ function resetTotal(){
     $("#cart_total").html(car_total);
 }
 
-
-$("body").on('click','.cart-num-add', function () {
+$(".cart-num-add").click(function () {
     var num_obj=$(this).siblings(".cart-num-text");
     var max=num_obj.attr('max');
     var min=num_obj.attr('min');
@@ -292,8 +215,7 @@ $("body").on('click','.cart-num-add', function () {
     },'json');
 });
 
-
-$("body").on('click','.cart-num-lower', function () {
+$(".cart-num-lower").click(function(){
     var num_obj=$(this).siblings(".cart-num-text");
     var max=num_obj.attr('max');
     var min=num_obj.attr('min');
@@ -368,39 +290,6 @@ $(".ditui-sele .dropdown").dropdown('toggle');
 $("#select_option").change(function(){
     var point_code = $(this).val();
     window.location.href = "<?php echo \yii\helpers\Url::to(['affiliate-plan/index'])?>" + "?plan_code="+ point_code;
-});
-
-var wx_xcx = <?php echo Yii::$app->session->get('source_from_agent_wx_xcx') ? 1:0  ?>;
-var host = document.domain;
-if(host.indexOf('mwx.') >=0){
-    wx_xcx = 1;
-}else{
-    wx_xcx = 0;
-}
-var source = getSourceParms();
-
-
-var swiper_content_tpl = $('#swiper_content_tpl').html();
-// var source = getSourceParms();
-//$.getJSON('<?php //echo Yii::$app->params["API_URL"]?>///mall/v1/ad/index?code=H5-0F-SLIDE&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
-    $.getJSON('/affiliate-plan/plan-info?type_code=DEFAULT&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
-    if(!result.status){
-        return;
-    }
-
-    var html= template(swiper_content_tpl, {list:result.data,from:0,to:(result.data.length-1),cart:result.cart});
-
-    $("#swiper_content").html(html);
-    $("img.lazy").scrollLoading({container:$(".content")});
-    var swiper_banner = new Swiper('#swiper-container_banner', {
-        pagination: '.swiper-pagination-banner',
-        paginationClickable: true,
-        loop:true,
-        spaceBetween: 0,
-        centeredSlides: true,
-        autoplay: 4000,
-        autoplayDisableOnInteraction: false
-    });
 });
 
 <?php $this->endBlock() ?>
