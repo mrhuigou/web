@@ -5,6 +5,7 @@
  * Date: 2017/8/4
  * Time: 15:54
  */
+use yii\helpers\Url;
 $this->title = "一起团";
 ?>
 <header class="fx-top bs-bottom whitebg lh44">
@@ -27,31 +28,43 @@ $this->title = "一起团";
         <img src="../assets/images/ditui/gp-top.jpeg" class="w" />
         </a>
     </div>
-    <div class="bg-wh mb5 pb5">
+<!--    <div class="bg-wh mb5 pb5">-->
+<!---->
+<!--        <div class="p10 pb5">-->
+<!--<!--            地址选择-->
+<!--            <div class="ditui-sele">-->
+<!--                <i class="iconfont icon-l">&#xe65f;</i>-->
+<!---->
+<!--                <div class="dropdown" >-->
+<!--                    --><?php //if($affiliate_info){?>
+<!--                        <select name="select_option" id="select_option" class="input-m w" style=" border: 0px;">-->
+<!--                            --><?php // foreach ($affiliate_plans as $affiliate_plan_value){?>
+<!--                                    <option value="--><?php //echo $affiliate_plan_value->code?><!--" readonly="readonly" --><?php //if($affiliate_plan->affiliate_plan_id == $affiliate_plan_value->affiliate_plan_id){ echo "selected='selected'";}?><!--><?php //echo $affiliate_plan_value->name?><!--</option>-->
+<!--                            --><?php //}?>
+<!--                        </select>-->
+<!--                    --><?php //}?>
+<!--                </div>-->
+<!---->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
-        <div class="p10 pb5">
-<!--            地址选择-->
-            <div class="ditui-sele">
-                <i class="iconfont icon-l">&#xe65f;</i>
+    <ul name="select_option" id="select_option" class="filter redFilter three f16 clearfix" style="border-bottom: 1px solid #ff463c;">
+        <?php if($affiliate_info){?>
+            <?php  foreach ($affiliate_plans as $affiliate_plan_value){?>
+                <li class="<?=($affiliate_plan->affiliate_plan_id == $affiliate_plan_value->affiliate_plan_id) ?'cur':''?>">
+                    <a href="<?php echo \yii\helpers\Url::to(['affiliate-plan/index']).'&plan_code='.$affiliate_plan_value->code?>"><?php echo $affiliate_plan_value->name?></a>
+                </li>
+            <?php }?>
+        <?php }?>
+    </ul>
 
-                <div class="dropdown" >
-                    <?php if($affiliate_info){?>
-                        <select name="select_option" id="select_option" class="input-m w" style=" border: 0px;">
-                            <option value="<?php echo $affiliate_info->code?>" readonly="readonly" selected ><?php echo $affiliate_info->username?></option>
-                        </select>
-                    <?php }?>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <?php if ($info) { ?>
+    <?php if ($affiliate_plan) { ?>
         <div id="cart-list">
             <?php if($affiliate_info && $affiliate_info->mode == 'DOWN_LINE'){?>
                 <p class="mt5 bg-wh pt10 pb10 pl10">自提点地址：<i class="red"><?php echo $affiliate_info->address?></i></p>
             <?php }?>
-            <p class=" mb5 bg-wh pt5 pb5 pl10">配送时间：<i class="red"><?php echo $info->ship_end?></i></p>
+            <p class=" mb5 bg-wh pt5 pb5 pl10">配送时间：<i class="red"><?php echo $affiliate_plan->ship_end?></i></p>
 
 
             <?php foreach ($products as $key=>$value) { ?>
@@ -117,7 +130,7 @@ $this->title = "一起团";
     <label class="label-checkbox item-content flex-item-3 flex-row flex-middle flex-center graybg tc "
            style="line-height: 58px;">
         <input type="checkbox" name="selectAll"  id="selectAll">
-        <div class="item-media "><i class="icon icon-form-checkbox vm"></i><span class="vm p2">全选</span></div>
+        <div class="item-media"><i class="icon icon-form-checkbox vm"></i><span class="vm p2">全选</span></div>
     </label>
     <div class="flex-item-6 flex-row flex-middle flex-right  p10  ">
         <p>合计：<span class="red">￥<i id="cart_total">0.00</i></span></p>
@@ -134,7 +147,7 @@ resetTotal();
 var select_cart_all=false;
 $(".item").change(function(){
     if($(".item:checked").length==$(".item").length){
-        select_cart_all=true;
+            select_cart_all=true;
         $("#selectAll").attr("checked", true);
     }else{
         select_cart_all=false;
@@ -173,6 +186,12 @@ function resetTotal(){
     });
     // $("#cart_total").html(car_total.toFixed(2));
     $("#cart_total").html(car_total);
+
+    if($(".item:checked").length > 0 && $(".item:checked").length==$(".item").length){
+        $("#selectAll").attr("checked", true);
+    }else{
+        $("#selectAll").attr("checked", false);
+    }
 }
 
 $(".cart-num-add").click(function () {
@@ -272,7 +291,7 @@ $("#checkoutBtn").click(function(){
     if(data.length>0){
         $.showLoading("正在提交");
         $('#form-checkout').submit();
-        $.post('/affiliate-plan/submit',{data:data_string,affiliate_plan_id:<?php echo $info? $info->affiliate_plan_id :0;?>},function(result){
+        $.post('/affiliate-plan/submit',{data:data_string,affiliate_plan_id:<?php echo $affiliate_plan? $affiliate_plan->affiliate_plan_id :0;?>},function(result){
             //location.href='affiliate-plan/checkout';
 
             if(result && !result.status){
@@ -289,7 +308,7 @@ $(".ditui-sele .dropdown").dropdown('toggle');
 
 $("#select_option").change(function(){
     var point_code = $(this).val();
-    window.location.href = "<?php echo \yii\helpers\Url::to(['affiliate-plan/index'])?>" + "?plan_code="+ point_code;
+    window.location.href = "<?php echo \yii\helpers\Url::to(['affiliate-plan/index'])?>" + "&plan_code="+ point_code;
 });
 
 <?php $this->endBlock() ?>

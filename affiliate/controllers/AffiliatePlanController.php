@@ -42,20 +42,14 @@ class AffiliatePlanController extends \yii\web\Controller {
 	public function actionIndex()
 	{
 
-        $code = \Yii::$app->request->get('plan_code');
+        $plan_code = \Yii::$app->request->get('plan_code');
         $type_code = \Yii::$app->request->get('type_code');
 
         //获取分销方案code编码
-        if(!$code){
+        if(!$plan_code){
             if ($model = AffiliatePlanType::findOne(['code' => $type_code, 'status' => 1])) {
-                $plans = AffiliatePlan::find()->where(['type'=>$model->code,'status'=>1])->andWhere(['and','date_start < NOW()','date_end > NOW()'])->all();
-                if($plans){
-                    foreach ($plans as $plan){
-                        if($plan){
-                            $code = $plan->code;
-                        }
-                    }
-                }
+                $plans = AffiliatePlan::find()->where(['type'=>$model->code,'status'=>1])->andWhere(['and','date_start < NOW()','date_end > NOW()'])->orderBy('date_start asc,date_end desc,affiliate_plan_id desc')->all();
+                $plan_code = $plans[0]->code;
             }else{
                 throw new NotFoundHttpException("没有找到相关分销方案类型");
             }
@@ -69,7 +63,7 @@ class AffiliatePlanController extends \yii\web\Controller {
         }
 
         if (!$fx_user_login_status) {
-            return $this->redirect(['/site-mobile/login', 'redirect' => '/affiliate-plan/index?plan_code='.$code]);
+            return $this->redirect(['/site-mobile/login', 'redirect' => '/affiliate-plan/index?plan_code='.$plan_code]);
         }
 
         $cart = [];
@@ -82,20 +76,23 @@ class AffiliatePlanController extends \yii\web\Controller {
         //获取当前分销商的分销商信息
         $affiliate_info = Affiliate::find()->where(['status'=>1,'affiliate_id'=>$affiliate_id])->one();
 
-        $info = AffiliatePlan::find()->where(['status' => 1,'code'=>$code])->andWhere(['<', 'date_start', date('Y-m-d H:i:s')])->andWhere(['>', 'date_end', date('Y-m-d H:i:s')])->one();
-
+        //正在进行的方案
+        $affiliate_plan = AffiliatePlan::find()->where(['status' => 1,'code'=>$plan_code])->andWhere(['<', 'date_start', date('Y-m-d H:i:s')])->andWhere(['>', 'date_end', date('Y-m-d H:i:s')])->one();
         $products = [];
-        if ($info) {
-            if ($model = AffiliatePlanType::findOne(['code' => $info->type, 'status' => 1])) {
+        if ($affiliate_plan) {
+
+            $affiliate_plans = AffiliatePlan::find()->where(['type'=>$affiliate_plan->type,'status'=>1])->andWhere(['and','date_start < NOW()','date_end > NOW()'])->orderBy('date_start asc,date_end desc,affiliate_plan_id desc')->all();
+
+            if ($model = AffiliatePlanType::findOne(['code' => $affiliate_plan->type, 'status' => 1])) {
             }else{
                 throw new NotFoundHttpException("没有找到相关分销方案类型");
             }
-            $products = AffiliatePlanDetail::find()->where(['status' => 1, 'affiliate_plan_id' => $info->affiliate_plan_id])->orderBy('priority asc')->all();
+            $products = AffiliatePlanDetail::find()->where(['status' => 1, 'affiliate_plan_id' => $affiliate_plan->affiliate_plan_id])->orderBy('priority asc')->all();
 
         } else {
             throw new NotFoundHttpException("没有找到相关分销方案");
         }
-        return $this->render('index', ['info' => $info, 'products' => $products,'cart'=>$cart,'affiliate_info' => $affiliate_info]);
+        return $this->render('index', ['affiliate_plan' => $affiliate_plan, 'products' => $products,'cart'=>$cart,'affiliate_info' => $affiliate_info,'affiliate_plans'=>$affiliate_plans]);
 
 	}
 
@@ -152,6 +149,8 @@ class AffiliatePlanController extends \yii\web\Controller {
                             'date_start' => $plan->date_start,
                             'date_end' => $plan->date_end,
                             'ship_end' => $plan->ship_end,
+                            'affiliate_plan_id' => $plan->affiliate_plan_id,
+                            'affiliate_plan_code' => $plan->code,
                             'products' => $products,
                         ];
 
