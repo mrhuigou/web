@@ -10,8 +10,8 @@ $this->title = "一起团";
 ?>
 <header class="fx-top bs-bottom whitebg lh44">
     <div class="flex-col tc">
-        <a class="flex-item-2" href="/">
-            <i class="aui-icon aui-icon-home green f28"></i>
+        <a class="flex-item-2" href="#">
+            <i class="aui-icon aui-icon-home white f28"></i>
         </a>
         <div class="flex-item-8 f16">
 			<?= \yii\helpers\Html::encode($this->title) ?>
