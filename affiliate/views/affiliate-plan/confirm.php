@@ -60,15 +60,15 @@ $this->title = '订单确认';
 
                     <div class="invoice_value tab_1" style="display: none">
                         <div class="flex-row mt10 ">
-                            <div class="flex-item-2 pt10 pl10"><i class="red">*</i>收货地址</div>
-                            <div class="flex-item-10 mb10 "><input type="text" class="input-text w " id="telephone" name="telephone" value="<?php echo $fx_user_info['telephone'] ? $fx_user_info['telephone']: "";?>">     </div>
+                            <div class="flex-item-4 pt10 pl10"><i class="red">*</i>收货地址</div>
+                            <div class="flex-item-8 mb10 "><input type="text" class="input-text w " id="telephone" name="telephone" value="<?php echo $fx_user_info['telephone'] ? $fx_user_info['telephone']: "";?>">     </div>
                         </div>
                     </div>
                     <ul class="line-book mt5 tab_2">
                         <?php if(!$model->in_range == 1){?>
                             <li>
-                                <div class="flex-item-2 pt10 pl10"><i class="red">*</i>选择地区</div>
-                                <div class="flex-item-10 mb10">
+                                <div class="flex-item-4 pt10 pl10"><i class="red">*</i>选择地区</div>
+                                <div class="flex-item-8 mb10">
                                     <div class="weui-cell__bd">
                                         <?php $p = $model->province ? $model->province : '山东省';
                                         $c = $model->city ? $model->city : '青岛市';
@@ -95,7 +95,8 @@ $this->title = '订单确认';
                             </li>
                             <p class="red pl5 error_district"></p>
                         <?php }?>
-                                            <?= $form->field($affiliate_order_model, 'type_invoice',['template' => '{label}<li>{input}</li>{error}'])->textarea(["placeholder" => '小区/写字楼/街道+楼号+楼层等','id'=>'address','class'=>'w f14 ','rows'=>2,'style'=>"height:45px;padding:5px;"])->label('详细地址')?>
+                        <div class="flex-item-4 pt10 pl10"><i class="red">*</i>详细地址</div>
+                                            <?= $form->field($affiliate_order_model, 'type_invoice',['template' => '{label}<li>{input}</li>{error}'])->textarea(["placeholder" => '小区/写字楼/街道+楼号+楼层等','id'=>'address','class'=>'w f14 ','rows'=>2,'style'=>"height:45px;padding:5px;"])->label(false)?>
                                             <p class="red pl5 error_address"></p>
                     </ul>
                 </div>

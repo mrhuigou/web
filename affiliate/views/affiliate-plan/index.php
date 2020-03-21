@@ -23,10 +23,26 @@ $this->title = "一起团";
 </header>
 <div class="content  bc">
     <!-- 新改图片 -->
-    <div class="bg-wh pb5 mb5">
-        <a href="#">
-        <img src="../assets/images/ditui/gp-top.jpeg" class="w" />
-        </a>
+<!--    <div class="bg-wh pb5 mb5">-->
+<!--        <a href="#">-->
+<!--        <img src="../assets/images/ditui/gp-top.jpeg" class="w" />-->
+<!--        </a>-->
+<!--    </div>-->
+
+    <!--团长头像-->
+    <div class="head-img" style="padding: 0 0;">
+        <div class="  flex-col flex-middle p10">
+            <div class="flex-item-3">
+                <a href="#" style=" line-height: 100px;">
+                    <img src="<?= \common\component\image\Image::resize(\Yii::$app->user->identity->photo, 100, 100) ?>"
+                         alt="<?= \Yii::$app->user->identity->nickname ?>" class="ava mava">
+                </a>
+            </div>
+            <div class="flex-item-6 tc pt10" >
+                <?= \Yii::$app->user->identity->nickname ?>
+                <p class="f12 " ><?= \Yii::$app->user->identity->signature ? \Yii::$app->user->identity->signature : '这家伙很懒没有留下签名' ?></p>
+            </div>
+        </div>
     </div>
 <!--    <div class="bg-wh mb5 pb5">-->
 <!---->
