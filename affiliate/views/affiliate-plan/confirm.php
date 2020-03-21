@@ -47,7 +47,7 @@ $this->title = '订单确认';
                     <div class="flex-row mt10 ">
                         <div class="flex-item-4 pt10 pl10"><i class="red">*</i>配送方式</div>
                         <div class="flex-item-8 ">
-                            <?= $form->field($affiliate_order_model, 'type_invoice', ['labelOptions' => ['class' => 'fb f14  ']])->inline()->radioList([ 1=>'自提', 2=>'配送到家'], [
+                            <?= $form->field($affiliate_order_model, 'type_invoice', ['labelOptions' => ['class' => 'fb f14  ']])->inline()->radioList([ 1=>'团长处自提', 2=>'配送到家'], [
                                 'itemOptions' => ['labelOptions' => ['class' => 'radio-inline ']],
                                 'onchange' => 'if( ($(this).find(":radio:checked").val() ==1)){ 
                                     $(".tab_1").show();$(".tab_2").hide();
