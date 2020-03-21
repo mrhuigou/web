@@ -14,9 +14,9 @@ $this->title = '订单确认';
         <div class="flex-item-8 f16">
 			<?= Html::encode($this->title) ?>
         </div>
-        <a class="flex-item-2" href="<?= \yii\helpers\Url::to(['/cart/index']) ?>">
-            <i class="aui-icon aui-icon-cart green f28"></i>
-        </a>
+<!--        <a class="flex-item-2" href="--><?//= \yii\helpers\Url::to(['/cart/index']) ?><!--">-->
+<!--            <i class="aui-icon aui-icon-cart green f28"></i>-->
+<!--        </a>-->
     </div>
 </header>
 <div class="pb50">
@@ -44,56 +44,66 @@ $this->title = '订单确认';
                         <div class="flex-item-2 pt10 pl10"><i class="red">*</i>手机</div>
                         <div class="flex-item-10 mb10 "><input type="text" class="input-text w " id="telephone" name="telephone" value="<?php echo $fx_user_info['telephone'] ? $fx_user_info['telephone']: "";?>">     </div>
                     </div>
+                    <div class="flex-row mt10 ">
+                        <div class="flex-item-4 pt10 pl10"><i class="red">*</i>配送方式</div>
+                        <div class="flex-item-8 ">
+                            <?= $form->field($affiliate_order_model, 'type_invoice', ['labelOptions' => ['class' => 'fb f14  ']])->inline()->radioList([ 1=>'自提', 2=>'配送到家'], [
+                                'itemOptions' => ['labelOptions' => ['class' => 'radio-inline ']],
+                                'onchange' => 'if( ($(this).find(":radio:checked").val() ==1)){ 
+                                    $(".tab_1").show();$(".tab_2").hide();
+                                    }else if($(this).find(":radio:checked").val() ==2){
+                                       $(".tab_1").hide();$(".tab_2").show();
+                                }'
+                            ])->label(false)?>
+                        </div>
+                    </div>
+
+                    <div class="invoice_value tab_1" style="display: none">
+                        <div class="flex-row mt10 ">
+                            <div class="flex-item-2 pt10 pl10"><i class="red">*</i>收货地址</div>
+                            <div class="flex-item-10 mb10 "><input type="text" class="input-text w " id="telephone" name="telephone" value="<?php echo $fx_user_info['telephone'] ? $fx_user_info['telephone']: "";?>">     </div>
+                        </div>
+                    </div>
+                    <ul class="line-book mt5 tab_2">
+                        <?php if(!$model->in_range == 1){?>
+                            <li>
+                                <div class="flex-item-2 pt10 pl10"><i class="red">*</i>选择地区</div>
+                                <div class="flex-item-10 mb10">
+                                    <div class="weui-cell__bd">
+                                        <?php $p = $model->province ? $model->province : '山东省';
+                                        $c = $model->city ? $model->city : '青岛市';
+                                        $d = $model->district ? $model->district : '市北区';
+                                        ?>
+                                        <input class="w f14" id="start" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
+                                    </div>
+                                </div>
+
+                            </li>
+                        <?php }else{?>
+                            <!--            <li><div class="t">所在城市：</div><div class="c">青岛市</div><div class="d">青岛市</div> </li>-->
+                            <li>
+                                <div class="t">选择地区：</div>
+                                <div class="c">
+                                    <div class="weui-cell__bd">
+                                        <?php $p = $model->province ? $model->province : '山东省';
+                                        $c = $model->city ? $model->city : '青岛市';
+                                        $d = $model->district ? $model->district : '市北区';
+                                        ?>
+                                        <input class="w f14" id="start" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
+                                    </div>
+                                </div>
+                            </li>
+                            <p class="red pl5 error_district"></p>
+                        <?php }?>
+                                            <?= $form->field($affiliate_order_model, 'type_invoice',['template' => '{label}<li>{input}</li>{error}'])->textarea(["placeholder" => '小区/写字楼/街道+楼号+楼层等','id'=>'address','class'=>'w f14 ','rows'=>2,'style'=>"height:45px;padding:5px;"])->label('详细地址')?>
+                                            <p class="red pl5 error_address"></p>
+                    </ul>
                 </div>
             </div>
 
 
 
             <div class="store_contain whitebg " id="store_contain_<?= $plan->affiliate_plan_id ?>">
-                <div class="mt5">
-                    <h2 class="clearfix p10">
-                        <span class="fl ">收货地址：<em class="org"><?= '默认收货地址' ?></em></span>
-                    </h2>
-                </div>
-
-                <ul class="line-book mt5">
-                    <?php if(!$model->in_range == 1){?>
-                        <li>
-                            <div class="t">选择地区：</div>
-                            <div class="c">
-                                <div class="weui-cell__bd">
-                                    <?php $p = $model->province ? $model->province : '山东省';
-                                    $c = $model->city ? $model->city : '青岛市';
-                                    $d = $model->district ? $model->district : '市北区';
-                                    ?>
-                                    <input class="w f14" id="start" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
-                                </div>
-                            </div>
-
-                        </li>
-                    <?php }else{?>
-                        <!--            <li><div class="t">所在城市：</div><div class="c">青岛市</div><div class="d">青岛市</div> </li>-->
-                        <li>
-                            <div class="t">选择地区：</div>
-                            <div class="c">
-                                <div class="weui-cell__bd">
-                                    <?php $p = $model->province ? $model->province : '山东省';
-                                    $c = $model->city ? $model->city : '青岛市';
-                                    $d = $model->district ? $model->district : '市北区';
-                                    ?>
-                                    <input class="w f14" id="start" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
-                                </div>
-                            </div>
-                        </li>
-                        <p class="red pl5 error_district"></p>
-                    <?php }?>
-<!--                    --><?//= $form->field($model, 'address',['template' => '{label}<li>{input}</li>{error}'])->textarea(["placeholder" => '小区/写字楼/街道+楼号+楼层等','id'=>'address','class'=>'w f14 ','rows'=>2,'style'=>"height:45px;padding:5px;"])->label('详细地址')?>
-<!--                    <p class="red pl5 error_address"></p>-->
-<!--                    --><?//= $form->field($model, 'username', ['inputOptions' => ["placeholder" => '请填写收货人姓名','id'=>'username']])->label('收货人') ?>
-<!--                    <p class="red pl5 error_username"></p>-->
-<!--                    --><?//= $form->field($model, 'telephone', ['inputOptions' => ["placeholder" => '请填写收货人电话号码','id'=>'telephone']])->label('手机号') ?>
-<!--                    <p class="red pl5 error_telephone"></p>-->
-                </ul>
 				<?php foreach ($carts as $key => $value) { ?>
                     <?php
                         $product = \api\models\V1\Product::findOne(['product_code'=>$value['pv']->product_code ]);

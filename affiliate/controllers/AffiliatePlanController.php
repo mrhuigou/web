@@ -6,6 +6,7 @@
  * Time: 15:52
  */
 namespace affiliate\controllers;
+use affiliate\models\AffiliateOrderForm;
 use api\models\V1\Affiliate;
 use api\models\V1\AffiliatePlan;
 use api\models\V1\AffiliatePlanDetail;
@@ -423,6 +424,7 @@ class AffiliatePlanController extends \yii\web\Controller {
             $affiliate_id = \Yii::$app->session->get('from_affiliate_uid');
             $affiliate_info = Affiliate::find()->where(['status'=>1,'affiliate_id'=>$affiliate_id])->one();
 
+            $affiliate_order_model = new AffiliateOrderForm();
             if(\Yii::$app->request->isPost){
                 //$this->submit();
                 $telephone = \Yii::$app->request->post("telephone");
@@ -437,7 +439,7 @@ class AffiliatePlanController extends \yii\web\Controller {
 
                 return $this->redirect(['payment/index', 'trade_no' => $trade_no, 'showwxpaytitle' => 1]);
             }
-            return $this->render('confirm', ['plan'=>$plan,'carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'fx_user_info' => $fx_user_info,'affiliate_info'=>$affiliate_info]);
+            return $this->render('confirm', ['plan'=>$plan,'carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'fx_user_info' => $fx_user_info,'affiliate_info'=>$affiliate_info,'affiliate_order_model' => $affiliate_order_model]);
         }else{
             return $this->redirect('/order/index');
         }
