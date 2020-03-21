@@ -93,7 +93,19 @@ class AffiliatePlanController extends \yii\web\Controller {
         } else {
             throw new NotFoundHttpException("没有找到相关分销方案");
         }
-        return $this->render('index', ['affiliate_plan' => $affiliate_plan, 'products' => $products,'cart'=>$cart,'affiliate_info' => $affiliate_info,'affiliate_plans'=>$affiliate_plans]);
+
+        //计算总金额
+        $total = 0;
+        if($ground_push_base = \Yii::$app->session->get('ground_push_base')){
+            foreach ($ground_push_base as $key => $value){
+                if($ground_push_base[$affiliate_plan->affiliate_plan_id]){
+                    continue;
+                }
+                $total = $total + $value['total'];
+            }
+        }
+
+        return $this->render('index', ['affiliate_plan' => $affiliate_plan, 'products' => $products,'cart'=>$cart,'affiliate_info' => $affiliate_info,'affiliate_plans'=>$affiliate_plans,'total'=> $total]);
 
 	}
 
@@ -295,6 +307,12 @@ class AffiliatePlanController extends \yii\web\Controller {
             if($cart[$affiliate_plan_id]){
                 unset($cart[$affiliate_plan_id]);
             }
+            if($ground_push_base = \Yii::$app->session->get('ground_push_base')){
+                if($ground_push_base[$affiliate_plan_id]){
+                    unset($ground_push_base[$affiliate_plan_id]);
+                }
+                \Yii::$app->session->set('ground_push_base',$ground_push_base);
+            }
         }
         if ($data_array) {
             foreach ($data_array as $key => $value) {
@@ -345,12 +363,16 @@ class AffiliatePlanController extends \yii\web\Controller {
                     //$this->submit();
                 }
 
-                $base['total'] = $total;
-                $base['platform_id'] = 1;
-                $base['store_id'] = 1;
-                $base['name'] = '青岛每日惠购';
-                $base['url'] = 'https://m.mrhuigou.com/affiliate-plan/index';
-                $base['affiliate_plan_id'] = $affiliate_plan_id;
+                $base = [];
+                if($base = \Yii::$app->session->get('ground_push_base')){
+
+                }
+                $base[$affiliate_plan_id]['total'] = $total;
+                $base[$affiliate_plan_id]['platform_id'] = 1;
+                $base[$affiliate_plan_id]['store_id'] = 1;
+                $base[$affiliate_plan_id]['name'] = '青岛每日惠购';
+                $base[$affiliate_plan_id]['url'] = 'https://m.mrhuigou.com/affiliate-plan/index';
+                $base[$affiliate_plan_id]['affiliate_plan_id'] = $affiliate_plan_id;
 
                 \Yii::$app->session->set('ground_push_base',$base);
 
