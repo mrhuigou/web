@@ -590,7 +590,7 @@ class AffiliatePlanController extends \yii\web\Controller {
 	    return true;
     }
     //生成订单页面
-    private function submit($base,$cart)
+    private function submit($bases,$carts)
     {   //交易号
         $trade_no = "";
 
@@ -602,6 +602,10 @@ class AffiliatePlanController extends \yii\web\Controller {
             //$product_stock = [];
             $transaction = \Yii::$app->db->beginTransaction();
             try {
+
+                //根据购物车里商品 按照不同的方案 生成不同的订单
+                foreach ($carts as $plan_id => $cart){
+                    $base = $bases[$plan_id];
                     //订单主数据
                     $Order_model = new Order();
                     $Order_model->order_no = OrderSn::generateNumber();
@@ -645,6 +649,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                     if (!$Order_model->save(false)) {
                         throw new \Exception("订单数据异常");
                     }
+
 
                     $point = AffiliatePlan::findOne($base['affiliate_plan_id']);
                     if($point){
@@ -725,42 +730,6 @@ class AffiliatePlanController extends \yii\web\Controller {
                             $product_total =  round(bcmul($price , $qty,4),2);
                             $sum_product_total = bcadd($sum_product_total,$product_total,4);
 
-//                            $point_stock = GroundPushStock::find()->where(['ground_push_point_id'=>$point->id,'product_code'=>$code])->one();
-//                            if(!$point_stock->quantity >= $qty){
-//                                //库存不足
-//                                throw new Exception("库存不足");
-//                            }
-//
-//                            $tmp_qty =  $point_stock->tmp_qty;
-//                            $tmp_qty = $tmp_qty + $qty;
-//                            $point_stock->tmp_qty = $tmp_qty;
-
-//                            $fn = function ($product_code,$point_id,$qty) use (&$fn){
-//
-//                                $point_stock = GroundPushStock::find()->where(['ground_push_point_id'=>$point_id,'product_code'=>$product_code])->one();
-//
-//                                \Yii::$app->log->logger->log("code:".$product_code." ; version:".$point_stock->version,Logger::LEVEL_ERROR);
-//                                if(!$point_stock->quantity >= $qty){
-//                                    //库存不足
-//                                    throw new Exception("库存不足");
-//                                }
-//                                try{
-//                                    $tmp_qty =  $point_stock->tmp_qty;
-//                                    $tmp_qty = $tmp_qty + $qty;
-//                                    $point_stock->tmp_qty = $tmp_qty;
-//                                    $point_stock->last_time = date("Y-m-d H:i:s");
-//                                    $point_stock->save(false);
-//
-//
-//                                }catch (StaleObjectException $e){
-//                                    //重新验证下库存
-//                                    $fn($product_code,$point_id,$qty);
-//                                }
-//                            };
-//
-//                            $fn($code,$point->affiliate_plan_id,$qty);
-
-
 
                             $promotion_id = 0;
                             $promotion_detail_id = 0;
@@ -790,10 +759,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                             }
                         }
                     }
-
                     $sum_product_total = round($sum_product_total,2);
-
-
                     $totals = $this->getPushOrderTotals($sum_product_total,$Order_model->order_id);
                     //添加订单总计信息
                     if ($totals) {
@@ -812,6 +778,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                             }
                         }
                     }
+
                     //添加订单历史记录
                     $Order_history = new OrderHistory();
                     $Order_history->order_id = $Order_model->order_id;
@@ -821,10 +788,13 @@ class AffiliatePlanController extends \yii\web\Controller {
                     if (!$Order_history->save(false)) {
                         throw new \Exception("订单记录异常");
                     }
+
+
                     //创建合并订单进行支付
                     $merge_order_ids[] = $Order_model->order_id;
                     $merge_total = round(bcadd($merge_total, $Order_model->total, 4),2);
 
+                }
 
                 $model = new OrderMerge();
                 $model->merge_code = OrderSn::generateNumber();
