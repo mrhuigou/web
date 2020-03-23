@@ -98,7 +98,7 @@ class AffiliatePlanController extends \yii\web\Controller {
         $total = 0;
         if($ground_push_base = \Yii::$app->session->get('ground_push_base')){
             foreach ($ground_push_base as $key => $value){
-                if($ground_push_base[$affiliate_plan->affiliate_plan_id]){
+                if($key == $affiliate_plan->affiliate_plan_id){
                     continue;
                 }
                 $total = $total + $value['total'];

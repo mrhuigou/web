@@ -205,7 +205,8 @@ $("#selectAll").click(function () {//全选
     resetTotal();
 });
 function resetTotal(){
-    var car_total=0;
+    // var car_total=0;
+    var car_total=<?= $total;?>;
     $(".item").each(function(){
         if($(this).is(":checked")){
             var pt=$(this).parents(".store-item").find(".product_total").text();
