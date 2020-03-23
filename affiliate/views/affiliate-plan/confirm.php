@@ -104,42 +104,77 @@ $this->title = '订单确认';
 
 
 
-            <div class="store_contain whitebg " id="store_contain_<?= $plan->affiliate_plan_id ?>">
-				<?php foreach ($carts as $key => $value) { ?>
-                    <?php
-                        $product = \api\models\V1\Product::findOne(['product_code'=>$value['pv']->product_code ]);
-                    ?>
-                    <div class="flex-col tc p5 graybg" style="border-bottom: 1px dotted #999;">
-                        <div class="flex-item-3">
-                            <a href="<?= \yii\helpers\Url::to(['product/index', 'product_code' => $product->product_code, 'shop_code' => $product->store_code]) ?>">
-                                <img src="<?= \common\component\image\Image::resize($product->image, 100, 100) ?>"
-                                     class="db w">
-                            </a>
-                        </div>
-                        <div class="flex-item-7 tl pl10">
-                            <h2><?= $product->description->name ?></h2>
-                            <p class="gray9  mt2"><?= $product->getSku() ?></p>
+            <?php foreach ($carts as $plan_id => $cart) {?>
 
+                <?php $plan_info = \api\models\V1\AffiliatePlan::findOne(['affiliate_plan_id'=> $plan_id])?>
+                <div class="graybg p10 store_totals">
+                    <p class="mb5 clearfix lh150">
+                            <span class="fr red fb"><?= $plan_info->name?></span>
+                        <span class="fl fb">方案名称：</span>
+                    </p>
+                </div>
+                <div class="graybg p10 store_totals">
+                    <p class="mb5 clearfix lh150">
+                            <span class="fr red fb"><?= date('Y-m-d',strtotime($plan_info->ship_end)) ?></span>
+                        <span class="fl fb">配送时间：</span>
+                    </p>
+                </div>
+                <div class="store_contain whitebg " id="store_contain_<?= $plan_info->affiliate_plan_id ?>">
+                    <?php $cart_total = 0;?>
+                    <?php foreach ($cart as $key => $value) { ?>
+                        <?php
+                        //单笔订单金额计算$cart_total
+                        $cart_total = $cart_total + $value['product_total'];
+
+                        ?>
+                        <?php
+                            $product = \api\models\V1\Product::findOne(['product_code'=>$value['pv']->product_code ]);
+                        ?>
+                        <div class="flex-col tc p5 graybg" style="border-bottom: 1px dotted #999;">
+                            <div class="flex-item-3">
+                                <a href="<?= \yii\helpers\Url::to(['product/index', 'product_code' => $product->product_code, 'shop_code' => $product->store_code]) ?>">
+                                    <img src="<?= \common\component\image\Image::resize($product->image, 100, 100) ?>"
+                                         class="db w">
+                                </a>
+                            </div>
+                            <div class="flex-item-7 tl pl10">
+                                <h2><?= $product->description->name ?></h2>
+                                <p class="gray9  mt2"><?= $product->getSku() ?></p>
+
+                            </div>
+                            <div class="flex-item-2 tc flex-middle flex-row">
+                                <p class="blue mb5"> x<?= $value['qty'] ?></p>
+                                <p class="red  fb">￥<?= $value['pv']->price; ?></p>
+                            </div>
                         </div>
-                        <div class="flex-item-2 tc flex-middle flex-row">
-                            <p class="blue mb5"> x<?= $value['qty'] ?></p>
-                            <p class="red  fb">￥<?= $value['pv']->price; ?></p>
-                        </div>
-                    </div>
-				<?php } ?>
+                    <?php } ?>
+                </div>
 
                 <div class="graybg p10 store_totals">
-					<?php if ($totals) { ?>
-						<?php foreach ($totals as $value) { ?>
+                    <p class="mb5 clearfix lh150">
+                            <span class="fr red fb">￥<em
+                                        class="total"><?= $cart_total?></em></span>
+                        <span class="fl fb">订单金额：</span>
+                    </p>
+                </div>
+
+                <div style="border:1px dashed #000;margin-top: 30px;"></div>
+            <?php } ?>
+
+            <div class="graybg p10 store_totals">
+                <?php if ($totals) { ?>
+                    <?php foreach ($totals as $value) { ?>
+                        <?php if($value['code'] == 'total'){?>
                             <p class="mb5 clearfix lh150">
-                                <span class="fr red fb">￥<em
-                                            class="<?= $value['code'] ?>"><?= $value['value'] ?></em></span>
+                                        <span class="fr red fb">￥<em
+                                                    class="<?= $value['code'] ?>"><?= $value['value'] ?></em></span>
                                 <span class="fl fb"><?= $value['title'] ?>：</span>
                             </p>
-						<?php } ?>
-					<?php } ?>
-                </div>
+                        <?php } ?>
+                    <?php } ?>
+                <?php } ?>
             </div>
+
 
 		<?php } ?>
 

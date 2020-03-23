@@ -393,7 +393,7 @@ class AffiliatePlanController extends \yii\web\Controller {
 
 	//地推活动购物车提交页面
 	public function actionSubmit(){
-	    \Yii::$app->session->remove("confirm_push");
+//	    \Yii::$app->session->remove("confirm_push");
 	    \Yii::$app->session->remove("ground_push_base");
 //        if (\Yii::$app->user->isGuest) {
 //            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
@@ -409,68 +409,79 @@ class AffiliatePlanController extends \yii\web\Controller {
 
         $affiliate_plan_id = \Yii::$app->request->post('affiliate_plan_id');
 	    $data_string = \Yii::$app->request->post("data");
+//	    $data_string = '511401,2;515469,1';
+//        $affiliate_plan_id = 2;
 	    trim($data_string,';');
 	    $data_array = explode(';',$data_string);
+
         $cart = [];
+        if($cart = \Yii::$app->session->get('confirm_push')){
+            if($cart[$affiliate_plan_id]){
+                unset($cart[$affiliate_plan_id]);
+            }
+        }
         if ($data_array) {
             foreach ($data_array as $key => $value) {
                 if ($value) {
                     $items = explode(',', $value);
                     list($product_code, $qty) = $items;
-                    $cart[$product_code] = $qty;
+                    $cart[$affiliate_plan_id][$product_code] = $qty;
                 }
             }
         }
+
         \Yii::$app->session->set('confirm_push', $cart);
         try {
 
-            $plan_info = AffiliatePlan::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1])->one();
+            if($cart){
+                $totals = 0;
+                foreach ($cart as $affiliate_plan_id => $products){
+                    $plan_info = AffiliatePlan::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1])->one();
 
-            if ($model = AffiliatePlanType::findOne(['code' => $plan_info->type, 'status' => 1])) {
-            }else{
-                throw new NotFoundHttpException("没有找到相关分销方案类型");
-            }
-
-            if (strtotime($plan_info->date_start) > strtotime(date('Y-m-d H:i:s'))) {
-                throw new Exception("分销活动未开始");
-            }
-            if (strtotime($plan_info->date_end) < strtotime(date('Y-m-d H:i:s'))) {
-                throw  new  Exception("分销活动已结束");
-            }
-
-            $time = time();
-            $end_time = strtotime(date("Y-m-d").' '. $plan_info->date_end);
-
-            if( time() > strtotime( $plan_info->ship_end) ){
-                throw  new  Exception("超过配送时间，请不要下单");
-            }
-
-            //检查库存（无库存处理）
-            if ($cart) {
-                $total = 0;
-                foreach ($cart as $code => $qty) {
-                    $affiliate_plan_detail = AffiliatePlanDetail::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1, 'product_code' => $code])->one();
-                    if ($affiliate_plan_detail->max_buy_qty < $qty) {
-                        //购买数量超过最大购买数量
-                        throw new Exception("最多购买".$affiliate_plan_detail->max_buy_qty.'件');
+                    if ($model = AffiliatePlanType::findOne(['code' => $plan_info->type, 'status' => 1])) {
+                    }else{
+                        throw new Exception("没有找到相关分销方案类型");
                     }
-                    $price = $affiliate_plan_detail->price;
-                    $total = round(bcadd($total, bcmul($price, $qty,4),4),2);
 
-                    //$this->submit();
+                    if (strtotime($plan_info->date_start) > strtotime(date('Y-m-d H:i:s'))) {
+                        throw new Exception("分销活动未开始");
+                    }
+                    if (strtotime($plan_info->date_end) < strtotime(date('Y-m-d H:i:s'))) {
+                        throw  new  Exception("分销活动已结束");
+                    }
+
+                    if( time() > strtotime( $plan_info->ship_end) ){
+                        throw  new  Exception("超过配送时间，请不要下单");
+                    }
+
+                    if($products){
+                        $total = 0;
+                        foreach ($products as $code => $qty) {
+                            $affiliate_plan_detail = AffiliatePlanDetail::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1, 'product_code' => $code])->one();
+                            if ($affiliate_plan_detail->max_buy_qty < $qty) {
+                                //购买数量超过最大购买数量
+                                throw new Exception("最多购买".$affiliate_plan_detail->max_buy_qty.'件');
+                            }
+                            $price = $affiliate_plan_detail->price;
+                            $total = round(bcadd($total, bcmul($price, $qty,4),4),2);
+
+                            //$this->submit();
+                        }
+
+                        $base[$affiliate_plan_id]['total'] = $total;
+                        $base[$affiliate_plan_id]['platform_id'] = 1;
+                        $base[$affiliate_plan_id]['store_id'] = 1;
+                        $base[$affiliate_plan_id]['name'] = '青岛每日惠购';
+                        $base[$affiliate_plan_id]['url'] = 'https://m.mrhuigou.com/affiliate-plan/index';
+                        $base[$affiliate_plan_id]['affiliate_plan_id'] = $affiliate_plan_id;
+
+                        \Yii::$app->session->set('ground_push_base',$base);
+
+                    }
+
+                    $totals = round(bcadd($totals, $total,4),2);
                 }
 
-
-                $base['total'] = $total;
-                $base['platform_id'] = 1;
-                $base['store_id'] = 1;
-                $base['name'] = '青岛每日惠购';
-                $base['url'] = 'https://m.mrhuigou.com/affiliate-plan/index';
-                $base['affiliate_plan_id'] = $affiliate_plan_id;
-
-                \Yii::$app->session->set('ground_push_base',$base);
-
-                //$this->submit($base, $cart, $ground_push_plan_id);
                 return $this->redirect(['/affiliate-plan/confirm','plan_id'=>$affiliate_plan_id]);
             }
 
@@ -485,6 +496,7 @@ class AffiliatePlanController extends \yii\web\Controller {
     }
     //提货确认页面
     public function actionConfirm(){
+
 	    $cart = [];
 //        if (\Yii::$app->user->isGuest) {
 //            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
@@ -515,34 +527,38 @@ class AffiliatePlanController extends \yii\web\Controller {
         }else{
              return $this->redirect('/order/index');
         }
-        if(\Yii::$app->request->get('plan_id')){
-            $plan_id = \Yii::$app->request->get('plan_id');
-        }else{
-            return $this->redirect('/order/index');
-        }
+//        if(\Yii::$app->request->get('plan_id')){
+//            $plan_id = \Yii::$app->request->get('plan_id');
+//        }else{
+//            return $this->redirect('/order/index');
+//        }
+//
+//        $plan = AffiliatePlan::findOne(['affiliate_plan_id'=>$plan_id]);
 
-        $plan = AffiliatePlan::findOne(['affiliate_plan_id'=>$plan_id]);
-
-        $sub_total = 0;
+        $sub_totals = 0;
+        $carts = [];
         if($cart){
-            $carts = [];
-            $count = 0;
-            foreach ($cart as $code => $qty){
-                $plan_view = AffiliatePlanDetail::findOne(['affiliate_plan_id'=>$plan->affiliate_plan_id,'product_code'=>$code,'status'=>1]);
-                $product_total = 0;
-                if($plan_view){
-                    $product_total = bcmul($qty,$plan_view->price,4);
-                    $product_total = round($product_total,2);
-                    $carts[$count]['pv'] = $plan_view;
-                    $carts[$count]['qty'] = $qty;
-                    $carts[$count]['product_total'] = $product_total;
+            foreach ($cart as $plan_id => $products){
+                $count = 0;
+                $sub_total = 0;
+                foreach ($products as $code => $qty){
+                    $plan_view = AffiliatePlanDetail::findOne(['affiliate_plan_id'=>$plan_id,'product_code'=>$code,'status'=>1]);
+                    $product_total = 0;
+                    if($plan_view){
+                        $product_total = bcmul($qty,$plan_view->price,4);
+                        $product_total = round($product_total,2);
+                        $carts[$plan_id][$count]['pv'] = $plan_view;
+                        $carts[$plan_id][$count]['qty'] = $qty;
+                        $carts[$plan_id][$count]['product_total'] = $product_total;
 
-                    $count++;
+                        $count++;
+                    }
+                    $sub_total = $sub_total + $product_total;
                 }
-                $sub_total = $sub_total + $product_total;
+                $sub_totals = $sub_total + $sub_totals;
             }
-            $pay_total = $sub_total;
-            $totals = $this->getPushOrderTotals($sub_total);
+            $pay_total = $sub_totals;
+            $totals = $this->getPushOrderTotals($sub_totals);
 
             $affiliate_id = \Yii::$app->session->get('from_affiliate_uid');
             $affiliate_info = Affiliate::find()->where(['status'=>1,'affiliate_id'=>$affiliate_id])->one();
@@ -562,7 +578,7 @@ class AffiliatePlanController extends \yii\web\Controller {
 
                 return $this->redirect(['payment/index', 'trade_no' => $trade_no, 'showwxpaytitle' => 1]);
             }
-            return $this->render('confirm', ['plan'=>$plan,'carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'fx_user_info' => $fx_user_info,'affiliate_info'=>$affiliate_info,'affiliate_order_model' => $affiliate_order_model]);
+            return $this->render('confirm', ['carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'fx_user_info' => $fx_user_info,'affiliate_info'=>$affiliate_info,'affiliate_order_model' => $affiliate_order_model]);
         }else{
             return $this->redirect('/order/index');
         }
