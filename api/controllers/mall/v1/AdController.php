@@ -144,13 +144,16 @@ class AdController extends Controller {
                     }
                     //------------------------优惠券描述---------------------
 
+                    //对商品图进行处理
+                    $images = $ad_detail->product->productBase->imagelist;
+
 					$data[$count] = [
 						'item_id'=>$ad_detail->product->product_base_id,
 						'item_code'=>$ad_detail->product->product_base_code,
 						'name' => $ad_detail->product->description->name,
 						'meta_description' => $promotion_detail_title.$coupon_title.$ad_detail->product->description->meta_description,
 //						'image' => Image::resize(($ad_detail->source_url ?: $promotion_detail_image )? :$ad_detail->product->image,320,320),
-						'image' => Image::resize($promotion_detail_image ? :$ad_detail->product->image,320,320),
+						'image' => Image::resize($promotion_detail_image ? :$images[0],320,320),
 						'ad_image' => Image::resize($ad_detail->source_url ?: $promotion_detail_image),
                         'sale_price' => $ad_detail->product->price,
 						'vip_price' => $ad_detail->product->vip_price,
