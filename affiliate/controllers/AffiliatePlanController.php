@@ -105,7 +105,17 @@ class AffiliatePlanController extends \yii\web\Controller {
             }
         }
 
-        return $this->render('index', ['affiliate_plan' => $affiliate_plan, 'products' => $products,'cart'=>$cart,'affiliate_info' => $affiliate_info,'affiliate_plans'=>$affiliate_plans,'total'=> $total]);
+        //排除当前方案，其他方案的购物车
+        $is_other_cart = false;
+        if(!empty($cart)){
+            foreach ($cart as $key => $value){
+                if($is_other_cart == false && $key != $affiliate_plan->affiliate_plan_id){
+                    $is_other_cart = true;
+                }
+            }
+        }
+
+        return $this->render('index', ['affiliate_plan' => $affiliate_plan, 'products' => $products,'cart'=>$cart,'affiliate_info' => $affiliate_info,'affiliate_plans'=>$affiliate_plans,'total'=> $total,'is_other_cart'=> $is_other_cart]);
 
 	}
 

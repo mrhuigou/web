@@ -308,6 +308,7 @@ $(".cart-num-lower").click(function(){
 $("#checkoutBtn").click(function(){
     var data=[];
     var data_string = "";
+    var is_other_cart = "<?=$is_other_cart?>";
     $(".item").each(function () {
         var sing_data = [];
         if($(this).attr("checked")){
@@ -320,7 +321,7 @@ $("#checkoutBtn").click(function(){
         }
     });
 
-    if(data.length>0){
+    if(data.length>0 || is_other_cart==1){
         $.showLoading("正在提交");
         $('#form-checkout').submit();
         $.post('/affiliate-plan/submit',{data:data_string,affiliate_plan_id:<?php echo $affiliate_plan? $affiliate_plan->affiliate_plan_id :0;?>},function(result){
