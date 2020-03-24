@@ -12,7 +12,7 @@
         <ul class="clearfix">
             <?php foreach($model as $data){ ?>
                 <li class="fl">
-                    <img src="<?=\common\component\image\Image::resize($data->image,50,50)?>" class="vm  bd" style="width: 25px; height: 25px;" title="<?=$data->description->name?> [<?=$data->getSku()?>]" />
+                    <img src="<?=\common\component\image\Image::resize($data->image,50,50)?>" class="vm  bd" style="width: 50px; height: 50px;" title="<?=$data->description->name?> [<?=$data->getSku()?>]" />
                     <?=$data->description->name?> [<?=$data->getSku()?>]
                     X <?=$data->quantity?>
                 </li>
