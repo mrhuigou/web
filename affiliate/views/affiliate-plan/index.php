@@ -79,11 +79,11 @@ $this->title = "一起团";
     <?php if ($affiliate_plan) { ?>
         <div id="cart-list">
             <?php if($affiliate_info && $affiliate_info->mode == 'DOWN_LINE'){?>
-                <p class="mt5 bg-wh pt10 pb10 pl10">自提点地址：<i class="red"><?php echo $affiliate_info->address?></i></p>
+                <p class="mt5 bg-wh pt10 pb10 pl10">团长服务点：<i class="red"><?php echo $affiliate_info->address?></i></p>
             <?php }?>
-            <p class=" mb5 bg-wh pt5 pb5 pl10">开团时间：<i class="red"><?php echo $affiliate_plan->date_start?></i></p>
-            <p class=" mb5 bg-wh pt5 pb5 pl10">闭团时间：<i class="red"><?php echo $affiliate_plan->date_end?></i></p>
-            <p class=" mb5 bg-wh pt5 pb5 pl10">配送时间：<i class="red"><?php echo $affiliate_plan->ship_end?></i></p>
+            <p class=" mb5 bg-wh pt5 pb5 pl10">开团时间：<i class="red"><?php echo date('Y-m-d',strtotime($affiliate_plan->date_start))?></i></p>
+            <p class=" mb5 bg-wh pt5 pb5 pl10">结单时间：<i class="red"><?php echo date('Y-m-d',strtotime($affiliate_plan->date_end))?></i></p>
+            <p class=" mb5 bg-wh pt5 pb5 pl10">配送时间：<i class="red"><?php echo date('Y-m-d',strtotime($affiliate_plan->ship_end))?></i></p>
 
 
             <?php foreach ($products as $key=>$value) { ?>
