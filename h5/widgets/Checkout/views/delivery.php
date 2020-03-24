@@ -28,7 +28,7 @@ use \common\component\Helper\Datetime;
     <div>
         <div class="col-12 bd m5 p5 whitebg cp f16 red">
             <span class="fb">配送通知：</span>
-            安全你、我、他，无接触配送，请到小区门口或楼下收货，共抗疫情，配送小哥不进入楼宇，敬请谅解！
+            安全你、我、他，无接触配送，请到小区门口或楼下收货，共抗疫情，配送小哥不进入楼宇，如果小区放行，我们非常高兴送到家里，敬请谅解！
         </div>
     </div>
 <!--    <div class="line-a flex-col w flex-middle red mb5" >-->
@@ -80,7 +80,7 @@ use \common\component\Helper\Datetime;
                                         <div>
                                             <div class="col-12 bd m5 p5 whitebg cp f16 red">
                                                 <span class="fb">配送通知：</span>
-                                                安全你、我、他，无接触配送，请到小区门口或楼下收货，共抗疫情，配送小哥不进入楼宇，敬请谅解！
+                                                安全你、我、他，无接触配送，请到小区门口或楼下收货，共抗疫情，配送小哥不进入楼宇，如果小区放行，我们非常高兴送到家里，敬请谅解！
                                             </div>
                                         </div>
                 </div>

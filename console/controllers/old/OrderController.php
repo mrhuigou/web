@@ -165,7 +165,7 @@ class OrderController extends \yii\console\Controller {
 											if ($open_id = $order->customer->getWxOpenId()) {
 												$notice = new WxNotice();
 //												$message = "亲:您的" . $order->order_no . "订单已发货，每日惠购小哥正在顶风冒雪赶来，您的一缕微笑是我们更好服务的动力，您可在“账户中心”实时跟踪货物地图位置，祝您购物愉快";
-												$message = "亲:您的" . $order->order_no . "订单已发货，每日惠购小哥正在赶来，安全你、我、他，无接触配送，请到小区门口或楼下收货，共抗疫情，配送小哥不进入楼宇，敬请谅解！您可在“账户中心”实时跟踪货物地图位置，祝您购物愉快";
+												$message = "亲:您的" . $order->order_no . "订单已发货，每日惠购小哥正在赶来，安全你、我、他，无接触配送，请到小区门口或楼下收货，共抗疫情，配送小哥不进入楼宇，如果小区放行，我们非常高兴送到家里，敬请谅解！您可在“账户中心”实时跟踪货物地图位置，祝您购物愉快";
 												$notice->order($open_id, "http://m.mrhuigou.com/order/shipping?order_no=" . $order->order_no, ['title' => '尊敬的每日惠购会员', 'order_no' => $order->order_no, 'total' => $order->total, 'status' => '已发出', 'remark' => $message]);
 											}
 											if ($order->orderShipping->shipping_telephone !== $order->telephone) {
