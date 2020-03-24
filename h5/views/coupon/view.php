@@ -73,7 +73,21 @@ $this->title ='家润每日惠购优惠券';
                 <?php if($value->product->stockCount >0){ ?>
 		<div class="flex-col mb5 br5 whitebg f12 bs coupon-product ml10 mr10" data-id="<?=$value->product->product_id?>" data-param="<?=$value->product->getPrice()?>">
 			<div class="flex-item-4 tc pt5 pb5">
-				<a href="<?=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product->product_code,'shop_code'=>$value->product->store_code])?>"><img src="<?=\common\component\image\Image::resize($value->product->image,100,100)?>" alt="商品图片" width="95" height="95"></a>
+
+                <?php
+                    //对商品图进行处理
+                    $imagelist = '';
+                    $images = $value->product->productBase->imagelist;
+                    if($images){
+                        foreach ($images as $value_image){
+                            if(empty($imagelist)){
+                                $imagelist = $value_image;
+                            }
+                        }
+                    }
+
+                ?>
+				<a href="<?=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product->product_code,'shop_code'=>$value->product->store_code])?>"><img src="<?=\common\component\image\Image::resize($imagelist,100,100)?>" alt="商品图片" width="95" height="95"></a>
 
             </div>
 
