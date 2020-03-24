@@ -39,13 +39,57 @@ $this->title = '订单确认';
                     <div class="flex-row mt10 pt15">
                         <div class="flex-item-4  pl10"><i class="red">*</i>配送方式</div>
                         <div class="flex-item-8 ">
-                            <?= $form->field($affiliate_order_model, 'type_invoice', ['labelOptions' => ['class' => 'fb f14  ']])->inline()->radioList([ 1=>'团长处自提', 2=>'配送到家'], [
+                            <?= $form->field($model, 'distribution_type', ['labelOptions' => ['class' => 'fb f14  ']])->inline()->radioList([ 1=>'配送到家', 2=>'团长处自提'], [
                                 'itemOptions' => ['labelOptions' => ['class' => 'radio-inline ']],
-                                'onchange' => 'if( ($(this).find(":radio:checked").val() ==1)){ 
-                                    $(".tab_1").show();$(".tab_2").hide();
-                                    }else if($(this).find(":radio:checked").val() ==2){
-                                       $(".tab_1").hide();$(".tab_2").show();
-                                }'
+                                'onchange' => '
+                                var distribution_type1 = $(this).find(":radio:checked").val();
+                                console.log($(this).find(":radio:checked").val());
+                                choice_distribution_type();
+                                //通过配送方式选择
+function choice_distribution_type(){
+    $.showLoading("正在加载");
+    $.post(\'/affiliate-plan/distribution-address\',{distribution_type:distribution_type1},function(data){
+        $.hideLoading();
+        if(data.status){
+           var address = data.data.address;
+           var distribution_type = data.data.distribution_type;
+   
+            if(distribution_type == 1){
+                if(Object.keys(address).length > 0){
+                    $(".confirm-username").html(address.address_username);
+                    $(".confirm-mobile").html(address.address_telephone);
+                    $(".confirm-zone").html(address.city + \'-\'+ address.district);
+                    $(".confirm-address").html(address.address_1);
+                    $(".tab_1").show();$(".tab_2").show();$(".tab_3").hide();
+                }else{
+                    $(".tab_1").hide();$(".tab_2").hide();$(".tab_3").show();
+                }
+            }
+            if(distribution_type == 2){
+                $(".tab_1").show();$(".tab_2").hide();$(".tab_3").hide();
+                 if(Object.keys(address).length > 0){
+                    $(".confirm-username").html(address.address_username);
+                    $(".confirm-mobile").html(address.address_telephone);
+                    $(".confirm-zone").html(address.city + \'-\'+ address.district);
+                    $(".confirm-address").html(address.address_1);
+                  
+                }else{
+                    
+                }
+            }
+            
+            
+      
+            
+        }else{
+            $.alert(data.message);
+        }
+    },\'json\');
+};
+                               
+                                
+                                
+                                '
                             ])->label(false)?>
                         </div>
                     </div>
@@ -54,23 +98,20 @@ $this->title = '订单确认';
 
 
             <div class="colorbar"></div>
-            <div class="p10 db  whitebg f14  flex-col"  id="addressTri" >
-                <?php $address = \api\models\V1\Address::findOne('248998');?>
-                <?php if($address) { ?>
-                    <div class="flex-item-10 select_address">
-                        <p><em class="confirm-username" id="confirm-username"><?=$address->firstname?></em><em class="confirm-tel ml10" id="confirm-mobile"><?=$address->telephone?></em></p>
-                        <p class="confirm-zone"><?=$address->citys?$address->citys->name:''?>-<?=$address->district?$address->district->name:""?></p>
-                        <p class="confirm-address"> <?=$address->address_1?> </p>
+                    <div class="p10 db  whitebg f14  flex-col"  id="addressTri">
+                            <div class="flex-item-10 select_address tab_1" style="display: none">
+                                <p><em class="confirm-username" id="confirm-username"></em><em class="confirm-tel ml10 confirm-mobile" id="confirm-mobile"></em></p>
+                                <p class="confirm-zone"></p>
+                                <p class="confirm-address"> </p>
+                            </div>
+                            <div class="flex-item-2 tr pt20 green select_address tab_2" style="display: none">
+                                修改<i class="iconfont f14 ">&#xe60b;</i>
+                            </div>
+                            <div class="select_address tab_3" style="display: none">
+                                <a class="db p20  rarrow whitebg f14 tc" href="javascript:;"><span class="iconfont fb">&#xe60c;</span>创建您的收货地址 </a>
+                            </div>
                     </div>
-                    <div class="flex-item-2 tr pt20 green select_address">
-                        修改<i class="iconfont f14 ">&#xe60b;</i>
-                    </div>
-                <?php }else{?>
-                    <div class="select_address">
-                        <a class="db p20  rarrow whitebg f14 tc" href="javascript:;"><span class="iconfont fb">&#xe60c;</span>创建您的收货地址 </a>
-                    </div>
-                <?php } ?>
-            </div>
+
             <div class="colorbar "></div>
 
 
@@ -259,13 +300,56 @@ $this->title = '订单确认';
 </div>
 <script>
 <?php $this->beginBlock('JS_END') ?>
+
+choice_distribution_type();
+//通过配送方式选择
+function choice_distribution_type(){
+    var distribution_type1 = <?=$model->distribution_type?>;
+    $.showLoading("正在加载");
+    $.post('/affiliate-plan/distribution-address',{distribution_type:distribution_type1},function(data){
+        $.hideLoading();
+        if(data.status){
+            var address = data.data.address;
+            var distribution_type = data.data.distribution_type;
+
+            if(distribution_type == 1){
+                if(Object.keys(address).length > 0){
+                    $(".confirm-username").html(address.address_username);
+                    $(".confirm-mobile").html(address.address_telephone);
+                    $(".confirm-zone").html(address.city + '-'+ address.district);
+                    $(".confirm-address").html(address.address_1);
+                    $(".tab_1").show();$(".tab_2").show();$(".tab_3").hide();
+                }else{
+                    $(".tab_1").hide();$(".tab_2").hide();$(".tab_3").show();
+                }
+            }
+            if(distribution_type == 2){
+                $(".tab_1").show();$(".tab_2").hide();$(".tab_3").hide();
+                if(Object.keys(address).length > 0){
+                    $(".confirm-username").html(address.address_username);
+                    $(".confirm-mobile").html(address.address_telephone);
+                    $(".confirm-zone").html(address.city + '-'+ address.district);
+                    $(".confirm-address").html(address.address_1);
+
+                }else{
+
+                }
+            }
+        }else{
+            $.alert(data.message);
+        }
+    },'json');
+}
+
+
+
 $("#button_submit").click(function(){
     //$("#confirm_form_address").html($(".select_address").html());
     var telephone = $("#telephone").val();
     var firstname = $("#firstname").val();
     var confirm_mobile = $("#confirm-mobile").text();
-    var confirm_name = $("#confirm-username").text();
-    console.log(confirm_name);//return false;
+    var confirm_name = $(".confirm-username").text();
+    console.log(confirm_name);return false;
     console.log(confirm_mobile);
     if(!firstname){
         $.alert("收货人姓名必须填写");

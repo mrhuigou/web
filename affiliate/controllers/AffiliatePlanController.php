@@ -573,7 +573,7 @@ class AffiliatePlanController extends \yii\web\Controller {
             $affiliate_id = \Yii::$app->session->get('from_affiliate_uid');
             $affiliate_info = Affiliate::find()->where(['status'=>1,'affiliate_id'=>$affiliate_id])->one();
 
-            $affiliate_order_model = new AffiliateOrderForm();
+            $model = new AffiliateOrderForm($affiliate_id,$fx_user_info);
             if(\Yii::$app->request->isPost){
                 //$this->submit();
                 $telephone = \Yii::$app->request->post("telephone");
@@ -588,13 +588,57 @@ class AffiliatePlanController extends \yii\web\Controller {
 
                 return $this->redirect(['payment/index', 'trade_no' => $trade_no, 'showwxpaytitle' => 1]);
             }
-            return $this->render('confirm', ['carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'fx_user_info' => $fx_user_info,'affiliate_info'=>$affiliate_info,'affiliate_order_model' => $affiliate_order_model]);
+            return $this->render('confirm', ['carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'fx_user_info' => $fx_user_info,'affiliate_info'=>$affiliate_info,'model' => $model]);
         }else{
             return $this->redirect('/order/index');
         }
 
 
 
+    }
+    //根据用户选择的配送方式获取收货地址
+    public function actionDistributionAddress(){
+
+        $distribution_type = \Yii::$app->request->post("distribution_type");
+//        $distribution_type = \Yii::$app->request->get("distribution_type");
+        try {
+
+            if($distribution_type){
+                $address = [];
+                $fx_user_info = json_decode(\Yii::$app->redis->get("fx_user_info"),true);
+                if($distribution_type == 1){
+                    //获取最后下单的地址
+                    $last_order_info = Order::find()->where(['customer_id'=> $fx_user_info['customer_id'],'sent_to_erp'=> 'Y'])->orderBy('date_added desc')->one();
+                    if($last_order_info){
+                        $address['zone'] = $last_order_info->orderShipping->shipping_zone;
+                        $address['city'] = $last_order_info->orderShipping->shipping_city;
+                        $address['district'] = $last_order_info->orderShipping->shipping_district;
+                        $address['address_1'] = $last_order_info->orderShipping->shipping_address_1;
+                        $address['address_username'] = $last_order_info->orderShipping->shipping_firstname;
+                        $address['address_telephone'] = $last_order_info->orderShipping->shipping_telephone;
+                    }
+                }
+                if($distribution_type == 2){
+                    $affiliate_id = \Yii::$app->session->get('from_affiliate_uid');
+                    $affiliate_info = Affiliate::find()->where(['status'=>1,'affiliate_id'=>$affiliate_id])->one();
+                    $address['zone'] = $affiliate_info->zone_name;
+                    $address['city'] = $affiliate_info->city_name;
+                    $address['district'] = $affiliate_info->district_name;
+                    $address['address_1'] = $affiliate_info->address;
+                    $address['address_username'] = $fx_user_info['firstname']?:"hdogh";
+                    $address['address_telephone'] = $fx_user_info['telephone'];
+                }
+            }
+
+            $json['status'] = true;
+            $json['data'] = ['address'=> $address,'distribution_type'=> $distribution_type];
+
+        }catch (Exception $e){
+            $e->getMessage();
+            $json['status']= false;
+            $json['message'] = $e->getMessage();
+        }
+        return json_encode($json);
     }
     public function validate(){
 	    return true;
