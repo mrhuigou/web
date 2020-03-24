@@ -26,7 +26,7 @@
         <ul class="clearfix">
             <?php foreach($coupon_gifts as $data){ ?>
                 <li class="fl">
-                    <img src="<?=\common\component\image\Image::resize($data->product->image,50,50)?>" class="vm  bd" style="width: 25px; height: 25px;" title="<?=$data->product->description->name?> [<?=$data->product->getSku()?>]" />
+                    <img src="<?=\common\component\image\Image::resize($data->product->image,50,50)?>" class="vm  bd" style="width: 50px; height: 50px;" title="<?=$data->product->description->name?> [<?=$data->product->getSku()?>]" />
                     <?=$data->product->description->name?> [<?=$data->product->getSku()?>]
                     X <?=$data->qty?>
                 </li>
