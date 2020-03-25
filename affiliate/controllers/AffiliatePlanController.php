@@ -578,6 +578,8 @@ class AffiliatePlanController extends \yii\web\Controller {
                 //$this->submit();
                 $telephone = \Yii::$app->request->post("telephone");
                 $firstname = \Yii::$app->request->post("firstname");
+
+                var_dump($telephone);die;
                 $base['telephone'] = $telephone;
                 $base['firstname'] = $firstname;
 

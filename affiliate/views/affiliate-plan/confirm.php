@@ -31,8 +31,9 @@ $this->title = '订单确认';
 			'inputOptions' => ["class" => 'appbtn tl w'],
 			'errorOptions' => ['class' => 'red fb tc db']
 		],]); ?>
+        <input type="text" id="confirm_telephone"   name="confirm_telephone" style="display: none" value="">
 
-
+<!--        <input type="text" class="input-text w" id="firstname" name="firstname" value="" style="display: none">-->
 		<?php if ($carts) { ?>
             <div class="store_contain whitebg " id="store_contain">
                 <div class="mt5 ">
@@ -416,7 +417,21 @@ $("#confirm_pay").click(function(){
     if(post_flag){
         post_flag=false;
         $.showLoading("正在提交");
+        // $('#form-checkout').submit();
+        $("#confirm_telephone").val($(".confirm-mobile").text());
         $('#form-checkout').submit();
+        // var addressPop=$('#addressPop').html();
+        // var telephone = $(".confirm-mobile").text();
+        // var username = $(".confirm-username").text();
+        // var zone= $(".confirm-zone").text();
+        // var address_1 = $(".confirm-address").text();
+        // $.post('/affiliate-plan/confirm',{telephone:telephone,username:username,address_1:address_1,zone:zone},function(data){
+        //     $.hideLoading();
+        //     if(data.status){
+        //     }else{
+        //         $.alert(data.message);
+        //     }
+        // },'json');
     }
 });
 
