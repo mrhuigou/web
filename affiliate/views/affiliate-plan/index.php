@@ -141,7 +141,7 @@ $this->title = "一起团";
                                 <p class="clearfix">
                                     <span class="num-lower iconfont cart-num-lower"></span>
 
-                                    <input type="text" class="num-text cart-num-text" readonly value="<?php echo $quantity?>"  max="<?=$value->max_buy_qty?>" min="1">
+                                    <input type="text" class="num-text cart-num-text"  value="<?php echo $quantity?>"  max="<?=$value->max_buy_qty?>" min="1">
 
                                     <span class="num-add iconfont cart-num-add"></span>
                                 </p>
@@ -305,6 +305,43 @@ $(".cart-num-lower").click(function(){
         }
     },'json');
 });
+$(".cart-num-text").blur(function(){
+    var num_obj=$(this);
+    var max=num_obj.attr('max');
+    var min=num_obj.attr('min');
+    var qty=parseInt(num_obj.val());
+    if(!max){
+        max=100;
+    }
+    if(!min){
+        min=1;
+    }
+    if(isNaN(qty) && qty < min){
+        qty=min;
+    }
+    if(qty <= parseInt(max) && qty >= parseInt(min)){
+        num_obj.val(qty);
+    }else{
+        qty=max;
+        num_obj.val(max);
+    }
+    $(this).parents('.store-item').find(".qty").text(qty);
+    var item=$(this).parents('.store-item').attr("data-content");
+    var item_id=$(this).parents('.store-item').attr("data-id");
+    var obj=$(this).parents(".store-item");
+    $.showLoading("正在加载");
+    $.post('<?php echo \yii\helpers\Url::to(["/affiliate-plan/update-item"])?>',{id:item_id,item:item,'qty':qty},function(data){
+        $.hideLoading();
+        if(data.status){
+            obj.find(".cart-num-text").val(data.qty);
+            obj.find(".product_total").html(data.sub_total);
+            resetTotal();
+        }else{
+            $.alert(data.message);
+        }
+    },'json');
+});
+
 $("#checkoutBtn").click(function(){
     var data=[];
     var data_string = "";
