@@ -34,13 +34,13 @@ $this->title = "一起团";
         <div class="  flex-col flex-middle p10">
             <div class="flex-item-3">
                 <a href="#" style=" line-height: 100px;">
-                    <img src="<?= \common\component\image\Image::resize(\Yii::$app->user->identity->photo, 100, 100) ?>"
-                         alt="<?= \Yii::$app->user->identity->nickname ?>" class="ava mava">
+                    <img src="<?= \common\component\image\Image::resize('', 100, 100) ?>"
+                         alt="每日惠购" class="ava mava">
                 </a>
             </div>
             <div class="flex-item-6 tc pt10" >
-                <?= \Yii::$app->user->identity->nickname ?>
-                <p class="f12 " ><?= \Yii::$app->user->identity->signature ? \Yii::$app->user->identity->signature : '这家伙很懒没有留下签名' ?></p>
+                每日惠购
+                <p class="f12 " >这家伙很懒没有留下签名</p>
             </div>
         </div>
     </div>
