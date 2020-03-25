@@ -644,17 +644,20 @@ class AffiliatePlanController extends \yii\web\Controller {
     //编辑收货地址
     public function actionEditAddress(){
 	    $address = [];
-//        $telephone = \Yii::$app->request->post("telephone");
-//        $username = \Yii::$app->request->post("username");
-//        $zone = \Yii::$app->request->post("zone");
-//        $address_1 = \Yii::$app->request->post("address_1");
+        $address['telephone'] = \Yii::$app->request->get("telephone");
+        $address['username'] = \Yii::$app->request->get("username");
+        $address['zone'] = \Yii::$app->request->get("zone");
+        $address['address_1'] = \Yii::$app->request->get("address_1");
         try {
 
-            throw new \Exception("商品创建失败");
-//            if(\Yii::$app->request->isPost){
-//
-//            }
-//            return $this->render('edit-address', ['address'=>$address]);
+            if($post = \Yii::$app->request->isPost){
+                echo "<pre>";
+                var_dump($post['address_1']);die;
+            }
+            $address = [
+                'telephone' => 13287379532
+            ];
+            return $this->render('edit-address', ['address'=>$address]);
 
         }catch (Exception $e){
             $e->getMessage();
