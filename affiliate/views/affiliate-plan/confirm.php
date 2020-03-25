@@ -43,6 +43,7 @@ $this->title = '订单确认';
                                 'itemOptions' => ['labelOptions' => ['class' => 'radio-inline ']],
                                 'onchange' => '
                                 var distribution_type1 = $(this).find(":radio:checked").val();
+                                $("#addressTri").attr("data-id", distribution_type1);
                                 console.log($(this).find(":radio:checked").val());
                                 choice_distribution_type();
                                 //通过配送方式选择
@@ -98,8 +99,8 @@ function choice_distribution_type(){
 
 
             <div class="colorbar"></div>
-                    <div class="p10 db  whitebg f14  flex-col"  id="addressTri">
-                            <div class="flex-item-10  tab_1" style="display: none">
+                    <div class="p10 db  whitebg f14  flex-col"  id="addressTri" data-id="">
+                            <div class="flex-item-10  tab_1 select_address" style="display: none">
                                 <p><em class="confirm-username" id="confirm-username"></em><em class="confirm-tel ml10 confirm-mobile" id="confirm-mobile"></em></p>
                                 <p class="confirm-zone"></p>
                                 <p class="confirm-address"> </p>
@@ -113,7 +114,20 @@ function choice_distribution_type(){
                     </div>
 
             <div class="colorbar "></div>
-
+            <ul class="line-book mt5">
+                <li>
+                    <div class="t">选择地区：</div>
+                    <div class="c">
+                        <div class="weui-cell__bd">
+                            <?php $p = $model->province ? $model->province : '山东省';
+                            $c = $model->city ? $model->city : '青岛市';
+                            $d = $model->district ? $model->district : '市北区';
+                            ?>
+                            <input class="w f14" id="start" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
+                        </div>
+                    </div>
+                </li>
+            </ul>
 
             <!--地址弹层-->
             <script id="addressPop" type="text/html">
@@ -418,6 +432,7 @@ $("#start").cityPicker({
 });
 
 $(".select_address").click(function () {
+
     var addressPop=$('#addressPop').html();
     var telephone = $(".confirm-mobile").text();
     var username = $(".confirm-username").text();
