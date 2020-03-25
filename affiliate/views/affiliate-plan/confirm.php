@@ -99,7 +99,7 @@ function choice_distribution_type(){
 
             <div class="colorbar"></div>
                     <div class="p10 db  whitebg f14  flex-col"  id="addressTri">
-                            <div class="flex-item-10 select_address tab_1" style="display: none">
+                            <div class="flex-item-10  tab_1" style="display: none">
                                 <p><em class="confirm-username" id="confirm-username"></em><em class="confirm-tel ml10 confirm-mobile" id="confirm-mobile"></em></p>
                                 <p class="confirm-zone"></p>
                                 <p class="confirm-address"> </p>
@@ -151,7 +151,7 @@ function choice_distribution_type(){
                     <div class="c">
                         <div class="t">详细地址：</div>
                         <div class="weui-cell__bd">
-                            <textarea name="a" placeholder='小区/写字楼/街道+楼号+楼层等' id='address' class='w f14' rows=2 style="height:45px;padding:5px;"></textarea>
+                            <textarea name="a" placeholder='小区/写字楼/街道+楼号+楼层等' id='address_new' class='w f14' rows=2 style="height:45px;padding:5px;"><%:=address_1%></textarea>
                         </div>
                     </div>
 
@@ -159,7 +159,7 @@ function choice_distribution_type(){
                         <div class="mt5">
                             <div class="flex-row ">
                                 <div class="flex-item-2 p5 pt10 pl10"><i class="red">*</i>姓名</div>
-                                <div class="flex-item-10 mt5 "><input type="text" class="input-text w" id="firstname" name="firstname" placeholder = '请填写收货人姓名' value="<?php echo Yii::$app->user->identity ? Yii::$app->user->identity->firstname : "";?>"></div>
+                                <div class="flex-item-10 mt5 "><input type="text" class="input-text w" id="firstname" name="firstname" placeholder = '请填写收货人姓名' value="<%:=username%>"></div>
                             </div>
                         </div>
                     </div>
@@ -168,7 +168,7 @@ function choice_distribution_type(){
                         <div class="mt5">
                             <div class="flex-row mt10 ">
                                 <div class="flex-item-2 p5 pt10 pl10"><i class="red">*</i>手机</div>
-                                <div class="flex-item-10 mb10 "><input type="text" class="input-text w " id="telephone" name="telephone" placeholder = '请填写收货人手机号' value="<?php echo Yii::$app->user->identity ? Yii::$app->user->identity->telephone: "";?>">     </div>
+                                <div class="flex-item-10 mb10 "><input type="text" class="input-text w " id="telephone" name="telephone" placeholder = '请填写收货人手机号' value="<%:=telephone%>"></div>
                             </div>
                         </div>
                     </div>
@@ -325,6 +325,7 @@ function choice_distribution_type(){
             }
             if(distribution_type == 2){
                 $(".tab_1").show();$(".tab_2").hide();$(".tab_3").hide();
+
                 if(Object.keys(address).length > 0){
                     $(".confirm-username").html(address.address_username);
                     $(".confirm-mobile").html(address.address_telephone);
@@ -345,19 +346,28 @@ function choice_distribution_type(){
 
 $("#button_submit").click(function(){
     //$("#confirm_form_address").html($(".select_address").html());
-    var telephone = $("#telephone").val();
-    var firstname = $("#firstname").val();
-    var confirm_mobile = $("#confirm-mobile").text();
-    var confirm_name = $(".confirm-username").text();
-    console.log(confirm_name);return false;
-    console.log(confirm_mobile);
-    if(!firstname){
+    var telephone = $(".confirm-mobile").text();
+    var confirm_username = $(".confirm-username").text();
+    var confirm_zone= $(".confirm-zone").text();
+    var confirm_address = $(".confirm-address").text();
+
+    if(!confirm_username){
         $.alert("收货人姓名必须填写");
         $("#firstname").css('border-color',"red");
         return false;
     }
     if(!telephone){
         $.alert("手机号码必须填写");
+        $("#telephone").css('border-color',"red");
+        return false;
+    }
+    if(!confirm_address){
+        $.alert("详细地址必须填写");
+        $("#telephone").css('border-color',"red");
+        return false;
+    }
+    if(!confirm_zone){
+        $.alert("地区必须填写");
         $("#telephone").css('border-color',"red");
         return false;
     }
@@ -372,11 +382,11 @@ $("#button_submit").click(function(){
 
 
     var delivery_list="";
-    delivery_list+='<div class="flex-item-4 mb5">姓名：</div><div class="flex-item-8  tr mb5">'+ $("#firstname").val()+' </div>';
+    delivery_list+='<div class="flex-item-4 mb5">姓名：</div><div class="flex-item-8  tr mb5">'+ confirm_username+' </div>';
     $("#confirm_form_shippingtime").html(delivery_list);
 
     var name_confirm = "";
-    name_confirm = '<div class="flex-item-4 mb5">手机：</div><div class="flex-item-8  tr mb5">'+ $("#telephone").val()+' </div>';
+    name_confirm = '<div class="flex-item-4 mb5">手机：</div><div class="flex-item-8  tr mb5">'+ telephone+' </div>';
    $("#confirm_form_telephone").html(name_confirm);
 
     maskdiv($("#confirm_form_order"),"bottom");
@@ -409,7 +419,11 @@ $("#start").cityPicker({
 
 $(".select_address").click(function () {
     var addressPop=$('#addressPop').html();
-    var html= template(addressPop, {});
+    var telephone = $(".confirm-mobile").text();
+    var username = $(".confirm-username").text();
+    var zone= $(".confirm-zone").text();
+    var address_1 = $(".confirm-address").text();
+    var html= template(addressPop, {telephone:telephone,username:username,address_1:address_1,zone:zone});
     layer.open({
         type: 1,
         area: 'auto',
@@ -422,9 +436,45 @@ $("body").on("click","#close_pop",function(){
     layer.closeAll();
 });
 $("body").on("click",".save_address",function(){
-    var address_name = 'chenaho';
-    $("#confirm-username").html(address_name);
-    $("#confirm-mobile").html('13287379532');
+
+    var telephone = $('#telephone').val();
+    if(!telephone){
+        alert("手机号码必须填写");
+        $("#telephone").css('border-color',"red");
+        return false;
+    }
+    var myreg =  /^1[3456789]\d{9}$/;
+    if(!myreg.test(telephone))
+    {
+        alert('请输入有效的手机号码！');
+        $("#telephone").css('border-color',"red");
+        return false;
+    }
+
+    var firstname = $('#firstname').val();
+    if(!firstname){
+        alert("收货人姓名必须填写");
+        $("#firstname").css('border-color',"red");
+        return false;
+    }
+
+    var address_new = $('#address_new').val();
+    if(!address_new){
+        alert("详细地址必须填写");
+        $("#address_new").css('border-color',"red");
+        return false;
+    }
+    var start = $('#start').val();
+    if(!start){
+        alert("地区必须填写");
+        $("#start").css('border-color',"red");
+        return false;
+    }
+
+    $(".confirm-mobile").html(telephone);
+    $(".confirm-username").html(firstname);
+    $(".confirm-zone").html(start);
+    $(".confirm-address").html(address_new);
     layer.closeAll();
 });
 
