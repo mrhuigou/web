@@ -34,7 +34,7 @@ $this->title = '订单确认';
 
 
 		<?php if ($carts) { ?>
-            <div class="store_contain whitebg " id="store_contain_<?= $plan->affiliate_plan_id ?>">
+            <div class="store_contain whitebg " id="store_contain">
                 <div class="mt5 ">
                     <div class="flex-row mt10 pt15">
                         <div class="flex-item-4  pl10"><i class="red">*</i>配送方式</div>
