@@ -31,7 +31,10 @@ $this->title = '订单确认';
 			'inputOptions' => ["class" => 'appbtn tl w'],
 			'errorOptions' => ['class' => 'red fb tc db']
 		],]); ?>
+        <input type="text" id="confirm_firstname"   name="confirm_firstname" style="display: none" value="">
         <input type="text" id="confirm_telephone"   name="confirm_telephone" style="display: none" value="">
+        <input type="text" id="confirm_address"   name="confirm_address" style="display: none" value="">
+        <input type="text" id="confirm_address_1"   name="confirm_address_1" style="display: none" value="">
 
 <!--        <input type="text" class="input-text w" id="firstname" name="firstname" value="" style="display: none">-->
 		<?php if ($carts) { ?>
@@ -102,7 +105,7 @@ function choice_distribution_type(){
             <div class="colorbar"></div>
                     <div class="p10 db  whitebg f14  flex-col"  id="addressTri" data-id="">
                             <div class="flex-item-10  tab_1 select_address" style="display: none">
-                                <p><em class="confirm-username" id="confirm-username"></em><em class="confirm-tel ml10 confirm-mobile" id="confirm-mobile"></em></p>
+                                <p><em class="confirm-username"></em><em class="confirm-tel ml10 confirm-mobile"></em></p>
                                 <p class="confirm-zone"></p>
                                 <p class="confirm-address"> </p>
                             </div>
@@ -419,6 +422,9 @@ $("#confirm_pay").click(function(){
         $.showLoading("正在提交");
         // $('#form-checkout').submit();
         $("#confirm_telephone").val($(".confirm-mobile").text());
+        $("#confirm_firstname").val($(".confirm-username").text());
+        $("#confirm_address").val($(".confirm-zone").text());
+        $("#confirm_address_1").val($(".confirm-address").text());
         $('#form-checkout').submit();
         // var addressPop=$('#addressPop').html();
         // var telephone = $(".confirm-mobile").text();

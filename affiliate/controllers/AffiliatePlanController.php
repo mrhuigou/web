@@ -576,14 +576,17 @@ class AffiliatePlanController extends \yii\web\Controller {
             $model = new AffiliateOrderForm($affiliate_id,$fx_user_info);
             if(\Yii::$app->request->isPost){
                 //$this->submit();
-                $telephone = \Yii::$app->request->post("telephone");
-                $firstname = \Yii::$app->request->post("firstname");
+                $telephone = \Yii::$app->request->post("confirm_telephone");
+                $firstname = \Yii::$app->request->post("confirm_firstname");
+                $region = \Yii::$app->request->post("confirm_address");
+                $address_1 = \Yii::$app->request->post("confirm_address_1");
 
-//                var_dump($telephone);die;
-                $base['telephone'] = $telephone;
-                $base['firstname'] = $firstname;
+                $address['telephone'] = $telephone;
+                $address['firstname'] = $firstname;
+                $address['region'] = $region;
+                $address['address_1'] = $address_1;
 
-                $trade_no = $this->submit($base,$cart);
+                $trade_no = $this->submit($base,$cart,$address);
 
                 \Yii::$app->session->remove("confirm_push");
                 \Yii::$app->session->remove("ground_push_base");
@@ -674,7 +677,7 @@ class AffiliatePlanController extends \yii\web\Controller {
 	    return true;
     }
     //生成订单页面
-    private function submit($bases,$carts)
+    private function submit($bases,$carts,$address=[])
     {   //交易号
         $trade_no = "";
 
@@ -702,10 +705,10 @@ class AffiliatePlanController extends \yii\web\Controller {
                     $Order_model->store_url = $base['url'];
                     $Order_model->customer_group_id = $fx_user_info['customer_group_id'];
                     $Order_model->customer_id = $fx_user_info['customer_id'];
-                    $Order_model->firstname = $fx_user_info['firstname'] ? $fx_user_info['firstname'] :\Yii::$app->request->post("firstname");
+                    $Order_model->firstname = $fx_user_info['firstname'] ? $fx_user_info['firstname'] :\Yii::$app->request->post("confirm_firstname");
                     $Order_model->lastname = $fx_user_info['lastname'];
                     $Order_model->email = $fx_user_info['email'];
-                    $Order_model->telephone = $fx_user_info['telephone'] ? $fx_user_info['telephone'] :\Yii::$app->request->post("telephone");
+                    $Order_model->telephone = $fx_user_info['telephone'] ? $fx_user_info['telephone'] :\Yii::$app->request->post("confirm_telephone");
                     $Order_model->gender = $fx_user_info['gender'];
                     $Order_model->payment_method = "";
                     $Order_model->payment_code = "";
