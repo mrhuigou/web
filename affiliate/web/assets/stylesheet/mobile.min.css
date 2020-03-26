@@ -1092,6 +1092,7 @@ hr{margin-top:10px;margin-bottom:10px;border:0;border-top:1px solid #ddd}
 .lottery-unit.active{background-color:#ffec30;opacity:.5}
 .lottery-deadline{width:32rem;height:7.5rem;margin:0 auto;background:url(../images/game/baby/img/banner_2.jpg) no-repeat;background-size:100%;padding-top:4.5rem;padding-left:7.5rem;color:#fff;font-size:1rem}
 .content{position:absolute;top:45px;bottom:56px;left:0;right:0;overflow-y:scroll;-webkit-overflow-scrolling:touch}
+.content-new{overflow-y:scroll;-webkit-overflow-scrolling:touch}
 .veiwport{min-width:300px;max-width:640px;margin:0 auto}
 #sales .swiper-slide,#selectItems .swiper-slide,#swiper-container_ad .swiper-slide{width:30%}
 #brand-sale .swiper-slide{width:70%}
