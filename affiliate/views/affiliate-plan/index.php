@@ -106,8 +106,22 @@ $this->title = "一起团";
                         <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
                     </label>
                     <div class="flex-item-2 flex-row flex-middle flex-center p5 item-img img_click">
+                        <?php
+                        //对展示图进行处理  没有图片时 使用包装图片
+                        //对商品图进行处理
+                        $imagelist = '';
+                        $images = $value->product->productBase->imagelist;
+                        if($images){
+                            foreach ($images as $value){
+                                if(empty($imagelist)){
+                                    $imagelist = $value;
+                                }
+                            }
+                        }
+
+                        ?>
                         <a href="#">
-                            <img src="<?=\common\component\image\Image::resize($value->image_url,100,100)?>"
+                            <img src="<?=\common\component\image\Image::resize(($value->image_url?:$imagelist)?:'',100,100)?>"
                                  class="bd w">
                         </a>
                     </div>
