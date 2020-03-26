@@ -112,9 +112,9 @@ $this->title = "一起团";
                         $imagelist = '';
                         $images = $value->product->productBase->imagelist;
                         if($images){
-                            foreach ($images as $value){
+                            foreach ($images as $value1){
                                 if(empty($imagelist)){
-                                    $imagelist = $value;
+                                    $imagelist = $value1;
                                 }
                             }
                         }
