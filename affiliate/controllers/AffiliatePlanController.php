@@ -579,7 +579,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                 $telephone = \Yii::$app->request->post("telephone");
                 $firstname = \Yii::$app->request->post("firstname");
 
-                var_dump($telephone);die;
+//                var_dump($telephone);die;
                 $base['telephone'] = $telephone;
                 $base['firstname'] = $firstname;
 
@@ -759,6 +759,19 @@ class AffiliatePlanController extends \yii\web\Controller {
 //                            'district' => $point->district ? $point->district->name : "",
 //                            'district_code' => $point->district ? $point->district->code : "",
 //                            'district_id' => $point->district ? $point->district->district_id : "",
+
+                            'address' => '青岛每日惠购',
+                            'postcode' => 266000,
+                            'zone' => '山东省',
+                            'zone_code' => '',
+                            'zone_id' => '',
+                            'city' => '青岛市',
+                            'city_code' => '',
+                            'city_id' => '',
+                            'district' => "",
+                            'district_code' => "",
+                            'district_id' => "",
+
                             'lat' => "",
                             'lng' => "",
                             'is_delivery' => 1,
