@@ -132,7 +132,8 @@ function jsApiCall()
 //    obj.addClass("graybtn");
 //    obj.html("正在努力加载，请稍等...")
     $.showLoading("正在提交");
-    $.get('<?=\yii\helpers\Url::to(['/payment/wxpay','trade_no'=>$model->merge_code])?>',function(data){
+    //$.get('<?//=\yii\helpers\Url::to(['/payment/wxpay','trade_no'=>$model->merge_code])?>//',function(data){
+    $.get('https://m.mrhuigou.com/payment/wxpay?trade_no="+<?=$model->merge_code?>',function(data){
         $.hideLoading();
         if(data.status){
             WeixinJSBridge.invoke('getBrandWCPayRequest',jQuery.parseJSON(data.data),function(res){
