@@ -99,7 +99,7 @@ $this->title = "收银台";
                 $order = $orders[0];
                 $store = $order->store;
                 if($store){
-                    if(($store->besupportpos == 1) && (Yii::$app->user->identity->can_use_cod) && !$model->recharge_status){
+                    if(($store->besupportpos == 1) && ($fx_user_info['can_use_cod']) && !$model->recharge_status){
                         $can_use_cod = true;
                     }
                 }

@@ -46,7 +46,7 @@ class PaymentController extends \yii\web\Controller
 
         $trade_no=Yii::$app->request->get('trade_no');
         $useragent=\Yii::$app->request->getUserAgent();
-        if(strpos(strtolower($useragent), 'micromessenger') && !$open_id=\Yii::$app->session->get('open_id')){
+        if(strpos(strtolower($useragent), 'micromessenger') && !$open_id=\Yii::$app->session->get('open_id') ?:"123"){
             return $this->redirect(['/payment/wx-js-call','path'=>Url::to(['/payment/index','trade_no'=>$trade_no,'showwxpaytitle'=>1],true)]);
         }
         try{
@@ -67,7 +67,8 @@ class PaymentController extends \yii\web\Controller
 	                   throw new NotFoundHttpException("交易订单已经过期！");
                    }
                 }
-                return $this->render('index',['model'=>$model]);
+                $fx_user_info = json_decode(\Yii::$app->redis->get("fx_user_info"),true);
+                return $this->render('index',['model'=>$model,'fx_user_info'=> $fx_user_info]);
             }else{
                 throw new NotFoundHttpException("交易订单不存在！");
             }
