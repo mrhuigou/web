@@ -36,7 +36,7 @@ class Share extends Widget{
 		parent::init();
 	}
 	public function run(){
-		if(!\Yii::$app->user->isGuest &&  !\Yii::$app->session->get('source_from_agent_wx_xcx')){
+//		if(!\Yii::$app->user->isGuest &&  !\Yii::$app->session->get('source_from_agent_wx_xcx')){
 			if($this->type){
 				if($this->type=='app'){
 					$this->render('share-app',['data'=>$this->data]);
@@ -46,7 +46,7 @@ class Share extends Widget{
                     $this->render('share-zhqd',['data'=>$this->data]);
                 }
 			}
-		}
+//		}
 	}
 	private function add_querystring_var($url, $key, $value) {
 		$url=preg_replace('/(.*)(?|&)'.$key.'=[^&]+?(&)(.*)/i','$1$2$4',$url.'&');
