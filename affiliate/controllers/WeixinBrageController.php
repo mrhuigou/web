@@ -5,7 +5,7 @@
  * Date: 2016/10/14
  * Time: 8:35
  */
-namespace h5\controllers;
+namespace affiliate\controllers;
 use api\models\V1\CustomerSharePage;
 use common\component\Wx\WxScans;
 use yii\base\ErrorException;
