@@ -364,7 +364,7 @@ class AffiliatePlanController extends \yii\web\Controller {
             }
 
             //检查库存（无库存处理）
-            if ($cart && $cart[$affiliate_plan_id]) {
+            if ($cart && array_key_exists($affiliate_plan_id,$cart)) {
                 $total = 0;
                 foreach ($cart[$affiliate_plan_id] as $code => $qty) {
                     $affiliate_plan_detail = AffiliatePlanDetail::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1, 'product_code' => $code])->one();
