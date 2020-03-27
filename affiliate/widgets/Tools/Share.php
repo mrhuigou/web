@@ -26,6 +26,15 @@ class Share extends Widget{
 		         $this->data['trace_code']=$trace_code;
 	         }
          }
+        if(isset($this->data['link']) && $this->data['link']){
+            $this->data['link']=$this->add_querystring_var($this->data['link'],'follower_id',\Yii::$app->user->getId());
+            if($from_affiliate_uid=\Yii::$app->session->get('from_affiliate_uid')){
+                $this->data['link']=$this->add_querystring_var($this->data['link'],'from_affiliate_uid',$from_affiliate_uid);
+            }
+            $trace_code=md5(urlencode($this->data['link']));
+            $this->data['link']=$this->add_querystring_var($this->data['link'],'trace_code',$trace_code);
+            $this->data['trace_code']=$trace_code;
+        }
 		if(strpos(strtolower($useragent), 'jiaruncustomerapp')){
 			$this->type="app";
 		}elseif(strpos(strtolower($useragent), 'micromessenger')){
