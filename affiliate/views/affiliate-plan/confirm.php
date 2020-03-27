@@ -362,14 +362,12 @@ $("#start").cityPicker({
 
 $(".select_address").click(function () {
 
-    // var addressPop=$('#addressPop').html();
     var telephone = $(".confirm-mobile").text();
     var username = $(".confirm-username").text();
     var zone= $(".confirm-zone").text();
     var address_1 = $(".confirm-address").text();
 
-    alert("跳转编辑收货地址");return false;
-    // var html= template(addressPop, {telephone:telephone,username:username,address_1:address_1,zone:zone});
+    location.href='/affiliate-plan/edit-address?telephone='+ telephone + '&username=' + username + '&zone=' + zone + '&address_1='+address_1;
 
 });
 

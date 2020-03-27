@@ -650,18 +650,23 @@ class AffiliatePlanController extends \yii\web\Controller {
     public function actionEditAddress(){
 	    $address = [];
         $address['telephone'] = \Yii::$app->request->get("telephone");
-        $address['username'] = \Yii::$app->request->get("username");
-        $address['zone'] = \Yii::$app->request->get("zone");
+        $address['firstname'] = \Yii::$app->request->get("username");
+        $address['region'] = \Yii::$app->request->get("zone");
         $address['address_1'] = \Yii::$app->request->get("address_1");
+
+        if(!empty($address['region'])){
+            $region = explode('-',$address['region']);
+            $address['province'] = $region[0];
+            $address['city'] = $region[1];
+            $address['district'] = $region[2];
+        }
+
         try {
 
             if($post = \Yii::$app->request->isPost){
-                echo "<pre>";
-                var_dump($post['address_1']);die;
+                return $this->redirect(['/affiliate-plan/confirm']);
             }
-            $address = [
-                'telephone' => 13287379532
-            ];
+
             return $this->render('edit-address', ['address'=>$address]);
 
         }catch (Exception $e){
