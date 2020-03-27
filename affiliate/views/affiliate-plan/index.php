@@ -9,62 +9,19 @@ use yii\helpers\Url;
 $this->title = "一起团";
 ?>
 <header class="fx-top bs-bottom whitebg lh44">
-<!--    <div class="flex-col tc">-->
-<!--        <a class="flex-item-2" href="#">-->
-<!--            <i class="aui-icon aui-icon-home white f28"></i>-->
-<!--        </a>-->
-<!--        <div class="flex-item-8 f16">-->
-<!--			--><?//= \yii\helpers\Html::encode($this->title) ?>
-<!--        </div>-->
-<!--        <a class="flex-item-2" href="--><?//= \yii\helpers\Url::to(['/user/index']) ?><!--">-->
-<!--            <i class="iconfont green f28">&#xe603;</i>-->
-<!--        </a>-->
-<!--    </div>-->
 </header>
 <div class="content-new  bc" >
-    <!-- 新改图片 -->
-<!--    <div class="bg-wh pb5 mb5">-->
-<!--        <a href="#">-->
-<!--        <img src="../assets/images/ditui/gp-top.jpeg" class="w" />-->
-<!--        </a>-->
-<!--    </div>-->
-
     <!--团长头像-->
-    <div class="head-img" style="padding: 0 0;">
+    <div class="fx-head-img" style="padding: 0 0;">
         <div class="  flex-col flex-middle p10">
             <div class="flex-item-3">
-                <a href="#" style=" line-height: 100px;">
+                <a href="#" style=" line-height: 140px;">
                     <img src="<?= \common\component\image\Image::resize('', 100, 100) ?>"
                          alt="每日惠购" class="ava mava">
                 </a>
             </div>
-            <div class="flex-item-6 tc pt10" >
-                每日惠购
-                <p class="f12 " >这家伙很懒没有留下签名</p>
-            </div>
         </div>
     </div>
-<!--    <div class="bg-wh mb5 pb5">-->
-<!---->
-<!--        <div class="p10 pb5">-->
-<!--<!--            地址选择-->
-<!--            <div class="ditui-sele">-->
-<!--                <i class="iconfont icon-l">&#xe65f;</i>-->
-<!---->
-<!--                <div class="dropdown" >-->
-<!--                    --><?php //if($affiliate_info){?>
-<!--                        <select name="select_option" id="select_option" class="input-m w" style=" border: 0px;">-->
-<!--                            --><?php // foreach ($affiliate_plans as $affiliate_plan_value){?>
-<!--                                    <option value="--><?php //echo $affiliate_plan_value->code?><!--" readonly="readonly" --><?php //if($affiliate_plan->affiliate_plan_id == $affiliate_plan_value->affiliate_plan_id){ echo "selected='selected'";}?><!--><?php //echo $affiliate_plan_value->name?><!--</option>-->
-<!--                            --><?php //}?>
-<!--                        </select>-->
-<!--                    --><?php //}?>
-<!--                </div>-->
-<!---->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
     <ul name="select_option" id="select_option" class="filter redFilter three f16 clearfix" style="border-bottom: 1px solid #ff463c;">
         <?php if($affiliate_info){?>
             <?php  foreach ($affiliate_plans as $affiliate_plan_value){?>
