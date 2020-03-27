@@ -16,6 +16,7 @@ AppAsset::register($this);
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta property="qc:admins" content="1013706074652112566375" />
 	<meta name="baidu-site-verification" content="YfBJrvVnS9" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
 	<?= Html::csrfMetaTags() ?>
 	<title><?= Html::encode($this->title) ?></title>
 	<meta name="description" content="每日惠购（www.mrhuigou.com）- 青岛首选综合性同城网购-每日惠购都市生活平台将城市生活分为吃、喝、穿、用、玩五大类，全面覆盖城市人生活的方方面面-每日惠购生活圈开放30余个生活体验版块，发现达人体验、分享网购乐趣-每日惠购为您量身打造高品质、高性价比、24小时上门服务的同城网购体验" />
