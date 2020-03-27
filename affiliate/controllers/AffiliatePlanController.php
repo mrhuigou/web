@@ -318,12 +318,12 @@ class AffiliatePlanController extends \yii\web\Controller {
         $cart = [];
         if(\Yii::$app->redis->get('confirm_push')){
             $cart = json_decode(\Yii::$app->redis->get('confirm_push'),true);
-            if($cart[$affiliate_plan_id]){
+            if(array_key_exists($affiliate_plan_id,$cart)){
                 unset($cart[$affiliate_plan_id]);
             }
             if($ground_push_base = \Yii::$app->redis->get('ground_push_base')){
                 $ground_push_base = json_decode($ground_push_base,true);
-                if($ground_push_base[$affiliate_plan_id]){
+                if(array_key_exists($affiliate_plan_id,$ground_push_base)){
                     unset($ground_push_base[$affiliate_plan_id]);
                 }
                 \Yii::$app->redis->set('ground_push_base',json_encode($ground_push_base));
