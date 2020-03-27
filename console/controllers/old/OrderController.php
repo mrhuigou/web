@@ -485,6 +485,7 @@ class OrderController extends \yii\console\Controller {
 					'RELATEDBILL2' => '',
 					'SHOPCODE' => $order->store ? $order->store->store_code : '',
 					'SCANS' => $scan,
+                    'USEPOINTS'=>$order->use_points ? true : false,
                     'AFFILIATE_CODE'=>$order->affiliate_code ? $order->affiliate_code :'',
                     'AFFILIATE_PLAN_CODE'=>$order->affiliate_plan_code? $order->affiliate_plan_code :'',
 				];
