@@ -36,7 +36,6 @@ $this->title = '订单确认';
         <input type="text" id="confirm_address"   name="confirm_address" style="display: none" value="">
         <input type="text" id="confirm_address_1"   name="confirm_address_1" style="display: none" value="">
 
-<!--        <input type="text" class="input-text w" id="firstname" name="firstname" value="" style="display: none">-->
 		<?php if ($carts) { ?>
             <div class="store_contain whitebg " id="store_contain">
                 <div class="mt5 ">
@@ -109,7 +108,7 @@ function choice_distribution_type(){
                                 <p class="confirm-zone"></p>
                                 <p class="confirm-address"> </p>
                             </div>
-                            <div class="flex-item-2 tr pt20 green select_address tab_2" style="display: none">
+                            <div class="flex-item-2 tr pt20 green select_address tab_1" style="display: none">
                                 修改<i class="iconfont f14 ">&#xe60b;</i>
                             </div>
                             <div class="select_address tab_3" style="display: none">
@@ -118,97 +117,6 @@ function choice_distribution_type(){
                     </div>
 
             <div class="colorbar "></div>
-            <ul class="line-book mt5">
-                <li>
-                    <div class="t">选择地区：</div>
-                    <div class="c">
-                        <div class="weui-cell__bd">
-                            <?php $p = $model->province ? $model->province : '山东省';
-                            $c = $model->city ? $model->city : '青岛市';
-                            $d = $model->district ? $model->district : '市北区';
-                            ?>
-                            <input class="w f14" id="start" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
-                        </div>
-                    </div>
-                </li>
-            </ul>
-
-            <!--地址弹层-->
-            <script id="addressPop" type="text/html">
-
-                <div class="w bdb tc lh44 bs-b clearfix pr">
-                    <a class="pa-tl" href="javascript:;" id="close_pop">
-                        <i class="aui-icon aui-icon-left green f28"></i>
-                    </a>
-                    <span class="f16">编辑配送地址</span>
-                    <!--        <a class="pa-tr pr5 cp gray6" href="--><?php //=\yii\helpers\Url::to(['/address/index','redirect'=>Yii::$app->request->getAbsoluteUrl(),'in_range'=>1])?><!--">编辑</a>-->
-                </div>
-                <div class="line-a flex-col w flex-middle red mb5">
-                    <div class="flex-item-12">
-                        因系统升级，<span class="fb">暂停黄岛区配送！</span>
-                        给您带来的不便，我们深感抱歉！
-                    </div>
-
-                </div>
-                <div class="p10 which addresslist pa-t graybg" style="top: 116px; bottom: 50px; overflow-y: scroll;">
-
-                    <ul class="line-book mt5">
-                            <li>
-                                <div class="t">选择地区：</div>
-                                <div class="c">
-                                    <div class="weui-cell__bd">
-                                        <?php $p = $model->province ? $model->province : '山东省';
-                                        $c = $model->city ? $model->city : '青岛市';
-                                        $d = $model->district ? $model->district : '市北区';
-                                        ?>
-                                        <input class="w f14" id="start" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
-                                    </div>
-                                </div>
-                            </li>
-                    </ul>
-                    <div class="c">
-                        <div class="t">详细地址：</div>
-                        <div class="weui-cell__bd">
-                            <textarea name="a" placeholder='小区/写字楼/街道+楼号+楼层等' id='address_new' class='w f14' rows=2 style="height:45px;padding:5px;"><%:=address_1%></textarea>
-                        </div>
-                    </div>
-
-                    <div class="store_contain whitebg ">
-                        <div class="mt5">
-                            <div class="flex-row ">
-                                <div class="flex-item-2 p5 pt10 pl10"><i class="red">*</i>姓名</div>
-                                <div class="flex-item-10 mt5 "><input type="text" class="input-text w" id="firstname" name="firstname" placeholder = '请填写收货人姓名' value="<%:=username%>"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="store_contain whitebg ">
-                        <div class="mt5">
-                            <div class="flex-row mt10 ">
-                                <div class="flex-item-2 p5 pt10 pl10"><i class="red">*</i>手机</div>
-                                <div class="flex-item-10 mb10 "><input type="text" class="input-text w " id="telephone" name="telephone" placeholder = '请填写收货人手机号' value="<%:=telephone%>"></div>
-                            </div>
-                        </div>
-                    </div>
-<!--                        --><?//= $form->field($model, 'address',['template' => '{label}<li>{input}</li>{error}'])->textarea(["placeholder" => '小区/写字楼/街道+楼号+楼层等','id'=>'address','class'=>'w f14 ','rows'=>2,'style'=>"height:45px;padding:5px;"])?>
-<!--                        --><?//= $form->field($model, 'username', ['inputOptions' => ["placeholder" => '请填写收货人姓名']]) ?>
-<!--                        --><?//= $form->field($model, 'telephone', ['inputOptions' => ["placeholder" => '请填写收货人电话号码']]) ?>
-
-
-
-
-
-
-
-
-
-                </div>
-                <div class="fx-bottom p5 tc graybg bdt">
-                    <a class="btn mbtn w greenbtn save_address" href="#">保存</a>
-                </div>
-            </script>
-
-
 
 
             <?php foreach ($carts as $plan_id => $cart) {?>
@@ -454,18 +362,15 @@ $("#start").cityPicker({
 
 $(".select_address").click(function () {
 
-    var addressPop=$('#addressPop').html();
+    // var addressPop=$('#addressPop').html();
     var telephone = $(".confirm-mobile").text();
     var username = $(".confirm-username").text();
     var zone= $(".confirm-zone").text();
     var address_1 = $(".confirm-address").text();
-    var html= template(addressPop, {telephone:telephone,username:username,address_1:address_1,zone:zone});
-    layer.open({
-        type: 1,
-        area: 'auto',
-        style: 'position: absolute; left: 0px; right: 0px; bottom: 0px; top: 0px;',
-        content:html
-    });
+
+    alert("跳转编辑收货地址");return false;
+    // var html= template(addressPop, {telephone:telephone,username:username,address_1:address_1,zone:zone});
+
 });
 
 $("body").on("click","#close_pop",function(){
