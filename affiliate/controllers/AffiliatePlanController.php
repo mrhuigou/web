@@ -72,7 +72,7 @@ class AffiliatePlanController extends \yii\web\Controller {
 
         $cart = [];
         if(\Yii::$app->session->get("confirm_push")){
-            $cart = json_decode(\Yii::$app->session->get("confirm_push"),true);
+            $cart = \Yii::$app->session->get("confirm_push");
         }
 
         //进入页面自动绑定分销商信息分销商ID
@@ -100,7 +100,6 @@ class AffiliatePlanController extends \yii\web\Controller {
         //计算总金额
         $total = 0;
         if($ground_push_base = \Yii::$app->session->get('ground_push_base')){
-            $ground_push_base = json_decode($ground_push_base,true);
             foreach ($ground_push_base as $key => $value){
                 if($key == $affiliate_plan->affiliate_plan_id){
                     continue;
@@ -315,35 +314,31 @@ class AffiliatePlanController extends \yii\web\Controller {
         $data_string = \Yii::$app->request->post("data");
         trim($data_string,';');
         $data_array = explode(';',$data_string);
+        $cart = [];
+        if(\Yii::$app->session->get('confirm_push')){
+            $cart = \Yii::$app->session->get('confirm_push');
+            if($cart[$affiliate_plan_id]){
+                unset($cart[$affiliate_plan_id]);
+            }
+            if($ground_push_base = \Yii::$app->session->get('ground_push_base')){
+                if($ground_push_base[$affiliate_plan_id]){
+                    unset($ground_push_base[$affiliate_plan_id]);
+                }
+                \Yii::$app->session->set('ground_push_base',$ground_push_base);
+            }
+        }
+        if ($data_array) {
+            foreach ($data_array as $key => $value) {
+                if ($value) {
+                    $items = explode(',', $value);
+                    list($product_code, $qty) = $items;
+                    $cart[$affiliate_plan_id][$product_code] = $qty;
+                }
+            }
+        }
 
+        \Yii::$app->session->set('confirm_push', $cart);
         try {
-
-            $cart = [];
-            if(\Yii::$app->session->get('confirm_push')){
-                $cart = json_decode(\Yii::$app->session->get('confirm_push'),true);
-                if($cart[$affiliate_plan_id]){
-                    unset($cart[$affiliate_plan_id]);
-                }
-                if($ground_push_base = \Yii::$app->session->get('ground_push_base')){
-                    $ground_push_base = json_decode($ground_push_base,true);
-                    if($ground_push_base[$affiliate_plan_id]){
-                        unset($ground_push_base[$affiliate_plan_id]);
-                    }
-                    \Yii::$app->session->set('ground_push_base',json_encode($ground_push_base));
-                }
-            }
-            if ($data_array) {
-                foreach ($data_array as $key => $value) {
-                    if ($value) {
-                        $items = explode(',', $value);
-                        list($product_code, $qty) = $items;
-                        $cart[$affiliate_plan_id][$product_code] = $qty;
-                    }
-                }
-            }
-
-            \Yii::$app->session->set('confirm_push', json_encode($cart));
-
 
             $plan_info = AffiliatePlan::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1])->one();
 
@@ -382,7 +377,9 @@ class AffiliatePlanController extends \yii\web\Controller {
                 }
 
                 $base = [];
+                if($base = \Yii::$app->session->get('ground_push_base')){
 
+                }
                 $base[$affiliate_plan_id]['total'] = $total;
                 $base[$affiliate_plan_id]['platform_id'] = 1;
                 $base[$affiliate_plan_id]['store_id'] = 1;
@@ -390,7 +387,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                 $base[$affiliate_plan_id]['url'] = 'https://m.mrhuigou.com/affiliate-plan/index';
                 $base[$affiliate_plan_id]['affiliate_plan_id'] = $affiliate_plan_id;
 
-                \Yii::$app->session->set('ground_push_base',json_encode($base));
+                \Yii::$app->session->set('ground_push_base',$base);
 
                 //$this->submit($base, $cart, $ground_push_plan_id);
             }
