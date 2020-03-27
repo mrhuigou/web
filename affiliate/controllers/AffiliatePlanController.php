@@ -624,13 +624,13 @@ class AffiliatePlanController extends \yii\web\Controller {
                     }
                 }
                 if($distribution_type == 2){
-                    $affiliate_id = \Yii::$app->session->get('from_affiliate_uid');
+                    $affiliate_id = \Yii::$app->session->get('from_affiliate_uid')?:2; //默认团长
                     $affiliate_info = Affiliate::find()->where(['status'=>1,'affiliate_id'=>$affiliate_id])->one();
                     $address['zone'] = $affiliate_info->zone_name;
                     $address['city'] = $affiliate_info->city_name;
                     $address['district'] = $affiliate_info->district_name;
                     $address['address_1'] = $affiliate_info->address;
-                    $address['address_username'] = $fx_user_info['firstname']?:"hdogh";
+                    $address['address_username'] = $fx_user_info['firstname']?:"";
                     $address['address_telephone'] = $fx_user_info['telephone'];
                 }
             }

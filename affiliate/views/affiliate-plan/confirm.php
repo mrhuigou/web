@@ -62,7 +62,7 @@ function choice_distribution_type(){
                 if(Object.keys(address).length > 0){
                     $(".confirm-username").html(address.address_username);
                     $(".confirm-mobile").html(address.address_telephone);
-                    $(".confirm-zone").html(address.city + \'-\'+ address.district);
+                    $(".confirm-zone").html( address.zone + \'-\'+ address.city + \'-\'+ address.district);
                     $(".confirm-address").html(address.address_1);
                     $(".tab_1").show();$(".tab_2").show();$(".tab_3").hide();
                 }else{
@@ -74,7 +74,7 @@ function choice_distribution_type(){
                  if(Object.keys(address).length > 0){
                     $(".confirm-username").html(address.address_username);
                     $(".confirm-mobile").html(address.address_telephone);
-                    $(".confirm-zone").html(address.city + \'-\'+ address.district);
+                    $(".confirm-zone").html( address.zone + \'-\'+ address.city + \'-\'+ address.district);
                     $(".confirm-address").html(address.address_1);
                   
                 }else{
@@ -242,7 +242,7 @@ function choice_distribution_type(){
                 if(Object.keys(address).length > 0){
                     $(".confirm-username").html(address.address_username);
                     $(".confirm-mobile").html(address.address_telephone);
-                    $(".confirm-zone").html(address.city + '-'+ address.district);
+                    $(".confirm-zone").html(address.zone + '-'+ address.city + '-'+ address.district);
                     $(".confirm-address").html(address.address_1);
                     $(".tab_1").show();$(".tab_2").show();$(".tab_3").hide();
                 }else{
@@ -255,7 +255,7 @@ function choice_distribution_type(){
                 if(Object.keys(address).length > 0){
                     $(".confirm-username").html(address.address_username);
                     $(".confirm-mobile").html(address.address_telephone);
-                    $(".confirm-zone").html(address.city + '-'+ address.district);
+                    $(".confirm-zone").html(address.zone + '-'+ address.city + '-'+ address.district);
                     $(".confirm-address").html(address.address_1);
 
                 }else{
