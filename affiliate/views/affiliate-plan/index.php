@@ -118,7 +118,7 @@ $this->title = "一起团";
                         </div>
                         <div class="flex-col w">
                             <div class="red  fb lh200 f14 flex-item-4">
-                                <p>￥<i class="product_total"><?=round(bcmul($value->price,$quantity,4),2)?></i></p>
+                                <p>￥<i class="product_total"><?=round(bcmul($value->price_type == 1 ? $value->price:$value->product->productBase->price ,$quantity,4),2)?></i></p>
                             </div>
                             <div class="flex-item-8 flex-row  flex-center">
                                 <p class="clearfix">
