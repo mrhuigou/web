@@ -334,29 +334,6 @@ $("#confirm_pay").click(function(){
         $("#confirm_address").val($(".confirm-zone").text());
         $("#confirm_address_1").val($(".confirm-address").text());
         $('#form-checkout').submit();
-        // var addressPop=$('#addressPop').html();
-        // var telephone = $(".confirm-mobile").text();
-        // var username = $(".confirm-username").text();
-        // var zone= $(".confirm-zone").text();
-        // var address_1 = $(".confirm-address").text();
-        // $.post('/affiliate-plan/confirm',{telephone:telephone,username:username,address_1:address_1,zone:zone},function(data){
-        //     $.hideLoading();
-        //     if(data.status){
-        //     }else{
-        //         $.alert(data.message);
-        //     }
-        // },'json');
-    }
-});
-
-/*地址选择*/
-$("#start").cityPicker({
-    title: "选择地址",
-    onChange: function (picker, values, displayValues) {
-        $("#province").val(displayValues[0]);
-        $("#city").val(displayValues[1]);
-        $("#district").val(displayValues[2]);
-
     }
 });
 
@@ -422,6 +399,4 @@ $("body").on("click",".save_address",function(){
 <?php
 \yii\web\YiiAsset::register($this);
 $this->registerJs($this->blocks['JS_END'], \yii\web\View::POS_READY);
-$this->registerJsFile("/assets/script/jqweui-picker.js",['depends'=>\h5\assets\AppAsset::className()]);
-$this->registerJsFile("/assets/script/jqweui-city-picker.js",['depends'=>\h5\assets\AppAsset::className()]);
 ?>
