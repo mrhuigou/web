@@ -144,11 +144,22 @@ function choice_distribution_type(){
                         ?>
                         <?php
                             $product = \api\models\V1\Product::findOne(['product_code'=>$value['pv']->product_code ]);
+                            //对展示图进行处理  没有图片时 使用包装图片
+                            //对商品图进行处理
+                            $imagelist = '';
+                            $images = $value['pv']->product->productBase->imagelist;
+                            if($images){
+                                foreach ($images as $value1){
+                                    if(empty($imagelist)){
+                                        $imagelist = $value1;
+                                    }
+                                }
+                            }
                         ?>
                         <div class="flex-col tc p5 graybg" style="border-bottom: 1px dotted #999;">
                             <div class="flex-item-3">
                                 <a href="<?= \yii\helpers\Url::to(['product/index', 'product_code' => $product->product_code, 'shop_code' => $product->store_code]) ?>">
-                                    <img src="<?= \common\component\image\Image::resize($product->image, 100, 100) ?>"
+                                    <img src="<?= \common\component\image\Image::resize($value['pv']->image_url?:$imagelist, 100, 100) ?>"
                                          class="db w">
                                 </a>
                             </div>
