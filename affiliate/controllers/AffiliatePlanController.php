@@ -50,6 +50,9 @@ class AffiliatePlanController extends \yii\web\Controller {
         if(!$plan_code){
             if ($model = AffiliatePlanType::findOne(['code' => $type_code, 'status' => 1])) {
                 $plans = AffiliatePlan::find()->where(['type'=>$model->code,'status'=>1])->andWhere(['and','date_start < NOW()','date_end > NOW()'])->orderBy('date_start asc,date_end desc,affiliate_plan_id desc')->all();
+                if(empty($plans)){
+                    throw new NotFoundHttpException("没有找到相关分销方案");
+                }
                 $plan_code = $plans[0]->code;
             }else{
                 throw new NotFoundHttpException("没有找到相关分销方案类型");
