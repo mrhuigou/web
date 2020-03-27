@@ -275,7 +275,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                             if($product->max_buy_qty && $product->max_buy_qty<$qty ){
                                 throw new ErrorException('此商品最大限购'.$product->max_buy_qty.'个');
                             }else{
-                                $data = ['status' => 1, 'sub_total' =>$product->price*$qty,'qty'=>$qty];
+                                $data = ['status' => 1, 'sub_total' =>($product->price_type == 1 ? $product->price:$product->product->productBase->price)*$qty,'qty'=>$qty];
                             }
                         }else{
                             throw new ErrorException('此商品已经下架');
@@ -371,7 +371,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                         throw new Exception("最多购买".$affiliate_plan_detail->max_buy_qty.'件');
                     }
                     $price = $affiliate_plan_detail->price;
-                    $total = round(bcadd($total, bcmul($price, $qty,4),4),2);
+                    $total = round(bcadd($total, bcmul($affiliate_plan_detail->price_type == 1 ? $affiliate_plan_detail->price:$affiliate_plan_detail->product->productBase->price, $qty,4),4),2);
 
                     //$this->submit();
                 }
@@ -476,7 +476,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                                 throw new Exception("最多购买".$affiliate_plan_detail->max_buy_qty.'件');
                             }
                             $price = $affiliate_plan_detail->price;
-                            $total = round(bcadd($total, bcmul($price, $qty,4),4),2);
+                            $total = round(bcadd($total, bcmul($affiliate_plan_detail->price_type == 1 ? $affiliate_plan_detail->price:$affiliate_plan_detail->product->productBase->price, $qty,4),4),2);
 
                             //$this->submit();
                         }
@@ -558,7 +558,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                     $plan_view = AffiliatePlanDetail::findOne(['affiliate_plan_id'=>$plan_id,'product_code'=>$code,'status'=>1]);
                     $product_total = 0;
                     if($plan_view){
-                        $product_total = bcmul($qty,$plan_view->price,4);
+                        $product_total = bcmul($qty,$plan_view->price_type == 1 ? $plan_view->price:$plan_view->product->productBase->price,4);
                         $product_total = round($product_total,2);
                         $carts[$plan_id][$count]['pv'] = $plan_view;
                         $carts[$plan_id][$count]['qty'] = $qty;
@@ -852,7 +852,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                                 //购买数量超过最大购买数量
                             }
                             $price = $affiliate_plan_detail->price;
-                            $product_total =  round(bcmul($price , $qty,4),2);
+                            $product_total =  round(bcmul($affiliate_plan_detail->price_type == 1 ? $affiliate_plan_detail->price:$affiliate_plan_detail->product->productBase->price , $qty,4),2);
                             $sum_product_total = bcadd($sum_product_total,$product_total,4);
 
 

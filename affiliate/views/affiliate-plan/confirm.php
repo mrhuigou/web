@@ -159,7 +159,7 @@ function choice_distribution_type(){
                             </div>
                             <div class="flex-item-2 tc flex-middle flex-row">
                                 <p class="blue mb5"> x<?= $value['qty'] ?></p>
-                                <p class="red  fb">￥<?= $value['pv']->price; ?></p>
+                                <p class="red  fb">￥<?= $value['pv']->price_type == 1 ? $value['pv']->price:$value['pv']->product->productBase->price; ?></p>
                             </div>
                         </div>
                     <?php } ?>
