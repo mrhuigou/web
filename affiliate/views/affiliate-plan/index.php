@@ -85,6 +85,14 @@ $this->title = "一起团";
             <p class=" mb5 bg-wh pt5 pb5 pl10">结单时间：<i class="red"><?php echo date('Y-m-d',strtotime($affiliate_plan->date_end))?></i></p>
             <p class=" mb5 bg-wh pt5 pb5 pl10">配送时间：<i class="red"><?php echo date('Y-m-d',strtotime($affiliate_plan->ship_end))?></i></p>
 
+            <div id="skill_content">
+                <div class="tit1 clearfix">
+                    <h2 class="fl red fb">限时抢购</h2>
+                    <p class="fl countdown">
+                        <span class="hour_show">00</span>:<span class="minute_show">00</span>:<span class="second_show">00</span>
+                    </p>
+                </div>
+            </div>
 
             <?php foreach ($products as $key=>$value) { ?>
                 <div class="flex-col flex-center store-item bdb  whitebg pr" data-content="<?=$value->product_code?>" data-id="<?=$value->affiliate_plan_detail_id?>">
@@ -425,6 +433,7 @@ $(".select_option").click(function(){
 
 
 });
+timer(2000,$("#skill_content"));
 
 <?php $this->endBlock() ?>
 </script>
