@@ -6,7 +6,7 @@
  * Time: 16:55
  */ ?>
 <?php
-$this->registerJsFile("https://res.wx.qq.com/open/js/jweixin-1.0.0.js",['depends'=>[\h5\assets\AppAsset::className()]]);
+$this->registerJsFile("https://res.wx.qq.com/open/js/jweixin-1.0.0.js",['depends'=>[\affiliate\assets\AppAsset::className()]]);
 $this->beginBlock('JS_INIT')
 ?>
     /*微信分享*/
