@@ -93,7 +93,7 @@ class PaymentController extends \yii\web\Controller
             //设置统一支付接口参数
             //设置必填参数
 	        $useragent=\Yii::$app->request->getUserAgent();
-            if(strpos(strtolower($useragent), 'micromessenger') &&  ($open_id=\Yii::$app->session->get('open_id'))){
+            if(strpos(strtolower($useragent), 'micromessenger') &&  ($open_id=\Yii::$app->session->get('open_id')?:'oJqFJ0gfsF86yY5SeobublS7fJl4')){
 	            $unifiedOrder->setParameter("openid", "$open_id");//用户ID
 	            $unifiedOrder->setParameter("body","每日惠购");//商品描述
 	            $unifiedOrder->setParameter("out_trade_no", "$order->merge_code"."_JSAPI");//商户订单号
