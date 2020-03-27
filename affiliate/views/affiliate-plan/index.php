@@ -214,8 +214,8 @@ $(".cart-num-add").click(function () {
     var max=num_obj.attr('max');
     var min=num_obj.attr('min');
     var qty=parseInt(num_obj.val());
-    if(!max){
-        max=100;
+    if(!max || max == 0){
+        max=10000;
     }
     if(!min){
         min=1;
@@ -254,8 +254,8 @@ $(".cart-num-lower").click(function(){
     var max=num_obj.attr('max');
     var min=num_obj.attr('min');
     var qty=parseInt(num_obj.val());
-    if(!max){
-        max=100;
+    if(!max || max == 0){
+        max=10000;
     }
     if(!min){
         min=1;
@@ -293,8 +293,8 @@ $(".cart-num-text").blur(function(){
     var max=num_obj.attr('max');
     var min=num_obj.attr('min');
     var qty=parseInt(num_obj.val());
-    if(!max){
-        max=100;
+    if(!max || max == 0){
+        max=10000;
     }
     if(!min){
         min=1;

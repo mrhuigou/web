@@ -366,7 +366,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                 $total = 0;
                 foreach ($cart[$affiliate_plan_id] as $code => $qty) {
                     $affiliate_plan_detail = AffiliatePlanDetail::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1, 'product_code' => $code])->one();
-                    if ($affiliate_plan_detail->max_buy_qty < $qty) {
+                    if ($affiliate_plan_detail->max_buy_qty && $affiliate_plan_detail->max_buy_qty < $qty) {
                         //购买数量超过最大购买数量
                         throw new Exception("最多购买".$affiliate_plan_detail->max_buy_qty.'件');
                     }
@@ -471,7 +471,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                         $total = 0;
                         foreach ($products as $code => $qty) {
                             $affiliate_plan_detail = AffiliatePlanDetail::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1, 'product_code' => $code])->one();
-                            if ($affiliate_plan_detail->max_buy_qty < $qty) {
+                            if ($affiliate_plan_detail->max_buy_qty && $affiliate_plan_detail->max_buy_qty < $qty) {
                                 //购买数量超过最大购买数量
                                 throw new Exception("最多购买".$affiliate_plan_detail->max_buy_qty.'件');
                             }
