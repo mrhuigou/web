@@ -594,7 +594,8 @@ class AffiliatePlanController extends \yii\web\Controller {
                 \Yii::$app->session->remove("confirm_push");
                 \Yii::$app->session->remove("ground_push_base");
 
-                return $this->redirect(['payment/index', 'trade_no' => $trade_no, 'showwxpaytitle' => 1]);
+//                return $this->redirect(['payment/index', 'trade_no' => $trade_no, 'showwxpaytitle' => 1]);
+                return $this->redirect('https://m.mrhuigou.com/payment/index?trade_no='.$trade_no.'&showwxpaytitle=1');
             }
             return $this->render('confirm', ['carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'fx_user_info' => $fx_user_info,'affiliate_info'=>$affiliate_info,'model' => $model]);
         }else{
