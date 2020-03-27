@@ -431,7 +431,8 @@ class AffiliatePlanController extends \yii\web\Controller {
 
         $cart = [];
         if($cart = \Yii::$app->session->get('confirm_push')){
-            if($cart[$affiliate_plan_id]){
+            $cart = json_decode($cart,true);
+            if(array_key_exists($affiliate_plan_id,$cart)){
                 unset($cart[$affiliate_plan_id]);
             }
         }
@@ -445,7 +446,7 @@ class AffiliatePlanController extends \yii\web\Controller {
             }
         }
 
-        \Yii::$app->session->set('confirm_push', $cart);
+        \Yii::$app->session->set('confirm_push', json_encode($cart));
         try {
 
             if($cart){
@@ -490,7 +491,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                         $base[$affiliate_plan_id]['url'] = 'https://m.mrhuigou.com/affiliate-plan/index';
                         $base[$affiliate_plan_id]['affiliate_plan_id'] = $affiliate_plan_id;
 
-                        \Yii::$app->session->set('ground_push_base',$base);
+                        \Yii::$app->session->set('ground_push_base',json_encode($base));
 
                     }
 
@@ -525,7 +526,7 @@ class AffiliatePlanController extends \yii\web\Controller {
             return $this->redirect(['/site-mobile/login', 'redirect' => '/affiliate-plan/index']);
         }
 	    if(\Yii::$app->session->get("confirm_push")){
-            $cart = \Yii::$app->session->get("confirm_push");
+            $cart = json_decode(\Yii::$app->session->get("confirm_push"),true);
         }else{
 	        return $this->redirect('/order/index');
         }
@@ -538,7 +539,7 @@ class AffiliatePlanController extends \yii\web\Controller {
         }
 
         if(\Yii::$app->session->get("ground_push_base")){
-	        $base = \Yii::$app->session->get("ground_push_base");
+	        $base = json_decode(\Yii::$app->session->get("ground_push_base"),true);
         }else{
              return $this->redirect('/order/index');
         }
