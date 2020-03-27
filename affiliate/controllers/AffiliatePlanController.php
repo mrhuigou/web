@@ -721,7 +721,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                     //订单主数据
                     $Order_model = new Order();
                     $Order_model->order_no = OrderSn::generateNumber();
-                    $Order_model->order_type_code = 'AffiliatePlan';
+                    $Order_model->order_type_code = 'Affiliate';
                     $Order_model->platform_id = $base['platform_id'];
                     $Order_model->platform_name = "每日惠购";
                     $Order_model->platform_url = \Yii::$app->request->getHostInfo();
