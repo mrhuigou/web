@@ -35,7 +35,7 @@ class WeixinBrageController extends \yii\web\Controller{
 	}
 	public function actionShare(){
 		try{
-			if (!\Yii::$app->user->isGuest && \Yii::$app->request->isAjax) {
+//			if (!\Yii::$app->user->isGuest && \Yii::$app->request->isAjax) {
 				$title=\Yii::$app->request->post('title');
 				$desc=\Yii::$app->request->post('desc');
 				$url=\Yii::$app->request->post('link');
@@ -55,7 +55,7 @@ class WeixinBrageController extends \yii\web\Controller{
 					$model->save();
 				}
 				$data=['status'=>1,'message'=>"分享成功！"];
-			}
+//			}
 		}catch (ErrorException $e){
 			$data=['status'=>0,'message'=>$e->getMessage()];
 		}
