@@ -635,6 +635,12 @@ class AffiliatePlanController extends \yii\web\Controller {
                 }
             }
 
+            if(\Yii::$app->session->get("fx_address")){
+                $address = json_decode(\Yii::$app->session->get("fx_address"),true);
+                $address['address_username'] = $address['firstname'];
+                $address['address_telephone'] = $address['telephone'];
+                $address['zone'] = $address['province'];
+            }
             $json['status'] = true;
             $json['data'] = ['address'=> $address,'distribution_type'=> $distribution_type];
 
@@ -664,6 +670,17 @@ class AffiliatePlanController extends \yii\web\Controller {
         try {
 
             if($post = \Yii::$app->request->isPost){
+                $address1['region'] = \Yii::$app->request->post('region');
+                $address1['address_1'] = \Yii::$app->request->post('address_1');
+                $address1['firstname'] = \Yii::$app->request->post('firstname');
+                $address1['telephone'] = \Yii::$app->request->post('telephone');
+                if(!empty($address1['region'])){
+                    $region = explode(' ',$address1['region']);
+                    $address1['province'] = $region[0];
+                    $address1['city'] = $region[1];
+                    $address1['district'] = $region[2];
+                }
+                \Yii::$app->session->set("fx_address",json_encode($address1));
                 return $this->redirect(['/affiliate-plan/confirm']);
             }
 

@@ -49,7 +49,7 @@ $this->title = '订单确认';
                     $c = $address['city'] ?  : '青岛市';
                     $d = $address['district'] ?  : '市北区';
                     ?>
-                    <input class="w f14" id="start" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
+                    <input class="w f14" id="start" name="region" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
                 </div>
             </div>
         </li>
@@ -57,7 +57,7 @@ $this->title = '订单确认';
 <div class="c">
     <div class="t">详细地址：</div>
     <div class="weui-cell__bd">
-        <textarea name="a" placeholder='小区/写字楼/街道+楼号+楼层等' id='address_1' name="address_1"  class='w f14' rows=2 style="height:45px;padding:5px;"><?=$address['address_1'] ?:''?></textarea>
+        <textarea name="address_1" placeholder='小区/写字楼/街道+楼号+楼层等' id='address_1'   class='w f14' rows=2 style="height:45px;padding:5px;"><?=$address['address_1'] ?:''?></textarea>
     </div>
 </div>
 <div class="store_contain whitebg ">
