@@ -40,9 +40,9 @@ class WeixinBrageController extends \yii\web\Controller{
 				$desc=\Yii::$app->request->post('desc');
 				$url=\Yii::$app->request->post('link');
 				$code=\Yii::$app->request->post('trace_code');
-				if(!$model=CustomerSharePage::findOne(['code'=>$code,'customer_id'=>\Yii::$app->user->getId()])){
+				if(!$model=CustomerSharePage::findOne(['code'=>$code,'customer_id'=>'322'])){
 					$model=new CustomerSharePage();
-					$model->customer_id=\Yii::$app->user->getId();
+					$model->customer_id='322';
 					$model->code=$code;
 					$model->title=$title;
 					$model->description=$desc;
