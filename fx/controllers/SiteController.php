@@ -272,7 +272,7 @@ class SiteController extends Controller {
 		    if($from_affiliate_uid==259){
                 $base_url="http://0532.qingdaonews.com/api/jiarun/wxauth?".http_build_query(['redirect_uri'=>urlencode(Url::to(['/site/auth-zhqd'],true)),'state_ext'=>$state]);
             }else{
-                $base_url=Yii::$app->wechat->getOauth2AuthorizeUrl(Url::to(['site-mobile/weixin'], true),$state,'snsapi_userinfo');
+                $base_url=Yii::$app->wechat->getOauth2AuthorizeUrl(Url::to(['site/weixin'], true),$state,'snsapi_userinfo');
             }
 			return $this->redirect($base_url);
 		}else{
