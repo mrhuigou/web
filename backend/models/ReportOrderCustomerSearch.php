@@ -93,7 +93,7 @@ class ReportOrderCustomerSearch extends Model {
 				$subQuery->andFilterWhere($filter_where);
 			}
 			$Query = new \yii\db\Query();
-			$Query->select(['tmp.customer_id', 'tmp.telephone', "count(DISTINCT tmp.order_id) as order_count", "MAX(tmp.date_added) as last_date"])->from(['tmp' => $subQuery])->groupBy("tmp.customer_id");
+			$Query->select(['tmp.customer_id','(select telephone from jr_customer WHERE jr_customer.customer_id = tmp.customer_id ) as telephone1', 'tmp.telephone', "count(DISTINCT tmp.order_id) as order_count", "MAX(tmp.date_added) as last_date"])->from(['tmp' => $subQuery])->groupBy("tmp.customer_id");
 			$dataProvider = new ActiveDataProvider([
 				'query' => $Query->orderBy("tmp.customer_id asc"),
 			]);
