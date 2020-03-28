@@ -419,6 +419,6 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     ];
 }
 ?>
-<?=\affiliate\widgets\Tools\Share::widget([
+<?=\fx\widgets\Tools\Share::widget([
     'data'=>$data
 ])?>

@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Html;
-use affiliate\assets\AppAsset;
+use fx\assets\AppAsset;
 /* @var $this \yii\web\View */
 /* @var $content string */
 AppAsset::register($this);
@@ -107,7 +107,6 @@ AppAsset::register($this);
     <?php $this->endBlock()?>
     <?php
     $this->registerJs($this->blocks['JS'],\yii\web\View::POS_HEAD);
-    $this->registerCssFile("/assets/stylesheet/mobile.min.css?v=20200222",['depends'=>[\affiliate\assets\AppAsset::className()]]);
     ?>
 
 <?php

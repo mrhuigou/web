@@ -12,23 +12,48 @@ $config = [
             'enableStrictParsing' => false,
 
         ],
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager',
-            'itemTable' => 'auth_item',
-            'assignmentTable' => 'auth_assignment',
-            'itemChildTable' => 'auth_item_child',
-            'ruleTable'=>'auth_rule'
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => null,
+                    'js' => ['/assets/js/jq.min.js','/assets/script/jquery-migrate-1.2.1.js']
+                ],
+                'yii\web\YiiAsset' => [
+                    'sourcePath' => null,
+                    'js' => ['/assets/js/core/yii.js']
+                ],
+                'yii\widgets\ActiveFormAsset' => [
+                    'sourcePath' => null,
+                    'js' => ['/assets/js/core/yii.activeForm.js']
+                ],
+                'yii\validators\ValidationAsset' => [
+                    'sourcePath' => null,
+                    'js' => ['/assets/js/core/yii.validation.js']
+                ],
+                'yii\captcha\CaptchaAsset' => [
+                    'sourcePath' => null,
+                    'js' => ['/assets/js/core/yii.captcha.js']
+                ],
+                'yii\authclient\widgets\AuthChoiceStyleAsset' => [
+                    'sourcePath' => null,
+                    'js' => ['/assets/js/authchoice/authchoice.js'],
+                    'css' => ['/assets/js/authchoice/authchoice.css']
+                ],
+                'kop\y2sp\assets\InfiniteAjaxScrollAsset' => [
+                    'sourcePath' => null,
+                    'js' => [
+                        '/assets/js/callbacks.js',
+                        '/assets/js/jquery-ias.js',
+                        '/assets/js/extension/history.js',
+                        '/assets/js/extension/noneleft.js',
+                        '/assets/js/extension/paging.js',
+                        '/assets/js/extension/spinner.js',
+                        '/assets/js/extension/trigger.js'
+                    ]
+                ],
+            ],
         ],
     ],
 ];
-
-if (!YII_ENV_TEST) {
-    // configuration adjustments for 'dev' environment
-//    $config['bootstrap'][] = 'debug';
-//    $config['modules']['debug'] = 'yii\debug\Module';
-
-//    $config['bootstrap'][] = 'gii';
-//    $config['modules']['gii'] = 'yii\gii\Module';
-}
 
 return $config;

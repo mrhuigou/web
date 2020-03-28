@@ -35,14 +35,14 @@ class WeixinBrageController extends \yii\web\Controller{
 	}
 	public function actionShare(){
 		try{
-//			if (!\Yii::$app->user->isGuest && \Yii::$app->request->isAjax) {
+			if (!\Yii::$app->user->isGuest && \Yii::$app->request->isAjax) {
 				$title=\Yii::$app->request->post('title');
 				$desc=\Yii::$app->request->post('desc');
 				$url=\Yii::$app->request->post('link');
 				$code=\Yii::$app->request->post('trace_code');
-				if(!$model=CustomerSharePage::findOne(['code'=>$code,'customer_id'=>'322'])){
+				if(!$model=CustomerSharePage::findOne(['code'=>$code,'customer_id'=>\Yii::$app->user->getId()])){
 					$model=new CustomerSharePage();
-					$model->customer_id='322';
+					$model->customer_id=\Yii::$app->user->getId();
 					$model->code=$code;
 					$model->title=$title;
 					$model->description=$desc;
@@ -55,7 +55,7 @@ class WeixinBrageController extends \yii\web\Controller{
 					$model->save();
 				}
 				$data=['status'=>1,'message'=>"分享成功！"];
-//			}
+			}
 		}catch (ErrorException $e){
 			$data=['status'=>0,'message'=>$e->getMessage()];
 		}

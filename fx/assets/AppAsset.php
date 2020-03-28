@@ -18,22 +18,11 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'assets/plugins/font-awesome/css/font-awesome.min.css',
-        'assets/plugins/uniform/css/uniform.default.css',
-//        'assets/stylesheet/mobile.min.css?v=20200219',
+        'assets/stylesheet/mobile.min.css?v=20200329',
         'assets/stylesheet/swiper.min.css?v=20170724',
         'assets/script/layer.m/need/layer.css?v=20171216'
     ];
     public $js = [
-        'assets/plugins/jquery-migrate-1.2.1.min.js',
-        'assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js',
-        'assets/plugins/bootstrap/js/bootstrap.min.js',
-        'assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js',
-        'assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js',
-        'assets/plugins/jquery.blockui.min.js',
-        'assets/plugins/jquery.cokie.min.js',
-        'assets/plugins/uniform/jquery.uniform.min.js',
-
         'assets/script/swiper.jquery.min.js?v=20170613',
         'assets/script/jquery-extend.js',
         'assets/script/template7.js',
@@ -62,6 +51,5 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
     ];
 }
