@@ -193,7 +193,7 @@ class SiteController extends Controller {
 		} elseif (\Yii::$app->session->get('redirect_url')) {
 			$url = \Yii::$app->session->get('redirect_url');
 		} else {
-			$url = Url::to(["/site-mobile/index"],true);
+			$url = Url::to(["/site/index"],true);
 		}
 
         $from_affiliate_uid=Yii::$app->session->get('from_affiliate_uid');
@@ -342,22 +342,13 @@ class SiteController extends Controller {
 
         }
 
-        $fx_user_login_status = false;
-        //获取用户登录状态 session 缓存 user_login_status
-        if(\Yii::$app->session->get("fx_user_login_status")){
-            $fx_user_login_status = \Yii::$app->session->get("fx_user_login_status");
-        }
-        if ($fx_user_login_status) {
+        if (!\Yii::$app->user->isGuest) {
             return $this->redirect($url);
         }
 		$model = new LoginForm();
 
 		if ($model->load(Yii::$app->request->post()) && $model->login()) {
 			\Yii::$app->cart->loadFromLogin();
-			//用户登录fx 状态
-            \Yii::$app->redis->set("fx_user_login_status",true);
-            $fx_user_info = Customer::findOne(['customer_id'=> \Yii::$app->user->getId()])->toArray();
-            \Yii::$app->redis->set("fx_user_info",json_encode($fx_user_info));
 			return $this->redirect($url);
 		} else {
 			return $this->render('login', [
