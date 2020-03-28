@@ -73,6 +73,7 @@ class ReportOrderCustomerController extends Controller
 		$header = array(
 			'用户ID'=>'string',
 			'电话'=>'string',
+			'下单手机号'=>'string',
 			'下单次数'=>'string',
 			'最后购物时间'=>'string',
 		);
@@ -81,7 +82,7 @@ class ReportOrderCustomerController extends Controller
 		if($model=$dataProvider->getModels()){
 			foreach($model as $value){
 				$writer->writeSheetRow('Sheet1',[
-					$value['customer_id'],$value['telephone'],$value['order_count'],$value['last_date']
+					$value['customer_id'],$value['telephone1'],$value['telephone'],$value['order_count'],$value['last_date']
 				]);
 			}
 		}
