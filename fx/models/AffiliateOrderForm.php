@@ -13,7 +13,7 @@ class AffiliateOrderForm extends Affiliate {
     public $city;
     public $district;
     public $address = [];
-    public function __construct($affiliate_id=0,$fx_user_info)
+    public function __construct($affiliate_id=0)
     {
         parent::__construct();
     }

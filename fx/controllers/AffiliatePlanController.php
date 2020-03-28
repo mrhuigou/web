@@ -6,7 +6,7 @@
  * Time: 15:52
  */
 namespace fx\controllers;
-use affiliate\models\AffiliateOrderForm;
+use fx\models\AffiliateOrderForm;
 use api\models\V1\Affiliate;
 use api\models\V1\AffiliatePlan;
 use api\models\V1\AffiliatePlanDetail;
@@ -58,21 +58,9 @@ class AffiliatePlanController extends \yii\web\Controller {
                 throw new NotFoundHttpException("没有找到相关分销方案类型");
             }
         }
-        $fx_user_login_status = false;
 
-        var_dump(\Yii::$app->user->getId());die;
         if (\Yii::$app->user->isGuest) {
-            return $this->redirect(['/site-mobile/login','redirect'=>Yii::$app->request->getAbsoluteUrl()]);
-        }
-        //获取用户登录状态 session 缓存 user_login_status
-        if(\Yii::$app->redis->get("fx_user_login_status")){
-            $fx_user_login_status = \Yii::$app->redis->get("fx_user_login_status");
-        }else{
-//            \Yii::$app->session->remove("fx_user_login_status");
-        }
-
-        if (!$fx_user_login_status) {
-            return $this->redirect(['/site-mobile/login', 'redirect' => '/affiliate-plan/index?plan_code='.$plan_code]);
+            return $this->redirect(['/site/login','redirect'=>Yii::$app->request->getAbsoluteUrl()]);
         }
 
         $cart = [];
@@ -303,16 +291,8 @@ class AffiliatePlanController extends \yii\web\Controller {
     public function actionSwitchPlanSubmit(){
 //        \Yii::$app->session->remove("confirm_push");
 //        \Yii::$app->session->remove("ground_push_base");
-//        if (\Yii::$app->user->isGuest) {
-//            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
-//        }
-        $fx_user_login_status = false;
-        //获取用户登录状态 session 缓存 user_login_status
-        if(\Yii::$app->redis->get("fx_user_login_status")){
-            $fx_user_login_status = \Yii::$app->redis->get("fx_user_login_status");
-        }
-        if (!$fx_user_login_status) {
-            return $this->redirect(['/site-mobile/login', 'redirect' => '/affiliate-plan/index']);
+        if (\Yii::$app->user->isGuest) {
+            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
         }
 
         $affiliate_plan_id = \Yii::$app->request->post('affiliate_plan_id');
@@ -415,22 +395,13 @@ class AffiliatePlanController extends \yii\web\Controller {
 	public function actionSubmit(){
 //	    \Yii::$app->session->remove("confirm_push");
 	    \Yii::$app->session->remove("ground_push_base");
-//        if (\Yii::$app->user->isGuest) {
-//            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
-//        }
-        $fx_user_login_status = false;
-        //获取用户登录状态 session 缓存 user_login_status
-        if(\Yii::$app->redis->get("fx_user_login_status")){
-            $fx_user_login_status = \Yii::$app->redis->get("fx_user_login_status");
-        }
-        if (!$fx_user_login_status) {
-            return $this->redirect(['/site-mobile/login', 'redirect' => '/affiliate-plan/index']);
+        if (\Yii::$app->user->isGuest) {
+            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
         }
 
         $affiliate_plan_id = \Yii::$app->request->post('affiliate_plan_id');
 	    $data_string = \Yii::$app->request->post("data");
-//	    $data_string = '511401,2;515469,1';
-//        $affiliate_plan_id = 2;
+
 	    trim($data_string,';');
 	    $data_array = explode(';',$data_string);
 
@@ -519,25 +490,18 @@ class AffiliatePlanController extends \yii\web\Controller {
     public function actionConfirm(){
 
 	    $cart = [];
-//        if (\Yii::$app->user->isGuest) {
-//            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
-//        }
-        $fx_user_login_status = false;
-        //获取用户登录状态 session 缓存 user_login_status
-        if(\Yii::$app->redis->get("fx_user_login_status")){
-            $fx_user_login_status = \Yii::$app->redis->get("fx_user_login_status");
+        if (\Yii::$app->user->isGuest) {
+            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
         }
-        if (!$fx_user_login_status) {
-            return $this->redirect(['/site-mobile/login', 'redirect' => '/affiliate-plan/index']);
-        }
+
 	    if(\Yii::$app->session->get("confirm_push")){
             $cart = json_decode(\Yii::$app->session->get("confirm_push"),true);
         }else{
 	        return $this->redirect('/order/index');
         }
 
-        $fx_user_info = json_decode(\Yii::$app->redis->get("fx_user_info"),true);
-        if($user = Customer::findOne(['customer_id'=>$fx_user_info['customer_id']])){
+
+        if($user = Customer::findOne(['customer_id'=>\Yii::$app->user->getId()])){
 	        if(!$user->telephone || !$user->telephone_validate){
                 return $this->redirect(['/user/security-set-telephone', 'redirect' => \Yii::$app->request->getAbsoluteUrl()]);
             }
@@ -584,7 +548,7 @@ class AffiliatePlanController extends \yii\web\Controller {
             $affiliate_id = \Yii::$app->session->get('from_affiliate_uid');
             $affiliate_info = Affiliate::find()->where(['status'=>1,'affiliate_id'=>$affiliate_id])->one();
 
-            $model = new AffiliateOrderForm($affiliate_id,$fx_user_info);
+            $model = new AffiliateOrderForm($affiliate_id);
             if(\Yii::$app->request->isPost){
                 //$this->submit();
                 $telephone = \Yii::$app->request->post("confirm_telephone");
@@ -605,7 +569,7 @@ class AffiliatePlanController extends \yii\web\Controller {
 //                return $this->redirect(['payment/index', 'trade_no' => $trade_no, 'showwxpaytitle' => 1]);
                 return $this->redirect('https://m.mrhuigou.com/payment/index?trade_no='.$trade_no.'&showwxpaytitle=1');
             }
-            return $this->render('confirm', ['carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'fx_user_info' => $fx_user_info,'affiliate_info'=>$affiliate_info,'model' => $model]);
+            return $this->render('confirm', ['carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'affiliate_info'=>$affiliate_info,'model' => $model]);
         }else{
             return $this->redirect('/order/index');
         }
@@ -625,7 +589,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                 $fx_user_info = json_decode(\Yii::$app->redis->get("fx_user_info"),true);
                 if($distribution_type == 1){
                     //获取最后下单的地址
-                    $last_order_info = Order::find()->where(['customer_id'=> $fx_user_info['customer_id'],'sent_to_erp'=> 'Y'])->orderBy('date_added desc')->one();
+                    $last_order_info = Order::find()->where(['customer_id'=> \Yii::$app->user->getId(),'sent_to_erp'=> 'Y'])->orderBy('date_added desc')->one();
                     if($last_order_info){
                         $address['zone'] = $last_order_info->orderShipping->shipping_zone;
                         $address['city'] = $last_order_info->orderShipping->shipping_city;
@@ -642,8 +606,8 @@ class AffiliatePlanController extends \yii\web\Controller {
                     $address['city'] = $affiliate_info->city_name;
                     $address['district'] = $affiliate_info->district_name;
                     $address['address_1'] = $affiliate_info->address;
-                    $address['address_username'] = $fx_user_info['firstname']?:"";
-                    $address['address_telephone'] = $fx_user_info['telephone'];
+                    $address['address_username'] = \Yii::$app->user->identity->firstname;
+                    $address['address_telephone'] = \Yii::$app->user->identity->telephone;
                 }
             }
 
