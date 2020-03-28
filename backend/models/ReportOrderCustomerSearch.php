@@ -44,7 +44,7 @@ class ReportOrderCustomerSearch extends Model {
 	 */
 	public function search($params)
 	{
-			$subQuery = Order::find()->alias('o')->joinWith('orderProducts op');
+			$subQuery = Order::find()->alias('o')->joinWith('orderProducts op')->joinWith('customer c');
 			$this->load($params);
 			if ($this->begin_date) {
 				$subQuery->andFilterWhere(['>=', 'o.date_added', $this->begin_date]);
@@ -93,7 +93,7 @@ class ReportOrderCustomerSearch extends Model {
 				$subQuery->andFilterWhere($filter_where);
 			}
 			$Query = new \yii\db\Query();
-			$Query->select(['tmp.customer_id', 'tmp.telephone', "count(DISTINCT tmp.order_id) as order_count", "MAX(tmp.date_added) as last_date"])->from(['tmp' => $subQuery])->groupBy("tmp.customer_id");
+			$Query->select(['tmp.customer_id','c.telephone as customer_telephone', 'tmp.telephone', "count(DISTINCT tmp.order_id) as order_count", "MAX(tmp.date_added) as last_date"])->from(['tmp' => $subQuery])->groupBy("tmp.customer_id");
 			$dataProvider = new ActiveDataProvider([
 				'query' => $Query->orderBy("tmp.customer_id asc"),
 			]);

@@ -36,7 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	        'columns' => [
 		        // ['class' => 'yii\grid\SerialColumn'],
                 ['label'=>'用户ID','value'=>'customer_id'],
-		        ['label'=>'手机','value'=>'telephone'],
+                ['label'=>'手机','value'=>'customer_telephone'],
+		        ['label'=>'下单手机','value'=>'telephone'],
 		        ['label'=>'下单数','value'=>'order_count'],
 		        ['label'=>'最后下单时间','value'=>'last_date'],
 	        ],
