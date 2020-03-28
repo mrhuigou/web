@@ -29,9 +29,8 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site-mobile/error',
+            'errorAction' => 'site/error',
         ],
     ],
     'params' => $params,
-    'on beforeAction'=>['affiliate\events\InitShare','assign'],
 ];
