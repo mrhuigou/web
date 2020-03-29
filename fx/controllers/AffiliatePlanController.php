@@ -731,7 +731,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                     $affiliate_id = \Yii::$app->session->get('from_affiliate_uid')?:0;
 
                     $Order_model->affiliate_id = $affiliate_id;
-                    $Order_model->commission=0;
+                    $Order_model->commission=$this->getOrderCommission($base['total'],$affiliate_id);
                     $Order_model->source_customer_id=0;
                     $Order_model->language_id = 2;
                     $Order_model->currency_id = 4;
@@ -1188,6 +1188,24 @@ class AffiliatePlanController extends \yii\web\Controller {
         return $this->redirect(['/share/index']);
 
 
+    }
+
+    protected function getOrderCommission($total,$affiliate_id){
+        $commission=0;
+        if($model=Affiliate::findOne(['affiliate_id'=>$affiliate_id,'status'=>1])){
+            if($model->settle_type == 'order'){
+                if($model->settle_commission == 'P'){
+                    if($model->settle_commission == 'P'){
+                        $commission = bcmul($model->commission,$total,2);
+                    }else{
+                        $commission = $model->commission;
+                    }
+                }else{
+                    $commission = $model->commission;
+                }
+            }
+        }
+        return $commission;
     }
 
 
