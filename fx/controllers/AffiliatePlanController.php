@@ -6,6 +6,9 @@
  * Time: 15:52
  */
 namespace fx\controllers;
+use api\models\V1\City;
+use api\models\V1\District;
+use api\models\V1\Zone;
 use fx\models\AffiliateOrderForm;
 use api\models\V1\Affiliate;
 use api\models\V1\AffiliatePlan;
@@ -426,6 +429,9 @@ class AffiliatePlanController extends \yii\web\Controller {
         \Yii::$app->session->set('confirm_push', json_encode($cart));
         try {
 
+            $affiliate_id = \Yii::$app->session->get('from_affiliate_uid');
+            $affiliate_info = Affiliate::find()->where(['status'=>1,'affiliate_id'=>$affiliate_id])->one();
+
             if($cart){
                 $totals = 0;
                 foreach ($cart as $affiliate_plan_id => $products){
@@ -467,6 +473,8 @@ class AffiliatePlanController extends \yii\web\Controller {
                         $base[$affiliate_plan_id]['name'] = '青岛每日惠购';
                         $base[$affiliate_plan_id]['url'] = 'https://m.mrhuigou.com/affiliate-plan/index';
                         $base[$affiliate_plan_id]['affiliate_plan_id'] = $affiliate_plan_id;
+                        $base[$affiliate_plan_id]['affiliate_plan_code'] = $plan_info->code;
+                        $base[$affiliate_plan_id]['affiliate_code'] = $affiliate_info->code;
 
                         \Yii::$app->session->set('ground_push_base',json_encode($base));
 
@@ -556,10 +564,16 @@ class AffiliatePlanController extends \yii\web\Controller {
                 $firstname = \Yii::$app->request->post("confirm_firstname");
                 $region = \Yii::$app->request->post("confirm_address");
                 $address_1 = \Yii::$app->request->post("confirm_address_1");
+                if(!empty($region)){
+                    $region = explode('-',$region);
+                    $address['province'] = $region[0];
+                    $address['city'] = $region[1];
+                    $address['district'] = $region[2];
+                }
 
                 $address['telephone'] = $telephone;
                 $address['firstname'] = $firstname;
-                $address['region'] = $region;
+//                $address['region'] = $region;
                 $address['address_1'] = $address_1;
 
                 $trade_no = $this->submit($base,$cart,$address);
@@ -702,19 +716,19 @@ class AffiliatePlanController extends \yii\web\Controller {
                     $Order_model->store_id = $base['store_id'];
                     $Order_model->store_name = $base['name'];
                     $Order_model->store_url = $base['url'];
-                    $Order_model->customer_group_id = $fx_user_info['customer_group_id'];
-                    $Order_model->customer_id = $fx_user_info['customer_id'];
-                    $Order_model->firstname = $fx_user_info['firstname'] ? $fx_user_info['firstname'] :\Yii::$app->request->post("confirm_firstname");
-                    $Order_model->lastname = $fx_user_info['lastname'];
-                    $Order_model->email = $fx_user_info['email'];
-                    $Order_model->telephone = $fx_user_info['telephone'] ? $fx_user_info['telephone'] :\Yii::$app->request->post("confirm_telephone");
-                    $Order_model->gender = $fx_user_info['gender'];
+                    $Order_model->customer_group_id = \Yii::$app->user->identity['customer_group_id'];
+                    $Order_model->customer_id = \Yii::$app->user->getId();
+                    $Order_model->firstname = \Yii::$app->user->identity['firstname'] ? \Yii::$app->user->identity['firstname'] :\Yii::$app->request->post("firstname");;
+                    $Order_model->lastname = \Yii::$app->user->identity['lastname'];
+                    $Order_model->email = \Yii::$app->user->identity['email'];
+                    $Order_model->telephone = \Yii::$app->user->identity['telephone'];
+                    $Order_model->gender = \Yii::$app->user->identity['gender'];
                     $Order_model->payment_method = "";
                     $Order_model->payment_code = "";
                     $Order_model->total = $base['total'];
                     $Order_model->comment = "";
                     $Order_model->order_status_id = 1;
-                    $affiliate_id = 0;
+                    $affiliate_id = \Yii::$app->session->get('from_affiliate_uid')?:0;
 
                     $Order_model->affiliate_id = $affiliate_id;
                     $Order_model->commission=0;
@@ -742,40 +756,30 @@ class AffiliatePlanController extends \yii\web\Controller {
                     $point = AffiliatePlan::findOne($base['affiliate_plan_id']);
                     if($point){
                         $delivery_time = '不限';
+                        $zone=Zone::findOne(['name'=>$address['province']]);
+                        $city=City::findOne(['name'=>$address['city'],'zone_id'=>$zone?$zone->zone_id:0]);
+                        $district=District::findOne(['name'=>$address['district'],'city_id'=>$city?$city->city_id:0]);
                         $shipping_address = [
-                            'shipping_method' => '客户自提',
+                            'shipping_method' => '每日惠购配送',
                             'shipping_code' => 'limit',
                             'delivery_code' => 'limit',
-                            'delivery_date' => date("Y-m-d"),
+                            'delivery_date' => date("Y-m-d",strtotime($point->ship_end)),
                             'delivery_time' => $delivery_time,
                             'delivery_station_id' => 0,
                             'delivery_station_code' => '',
-                            'username' => $fx_user_info['firstname'] ? $fx_user_info['firstname'] :\Yii::$app->request->post("firstname"),
-                            'telephone' => $fx_user_info['telephone'] ? $fx_user_info['telephone'] :\Yii::$app->request->post("telephone"),
-//                            'address' => $point->address,
-//                            'postcode' => 266000,
-//                            'zone' => $point->zone ? $point->zone->name : "",
-//                            'zone_code' => $point->zone ? $point->zone->code : "",
-//                            'zone_id' => $point->zone->zone_id,
-//                            'city' => $point->city ? $point->city->name : "",
-//                            'city_code' => $point->city ? $point->city->code : "",
-//                            'city_id' => $point->city ? $point->city->city_id:"",
-//                            'district' => $point->district ? $point->district->name : "",
-//                            'district_code' => $point->district ? $point->district->code : "",
-//                            'district_id' => $point->district ? $point->district->district_id : "",
-
-                            'address' => '青岛每日惠购',
+                            'username' => $address['firstname'],
+                            'telephone' => $address['telephone'],
+                            'address' => $address['address_1'],
                             'postcode' => 266000,
-                            'zone' => '山东省',
-                            'zone_code' => '',
-                            'zone_id' => '',
-                            'city' => '青岛市',
-                            'city_code' => '',
-                            'city_id' => '',
-                            'district' => "",
-                            'district_code' => "",
-                            'district_id' => "",
-
+                            'zone' => $address['province']? : "",
+                            'zone_code' => $zone?$zone->code:"",
+                            'zone_id' => $zone?$zone->zone_id:0,
+                            'city' => $address['city']? : "",
+                            'city_code' => $city?$city->code: "",
+                            'city_id' => $city?$city->city_id:0,
+                            'district' => $address['district']? : "",
+                            'district_code' => $district?$district->code: "",
+                            'district_id' => $district?$district->district_id:0,
                             'lat' => "",
                             'lng' => "",
                             'is_delivery' => 1,
@@ -786,8 +790,8 @@ class AffiliatePlanController extends \yii\web\Controller {
                             $Order_Shipping->order_id = $Order_model->order_id;
                             $Order_Shipping->station_id = $shipping_address['delivery_station_id'];
                             $Order_Shipping->station_code = $shipping_address['delivery_station_code'];
-                            $Order_Shipping->shipping_firstname = \Yii::$app->request->post("firstname");
-                            $Order_Shipping->shipping_telephone = \Yii::$app->request->post("telephone");
+                            $Order_Shipping->shipping_firstname = $shipping_address['username'];
+                            $Order_Shipping->shipping_telephone = $shipping_address['telephone'];
                             $Order_Shipping->shipping_address_1 = $shipping_address['address'];
                             $Order_Shipping->shipping_postcode = $shipping_address['postcode'];
                             $Order_Shipping->shipping_zone = $shipping_address['zone'];
@@ -827,8 +831,8 @@ class AffiliatePlanController extends \yii\web\Controller {
                             if($affiliate_plan_detail->max_buy_qty < $qty){
                                 //购买数量超过最大购买数量
                             }
-                            $price = $affiliate_plan_detail->price;
-                            $product_total =  round(bcmul($affiliate_plan_detail->price_type == 1 ? $affiliate_plan_detail->price:$affiliate_plan_detail->product->productBase->price , $qty,4),2);
+                            $price = $affiliate_plan_detail->price_type == 1 ? $affiliate_plan_detail->price:$affiliate_plan_detail->product->productBase->price;
+                            $product_total =  round(bcmul( $price, $qty,4),2);
                             $sum_product_total = bcadd($sum_product_total,$product_total,4);
 
 
@@ -855,6 +859,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                             $Order_product->promotion_id = $promotion_id;
                             $Order_product->promotion_detail_id = $promotion_detail_id;
                             $Order_product->commission=$product->getCommission($Order_model->source_customer_id,$Order_product->pay_total);
+
                             if (!$Order_product->save(false)) {
                                 throw new \Exception("商品创建失败");
                             }
