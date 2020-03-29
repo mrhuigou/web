@@ -218,7 +218,7 @@ function choice_distribution_type(){
     </a>
 </div>
 <div id="confirm_form_order" class="bg-f0" style="display: none;">
-    <h2 class="w p10 tc bg-wh">请确认姓名与手机号码</h2>
+    <h2 class="w p10 tc bg-wh">请确认收货地址</h2>
 <!--    <div class=" m5 p5  bg-wh">-->
 <!--        <div class="colorbar"></div>-->
 <!--        <div id="confirm_form_address"></div>-->
@@ -319,11 +319,11 @@ $("#button_submit").click(function(){
 
 
     var delivery_list="";
-    delivery_list+='<div class="flex-item-4 mb5">姓名：</div><div class="flex-item-8  tr mb5">'+ confirm_username+' </div>';
+    delivery_list+='<div class="flex-item-4 mb5">收货地址：</div><div class="flex-item-8  tr mb5">'+ confirm_zone+' </div>';
     $("#confirm_form_shippingtime").html(delivery_list);
 
     var name_confirm = "";
-    name_confirm = '<div class="flex-item-4 mb5">手机：</div><div class="flex-item-8  tr mb5">'+ telephone+' </div>';
+    name_confirm = '<div class="flex-item-4 mb5">详细地址：</div><div class="flex-item-8  tr mb5">'+ confirm_address+' </div>';
    $("#confirm_form_telephone").html(name_confirm);
 
     maskdiv($("#confirm_form_order"),"bottom");
