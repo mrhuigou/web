@@ -76,8 +76,9 @@ class AffiliatePlanController extends \yii\web\Controller {
         //正在进行的方案
         $affiliate_plan = AffiliatePlan::find()->where(['status' => 1,'code'=>$plan_code])->andWhere(['<', 'date_start', date('Y-m-d H:i:s')])->andWhere(['>', 'date_end', date('Y-m-d H:i:s')])->one();
         $products = [];
+        $plan_countdown = 0;
         if ($affiliate_plan) {
-
+            $plan_countdown = strtotime($affiliate_plan->date_end) - time();
             $affiliate_plans = AffiliatePlan::find()->where(['type'=>$affiliate_plan->type,'status'=>1])->andWhere(['and','date_start < NOW()','date_end > NOW()'])->orderBy('date_start asc,date_end desc,affiliate_plan_id desc')->all();
 
             if ($model = AffiliatePlanType::findOne(['code' => $affiliate_plan->type, 'status' => 1])) {
@@ -112,7 +113,7 @@ class AffiliatePlanController extends \yii\web\Controller {
             }
         }
 
-        return $this->render('index', ['affiliate_plan' => $affiliate_plan, 'products' => $products,'cart'=>$cart,'affiliate_info' => $affiliate_info,'affiliate_plans'=>$affiliate_plans,'total'=> $total,'is_other_cart'=> $is_other_cart]);
+        return $this->render('index', ['affiliate_plan' => $affiliate_plan,'plan_countdown' =>$plan_countdown,'products' => $products,'cart'=>$cart,'affiliate_info' => $affiliate_info,'affiliate_plans'=>$affiliate_plans,'total'=> $total,'is_other_cart'=> $is_other_cart]);
 
 	}
 

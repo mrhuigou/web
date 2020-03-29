@@ -197,5 +197,9 @@ class Affiliate extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
+    public function getCustomer(){
+        return $this->hasOne(Customer::className(), ['customer_id' => 'customer_id']);
+    }
+
 
 }
