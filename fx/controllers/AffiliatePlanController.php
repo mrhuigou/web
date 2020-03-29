@@ -858,7 +858,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                             $Order_product->refund_qty = 0;
                             $Order_product->promotion_id = $promotion_id;
                             $Order_product->promotion_detail_id = $promotion_detail_id;
-                            $Order_product->commission=$product->getCommission($Order_model->source_customer_id,$Order_product->pay_total);
+                            $Order_product->commission=$this->getProductCommission($Order_model->affiliate_id,$affiliate_plan_detail->affiliate_price,$qty);
 
                             if (!$Order_product->save(false)) {
                                 throw new \Exception("商品创建失败");
@@ -1208,5 +1208,14 @@ class AffiliatePlanController extends \yii\web\Controller {
         return $commission;
     }
 
+    protected function getProductCommission($affiliate_id,$affiliate_price,$qty=0){
+        $commission=0;
+        if($model=Affiliate::findOne(['affiliate_id'=>$affiliate_id,'status'=>1])){
+            if($model->settle_type == 'product'){
+                $commission = bcmul($qty,$affiliate_price,2);
+            }
+        }
+        return $commission;
+    }
 
 }
