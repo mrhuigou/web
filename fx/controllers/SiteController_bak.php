@@ -26,6 +26,7 @@ use h5\models\SignuptelForm;
 use h5\models\SignupemailForm;
 use yii\base\ErrorException;
 use yii\base\InvalidParamException;
+use yii\db\Exception;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\httpclient\Client;
@@ -42,6 +43,7 @@ class SiteController extends Controller {
 	/**
 	 * @inheritdoc
 	 */
+    public $layout = 'main';
 	public function behaviors()
 	{
 		return [
@@ -197,6 +199,7 @@ class SiteController extends Controller {
 
         $from_affiliate_uid=Yii::$app->session->get('from_affiliate_uid');
         $useragent = \Yii::$app->request->getUserAgent();
+
         if(strpos(strtolower($useragent), 'zhqdapp') || strpos(strtolower($useragent), 'anfangapp')){ //APP登录
             if(strpos(strtolower($useragent), 'zhqdapp')){
                 $provider = 'Zhqd';
@@ -306,6 +309,7 @@ class SiteController extends Controller {
                             }
 
                         }else{
+
                             throw new NotFoundHttpException("数据错误，没有用户标示");
                         }
                         if($user){
@@ -338,10 +342,12 @@ class SiteController extends Controller {
             }
 
         }
+
         if (!\Yii::$app->user->isGuest) {
             return $this->redirect($url);
         }
 		$model = new LoginForm();
+
 		if ($model->load(Yii::$app->request->post()) && $model->login()) {
 			\Yii::$app->cart->loadFromLogin();
 			return $this->redirect($url);
