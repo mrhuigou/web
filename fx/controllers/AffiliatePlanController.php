@@ -828,6 +828,7 @@ class AffiliatePlanController extends \yii\web\Controller {
 
                     //添加商品信息
                     if (isset($cart) ) {
+                        $total_commission = 0;
                         $sum_product_total = 0;
                         foreach ($cart as $code => $qty) {
                             $product = Product::findOne(['product_code'=>$code]);
@@ -870,6 +871,14 @@ class AffiliatePlanController extends \yii\web\Controller {
                             if (!$Order_product->save(false)) {
                                 throw new \Exception("商品创建失败");
                             }
+                            $total_commission = bcadd($total_commission,$Order_product->commission,4);
+                        }
+                        $total_commission = round($total_commission,2);
+                        //更新订单佣金
+                        $Order_model = Order::findOne($Order_model->order_id);
+                        $Order_model->commission=$total_commission;
+                        if (!$Order_model->save(false)) {
+                            throw new \Exception("订单数据异常");
                         }
                     }
                     $sum_product_total = round($sum_product_total,2);
