@@ -45,9 +45,9 @@ $this->title = '订单确认';
             <div class="t">选择地区：</div>
             <div class="c">
                 <div class="weui-cell__bd">
-                    <?php $p = $address['province'] ?  : '山东省';
-                    $c = $address['city'] ?  : '青岛市';
-                    $d = $address['district'] ?  : '市北区';
+                    <?php $p = $address['zone_name'] ?  : '山东省';
+                    $c = $address['city_name'] ?  : '青岛市';
+                    $d = $address['district_name'] ?  : '市北区';
                     ?>
                     <input class="w f14" id="start" name="region" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
                 </div>
@@ -57,24 +57,7 @@ $this->title = '订单确认';
 <div class="c">
     <div class="t">详细地址：</div>
     <div class="weui-cell__bd">
-        <textarea name="address_1" placeholder='小区/写字楼/街道+楼号+楼层等' id='address_1'   class='w f14' rows=2 style="height:45px;padding:5px;"><?=$address['address_1'] ?:''?></textarea>
-    </div>
-</div>
-<div class="store_contain whitebg ">
-    <div class="mt5">
-        <div class="flex-row ">
-            <div class="flex-item-2 p5 pt10 pl10"><i class="red">*</i>姓名</div>
-            <div class="flex-item-10 mt5 "><input type="text" class="input-text w" id="firstname" name="firstname" placeholder = '请填写收货人姓名' value="<?=$address['firstname'] ?:''?>"></div>
-        </div>
-    </div>
-</div>
-
-<div class="store_contain whitebg ">
-    <div class="mt5">
-        <div class="flex-row mt10 ">
-            <div class="flex-item-2 p5 pt10 pl10"><i class="red">*</i>手机</div>
-            <div class="flex-item-10 mb10 "><input type="text" class="input-text w " id="telephone" name="telephone" placeholder = '请填写收货人手机号' value="<?=$address['telephone'] ?:''?>"></div>
-        </div>
+        <textarea name="address_1" placeholder='小区/写字楼/街道+楼号+楼层等' id='address_1'   class='w f14' rows=2 style="height:45px;padding:5px;"><?=$address['address'] ?:''?></textarea>
     </div>
 </div>
 
@@ -96,26 +79,7 @@ $this->title = '订单确认';
     });
 
 $("body").on("click",".save_address",function(){
-    var telephone = $('#telephone').val();
-    if(!telephone){
-        $.alert("手机号码必须填写");
-        $("#telephone").css('border-color',"red");
-        return false;
-    }
-    var myreg =  /^1[3456789]\d{9}$/;
-    if(!myreg.test(telephone))
-    {
-        $.alert('请输入有效的手机号码！');
-        $("#telephone").css('border-color',"red");
-        return false;
-    }
 
-    var firstname = $('#firstname').val();
-    if(!firstname){
-        $.alert("收货人姓名必须填写");
-        $("#firstname").css('border-color',"red");
-        return false;
-    }
     var address_1 = $('#address_1').val();
     if(!address_1){
         $.alert("详细地址必须填写");

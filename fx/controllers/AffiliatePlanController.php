@@ -584,7 +584,22 @@ class AffiliatePlanController extends \yii\web\Controller {
 //                return $this->redirect(['payment/index', 'trade_no' => $trade_no, 'showwxpaytitle' => 1]);
                 return $this->redirect('https://m.mrhuigou.com/payment/index?trade_no='.$trade_no.'&showwxpaytitle=1');
             }
-            return $this->render('confirm', ['carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'affiliate_info'=>$affiliate_info,'model' => $model]);
+            $shipping_method = \Yii::$app->session->get("shipping_method")?:1;
+            if($shipping_address = \Yii::$app->session->get("shipping_address")){
+                $shipping_address = json_decode($shipping_address,true);
+            }else{
+                //获取当前用户的最后一次购物的收货地址
+                $last_order_info = Order::find()->where(['customer_id'=> \Yii::$app->user->getId(),'sent_to_erp'=> 'Y'])->orderBy('date_added desc')->one();
+                $shipping_address = [];
+                if($last_order_info){
+                    $shipping_address['zone_name'] = $last_order_info->orderShipping->shipping_zone;
+                    $shipping_address['city_name'] = $last_order_info->orderShipping->shipping_city;
+                    $shipping_address['district_name'] = $last_order_info->orderShipping->shipping_district;
+                    $shipping_address['address'] = $last_order_info->orderShipping->shipping_address_1;
+                }
+                \Yii::$app->session->set("shipping_address",json_encode($shipping_address));
+            }
+            return $this->render('confirm', ['carts'=>$carts,'totals'=>$totals,'pay_total'=>$pay_total ,'affiliate_info'=>$affiliate_info,'model' => $model,'shipping_method'=> $shipping_method,'shipping_address'=> $shipping_address]);
         }else{
             return $this->redirect('/order/index');
         }
@@ -646,32 +661,24 @@ class AffiliatePlanController extends \yii\web\Controller {
     //编辑收货地址
     public function actionEditAddress(){
 	    $address = [];
-        $address['telephone'] = \Yii::$app->request->get("telephone");
-        $address['firstname'] = \Yii::$app->request->get("username");
-        $address['region'] = \Yii::$app->request->get("zone");
-        $address['address_1'] = \Yii::$app->request->get("address_1");
 
-        if(!empty($address['region'])){
-            $region = explode('-',$address['region']);
-            $address['province'] = $region[0];
-            $address['city'] = $region[1];
-            $address['district'] = $region[2];
+        if($shipping_address = \Yii::$app->session->get("shipping_address")){
+            $address = json_decode($shipping_address,true);
         }
 
         try {
 
             if($post = \Yii::$app->request->isPost){
-                $address1['region'] = \Yii::$app->request->post('region');
-                $address1['address_1'] = \Yii::$app->request->post('address_1');
-                $address1['firstname'] = \Yii::$app->request->post('firstname');
-                $address1['telephone'] = \Yii::$app->request->post('telephone');
-                if(!empty($address1['region'])){
-                    $region = explode(' ',$address1['region']);
-                    $address1['province'] = $region[0];
-                    $address1['city'] = $region[1];
-                    $address1['district'] = $region[2];
+                $region = \Yii::$app->request->post('region');
+                $address_edit['address'] = \Yii::$app->request->post('address_1');
+
+                if(!empty($region)){
+                    $region = explode(' ',$region);
+                    $address_edit['zone_name'] = $region[0];
+                    $address_edit['city_name'] = $region[1];
+                    $address_edit['district_name'] = $region[2];
                 }
-                \Yii::$app->session->set("fx_address",json_encode($address1));
+                \Yii::$app->session->set("shipping_address",json_encode($address_edit));
                 return $this->redirect(['/affiliate-plan/confirm']);
             }
 

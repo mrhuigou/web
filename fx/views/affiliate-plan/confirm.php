@@ -37,6 +37,69 @@ $this->title = '订单确认';
         <input type="text" id="confirm_address_1"   name="confirm_address_1" style="display: none" value="">
 
 		<?php if ($carts) { ?>
+
+            <div class="store_contain whitebg " id="store_contain_<?= $point->id ?>">
+                <div class="mt5">
+                    <div class="flex-row ">
+                        <div class="flex-item-3 p5 pt10 pl10"><i class="red">*</i>收货人</div>
+                        <div class="flex-item-9 mt5 "><input type="text" class="input-text w" id="firstname" name="firstname" value="<?php echo Yii::$app->user->identity ? Yii::$app->user->identity->firstname : "";?>"></div>
+                    </div>
+                    <div class="flex-row mt10 ">
+                        <div class="flex-item-3 pt10 pl10"><i class="red">*</i>收货电话</div>
+                        <div class="flex-item-9 mb10 "><input type="text" class="input-text w " id="telephone" name="telephone" value="<?php echo Yii::$app->user->identity ? Yii::$app->user->identity->telephone: "";?>">     </div>
+                    </div>
+                </div>
+            </div>
+            <div class="store_contain whitebg " id="store_contain_<?= $point->id ?>">
+                <div class="mt5">
+                    <div class="flex-row mt10 ">
+                        <div id="address_list" class="">
+                            <div class="flex-col flex-center store-item bdb  whitebg p5 item-address <?=$shipping_method==1?"red":""?>">
+                                <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center" style="margin-top: 10px;">
+                                    <input type="radio" value="1" name="address_id"  class="item" <?=$shipping_method==1?'checked':""?>>
+                                    <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                </label>
+
+                                <div class="flex-item-3 pt10">配送到家</div>
+                                <?php if(!empty($shipping_address)){?>
+                                <div class="flex-item-6 ">
+                                    <p class="addresss111"><?=$shipping_address['zone_name'].'-'.$shipping_address['city_name'].'-'.$shipping_address['district_name']?></p>
+                                    <p>
+                                        <?= $shipping_address['address']?>
+                                    </p>
+                                </div>
+                                <div class="flex-item-2 flex-row flex-middle flex-center">
+                                    <?php $in_range = Yii::$app->request->get('in_range',1);?>
+                                    <a href="<?=\yii\helpers\Url::to(['/affiliate-plan/edit-address','redirect'=>Yii::$app->request->getAbsoluteUrl()])?>" class="iconfont gray9 ">&#xe615;</a>
+                                </div>
+                                <?php }else{ ?>
+                                <div class="flex-item-6 ">
+                                    <a class="db  rarrow whitebg f14 tc" href="<?=\yii\helpers\Url::to(['/affiliate-plan/edit-address','redirect'=>Yii::$app->request->getAbsoluteUrl()])?>"><span class="iconfont fb">&#xe60c;</span>创建您的收货地址 </a>
+                                </div>
+                                <?php }?>
+
+                            </div>
+                        <?php if($affiliate_info->mode == 'DOWN_LINE'){//分销商为线下时 显示自提点?>
+                            <div class="flex-col flex-center store-item bdb  whitebg p5 item-address <?=$shipping_method == 2?"red":""?>">
+                                <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center" style="margin-top: 10px;">
+                                    <input type="radio" value="2" name="address_id"  class="item" <?=$shipping_method == 2?'checked':""?>>
+                                    <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                </label>
+                                <div class="flex-item-3 pt10">团长处自提</div>
+                                <div class="flex-item-6 ">
+                                    <p class="addresss111"><?=$affiliate_info->zone_name.'-'.$affiliate_info->city_name.'-'.$affiliate_info->district_name?></p>
+                                    <p>
+                                        <?=$affiliate_info->address?>
+                                    </p>
+                                </div>
+                            </div>
+                        <?php }?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="store_contain whitebg " id="store_contain">
                 <div class="mt5 ">
                     <div class="flex-row mt10 pt15">
@@ -403,6 +466,13 @@ $("body").on("click",".save_address",function(){
     $(".confirm-zone").html(start);
     $(".confirm-address").html(address_new);
     layer.closeAll();
+});
+
+$("#address_list  .item-address").click(function(){
+    $(this).addClass('red').siblings().removeClass('red');
+    $(this).find('input:radio').attr('checked',true);
+    // alert($(this).(".addresss111").html());
+    alert($("input[type='radio']:checked").val());
 });
 
 <?php $this->endBlock() ?>
