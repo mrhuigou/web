@@ -16,7 +16,7 @@ $this->title = "一起团";
         <div class="  flex-col flex-middle p10">
             <div class="flex-item-3">
                 <a href="#" style=" line-height: 140px;">
-                    <img src="<?= \common\component\image\Image::resize($affiliate_info->customer->photo?:'/assets/images/defaul.png', 100, 100) ?>"
+                    <img src="<?= \common\component\image\Image::resize(!empty($affiliate_info)?$affiliate_info->customer->photo:'/assets/images/defaul.png', 100, 100) ?>"
                          alt="每日惠购" class="ava mava">
                 </a>
             </div>
