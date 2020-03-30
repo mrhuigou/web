@@ -40,18 +40,18 @@ $this->title = '用户中心';
 				</a>
 			</div>
 		</div>
-        <div class="flex-col tc lh37 bg-wh " style="opacity: 0.7;">
-            <a class="flex-item-4" href="<?= \yii\helpers\Url::to(['collect/index']) ?>">
-                <i class="aui-icon aui-icon-favor" style="font-size: 16px;"></i>
-                商品收藏
-            </a>
-            <a class="flex-item-4 " href="<?= \yii\helpers\Url::to(['foot-print/index']) ?>">
-                <i class="aui-icon aui-icon-footprint" style="font-size: 16px;"></i>我的足迹
-            </a>
-            <a class="flex-item-4" href="<?= \yii\helpers\Url::to(['/message/index']) ?>">
-                <i class="aui-icon aui-icon-notification" style="font-size: 16px;"></i>消息
-            </a>
-        </div>
+<!--        <div class="flex-col tc lh37 bg-wh " style="opacity: 0.7;">-->
+<!--            <a class="flex-item-4" href="--><?//= \yii\helpers\Url::to(['collect/index']) ?><!--">-->
+<!--                <i class="aui-icon aui-icon-favor" style="font-size: 16px;"></i>-->
+<!--                商品收藏-->
+<!--            </a>-->
+<!--            <a class="flex-item-4 " href="--><?//= \yii\helpers\Url::to(['foot-print/index']) ?><!--">-->
+<!--                <i class="aui-icon aui-icon-footprint" style="font-size: 16px;"></i>我的足迹-->
+<!--            </a>-->
+<!--            <a class="flex-item-4" href="--><?//= \yii\helpers\Url::to(['/message/index']) ?><!--">-->
+<!--                <i class="aui-icon aui-icon-notification" style="font-size: 16px;"></i>消息-->
+<!--            </a>-->
+<!--        </div>-->
         </div>
 		<!--订单状态-->
         <div class="mt5  whitebg p10 bdb clearfix"><span class="fl"><i class="iconfont blue f18" style="line-height: 14px;">&#xe61f;</i>我的订单</span><a href="<?= \yii\helpers\Url::to(['/order/index']) ?>" class="fr">查看所有订单</a></div>
@@ -70,57 +70,57 @@ $this->title = '用户中心';
             <span class="fl"><em class="iconfont blue f18" style="line-height: 14px;">&#xe622;</em>收货地址</span>
 			<i class="iconfont fr green">添加收货地址</i>
 		</a>
-        <a class="line-a db w clearfix  mt5" href="<?= \yii\helpers\Url::to(['/invoice/index']) ?>">
-            <span class="fl"><em class="iconfont blue f18" style="line-height: 14px;">&#xe6af;</em>发票信息</span>
-            <i class="iconfont fr green">发票管理</i>
-        </a>
+<!--        <a class="line-a db w clearfix  mt5" href="--><?//= \yii\helpers\Url::to(['/invoice/index']) ?><!--">-->
+<!--            <span class="fl"><em class="iconfont blue f18" style="line-height: 14px;">&#xe6af;</em>发票信息</span>-->
+<!--            <i class="iconfont fr green">发票管理</i>-->
+<!--        </a>-->
 <!--        --><?php //echo \h5\widgets\Block\UserShareBlock::widget()?>
-		<div class="mt5  whitebg p5 "><i class="aui-icon aui-icon-pay org f18"></i>我的钱包</div>
-		<div class="flex-col flex-center tc whitebg bdt bdb  p10 mb5">
-            <?php if(Yii::$app->session->get('source_from_agent_wx_xcx')){?>
-<!--                <a class="flex-item-4  flex-middle  p10 bdr " href="--><?php //echo \yii\helpers\Url::to(['/user/balance']) ?><!--">-->
+<!--		<div class="mt5  whitebg p5 "><i class="aui-icon aui-icon-pay org f18"></i>我的钱包</div>-->
+<!--		<div class="flex-col flex-center tc whitebg bdt bdb  p10 mb5">-->
+<!--            --><?php //if(Yii::$app->session->get('source_from_agent_wx_xcx')){?>
+<!--<!--                <a class="flex-item-4  flex-middle  p10 bdr " href="--><?php ////echo \yii\helpers\Url::to(['/user/balance']) ?><!--<!--">-->
+<!--<!--                    <i class="aui-icon aui-icon-recharge blue  "></i>-->
+<!--<!--                    余额-->
+<!--<!--                </a>-->
+<!--                <a class="flex-item-4  flex-middle  p10 bdr " href="--><?php //echo \yii\helpers\Url::to(['/user-coupon/index-delivery']) ?><!--">-->
 <!--                    <i class="aui-icon aui-icon-recharge blue  "></i>-->
-<!--                    余额-->
+<!--                    提货券-->
 <!--                </a>-->
-                <a class="flex-item-4  flex-middle  p10 bdr " href="<?php echo \yii\helpers\Url::to(['/user-coupon/index-delivery']) ?>">
-                    <i class="aui-icon aui-icon-recharge blue  "></i>
-                    提货券
-                </a>
-                <a class="flex-item-4  flex-middle bdr  p10" href="<?php echo \yii\helpers\Url::to(['/user-coupon/index']) ?>">
-                    <i class="aui-icon aui-icon-ticket org "></i>
-                    优惠券
-                </a>
-                <a class="flex-item-4  flex-middle p10" href="<?php echo \yii\helpers\Url::to(['/user-hongbao/index']) ?>">
-                    <i class="aui-icon aui-icon-redpacket red"></i>
-                    红包
-                </a>
-            <?php }else{?>
-<!--                <a class="flex-item-4  flex-middle  p10 bdr " href="--><?php //echo \yii\helpers\Url::to(['/user/balance']) ?><!--">-->
-<!--                    <i class="aui-icon aui-icon-recharge blue  "></i>-->
-<!--                    余额-->
+<!--                <a class="flex-item-4  flex-middle bdr  p10" href="--><?php //echo \yii\helpers\Url::to(['/user-coupon/index']) ?><!--">-->
+<!--                    <i class="aui-icon aui-icon-ticket org "></i>-->
+<!--                    优惠券-->
 <!--                </a>-->
-                <a class="flex-item-4  flex-middle  p10 bdr " href="<?php echo \yii\helpers\Url::to(['/user-coupon/index-delivery']) ?>">
-                    <i class="aui-icon  org  ">
-                        <img src="/assets/images/thq.png" style="width: 23px;height: 23px;" alt="">
-                    </i>
-                    提货券
-                </a>
-                <a class="flex-item-4  flex-middle bdr  p10" href="<?php echo \yii\helpers\Url::to(['/user-coupon/index']) ?>">
-                    <i class="aui-icon aui-icon-ticket org "></i>
-                    优惠券
-                </a>
-                <a class="flex-item-4  flex-middle bdr p10" href="<?php echo \yii\helpers\Url::to(['/user-hongbao/index']) ?>">
-                    <i class="aui-icon aui-icon-redpacket red"></i>
-                    红包
-                </a>
-<!--                <a class="flex-item-3  flex-middle  p10  " href="--><?php //echo \yii\helpers\Url::to(['/site/go-to','code'=>'hssrwd']) ?><!--">-->
-<!--                    <i class="iconfont vm green"> &#xe6b5;</i>-->
-<!--                    <span class="vm">理财</span>-->
+<!--                <a class="flex-item-4  flex-middle p10" href="--><?php //echo \yii\helpers\Url::to(['/user-hongbao/index']) ?><!--">-->
+<!--                    <i class="aui-icon aui-icon-redpacket red"></i>-->
+<!--                    红包-->
 <!--                </a>-->
-            <?php }?>
-
-
-		</div>
+<!--            --><?php //}else{?>
+<!--<!--                <a class="flex-item-4  flex-middle  p10 bdr " href="--><?php ////echo \yii\helpers\Url::to(['/user/balance']) ?><!--<!--">-->
+<!--<!--                    <i class="aui-icon aui-icon-recharge blue  "></i>-->
+<!--<!--                    余额-->
+<!--<!--                </a>-->
+<!--                <a class="flex-item-4  flex-middle  p10 bdr " href="--><?php //echo \yii\helpers\Url::to(['/user-coupon/index-delivery']) ?><!--">-->
+<!--                    <i class="aui-icon  org  ">-->
+<!--                        <img src="/assets/images/thq.png" style="width: 23px;height: 23px;" alt="">-->
+<!--                    </i>-->
+<!--                    提货券-->
+<!--                </a>-->
+<!--                <a class="flex-item-4  flex-middle bdr  p10" href="--><?php //echo \yii\helpers\Url::to(['/user-coupon/index']) ?><!--">-->
+<!--                    <i class="aui-icon aui-icon-ticket org "></i>-->
+<!--                    优惠券-->
+<!--                </a>-->
+<!--                <a class="flex-item-4  flex-middle bdr p10" href="--><?php //echo \yii\helpers\Url::to(['/user-hongbao/index']) ?><!--">-->
+<!--                    <i class="aui-icon aui-icon-redpacket red"></i>-->
+<!--                    红包-->
+<!--                </a>-->
+<!--<!--                <a class="flex-item-3  flex-middle  p10  " href="--><?php ////echo \yii\helpers\Url::to(['/site/go-to','code'=>'hssrwd']) ?><!--<!--">-->
+<!--<!--                    <i class="iconfont vm green"> &#xe6b5;</i>-->
+<!--<!--                    <span class="vm">理财</span>-->
+<!--<!--                </a>-->
+<!--            --><?php //}?>
+<!---->
+<!---->
+<!--		</div>-->
 
 		<a class="line-a db w clearfix mt5 " href="<?= \yii\helpers\Url::to(['/user/security-center']) ?>">
             <span class="fl"><em class="aui-icon aui-icon-safe org f18" style="line-height: 20px;"></em>安全中心</span>
@@ -175,7 +175,7 @@ $this->title = '用户中心';
 	</div>
 </section>
 </div>
-<?= h5\widgets\MainMenu::widget(); ?>
+<?//= h5\widgets\MainMenu::widget(); ?>
 
 <?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     $data = [
