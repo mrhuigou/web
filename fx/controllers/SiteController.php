@@ -26,6 +26,7 @@ use h5\models\SignuptelForm;
 use h5\models\SignupemailForm;
 use yii\base\ErrorException;
 use yii\base\InvalidParamException;
+use yii\db\Exception;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\httpclient\Client;
@@ -42,7 +43,7 @@ class SiteController extends Controller {
 	/**
 	 * @inheritdoc
 	 */
-    public $layout = 'main_mobile';
+    public $layout = 'main';
 	public function behaviors()
 	{
 		return [
