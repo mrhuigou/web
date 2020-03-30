@@ -2761,7 +2761,7 @@ class WebapiController extends \yii\rest\Controller {
                 $model->name = $data['NAME'];
                 $model->type = $data['PLANTYPE'];
                 $model->description = $data['DESCRIPTION'];
-                $model->status = $data['STATUS'] == "ACTIVE" ? 1 : 0;
+                $model->status = $data['STATUS'] == "EXECUTING" ? 1 : 0;
                 $model->date_start = $data['BEGIN_DATE'];
                 $model->date_end = $data['END_DATE'];
                 $model->ship_end = $data['SHIP_DATE'];
@@ -2789,7 +2789,7 @@ class WebapiController extends \yii\rest\Controller {
                     $model->max_buy_qty = $value['MAX_LIMIT_QUANTITY'];
                     $model->priority = $value['PRIORITY'];
                     $model->image_url = $value['SOURCE_URL'];
-                    $model->status = $value['DETAIL_STATUS'] == 'ACTIVE' ? 1 : 0;
+                    $model->status = $value['DETAIL_STATUS'] == 'EXECUTING' ? 1 : 0;
                     if (!$model->save()) {
                         throw new \Exception(json_encode($model->errors));
                     }
