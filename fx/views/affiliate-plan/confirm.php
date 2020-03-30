@@ -219,48 +219,6 @@ $this->title = '订单确认';
 <script>
 <?php $this->beginBlock('JS_END') ?>
 
-choice_distribution_type();
-//通过配送方式选择
-function choice_distribution_type(){
-    var distribution_type1 = <?=$model->distribution_type?>;
-    $.showLoading("正在加载");
-    $.post('/affiliate-plan/distribution-address',{distribution_type:distribution_type1},function(data){
-        $.hideLoading();
-        if(data.status){
-            var address = data.data.address;
-            var distribution_type = data.data.distribution_type;
-
-            if(distribution_type == 1){
-                if(Object.keys(address).length > 0){
-                    $(".confirm-username").html(address.address_username);
-                    $(".confirm-mobile").html(address.address_telephone);
-                    $(".confirm-zone").html(address.zone + '-'+ address.city + '-'+ address.district);
-                    $(".confirm-address").html(address.address_1);
-                    $(".tab_1").show();$(".tab_2").show();$(".tab_3").hide();
-                }else{
-                    $(".tab_1").hide();$(".tab_2").hide();$(".tab_3").show();
-                }
-            }
-            if(distribution_type == 2){
-                $(".tab_1").show();$(".tab_2").hide();$(".tab_3").hide();
-
-                if(Object.keys(address).length > 0){
-                    $(".confirm-username").html(address.address_username);
-                    $(".confirm-mobile").html(address.address_telephone);
-                    $(".confirm-zone").html(address.zone + '-'+ address.city + '-'+ address.district);
-                    $(".confirm-address").html(address.address_1);
-
-                }else{
-
-                }
-            }
-        }else{
-            $.alert(data.message);
-        }
-    },'json');
-}
-
-
 
 $("#button_submit").click(function(){
     //$("#confirm_form_address").html($(".select_address").html());
@@ -333,63 +291,6 @@ $("#confirm_pay").click(function(){
         $("#confirm_address_1").val($(".shipping-address").eq($("input[type='radio']:checked").val() - 1).text());
         $('#form-checkout').submit();
     }
-});
-
-$(".select_address").click(function () {
-
-    var telephone = $(".confirm-mobile").text();
-    var username = $(".confirm-username").text();
-    var zone= $(".confirm-zone").text();
-    var address_1 = $(".confirm-address").text();
-
-    location.href='/affiliate-plan/edit-address?telephone='+ telephone + '&username=' + username + '&zone=' + zone + '&address_1='+address_1;
-
-});
-
-$("body").on("click","#close_pop",function(){
-    layer.closeAll();
-});
-$("body").on("click",".save_address",function(){
-
-    var telephone = $('#telephone').val();
-    if(!telephone){
-        alert("手机号码必须填写");
-        $("#telephone").css('border-color',"red");
-        return false;
-    }
-    var myreg =  /^1[3456789]\d{9}$/;
-    if(!myreg.test(telephone))
-    {
-        alert('请输入有效的手机号码！');
-        $("#telephone").css('border-color',"red");
-        return false;
-    }
-
-    var firstname = $('#firstname').val();
-    if(!firstname){
-        alert("收货人姓名必须填写");
-        $("#firstname").css('border-color',"red");
-        return false;
-    }
-
-    var address_new = $('#address_new').val();
-    if(!address_new){
-        alert("详细地址必须填写");
-        $("#address_new").css('border-color',"red");
-        return false;
-    }
-    var start = $('#start').val();
-    if(!start){
-        alert("地区必须填写");
-        $("#start").css('border-color',"red");
-        return false;
-    }
-
-    $(".confirm-mobile").html(telephone);
-    $(".confirm-username").html(firstname);
-    $(".confirm-zone").html(start);
-    $(".confirm-address").html(address_new);
-    layer.closeAll();
 });
 
 $("#address_list  .item-address").click(function(){
