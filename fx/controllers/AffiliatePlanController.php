@@ -560,8 +560,8 @@ class AffiliatePlanController extends \yii\web\Controller {
             $model = new AffiliateOrderForm($affiliate_id);
             if(\Yii::$app->request->isPost){
                 //$this->submit();
-                $telephone = \Yii::$app->request->post("confirm_telephone");
-                $firstname = \Yii::$app->request->post("confirm_firstname");
+                $telephone = \Yii::$app->request->post("telephone");
+                $firstname = \Yii::$app->request->post("firstname");
                 $region = \Yii::$app->request->post("confirm_address");
                 $address_1 = \Yii::$app->request->post("confirm_address_1");
                 if(!empty($region)){

@@ -31,8 +31,8 @@ $this->title = '订单确认';
 			'inputOptions' => ["class" => 'appbtn tl w'],
 			'errorOptions' => ['class' => 'red fb tc db']
 		],]); ?>
-        <input type="text" id="confirm_firstname"   name="confirm_firstname" style="display: none" value="">
-        <input type="text" id="confirm_telephone"   name="confirm_telephone" style="display: none" value="">
+<!--        <input type="text" id="confirm_firstname"   name="confirm_firstname" style="display: none" value="">-->
+<!--        <input type="text" id="confirm_telephone"   name="confirm_telephone" style="display: none" value="">-->
         <input type="text" id="confirm_address"   name="confirm_address" style="display: none" value="">
         <input type="text" id="confirm_address_1"   name="confirm_address_1" style="display: none" value="">
 
@@ -56,7 +56,7 @@ $this->title = '订单确认';
                         <div id="address_list" class="">
                             <div class="flex-col flex-center store-item bdb  whitebg p5 item-address <?=$shipping_method==1?"red":""?>">
                                 <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center" style="margin-top: 10px;">
-                                    <input type="radio" value="1" name="address_id"  class="item" <?=$shipping_method==1?'checked':""?>>
+                                    <input type="radio" value="1" name="shipping_method"  class="item" <?=$shipping_method==1?'checked':""?>>
                                     <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
                                 </label>
 
@@ -64,9 +64,7 @@ $this->title = '订单确认';
                                 <?php if(!empty($shipping_address)){?>
                                 <div class="flex-item-6 ">
                                     <p class="shipping-region"><?=$shipping_address['zone_name'].'-'.$shipping_address['city_name'].'-'.$shipping_address['district_name']?></p>
-                                    <p class="shipping-address">
-                                        <?= $shipping_address['address']?>
-                                    </p>
+                                    <p class="shipping-address"><?=$shipping_address['address']?></p>
                                 </div>
                                 <div class="flex-item-2 flex-row flex-middle flex-center">
                                     <?php $in_range = Yii::$app->request->get('in_range',1);?>
@@ -82,15 +80,13 @@ $this->title = '订单确认';
                         <?php if($affiliate_info->mode == 'DOWN_LINE'){//分销商为线下时 显示自提点?>
                             <div class="flex-col flex-center store-item bdb  whitebg p5 item-address <?=$shipping_method == 2?"red":""?>">
                                 <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center" style="margin-top: 10px;">
-                                    <input type="radio" value="2" name="address_id"  class="item" <?=$shipping_method == 2?'checked':""?>>
+                                    <input type="radio" value="2" name="shipping_method"  class="item" <?=$shipping_method == 2?'checked':""?>>
                                     <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
                                 </label>
                                 <div class="flex-item-3 pt10">团长处自提</div>
                                 <div class="flex-item-6 ">
                                     <p class="shipping-region"><?=$affiliate_info->zone_name.'-'.$affiliate_info->city_name.'-'.$affiliate_info->district_name?></p>
-                                    <p class="shipping-address">
-                                        <?=$affiliate_info->address?>
-                                    </p>
+                                    <p class="shipping-address"><?=$affiliate_info->address?></p>
                                 </div>
                             </div>
                         <?php }?>
@@ -333,10 +329,8 @@ $("#confirm_pay").click(function(){
         post_flag=false;
         $.showLoading("正在提交");
         // $('#form-checkout').submit();
-        $("#confirm_telephone").val($(".confirm-mobile").text());
-        $("#confirm_firstname").val($(".confirm-username").text());
-        $("#confirm_address").val($(".confirm-zone").text());
-        $("#confirm_address_1").val($(".confirm-address").text());
+        $("#confirm_address").val($(".shipping-region").eq($("input[type='radio']:checked").val() - 1).text());
+        $("#confirm_address_1").val($(".shipping-address").eq($("input[type='radio']:checked").val() - 1).text());
         $('#form-checkout').submit();
     }
 });
