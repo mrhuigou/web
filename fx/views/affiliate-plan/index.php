@@ -22,10 +22,10 @@ $this->title = "一起团";
             </div>
         </div>
     </div>
-    <ul name="select_option" id="select_option" class="filter redFilter three f16 clearfix" style="border-bottom: 1px solid #ff463c;">
-        <?php if($affiliate_info){?>
+    <ul name="select_option" id="select_option" class="filter redFilter f16 clearfix" style="border-bottom: 1px solid #ff463c;">
+        <?php if($affiliate_plans){?>
             <?php  foreach ($affiliate_plans as $affiliate_plan_value){?>
-                <li class="<?=($affiliate_plan->affiliate_plan_id == $affiliate_plan_value->affiliate_plan_id) ?'cur':''?>">
+                <li class="<?=($affiliate_plan->affiliate_plan_id == $affiliate_plan_value->affiliate_plan_id) ?'cur':''?>" style="width: <?=100/count($affiliate_plans) .'%'?>">
                     <a href="#" class="select_option" data-content="<?= $affiliate_plan_value->code ?>"><?php echo $affiliate_plan_value->name?></a>
 
                 </li>
