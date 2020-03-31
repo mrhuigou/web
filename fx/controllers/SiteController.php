@@ -306,7 +306,20 @@ class SiteController extends Controller {
                             }
 
                         }else{
-                            throw new NotFoundHttpException("数据错误，没有用户标示");
+
+                            //团长分销购物 用户登录
+                            if (!\Yii::$app->user->isGuest) {
+                                return $this->redirect($url);
+                            }
+                            $model = new LoginForm();
+                            if ($model->load(Yii::$app->request->post()) && $model->login()) {
+                                $user=User::findIdentity(\Yii::$app->user->getId());
+                            } else {
+                                return $this->render('login', [
+                                    'model' => $model,
+                                ]);
+                            }
+//                            throw new NotFoundHttpException("数据错误，没有用户标示");
                         }
                         if($user){
                             if($aff->point_id){ //接入商有积分
