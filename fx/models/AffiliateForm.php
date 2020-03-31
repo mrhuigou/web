@@ -12,6 +12,9 @@ class AffiliateForm extends Affiliate {
     public $description;
     public $contact_name;
     public $address;
+    public $province;
+    public $city;
+    public $district;
     public function __construct($config = [])
     {
         if($model = Affiliate::findOne(['status'=>1,'customer_id'=>Yii::$app->user->getId()])){
@@ -23,6 +26,9 @@ class AffiliateForm extends Affiliate {
             $this->description = $model->description;
             $this->contact_name = $model->contact_name;
             $this->address = $model->address;
+            $this->province = $model->zone_name;
+            $this->city = $model->city_name;
+            $this->district = $model->district_name;
         }
 
         parent::__construct($config);

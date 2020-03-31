@@ -55,6 +55,7 @@ class Affiliate extends ActiveRecord implements IdentityInterface
             'status' => '状态',
             'date_added' => '创建时间',
             'mode' => '模式',
+            'address' => '详细地址',
         ];
     }
 
