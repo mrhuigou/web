@@ -50,7 +50,7 @@ $this->title = '订单确认';
                     </div>
                 </div>
             </div>
-            <div class="store_contain whitebg " id="store_contain_<?= $point->id ?>">
+            <div class="store_contain whitebg " id="store_contain">
                 <div class="mt5">
                     <div class="flex-row mt10 ">
                         <div id="address_list" class="">
