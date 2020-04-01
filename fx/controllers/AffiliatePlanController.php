@@ -9,6 +9,8 @@ namespace fx\controllers;
 use api\models\V1\City;
 use api\models\V1\District;
 use api\models\V1\Zone;
+use common\component\Curl\Curl;
+use common\component\Helper\Map;
 use fx\models\AffiliateOrderForm;
 use api\models\V1\Affiliate;
 use api\models\V1\AffiliatePlan;
@@ -577,6 +579,8 @@ class AffiliatePlanController extends \yii\web\Controller {
 //                $address['region'] = $region;
                 $address['address_1'] = $address_1;
                 $address['shipping_method'] = $shipping_method;
+                $address['confirm_lng'] = \Yii::$app->request->post("confirm_lng");
+                $address['confirm_lat'] = \Yii::$app->request->post("confirm_lat");
                 $trade_no = $this->submit($base,$cart,$address);
 
                 \Yii::$app->session->remove("confirm_push");
@@ -597,6 +601,8 @@ class AffiliatePlanController extends \yii\web\Controller {
                     $shipping_address['city_name'] = $last_order_info->orderShipping->shipping_city;
                     $shipping_address['district_name'] = $last_order_info->orderShipping->shipping_district;
                     $shipping_address['address'] = $last_order_info->orderShipping->shipping_address_1;
+                    $shipping_address['lng'] = $last_order_info->orderShipping->lng;
+                    $shipping_address['lat'] = $last_order_info->orderShipping->lat;
                 }
                 \Yii::$app->session->set("shipping_address",json_encode($shipping_address));
             }
@@ -679,6 +685,51 @@ class AffiliatePlanController extends \yii\web\Controller {
                     $address_edit['city_name'] = $region[1];
                     $address_edit['district_name'] = $region[2];
                 }
+//                收货地址判断 （经纬度计算）
+                $curl=new Curl();
+                $url='http://apis.map.qq.com/ws/geocoder/v1/';
+                $result=$curl->get($url,['address'=>$address_edit['city_name'].$address_edit['district_name'].$address_edit['address'],'key'=>'GNWBZ-7FSAR-JL5WY-WIDVS-FHLY2-JVBEC']);
+
+                if($result && $result->status==0 && $result->result){
+                    $address_edit['lat']=$result->result->location->lat;
+                    $address_edit['lng']=$result->result->location->lng;
+                    if($result->result->address_components->province){
+                        $address_edit['province']=trim($result->result->address_components->province);
+                    }
+                    if($result->result->address_components->city){
+                        $address_edit['city']=trim($result->result->address_components->city);
+                    }
+                    if($result->result->address_components->district){
+                        $address_edit['district']=trim($result->result->address_components->district);
+                    }
+                }else{
+                    throw  new Exception('您输入的地址不在配送范围之内!');
+                }
+
+                if($address_edit['lat'] && $address_edit['lng']){
+                    $center_lat=36.1516;
+                    $center_lng=120.39822;
+
+                    if(($distance=Map::GetShortDistance($center_lng,$center_lat,$address_edit['lng'],$address_edit['lat']))>15*1000){
+                        throw  new Exception('您输入的地址不在配送范围之内!');
+                    }
+                }
+
+                if($address_edit['province'] && !in_array($address_edit['province'],['山东省'])){
+                    throw  new Exception('超出配送范围，请重新选择！');
+                }
+                if($address_edit['city'] && !in_array($address_edit['city'],['青岛市'])){
+                    throw  new Exception('超出配送范围，请重新选择！');
+                }
+                // $district_array=['市南区','市北区','四方区','李沧区','崂山区','黄岛区'];
+                $active_districts = District::find()->select('name')->where(['is_use'=>1])->all();
+                foreach ($active_districts as $active_district){
+                    $district_array[] = $active_district->name;
+                }
+                if($address_edit['district'] && !in_array($address_edit['district'],$district_array)){
+                    throw  new Exception('超出配送范围，请重新选择！');
+                }
+
                 \Yii::$app->session->set("shipping_address",json_encode($address_edit));
                 return $this->redirect(['/affiliate-plan/confirm']);
             }
@@ -795,8 +846,8 @@ class AffiliatePlanController extends \yii\web\Controller {
                             'district' => $address['district']? : "",
                             'district_code' => $district?$district->code: "",
                             'district_id' => $district?$district->district_id:0,
-                            'lat' => "",
-                            'lng' => "",
+                            'lat' => $address['confirm_lat'],
+                            'lng' => $address['confirm_lng'],
                             'is_delivery' => 1,
                         ];
 

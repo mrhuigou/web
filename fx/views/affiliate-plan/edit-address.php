@@ -92,7 +92,16 @@ $("body").on("click",".save_address",function(){
         $("#start").css('border-color',"red");
         return false;
     }
-    $("#form-address").submit();
+    // $("#form-address").submit();
+    $.showLoading("正在提交");
+    // $('#form-checkout').submit();
+    $.post('/affiliate-plan/edit-address',{region:start,address_1:address_1},function(result){
+        //location.href='affiliate-plan/checkout';
+        if(result && !result.status){
+            $.hideLoading();
+            $.alert(result.message);
+        }
+    },'json');
 });
 
 <?php $this->endBlock() ?>

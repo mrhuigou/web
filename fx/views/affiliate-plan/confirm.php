@@ -35,6 +35,8 @@ $this->title = '订单确认';
 <!--        <input type="text" id="confirm_telephone"   name="confirm_telephone" style="display: none" value="">-->
         <input type="text" id="confirm_address"   name="confirm_address" style="display: none" value="">
         <input type="text" id="confirm_address_1"   name="confirm_address_1" style="display: none" value="">
+        <input type="text" id="confirm_lng"   name="confirm_lng" style="display: none" value="">
+        <input type="text" id="confirm_lat"   name="confirm_lat" style="display: none" value="">
 
 		<?php if ($carts) { ?>
 
@@ -66,6 +68,8 @@ $this->title = '订单确认';
                                 <div class="flex-item-6 ">
                                     <p class="shipping-region"><?=$shipping_address['zone_name'].'-'.$shipping_address['city_name'].'-'.$shipping_address['district_name']?></p>
                                     <p class="shipping-address"><?=$shipping_address['address']?></p>
+                                    <p class="shipping-lng" style="display: none"><?=$shipping_address['lng']?></p>
+                                    <p class="shipping-lat" style="display: none"><?=$shipping_address['lat']?></p>
                                 </div>
                                 <div class="flex-item-2 flex-row flex-middle flex-center">
                                     <?php $in_range = Yii::$app->request->get('in_range',1);?>
@@ -89,6 +93,8 @@ $this->title = '订单确认';
                                 <div class="flex-item-6 ">
                                     <p class="shipping-region"><?=$affiliate_info->zone_name.'-'.$affiliate_info->city_name.'-'.$affiliate_info->district_name?></p>
                                     <p class="shipping-address"><?=$affiliate_info->address?></p>
+                                    <p class="shipping-lng" style="display: none"><?=$affiliate_info->lng?></p>
+                                    <p class="shipping-lat" style="display: none"><?=$affiliate_info->lat?></p>
                                 </div>
                             </div>
                         <?php }?>
@@ -287,8 +293,17 @@ $("#confirm_pay").click(function(){
         post_flag=false;
         $.showLoading("正在提交");
         // $('#form-checkout').submit();
+        var is_deliver_home = <?= $affiliate_info->is_deliver_home?>;
         $("#confirm_address").val($(".shipping-region").eq($("input[type='radio']:checked").val() - 1).text());
         $("#confirm_address_1").val($(".shipping-address").eq($("input[type='radio']:checked").val() - 1).text());
+        $("#confirm_lng").val($(".shipping-lng").eq($("input[type='radio']:checked").val() - 1).text());
+        $("#confirm_lat").val($(".shipping-lat").eq($("input[type='radio']:checked").val() - 1).text());
+        if(!is_deliver_home){
+            $("#confirm_address").val($(".shipping-region").eq(0).text());
+            $("#confirm_address_1").val($(".shipping-address").eq(0).text());
+            $("#confirm_lng").val($(".shipping-lng").eq(0).text());
+            $("#confirm_lat").val($(".shipping-lat").eq(0).text());
+        }
         $('#form-checkout').submit();
     }
 });
