@@ -54,6 +54,7 @@ $this->title = '订单确认';
                 <div class="mt5">
                     <div class="flex-row mt10 ">
                         <div id="address_list" class="">
+                        <?php if($affiliate_info->is_deliver_home == 'true'){//分销商 是否配送到家?>
                             <div class="flex-col flex-center store-item bdb  whitebg p5 item-address <?=$shipping_method==1?"red":""?>">
                                 <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center" style="margin-top: 10px;">
                                     <input type="radio" value="1" name="shipping_method"  class="item" <?=$shipping_method==1?'checked':""?>>
@@ -77,10 +78,11 @@ $this->title = '订单确认';
                                 <?php }?>
 
                             </div>
-                        <?php if($affiliate_info->mode == 'DOWN_LINE'){//分销商为线下时 显示自提点?>
-                            <div class="flex-col flex-center store-item bdb  whitebg p5 item-address <?=$shipping_method == 2?"red":""?>">
+                            <?php }?>
+                        <?php if($affiliate_info->mode == 'DOWN_LINE' || $affiliate_info->is_deliver_home == 'false'){//分销商为线下时 显示自提点 或不允许配送到家?>
+                            <div class="flex-col flex-center store-item bdb  whitebg p5 item-address <?=$shipping_method == 2 || $affiliate_info->is_deliver_home == 'false'?"red":""?>">
                                 <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center" style="margin-top: 10px;">
-                                    <input type="radio" value="2" name="shipping_method"  class="item" <?=$shipping_method == 2?'checked':""?>>
+                                    <input type="radio" value="2" name="shipping_method"  class="item" <?=$shipping_method == 2 || $affiliate_info->is_deliver_home == 'false'?'checked':""?>>
                                     <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
                                 </label>
                                 <div class="flex-item-3 pt10">团长处自提</div>
@@ -216,10 +218,15 @@ $this->title = '订单确认';
 $("#button_submit").click(function(){
     //$("#confirm_form_address").html($(".select_address").html());
 
+    var is_deliver_home = <?= $affiliate_info->is_deliver_home?>;
     var telephone = $("#telephone").val();
     var firstname = $("#firstname").val();
     var confirm_zone= $(".shipping-region").eq($("input[type='radio']:checked").val() - 1).text();
     var confirm_address = $(".shipping-address").eq($("input[type='radio']:checked").val() - 1).text();
+    if(!is_deliver_home){
+        var confirm_zone= $(".shipping-region").eq(0).text();
+        var confirm_address = $(".shipping-address").eq(0).text();
+    }
 
     if(!firstname){
         $.alert("收货人姓名必须填写");
