@@ -106,19 +106,19 @@ $this->title = '订单确认';
                                 <span class="btn btn-xxs btn-bd-red">免邮</span>
                                 订单金额满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red" id="diff_free"><?php echo bcsub($val['base']->minbookcash,$sub_total,2)?></i>元,即可以享受包邮！</h2>
 
-                            <div class="flex-col">
+                            <div class="flex-col"  <?= (count($checkout_ad) == 1)? "style=\"text-align: center\"" : ""?>>
                                     <?php
                                      switch (count($checkout_ad)){
-                                         case  1: $items = 12;
-                                         case  2: $items = 6;
-                                         case  3: $items = 4;
-                                         case  4: $items = 3;
-                                         default: $items = 6;
+                                         case  1: $items = 12;break;
+                                         case  2: $items = 6;break;
+                                         case  3: $items = 4;break;
+                                         case  4: $items = 3;break;
+                                         default: $items = 6;break;
                                      }
                                     ?>
                                     <?php foreach ($checkout_ad as $ad){?>
                                         <a href="<?= \yii\helpers\Url::to($ad->link_url, true) ?>" class="flex-item-<?php echo $items?>">
-                                            <img src="<?= \common\component\image\Image::resize($ad->source_url) ?>" class="w bd m2">
+                                            <img src="<?= \common\component\image\Image::resize($ad->source_url) ?>" class="w bd m2"  <?= (count($checkout_ad) == 1)? "style=\"width:180px\"" : ""?>>
                                         </a>
                                     <?php }?>
 
