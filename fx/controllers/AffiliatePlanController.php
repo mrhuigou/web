@@ -564,6 +564,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                 $firstname = \Yii::$app->request->post("firstname");
                 $region = \Yii::$app->request->post("confirm_address");
                 $address_1 = \Yii::$app->request->post("confirm_address_1");
+                $shipping_method = \Yii::$app->request->post("shipping_method");
                 if(!empty($region)){
                     $region = explode('-',$region);
                     $address['province'] = $region[0];
@@ -575,7 +576,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                 $address['firstname'] = $firstname;
 //                $address['region'] = $region;
                 $address['address_1'] = $address_1;
-
+                $address['shipping_method'] = $shipping_method;
                 $trade_no = $this->submit($base,$cart,$address);
 
                 \Yii::$app->session->remove("confirm_push");
@@ -713,6 +714,13 @@ class AffiliatePlanController extends \yii\web\Controller {
                 //根据购物车里商品 按照不同的方案 生成不同的订单
                 foreach ($carts as $plan_id => $cart){
                     $base = $bases[$plan_id];
+
+                    $comment = "";
+                    if($address['shipping_method'] == '1'){
+                        $comment = "<配送到家>";
+                    }else{
+                        $comment = "<团长处自提>";
+                    }
                     //订单主数据
                     $Order_model = new Order();
                     $Order_model->order_no = OrderSn::generateNumber();
@@ -733,7 +741,7 @@ class AffiliatePlanController extends \yii\web\Controller {
                     $Order_model->payment_method = "";
                     $Order_model->payment_code = "";
                     $Order_model->total = $base['total'];
-                    $Order_model->comment = "";
+                    $Order_model->comment = $comment;//订单备注
                     $Order_model->order_status_id = 1;
                     $affiliate_id = \Yii::$app->session->get('from_affiliate_uid')?:0;
 
