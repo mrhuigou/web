@@ -57,6 +57,7 @@ class AffiliateForm extends Affiliate {
                 $model = new Affiliate();
                 $model->customer_id = Yii::$app->user->getId();
             }
+            $model->code = '';
             $model->mode = $this->mode;
             $model->type = $this->type;
             $model->rebate_type = $this->rebate_type;
@@ -65,8 +66,40 @@ class AffiliateForm extends Affiliate {
             $model->description = $this->description;
             $model->contact_name = $this->contact_name;
             $model->address = $this->address;
+            $model->telephone = $this->telephone;
             $model->status = 1;
             $model->save();
+
+            $return_data = array(
+                'CODE'=>$model->code,
+                'NAME'=>$model->name,
+                'DISPLAY_NAME'=>$model->username,
+                'TYPE'=>$model->type,
+                'MODE'=>$model->mode,
+                'REBATE_TYPE'=>$model->rebate_type,
+                'DESCRIPTION'=>$model->description,
+                'CONTACT_NAME'=>$model->contact_name,
+                'TELEPHONE'=>$model->telephone,
+            );
+            if($model->mode == 'DOWN_LINE'){
+                $return_data['ADDRESS'] = $model->address;
+            }
+            //自动同步后台
+            if($return_data){
+                $erp_wsdl = Yii::$app->params['ERP_SOAP_URL'];
+                $client = new \SoapClient($erp_wsdl, array('soap_version' => SOAP_1_1, 'exceptions' => false));
+                $data=$this->getParam('applyAffiliate',array($return_data));
+                $content = $client->getInterfaceForJson($data);
+                $result=$this->getResult($content);
+                Yii::error(json_encode($result));
+                if($result['status']=='OK'){
+                    $model->send_status = 1;
+                    $model->save();
+                }
+            }
+
+
+
             return true;
         }
     }
