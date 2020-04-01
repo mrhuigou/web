@@ -99,18 +99,11 @@ $this->title = '订单确认';
             <?php foreach ($carts as $plan_id => $cart) {?>
 
                 <?php $plan_info = \api\models\V1\AffiliatePlan::findOne(['affiliate_plan_id'=> $plan_id])?>
-                <div class="graybg p10 store_totals">
-                    <p class="mb5 clearfix lh150">
-                            <span class="fr red fb"><?= $plan_info->name?></span>
-                        <span class="fl fb">方案名称：</span>
-                    </p>
-                </div>
-                <div class="graybg p10 store_totals">
-                    <p class="mb5 clearfix lh150">
-                            <span class="fr red fb"><?= date('Y-m-d',strtotime($plan_info->ship_end)) ?></span>
-                        <span class="fl fb">配送时间：</span>
-                    </p>
-                </div>
+                <p class=" mb5 bg-wh pt5 pb5 pl10 graybg p10 store_totals">
+                    配送时间：<i class="red"><?= date('Y-m-d',strtotime($plan_info->ship_end)) ?></i>
+                    &nbsp;&nbsp;&nbsp;
+                    方案名称：<i class="red"><?= $plan_info->name?></i>
+                </p>
                 <div class="store_contain whitebg " id="store_contain_<?= $plan_info->affiliate_plan_id ?>">
                     <?php $cart_total = 0;?>
                     <?php foreach ($cart as $key => $value) { ?>
