@@ -19,6 +19,10 @@ return [
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity', 'httpOnly' => true, 'domain' => '.' . DOMAIN],
         ],
+        'session' => [
+            'cookieParams' => ['domain' => '.' . DOMAIN, 'lifetime' => 0],
+            'timeout' => 3600,
+        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

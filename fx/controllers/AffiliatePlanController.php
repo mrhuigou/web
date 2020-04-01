@@ -62,9 +62,9 @@ class AffiliatePlanController extends \yii\web\Controller {
             }
         }
 
-        if (\Yii::$app->user->isGuest) {
-            return $this->redirect(['/site/login','redirect'=>Yii::$app->request->getAbsoluteUrl()]);
-        }
+//        if (\Yii::$app->user->isGuest) {
+//            return $this->redirect(['/site/login','redirect'=>Yii::$app->request->getAbsoluteUrl()]);
+//        }
 
         $cart = [];
         if(\Yii::$app->session->get("confirm_push")){
@@ -295,9 +295,9 @@ class AffiliatePlanController extends \yii\web\Controller {
     public function actionSwitchPlanSubmit(){
 //        \Yii::$app->session->remove("confirm_push");
 //        \Yii::$app->session->remove("ground_push_base");
-        if (\Yii::$app->user->isGuest) {
-            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
-        }
+//        if (\Yii::$app->user->isGuest) {
+//            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
+//        }
 
         $affiliate_plan_id = \Yii::$app->request->post('affiliate_plan_id');
 
@@ -399,9 +399,9 @@ class AffiliatePlanController extends \yii\web\Controller {
 	public function actionSubmit(){
 //	    \Yii::$app->session->remove("confirm_push");
 	    \Yii::$app->session->remove("ground_push_base");
-        if (\Yii::$app->user->isGuest) {
-            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
-        }
+//        if (\Yii::$app->user->isGuest) {
+//            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
+//        }
 
         $affiliate_plan_id = \Yii::$app->request->post('affiliate_plan_id');
 	    $data_string = \Yii::$app->request->post("data");
@@ -500,7 +500,7 @@ class AffiliatePlanController extends \yii\web\Controller {
 
 	    $cart = [];
         if (\Yii::$app->user->isGuest) {
-            return $this->redirect(['/site/login', 'redirect' => '/ground-push/index']);
+            return $this->redirect(['/site/login', 'redirect' => '/affiliate-plan/confirm']);
         }
 
 	    if(\Yii::$app->session->get("confirm_push")){

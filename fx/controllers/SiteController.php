@@ -336,7 +336,7 @@ class SiteController extends Controller {
                                         $point_customer->save();
                                 }
                             }
-                            Yii::$app->user->logout();
+                            Yii::$app->user->logout(false);
                             Yii::$app->user->login($user);
                             \Yii::$app->cart->loadFromLogin();
                             return $this->redirect($url);
