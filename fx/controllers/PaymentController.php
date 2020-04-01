@@ -12,7 +12,7 @@ use common\component\Payment\Upop\quickpay_conf;
 use common\component\Payment\Upop\quickpay_service;
 use common\component\Payment\WxPay\JsApi_pub;
 use common\component\Payment\WxPay\UnifiedOrder_pub;
-use h5\models\BalanceForm;
+use fx\models\BalanceForm;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
@@ -29,24 +29,12 @@ class PaymentController extends \yii\web\Controller
     }
     public function actionIndex()
     {
-
-//        if (\Yii::$app->user->isGuest) {
-//            return $this->redirect(['/site/login','redirect'=>Yii::$app->request->getAbsoluteUrl()]);
-//        }
-
-        $fx_user_login_status = false;
-        //获取用户登录状态 session 缓存 user_login_status
-//        \Yii::$app->session->remove("fx_user_login_status");
-        if(\Yii::$app->redis->get("fx_user_login_status")){
-            $fx_user_login_status = \Yii::$app->redis->get("fx_user_login_status");
+        if (\Yii::$app->user->isGuest) {
+            return $this->redirect(['/site/login','redirect'=>Yii::$app->request->getAbsoluteUrl()]);
         }
-        if (!$fx_user_login_status) {
-            return $this->redirect(['/site-mobile/login', 'redirect' => Yii::$app->request->getAbsoluteUrl()]);
-        }
-
         $trade_no=Yii::$app->request->get('trade_no');
         $useragent=\Yii::$app->request->getUserAgent();
-        if(strpos(strtolower($useragent), 'micromessenger') && !$open_id=\Yii::$app->session->get('open_id') ?:"123"){
+        if(strpos(strtolower($useragent), 'micromessenger') && !$open_id=\Yii::$app->session->get('open_id')){
             return $this->redirect(['/payment/wx-js-call','path'=>Url::to(['/payment/index','trade_no'=>$trade_no,'showwxpaytitle'=>1],true)]);
         }
         try{
@@ -57,18 +45,17 @@ class PaymentController extends \yii\web\Controller
                 if($model->status==1){
                     return $this->redirect(['/checkout/complate','trade_no'=>$model->merge_code]);
                 }else{
-                   if(bccomp($model->getMergeTotal(),$model->total)!==0){
-                       $model->status=-1;
-                       $model->date_modified = date("Y-m-d H:i:s");
-                       $model->save();
-                       throw new NotFoundHttpException("交易订单已经过期！");
-                   }
-                   if(!$model->getPayStatus()){
-	                   throw new NotFoundHttpException("交易订单已经过期！");
-                   }
+                    if(bccomp($model->getMergeTotal(),$model->total)!==0){
+                        $model->status=-1;
+                        $model->date_modified = date("Y-m-d H:i:s");
+                        $model->save();
+                        throw new NotFoundHttpException("交易订单已经过期！");
+                    }
+                    if(!$model->getPayStatus()){
+                        throw new NotFoundHttpException("交易订单已经过期！");
+                    }
                 }
-                $fx_user_info = json_decode(\Yii::$app->redis->get("fx_user_info"),true);
-                return $this->render('index',['model'=>$model,'fx_user_info'=> $fx_user_info]);
+                return $this->render('index',['model'=>$model]);
             }else{
                 throw new NotFoundHttpException("交易订单不存在！");
             }
@@ -92,35 +79,35 @@ class PaymentController extends \yii\web\Controller
             $unifiedOrder = new UnifiedOrder_pub();
             //设置统一支付接口参数
             //设置必填参数
-	        $useragent=\Yii::$app->request->getUserAgent();
-            if(strpos(strtolower($useragent), 'micromessenger') &&  ($open_id=\Yii::$app->session->get('open_id')?:'oJqFJ0gfsF86yY5SeobublS7fJl4')){
-	            $unifiedOrder->setParameter("openid", "$open_id");//用户ID
-	            $unifiedOrder->setParameter("body","每日惠购");//商品描述
-	            $unifiedOrder->setParameter("out_trade_no", "$order->merge_code"."_JSAPI");//商户订单号
-	            $unifiedOrder->setParameter("total_fee", $order->total * 100);//总金额
-	            $unifiedOrder->setParameter("notify_url", "https://open.mrhuigou.com/payment/weixin");//通知地址
-	            $unifiedOrder->setParameter("trade_type", "JSAPI");//交易类型
-	            $prepay_id = $unifiedOrder->getPrepayId();
-	            if($prepay_id){
-		            $jsApi->setPrepayId($prepay_id);
-		            $jsApiParameters = $jsApi->getParameters();
-		            return Json::encode(['status'=>1,'data'=>$jsApiParameters]);
-	            }else{
-		            throw new NotFoundHttpException("微信支付网关异常！");
-	            }
+            $useragent=\Yii::$app->request->getUserAgent();
+            if(strpos(strtolower($useragent), 'micromessenger') &&  ($open_id=\Yii::$app->session->get('open_id'))){
+                $unifiedOrder->setParameter("openid", "$open_id");//用户ID
+                $unifiedOrder->setParameter("body","每日惠购");//商品描述
+                $unifiedOrder->setParameter("out_trade_no", "$order->merge_code"."_JSAPI");//商户订单号
+                $unifiedOrder->setParameter("total_fee", $order->total * 100);//总金额
+                $unifiedOrder->setParameter("notify_url", "https://open.mrhuigou.com/payment/weixin");//通知地址
+                $unifiedOrder->setParameter("trade_type", "JSAPI");//交易类型
+                $prepay_id = $unifiedOrder->getPrepayId();
+                if($prepay_id){
+                    $jsApi->setPrepayId($prepay_id);
+                    $jsApiParameters = $jsApi->getParameters();
+                    return Json::encode(['status'=>1,'data'=>$jsApiParameters]);
+                }else{
+                    throw new NotFoundHttpException("微信支付网关异常！");
+                }
             }else{
-	            $unifiedOrder->setParameter("body","每日惠购");//商品描述
-	            $unifiedOrder->setParameter("out_trade_no", "$order->merge_code"."_MWEB");//商户订单号
-	            $unifiedOrder->setParameter("total_fee", $order->total * 100);//总金额
-	            $unifiedOrder->setParameter("notify_url", "https://open.mrhuigou.com/payment/weixin");//通知地址
-	            $unifiedOrder->setParameter("trade_type", "MWEB");//交易类型
-	            $unifiedOrder->setParameter('scene_info',Json::encode(['h5_info'=>['type'=>'Wap','wap_url'=>"https://m.mrhuigou.com","wap_name"=>"每日惠购"]]));
-	            $redirect_url = $unifiedOrder->getWapResult();
-	            if($redirect_url){
-		            return Json::encode(['status'=>1,'data'=>$redirect_url]);
-	            }else{
-		            throw new NotFoundHttpException("微信网页支付稍后开通，请选择其它支付方式！");
-	            }
+                $unifiedOrder->setParameter("body","每日惠购");//商品描述
+                $unifiedOrder->setParameter("out_trade_no", "$order->merge_code"."_MWEB");//商户订单号
+                $unifiedOrder->setParameter("total_fee", $order->total * 100);//总金额
+                $unifiedOrder->setParameter("notify_url", "https://open.mrhuigou.com/payment/weixin");//通知地址
+                $unifiedOrder->setParameter("trade_type", "MWEB");//交易类型
+                $unifiedOrder->setParameter('scene_info',Json::encode(['h5_info'=>['type'=>'Wap','wap_url'=>"https://m.mrhuigou.com","wap_name"=>"每日惠购"]]));
+                $redirect_url = $unifiedOrder->getWapResult();
+                if($redirect_url){
+                    return Json::encode(['status'=>1,'data'=>$redirect_url]);
+                }else{
+                    throw new NotFoundHttpException("微信网页支付稍后开通，请选择其它支付方式！");
+                }
             }
 
 
@@ -149,14 +136,14 @@ class PaymentController extends \yii\web\Controller
                 $model->payment_code="free_checkout";
                 $model->remak=$order->merge_code;
                 $model->save();
-               return $this->redirect(['/checkout/complate','trade_no'=>$order->merge_code]);
+                return $this->redirect(['/checkout/complate','trade_no'=>$order->merge_code]);
             }else{
                 throw new NotFoundHttpException("非法操作！");
             }
         }catch (NotFoundHttpException $e){
             return $this->render('error',['message'=>$e->getMessage()]);
-       }
-     }
+        }
+    }
     public function actionCod(){
         if (\Yii::$app->user->isGuest) {
             return $this->redirect(['/site/login','redirect'=>Yii::$app->request->getAbsoluteUrl()]);
@@ -329,23 +316,23 @@ class PaymentController extends \yii\web\Controller
             }
             Yii::$app->session->set('Pay_trade_no',$order->merge_code);
 
-			//页面跳转同步通知页面路径
+            //页面跳转同步通知页面路径
             $return_url = Url::to(['/checkout/complate','trade_no'=>$order->merge_code],true);
-			//需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
+            //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
 
-			$order_no = $order->merge_code;;
-			//商户网站订单系统中唯一订单号，必填
-			//订单名称
+            $order_no = $order->merge_code;;
+            //商户网站订单系统中唯一订单号，必填
+            //订单名称
             $subject = "每日惠购订单";
-			//必填
-			//付款金额
-			$amount = number_format($order['total'], 2,'.','');
-			//必填
-			//订单描述
-			$body = "订单编号:".$order->merge_code;
-			//默认支付方式
-			$paymethod = "precardPay";
+            //必填
+            //付款金额
+            $amount = number_format($order['total'], 2,'.','');
+            //必填
+            //订单描述
+            $body = "订单编号:".$order->merge_code;
+            //默认支付方式
+            $paymethod = "precardPay";
 
             $parameter = array(
                 "service" => "payorder",

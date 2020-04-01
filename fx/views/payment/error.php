@@ -9,7 +9,7 @@ use yii\helpers\Html;
 
 $this->title = "支付错误";
 ?>
-<?=h5\widgets\Header::widget(['title'=>$this->title])?>
+<?=fx\widgets\Header::widget(['title'=>$this->title])?>
 <section class="veiwport  mb50">
     <figure class="info-tips red">
         <i class="iconfont font-warning ">&#xe616;</i>

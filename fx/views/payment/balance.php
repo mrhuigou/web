@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 $this->title="手机支付密码"
 ?>
-<?=h5\widgets\Header::widget(['title'=>$this->title])?>
+<?=fx\widgets\Header::widget(['title'=>$this->title])?>
 <section class="veiwport  mb50">
     <p class="tc fb f14 mt50">输入你的支付密码</p>
     <?php $form = ActiveForm::begin(['id' => 'form-address','fieldConfig' => [

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use \common\component\Helper\Helper;
 $this->title = "收银台";
 ?>
-<?=h5\widgets\Header::widget(['title'=>$this->title])?>
+<?=fx\widgets\Header::widget(['title'=>$this->title])?>
 <section class="veiwport  mb50">
     <div class="fool white clearfix mb10">
         <em class="fl mr15 iconfont">&#xe61f;</em>
@@ -99,7 +99,7 @@ $this->title = "收银台";
                 $order = $orders[0];
                 $store = $order->store;
                 if($store){
-                    if(($store->besupportpos == 1) && ($fx_user_info['can_use_cod']) && !$model->recharge_status){
+                    if(($store->besupportpos == 1) && (Yii::$app->user->identity->can_use_cod) && !$model->recharge_status){
                         $can_use_cod = true;
                     }
                 }
@@ -133,7 +133,6 @@ function jsApiCall()
 //    obj.html("正在努力加载，请稍等...")
     $.showLoading("正在提交");
     $.get('<?=\yii\helpers\Url::to(['/payment/wxpay','trade_no'=>$model->merge_code])?>',function(data){
-    //$.get('https://m.mrhuigou.com/payment/wxpay?trade_no="+<?//=$model->merge_code?>//',function(data){
         $.hideLoading();
         if(data.status){
             WeixinJSBridge.invoke('getBrandWCPayRequest',jQuery.parseJSON(data.data),function(res){
