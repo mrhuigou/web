@@ -120,7 +120,7 @@ $this->title = "收银台";
         <?php } ?>
     </div>
 </section>
-<?= h5\widgets\MainMenu::widget(); ?>
+<?//= h5\widgets\MainMenu::widget(); ?>
 <script>
 <?php $this->beginBlock('JS_END') ?>
 <?php if(strpos(strtolower(\Yii::$app->request->getUserAgent()), 'micromessenger')){  ?>
@@ -220,4 +220,4 @@ $("#BestoneBtn").bind("click",function(){
 \yii\web\YiiAsset::register($this);
 $this->registerJs($this->blocks['JS_END'],\yii\web\View::POS_END);
 ?>
-<?=\h5\widgets\Block\Start::widget(['type'=>1]);?>
+<?//=\h5\widgets\Block\Start::widget(['type'=>1]);?>
