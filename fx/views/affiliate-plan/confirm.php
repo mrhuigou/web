@@ -203,12 +203,6 @@ $this->title = '订单确认';
 <!--        <div class="colorbar "></div>-->
 <!--    </div>-->
     <div class="   m5 ">
-        <div id="confirm_form_firstname" class="flex-col w flex-middle bg-wh  p10 ">
-        </div>
-        <div id="confirm_form_telephone" class="flex-col w flex-middle bg-wh p10 ">
-        </div>
-        <div id="confirm_form_region" class="flex-col w flex-middle bg-wh  p10 ">
-        </div>
         <div id="confirm_form_address" class="flex-col w flex-middle bg-wh p10 ">
         </div>
     </div>
@@ -263,22 +257,13 @@ $("#button_submit").click(function(){
         return false;
     }
 
-    var firstname_confirm="";
-    firstname_confirm+='<div class="flex-item-4 mb5">姓名：</div><div class="flex-item-8  tr mb5">'+ $("#firstname").val()+' </div>';
-    $("#confirm_form_firstname").html(firstname_confirm);
-
-    var telephone_confirm = "";
-    telephone_confirm = '<div class="flex-item-4 mb5">手机：</div><div class="flex-item-8  tr mb5">'+ $("#telephone").val()+' </div>';
-    $("#confirm_form_telephone").html(telephone_confirm);
-
-    var region_confirm="";
-    region_confirm+='<div class="flex-item-4 mb5">收货地址：</div><div class="flex-item-8  tr mb5">'+ confirm_zone+' </div>';
-    $("#confirm_form_region").html(region_confirm);
-
-    var address_confirm = "";
-    address_confirm = '<div class="flex-item-4 mb5">详细地址：</div><div class="flex-item-8  tr mb5">'+ confirm_address+' </div>';
-   $("#confirm_form_address").html(address_confirm);
-
+    var addess_confirm= "";
+    address_confirm = '<div>' +
+        '<p><span class="fb">'+ $("#firstname").val()+ '</span><em class="ml10">'+ $("#telephone").val()+'</em></p>' +
+        '<p>'+ confirm_zone +'</p>' +
+        '<p>'+ confirm_address +'</p>' +
+        '</div>';
+    $("#confirm_form_address").html(address_confirm);
     maskdiv($("#confirm_form_order"),"bottom");
 });
 $("#confirm_cannel").click(function(e){
