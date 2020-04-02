@@ -1009,7 +1009,7 @@ class CheckoutController extends \yii\web\Controller {
 			$promotion = [];
 			$this->getOrderTotal($totals, $total, $data, $store_id, $promotion);
 
-            $this->getPointsTotal($totals, $total, $data);
+//            $this->getPointsTotal($totals, $total, $data);
             $this->getShippingTotal($totals, $total, $data, $store_id, $shipping_cost, $delivery_station_id,$shipping_cost_free);
 			//计算订单金额
 			$this->getTotal($totals, $total);

@@ -493,7 +493,7 @@ class CheckoutForm extends Model {
 					$merge_order_ids[] = $Order_model->order_id;
 					$merge_total = round(bcadd($merge_total, $Order_model->total, 4),2);
 
-                    $this->notice_points($Order_model);
+//                    $this->notice_points($Order_model);
                     }
 				if ($product_stock) {
 					foreach ($product_stock as $stock) {
