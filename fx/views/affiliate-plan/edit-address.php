@@ -109,6 +109,6 @@ $("body").on("click",".save_address",function(){
 <?php
 \yii\web\YiiAsset::register($this);
 $this->registerJs($this->blocks['JS_END'], \yii\web\View::POS_READY);
-$this->registerJsFile("/assets/script/jqweui-picker.js",['depends'=>\h5\assets\AppAsset::className()]);
-$this->registerJsFile("/assets/script/jqweui-city-picker.js",['depends'=>\h5\assets\AppAsset::className()]);
+$this->registerJsFile("/assets/script/jqweui-picker.js",['depends'=>\fx\assets\AppAsset::className()]);
+$this->registerJsFile("/assets/script/jqweui-city-picker.js",['depends'=>\fx\assets\AppAsset::className()]);
 ?>

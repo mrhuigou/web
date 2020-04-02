@@ -73,9 +73,9 @@ AppAsset::register($this);
 </div>
 <?php $this->beginBody() ?>
 <article>
-<?=\h5\widgets\Block\Start::widget()?>
+<?=\fx\widgets\Block\Start::widget()?>
 <?= $content ?>
-    <?php echo \h5\widgets\Block\NewGuyCouponPop::widget();?>
+    <?php echo \fx\widgets\Block\NewGuyCouponPop::widget();?>
 </article>
 <div id="pop_sku">
 </div>

@@ -77,4 +77,4 @@ $this->title ='安全中心';
             </a>
         </div>
     </section>
-<?= h5\widgets\MainMenu::widget(); ?>
+<?//= fx\widgets\MainMenu::widget(); ?>

@@ -11,7 +11,7 @@
         <td valign="top">
             <h2 class="row-two"><?=$order_proudct->name;?></h2>
             <p class="gray9  mt2"><?=$order_proudct->product->getSku();?></p>
-            <?=h5\widgets\Order\Promotion::widget(['product'=>$order_proudct])?>
+            <?=fx\widgets\Order\Promotion::widget(['product'=>$order_proudct])?>
         </td>
         <td width="20%" class="tc">
             <p class="gray6 mb5">X <em class="qty"><?= $order_proudct->quantity; ?></em></p>
@@ -20,13 +20,13 @@
         </tr>
     </table>
     <?php }?>
-        <?=h5\widgets\Order\OrderPromotion::widget(['order'=>$model])?>
+        <?=fx\widgets\Order\OrderPromotion::widget(['order'=>$model])?>
     </a>
     <div class="p10 tr bdb  whitebg">
         <span >共<?=$model->orderProductQty?>件商品  合计：￥<?= number_format($model->total,2);?> </span>
     </div>
 <div class="p5 tr    whitebg">
-    <?=\h5\widgets\Order\OrderMenu::widget(['model'=>$model])?>
+    <?=\fx\widgets\Order\OrderMenu::widget(['model'=>$model])?>
 </div>
     <?php } ?>
     <?php if($model->orderDigitalProducts){?>
@@ -52,7 +52,7 @@
             <span >合计：￥<?= number_format($model->total,2);?> </span>
         </div>
         <div class="p5 tr    whitebg">
-	        <?=\h5\widgets\Order\OrderMenu::widget(['model'=>$model])?>
+	        <?=\fx\widgets\Order\OrderMenu::widget(['model'=>$model])?>
         </div>
     <?php } ?>
 </div>

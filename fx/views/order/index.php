@@ -28,5 +28,5 @@ $this->title ='订单中心';
         ]);
         ?>
 </section>
-    <?= h5\widgets\MainMenu::widget(); ?>
+<!--    --><?//= fx\widgets\MainMenu::widget(); ?>
 

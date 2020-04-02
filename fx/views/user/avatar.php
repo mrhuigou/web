@@ -98,10 +98,10 @@ $.alert(res.message);
 
 <?php $this->endBlock() ?>
 <?php
-$this->registerJsFile("/assets/script/iscroll-zoom.js",['depends'=>\h5\assets\AppAsset::className()]);
-$this->registerJsFile("/assets/script/hammer.min.js",['depends'=>\h5\assets\AppAsset::className()]);
-$this->registerJsFile("/assets/script/lrz.all.bundle.js",['depends'=>\h5\assets\AppAsset::className()]);
-$this->registerJsFile("/assets/script/PhotoClip.js",['depends'=>\h5\assets\AppAsset::className()]);
+$this->registerJsFile("/assets/script/iscroll-zoom.js",['depends'=>\fx\assets\AppAsset::className()]);
+$this->registerJsFile("/assets/script/hammer.min.js",['depends'=>\fx\assets\AppAsset::className()]);
+$this->registerJsFile("/assets/script/lrz.all.bundle.js",['depends'=>\fx\assets\AppAsset::className()]);
+$this->registerJsFile("/assets/script/PhotoClip.js",['depends'=>\fx\assets\AppAsset::className()]);
 $this->registerJs($this->blocks['JS_END'],\yii\web\View::POS_END);
 ?>
 

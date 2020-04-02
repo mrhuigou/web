@@ -171,7 +171,7 @@ $("body").on("click",".SubmitBtn",function () {
 </script>
 <?php
 $this->registerJs($this->blocks['JS_QQDiTu'], \yii\web\View::POS_READY);
-$this->registerJsFile("/assets/script/jqweui-picker.js",['depends'=>\h5\assets\AppAsset::className()]);
-$this->registerJsFile("/assets/script/jqweui-city-picker.js",['depends'=>\h5\assets\AppAsset::className()]);
+$this->registerJsFile("/assets/script/jqweui-picker.js",['depends'=>\fx\assets\AppAsset::className()]);
+$this->registerJsFile("/assets/script/jqweui-city-picker.js",['depends'=>\fx\assets\AppAsset::className()]);
 ?>
 
