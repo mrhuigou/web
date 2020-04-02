@@ -132,26 +132,26 @@ $this->title = '订单确认';
                     </div>
                     <?php } ?>
                 <?php if($val['base']->store_id == 1){?>
-                        <?php  $point_customers = \api\models\V1\PointCustomer::find()->where(['customer_id'=>Yii::$app->user->getId()])->all();?>
-                        <?php if($point_customers && count($point_customers) > 0){ ?>
-                        <?php $setArray = Yii::$app->session->get("customer_point_h5");?>
-                        <?php foreach ($point_customers as $point_customer){?>
-                    <?php $point_total = $point_customer->point->pointByCurl?>
-                    <?php if($point_total > 0 && bcmul($point_customer->point->rate,$point_total,2) >0){?>
-
-                            <p class="clearfix ">
-                                <span class="">
-                                    <a href="javascript:void(0)"  class="line-a bdt btn_points" data-date="<?php echo $point_customer->point_customer_id?>" data-content="<?php echo $val['base']->store_id?>" STYLE="border-bottom: none">
-                                    <i class="iconfont fr"></i>
-                                    <span class="fb"><?php echo $point_customer->point->display_name?>积分：</span>
-                                    <em class="f12 red"><?php echo $point_total;?>（可抵用<?php echo bcmul($point_customer->point->rate,$point_total,2)?>元）</em><em class="btn_balance_html"><?php if(isset($setArray[$point_customer->point_customer_id]) && $setArray[$point_customer->point_customer_id]){ ?>(取消使用) <?php  }else{?>  (点击使用)<?php }?></em>
-                                        <br><em class="f12 red">【注：积分抵扣的订单不支持退货】</em>
-                                    </a>
-                                </span>
-                            </p>
-                <?php } ?>
-                <?php } ?>
-                        <?php } ?>
+<!--                        --><?php // $point_customers = \api\models\V1\PointCustomer::find()->where(['customer_id'=>Yii::$app->user->getId()])->all();?>
+<!--                        --><?php //if($point_customers && count($point_customers) > 0){ ?>
+<!--                        --><?php //$setArray = Yii::$app->session->get("customer_point_h5");?>
+<!--                        --><?php //foreach ($point_customers as $point_customer){?>
+<!--                    --><?php //$point_total = $point_customer->point->pointByCurl?>
+<!--                    --><?php //if($point_total > 0 && bcmul($point_customer->point->rate,$point_total,2) >0){?>
+<!---->
+<!--                            <p class="clearfix ">-->
+<!--                                <span class="">-->
+<!--                                    <a href="javascript:void(0)"  class="line-a bdt btn_points" data-date="--><?php //echo $point_customer->point_customer_id?><!--" data-content="--><?php //echo $val['base']->store_id?><!--" STYLE="border-bottom: none">-->
+<!--                                    <i class="iconfont fr"></i>-->
+<!--                                    <span class="fb">--><?php //echo $point_customer->point->display_name?><!--积分：</span>-->
+<!--                                    <em class="f12 red">--><?php //echo $point_total;?><!--（可抵用--><?php //echo bcmul($point_customer->point->rate,$point_total,2)?><!--元）</em><em class="btn_balance_html">--><?php //if(isset($setArray[$point_customer->point_customer_id]) && $setArray[$point_customer->point_customer_id]){ ?><!--(取消使用) --><?php // }else{?><!--  (点击使用)--><?php //}?><!--</em>-->
+<!--                                        <br><em class="f12 red">【注：积分抵扣的订单不支持退货】</em>-->
+<!--                                    </a>-->
+<!--                                </span>-->
+<!--                            </p>-->
+<!--                --><?php //} ?>
+<!--                --><?php //} ?>
+<!--                        --><?php //} ?>
 
                         <?php }?>
                 <?php }else{ ?>
