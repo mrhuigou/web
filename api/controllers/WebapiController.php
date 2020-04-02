@@ -1297,19 +1297,19 @@ class WebapiController extends \yii\rest\Controller {
 			foreach ($datas as $data) {
 				if (!$model = Coupon::findOne(['code' => trim($data['CODE'])])) {
 					$model = new Coupon();
-//				}else{
-//				    //如果更新到期时间，更新所有已经领取过的用户券的到期时间
-//                    if(!empty($data['END_TIME'])){
-//                        if($model->date_end != $data['END_TIME']){
-//                            $customer_coupons = CustomerCoupon::find()->where(['is_use' => 0, 'coupon_id' => $model->coupon_id])->all();
-//                            foreach ($customer_coupons as $customer_coupon){
-//                                $customer_coupon->end_time = $data['END_TIME'];
-//                                if (!$customer_coupon->save()) {
-//                                    throw new \Exception(serialize($customer_coupon->errors));
-//                                }
-//                            }
-//                        }
-//                    }
+				}else{
+				    //如果更新到期时间，更新所有已经领取过的用户券的到期时间
+                    if(!empty($data['END_TIME'])){
+                        if($model->date_end != $data['END_TIME']){
+                            $customer_coupons = CustomerCoupon::find()->where(['is_use' => 0, 'coupon_id' => $model->coupon_id])->all();
+                            foreach ($customer_coupons as $customer_coupon){
+                                $customer_coupon->end_time = $data['END_TIME'];
+                                if (!$customer_coupon->save()) {
+                                    throw new \Exception(serialize($customer_coupon->errors));
+                                }
+                            }
+                        }
+                    }
                 }
 				$model->code = trim($data['CODE']);
 				$model->name = $data['NAME'];
