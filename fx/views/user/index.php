@@ -74,7 +74,7 @@ $this->title = '用户中心';
 <!--            <span class="fl"><em class="iconfont blue f18" style="line-height: 14px;">&#xe6af;</em>发票信息</span>-->
 <!--            <i class="iconfont fr green">发票管理</i>-->
 <!--        </a>-->
-<!--        --><?php //echo \h5\widgets\Block\UserShareBlock::widget()?>
+        <?php echo \fx\widgets\Block\UserShareBlock::widget()?>
 <!--		<div class="mt5  whitebg p5 "><i class="aui-icon aui-icon-pay org f18"></i>我的钱包</div>-->
 <!--		<div class="flex-col flex-center tc whitebg bdt bdb  p10 mb5">-->
 <!--            --><?php //if(Yii::$app->session->get('source_from_agent_wx_xcx')){?>
