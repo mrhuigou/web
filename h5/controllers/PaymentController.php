@@ -2,6 +2,7 @@
 
 namespace h5\controllers;
 use api\models\V1\CheckoutOrder;
+use api\models\V1\CustomerAuthentication;
 use api\models\V1\Order;
 use api\models\V1\OrderMerge;
 use common\component\Payment\Alipay\AlipayConfig;
@@ -34,7 +35,9 @@ class PaymentController extends \yii\web\Controller
         }
         $trade_no=Yii::$app->request->get('trade_no');
         $useragent=\Yii::$app->request->getUserAgent();
-        if(strpos(strtolower($useragent), 'micromessenger') && !$open_id=\Yii::$app->session->get('open_id')){
+        $customer_auth_model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'customer_id' => Yii::$app->user->getId()]);
+        $open_id = (\Yii::$app->session->get('open_id') ?:$customer_auth_model->openid)?:'';
+        if(strpos(strtolower($useragent), 'micromessenger') && !$open_id){
             return $this->redirect(['/payment/wx-js-call','path'=>Url::to(['/payment/index','trade_no'=>$trade_no,'showwxpaytitle'=>1],true)]);
         }
         try{
