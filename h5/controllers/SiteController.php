@@ -731,12 +731,9 @@ class SiteController extends Controller {
         Yii::error('source_from_begin:$code:'.json_encode($code));
         $result = Yii::$app->wechat->getOauth2AccessTokenTest($code, $grantType = 'authorization_code');
         Yii::error('source_from_begin:$result:'.json_encode($result));
-        echo "<pre>";
-        var_dump($result);
         if($ret = isset($result['errmsg']) ? false : $result){
             $UserInfo = Yii::$app->wechat->getSnsMemberInfoTest($result['openid'], $result['access_token']);
-            Yii::error('source_from_begin:$result:'.json_encode($result));
-            var_dump($UserInfo);
+            Yii::error('source_from_begin:$UserInfo:'.json_encode($UserInfo));
         }
     }
 
