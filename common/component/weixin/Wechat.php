@@ -1354,6 +1354,24 @@ class Wechat extends Component
 		return isset($result['errmsg']) ? false : $result;
 	}
 
+    /**
+     * 网页授权获取用户信息:第二步
+     * 通过跳转到getOauth2AuthorizeUrl返回的授权code获取用户资料 (该函数和getAccessToken函数作用不同.请参考文档)
+     * @param $code
+     * @param string $grantType
+     * @return array
+     */
+    public function getOauth2AccessTokenTest($code, $grantType = 'authorization_code')
+    {
+        $result = $this->httpGet(self::WECHAT_OAUTH2_ACCESS_TOKEN_URL . http_build_query([
+                'appid' => $this->appId,
+                'secret' => $this->appSecret,
+                'code' => $code,
+                'grant_type' => $grantType
+            ]));
+        return $result;
+    }
+
 	/**
 	 * 网页授权获取用户信息:第三步(非必须)
 	 * 由于access_token拥有较短的有效期，当access_token超时后，可以使用refresh_token进行刷新，refresh_token拥有较长的有效期（7天、30天、60天、90天），当refresh_token失效的后，需要用户重新授权。
@@ -1385,6 +1403,23 @@ class Wechat extends Component
 			]));
 		return isset($result['errmsg']) && $result['errmsg'] == 'ok';
 	}
+
+    /**
+     * 如果网页授权作用域为snsapi_userinfo，则此时开发者可以通过网页授权后的access_token和openid拉取用户信息了。
+     * @param $openId
+     * @param string $oauth2AccessToken
+     * @param string $lang
+     * @return array|bool
+     */
+    public function getSnsMemberInfoTest($openId, $oauth2AccessToken, $lang = 'zh_CN')
+    {
+        $result = $this->httpGet(self::WEHCAT_SNS_USER_INFO_URL . http_build_query([
+                'access_token' => $oauth2AccessToken,
+                'openid' => $openId,
+                'lang' => $lang
+            ]));
+        return $result;
+    }
 
 	/**
 	 * 如果网页授权作用域为snsapi_userinfo，则此时开发者可以通过网页授权后的access_token和openid拉取用户信息了。

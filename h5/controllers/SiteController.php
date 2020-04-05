@@ -184,6 +184,12 @@ class SiteController extends Controller {
 
 		return $this->render('index-new', $data);
 	}
+    public function actionLoginTest(){
+        $url = Url::to(["/site/index"],true);
+        $state = AuthState::create($url);
+        $base_url=Yii::$app->wechat->getOauth2AuthorizeUrl(Url::to(['site/weixin'], true),$state,'snsapi_userinfo');
+        return $this->redirect($base_url);
+    }
 
 	public function actionLogin()
 	{
@@ -716,6 +722,21 @@ class SiteController extends Controller {
             }else{
                 throw  new NotFoundHttpException('用户信息授权失败');
             }
+        }
+    }
+    public function actionWeixinTest()
+    {
+        $code = Yii::$app->request->get("code");
+        $state = AuthState::get(Yii::$app->request->get("state"));
+        Yii::error('source_from_begin:$code:'.json_encode($code));
+        $result = Yii::$app->wechat->getOauth2AccessTokenTest($code, $grantType = 'authorization_code');
+        Yii::error('source_from_begin:$result:'.json_encode($result));
+        echo "<pre>";
+        var_dump($result);
+        if($ret = isset($result['errmsg']) ? false : $result){
+            $UserInfo = Yii::$app->wechat->getSnsMemberInfoTest($result['openid'], $result['access_token']);
+            Yii::error('source_from_begin:$result:'.json_encode($result));
+            var_dump($UserInfo);
         }
     }
 
