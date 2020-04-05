@@ -1351,7 +1351,6 @@ class Wechat extends Component
 				'code' => $code,
 				'grant_type' => $grantType
 			]));
-        Yii::error('source_from_begin:$result111:'.json_encode($result));
 		return isset($result['errmsg']) ? false : $result;
 	}
 
