@@ -187,7 +187,7 @@ class SiteController extends Controller {
     public function actionLoginTest(){
         $url = Url::to(["/site/index"],true);
         $state = AuthState::create($url);
-        $base_url=Yii::$app->wechat->getOauth2AuthorizeUrl(Url::to(['site/weixin'], true),$state,'snsapi_userinfo');
+        $base_url=Yii::$app->wechat->getOauth2AuthorizeUrl(Url::to(['site/weixin-test'], true),$state,'snsapi_userinfo');
         return $this->redirect($base_url);
     }
 
