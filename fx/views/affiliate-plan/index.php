@@ -46,9 +46,9 @@ $this->title = "一起团";
 
     <?php if ($affiliate_plan) { ?>
         <div id="cart-list">
-            <?php if($affiliate_info && $affiliate_info->mode == 'DOWN_LINE'){?>
-                <p class="mt5 bg-wh pt10 pb10 pl10">团长服务点：<i class="red"><?php echo $affiliate_info->address?></i></p>
-            <?php }?>
+<!--            --><?php //if($affiliate_info && $affiliate_info->mode == 'DOWN_LINE'){?>
+                <p class="mt5 bg-wh pt10 pb10 pl10">团长：<i class="red"><?php echo $affiliate_info->username?></i></p>
+<!--            --><?php //}?>
             <p class=" mb5 bg-wh pt5 pb5 pl10">
                 开团时间：<i class="red"><?php echo date('Y-m-d',strtotime($affiliate_plan->date_start))?></i>
                 &nbsp;&nbsp;&nbsp;
@@ -85,7 +85,7 @@ $this->title = "一起团";
                             <?php }?>
                         <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
                     </label>
-                    <div class="flex-item-2 flex-row flex-middle flex-center p5 item-img img_click">
+                    <div class="flex-item-4 flex-row flex-middle flex-center p5 item-img img_click">
                         <?php
                         //对展示图进行处理  没有图片时 使用包装图片
                         //对商品图进行处理
@@ -122,9 +122,10 @@ $this->title = "一起团";
 
 
                     ?>
-                    <div class="flex-item-9 flex-row   p5">
+                    <div class="flex-item-7 flex-row   p5">
                         <div class="w">
                             <h2 class="row-one"><?=$value->product->description->name?></h2>
+                            <p class="row-one red f13 mt5"><?php echo $value->product->description->meta_description?></p>
                             <p class="gray9  mt2"><?=$value->product->getSku()?></p>
                         </div>
                         <div class="flex-col w">
