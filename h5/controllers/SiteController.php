@@ -774,6 +774,7 @@ class SiteController extends Controller {
 			} else {
 				throw new NotFoundHttpException("获取用户信息失败");
 			}
+            Yii::error('source_from_begin:customer_id:'.$model->customer_id);
             Yii::error('source_from_begin:$customer:'.json_encode(User::findIdentity($model->customer_id)));
 			if (!$customer = User::findIdentity($model->customer_id)) {
 				$customer = new User();
