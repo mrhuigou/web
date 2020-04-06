@@ -1,6 +1,7 @@
 <?php
 namespace fx\controllers;
 use api\models\V1\AdvertiseDetail;
+use api\models\V1\Affiliate;
 use api\models\V1\AffiliatePersonal;
 use api\models\V1\CustomerAffiliate;
 use api\models\V1\CustomerCommission;
@@ -9,6 +10,7 @@ use api\models\V1\CustomerCommissionFlow;
 use api\models\V1\CustomerFollower;
 use api\models\V1\Order;
 use common\component\Helper\OrderSn;
+use fx\models\AffiliateForm;
 use fx\models\CustomerAffiliateForm;
 use fx\models\CustomerCommissionForm;
 use yii\base\ErrorException;
@@ -52,7 +54,7 @@ class UserShareController extends \yii\web\Controller {
 		if (\Yii::$app->user->isGuest) {
 			return $this->redirect(['/site/login', 'redirect' => \Yii::$app->request->getAbsoluteUrl()]);
 		}
-		if (!$affiliate = CustomerAffiliate::findOne(['customer_id' => Yii::$app->user->getId()])) {
+		if (!$affiliate = Affiliate::findOne(['customer_id' => Yii::$app->user->getId()])) {
 			return $this->redirect('/user-share/apply');
 		} else {
 			if (!$affiliate->status) {
@@ -81,8 +83,9 @@ class UserShareController extends \yii\web\Controller {
 		$advertise = new AdvertiseDetail();
 		$focus_position = ['H5-1LFX-AD'];
 		$banner = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$model = new CustomerAffiliateForm();
-		if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//		$model = new CustomerAffiliateForm();
+		$model = new AffiliateForm();
+		if ($model->load(Yii::$app->request->post()) && $model->submit()) {
 		    if($redirect){
                 return $this->redirect($redirect);
             }

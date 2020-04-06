@@ -15,6 +15,7 @@ class AffiliateForm extends Affiliate {
     public $province;
     public $city;
     public $district;
+    public $agree=1;
     public function __construct($config = [])
     {
         if($model = Affiliate::findOne(['status'=>1,'customer_id'=>Yii::$app->user->getId()])){
@@ -50,6 +51,20 @@ class AffiliateForm extends Affiliate {
             }
         }
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => '姓名',
+            'telephone'=>'手机号',
+            'agree'=>'同意'
+        ];
+    }
+
+
     public function submit(){
         if ($this->validate()) {
             if($model = Affiliate::findOne(['customer_id'=>Yii::$app->user->getId()])){

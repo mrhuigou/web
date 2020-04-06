@@ -7,6 +7,7 @@
  * Time: 10:39
  */
 namespace fx\widgets\Block;
+use api\models\V1\Affiliate;
 use api\models\V1\CustomerAffiliate;
 use api\models\V1\CustomerCommission;
 use api\models\V1\CustomerCommissionFlow;
@@ -27,9 +28,9 @@ class UserShareBlock extends Widget{
             $commission_total=0;
             $follower_total=0;
             $order_total=0;
-            if($model=CustomerAffiliate::findOne(['customer_id'=>\Yii::$app->user->getId()])) {
+            if($model=Affiliate::findOne(['customer_id'=>\Yii::$app->user->getId()])) {
                 $commission_total = CustomerCommissionFlow::find()->where(['customer_id' => \Yii::$app->user->getId(),'status'=>1])->andWhere(['>','amount',0])->sum('amount');
-                $follower_total = CustomerFollower::find()->where(['customer_id' => \Yii::$app->user->getId()])->count('follower_id');
+//                $follower_total = CustomerFollower::find()->where(['customer_id' => \Yii::$app->user->getId()])->count('follower_id');
                 $order_total = Order::find()->where(['source_customer_id' => \Yii::$app->user->getId(), 'order_type_code' => ['normal', 'presell']])->andWhere(['>', 'total', 0])->count("*");
             }
             return $this->render('user-share-block',['model'=>$model,'commission_total'=>$commission_total,'follower_total'=>$follower_total,'order_total'=>$order_total]);
