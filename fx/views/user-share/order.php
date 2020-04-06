@@ -27,4 +27,4 @@ $this->title = $title;
 			]); ?>
 		</div>
 	</section>
-<?= fx\widgets\MainMenu::widget(); ?>
+<?//= fx\widgets\MainMenu::widget(); ?>

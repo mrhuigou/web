@@ -18,4 +18,4 @@ $this->title ='等待审核';
 	</div>
 </section>
 <!--浮动购物车-->
-<?=fx\widgets\MainMenu::widget();?>
+<?//=fx\widgets\MainMenu::widget();?>

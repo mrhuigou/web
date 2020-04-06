@@ -23,4 +23,4 @@ $this->title = '明细';
 			]); ?>
 		</div>
 	</section>
-<?= fx\widgets\MainMenu::widget(); ?>
+<?//= fx\widgets\MainMenu::widget(); ?>

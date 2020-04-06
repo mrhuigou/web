@@ -12,13 +12,13 @@ $this->title ='我的分享';
 <?=fx\widgets\Header::widget(['title'=>$this->title])?>
 <section class="veiwport  pb50">
 	<div class="flex-col tc lh37 aui-border whitebg f14  ">
-		<a class="flex-item-4 redbg white" href="<?=\yii\helpers\Url::to(['/user-share/index'])?>">
+		<a class="flex-item-6 redbg white" href="<?=\yii\helpers\Url::to(['/user-share/index'])?>">
 			收益
 		</a>
-        <a class="flex-item-4  aui-border-l " href="<?=\yii\helpers\Url::to(['/user-share/follower'])?>">
-            粉丝
-        </a>
-		<a class="flex-item-4 aui-border-l " href="<?=\yii\helpers\Url::to(['/user-share/commission'])?>">
+<!--        <a class="flex-item-4  aui-border-l " href="--><?//=\yii\helpers\Url::to(['/user-share/follower'])?><!--">-->
+<!--            粉丝-->
+<!--        </a>-->
+		<a class="flex-item-6 aui-border-l " href="<?=\yii\helpers\Url::to(['/user-share/commission'])?>">
 			明细
 		</a>
 	</div>
@@ -49,16 +49,16 @@ $this->title ='我的分享';
         <a class="btn lbtn greenbtn w " href="/user-share/apply-draw" >申请提现</a>
     </div>
     <div class="m5">
-        <a class="btn lbtn graybtn w " href="<?=\yii\helpers\Url::to(['/user-share/order'])?>">粉丝订单收益</a>
+        <a class="btn lbtn graybtn w " href="<?=\yii\helpers\Url::to(['/user-share/order'])?>">订单收益</a>
     </div>
-    <div class="m5">
-        <a class="btn lbtn graybtn w " href="<?=\yii\helpers\Url::to(['/user-share/order-aff-person'])?>">分享商品收益</a>
-    </div>
+<!--    <div class="m5">-->
+<!--        <a class="btn lbtn graybtn w " href="--><?//=\yii\helpers\Url::to(['/user-share/order-aff-person'])?><!--">分享商品收益</a>-->
+<!--    </div>-->
 
     <div class="p5 m5  lh150 bg-wh f12 f5">
         友情提示：亲，您推广的用户订单收益，系统会在订单交易完成后，自动转入你的收益帐户中。
     </div>
 </section>
 	<!--浮动购物车-->
-<?=fx\widgets\MainMenu::widget();?>
+<?//=fx\widgets\MainMenu::widget();?>
 

@@ -8,7 +8,7 @@
 use \yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
-$this->title ='申请合伙人';
+$this->title ='申请团长';
 ?>
 <?=fx\widgets\Header::widget(['title'=>$this->title])?>
 	<section class="veiwport  pb50">
@@ -30,7 +30,7 @@ $this->title ='申请合伙人';
 		</div>
 		<?php ActiveForm::end(); ?>
         <div class="tc lh37   f14 tit-- ">
-            加入合伙人的理由
+            加入团长的理由
         </div>
         <div class="p10 f14 lh150 pb20">
             <ul>
@@ -42,4 +42,4 @@ $this->title ='申请合伙人';
         </div>
 	</section>
 	<!--浮动购物车-->
-<?=fx\widgets\MainMenu::widget();?>
+<?//=fx\widgets\MainMenu::widget();?>

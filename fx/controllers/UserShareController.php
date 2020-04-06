@@ -168,7 +168,7 @@ class UserShareController extends \yii\web\Controller {
 				'pagesize' => '10',
 			]
 		]);
-		return $this->render('order', ['model' => $model, 'dataProvider' => $dataProvider,'title'=>'粉丝订单收益','type'=>'aff_customer']);
+		return $this->render('order', ['model' => $model, 'dataProvider' => $dataProvider,'title'=>'订单收益','type'=>'aff_customer']);
 	}
     public function actionOrderAffPerson()
     {
