@@ -741,14 +741,16 @@ class SiteController extends Controller {
 	{
 		$code = Yii::$app->request->get("code");
 		$state = AuthState::get(Yii::$app->request->get("state"));
+        Yii::error('source_from_begin:$state:'.$state);
         Yii::error('source_from_begin:$code:'.json_encode($code));
+        Yii::error('source_from_begin:time1:'.time());
 		if ($result = Yii::$app->wechat->getOauth2AccessToken($code, $grantType = 'authorization_code')) {
             Yii::error('source_from_begin:$result:'.json_encode($result));
 			$identifier = isset($result['unionid']) ? $result['unionid'] : $result['openid'];
             Yii::error('source_from_begin:openid:'.$result['openid']);
             Yii::error('source_from_begin:access_token:'.$result['access_token']);
-//			if (!$model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'identifier' => [$identifier, md5($identifier)]])) {
-			if (!$model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'identifier' => $identifier])) {
+			if (!$model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'identifier' => [$identifier, md5($identifier)]])) {
+//			if (!$model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'identifier' => $identifier])) {
 				$model = new CustomerAuthentication();
 				$model->status = 0;
 				$model->date_added = date('Y-m-d H:i:s', time());
@@ -837,9 +839,10 @@ class SiteController extends Controller {
                     }
                 }
             }
-
+            Yii::error('source_from_begin:time2:'.time());
 			Yii::$app->user->login($customer, 3600 * 24 * 7);
 			\Yii::$app->cart->loadFromLogin();
+            Yii::error('source_from_begin:time3:'.time());
 			return $this->redirect($state);
 		} else {
 			throw new NotFoundHttpException("用户授权失败！");
