@@ -39,7 +39,7 @@ use yii\web\NotFoundHttpException;
 /**
  * Site controller
  */
-class SiteController extends Controller {
+class SiteBakController extends Controller {
 	/**
 	 * @inheritdoc
 	 */
