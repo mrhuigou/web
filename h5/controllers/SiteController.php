@@ -745,18 +745,23 @@ class SiteController extends Controller {
         Yii::error('source_from_begin:$code:'.json_encode($code));
         Yii::error('source_from_begin:time1:'.time());
 		if ($result = Yii::$app->wechat->getOauth2AccessToken($code, $grantType = 'authorization_code')) {
+            Yii::error('source_from_begin:$result_time:'.time());
             Yii::error('source_from_begin:$result:'.json_encode($result));
 			$identifier = isset($result['unionid']) ? $result['unionid'] : $result['openid'];
             Yii::error('source_from_begin:openid:'.$result['openid']);
             Yii::error('source_from_begin:access_token:'.$result['access_token']);
+            Yii::error('source_from_begin:$model_time1:'.time());
 			if (!$model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'identifier' => [$identifier, md5($identifier)]])) {
 //			if (!$model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'identifier' => $identifier])) {
+                Yii::error('source_from_begin:$model_time2:'.time());
 				$model = new CustomerAuthentication();
 				$model->status = 0;
 				$model->date_added = date('Y-m-d H:i:s', time());
 			}
             Yii::error('source_from_begin:$customerAuthentication:'.json_encode($model));
+            Yii::error('source_from_begin:$UserInfo_time1:'.time());
 			if ($UserInfo = Yii::$app->wechat->getSnsMemberInfo($result['openid'], $result['access_token'])) {
+                Yii::error('source_from_begin:$UserInfol_time2:'.time());
                 Yii::error('source_from_begin:$UserInfo:'.json_encode($UserInfo));
 				if ($UserInfo['sex'] == 1) {
 					$sex = '男';
