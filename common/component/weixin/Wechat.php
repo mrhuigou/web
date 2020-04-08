@@ -1333,6 +1333,7 @@ class Wechat extends Component
 				'response_type' => 'code',
 				'scope' => $scope,
 				'state' => $state,
+                'connect_redirect'=>1
 			]) . '#wechat_redirect';
 	}
 
