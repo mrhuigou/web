@@ -19,9 +19,9 @@ $this->title ='申请团长';
 			'inputOptions' => ["class" => 'w f14'],
 			'errorOptions' => ['class' => 'red pl5']
 		],]); ?>
-        <?= $form->field($model, 'province', ['template' => '{input}'])->hiddenInput(['id' => 'province'])->label(false) ?>
-        <?= $form->field($model, 'city', ['template' => '{input}'])->hiddenInput(['id' => 'city'])->label(false) ?>
-        <?= $form->field($model, 'district',['template' => '{input}'])->hiddenInput(['id' => 'district'])?>
+        <?= $form->field($model, 'zone_name', ['template' => '{input}'])->hiddenInput(['id' => 'province'])->label(false) ?>
+        <?= $form->field($model, 'city_name', ['template' => '{input}'])->hiddenInput(['id' => 'city'])->label(false) ?>
+        <?= $form->field($model, 'district_name',['template' => '{input}'])->hiddenInput(['id' => 'district'])?>
 
         <ul class="line-book mt10">
             <?= $form->field($model, 'mode', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'DOWN_LINE'=>'线下', 'ON_LINE'=>'线上'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline p10']],])?>
@@ -38,23 +38,25 @@ $this->title ='申请团长';
                 <div class="t">选择地区：</div>
                 <div class="c">
                     <div class="weui-cell__bd">
-                        <?php $p = $model->province ? $model->province : '山东省';
-                        $c = $model->city ? $model->city : '青岛市';
-                        $d = $model->district ? $model->district : '市北区';
+                        <?php $p = $model->zone_name ? $model->zone_name : '山东省';
+                        $c = $model->city_name ? $model->city_name : '青岛市';
+                        $d = $model->district_name ? $model->district_name : '请选择';
                         ?>
                         <input class="w f14" id="start" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
                     </div>
                 </div>
 
             </li>
+            <p class="red pl5 error_district"></p>
             <?= $form->field($model, 'address',['template' => '{label}<li>{input}</li>{error}'])->textarea(["placeholder" => '小区/写字楼/街道+楼号+楼层等','id'=>'address','class'=>'w f14 ','rows'=>2,'style'=>"height:45px;padding:5px;"])?>
-
+            <p class="red pl5 error_address"></p>
             <?php $url =  \yii\helpers\Url::to(["/user-share/xieyi"])?>
 		<?= $form->field($model, 'agree')->checkbox(['template' => "<div class='p5'>{input} {label}<a href='{$url}'class='blue'>《每日惠购合伙人分享协议》</a></div>{error}"]) ?>
-		</ul>
-		<div class=" bdt  p10 w tc ">
-			<?= Html::submitButton('提交', ['class' => 'btn mbtn greenbtn w', 'name' => 'save-button']) ?>
-		</div>
+
+        </ul>
+        <div class=" bdt  p10 w tc ">
+            <a href="javascript:void(0)"  class='btn mbtn greenbtn w SubmitBtn'>提交</a>
+        </div>
 		<?php ActiveForm::end(); ?>
         <div class="tc lh37   f14 tit-- ">
             加入团长的理由
@@ -83,6 +85,35 @@ $this->title ='申请团长';
 
         }
     });
+
+    $("body").on("click",".SubmitBtn",function () {
+        var affiliateform_mode = $('#affiliateform-mode').find(":radio:checked").val();
+
+        if(affiliateform_mode == 'DOWN_LINE'){
+            if(!$("#district").val() ||  $("#district").val() == '请选择'){
+                $('.error_district').html("请选择地区");
+                $('.error_district').show();
+                $.alert("请选择地区");
+                return false;
+            }else{
+                $('.error_district').hide();
+            }
+            if(!$("#address").val()){
+                $('.error_address').html("请输入详细地址");
+                $('.error_address').show();
+                $.alert("请输入详细地址");
+                return false;
+            }else{
+                $('.error_address').hide();
+            }
+        }
+
+        $("#form-address").submit();
+    });
+
+
+
+
     <?php $this->endBlock() ?>
 </script>
 <?php
