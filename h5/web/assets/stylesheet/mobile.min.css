@@ -1680,6 +1680,8 @@ a.search-btn{font-size:23px;line-height:19px;position:absolute;right:5px;top:11p
 .veiwport.mt0{margin-top:0}
 .nav-main{background-color:#fff;-webkit-box-shadow:0 0 3px rgba(0,0,0,.5);box-shadow:0 0 3px rgba(0,0,0,.5)}
 .nav-main a{line-height:21px;float:left;width:20%;padding:5px 0;text-align:center;background-color:#fff}
+.nav-main-3 a{line-height:21px;float:left;width:33.3%;padding:5px 0;text-align:center;background-color:#fff}
+.nav-main-3 a i{display:block;margin-top:2px;margin-bottom:2px}
 .nav-main a i{display:block;margin-top:2px;margin-bottom:2px}
 .main-nav{text-align:center;padding-top:10px;padding-bottom:5px;margin-bottom:6px;background-color:#fff}
 .main-nav a{width:20%;float:left;margin-bottom:10px}

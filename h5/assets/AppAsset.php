@@ -18,7 +18,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'assets/stylesheet/mobile.min.css?v=20200219',
+        'assets/stylesheet/mobile.min.css?v=20200409',
         'assets/stylesheet/swiper.min.css?v=20170724',
         'assets/script/layer.m/need/layer.css?v=20171216'
     ];
