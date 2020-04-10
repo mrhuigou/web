@@ -5,6 +5,7 @@ use api\models\V1\Affiliate;
 use api\models\V1\District;
 use common\component\Curl\Curl;
 use common\component\Helper\Map;
+use common\component\Helper\RandomString;
 use Yii;
 class AffiliateForm extends Affiliate {
     public $mode = 'DOWN_LINE';
@@ -23,6 +24,7 @@ class AffiliateForm extends Affiliate {
     public $agree=1;
     public $in_range=1;
     public $has_other_zone;
+    public $telephone;
     public function __construct($config = [])
     {
 //        if($model = Affiliate::findOne(['status'=>1,'customer_id'=>Yii::$app->user->getId()])){
@@ -50,14 +52,13 @@ class AffiliateForm extends Affiliate {
 //            [['mode'],'ValidateMode']
             ['telephone', 'string', 'length' => 11],
             [['address'],'poiValidate'],
+            [['telephone'], 'ValidateTelephone'],
         ];
     }
-    public function ValidateMode($attribute, $params){
-        if($this->mode){
-            if($this->mode == 'DOWN_LINE'){
-                if(!$this->address){
-                    $this->addError('mode', '收货地址不能为空!');
-                }
+    public function ValidateTelephone($attribute, $params){
+        if($this->telephone){
+            if($affiliate = Affiliate::findOne(['telephone'=>$this->telephone])){
+                $this->addError('telephone', '此号码已经注册过了!');
             }
         }
     }
@@ -72,7 +73,6 @@ class AffiliateForm extends Affiliate {
             $this->addError($attribute,'您的地址错误，请选择区域');
         }
         $curl=new Curl();
-        echo "<pre>";
         $url='http://apis.map.qq.com/ws/geocoder/v1/';
         $result=$curl->get($url,['address'=>$this->city_name.$this->district_name.$this->address,'key'=>'GNWBZ-7FSAR-JL5WY-WIDVS-FHLY2-JVBEC']);
         if($result && $result->status==0 && $result->result){
@@ -154,7 +154,7 @@ class AffiliateForm extends Affiliate {
                 $model = new Affiliate();
                 $model->customer_id = Yii::$app->user->getId();
             }
-            $model->code = '';
+            $model->code = 'af'.RandomString::random_text('alnum',6);
             $model->mode = $this->mode;
             $model->type = $this->type;
             $model->rebate_type = $this->rebate_type;
@@ -167,6 +167,7 @@ class AffiliateForm extends Affiliate {
             $model->district_name = $this->district_name;
             $model->address = $this->address;
             $model->telephone = $this->telephone;
+            $model->setPassword('123456'); //默认密码123456
             $model->lng = $this->lng;
             $model->lat = $this->lat;
             $model->status = 1;
@@ -187,18 +188,18 @@ class AffiliateForm extends Affiliate {
                 $return_data['ADDRESS'] = $model->address;
             }
             //自动同步后台
-//            if($return_data){
-//                $erp_wsdl = Yii::$app->params['ERP_SOAP_URL'];
-//                $client = new \SoapClient($erp_wsdl, array('soap_version' => SOAP_1_1, 'exceptions' => false));
-//                $data=$this->getParam('applyAffiliate',array($return_data));
-//                $content = $client->getInterfaceForJson($data);
-//                $result=$this->getResult($content);
-//                Yii::error(json_encode($result));
-//                if($result['status']=='OK'){
-//                    $model->send_status = 1;
-//                    $model->save();
-//                }
-//            }
+            if($return_data){
+                $erp_wsdl = Yii::$app->params['ERP_SOAP_URL'];
+                $client = new \SoapClient($erp_wsdl, array('soap_version' => SOAP_1_1, 'exceptions' => false));
+                $data=$this->getParam('applyAffiliate',array($return_data));
+                $content = $client->getInterfaceForJson($data);
+                $result=$this->getResult($content);
+                Yii::error(json_encode($result));
+                if($result['status']=='OK'){
+                    $model->send_status = 1;
+                    $model->save();
+                }
+            }
 
 
 
