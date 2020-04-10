@@ -184,12 +184,6 @@ class SiteController extends Controller {
 
 		return $this->render('index-new', $data);
 	}
-    public function actionLoginTest(){
-        $url = Url::to(["/site/index"],true);
-        $state = AuthState::create($url);
-        $base_url=Yii::$app->wechat->getOauth2AuthorizeUrl(Url::to(['site/weixin-test'], true),$state,'snsapi_userinfo');
-        return $this->redirect($base_url);
-    }
 
 	public function actionLogin()
 	{
@@ -724,44 +718,22 @@ class SiteController extends Controller {
             }
         }
     }
-    public function actionWeixinTest()
-    {
-        $code = Yii::$app->request->get("code");
-        $state = AuthState::get(Yii::$app->request->get("state"));
-        Yii::error('source_from_begin:$code:'.json_encode($code));
-        $result = Yii::$app->wechat->getOauth2AccessTokenTest($code, $grantType = 'authorization_code');
-        Yii::error('source_from_begin:$result:'.json_encode($result));
-        if($ret = isset($result['errmsg']) ? false : $result){
-            $UserInfo = Yii::$app->wechat->getSnsMemberInfoTest($result['openid'], $result['access_token']);
-            Yii::error('source_from_begin:$UserInfo:'.json_encode($UserInfo));
-        }
-    }
 
 	public function actionWeixin()
 	{
 		$code = Yii::$app->request->get("code");
 		$state = AuthState::get(Yii::$app->request->get("state"));
-        Yii::error('source_from_begin:$state:'.$state);
         Yii::error('source_from_begin:$code:'.json_encode($code));
-        Yii::error('source_from_begin:time1:'.time());
 		if ($result = Yii::$app->wechat->getOauth2AccessToken($code, $grantType = 'authorization_code')) {
-            Yii::error('source_from_begin:$result_time:'.time());
             Yii::error('source_from_begin:$result:'.json_encode($result));
 			$identifier = isset($result['unionid']) ? $result['unionid'] : $result['openid'];
-            Yii::error('source_from_begin:openid:'.$result['openid']);
-            Yii::error('source_from_begin:access_token:'.$result['access_token']);
-            Yii::error('source_from_begin:$model_time1:'.time());
 			if (!$model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'identifier' => [$identifier, md5($identifier)]])) {
-//			if (!$model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'identifier' => $identifier])) {
-                Yii::error('source_from_begin:$model_time2:'.time());
 				$model = new CustomerAuthentication();
 				$model->status = 0;
 				$model->date_added = date('Y-m-d H:i:s', time());
 			}
             Yii::error('source_from_begin:$customerAuthentication:'.json_encode($model));
-            Yii::error('source_from_begin:$UserInfo_time1:'.time());
 			if ($UserInfo = Yii::$app->wechat->getSnsMemberInfo($result['openid'], $result['access_token'])) {
-                Yii::error('source_from_begin:$UserInfol_time2:'.time());
                 Yii::error('source_from_begin:$UserInfo:'.json_encode($UserInfo));
 				if ($UserInfo['sex'] == 1) {
 					$sex = '男';
@@ -781,7 +753,6 @@ class SiteController extends Controller {
 			} else {
 				throw new NotFoundHttpException("获取用户信息失败");
 			}
-            Yii::error('source_from_begin:customer_id:'.$model->customer_id);
             Yii::error('source_from_begin:$customer:'.json_encode(User::findIdentity($model->customer_id)));
 			if (!$customer = User::findIdentity($model->customer_id)) {
 				$customer = new User();
@@ -844,10 +815,8 @@ class SiteController extends Controller {
                     }
                 }
             }
-            Yii::error('source_from_begin:time2:'.time());
 			Yii::$app->user->login($customer, 3600 * 24 * 7);
 			\Yii::$app->cart->loadFromLogin();
-            Yii::error('source_from_begin:time3:'.time());
 			return $this->redirect($state);
 		} else {
 			throw new NotFoundHttpException("用户授权失败！");
