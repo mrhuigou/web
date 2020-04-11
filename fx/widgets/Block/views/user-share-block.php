@@ -25,7 +25,8 @@
 <!--		粉丝数</p>-->
 <!--	</a>-->
 </div>
-<a class="btn lbtn bluebtn w"  href="<?php echo \yii\helpers\Url::to(['/affiliate-plan/index']).'?sourcefrom='.$model->code.'&type_code=DEFAULT'?>" >开始分享</a>
+<!--<a class="btn lbtn bluebtn w"  href="--><?php //echo \yii\helpers\Url::to(['/affiliate-plan/index']).'?sourcefrom='.$model->code.'&type_code=DEFAULT'?><!--" >开始分享</a>-->
+<a class="btn lbtn bluebtn w"  href="<?php echo '/affiliate-plan/index?sourcefrom='.$model->code.'&type_code=DEFAULT'?>" >开始分享</a>
 <?php }else{?>
 <div class="mt5  whitebg p10 clearfix "><span class="fl "><i class="iconfont green" style="line-height: 14px;">&#xe62b;</i> 每日惠购团长</span><span class="red fn f12 fr ">申请开通，赚取分享收益</span></div>
 <a href="<?php echo \yii\helpers\Url::to(['/user-share/index'])?>" class="w">

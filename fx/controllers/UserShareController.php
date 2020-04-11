@@ -32,13 +32,15 @@ class UserShareController extends \yii\web\Controller {
 		if (\Yii::$app->user->isGuest) {
 			return $this->redirect(['/site/login', 'redirect' => \Yii::$app->request->getAbsoluteUrl()]);
 		}
-		if (!$affiliate = CustomerAffiliate::findOne(['customer_id' => Yii::$app->user->getId()])) {
-			return $this->redirect('/user-share/apply');
-		} else {
-			if (!$affiliate->status) {
-				return $this->redirect('/user-share/result');
-			}
-		}
+
+        if (!$affiliate = Affiliate::findOne(['customer_id' => Yii::$app->user->getId()])) {
+            return $this->redirect('/user-share/apply');
+        } else {
+            if (!$affiliate->status) {
+                return $this->redirect('/user-share/result');
+            }
+        }
+
 		$data = [];
 		$advertise = new AdvertiseDetail();
 		$focus_position = ['H5-1LFX-AD'];
@@ -109,13 +111,13 @@ class UserShareController extends \yii\web\Controller {
 		if (\Yii::$app->user->isGuest) {
 			return $this->redirect(['/site/login', 'redirect' => \Yii::$app->request->getAbsoluteUrl()]);
 		}
-		if (!$affiliate = CustomerAffiliate::findOne(['customer_id' => Yii::$app->user->getId()])) {
-			return $this->redirect('/user-share/apply');
-		} else {
-			if (!$affiliate->status) {
-				return $this->render('result');
-			}
-		}
+        if (!$affiliate = Affiliate::findOne(['customer_id' => Yii::$app->user->getId()])) {
+            return $this->redirect('/user-share/apply');
+        } else {
+            if (!$affiliate->status) {
+                return $this->redirect('/user-share/result');
+            }
+        }
 		return $this->redirect('/user-share/index');
 	}
 	public function actionList(){
