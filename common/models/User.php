@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use api\models\V1\Affiliate;
 use api\models\V1\CustomerAffiliate;
 use api\models\V1\CustomerAuthentication;
 use api\models\V1\CustomerCommission;
@@ -316,4 +317,14 @@ class User extends ActiveRecord implements IdentityInterface,\OAuth2\Storage\Use
 			return 0;
 		}
 	}
+
+	//获取当前用户的 分销身份信息id
+    public function getAffiliateId(){
+        $model=Affiliate::find()->where(['customer_id'=>$this->customer_id])->one();
+        if($model){
+            return $model->affiliate_id;
+        }else{
+            return 0;
+        }
+    }
 }

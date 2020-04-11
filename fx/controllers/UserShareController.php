@@ -3,6 +3,7 @@ namespace fx\controllers;
 use api\models\V1\AdvertiseDetail;
 use api\models\V1\Affiliate;
 use api\models\V1\AffiliatePersonal;
+use api\models\V1\AffiliateTransactionFlow;
 use api\models\V1\CustomerAffiliate;
 use api\models\V1\CustomerCommission;
 use api\models\V1\CustomerCommissionDraw;
@@ -61,7 +62,7 @@ class UserShareController extends \yii\web\Controller {
 				return $this->redirect('/user-share/result');
 			}
 		}
-		$model = CustomerCommissionFlow::find()->where(['customer_id' => Yii::$app->user->getId(),'status'=>1])->andWhere(['>','amount',0]);
+		$model = AffiliateTransactionFlow::find()->where(['affiliate_id' => Yii::$app->user->identity->getAffiliateId(),'status'=>1])->andWhere(['>','amount',0]);
 		$history_total = $model->sum('amount');
 		$month_total = $model->andWhere(['=','MONTH(FROM_UNIXTIME(create_at))', date('m')])->andWhere(['=','year(FROM_UNIXTIME(create_at))', date('Y')])->sum('amount');
 		$week_total = $model->andWhere(['=', 'WEEK(FROM_UNIXTIME(create_at),1)', date('W')])->andWhere(['=','MONTH(FROM_UNIXTIME(create_at))', date('m')])->andWhere(['=','year(FROM_UNIXTIME(create_at))', date('Y')])->sum('amount');
@@ -164,7 +165,7 @@ class UserShareController extends \yii\web\Controller {
 		if (\Yii::$app->user->isGuest) {
 			return $this->redirect(['/site/login', 'redirect' => \Yii::$app->request->getAbsoluteUrl()]);
 		}
-		$model = Order::find()->where(['source_customer_id' => \Yii::$app->user->getId(), 'order_type_code' => ['normal', 'presell']])->andWhere(['>','total',0])->andWhere(['not in','order_status_id',[6,7]]);
+		$model = Order::find()->where(['affiliate_id' => Yii::$app->user->identity->getAffiliateId(), 'order_type_code' => ['Affiliate']])->andWhere(['>','total',0])->andWhere(['not in','order_status_id',[6,7]]);
 		$dataProvider = new ActiveDataProvider([
 			'query' => $model->orderby('order_id desc'),
 			'pagination' => [
@@ -215,7 +216,7 @@ class UserShareController extends \yii\web\Controller {
 		if (\Yii::$app->user->isGuest) {
 			return $this->redirect(['/site/login', 'redirect' => \Yii::$app->request->getAbsoluteUrl()]);
 		}
-		$model = CustomerCommissionFlow::find()->where(['customer_id' => \Yii::$app->user->getId()]);
+        $model = AffiliateTransactionFlow::find()->where(['affiliate_id' => Yii::$app->user->identity->getAffiliateId()]);
 		$dataProvider = new ActiveDataProvider([
 			'query' => $model->orderby('id desc'),
 			'pagination' => [
