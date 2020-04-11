@@ -15,7 +15,7 @@ $this->title ='申请提现';
 <div class="tc p20 f14">
 	<img src="<?=\common\component\image\Image::resize(Yii::$app->user->identity->photo,120,120)?>" width="120" height="120" class="img-circle mt30">
 	<h3 class="pt5 f16"><?=Yii::$app->user->identity->nickname?></h3>
-	<p class="f14 fb tc p10 lh200">可提现收益：<span class="red"><?=floatval(Yii::$app->user->identity->getCommission())?></span>元</p>
+	<p class="f14 fb tc p10 lh200">可提现收益：<span class="red"><?=floatval(Yii::$app->user->identity->getAfCommission())?></span>元</p>
 	<?php $form = ActiveForm::begin(['id' => 'form-signup','fieldConfig' => [
 		'template' => "<div class='pr pt-15em'>{input}<p class=\"input-setup clearfix\"><a href=\"javascript:void(0);\" class=\"input-del fr\" style=\"display:none;\"></a></p></div>{error}",
 		'inputOptions' => ['class' => 'input-text w',"autocomplete"=>"off"],

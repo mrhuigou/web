@@ -12,7 +12,7 @@ $this->title ='申请团长';
 ?>
 <?=fx\widgets\Header::widget(['title'=>$this->title])?>
 	<section class="veiwport  pb50">
-        <img src="/assets/images/share/banner.jpg" class="w">
+        <img src="/assets/images/share/banner2.jpg" class="w">
 		<div class="mt10  lh200 p10 fb tit--">申请单</div>
 		<?php $form = ActiveForm::begin(['id' => 'form-address', 'fieldConfig' => [
 			'template' => '<li><div class="t">{label}：</div><div class="c">{input}</div></li>{error}',

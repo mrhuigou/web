@@ -12,6 +12,7 @@ use api\models\V1\CustomerFollower;
 use api\models\V1\Order;
 use common\component\Helper\OrderSn;
 use fx\models\AffiliateForm;
+use fx\models\AffiliateTransactionForm;
 use fx\models\CustomerAffiliateForm;
 use fx\models\CustomerCommissionForm;
 use yii\base\ErrorException;
@@ -200,7 +201,7 @@ class UserShareController extends \yii\web\Controller {
 		if(!$open_id=\Yii::$app->session->get('open_id')){
 			return $this->redirect(['/user-share/wx-js-call','path'=>Url::to(['/user-share/apply-draw'],true)]);
 		}
-		$model=new CustomerCommissionForm($open_id);
+		$model=new AffiliateTransactionForm($open_id);
 		if($model->load(Yii::$app->request->post()) && $model->save()){
 			return $this->redirect('/user-share/apply-result');
 		}

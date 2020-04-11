@@ -1,5 +1,8 @@
 <?php
 namespace fx\models;
+use api\models\V1\AffiliateTransaction;
+use api\models\V1\AffiliateTransactionDraw;
+use api\models\V1\AffiliateTransactionFlow;
 use api\models\V1\CustomerCommission;
 use api\models\V1\CustomerCommissionDraw;
 use api\models\V1\CustomerCommissionFlow;
@@ -13,7 +16,7 @@ use yii\web\NotFoundHttpException;
 /**
  * RealNameForm
  */
-class CustomerCommissionForm extends Model
+class AffiliateTransactionForm extends Model
 {
 	public $amount;
 	public $open_id;
@@ -49,7 +52,7 @@ class CustomerCommissionForm extends Model
 		}
 	}
 	public function validate_amount($attribute, $params){
-		if($this->amount>Yii::$app->user->identity->getCommission()){
+		if($this->amount>Yii::$app->user->identity->getAfCommission()){
 			$this->addError($attribute,'金额不能大于收益总额！');
 		}
 	}
@@ -63,15 +66,15 @@ class CustomerCommissionForm extends Model
 		if ($this->validate()) {
 			$transaction = \Yii::$app->db->beginTransaction();
 			try {
-				if($model=CustomerCommission::findOne(['customer_id'=>Yii::$app->user->getId()])){
+				if($model=AffiliateTransaction::findOne(['affiliate_id'=>Yii::$app->user->identity->getAffiliateId()])){
 					$amount=$model->amount-$this->amount;
 					$model->amount=$amount;
 					if (!$model->save()) {
 						throw new \Exception(json_encode($model->errors));
 					}
-					$draw_model=new CustomerCommissionDraw();
+					$draw_model=new AffiliateTransactionDraw();
 					$draw_model->code=OrderSn::generateNumber();
-					$draw_model->customer_id=Yii::$app->user->getId();
+					$draw_model->affiliate_id=Yii::$app->user->identity->getAffiliateId();
 					$draw_model->open_id=$this->open_id;
 					$draw_model->amount=$this->amount;
 					$draw_model->status=0;
@@ -79,10 +82,10 @@ class CustomerCommissionForm extends Model
 					if (!$draw_model->save()) {
 						throw new \Exception(json_encode($draw_model->errors));
 					}
-					$flow_model=new CustomerCommissionFlow();
+					$flow_model=new AffiliateTransactionFlow();
 					$flow_model->type="draw";
 					$flow_model->type_id=$draw_model->id;
-					$flow_model->customer_id=Yii::$app->user->getId();
+					$flow_model->affiliate_id=Yii::$app->user->identity->getAffiliateId();
 					$flow_model->title='提现';
 					$flow_model->amount=-$this->amount;
 					$flow_model->balance=$amount;
