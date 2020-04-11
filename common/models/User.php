@@ -2,6 +2,7 @@
 namespace common\models;
 
 use api\models\V1\Affiliate;
+use api\models\V1\AffiliateTransaction;
 use api\models\V1\CustomerAffiliate;
 use api\models\V1\CustomerAuthentication;
 use api\models\V1\CustomerCommission;
@@ -323,6 +324,16 @@ class User extends ActiveRecord implements IdentityInterface,\OAuth2\Storage\Use
         $model=Affiliate::find()->where(['customer_id'=>$this->customer_id])->one();
         if($model){
             return $model->affiliate_id;
+        }else{
+            return 0;
+        }
+    }
+
+    public function getAfCommission(){
+
+        $model=AffiliateTransaction::find()->where(['affiliate_id'=>$this->getAffiliateId()]);
+        if($model){
+            return max(0,$model->sum('amount'));
         }else{
             return 0;
         }

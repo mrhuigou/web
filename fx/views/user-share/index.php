@@ -42,8 +42,8 @@ $this->title ='我的分享';
 		</div>
 	</div>
     <div class="m10">
-        <p class="f14 fb tc p10 lh200">可提现收益：<span class="red"><?=floatval(Yii::$app->user->identity->getCommission())?></span>元</p>
-        <p class="lh150 f5 f12 tc none">我的收益 <?=floatval(Yii::$app->user->identity->getCommission())?> 元</p>
+        <p class="f14 fb tc p10 lh200">可提现收益：<span class="red"><?=floatval(Yii::$app->user->identity->getAfCommission())?></span>元</p>
+        <p class="lh150 f5 f12 tc none">我的收益 <?=floatval(Yii::$app->user->identity->getAfCommission())?> 元</p>
     </div>
     <div class="m5">
         <a class="btn lbtn greenbtn w " href="/user-share/apply-draw" >申请提现</a>
