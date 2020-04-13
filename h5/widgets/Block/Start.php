@@ -10,6 +10,7 @@ namespace h5\widgets\Block;
 use api\models\V1\CustomerCoupon;
 use api\models\V1\Order;
 use api\models\V1\ShareLogoScans;
+use common\component\Wx\WxScans;
 use yii\bootstrap\Widget;
 
 class Start extends Widget{
@@ -42,7 +43,7 @@ class Start extends Widget{
 							}
 						}
 						\Yii::$app->session->set('ad_pop_flag',1);
-						return $this->render('start',['type'=>$this->type,'status'=>$this->getUserStatus(),'share_logo' => $this->getShareLogo()]);
+						return $this->render('start',['type'=>$this->type,'status'=>$this->getUserStatus(),'share_logo' => $this->getShareLogo(),'ticket_code' => $this->getTicketCode()]);
 //						return $this->render('start',['type'=>$this->type,'status'=>$this->getUserStatus()]);
 					}
 			}
@@ -69,6 +70,30 @@ class Start extends Widget{
 		}
 		return $status;
 	}
+
+    //生成相应的场景二维码
+	public function getTicketCode(){
+        //生成相应的场景二维码
+        $scan=new WxScans();
+        $scene_str=md5(serialize(time()));
+        if($data=$scan->creatScan($scene_str)){
+            //创建场景二维码推送的消息
+            $ticket_info = array(
+                'title' => '恭喜你关注成功!',
+                'description' => '点击进入继续操作',
+                'pic_url' => 'group1/M00/06/A8/wKgB7l4On3iAO3q1AAIEAGCtyu0922.jpg',
+                'url' => \Yii::$app->request->getAbsoluteUrl(),//当前页面的链接
+            );
+            $ticket = $data['ticket'];
+            \Yii::$app->redis->set($ticket,json_encode($ticket_info));
+        }
+
+        $url = \Yii::$app->wechat->getQrCodeUrl($ticket);
+        $image = \Yii::$app->wechat->httpGet($url);//exit;
+        $file= "./scans_code/".$ticket.".jpg"; //设置图片名字
+        file_put_contents($file,$image); //二维码保存到本地
+        return "/scans_code/".$ticket.".jpg";
+    }
 
 	public function getShareLogo(){
         $cur_param=\Yii::$app->request->getPathInfo();

@@ -61,7 +61,7 @@ buttons: []
         $.modal({
         title: "",
 <!--        text: '<img src="/images/subcription_pic_mrhuigou1.png" class="w">',-->
-        text: '<div class="layer-status"><img src="<?= 'https://img1.mrhuigou.com/'.$share_logo?>" class="w"><a class="layer-close iconfont" href="javascript:;">&#xe612;</a></div>',
+        text: '<div class="layer-status"><div style="position: relative;"><img src="<?= 'https://img1.mrhuigou.com/'.$share_logo?>" class="w"></div><div style="position: absolute; top: 16.6rem;right: 3.2rem"><img src="<?= $ticket_code;?>" class="" style="width: 7.5rem;"></div><a class="layer-close iconfont" href="javascript:;">&#xe612;</a></div>',
         buttons: []
         });
         <?php }?>

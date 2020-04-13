@@ -211,6 +211,23 @@ class WechatController extends Controller {
                 }
                 $customer_id = $this->BindUser($openid, $affiliate_id,$source_info);
                 $this->sendGift($customer_id, $openid);
+            }else{ //redis 缓存中的场景二维码
+                $source_info['status'] = false;
+                if($ticket_info = Yii::$app->redis->get($msg['Ticket'])){
+                    $ticket_info = json_decode($ticket_info,true);
+                    $message[] = [
+                        'title' => $ticket_info['title'],
+                        'description' => $ticket_info['description'],
+                        'picurl' => Image::resize($ticket_info['pic_url'], 200, 200),
+                        'url' => $ticket_info['url'],
+                    ];
+                    \Yii::$app->wechat->sendNews($msg['FromUserName'], $message);
+
+                }else{
+                    \Yii::$app->wechat->sendText($msg['FromUserName'], "恭喜您关注成功！");
+                }
+                $customer_id = $this->BindUser($openid, $affiliate_id,$source_info);
+                $this->sendGift($customer_id, $openid);
             }
         }
     }
