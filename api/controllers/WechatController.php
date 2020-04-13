@@ -149,7 +149,9 @@ class WechatController extends Controller {
 				}
 				\Yii::$app->wechat->sendNews($this->msg['FromUserName'], $data);
 			} else {
-				\Yii::$app->wechat->sendText($this->msg['FromUserName'], "恭喜您关注成功！");
+//				\Yii::$app->wechat->sendText($this->msg['FromUserName'], "恭喜您关注成功！");
+                $content = "你好呀，我们终于见面了。"."\n"."感谢你关注家润每日惠购!";
+				\Yii::$app->wechat->sendText($this->msg['FromUserName'], $content);
 			}
 			$customer_id = $this->BindUser($openid, $affiliate_id);
 			$this->sendGift($customer_id, $openid);
