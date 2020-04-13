@@ -44,7 +44,7 @@
 $.modal({
 title: "",
 <!--text: '<img src="/images/subcription_pic_mrhuigou1.png" class="w">',-->
-text: '<img src="<?= 'https://img1.mrhuigou.com/'.$share_logo?>" class="w"><a class="layer-close iconfont" href="javascript:;">&#xe612;</a>',
+text: '<div style="position: relative;"><img src="<?= 'https://img1.mrhuigou.com/'.$share_logo?>" class="w"></div><div style="position: absolute; top: 16.6rem;right: 3.2rem"><img src="<?= $ticket_code;?>" class="" style="width: 7.5rem;"></div>',
 buttons: []
 });
 <?php }else{?>
