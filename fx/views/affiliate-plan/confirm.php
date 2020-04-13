@@ -3,6 +3,11 @@
 use \yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
+if(!empty($shipping_address)){
+    $is_empty_shipping_address = 0; //不为空
+}else{
+    $is_empty_shipping_address = 1; //空
+}
 /* @var $this yii\web\View */
 $this->title = '订单确认';
 ?>
@@ -227,6 +232,15 @@ $("#button_submit").click(function(){
         var confirm_zone= $(".shipping-region").eq(0).text();
         var confirm_address = $(".shipping-address").eq(0).text();
     }
+    var is_empty_shipping_address = <?= $is_empty_shipping_address?>;
+    if(is_empty_shipping_address && $("input[type='radio']:checked").val() == 1){
+        $.alert("请先创建地址!");
+        return false;
+    }
+    if(is_empty_shipping_address && $("input[type='radio']:checked").val() == 2){
+        var confirm_zone= $(".shipping-region").eq(0).text();
+        var confirm_address = $(".shipping-address").eq(0).text();
+    }
 
     if(!firstname){
         $.alert("收货人姓名必须填写");
@@ -248,20 +262,17 @@ $("#button_submit").click(function(){
     }
     if(!confirm_address){
         $.alert("详细地址必须填写");
-        $("#telephone").css('border-color',"red");
         return false;
     }
     if(!confirm_zone){
         $.alert("地区必须填写");
-        $("#telephone").css('border-color',"red");
         return false;
     }
 
     var addess_confirm= "";
     address_confirm = '<div>' +
         '<p><span class="fb">'+ $("#firstname").val()+ '</span><em class="ml10">'+ $("#telephone").val()+'</em></p>' +
-        '<p>'+ confirm_zone +'</p>' +
-        '<p>'+ confirm_address +'</p>' +
+        '<p>'+ confirm_zone + confirm_address +'</p>' +
         '</div>';
     $("#confirm_form_address").html(address_confirm);
     maskdiv($("#confirm_form_order"),"bottom");
@@ -283,7 +294,8 @@ $("#confirm_pay").click(function(){
         $("#confirm_address_1").val($(".shipping-address").eq($("input[type='radio']:checked").val() - 1).text());
         $("#confirm_lng").val($(".shipping-lng").eq($("input[type='radio']:checked").val() - 1).text());
         $("#confirm_lat").val($(".shipping-lat").eq($("input[type='radio']:checked").val() - 1).text());
-        if(!is_deliver_home){
+        var is_empty_shipping_address = <?= $is_empty_shipping_address?>;
+        if(!is_deliver_home || (is_empty_shipping_address && $("input[type='radio']:checked").val() == 2)){
             $("#confirm_address").val($(".shipping-region").eq(0).text());
             $("#confirm_address_1").val($(".shipping-address").eq(0).text());
             $("#confirm_lng").val($(".shipping-lng").eq(0).text());
