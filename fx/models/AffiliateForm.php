@@ -206,4 +206,19 @@ class AffiliateForm extends Affiliate {
             return true;
         }
     }
+
+    //生成请求数据方法
+    protected function getParam($a,$d=array(),$v='1.0'){
+        $t=time();
+        $m='webservice';
+        $key='asdf';
+        $data=array('a'=>$a,'c'=>'NONE','d'=>$d,'f'=>'json','k'=>md5($t.$m.$key),'m'=>$m,'l'=>'CN','p'=>'soap','t'=>$t,'v'=>$v);
+        return json_encode($data);
+    }
+
+    //获取结果数据方法
+    protected function getResult($data){
+        $result=json_decode($data,true);
+        return $result;
+    }
 }

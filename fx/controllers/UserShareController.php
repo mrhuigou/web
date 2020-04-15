@@ -50,6 +50,10 @@ class UserShareController extends \yii\web\Controller {
 //		$data['ad_2'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
 //		$focus_position = ['H5-1LFX-DES2'];
 //		$data['ad_3'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
+
+        if($model=Affiliate::findOne(['customer_id'=>\Yii::$app->user->getId()])) {
+            $data['model'] = $model;
+        }
 		return $this->render('help',$data);
 
 	}
