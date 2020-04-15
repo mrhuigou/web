@@ -33,7 +33,13 @@ class WxpayAction extends Action{
         //=========步骤1：网页授权获取用户openid============
         //通过code获得openid
         if (!Yii::$app->request->get('code')){
-            $url = $jsApi->createOauthUrlForCode(WxPayConf_pub::JS_API_CALL_URL,urlencode($this->path),'snsapi_userinfo');
+            $host = explode('.', $_SERVER["HTTP_HOST"]);
+            if($host[0] == 'fx'){
+                $url = $jsApi->createOauthUrlForCode('http://fx.mrhuigou.com/payment/wx-js-call',urlencode($this->path),'snsapi_userinfo');
+            }else{
+                $url = $jsApi->createOauthUrlForCode(WxPayConf_pub::JS_API_CALL_URL,urlencode($this->path),'snsapi_userinfo');
+            }
+//            $url = $jsApi->createOauthUrlForCode(WxPayConf_pub::JS_API_CALL_URL,urlencode($this->path),'snsapi_userinfo');
               return Yii::$app->response->redirect($url);
         }else{
             //获取code码，以获取openid
