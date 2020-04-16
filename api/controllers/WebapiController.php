@@ -45,6 +45,7 @@ use api\models\V1\OptionValue;
 use api\models\V1\OptionValueDescription;
 use api\models\V1\Order;
 use api\models\V1\OrderCycle;
+use api\models\V1\OrderGift;
 use api\models\V1\OrderHistory;
 use api\models\V1\OrderProduct;
 use api\models\V1\OrderStatus;
@@ -2603,12 +2604,28 @@ class WebapiController extends \yii\rest\Controller {
                         ReturnTotal::deleteAll(['return_id'=>$model->return_id]);
                         foreach ($data['DETAILS'] as $product_data){
                             if( in_array(strtolower($product_data['TYPE']),$product_types)){
-                                if(!$return_product = ReturnProduct::findOne(['return_code'=>$product_data['ORDERCODE'],'product_code'=>$product_data['PUCODE']])){
+//                                if(!$return_product = ReturnProduct::findOne(['return_code'=>$product_data['ORDERCODE'],'product_code'=>$product_data['PUCODE']])){
+//                                    $return_product = new ReturnProduct();
+//                                }
+//                                $order_product = OrderProduct::findOne(['order_id'=>$model->order_id,'product_code'=>$product_data['PUCODE']]);
+//                                $store = Store::findOne(['store_code'=>$product_data['SHOPCODE']]);
+
+                                //========================新加的============================
+//                                $return_product = new ReturnProduct();
+                                $store = Store::findOne(['store_code'=>$product_data['SHOPCODE']]);
+                                if(!$return_product = ReturnProduct::findOne(['return_code'=>$product_data['ORDERCODE'],'product_code'=>$product_data['PUCODE'],'product_total'=> $product_data['PAYMENT']])){//多加付款金额判断
                                     $return_product = new ReturnProduct();
                                 }
-                                $order_product = OrderProduct::findOne(['order_id'=>$model->order_id,'product_code'=>$product_data['PUCODE']]);
-                                $store = Store::findOne(['store_code'=>$product_data['SHOPCODE']]);
-                                $return_product->order_product_id = $order_product->order_product_id;
+                                $gift_product = false;
+                                if(empty($product_data['PAYMENT'])){//付款金额
+                                    $gift_product = true;
+                                }
+                                if(!$order_product = OrderProduct::findOne(['order_id'=>$model->order_id,'product_code'=>$product_data['PUCODE']])){
+                                    $order_product = OrderGift::findOne(['order_id'=>$model->order_id,'product_code'=>$product_data['PUCODE']]);
+                                    $gift_product = true;
+                                }
+                                //========================新加的============================
+                                $return_product->order_product_id = !$gift_product? $order_product->order_product_id:0;
                                 $return_product->return_code = $product_data['ORDERCODE'];
                                 $return_product->return_id = $model->return_id;
                                 $return_product->product_base_id = $order_product->product_base_id;
@@ -2628,8 +2645,8 @@ class WebapiController extends \yii\rest\Controller {
                                 $return_product->comment = $product_data['DESCRIPTION'];
                                 $return_product->return_reason_id = 4;
                                 $return_product->return_action_id = 0;
-                                $return_product->from_table = 'order_product';
-                                $return_product->from_id = $order_product->order_product_id;
+                                $return_product->from_table = !$gift_product?'order_product':'order_gift';
+                                $return_product->from_id = !$gift_product? $order_product->order_product_id:0;
                                 $return_product->save();
                                 if($return_product->hasErrors()){
                                     throw  new  Exception("return_product:".json_encode($return_product->errors));
