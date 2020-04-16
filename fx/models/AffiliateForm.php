@@ -155,9 +155,9 @@ class AffiliateForm extends Affiliate {
                 $model->customer_id = Yii::$app->user->getId();
             }
             $model->code = 'af'.RandomString::random_text('alnum',6);
-            $model->mode = $this->mode;
-            $model->type = $this->type;
-            $model->rebate_type = $this->rebate_type;
+            $model->mode = strtoupper($this->mode);
+            $model->type = strtoupper($this->type);
+            $model->rebate_type = strtoupper($this->rebate_type);
             $model->name = $this->name;
             $model->username = $this->username;
             $model->description = $this->description;
