@@ -59,4 +59,8 @@ class AffiliateTransactionDraw extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getAffiliate(){
+        return $this->hasOne(Affiliate::className(),['affiliate_id'=>'affiliate_id']);
+    }
+
 }
