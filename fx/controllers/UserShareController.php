@@ -120,7 +120,7 @@ class UserShareController extends \yii\web\Controller {
             return $this->redirect('/user-share/apply');
         } else {
             if (!$affiliate->status) {
-                return $this->redirect('/user-share/result');
+                return $this->render('result');
             }
         }
 		return $this->redirect('/user-share/index');
