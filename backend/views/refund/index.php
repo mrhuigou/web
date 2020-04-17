@@ -53,6 +53,22 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'email:email',
             'telephone',
              ['label'=>'退货状态',  'attribute' => 'name',  'value' => 'returnStatus.name' ],
+            ['label'=>'退货子类型','value'=>function($data){
+                switch ($data['return_method']){
+                    case "RETURN_GOODS":
+                        return "退货";
+                        break;
+                    case "RESHIP":
+                        return "换货";
+                        break;
+                    case "RETURN_PAY":
+                        return "仅退款";
+                        break;
+                    default:
+                        return "默认";
+                        break;
+                }
+            }],
             // 'comment:ntext',
             'total',
             'date_added',
