@@ -125,7 +125,7 @@ $this->title = "一起团";
                     <div class="flex-item-7 flex-row   p5">
                         <div class="w">
                             <h2 class="row-one"><?=$value->product->description->name?></h2>
-                            <p class="row-one red f13 mt5"><?php echo $value->product->description->meta_description?></p>
+                            <p class="row-one red f13 mt5"><?php echo $value->title?></p>
                             <p class="gray9  mt2"><?=$value->product->getSku()?></p>
                         </div>
                         <div class="flex-col w">
