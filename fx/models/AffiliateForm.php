@@ -161,6 +161,7 @@ class AffiliateForm extends Affiliate {
             $model->mode = strtoupper($this->mode);
             $model->type = strtoupper($this->type);
             $model->rebate_type = strtoupper($this->rebate_type);
+            $model->settle_type = $this->rebate_type;  //使用原来字段
             $model->name = $this->name;
             $model->username = $this->username?:$this->name;
             $model->description = $this->description;
