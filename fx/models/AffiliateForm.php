@@ -40,7 +40,10 @@ class AffiliateForm extends Affiliate {
 //            $this->city = $model->city_name;
 //            $this->district = $model->district_name;
 //        }
+        if(Yii::$app->request->post()){
             $this->mode = Yii::$app->request->post()['AffiliateForm']['mode']?:$mode;
+        }
+
         parent::__construct($config);
     }
 
