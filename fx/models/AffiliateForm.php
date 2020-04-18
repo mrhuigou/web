@@ -174,6 +174,7 @@ class AffiliateForm extends Affiliate {
             $model->lng = $this->lng;
             $model->lat = $this->lat;
             $model->status = 0;
+            $model->date_added=date('Y-m-d H:i:s',time());
             $model->save();
 
             $return_data = array(

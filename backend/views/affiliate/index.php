@@ -58,6 +58,19 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'country_id',
             // 'zone_id',
             'code',
+            ['label'=>'类型','value'=>function($data){
+                switch ($data['type']){
+                    case "PERSONAL":
+                        return "个人";
+                        break;
+                    case "COMPANY":
+                        return "公司";
+                        break;
+                    default:
+                        return "默认";
+                        break;
+                }
+            }],
             // 'commission',
             // 'tax',
             // 'payment',
