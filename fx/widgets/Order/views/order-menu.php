@@ -51,7 +51,7 @@
         <?php if($model->orderDelieryComment){?>
         <a class="btn sbtn graybtn pr10 pl10" href="javascript::" > 已评价 </a>
         <?php }?>
-	<a class="btn sbtn orgbtn pr10 pl10" href="<?=\yii\helpers\Url::to(['/order/add-cart','order_no'=>$model->order_no],true)?>" > 再次购买 </a>
+<!--	<a class="btn sbtn orgbtn pr10 pl10" href="--><?//=\yii\helpers\Url::to(['/order/add-cart','order_no'=>$model->order_no],true)?><!--" > 再次购买 </a>-->
 	<a class="btn sbtn graybtn pr10 pl10" href="<?=\yii\helpers\Url::to(['/order/info','order_no'=>$model->order_no],true)?>" > 订单详情 </a>
 
 
