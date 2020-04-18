@@ -796,6 +796,7 @@ class OrderController extends \yii\console\Controller {
         {
             $hour = 0.33;//提示时间
             $order_datas = Order::find()->Where(['and', 'order_status_id=1', 'UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(date_added) >=' . $hour * 3600,'UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(date_added) - 180 <=' . $hour * 3600 ])
+                ->andWhere(['order_type_code' => ['normal', 'presell']])
                 ->orderBy(['order_id' => 'SORT_ASC'])->asArray()->all();
             if ($order_datas) {
                 foreach ($order_datas as $order_data) {
