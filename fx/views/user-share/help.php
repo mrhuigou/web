@@ -53,7 +53,7 @@ $this->title="我的分享"
     </div>
     <div class="fx-bottom fx-convert-tar p5 bdt bg-wh">
         <!--<a class="btn lbtn bluebtn w"  href="--><?php //echo \yii\helpers\Url::to(['/affiliate-plan/index']).'?sourcefrom='.$model->code.'&type_code=DEFAULT'?><!--" >开始分享</a>-->
-        <a class="btn lbtn bluebtn w"  href="<?php echo '/affiliate-plan/index?sourcefrom='.$model->code.'&type_code=DEFAULT'?>" >开始分享</a>
+        <a class="btn lbtn bluebtn w"  href="<?php echo '/affiliate-plan/index?sourcefrom='.$model->code.'&type_code='.$model->plan_type?>" >开始分享</a>
 <!--        <a class="btn lbtn greenbtn w m5" href="--><?//=\yii\helpers\Url::to(['/affiliate-plan/index']).'&type_code=DEFAULT'?><!--">开始分享</a>-->
     </div>
 
