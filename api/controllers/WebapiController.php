@@ -2840,6 +2840,7 @@ class WebapiController extends \yii\rest\Controller {
                 $model->type = $data['TYPE'];
                 $model->mode = $data['MODE'];
                 $model->rebate_type = $data['REBATE_TYPE'];
+                $model->settle_type = strtolower($data['REBATE_TYPE']); //恢复使用原来的字段（分佣方式）
                 if(isset($data['REBATE_TYPE']) && $data['REBATE_TYPE'] == 'ORDER'){
                     $model->rebate = $data['REBATE'];
                     $model->commission = $data['REBATE'];
