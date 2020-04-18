@@ -103,9 +103,47 @@ class AffiliateForm extends Model
                 $model->date_added=date('Y-m-d H:i:s',time());
                 $model->save();
             }
+            $return_data = array(
+                'CODE'=>$model->code,
+                'NAME'=>$model->username,
+                'DISPLAY_NAME'=>$model->username,
+                'TYPE'=> 'COMPANY',
+                'MODE'=>'ON_LINE',
+                'REBATE_TYPE'=>'PRODUCT',
+//                'DESCRIPTION'=>$model->description,
+                'CONTACT_NAME'=>$model->username,
+                'TELEPHONE'=>$model->telephone,
+            );
+            //自动同步后台
+            if($return_data){
+                $erp_wsdl = Yii::$app->params['ERP_SOAP_URL'];
+                $client = new \SoapClient($erp_wsdl, array('soap_version' => SOAP_1_1, 'exceptions' => false));
+                $data=$this->getParam('applyAffiliate',array($return_data));
+                $content = $client->getInterfaceForJson($data);
+                $result=$this->getResult($content);
+                Yii::error(json_encode($result));
+                if($result['status']=='OK'){
+                    $model->send_status = 1;
+                    $model->save();
+                }
+            }
             return $model;
         }
         return null;
     }
 
+    //生成请求数据方法
+    protected function getParam($a,$d=array(),$v='1.0'){
+        $t=time();
+        $m='webservice';
+        $key='asdf';
+        $data=array('a'=>$a,'c'=>'NONE','d'=>$d,'f'=>'json','k'=>md5($t.$m.$key),'m'=>$m,'l'=>'CN','p'=>'soap','t'=>$t,'v'=>$v);
+        return json_encode($data);
+    }
+
+    //获取结果数据方法
+    protected function getResult($data){
+        $result=json_decode($data,true);
+        return $result;
+    }
 }
