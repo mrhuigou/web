@@ -78,6 +78,10 @@ class AffiliatePlanController extends \yii\web\Controller {
         //获取当前分销商的分销商信息
         $affiliate_info = Affiliate::find()->where(['status'=>1,'affiliate_id'=>$affiliate_id])->one();
 
+        if(!$affiliate_info){
+            throw new NotFoundHttpException("分销商不存在!");
+        }
+
         //正在进行的方案
         $affiliate_plan = AffiliatePlan::find()->where(['status' => 1,'code'=>$plan_code])->andWhere(['<', 'date_start', date('Y-m-d H:i:s')])->andWhere(['>', 'date_end', date('Y-m-d H:i:s')])->one();
         $products = [];
