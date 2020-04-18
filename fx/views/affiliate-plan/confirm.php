@@ -141,7 +141,7 @@ $this->title = '订单确认';
                         ?>
                         <div class="flex-col tc p5 graybg" style="border-bottom: 1px dotted #999;">
                             <div class="flex-item-3">
-                                <a href="<?= \yii\helpers\Url::to(['product/index', 'product_code' => $product->product_code, 'shop_code' => $product->store_code]) ?>">
+                                <a href="#">
                                     <img src="<?= \common\component\image\Image::resize($value['pv']->image_url?:$imagelist, 100, 100) ?>"
                                          class="db w">
                                 </a>
