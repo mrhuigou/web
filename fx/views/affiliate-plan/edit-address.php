@@ -45,9 +45,9 @@ $this->title = '订单确认';
             <div class="t">选择地区：</div>
             <div class="c">
                 <div class="weui-cell__bd">
-                    <?php $p = $address['zone_name'] ?  : '山东省';
-                    $c = $address['city_name'] ?  : '青岛市';
-                    $d = $address['district_name'] ?  : '市北区';
+                    <?php $p = isset($address['zone_name']) ? $address['zone_name'] : '山东省';
+                    $c = isset($address['city_name']) ? $address['city_name'] : '青岛市';
+                    $d = isset($address['district_name']) ? $address['district_name'] : '市北区';
                     ?>
                     <input class="w f14" id="start" name="region" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
                 </div>
@@ -57,7 +57,7 @@ $this->title = '订单确认';
 <div class="c">
     <div class="t">详细地址：</div>
     <div class="weui-cell__bd">
-        <textarea name="address_1" placeholder='小区/写字楼/街道+楼号+楼层等' id='address_1'   class='w f14' rows=2 style="height:45px;padding:5px;"><?=$address['address'] ?:''?></textarea>
+        <textarea name="address_1" placeholder='小区/写字楼/街道+楼号+楼层等' id='address_1'   class='w f14' rows=2 style="height:45px;padding:5px;"><?=isset($address['address']) ?$address['address']:''?></textarea>
     </div>
 </div>
 
