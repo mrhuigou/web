@@ -2807,6 +2807,7 @@ class WebapiController extends \yii\rest\Controller {
                     $model->priority = $value['PRIORITY'];
                     $model->image_url = $value['SOURCE_URL'];
                     $model->status = $value['DETAIL_STATUS'] == 'EXECUTING' ? 1 : 0;
+                    $model->title = $value['TITLE'];
                     if (!$model->save()) {
                         throw new \Exception(json_encode($model->errors));
                     }
