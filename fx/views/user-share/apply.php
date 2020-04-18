@@ -13,7 +13,7 @@ $this->title ='申请团长';
 <?=fx\widgets\Header::widget(['title'=>$this->title])?>
 	<section class="veiwport  pb50">
         <img src="/assets/images/share/banner2.jpg" class="w">
-		<div class="mt10  lh200 p10 fb tit--">申请单</div>
+<!--		<div class="mt10  lh200 p10 fb tit--">申请单</div>-->
 		<?php $form = ActiveForm::begin(['id' => 'form-address', 'fieldConfig' => [
 			'template' => '<li><div class="t">{label}：</div><div class="c">{input}</div></li>{error}',
 			'inputOptions' => ["class" => 'w f14'],
@@ -23,35 +23,50 @@ $this->title ='申请团长';
         <?= $form->field($model, 'city_name', ['template' => '{input}'])->hiddenInput(['id' => 'city'])->label(false) ?>
         <?= $form->field($model, 'district_name',['template' => '{input}'])->hiddenInput(['id' => 'district'])?>
 
-        <ul class="line-book mt10">
-            <?= $form->field($model, 'mode', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'DOWN_LINE'=>'线下', 'ON_LINE'=>'线上'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline p10']],])?>
-            <?= $form->field($model, 'type', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'personal'=>'个人', 'company'=>'公司'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline p10']],])?>
-            <?= $form->field($model, 'rebate_type', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'order'=>'订单', 'product'=>'商品'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline p10']],])?>
+        <ul class="line-book mt10 whitebg">
+            <?= $form->field($model, 'mode', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'DOWN_LINE'=>'线下', 'ON_LINE'=>'线上'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline p10']],
+                'onchange' => 'if( ($(this).find(":radio:checked").val() == "DOWN_LINE")){ 
+				$(".tab_1").show();
+				}else if($(this).find(":radio:checked").val() =="ON_LINE"){
+				   $(".tab_1").hide();
+                 }
+				else{
+				   $(".tab_1").show();
+				} 
+				 '
+                ])?>
+            <p class="org f12 lh150">选择线下模式时，用户不方便收货时,须代收</p>
+
+            <!--            --><?//= $form->field($model, 'type', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'personal'=>'个人', 'company'=>'公司'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline p10']],])?>
+<!--            --><?//= $form->field($model, 'rebate_type', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'order'=>'订单', 'product'=>'商品'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline p10']],])?>
             <?= $form->field($model, 'name', ['labelOptions' => ['class' => 'pr5 ']])->textInput(['maxlength' => 255, 'placeholder' => '请填写名称'])->label('名称'); ?>
             <?= $form->field($model, 'username', ['inputOptions' => ["placeholder" => '请填写展示名称']])->label('展示名称'); ?>
-            <?= $form->field($model, 'description', ['labelOptions' => ['class' => 'pr5 ']])->textInput(['maxlength' => 255, 'placeholder' => '请填写描述'])->label('描述'); ?>
+<!--            --><?//= $form->field($model, 'description', ['labelOptions' => ['class' => 'pr5 ']])->textInput(['maxlength' => 255, 'placeholder' => '请填写描述'])->label('描述'); ?>
             <?= $form->field($model, 'contact_name', ['labelOptions' => ['class' => 'pr5 ']])->textInput(['maxlength' => 255, 'placeholder' => '请填写联系人名称'])->label('联系人'); ?>
             <?= $form->field($model, 'telephone', ['inputOptions' => ["placeholder" => '请填写联系电话']])->label('联系电话'); ?>
 
 
-            <li>
-                <div class="t">选择地区：</div>
-                <div class="c">
-                    <div class="weui-cell__bd">
-                        <?php $p = $model->zone_name ? $model->zone_name : '山东省';
-                        $c = $model->city_name ? $model->city_name : '青岛市';
-                        $d = $model->district_name ? $model->district_name : '请选择';
-                        ?>
-                        <input class="w f14" id="start" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
+            <div class="tab_1">
+                <li>
+                    <div class="t">选择地区：</div>
+                    <div class="c">
+                        <div class="weui-cell__bd">
+                            <?php $p = $model->zone_name ? $model->zone_name : '山东省';
+                            $c = $model->city_name ? $model->city_name : '青岛市';
+                            $d = $model->district_name ? $model->district_name : '请选择';
+                            ?>
+                            <input class="w f14" id="start" type="text"  value="<?php echo $p.' '.$c.' '.$d;?>">
+                        </div>
                     </div>
-                </div>
 
-            </li>
-            <p class="red pl5 error_district"></p>
-            <?= $form->field($model, 'address',['template' => '{label}<li>{input}</li>{error}'])->textarea(["placeholder" => '小区/写字楼/街道+楼号+楼层等','id'=>'address','class'=>'w f14 ','rows'=>2,'style'=>"height:45px;padding:5px;"])?>
-            <p class="red pl5 error_address"></p>
+                </li>
+                <p class="red pl5 error_district"></p>
+                <?= $form->field($model, 'address',['template' => '{label}<li>{input}</li>{error}'])->textarea(["placeholder" => '小区/写字楼/街道+楼号+楼层等','id'=>'address','class'=>'w f14 ','rows'=>2,'style'=>"height:45px;padding:5px;"])?>
+                <p class="red pl5 error_address"></p>
+            </div>
+
             <?php $url =  \yii\helpers\Url::to(["/user-share/xieyi"])?>
-		<?= $form->field($model, 'agree')->checkbox(['template' => "<div class='p5'>{input} {label}<a href='{$url}'class='blue'>《每日惠购合伙人分享协议》</a></div>{error}"]) ?>
+		<?= $form->field($model, 'agree')->checkbox(['template' => "<div class='p5'>{input} {label}<a href='{$url}'class='blue'>《每日惠购团长分享协议》</a></div>{error}"]) ?>
 
         </ul>
         <div class=" bdt  p10 w tc ">
@@ -85,6 +100,14 @@ $this->title ='申请团长';
 
         }
     });
+
+    var affiliateform_mode = $('#affiliateform-mode').find(":radio:checked").val();
+    if(affiliateform_mode == 'DOWN_LINE'){
+        $(".tab_1").show();
+    }else{
+        $(".tab_1").hide();
+    }
+
 
     $("body").on("click",".SubmitBtn",function () {
         var affiliateform_mode = $('#affiliateform-mode').find(":radio:checked").val();

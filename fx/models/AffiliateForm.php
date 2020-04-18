@@ -25,7 +25,7 @@ class AffiliateForm extends Affiliate {
     public $in_range=1;
     public $has_other_zone;
     public $telephone;
-    public function __construct($config = [])
+    public function __construct($mode='DOWN_LINE',$config = [])
     {
 //        if($model = Affiliate::findOne(['status'=>1,'customer_id'=>Yii::$app->user->getId()])){
 //            $this->mode = $model->mode;
@@ -40,7 +40,7 @@ class AffiliateForm extends Affiliate {
 //            $this->city = $model->city_name;
 //            $this->district = $model->district_name;
 //        }
-
+            $this->mode = Yii::$app->request->post()['AffiliateForm']['mode']?:$mode;
         parent::__construct($config);
     }
 
@@ -48,7 +48,7 @@ class AffiliateForm extends Affiliate {
     {
         return [
             [['name','username','description','telephone','contact_name','type','rebate_type','zone_name','city_name','district_name','address'], 'safe'],
-            [['name','username','description','telephone','contact_name','type','rebate_type'], 'required'],
+            [['name','telephone','contact_name','type','rebate_type'], 'required'],
 //            [['mode'],'ValidateMode']
             ['telephone', 'string', 'length' => 11],
             [['address'],'poiValidate'],
@@ -159,7 +159,7 @@ class AffiliateForm extends Affiliate {
             $model->type = strtoupper($this->type);
             $model->rebate_type = strtoupper($this->rebate_type);
             $model->name = $this->name;
-            $model->username = $this->username;
+            $model->username = $this->username?:$this->name;
             $model->description = $this->description;
             $model->contact_name = $this->contact_name;
             $model->zone_name = $this->zone_name;
@@ -170,7 +170,7 @@ class AffiliateForm extends Affiliate {
             $model->setPassword('123456'); //默认密码123456
             $model->lng = $this->lng;
             $model->lat = $this->lat;
-            $model->status = 1;
+            $model->status = 0;
             $model->save();
 
             $return_data = array(
