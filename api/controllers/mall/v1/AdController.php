@@ -116,6 +116,72 @@ class AdController extends Controller {
 			if($details){
 			    $count = 0;
 				foreach($details as $key=>$ad_detail){
+				    //测试-------------------------------------
+                    $ad_detail_product = $ad_detail->product;
+                    if(!$ad_detail_product){
+                        continue;
+                    }
+
+                    //过滤 已经下架的商品
+//                    if($ad_detail->product->beintoinv != 1){
+//					    continue;
+//                    }
+
+                    //------------------------促销方案描述---------------------
+                    $promotion_detail_title = '';
+                    $promotion_detail_image = '';
+                    if($ad_detail_product->promotions){
+                        foreach ($ad_detail_product->promotions as $promotion){
+                            $promotion_detail_title = '[促]'.$promotion->promotion_detail_title;
+                            $promotion_detail_image = $promotion->promotion_detail_image;
+                        }
+                    }
+                    //------------------------促销方案描述---------------------
+                    //------------------------优惠券描述---------------------
+                    $coupon_title = '';
+                    if($ad_detail_product->productBase->coupon){
+                        foreach ($ad_detail_product->productBase->coupon as $coupon){
+                            $coupon_title = '[券]'.$coupon->comment;
+                        }
+                    }
+                    //------------------------优惠券描述---------------------
+
+                    //对商品图进行处理
+                    $imagelist = '';
+                    $images = $ad_detail_product->productBase->imagelist;
+                    if($images){
+                        foreach ($images as $value){
+                            if(empty($imagelist)){
+                                $imagelist = $value;
+                            }
+                        }
+                    }
+                    $data[$count] = [
+                        'item_id'=>$ad_detail_product->product_base_id,
+                        'item_code'=>$ad_detail_product->product_base_code,
+                        'name' => $ad_detail_product->description->name,
+                        'meta_description' => $promotion_detail_title.$coupon_title.$ad_detail_product->description->meta_description,
+//						'image' => Image::resize(($ad_detail->source_url ?: $promotion_detail_image )? :$ad_detail->product->image,320,320),
+                        'image' => Image::resize(($promotion_detail_image ? :$imagelist)?:'',320,320),
+                        'ad_image' => Image::resize($ad_detail->source_url ?: $promotion_detail_image),
+                        'sale_price' => $ad_detail_product->price,
+                        'vip_price' => $ad_detail_product->vip_price,
+                        'cur_price' => $ad_detail_product->getPrice(),
+                        'stock'=>$ad_detail_product->getStockCount(),
+                        'beintoinv'=>$ad_detail_product->beintoinv,//判断是否下架 1上架
+                        'product_date'=>$ad_detail_product->productBase->bedisplaylife && $ad_detail_product->productDate ? $ad_detail_product->productDate:"",
+                        'life'=>$ad_detail_product->productBase->bedisplaylife?$ad_detail_product->productBase->life:" ",
+                        'url'=>$ad_detail->link_url ?:(Url::to(['product/index','shop_code'=>$ad_detail_product->store_code,'product_code'=>$ad_detail_product->product_code])),//'/'.$ad_detail->product->store_code."-".$ad_detail->product->product_code.".html"
+                    ];
+                    $count ++ ;
+
+
+
+                    //---------------------测试
+
+
+				    /*
+
 					if(!$ad_detail->product){
 						continue;
 					}
@@ -172,6 +238,7 @@ class AdController extends Controller {
 						'url'=>$ad_detail->link_url ?:(Url::to(['product/index','shop_code'=>$ad_detail->product->store_code,'product_code'=>$ad_detail->product->product_code])),//'/'.$ad_detail->product->store_code."-".$ad_detail->product->product_code.".html"
 					];
                     $count ++ ;
+				    */
 				}
 			}
 		} catch (\Exception $e) {
