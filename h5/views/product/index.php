@@ -306,6 +306,12 @@ $('.J_TSaleProp .sku').each(function() {
             if(object.stock_type == 'NONE'){
                 $('#J_LinkBuy').removeClass("disabled graybg").addClass("redbg");
                 $('#J_LinkBasket').removeClass("disabled graybg").addClass("orgbg");
+                if(object.count>0){
+                }else{
+                    $('#J_LinkBuy').addClass("disabled graybg").removeClass("redbg");
+                    $('#J_LinkBasket').addClass("disabled graybg").removeClass("orgbg");
+                }
+
             }else if(object.stock_type == 'DESCRIPTION'){
                 if(object.count>0 ){
                     if(object.count <= object.low_limit){
