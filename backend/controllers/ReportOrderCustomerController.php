@@ -74,6 +74,7 @@ class ReportOrderCustomerController extends Controller
 			'用户ID'=>'string',
 			'电话'=>'string',
 			'下单手机号'=>'string',
+			'手机型号'=>'string',
 			'下单次数'=>'string',
 			'最后购物时间'=>'string',
 		);
@@ -82,7 +83,9 @@ class ReportOrderCustomerController extends Controller
 		if($model=$dataProvider->getModels()){
 			foreach($model as $value){
 				$writer->writeSheetRow('Sheet1',[
-					$value['customer_id'],$value['telephone1'],$value['telephone'],$value['order_count'],$value['last_date']
+					$value['customer_id'],$value['telephone1'],$value['telephone'],
+                    strpos($value['user_agent'],'iPhone')?'苹果':(strpos($value['user_agent'],'Android')?'安卓':'其他'),
+                    $value['order_count'],$value['last_date']
 				]);
 			}
 		}

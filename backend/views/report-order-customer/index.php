@@ -38,6 +38,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['label'=>'用户ID','value'=>'customer_id'],
 		        ['label'=>'手机','value'=>'telephone1'],
 		        ['label'=>'收货手机号','value'=>'telephone'],
+                ['label'=>'手机型号','value'=>function($data){
+                    if(strpos($data['user_agent'],'iPhone')){
+                        return "苹果";
+                    }elseif (strpos($data['user_agent'],'Android')){
+                        return "安卓";
+                    }else{
+                        return "其他";
+                    }
+                }],
 		        ['label'=>'下单数','value'=>'order_count'],
 		        ['label'=>'最后下单时间','value'=>'last_date'],
 	        ],
