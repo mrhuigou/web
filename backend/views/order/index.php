@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			                return '每日惠购会员';
                         }else{
                             if($model->affiliate){
-                                return $model->affiliate->username;
+                                return $model->affiliate->name;
                             }else{
                                 return '错误的数据';
                             }
