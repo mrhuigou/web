@@ -89,11 +89,21 @@ class PromotionController extends Controller {
 				foreach ($details as $key => $detail) {
 				    $stock = $detail->product->getStockCount();
 				    if($stock > 0){
+                        $promotion_detail_image = '';
+                        if($detail->product->promotions){
+                            foreach ($detail->product->promotions as $promotion){
+                                $promotion_detail_image = $promotion->promotion_detail_image;
+                            }
+                        }
+                        //------------------------促销方案描述---------------------
+
+
                         $data[] = [
                             'item_id'=>$detail->product->product_base_id,
                             'name' => $detail->product->description->name,
                             'meta_description' => $detail->product->description->meta_description,
-                            'image' => Image::resize($detail->product->image, 500, 500),
+                            'image' => $promotion_detail_image?Image::resize($promotion_detail_image, 500, 500): Image::resize($detail->product->image, 500, 500),
+//                            'image' => Image::resize($detail->product->image, 500, 500),
                             'sale_price' => $detail->product->price,
                             'vip_price' => $detail->product->vip_price,
                             'cur_price' => $detail->getCurPrice(),
