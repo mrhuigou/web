@@ -91,9 +91,10 @@ class PromotionController extends Controller {
 				    if($stock > 0){
                         $promotion_detail_image = '';
                         if($detail->product->promotions){
-                            foreach ($detail->product->promotions as $promotion){
-                                $promotion_detail_image = $promotion->promotion_detail_image;
-                            }
+//                            foreach ($detail->product->promotions as $key => &$promotion){
+//                                $promotion_detail_image = $promotion->promotion_detail_image;
+//                            }
+                            $promotion_detail_image = $detail->product->promotions[0]->promotion_detail_image;
                         }
                         //------------------------促销方案描述---------------------
 
