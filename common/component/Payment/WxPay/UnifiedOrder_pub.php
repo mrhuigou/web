@@ -22,7 +22,8 @@ class UnifiedOrder_pub extends Wxpay_client_pub
         {
             $this->parameters["appid"] = WxPayConf_pub::APPID;//公众账号ID
             $this->parameters["mch_id"] = WxPayConf_pub::MCHID;//商户号
-            $this->parameters["spbill_create_ip"] = \Yii::$app->request->getUserIP();//终端ip
+//            $this->parameters["spbill_create_ip"] = \Yii::$app->request->getUserIP();//终端ip
+            $this->parameters["spbill_create_ip"] = explode(',', \Yii::$app->request->getUserIP())[0];//终端ip
             $this->parameters["nonce_str"] = $this->createNoncestr();//随机字符串
             $this->parameters["sign"] = $this->getSign($this->parameters);//签名
             return  $this->arrayToXml($this->parameters);
