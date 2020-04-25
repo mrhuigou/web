@@ -359,7 +359,7 @@ $('.J_TSaleProp .sku').each(function() {
         //设置属性状态
         Sku='';
         $('.sku').each(function() {
-            SKUResult[$(this).attr('attr_id')] ? $(this).removeClass('disabled') : $(this).addClass("disabled").removeClass('cur');
+            SKUResult[$(this).attr('attr_id')].count ? $(this).removeClass('disabled') : $(this).addClass("disabled").removeClass('cur');
         });
 
         $('#J_LinkBuy').addClass("disabled graybg").removeClass("redbg");
