@@ -125,7 +125,7 @@ $this->title = '订单详情';
 	</div>
 
 	<div class=" tc  fx-bottom whitebg bdt p10" style="z-index: 1000">
-		<?php if(in_array($model->order_type_code,['normal','presell'])){?>
+		<?php if(in_array($model->order_type_code,['normal','presell','Affiliate'])){?>
 		<?php if ($model->order_status_id == 1) { ?>
 			<a class="btn sbtn redbtn pr10 pl10"
 			   href="<?= \yii\helpers\Url::to(['/order/pay', 'order_no' => $model->order_no], true) ?>"> 支付 </a>
@@ -142,8 +142,8 @@ $this->title = '订单详情';
 				   href="<?= \yii\helpers\Url::to(['/order/refund-all', 'order_no' => $model->order_no], true) ?>">
 					整单退 </a>
 			<?php } ?>
-			<a class="btn sbtn orgbtn pr10 pl10"
-			   href="<?= \yii\helpers\Url::to(['/order/add-cart', 'order_no' => $model->order_no], true) ?>"> 再次购买 </a>
+<!--			<a class="btn sbtn orgbtn pr10 pl10"-->
+<!--			   href="--><?//= \yii\helpers\Url::to(['/order/add-cart', 'order_no' => $model->order_no], true) ?><!--"> 再次购买 </a>-->
 		<?php } ?>
 		<?php }else{?>
 		<?php if ($model->order_status_id == 1) { ?>
