@@ -250,6 +250,7 @@ class Order extends \yii\db\ActiveRecord
     public function getOrderCommision($customer_id){
         $result['aff_personal_commision'] = 0;
         $result['aff_customer_commision'] = 0;
+        $result['aff_affiliate_commision'] = 0;
         if($this->current_source_customer_id == $customer_id){
             $data_left = $this->getAffPersonalCommission();
             $result['aff_personal_commision'] = $data_left['aff_personal_commision'];
@@ -269,6 +270,13 @@ class Order extends \yii\db\ActiveRecord
             }
             if($commissioin > 0){
                 $result['aff_customer_commision'] = $commissioin;
+            }
+        }
+
+        if($this->affiliate_id == $customer_id){
+            $commissioin = $this->getAffCustomerCommision();
+            if($commissioin > 0){
+                $result['aff_affiliate_commision'] = $commissioin;
             }
         }
         return $result;
