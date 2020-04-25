@@ -4,7 +4,7 @@
  * @author Tsibikov Vitaliy <tsibikov_vit@mail.ru> <tsibikov.com>
  * Create date: 25.02.2015 17:07
  */
-namespace h5\widgets\Order;
+namespace fx\widgets\Order;
 use api\models\V1\CustomerAffiliate;
 use api\models\V1\CustomerCoupon;
 use api\models\V1\CustomerPromotion;

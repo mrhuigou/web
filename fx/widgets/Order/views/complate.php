@@ -40,7 +40,7 @@
 	$this->registerJs($this->blocks['JS_END'],\yii\web\View::POS_END);
 	?>
 <?php }else{?>
-    <?php if($chance=\h5\widgets\Block\Game::widget(['customer_id'=>$model->customer_id])){?>
+    <?php if($chance=\fx\widgets\Block\Game::widget(['customer_id'=>$model->customer_id])){?>
     <?=$chance?>
 	<?php }else{?>
         <?php if(!Yii::$app->session->get('source_from_agent_wx_xcx')){?>
