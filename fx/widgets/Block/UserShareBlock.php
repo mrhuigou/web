@@ -33,7 +33,7 @@ class UserShareBlock extends Widget{
                 $commission_total = AffiliateTransactionFlow::find()->where(['affiliate_id' => \Yii::$app->user->identity->getAffiliateId(),'status'=>1])->andWhere(['>','amount',0])->sum('amount');
 //                $follower_total = CustomerFollower::find()->where(['customer_id' => \Yii::$app->user->getId()])->count('follower_id');
 //                $order_total = Order::find()->where(['source_customer_id' => \Yii::$app->user->getId(), 'order_type_code' => ['Affiliate']])->andWhere(['>', 'total', 0])->count("*");
-                $order_total = Order::find()->where(['affiliate_id' => \Yii::$app->user->identity->getAffiliateId(), 'order_type_code' => ['Affiliate']])->andWhere(['>', 'total', 0])->count("*");
+                $order_total = Order::find()->where(['affiliate_id' => \Yii::$app->user->identity->getAffiliateId(), 'order_type_code' => ['Affiliate']])->andWhere(['>', 'total', 0])->andWhere(['not in','order_status_id',[6,7]])->count("*");
             }
             return $this->render('user-share-block',['model'=>$model,'commission_total'=>$commission_total,'follower_total'=>$follower_total,'order_total'=>$order_total]);
         }
