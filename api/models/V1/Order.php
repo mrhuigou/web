@@ -340,10 +340,13 @@ class Order extends \yii\db\ActiveRecord
 
                 $sub_commission=ReturnProduct::find()->where(['return_id'=>$sub_query,'from_table'=>'order_product','from_id'=>$op->order_product_id])->sum('commission');
                 if($sub_commission){
-                    $commission=$sub_commission?max(0,$op->commission-$sub_commission):0;
+//                    $commission=$sub_commission?max(0,$op->commission-$sub_commission):0;
+                    $pro_commission=$sub_commission?max(0,$op->commission-$sub_commission):0;
                 }else{
-                    $commission+=$op->commission;
+//                    $commission+=$op->commission;
+                    $pro_commission = $op->commission;
                 }
+                $commission+=$pro_commission;
             }
         }
         return $commission;
