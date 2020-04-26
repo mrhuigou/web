@@ -1,6 +1,7 @@
 <div class="bdb br5 whitebg p10 clearfix mb10">
 	<div class="fl f12 pw80">
-		<p class="gray9">订单号：<?= $model->order_no; ?></p>
+		<p class="gray9"><?= $model->orderShipping->shipping_firstname; ?>：<?= $model->orderShipping->shipping_telephone; ?></p>
+		<p class="gray9">订单号：<?= $model->order_id; ?></p>
         <p class="gray9">订单状态：<span class="red"><?= $model->orderStatus->name; ?></span></p>
 		<p class="gray9">下单日期：<?= $model->date_added; ?></p>
 	</div>
