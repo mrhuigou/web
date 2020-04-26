@@ -1,8 +1,45 @@
 <div class="bdb br5 whitebg p10 clearfix mb10">
+
+    <?php
+    $return_status_id = '';
+    if($return = \api\models\V1\ReturnBase::find()->where(['order_id'=>$model->order_id])->all()){
+
+        $return_status6 = false;//退货状态 （取消退货）  1.4.6
+        $return_status1 = false;//退货状态 （待处理）
+        $return_id = '';
+        foreach ($return as $key => &$value){
+            //待处理判断
+            if($value->return_status_id == 1){
+                $return_status1 = true;
+                $return_id = $value->return_id;
+                break;
+            }
+            //取消退货处理
+            if($value->return_status_id == 6){
+                $return_status6 = true;
+                $return_id6 = $value->return_id;
+            }else{
+                $return_status6 = false;
+                $return_id4 = $value->return_id;
+                break;
+            }
+        }
+
+        if(!$return_status1) {//不存在待处理
+            if (!$return_status6 && !empty($return_id4)) {//完成退货
+                $return_id = $return_id4;
+            } else {
+                $return_id = $return_id6;
+            }
+        }
+        $return_info = \api\models\V1\ReturnBase::findOne(['return_id'=>$return_id]);
+        $return_status_id = $return_info->returnStatus->return_status_id;
+    }
+    ?>
 	<div class="fl f12 pw80">
 		<p class="gray9"><?= $model->orderShipping->shipping_firstname; ?>：<?= $model->orderShipping->shipping_telephone; ?></p>
 		<p class="gray9">订单号：<?= $model->order_id; ?></p>
-        <p class="gray9">订单状态：<span class="red"><?= $model->orderStatus->name; ?></span></p>
+        <p class="gray9">订单状态：<span class="red"><?= $model->orderStatus->name; ?></span><span class="red"><?= !empty($return_status_id) && in_array($return_status_id,[1]) ?'(退货处理中)':''; ?></span></p>
 		<p class="gray9">下单日期：<?= $model->date_added; ?></p>
 	</div>
 
