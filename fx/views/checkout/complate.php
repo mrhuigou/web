@@ -43,7 +43,7 @@ $this->title ='支付结果';
         <?php }?>
         </div>
     </div>
-	<?=\fx\widgets\Order\Complate::widget(['model'=>$model])?>
+<!--	--><?//=\fx\widgets\Order\Complate::widget(['model'=>$model])?>
 </section>
 <?=\fx\widgets\Tools\Share::widget([
 	'data'=>[
