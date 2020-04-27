@@ -50,12 +50,14 @@ $this->title = "一起团";
                 <p class="mt5 bg-wh pt10 pb10 pl10">团长：<i class="red"><?php echo $affiliate_info->username?></i></p>
 <!--            --><?php //}?>
             <p class=" mb5 bg-wh pt5 pb5 pl10">
-                开团时间：<i class="red"><?php echo date('Y-m-d',strtotime($affiliate_plan->date_start))?></i>
-                &nbsp;&nbsp;&nbsp;
+<!--                开团时间：<i class="red">--><?php //echo date('Y-m-d',strtotime($affiliate_plan->date_start))?><!--</i>-->
+
                 结单时间：<i class="red"><?php echo date('Y-m-d',strtotime($affiliate_plan->date_end))?></i>
+                &nbsp;&nbsp;&nbsp;
+                配送时间：<i class="red"><?php echo date('Y-m-d',strtotime($affiliate_plan->ship_end))?></i>
             </p>
 <!--            <p class=" mb5 bg-wh pt5 pb5 pl10">结单时间：<i class="red">--><?php //echo date('Y-m-d',strtotime($affiliate_plan->date_end))?><!--</i></p>-->
-            <p class=" mb5 bg-wh pt5 pb5 pl10">配送时间：<i class="red"><?php echo date('Y-m-d',strtotime($affiliate_plan->ship_end))?></i></p>
+<!--            <p class=" mb5 bg-wh pt5 pb5 pl10">配送时间：<i class="red">--><?php //echo date('Y-m-d',strtotime($affiliate_plan->ship_end))?><!--</i></p>-->
 
             <div id="skill_content">
                 <div class="tit1 clearfix">
