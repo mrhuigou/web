@@ -36,13 +36,13 @@ $this->title = '商品详情';
 			<?php if ($model->bedisplaylife) { ?>
 				<div style="margin-top: -25px;position: absolute;z-index: 999;" class="pl5">
                     <?php if($product && $product->productDate){?>
-                        <span class="p2 greenbg bd-green white lh150  f12">生产日期：<?= $product->productDate ?></span>
+                        <span class="p2 greenbg bd-green white lh150  f12">生产日期:<?= $product->productDate ?></span>
                     <?php }else{?>
                         <?php if ($model->productDate) { ?>
-                            <span class="p2 greenbg bd-green white lh150  f12">生产日期：<?= $model->productDate ?></span>
+                            <span class="p2 greenbg bd-green white lh150  f12">生产日期:<?= $model->productDate ?></span>
                         <?php } ?>
                     <?php } ?>
-					<span class="p2 bd-green green whitebg lh150 f12">保质期 :<?= $model->life ?></span>
+					<span class="p2 bd-green green whitebg lh150 f12">保质期:<?= $model->life ?></span>
 
                     <!--对保质期过滤-->
                     <?php
@@ -61,10 +61,10 @@ $this->title = '商品详情';
                     ?>
 
                     <?php if($product && $product->productDate && $model->life){?>
-                        <span class="p2 greenbg bd-green white lh150  f12">到期日期：<?= date('Y-m-d',strtotime('+'.$num.$date .'-1days',strtotime($product->productDate))) ?></span>
+                        <span class="p2 greenbg bd-green white lh150  f12">到期日期:<?= date('Y-m-d',strtotime('+'.$num.$date .'-1days',strtotime($product->productDate))) ?></span>
                     <?php }else{?>
                         <?php if ($model->productDate && $model->life) { ?>
-                            <span class="p2 greenbg bd-green white lh150  f12">到期日期：<?= date('Y-m-d',strtotime('+'.$num.$date .'-1days',strtotime($model->productDate))) ?></span>
+                            <span class="p2 greenbg bd-green white lh150  f12">到期日期:<?= date('Y-m-d',strtotime('+'.$num.$date .'-1days',strtotime($model->productDate))) ?></span>
                         <?php } ?>
                     <?php } ?>
 				</div>
