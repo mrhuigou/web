@@ -63,6 +63,15 @@ $this->title = "一起团";
                 <div class="tit1 clearfix">
                     <h2 class="fl red fb">限时抢购</h2>
                     <p class="fl countdown">
+                        <?php
+                        $days = 0;
+                        if(strtotime($affiliate_plan->date_end) - time() > 0){
+                            $days = floor((strtotime($affiliate_plan->date_end) - time()) / 86400);
+                        }
+                        ?>
+                        <?php if($days > 0){?>
+                            <span><?= $days?>天</span>
+                        <?php }?>
                         <span class="hour_show">00</span>:<span class="minute_show">00</span>:<span class="second_show">00</span>
                     </p>
                 </div>
