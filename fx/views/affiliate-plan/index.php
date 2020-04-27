@@ -101,7 +101,7 @@ $this->title = "一起团";
 
                         ?>
                         <a href="#">
-                            <img src="<?=\common\component\image\Image::resize(($value->image_url?:$imagelist)?:'',100,100)?>"
+                            <img src="<?=\common\component\image\Image::resize(($value->image_url?:$imagelist)?:'')?>"
                                  class="bd w">
                         </a>
                     </div>
