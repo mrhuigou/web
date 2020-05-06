@@ -2782,8 +2782,8 @@ class WebapiController extends \yii\rest\Controller {
                 $model->date_start = $data['BEGIN_DATE'];
                 $model->date_end = $data['END_DATE'];
                 $model->ship_end = $data['SHIP_DATE'];
-                $model->minbookcash = $data['MINBOOKCASH'];
-                $model->deliverycash = $data['DELIVERYCASH'];
+                $model->position = $data['POSITION'];//位置编码
+                $model->source_url = $data['SOURCE_URL'];//图片url
                 $Store = Store::findOne(['store_code' => isset($data['SHOP_CODE']) ? $data['SHOP_CODE'] : 0]);
                 $model->store_id = $Store ? $Store->store_id : 0;
                 $model->store_code = isset($data['SHOP_CODE']) ? $data['SHOP_CODE'] : "";
@@ -2808,6 +2808,7 @@ class WebapiController extends \yii\rest\Controller {
                     $model->image_url = $value['SOURCE_URL'];
                     $model->status = $value['DETAIL_STATUS'] == 'EXECUTING' ? 1 : 0;
                     $model->title = $value['TITLE'];
+                    $model->max_quantity = $value['MAX_QUANTITY'];//最大库存数量
                     if (!$model->save()) {
                         throw new \Exception(json_encode($model->errors));
                     }
