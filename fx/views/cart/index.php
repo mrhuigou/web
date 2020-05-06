@@ -94,7 +94,7 @@ $this->title ='购物车';
                         </div>
                     </div>
                     <div class="promotion">
-                        <?=fx\widgets\Checkout\Promotion::widget(['promotion'=>$value->getPromotion(),'qty'=>$value->getQuantity()])?>
+                        <?=h5\widgets\Checkout\Promotion::widget(['promotion'=>$value->getPromotion(),'qty'=>$value->getQuantity()])?>
                     </div>
                 </div>
                 <a class="flex-item-2 flex-row flex-middle flex-center item-del del_item redbg tc" style="line-height:79px;display: none;" href="javascript:;">
