@@ -100,7 +100,7 @@ class SiteController extends Controller {
 	public function actionIndex()
 	{
 
-	    return $this->redirect('/affiliate-plan/index?sourcefrom=mrhuigou&type_code=DEFAULT');
+//	    return $this->redirect('/affiliate-plan/index?sourcefrom=mrhuigou&type_code=DEFAULT');
 //		if (\Yii::$app->user->isGuest) {
 //		return $this->redirect(['/site/login','redirect'=>\Yii::$app->request->getAbsoluteUrl()]);
 //		}

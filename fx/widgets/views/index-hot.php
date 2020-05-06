@@ -7,7 +7,7 @@
  */
 ?>
 <div class="ts">
-<div class="tit1 bluetit1">
+<div class="tit1 bluetit1" style="display: none">
 	<h2>特色栏目
 <!--        <a class="fr f12 red mt2" href="--><?//=\yii\helpers\Url::to(['/read-more/index','subject'=>'PANIC'])?><!--">更多&gt;&gt;</a></h2>-->
 
