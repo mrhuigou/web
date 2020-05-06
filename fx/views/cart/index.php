@@ -94,7 +94,7 @@ $this->title ='购物车';
                         </div>
                     </div>
                     <div class="promotion">
-                        <?=h5\widgets\Checkout\Promotion::widget(['promotion'=>$value->getPromotion(),'qty'=>$value->getQuantity()])?>
+                        <?=fx\widgets\Checkout\Promotion::widget(['promotion'=>$value->getPromotion(),'qty'=>$value->getQuantity()])?>
                     </div>
                 </div>
                 <a class="flex-item-2 flex-row flex-middle flex-center item-del del_item redbg tc" style="line-height:79px;display: none;" href="javascript:;">
@@ -114,7 +114,7 @@ $this->title ='购物车';
             <div class="item-media "><i class="icon icon-form-checkbox vm"></i><span class="vm p2">全选</span></div>
         </label>
         <div class="flex-item-6 flex-row flex-middle flex-right  p10  ">
-            <p>合计：<span class="red">￥<i id="cart_total"><?=Yii::$app->cart->getCost(true)?></i></span></p>
+            <p>合计：<span class="red">￥<i id="cart_total"><?=Yii::$app->fxcart->getCost(true)?></i></span></p>
             <p class="gray9">(不含运费)</p>
         </div>
         <a id="checkoutBtn" class="flex-item-3 flex-row flex-middle flex-center  tc p10 white   greenbg" href="javascript:;" style="line-height: 40px;">

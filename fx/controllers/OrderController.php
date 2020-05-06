@@ -261,7 +261,7 @@ class OrderController extends \yii\web\Controller
             if($model->orderProducts){
                 foreach($model->orderProducts as $order_product){
                     if($order_product->product){
-                        \Yii::$app->cart->put($order_product->product->getCartPosition(),$order_product->quantity);
+                        \Yii::$app->fxcart->put($order_product->product->getCartPosition(),$order_product->quantity);
                     }
                 }
             }else{

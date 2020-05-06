@@ -10,8 +10,8 @@ use yii\helpers\Url;
 class CartController extends \yii\web\Controller {
     public function actionIndex()
     {
-        if (!\Yii::$app->cart->getIsEmpty()) {
-            $cart = \Yii::$app->cart->getPositions();
+        if (!\Yii::$app->fxcart->getIsEmpty()) {
+            $cart = \Yii::$app->fxcart->getPositions();
             $cart_data = [];
             foreach ($cart as $key => $value) {
                 $cart_data[$value->store_id]['base'] = Store::findOne(['store_id' => $value->store_id]);
@@ -47,8 +47,8 @@ class CartController extends \yii\web\Controller {
                         }
                     }
                     if ($stock_count > 0) {
-                        if (\Yii::$app->cart->hasPosition($model->getCartPosition()->getId())) {
-                            $position = \Yii::$app->cart->getPositionById($model->getCartPosition()->getId());
+                        if (\Yii::$app->fxcart->hasPosition($model->getCartPosition()->getId())) {
+                            $position = \Yii::$app->fxcart->getPositionById($model->getCartPosition()->getId());
                             $quantity = $qty + $position->getQuantity();
                             $stock_count=$model->getStockCount($quantity);
                             if ($quantity > 100 || $quantity > $stock_count) {
@@ -60,8 +60,8 @@ class CartController extends \yii\web\Controller {
                             }
                         }
                         Track::add($model->product_base_id,'add_cart');
-                        \Yii::$app->cart->put($model->getCartPosition(), $qty);
-                        $data = ['status' => 1, 'data' =>\Yii::$app->cart->getCount()];
+                        \Yii::$app->fxcart->put($model->getCartPosition(), $qty);
+                        $data = ['status' => 1, 'data' =>\Yii::$app->fxcart->getCount()];
                     } else {
                         throw new ErrorException('库存不足');
                     }
@@ -83,8 +83,8 @@ class CartController extends \yii\web\Controller {
     {
         if(($datas = \Yii::$app->request->post('data')) && count($datas)>0){
             foreach($datas as $data){
-                if (\Yii::$app->cart->hasPosition($data)) {
-                    \Yii::$app->cart->removeById($data);
+                if (\Yii::$app->fxcart->hasPosition($data)) {
+                    \Yii::$app->fxcart->removeById($data);
                     if (\Yii::$app->session->get('FirstBuy') == $data) {
                         \Yii::$app->session->remove('FirstBuy');
                     }
@@ -93,14 +93,14 @@ class CartController extends \yii\web\Controller {
         }
     }
     public function actionRemoveAll(){
-        \Yii::$app->cart->removeAll();
+        \Yii::$app->fxcart->removeAll();
     }
 
     public function actionUpdate(){
         $item=\Yii::$app->request->post('item');
         $qty=\Yii::$app->request->post('qty');
-        if(\Yii::$app->cart->hasPosition($item) && $qty>0){
-            $position=\Yii::$app->cart->getPositionById($item);
+        if(\Yii::$app->fxcart->hasPosition($item) && $qty>0){
+            $position=\Yii::$app->fxcart->getPositionById($item);
             if($stock_count=$position->product->getStockCount($qty)){
                 if($limit_max_qty=$position->product->getLimitMaxQty(\Yii::$app->user->getId())){
                     $stock_count=min($limit_max_qty,$stock_count);
@@ -113,7 +113,7 @@ class CartController extends \yii\web\Controller {
                 $qty=min($stock_count, 100);
             }
             Track::add($position->product->product_base_id,'update_cart');
-            \Yii::$app->cart->update($position, $qty);
+            \Yii::$app->fxcart->update($position, $qty);
             $json=[
                 'qty'=>$qty,
                 'price'=>$position->getPrice(),
@@ -135,14 +135,14 @@ class CartController extends \yii\web\Controller {
         $msg = '';
         if ($data) {
             foreach ($data as $key => $value) {
-                if(\Yii::$app->cart->hasPosition($value)){
-                    $position = \Yii::$app->cart->getPositionById($value);
+                if(\Yii::$app->fxcart->hasPosition($value)){
+                    $position = \Yii::$app->fxcart->getPositionById($value);
                     if (!$position->hasStock()) {
                         $status = false;
                         $msg = '库存不足，请查看';
                         break;
                     }
-                    $cart[$value] = \Yii::$app->cart->getPositionById($value);
+                    $cart[$value] = \Yii::$app->fxcart->getPositionById($value);
                     Track::add($cart[$value]->product->product_base_id, 'submit_cart');
                 }
             }
@@ -186,7 +186,7 @@ class CartController extends \yii\web\Controller {
                         throw new ErrorException('库存不足');
                     }
                     Track::add($model->product_base_id,'buy_now');
-                    \Yii::$app->cart->update($model->getCartPosition(), $qty);
+                    \Yii::$app->fxcart->update($model->getCartPosition(), $qty);
                     $data=['status'=>1,'data'=>Url::to(['/cart/index'])];
                 }else{
                     throw new ErrorException('商品不存在或者已经下架');
@@ -208,7 +208,7 @@ class CartController extends \yii\web\Controller {
         if (\Yii::$app->request->post('cart_ids')) {
             $keys = \Yii::$app->request->post('cart_ids');
             $cart_ids = explode(",", $keys);
-            $cart_products = \Yii::$app->cart->getPositions();
+            $cart_products = \Yii::$app->fxcart->getPositions();
             $cart_select_products = [];
             foreach ($cart_products as $pt_key => $product) {
                 if (in_array($pt_key, $cart_ids)) {

@@ -230,7 +230,7 @@ class UserController extends \yii\web\Controller {
                     $customer_auth->save();
                     $user = User::findIdentity($customer_auth->customer_id);
                     \Yii::$app->user->login($user, 3600 * 24 * 7);
-                    \Yii::$app->cart->loadFromLogin();
+                    \Yii::$app->fxcart->loadFromLogin();
                     $msg = '绑定成功';
                     $stauts = true;
 

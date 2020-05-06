@@ -10,6 +10,16 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => false,
+            'rules' => [
+                '<shop_code:\w+>-<product_code:\w+>.html' => 'product/index',
+                'page/<page_id:\w+>.html' =>'page/index', //
+                'information/<information_id:\w+>.html' =>'information/information', //
+                'subject/<subject:\w+>.html' => 'topic/index',
+                'act/<code:\w+>.html' => 'topic/detail',
+                'promotion/<subject:\w+>.html' => 'promotion/index',
+                'product/category' => 'category/index',
+                'shop/search'=>'search/index'
+            ],
 
         ],
         'assetManager' => [

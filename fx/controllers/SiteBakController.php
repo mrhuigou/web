@@ -261,7 +261,7 @@ class SiteBakController extends Controller {
             if($user){
                 Yii::$app->user->logout();
                 Yii::$app->user->login($user);
-                \Yii::$app->cart->loadFromLogin();
+                \Yii::$app->fxcart->loadFromLogin();
                 return $this->redirect($url);
             }else{
                 throw  new NotFoundHttpException('用户信息授权失败');
@@ -329,7 +329,7 @@ class SiteBakController extends Controller {
                             }
                             Yii::$app->user->logout();
                             Yii::$app->user->login($user);
-                            \Yii::$app->cart->loadFromLogin();
+                            \Yii::$app->fxcart->loadFromLogin();
                             return $this->redirect($url);
                         }else{
                             throw  new NotFoundHttpException('用户信息授权失败');
@@ -349,7 +349,7 @@ class SiteBakController extends Controller {
 		$model = new LoginForm();
 
 		if ($model->load(Yii::$app->request->post()) && $model->login()) {
-			\Yii::$app->cart->loadFromLogin();
+			\Yii::$app->fxcart->loadFromLogin();
 			return $this->redirect($url);
 		} else {
 			return $this->render('login', [
@@ -466,7 +466,7 @@ class SiteBakController extends Controller {
 		if ($model->load(Yii::$app->request->post())) {
 			if ($user = $model->signup()) {
 				Yii::$app->getUser()->login($user);
-				\Yii::$app->cart->loadFromLogin();
+				\Yii::$app->fxcart->loadFromLogin();
 				return $this->redirect($url);
 			}
 		}
@@ -620,7 +620,7 @@ class SiteBakController extends Controller {
 		if ($model->load(Yii::$app->request->post()) && $user = $model->save()) {
 			$user = User::findIdentity($user->customer_id);
 			Yii::$app->user->login($user, 3600 * 24 * 7);
-			\Yii::$app->cart->loadFromLogin();
+			\Yii::$app->fxcart->loadFromLogin();
 			if ($redirect) {
 				return $this->redirect($redirect);
 			} else {
@@ -716,7 +716,7 @@ class SiteBakController extends Controller {
             }
             if($user){
                 Yii::$app->user->login($user);
-                \Yii::$app->cart->loadFromLogin();
+                \Yii::$app->fxcart->loadFromLogin();
                 return $this->redirect($url);
             }else{
                 throw  new NotFoundHttpException('用户信息授权失败');
@@ -821,7 +821,7 @@ class SiteBakController extends Controller {
             }
 
 			Yii::$app->user->login($customer, 3600 * 24 * 7);
-			\Yii::$app->cart->loadFromLogin();
+			\Yii::$app->fxcart->loadFromLogin();
 			return $this->redirect($state);
 		} else {
 			throw new NotFoundHttpException("用户授权失败！");
@@ -884,7 +884,7 @@ class SiteBakController extends Controller {
 			$user = User::findIdentity($model->customer_id);
 			if ($user->telephone_validate) {
 				Yii::$app->user->login($user, 3600 * 24 * 7);
-				\Yii::$app->cart->loadFromLogin();
+				\Yii::$app->fxcart->loadFromLogin();
 				return $this->redirect("/user/index");
 			} else {
 				return $this->redirect(['/site/auto-login', 'auth_id' => $model->customer_authentication_id, 'redirect' => '/site/index']);

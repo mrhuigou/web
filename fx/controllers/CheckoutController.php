@@ -144,13 +144,13 @@ class CheckoutController extends \yii\web\Controller {
 				Yii::$app->session->remove('confirm_cart');
                 Yii::$app->session->remove('customer_point_h5');
                 Yii::$app->session->remove('checkout_address_id');
-				if (!Yii::$app->cart->getIsEmpty()) {
+				if (!Yii::$app->fxcart->getIsEmpty()) {
 					foreach ($cart as $key => $id) {
-						if (Yii::$app->cart->hasPosition($key)) {
+						if (Yii::$app->fxcart->hasPosition($key)) {
 							if (\Yii::$app->session->get('FirstBuy') && \Yii::$app->session->get('FirstBuy') == $key) {
 								\Yii::$app->session->remove('FirstBuy');
 							}
-							Yii::$app->cart->removeById($key);
+							Yii::$app->fxcart->removeById($key);
 						}
 					}
 				}
