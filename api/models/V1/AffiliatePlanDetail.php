@@ -68,4 +68,8 @@ class AffiliatePlanDetail extends \yii\db\ActiveRecord
     public function getProduct(){
         return $this->hasOne(Product::className(),['product_code'=>'product_code']);
     }
+
+    public function getPrice(){
+        return round($this->price_type == 1 ? $this->price:$this->product->productBase->price ,2);
+    }
 }

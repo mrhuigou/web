@@ -161,6 +161,52 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         <?php } ?>
     <?php } ?>
 
+    <!--分销方案商品列表-->
+    <?php if(count($products)){ ?>
+        <?php foreach($products as $value){?>
+            <?php if($value){ //库存大于0?>
+                <div class="flex-col mb5 br5 whitebg f12 bs coupon-product ml10 mr10" data-id="<?=$value->product_code?>" data-param="<?=$value->getPrice()?>">
+                    <div class="flex-item-4 tc pt5 pb5">
+
+                        <?php
+                        //对商品图进行处理
+                        $imagelist = '';
+                        $images = $value->product->productBase->imagelist;
+                        if($images){
+                            foreach ($images as $value_image){
+                                if(empty($imagelist)){
+                                    $imagelist = $value_image;
+                                }
+                            }
+                        }
+
+                        ?>
+                        <a href="<?=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product_code,'shop_code'=>$value->store_code])?>"><img src="<?=\common\component\image\Image::resize(($value->image_url?:$imagelist)?:'',100,100)?>" alt="商品图片" width="95" height="95"></a>
+
+                    </div>
+
+                    <div class="flex-item-8 pt10">
+                        <a href="<?=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product_code,'shop_code'=>$value->store_code])?>" class="f14"><?=$value->product->description->name?></a>
+                        <p class="row-one red f13 mt5"><?php echo $value->title?></p>
+                        <div class="pt10">
+
+                            <div class="num-wrap num2 fr pr10 mt2 numDynamic ">
+                                <span class="num-lower iconfont"  style="display:none;"></span>
+                                <input type="text" value="0" class="num-text" style="display:none;">
+                                <span class="num-add iconfont" style="display:none;"></span>
+                                <div class="add-click"><i class="iconfont"></i></div>
+                            </div>
+                            <p>
+                                <span class="red f20 mr5 ">￥<?= $value->getPrice()?></span>
+                                <span class="gray9 del">￥<?=$value->product->price?></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } ?>
+    <?php }?>
+
 </section>
 
 
