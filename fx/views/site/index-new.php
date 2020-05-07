@@ -313,6 +313,113 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 $(".dropdown1").dropdown();
 $.backtop(".content");
 
+$('.add-click').click(function(){
+    $(this).hide();
+    var wrap = $(this).parent(".num-wrap");
+    wrap.find('.num-add').show();
+    wrap.find('.num-lower').show();
+    wrap.find('.num-add').click();
+});
+
+//基础代码
+$(".num-add").click(function(){
+    var _this = $(this);
+    var wrap = _this.parent(".num-wrap");
+    var text = wrap.find(".num-text");
+    var lower = wrap.find(".num-lower");
+    var a=text.val();
+    a++;
+    text.val(a);
+    if(text.val() == 1){
+        lower.addClass("first");
+    }else{
+        lower.removeClass("first");
+    }
+    var key=_this.parents(".coupon-product").data('id');
+    var img_url=_this.parents(".coupon-product").find("img").attr('src');
+    var price=_this.parents(".coupon-product").data('param');
+    var qty=_this.parents(".coupon-product").find('.num-text').val();
+    var total=FloatMul(price,qty);
+//console.log("1111111=>"+qty);
+    Gooddisplaywiget(key,qty,price,total,img_url,text);
+
+    // $.showLoading("正在提交");
+});
+
+$(".num-lower").click(function(){
+    var _this = $(this);
+    var wrap = _this.parent(".num-wrap");
+    var text = wrap.find(".num-text");
+    var lower = wrap.find(".num-lower");
+    var a=text.val();
+    if(a>0){
+        a--;
+    }
+    text.val(a);
+    if(text.val() == 1){
+        lower.addClass("first");
+    }else{
+        lower.removeClass("first");
+    }
+    var key=_this.parents(".coupon-product").data('id');
+    var img_url=_this.parents(".coupon-product").find("img").attr('src');
+    var price=_this.parents(".coupon-product").data('param');
+    var qty=_this.parents(".coupon-product").find('.num-text').val();
+    var total=FloatMul(price,qty);
+    Gooddisplaywiget(key,qty,price,total,img_url,text);
+});
+
+$(".num-text").blur(function(){
+    var _this = $(this);
+    var wrap = _this.parent(".num-wrap");
+    var text = wrap.find(".num-text");
+    var lower = wrap.find(".num-lower");
+    var a=text.val();
+    text.val(a);
+    if(text.val() == 1){
+        lower.addClass("first");
+    }else{
+        lower.removeClass("first");
+    }
+    var key=_this.parents(".coupon-product").data('id');
+    var img_url=_this.parents(".coupon-product").find("img").attr('src');
+    var price=_this.parents(".coupon-product").data('param');
+    var qty=_this.parents(".coupon-product").find('.num-text').val();
+    var total=FloatMul(price,qty);
+    Gooddisplaywiget(key,qty,price,total,img_url,text);
+});
+
+function Gooddisplaywiget(key,qty,price,total,img_url,text) {
+    fillingHtml();
+}
+
+function fillingHtml() {
+
+}
+$(".numDynamic .num-add").click(function(){
+    var text = $(this).siblings(".num-text");
+    if(parseInt(text.val()) > 0){
+        $(this).siblings(".num-lower").show();
+        $(this).siblings(".num-text").show();
+    }else{
+        $(this).siblings(".num-lower").hide();
+        $(this).siblings(".num-text").hide();
+    }
+})
+$(".numDynamic .num-lower").click(function(){
+    var text = $(this).siblings(".num-text");
+    if(parseInt(text.val()) > 0){
+        $(this).show();
+        $(this).siblings(".num-text").show();
+    }else{
+        $(this).hide();
+        $(this).siblings(".num-text").hide();
+        $(this).siblings(".num-add").hide();
+        $(this).siblings(".add-click").show();
+    }
+})
+
+
 Ad_Sys_Code();
 <?php $this->endBlock() ?>
 </script>
