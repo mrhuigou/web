@@ -191,10 +191,19 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                         <div class="pt10">
 
                             <div class="num-wrap num2 fr pr10 mt2 numDynamic ">
-                                <span class="num-lower iconfont"  style="display:none;"></span>
-                                <input type="text" value="0" class="num-text" style="display:none;">
-                                <span class="num-add iconfont" style="display:none;"></span>
-                                <div class="add-click"><i class="iconfont"></i></div>
+                                <?php
+                                if($value->getQty() > 0){?>
+                                    <span class="num-lower iconfont"  style=""></span>
+                                    <input type="text" value="<?= $value->getQty()?>" class="num-text" style="">
+                                    <span class="num-add iconfont" style=""></span>
+                               <?php }else{?>
+                                    <span class="num-lower iconfont"  style="display:none;"></span>
+                                    <input type="text" value="0" class="num-text" style="display:none;">
+                                    <span class="num-add iconfont" style="display:none;"></span>
+                                    <div class="add-click"><i class="iconfont"></i></div>
+                               <?php }?>
+
+
                             </div>
                             <p>
                                 <span class="red f20 mr5 ">￥<?= $value->getPrice()?></span>

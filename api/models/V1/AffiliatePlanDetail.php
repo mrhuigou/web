@@ -72,4 +72,14 @@ class AffiliatePlanDetail extends \yii\db\ActiveRecord
     public function getPrice(){
         return round($this->price_type == 1 ? $this->price:$this->product->productBase->price ,2);
     }
+
+    //该商品加入购物车的数量
+    public function getQty(){
+        $qty = 0;
+        if(\Yii::$app->fxcart->hasPosition($this->product->getCartPosition()->getId())){
+            $cart = \Yii::$app->fxcart->getPositions();
+            $qty = $cart[$this->product->getCartPosition()->getId()]->getQuantity();
+        }
+        return $qty;
+    }
 }
