@@ -336,12 +336,8 @@ $(".num-add").click(function(){
         lower.removeClass("first");
     }
     var key=_this.parents(".coupon-product").data('id');
-    var img_url=_this.parents(".coupon-product").find("img").attr('src');
-    var price=_this.parents(".coupon-product").data('param');
     var qty=_this.parents(".coupon-product").find('.num-text').val();
-    var total=FloatMul(price,qty);
-//console.log("1111111=>"+qty);
-    Gooddisplaywiget(key,qty,price,total,img_url,text);
+    Gooddisplaywiget(key,qty);
 
     // $.showLoading("正在提交");
 });
@@ -362,11 +358,8 @@ $(".num-lower").click(function(){
         lower.removeClass("first");
     }
     var key=_this.parents(".coupon-product").data('id');
-    var img_url=_this.parents(".coupon-product").find("img").attr('src');
-    var price=_this.parents(".coupon-product").data('param');
     var qty=_this.parents(".coupon-product").find('.num-text').val();
-    var total=FloatMul(price,qty);
-    Gooddisplaywiget(key,qty,price,total,img_url,text);
+    Gooddisplaywiget(key,qty);
 });
 
 $(".num-text").blur(function(){
@@ -382,14 +375,32 @@ $(".num-text").blur(function(){
         lower.removeClass("first");
     }
     var key=_this.parents(".coupon-product").data('id');
-    var img_url=_this.parents(".coupon-product").find("img").attr('src');
-    var price=_this.parents(".coupon-product").data('param');
     var qty=_this.parents(".coupon-product").find('.num-text').val();
-    var total=FloatMul(price,qty);
-    Gooddisplaywiget(key,qty,price,total,img_url,text);
+    Gooddisplaywiget(key,qty);
 });
 
-function Gooddisplaywiget(key,qty,price,total,img_url,text) {
+function Gooddisplaywiget(product_code,qty) {
+    console.log(qty);
+    $.post('/cart/add-to-cart-fx', {
+        'product_code': product_code,
+        'qty': qty
+    }, function (data) {
+        $.hideIndicator();
+        if(data.status){
+            layer.open({
+                content: '添加购物车成功',
+                skin: 'msg',
+                time: 2 //2秒后自动关闭
+            });
+        }else{
+            layer.open({
+                content:data.message,
+                skin: 'msg',
+                time: 2
+            });
+        }
+    },'json');
+
     fillingHtml();
 }
 

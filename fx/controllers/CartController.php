@@ -79,6 +79,60 @@ class CartController extends \yii\web\Controller {
         return $data;
     }
 
+    //分销方案商品添加购物车
+    public function actionAddToCartFx()
+    {
+        try {
+            if (\Yii::$app->request->getIsPost() && \Yii::$app->request->isAjax) {
+                $product_code = \Yii::$app->request->post('product_code') ? \Yii::$app->request->post('product_code') : 0;
+                $qty = \Yii::$app->request->post('qty') ? \Yii::$app->request->post('qty') : 0;
+                $model = Product::findOne(['product_code' => $product_code, 'beintoinv' => 1]);
+
+                if ($model) {
+
+                    if($qty > 0){
+                        $stock_count = 10000; //库存验证
+                        if ($stock_count > 0) {
+                            //=======================库存验证========================
+                            //=======================库存验证========================
+
+                            Track::add($model->product_base_id,'add_cart');
+                            if(\Yii::$app->fxcart->hasPosition($model->getCartPosition()->getId())){
+                                \Yii::$app->fxcart->update($model->getCartPosition(), $qty);
+                            }else{
+                                \Yii::$app->fxcart->put($model->getCartPosition(), $qty);
+                            }
+
+                            $data = ['status' => 1, 'data' =>\Yii::$app->fxcart->getCount()];
+                        } else {
+                            throw new ErrorException('库存不足');
+                        }
+                    } else{ // 当前商品购买数量为0
+                        if(\Yii::$app->fxcart->hasPosition($model->getCartPosition()->getId())){
+                            \Yii::$app->fxcart->removeById($model->getCartPosition()->getId());
+                            if (\Yii::$app->session->get('FirstBuy') == $model->getCartPosition()->getId()) {
+                                \Yii::$app->session->remove('FirstBuy');
+                            }
+                        }
+                        $data = ['status' => 1, 'data' =>\Yii::$app->fxcart->getCount()];
+                    }
+
+
+                } else {
+                    throw new ErrorException('商品不存在或者已经下架');
+                }
+            } else {
+                throw new ErrorException('数据加载失败');
+            }
+
+        } catch (ErrorException $e) {
+            $data = ['status' => 0, 'message' => $e->getMessage()];
+        }
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $data;
+    }
+
+
     public function actionRemove()
     {
         if(($datas = \Yii::$app->request->post('data')) && count($datas)>0){
