@@ -156,6 +156,16 @@ class Product extends \yii\db\ActiveRecord implements CartPositionProviderInterf
             'product_id' => $this->product_id,
         ]);
     }
+
+    public function getCartPositionFx($params = []){
+        return \Yii::createObject([
+            'class' => 'api\models\V1\ProductCartPositionFx',
+            'store_id'=>$this->store_id,
+            'product_base_id'=>$this->product_base_id,
+            'product_id' => $this->product_id,
+            'affiliate_plan_id' => $params['affiliate_plan_id'],
+        ]);
+    }
     public function getDescription(){
         return $this->hasOne(ProductBaseDescription::className(), ['product_base_id' => 'product_base_id']);
     }

@@ -86,6 +86,8 @@ class CartController extends \yii\web\Controller {
             if (\Yii::$app->request->getIsPost() && \Yii::$app->request->isAjax) {
                 $product_code = \Yii::$app->request->post('product_code') ? \Yii::$app->request->post('product_code') : 0;
                 $qty = \Yii::$app->request->post('qty') ? \Yii::$app->request->post('qty') : 0;
+                $params['affiliate_plan_id'] = \Yii::$app->request->post('affiliate_plan_id') ? \Yii::$app->request->post('affiliate_plan_id') : 0;
+
                 $model = Product::findOne(['product_code' => $product_code, 'beintoinv' => 1]);
 
                 if ($model) {
@@ -97,10 +99,10 @@ class CartController extends \yii\web\Controller {
                             //=======================库存验证========================
 
                             Track::add($model->product_base_id,'add_cart');
-                            if(\Yii::$app->fxcart->hasPosition($model->getCartPosition()->getId())){
-                                \Yii::$app->fxcart->update($model->getCartPosition(), $qty);
+                            if(\Yii::$app->fxcart->hasPosition($model->getCartPositionFx($params)->getId())){
+                                \Yii::$app->fxcart->update($model->getCartPositionFx($params), $qty);
                             }else{
-                                \Yii::$app->fxcart->put($model->getCartPosition(), $qty);
+                                \Yii::$app->fxcart->put($model->getCartPositionFx($params), $qty);
                             }
 
                             $data = ['status' => 1, 'data' =>\Yii::$app->fxcart->getCount()];
@@ -108,9 +110,9 @@ class CartController extends \yii\web\Controller {
                             throw new ErrorException('库存不足');
                         }
                     } else{ // 当前商品购买数量为0
-                        if(\Yii::$app->fxcart->hasPosition($model->getCartPosition()->getId())){
-                            \Yii::$app->fxcart->removeById($model->getCartPosition()->getId());
-                            if (\Yii::$app->session->get('FirstBuy') == $model->getCartPosition()->getId()) {
+                        if(\Yii::$app->fxcart->hasPosition($model->getCartPositionFx($params)->getId())){
+                            \Yii::$app->fxcart->removeById($model->getCartPositionFx($params)->getId());
+                            if (\Yii::$app->session->get('FirstBuy') == $model->getCartPositionFx($params)->getId()) {
                                 \Yii::$app->session->remove('FirstBuy');
                             }
                         }

@@ -74,11 +74,12 @@ class AffiliatePlanDetail extends \yii\db\ActiveRecord
     }
 
     //该商品加入购物车的数量
-    public function getQty(){
+    public function getQty($affiliate_plan_id=0){
         $qty = 0;
-        if(\Yii::$app->fxcart->hasPosition($this->product->getCartPosition()->getId())){
+        $params['affiliate_plan_id'] = $affiliate_plan_id;
+        if(\Yii::$app->fxcart->hasPosition($this->product->getCartPositionFx($params)->getId())){
             $cart = \Yii::$app->fxcart->getPositions();
-            $qty = $cart[$this->product->getCartPosition()->getId()]->getQuantity();
+            $qty = $cart[$this->product->getCartPositionFx($params)->getId()]->getQuantity();
         }
         return $qty;
     }

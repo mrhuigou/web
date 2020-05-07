@@ -165,7 +165,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     <?php if(count($products)){ ?>
         <?php foreach($products as $value){?>
             <?php if($value){ //库存大于0?>
-                <div class="flex-col mb5 br5 whitebg f12 bs coupon-product ml10 mr10" data-id="<?=$value->product_code?>" data-param="<?=$value->getPrice()?>">
+                <div class="flex-col mb5 br5 whitebg f12 bs coupon-product ml10 mr10" data-id="<?=$value->product_code?>" data-param="<?=$value->affiliate_plan_id?>">
                     <div class="flex-item-4 tc pt5 pb5">
 
                         <?php
@@ -192,9 +192,9 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 
                             <div class="num-wrap num2 fr pr10 mt2 numDynamic ">
                                 <?php
-                                if($value->getQty() > 0){?>
+                                if($value->getQty($value->affiliate_plan_id) > 0){?>
                                     <span class="num-lower iconfont"  style=""></span>
-                                    <input type="text" value="<?= $value->getQty()?>" class="num-text" style="">
+                                    <input type="text" value="<?= $value->getQty($value->affiliate_plan_id)?>" class="num-text" style="">
                                     <span class="num-add iconfont" style=""></span>
                                <?php }else{?>
                                     <span class="num-lower iconfont"  style="display:none;"></span>
@@ -346,7 +346,8 @@ $(".num-add").click(function(){
     }
     var key=_this.parents(".coupon-product").data('id');
     var qty=_this.parents(".coupon-product").find('.num-text').val();
-    Gooddisplaywiget(key,qty);
+    var affiliate_plan_id=_this.parents(".coupon-product").data('param');
+    Gooddisplaywiget(key,qty,affiliate_plan_id);
 
     // $.showLoading("正在提交");
 });
@@ -368,7 +369,8 @@ $(".num-lower").click(function(){
     }
     var key=_this.parents(".coupon-product").data('id');
     var qty=_this.parents(".coupon-product").find('.num-text').val();
-    Gooddisplaywiget(key,qty);
+    var affiliate_plan_id=_this.parents(".coupon-product").data('param');
+    Gooddisplaywiget(key,qty,affiliate_plan_id);
 });
 
 $(".num-text").blur(function(){
@@ -385,14 +387,17 @@ $(".num-text").blur(function(){
     }
     var key=_this.parents(".coupon-product").data('id');
     var qty=_this.parents(".coupon-product").find('.num-text').val();
-    Gooddisplaywiget(key,qty);
+    var affiliate_plan_id=_this.parents(".coupon-product").data('param');
+    Gooddisplaywiget(key,qty,affiliate_plan_id);
 });
 
-function Gooddisplaywiget(product_code,qty) {
+function Gooddisplaywiget(product_code,qty,affiliate_plan_id) {
     console.log(qty);
     $.post('/cart/add-to-cart-fx', {
         'product_code': product_code,
-        'qty': qty
+        'qty': qty,
+        'affiliate_plan_id': affiliate_plan_id,
+
     }, function (data) {
         $.hideIndicator();
         if(data.status){
