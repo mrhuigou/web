@@ -2809,6 +2809,7 @@ class WebapiController extends \yii\rest\Controller {
                     $model->status = $value['DETAIL_STATUS'] == 'EXECUTING' ? 1 : 0;
                     $model->title = $value['TITLE'];
                     $model->max_quantity = $value['MAX_QUANTITY'];//最大库存数量
+                    $model->store_code = isset($data['SHOP_CODE']) ? $data['SHOP_CODE'] : "";
                     if (!$model->save()) {
                         throw new \Exception(json_encode($model->errors));
                     }
