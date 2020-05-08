@@ -31,12 +31,12 @@ $this->title = '订单确认';
 			'inputOptions' => ["class" => 'appbtn tl w'],
 			'errorOptions' => ['class' => 'red fb tc db error']
 		],]); ?>
-		<?= $form->field($model, 'address_id')->widget(\h5\widgets\Checkout\Address::className()); ?>
-        <?= $form->field($model, 'invoice_id')->widget(\h5\widgets\Checkout\Invoice::className()); ?>
+		<?= $form->field($model, 'address_id')->widget(\fx\widgets\Checkout\Address::className()); ?>
+        <?= $form->field($model, 'invoice_id')->widget(\fx\widgets\Checkout\Invoice::className()); ?>
         <?php $is_jiarun = false;?>
 		<?php foreach ($cart as $k => $val) { ?>
             <?php if($val['base']->store_id == 1){ $is_jiarun = true;}?>
-			<?= h5\widgets\Checkout\Delivery::widget(['store_id' => $val['base']->store_id, 'total' => $val['total']]) ?>
+			<?= fx\widgets\Checkout\Delivery::widget(['store_id' => $val['base']->store_id, 'total' => $val['total']]) ?>
             <div class="store_contain whitebg " id="store_contain_<?= $val['base']->store_id ?>">
                 <div class="mt5">
                     <h2 class="clearfix p10">
@@ -62,7 +62,7 @@ $this->title = '订单确认';
                         <div class="flex-item-7 tl pl10">
                             <h2><?= $value->product->description->name ?></h2>
                             <p class="gray9  mt2"><?= $value->product->getSku() ?></p>
-							<?= h5\widgets\Checkout\Promotion::widget(['promotion' => $value->getPromotion(), 'qty' => $value->quantity]) ?>
+<!--							--><?//= fx\widgets\Checkout\Promotion::widget(['promotion' => $value->getPromotion(), 'qty' => $value->quantity]) ?>
                         </div>
                         <div class="flex-item-2 tc flex-middle flex-row">
                             <p class="blue mb5"> x<?= $value->quantity ?></p>
@@ -70,8 +70,8 @@ $this->title = '订单确认';
                         </div>
                     </div>
 				<?php } ?>
-                <div class="store-promotion  mb5"><?= h5\widgets\Checkout\StorePromotion::widget(['promotion' => $val['promotion'], 'coupon_gift' => $val['coupon_gift']]) ?></div>
-<!--				--><?//= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products']]) ?>
+                <div class="store-promotion  mb5"><?= fx\widgets\Checkout\StorePromotion::widget(['promotion' => $val['promotion'], 'coupon_gift' => $val['coupon_gift']]) ?></div>
+<!--				--><?//= fx\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products']]) ?>
                 <?php if($is_jiarun){?>
                 <?php $shipping = 0;$sub_total = 0;?>
                 <?php if ($val['totals']) {
@@ -85,7 +85,7 @@ $this->title = '订单确认';
                      }
 
                  } ?>
-                    <?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products'],'sub_total' => $sub_total,'shipping' => $shipping]) ?>
+                    <?= fx\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products'],'sub_total' => $sub_total,'shipping' => $shipping]) ?>
 <!--                --><?php //if ($shipping > 0 && $sub_total < 68 && count($checkout_ad) >0) { ?>
                 <?php if (count($checkout_ad) >0) { ?>
                     <div id="shipping_script" hidden>
@@ -155,7 +155,7 @@ $this->title = '订单确认';
 
                         <?php }?>
                 <?php }else{ ?>
-                <?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products']]) ?>
+                <?= fx\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products']]) ?>
                 <?php } ?>
                 <div class="graybg p10 store_totals">
 					<?php if ($val['totals']) { ?>
