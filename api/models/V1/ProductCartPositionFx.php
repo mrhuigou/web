@@ -27,7 +27,10 @@ class ProductCartPositionFx extends Object implements CartPositionInterface
 
 	public function getPrice()
 	{
-		$price=$this->product->vip_price;
+	    //获取分销方案对应的商品价格
+        if($goods = AffiliatePlanDetail::findOne(['affiliate_plan_id' => $this->affiliate_plan_id,'product_code'=> $this->product->product_code])){
+            $price = round($goods->price_type == 1 ? $goods->price:$this->product->productBase->price ,2);
+        }
 		$is_yiyuangou=false;
 		if(\Yii::$app->session->get('FirstBuy')==$this->getId()){
 			$is_yiyuangou=true;
