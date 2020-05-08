@@ -85,7 +85,7 @@ $this->title = '订单确认';
                      }
 
                  } ?>
-                    <?= fx\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products'],'sub_total' => $sub_total,'shipping' => $shipping]) ?>
+<!--                    --><?//= fx\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products'],'sub_total' => $sub_total,'shipping' => $shipping]) ?>
 <!--                --><?php //if ($shipping > 0 && $sub_total < 68 && count($checkout_ad) >0) { ?>
                 <?php if (count($checkout_ad) >0) { ?>
                     <div id="shipping_script" hidden>
@@ -226,32 +226,10 @@ $this->title = '订单确认';
     </a>
 </div>
 <div id="confirm_form_order" class="bg-f0" style="display: none;">
-<!--    <h2 class="w p10 tc bg-wh">请确认地址与收货时间</h2>-->
-<!--    <div class=" m5 p5  bg-wh">-->
-<!--        <div class="colorbar"></div>-->
-<!--        <div id="confirm_form_address"></div>-->
-<!--        <div class="colorbar "></div>-->
-<!--    </div>-->
-<!--    <div class="col-12 bd m5 p5 whitebg cp f18 red">-->
-<!--        因系统改造升级，<span class="fb">暂停晚间配送！</span>-->
-<!--        给您带来的不便，我们深感抱歉！-->
-<!--        请确定合适的配送时间，感谢您的理解！-->
-<!--    </div>-->
     <div class="   m5 ">
         <div id="confirm_form_shippingtime" class="flex-col w flex-middle bg-green white p10 ">
         </div>
     </div>
-
-    <?php if(time() >= strtotime('2020-02-14 23:00:00') && time() <= strtotime('2020-02-15 11:30:00')){?>
-        <div class="col-12 bd m5 p5 whitebg cp f18 red">
-            受雨雪影响配送受限,订单最早于2月16日8:00-12:00送达,敬请谅解!
-        </div>
-    <?php }else{?>
-        <div class="col-12 bd m5 p5 whitebg cp f18 red">
-            安全你、我、他，无接触配送，请到小区门口或楼下收货，共抗疫情，配送小哥不进入楼宇，如果小区放行，我们非常高兴送到家里，敬请谅解！
-        </div>
-    <?php }?>
-
     <div class="flex-col">
         <a class="flex-item-6 tc red fb p15 bg-wh" href="javascript:;" id="confirm_cannel">去修改</a>
         <a class="flex-item-6 tc greenbg white fb p15 " href="javascript:;" id="confirm_pay">去支付</a>
