@@ -20,6 +20,10 @@ return [
             'class' => 'common\component\cart\ShoppingCart',
             'cartId' => 'my_application_cart',
         ],
+        'fxcart' => [
+            'class' => 'common\component\cart\FxShoppingCart',
+            'cartId' => 'my_application_fx_cart',
+        ],
          'redis' => [
              'class' => 'yii\redis\Connection',
              'hostname' => '192.168.1.247',
