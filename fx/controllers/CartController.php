@@ -176,7 +176,8 @@ class CartController extends \yii\web\Controller {
                 'discount'=>bcsub($position->price,$position->getPrice(),2),
                 'sub_total'=>floatval($position->getCost()),
                 'stock_status'=>$stock_tag,
-                'promotion'=>Promotion::widget(['promotion'=>$position->getPromotion(),'qty'=>$position->getQuantity()])
+//                'promotion'=>Promotion::widget(['promotion'=>$position->getPromotion(),'qty'=>$position->getQuantity()]),
+                'promotion'=>'',//促销方案 关闭
             ];
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return $json;
