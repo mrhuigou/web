@@ -115,11 +115,11 @@ class CheckoutController extends \yii\web\Controller {
 
                 $shipping_cost_free = 0; //判断是否有免邮属性的优惠券
 				//计算全局优惠券金额
-				$this->getGlobalCouponTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $comfirm_orders[$key]['coupon_gift'],$comfirm_orders[$key]['rate']);
+//				$this->getGlobalCouponTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $comfirm_orders[$key]['coupon_gift'],$comfirm_orders[$key]['rate']);
 				//计算优惠金额
-				$this->getCouponTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $customer_coupon_id, $shipping_cost, $comfirm_orders[$key]['coupon_gift'],$comfirm_orders[$key]['rate'],$shipping_cost_free);
+//				$this->getCouponTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $customer_coupon_id, $shipping_cost, $comfirm_orders[$key]['coupon_gift'],$comfirm_orders[$key]['rate'],$shipping_cost_free);
 				//订单满减金额
-				$this->getOrderTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $comfirm_orders[$key]['promotion']);
+//				$this->getOrderTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $comfirm_orders[$key]['promotion']);
 				if($key ==1){
 //                    $this->getPointsTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data);
                 }

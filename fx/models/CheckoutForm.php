@@ -10,6 +10,7 @@ use api\models\V1\Address;
 use api\models\V1\Affiliate;
 use api\models\V1\AffiliateCustomer;
 use api\models\V1\AffiliatePersonal;
+use api\models\V1\AffiliatePlanDetail;
 use api\models\V1\CouponHistory;
 use api\models\V1\Customer;
 use api\models\V1\CustomerAffiliate;
@@ -201,10 +202,18 @@ class CheckoutForm extends Model {
 			try {
 				foreach ($this->cart_data as $k => $order_data) {
 					$invoice_temp = ['不需要发票', '个人发票', '企业增值税普票','企业增值税专票'];
+
+					$comment = "";
+                    if(!empty($comment)){
+                        $comment = "<配送到家>";
+                    }else{
+                        $comment = "<团长处自提>";
+                    }
+
 					//订单主数据
 					$Order_model = new Order();
 					$Order_model->order_no = OrderSn::generateNumber();
-					$Order_model->order_type_code = $this->getOrderType($order_data['products']);
+					$Order_model->order_type_code = 'Affiliate';
 					$Order_model->platform_id = $order_data['base']->platform_id;
 					$Order_model->platform_name = "每日惠购";
 					$Order_model->platform_url = Yii::$app->request->getHostInfo();
@@ -221,22 +230,12 @@ class CheckoutForm extends Model {
 					$Order_model->payment_method = "";
 					$Order_model->payment_code = "";
 					$Order_model->total = $order_data['total'];
-					$Order_model->comment = $this->comment[$k];
+					$Order_model->comment = $this->comment[$k].$comment;
 					$Order_model->order_status_id = 1;
 
 					if($affiliate_id = Yii::$app->session->get("from_affiliate_uid",0)){
 					    $affiliate = Affiliate::findOne(['affiliate_id'=>$affiliate_id]);
-                        if($affiliate && $affiliate->status ){//非智慧青岛
-                            if($affiliate->affiliate_id != 259){
-                                $customer = Customer::findOne(['customer_id'=>Yii::$app->user->getId()]);
-                                if($customer->affiliate_id == Yii::$app->session->get("from_affiliate_uid")){
-                                    $affiliate_id = $customer->affiliate_id;
-                                }
-                            }else{
-                                //z智慧青岛
-                                $affiliate_id = $affiliate->affiliate_id;
-                            }
-                        }
+                        $affiliate_id = $affiliate->affiliate_id;
 					}
 					$Order_model->affiliate_id = $affiliate_id;
 					$Order_model->commission=$this->getOrderCommission($order_data['total'],$affiliate_id);
@@ -355,20 +354,23 @@ class CheckoutForm extends Model {
                     $order_products_array = [];
 					//添加商品信息
 					if (isset($order_data['products']) && $order_data['products']) {
+                        $total_commission = 0;
 						foreach ($order_data['products'] as $product) {
 
+						    $product_info = Product::findOne($product->product_id);
+                            $affiliate_plan_detail = AffiliatePlanDetail::find()->where(['affiliate_plan_id'=>$product->affiliate_plan_id,'status'=>1,'product_code'=>$product_info->product_code])->one();
 							if(!$product->product->getStockCount()){
-								throw new \Exception("库存不足");
-							}
+                                throw new \Exception("库存不足");
+                            }
                             $order_products_array[] = $product->product->product_id;
 							$product_price = $product->getPrice();
 							$product_total = $product->getCost();
 							$promotion_id = 0;
 							$promotion_detail_id = 0;
-							if ($product->promotion) {
-								$promotion_id = $product->promotion->promotion_id;
-								$promotion_detail_id = $product->promotion->promotion_detail_id;
-							}
+//							if ($product->promotion) {
+//								$promotion_id = $product->promotion->promotion_id;
+//								$promotion_detail_id = $product->promotion->promotion_detail_id;
+//							}
 //							$product_base  = ProductBase::findOne(['product_base_id'=>$product->product->product_base_id]);
 //							$product_base->date_modified = date("Y-m-d H:i:s");
 //                            $product_base->save();
@@ -391,16 +393,30 @@ class CheckoutForm extends Model {
 							$Order_product->refund_qty = 0;
 							$Order_product->promotion_id = $promotion_id;
 							$Order_product->promotion_detail_id = $promotion_detail_id;
-							$Order_product->commission=$product->product->getCommission($Order_model->source_customer_id,$Order_product->pay_total);
+//							$Order_product->commission=$product->product->getCommission($Order_model->source_customer_id,$Order_product->pay_total);
+							$Order_product->commission=$this->getProductCommission($Order_model->affiliate_id,$affiliate_plan_detail->affiliate_price,$product->quantity);
 							if (!$Order_product->save(false)) {
 								throw new \Exception("商品创建失败");
 							}
-							$this->ProductPromotion($Order_product, $product, $Order_model, $product_stock);
-							$product_stock[] = [
-								'product_code' => $Order_product->product_code,
-								'qty' => $Order_product->quantity
-							];
-						}
+//							$this->ProductPromotion($Order_product, $product, $Order_model, $product_stock);
+//							$product_stock[] = [
+//								'product_code' => $Order_product->product_code,
+//								'qty' => $Order_product->quantity
+//							];
+                            $total_commission = bcadd($total_commission,$Order_product->commission,4);
+
+
+                        }
+                        $total_commission = round($total_commission,2);
+						if($total_commission){
+                            //更新订单佣金
+                            $Order_model = Order::findOne($Order_model->order_id);
+                            $Order_model->commission=$total_commission;
+                            if (!$Order_model->save(false)) {
+                                throw new \Exception("订单数据异常");
+                            }
+                        }
+
 					}
                     if(Yii::$app->session->get('source_from_uid')){
 
@@ -493,7 +509,7 @@ class CheckoutForm extends Model {
 					$merge_order_ids[] = $Order_model->order_id;
 					$merge_total = round(bcadd($merge_total, $Order_model->total, 4),2);
 
-                    $this->notice_points($Order_model);
+//                    $this->notice_points($Order_model);
                     }
 				if ($product_stock) {
 					foreach ($product_stock as $stock) {
@@ -895,5 +911,15 @@ class CheckoutForm extends Model {
             Yii::error("points_notice=============>".$e->getMessage().'at'.$e->getLine());
         }
 
+    }
+
+    protected function getProductCommission($affiliate_id,$affiliate_price,$qty=0){
+        $commission=0;
+        if($model=Affiliate::findOne(['affiliate_id'=>$affiliate_id,'status'=>1])){
+            if($model->settle_type == 'product'){
+                $commission = bcmul($qty,$affiliate_price,2);
+            }
+        }
+        return $commission;
     }
 }

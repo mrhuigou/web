@@ -32,7 +32,7 @@ $this->title = '订单确认';
 			'errorOptions' => ['class' => 'red fb tc db error']
 		],]); ?>
 		<?= $form->field($model, 'address_id')->widget(\fx\widgets\Checkout\Address::className()); ?>
-        <?= $form->field($model, 'invoice_id')->widget(\fx\widgets\Checkout\Invoice::className()); ?>
+<!--        --><?//= $form->field($model, 'invoice_id')->widget(\fx\widgets\Checkout\Invoice::className()); ?>
         <?php $is_jiarun = false;?>
 		<?php foreach ($cart as $k => $val) { ?>
             <?php if($val['base']->store_id == 1){ $is_jiarun = true;}?>
