@@ -2,6 +2,9 @@
 
 namespace common\component\cart;
 
+use api\models\V1\AffiliatePlan;
+use api\models\V1\AffiliatePlanDetail;
+use api\models\V1\Product;
 use Yii;
 use yii\base\Component;
 use yii\base\Event;
@@ -66,6 +69,28 @@ class FxShoppingCart extends Component
     {
         if(isset(\Yii::$app->components['redis']) && !empty(\Yii::$app->components['redis']) && Yii::$app->user->getId()){
             if(\Yii::$app->redis->HEXISTS($this->cartId,\Yii::$app->user->getId())){
+                $positions=unserialize(\Yii::$app->redis->HGET($this->cartId,\Yii::$app->user->getId()));
+                if($positions){
+                    foreach($positions as $position){
+                        if ($position->affiliate_plan_id) {
+                            if (!$model = AffiliatePlan::find()->where(['status' => 1, 'affiliate_plan_id' => $position->affiliate_plan_id])->andWhere(['<', 'date_start', date('Y-m-d H:i:s')])->andWhere(['>', 'date_end', date('Y-m-d H:i:s')])->one()) {
+                                unset($position);
+                                continue;
+                            }else{
+                                if($model->type == 'DISPLAY'){//分销方案展示专用
+                                    $product = Product::findOne(['product_id'=>$position->product_id]);
+                                    //查询详细表  商品状态是否开启
+                                    if(!$info = AffiliatePlanDetail::findOne(['product_code'=> $product->product_code,'status' => 1, 'affiliate_plan_id' => $position->affiliate_plan_id])){
+                                        unset($position);
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                        $this->_positions[$position->getId()]=$position;
+                    }
+                    \Yii::$app->redis->Hset($this->cartId, Yii::$app->user->getId(), $this->getSerialized());
+                }
                 $this->setSerialized(\Yii::$app->redis->HGET($this->cartId,\Yii::$app->user->getId()));
             }
         }else{
