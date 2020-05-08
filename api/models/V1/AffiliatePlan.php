@@ -38,11 +38,10 @@ class AffiliatePlan extends \yii\db\ActiveRecord
     {
         return [
             [['date_start', 'date_end', 'ship_end'], 'safe'],
-            [['minbookcash', 'deliverycash'], 'number'],
             [['store_id', 'status'], 'integer'],
             [['code', 'store_code'], 'string', 'max' => 32],
             [['name'], 'string', 'max' => 100],
-            [['description', 'type'], 'string', 'max' => 255],
+            [['description', 'type','position','source_url'], 'string', 'max' => 255],
         ];
     }
 
@@ -60,8 +59,6 @@ class AffiliatePlan extends \yii\db\ActiveRecord
             'date_start' => 'Date Start',
             'date_end' => 'Date End',
             'ship_end' => 'Ship End',
-            'minbookcash' => 'Minbookcash',
-            'deliverycash' => 'Deliverycash',
             'store_id' => 'Store ID',
             'store_code' => 'Store Code',
             'status' => 'Status',
