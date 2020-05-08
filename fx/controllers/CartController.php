@@ -30,6 +30,7 @@ class CartController extends \yii\web\Controller {
                 $sku = \Yii::$app->request->post('sku') ? \Yii::$app->request->post('sku') : '';
                 $product_base_id = \Yii::$app->request->post('product_base_id') ? \Yii::$app->request->post('product_base_id') : 0;
                 $qty = \Yii::$app->request->post('qty') ? \Yii::$app->request->post('qty') : 1;
+                $params['affiliate_plan_id'] = \Yii::$app->request->post('affiliate_plan_id') ? \Yii::$app->request->post('affiliate_plan_id') : 0;
                 if (strpos($sku, ":")) {
                     if (substr($sku, 0, 1) != 0) {
                         $model = Product::findOne(['sku' => $sku, 'product_base_id' => $product_base_id, 'beintoinv' => 1]);
@@ -47,8 +48,8 @@ class CartController extends \yii\web\Controller {
                         }
                     }
                     if ($stock_count > 0) {
-                        if (\Yii::$app->fxcart->hasPosition($model->getCartPosition()->getId())) {
-                            $position = \Yii::$app->fxcart->getPositionById($model->getCartPosition()->getId());
+                        if (\Yii::$app->fxcart->hasPosition($model->getCartPositionFx($params)->getId())) {
+                            $position = \Yii::$app->fxcart->getPositionById($model->getCartPositionFx($params)->getId());
                             $quantity = $qty + $position->getQuantity();
                             $stock_count=$model->getStockCount($quantity);
                             if ($quantity > 100 || $quantity > $stock_count) {
@@ -60,7 +61,7 @@ class CartController extends \yii\web\Controller {
                             }
                         }
                         Track::add($model->product_base_id,'add_cart');
-                        \Yii::$app->fxcart->put($model->getCartPosition(), $qty);
+                        \Yii::$app->fxcart->put($model->getCartPositionFx($params), $qty);
                         $data = ['status' => 1, 'data' =>\Yii::$app->fxcart->getCount()];
                     } else {
                         throw new ErrorException('库存不足');
@@ -218,6 +219,7 @@ class CartController extends \yii\web\Controller {
                 $sku = \Yii::$app->request->post('sku') ? \Yii::$app->request->post('sku') : '';
                 $product_base_id = \Yii::$app->request->post('product_base_id') ? \Yii::$app->request->post('product_base_id') : 0;
                 $qty = \Yii::$app->request->post('qty') ? \Yii::$app->request->post('qty') : 1;
+                $params['affiliate_plan_id'] = \Yii::$app->request->post('affiliate_plan_id') ? \Yii::$app->request->post('affiliate_plan_id') : 0;
                 if(strpos($sku,":")){
                     if(substr($sku,0,1)!=0){
                         $model=Product::findOne(['sku'=>$sku,'product_base_id'=>$product_base_id,'beintoinv'=>1]);
@@ -243,7 +245,7 @@ class CartController extends \yii\web\Controller {
                         throw new ErrorException('库存不足');
                     }
                     Track::add($model->product_base_id,'buy_now');
-                    \Yii::$app->fxcart->update($model->getCartPosition(), $qty);
+                    \Yii::$app->fxcart->update($model->getCartPositionFx($params), $qty);
                     $data=['status'=>1,'data'=>Url::to(['/cart/index'])];
                 }else{
                     throw new ErrorException('商品不存在或者已经下架');
