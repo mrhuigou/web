@@ -507,7 +507,7 @@ $(document).ready(function(){
                     time: 2
                 });
             }else {
-            $.post('/cart/buynow',{'product_base_id':product_base_id,'sku':Sku,'qty':qty},function(data){
+            $.post('/cart/buynow',{'product_base_id':product_base_id,'sku':Sku,'qty':qty,'affiliate_plan_id':affiliate_plan_id},function(data){
                 $.hideIndicator();
                 if(data.status){
                     $(".close-pop").click();
@@ -549,7 +549,8 @@ $(document).ready(function(){
                 $.post('/cart/add-to-cart', {
                     'product_base_id': product_base_id,
                     'sku': Sku,
-                    'qty': qty
+                    'qty': qty,
+                    'affiliate_plan_id': affiliate_plan_id,
                 }, function (data) {
                     $.hideIndicator();
                     if(data.status){

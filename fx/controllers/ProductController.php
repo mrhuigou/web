@@ -17,6 +17,7 @@ class ProductController extends \yii\web\Controller
 
         $store_code=\Yii::$app->request->get('store_code') ? \Yii::$app->request->get('store_code'): \Yii::$app->request->get('shop_code');
         $product_code=\Yii::$app->request->get('product_code') ? \Yii::$app->request->get('product_code'): \Yii::$app->request->get('product_base_code');
+        $affiliate_plan_id=\Yii::$app->request->get('affiliate_plan_id') ? \Yii::$app->request->get('affiliate_plan_id'): 0;
         $cur_sku='';
         $product = '';
         if($store_code && $product_code){
@@ -41,7 +42,7 @@ class ProductController extends \yii\web\Controller
         }
         if( $model = ProductBase::findOne(['product_base_id' => $product_base_id?$product_base_id:0])){
             Track::add($product_base_id,'view');
-            return $this->render('index',['model'=>$model,'cur_sku'=>$cur_sku,'product'=>$product]);
+            return $this->render('index',['model'=>$model,'cur_sku'=>$cur_sku,'product'=>$product,'affiliate_plan_id'=>$affiliate_plan_id]);
         }else{
             throw new NotFoundHttpException("没有找到该商品！");
         }

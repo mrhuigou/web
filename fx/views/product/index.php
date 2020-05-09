@@ -129,7 +129,7 @@ $this->title = '商品详情';
 							<div class="package J_TSaleProp">
 								<?php foreach ($sku['content'] as $content) { ?>
 									<a href="javascript:void(0)" class="sku"
-									   attr_id="<?= $content['value'] ?>"> <?= $content['name'] ?></a>
+									   attr_id="<?= $content['value'] ?>" attr_param="<?= $affiliate_plan_id ?>"> <?= $content['name'] ?></a>
 								<?php } ?>
 							</div>
 						</div>
@@ -243,6 +243,7 @@ var sku_datas = eval(<?= json_encode($model->SkuData) ?>);
 //alert(JSON.stringify(sku_datas));
 var SKUResult = {};
 var Sku='';
+var affiliate_plan_id='';
 initSKU();
 //alert(JSON.stringify(data));
 $('.J_TSaleProp .sku').each(function() {
@@ -267,6 +268,7 @@ $('.J_TSaleProp .sku').each(function() {
         selectedObjs.each(function() {
             selectedIds.push($(this).attr('attr_id'));
         });
+        affiliate_plan_id = $(this).attr('attr_param');
         var len = selectedIds.length;
 
         //用已选中的节点验证
