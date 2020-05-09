@@ -181,7 +181,7 @@ class Product extends \yii\db\ActiveRecord implements CartPositionProviderInterf
      * @param  $limit_quantity：限制数量
      * @param  $quantity：购买数量，针对库存量
      */
-    public function getPrice(){
+    public function getPrice($affiliate_plan_id=0){
         $price=$this->vip_price;
         if($promotion=$this->getPromotion()){
             //进行价格取值
@@ -189,6 +189,11 @@ class Product extends \yii\db\ActiveRecord implements CartPositionProviderInterf
                 $price=bcmul($price,$promotion->rebate,2);
             }else{
                 $price=max(0,$promotion->price);
+            }
+        }
+        if($affiliate_plan_id){
+            if($info = AffiliatePlanDetail::findOne(['status'=>1,'product_code'=>$this->product_code ,'affiliate_plan_id'=>$affiliate_plan_id])) {
+                $price = round($info->price_type == 1 ? $info->price : $info->product->productBase->price, 2);
             }
         }
         return floatval(number_format($price,2,'.',''));

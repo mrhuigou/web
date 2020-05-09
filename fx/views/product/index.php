@@ -105,7 +105,7 @@ $this->title = '商品详情';
 					</div>
 				</div>
 				<div class="red fb">
-					￥<span class="f20" id="cur_price"><?= $model->getPrice(); ?></span>
+					￥<span class="f20" id="cur_price"><?= $model->getPrice($product->product_code,$affiliate_plan_id); ?></span>
 					<span class="del ml5  " id="sale_price"><?= $model->getSale_price(); ?></span>
 				</div>
                 <?php if($model->can_not_return){?>
@@ -115,9 +115,9 @@ $this->title = '商品详情';
                     </div>
         <?php }?>
 			</div>
-			<?= fx\widgets\Product\Coupon::widget(['model' => $model]) ?>
-			<?= fx\widgets\Product\Promotion::widget(['model' => $model]) ?>
-			<?= fx\widgets\Product\Shipping::widget(['model' => $model]) ?>
+<!--			--><?//= fx\widgets\Product\Coupon::widget(['model' => $model]) ?>
+<!--			--><?//= fx\widgets\Product\Promotion::widget(['model' => $model]) ?>
+<!--			--><?//= fx\widgets\Product\Shipping::widget(['model' => $model]) ?>
 			<!--数量-->
 			<div class="whitebg bdt bdb pt5 pb5 mb5">
 				<?php foreach ($model->sku as $sku) { ?>
@@ -163,8 +163,8 @@ $this->title = '商品详情';
 					</div>
 				</div>
 			</div>
-			<?= fx\widgets\Product\CouponRelation::widget(['model' => $model]) ?>
-			<?= fx\widgets\Product\Relation::widget(['model' => $model]) ?>
+<!--			--><?//= fx\widgets\Product\CouponRelation::widget(['model' => $model]) ?>
+<!--			--><?//= fx\widgets\Product\Relation::widget(['model' => $model]) ?>
 
 			<div class='tabslet pb50'>
 				<ul class='horizontal flex-col tc'>
@@ -238,7 +238,7 @@ $this->beginBlock('JS_SKU')
 //销售属性集
 var product_base_id=<?= $model->product_base_id ?>;
 var keys = eval(<?= json_encode($model->skuKeys) ?>);
-var sku_datas = eval(<?= json_encode($model->SkuData) ?>);
+var sku_datas = eval(<?= json_encode($model->getSkuData($affiliate_plan_id)) ?>);
 //保存最后的组合结果信息
 //alert(JSON.stringify(sku_datas));
 var SKUResult = {};

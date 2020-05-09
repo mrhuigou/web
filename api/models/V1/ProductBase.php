@@ -105,13 +105,18 @@ class ProductBase extends \yii\db\ActiveRecord
     public function getDescription(){
         return $this->hasOne(ProductBaseDescription::className(), ['product_base_id' => 'product_base_id']);
     }
-    public function getPrice(){
+    public function getPrice($product_code=0,$affiliate_plan_id=0){
         $price=$this->hasMany(Product::className(),['product_base_id' => 'product_base_id'])->andWhere(['beintoinv'=>1])->min('vip_price');
         if($products=$this->hasMany(Product::className(),['product_base_id' => 'product_base_id'])->andWhere(['jr_product.beintoinv'=>1])->all()){
             foreach($products as $product){
               if($price>$product->getPrice()){
                   $price=$product->getPrice();
               }
+            }
+        }
+        if($product_code && $affiliate_plan_id){
+            if($info = AffiliatePlanDetail::findOne(['status'=>1,'product_code'=>$product_code ,'affiliate_plan_id'=>$affiliate_plan_id])) {
+                $price = round($info->price_type == 1 ? $info->price : $info->product->productBase->price, 2);
             }
         }
        return $price;
@@ -262,7 +267,7 @@ class ProductBase extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public function getSkuData(){
+    public function getSkuData($affiliate_plan_id=0){
         $data=[];
         if($this->product){
             foreach($this->product as $product){
@@ -272,7 +277,7 @@ class ProductBase extends \yii\db\ActiveRecord
                 }
                 if($product->sku){
                     $data[$product->sku]=[
-                        'price'=>number_format($product->getPrice(),2),
+                        'price'=>number_format($product->getPrice($affiliate_plan_id),2),
                         'sale_price'=>number_format($product->price,2),
                         'count'=>max(0,$product->stockCount),
                         'format'=>$product->format,
@@ -284,7 +289,7 @@ class ProductBase extends \yii\db\ActiveRecord
                     ] ;
                 }else{
                     $data['0:'.$product->product_id]=[
-                        'price'=>number_format($product->getPrice(),2),
+                        'price'=>number_format($product->getPrice($affiliate_plan_id),2),
                         'sale_price'=>number_format($product->price,2),
                         'count'=>$product->stockCount,
                         'stock_type' => $stock_type,
