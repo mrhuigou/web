@@ -158,8 +158,8 @@ class CartController extends \yii\web\Controller {
         $qty=\Yii::$app->request->post('qty');
         if(\Yii::$app->fxcart->hasPosition($item) && $qty>0){
             $position=\Yii::$app->fxcart->getPositionById($item);
-            if($stock_count=$position->product->getStockCount($qty)){
-                if($limit_max_qty=$position->product->getLimitMaxQty(\Yii::$app->user->getId())){
+            if($stock_count=$position->product->getStockCount($qty,$position->affiliate_plan_id)){
+                if($limit_max_qty=$position->product->getLimitMaxQtyFx($position->affiliate_plan_id)){
                     $stock_count=min($limit_max_qty,$stock_count);
                 }
             }
@@ -195,7 +195,7 @@ class CartController extends \yii\web\Controller {
             foreach ($data as $key => $value) {
                 if(\Yii::$app->fxcart->hasPosition($value)){
                     $position = \Yii::$app->fxcart->getPositionById($value);
-                    if (!$position->hasStock()) {
+                    if (!$position->hasStock($position->affiliate_plan_id)) {
                         $status = false;
                         $msg = '库存不足，请查看';
                         break;
