@@ -44,7 +44,7 @@ $this->title ='购物车';
                     <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
                 </label>
                 <div class="flex-item-2 flex-row flex-middle flex-center p5 item-img" >
-                    <a href="<?=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product->product_code,'shop_code'=>$value->product->store_code])?>">
+                    <a href="<?=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product->product_code,'shop_code'=>$value->product->store_code,'affiliate_plan_id'=>$value->affiliate_plan_id])?>">
                     <img src="<?=\common\component\image\Image::resize($value->product->image?:current($value->product->productBase->imagelist),100,100)?>"  class="bd w">
                     </a>
                 </div>

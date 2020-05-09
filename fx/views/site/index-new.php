@@ -181,12 +181,12 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                         }
 
                         ?>
-                        <a href="<?=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product_code,'shop_code'=>$value->store_code])?>"><img src="<?=\common\component\image\Image::resize(($value->image_url?:$imagelist)?:'',100,100)?>" alt="商品图片" width="95" height="95"></a>
+                        <a href="<?=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product_code,'shop_code'=>$value->store_code,'affiliate_plan_id'=>$value->affiliate_plan_id])?>"><img src="<?=\common\component\image\Image::resize(($value->image_url?:$imagelist)?:'',100,100)?>" alt="商品图片" width="95" height="95"></a>
 
                     </div>
 
                     <div class="flex-item-8 pt10">
-                        <a href="<?=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product_code,'shop_code'=>$value->store_code])?>" class="f14"><?=$value->product->description->name?></a>
+                        <a href="<?=\yii\helpers\Url::to(['/product/index','product_code'=>$value->product_code,'shop_code'=>$value->store_code,'affiliate_plan_id'=>$value->affiliate_plan_id])?>" class="f14"><?=$value->product->description->name?></a>
                         <p class="row-one red f13 mt5"><?php echo $value->title?></p>
                         <div class="pt10">
 

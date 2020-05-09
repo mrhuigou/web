@@ -54,7 +54,7 @@ $this->title = '订单确认';
 				<?php foreach ($val['products'] as $key => $value) { ?>
                     <div class="flex-col tc p5 graybg" style="border-bottom: 1px dotted #999;">
                         <div class="flex-item-3">
-                            <a href="<?= \yii\helpers\Url::to(['product/index', 'product_code' => $value->product->product_code, 'shop_code' => $value->product->store_code]) ?>">
+                            <a href="<?= \yii\helpers\Url::to(['product/index', 'product_code' => $value->product->product_code, 'shop_code' => $value->product->store_code,'affiliate_plan_id'=>$value->affiliate_plan_id]) ?>">
                                 <img src="<?= \common\component\image\Image::resize($value->product->image, 100, 100) ?>"
                                      class="db w">
                             </a>
