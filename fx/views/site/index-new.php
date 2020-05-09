@@ -406,6 +406,7 @@ function Gooddisplaywiget(product_code,qty,affiliate_plan_id) {
                 skin: 'msg',
                 time: 2 //2秒后自动关闭
             });
+            $(".cart_qty").text(data.data);
         }else{
             layer.open({
                 content:data.message,
