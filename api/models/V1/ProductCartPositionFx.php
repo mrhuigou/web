@@ -57,20 +57,44 @@ class ProductCartPositionFx extends Object implements CartPositionInterface
 	{
 		return Product::findOne($this->product_id);
 	}
-	public function hasStock(){
+	public function hasStock($affiliate_plan_id=0){
         $qty=$this->getQuantity();
-		if($stock_count=$this->product->getStockCount($qty)){
-			if($limit_max_qty=$this->product->getLimitMaxQty(\Yii::$app->user->getId())){
-				if($stock_count>=$limit_max_qty){
-					$stock_count=$limit_max_qty;
-				}
-			}
-		}else{
-			$stock_count=0;
-		}
-		if($stock_count<=0){
-			return false;
-		}
+        //团购分销方案的商品 库存改用 方案商品详情里的库存
+        if($affiliate_plan_id){
+            if($stock_count=$this->product->getStockCount($qty,$affiliate_plan_id)){
+                if($limit_max_qty=$this->product->getLimitMaxQtyFx($affiliate_plan_id)){
+                    if(!$limit_max_qty && $stock_count>=$limit_max_qty){
+                        $stock_count=$limit_max_qty;
+                    }
+                }
+            }
+        }else{
+            if($stock_count=$this->product->getStockCount($qty)){
+                if($limit_max_qty=$this->product->getLimitMaxQty(\Yii::$app->user->getId())){
+                    if($stock_count>=$limit_max_qty){
+                        $stock_count=$limit_max_qty;
+                    }
+                }
+            }else{
+                $stock_count=0;
+            }
+            if($stock_count<=0){
+                return false;
+            }
+        }
+
+//		if($stock_count=$this->product->getStockCount($qty)){
+//			if($limit_max_qty=$this->product->getLimitMaxQty(\Yii::$app->user->getId())){
+//				if($stock_count>=$limit_max_qty){
+//					$stock_count=$limit_max_qty;
+//				}
+//			}
+//		}else{
+//			$stock_count=0;
+//		}
+//		if($stock_count<=0){
+//			return false;
+//		}
 
 //		if(($promotion=$this->getPromotion()) && $promotion->behave_gift && $promotion->gifts){
 //			foreach($promotion->gifts as $gift){

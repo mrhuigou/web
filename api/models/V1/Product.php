@@ -325,7 +325,7 @@ class Product extends \yii\db\ActiveRecord implements CartPositionProviderInterf
 		}
 		return $qty;
 	}
-    public function getStockCount($cart_quantity = 0){
+    public function getStockCount($cart_quantity = 0,$affiliate_plan_id=0){
         $total=0;
         $productmodel = Product::findOne($this->product_id); //不能直接使用 比如购物车中已经存好的商品数据
         if($productmodel->productStore && $productmodel->productStore->status==1) {
@@ -366,6 +366,12 @@ class Product extends \yii\db\ActiveRecord implements CartPositionProviderInterf
         }
         if(!$this->besale){
             $total=0;
+        }
+
+        if($affiliate_plan_id){
+            if($info = AffiliatePlanDetail::findOne(['status'=>1,'affiliate_plan_id'=> $affiliate_plan_id,'product_code'=> $this->product_code])){
+                $total = $info->max_quantity - $info->tmp_qty;
+            }
         }
         return max(0,$total);
     }
@@ -441,5 +447,15 @@ class Product extends \yii\db\ActiveRecord implements CartPositionProviderInterf
     }
     public function getWarehouseStock(){
         return $this->hasOne(WarehouseStock::className(),['product_code'=>'product_code']);
+    }
+
+    public function getLimitMaxQtyFx($affiliate_plan_id=0){
+        $qty=0;
+        if($affiliate_plan_id){
+            if($info = AffiliatePlanDetail::findOne(['status'=>1,'affiliate_plan_id'=> $affiliate_plan_id,'product_code'=> $this->product_code])){
+                $qty=$info->max_buy_qty;
+            }
+        }
+        return $qty;
     }
 }

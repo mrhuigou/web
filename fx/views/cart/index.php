@@ -63,14 +63,13 @@ $this->title ='购物车';
                                 <input type="text" class="num-text cart-num-text" value="<?=$value->getQuantity()?>" max="100",min="1">
                                 <span class="num-add iconfont cart-num-add"></span>
                             </p>
-                            <p class="redbg white stock_status tc p5" style="display: <?=!$value->hasStock()?"":"none"?>">
+                            <p class="redbg white stock_status tc p5" style="display: <?=!$value->hasStock($value->affiliate_plan_id)?"":"none"?>">
+	                            <?php if (!$value->hasStock($value->affiliate_plan_id)) { ?>
+		                            <?php if ($max_sale = $value->product->getLimitMaxQtyFx($value->affiliate_plan_id)) {
+			                            if ($StockCount = $value->product->getStockCount($value->getQuantity(),$value->affiliate_plan_id)) {
 
-	                            <?php if (!$value->hasStock()) { ?>
-
-		                            <?php if ($max_sale = $value->product->getLimitMaxQty(\Yii::$app->user->getId())) {
-			                            if ($value->product->getStockCount($value->getQuantity())) {
-				                            if ($value->product->getStockCount($value->getQuantity()) < $value->getQuantity()) {
-					                            echo '最多购买' . $value->product->getStockCount() . '件';
+				                            if (($StockCount < $max_sale) && ($StockCount < $value->getQuantity())) {
+					                            echo '最多购买' . $value->product->getStockCount(0,$value->affiliate_plan_id) . '件';
 				                            }else{
 					                            echo '最大限购' . $max_sale . '件';
                                             }
@@ -78,7 +77,7 @@ $this->title ='购物车';
 				                            echo '库存不足';
 			                            }
                                     } else {
-                                        $stock_quantity = $value->product->getStockCount($value->getQuantity());
+                                        $stock_quantity = $value->product->getStockCount($value->getQuantity(),$value->affiliate_plan_id);
 			                            if (!$stock_quantity) {
 				                            echo '库存不足';
 			                            }else{
