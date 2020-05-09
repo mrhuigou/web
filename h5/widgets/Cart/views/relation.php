@@ -12,7 +12,7 @@
 </div>
 
 <!--<dl class="mt10">-->
-<dl class="mt5">
+<dl class="mt5" id="baoyou" style="display: none">
     <dt class=" f14 whitebg org fb tc bdt bdb">
     <div class="tit1 orgtit1 clearfix">
         <h2 class="fl f14">任选一件整单包邮</h2>
@@ -77,6 +77,9 @@ slidesPerView: "auto"
 $.getJSON('<?php echo Yii::$app->params['API_URL']?>/mall/v1/promotion/subject?callback=?&'+source,{subject:'baoyou',wx_xcx:wx_xcx}, function(result){
 var html_content= template($('#tpl').html(), {list:result.data,from:0,to:result.data.length-1,index:'qiuyou_sider'});
 $("#tlp_content_3").html(html_content);
+if(result.data.length >0){
+$("#baoyou").show();
+}
 //爆款滑动
 var brandList_3 = new Swiper('#qiuyou_sider', {
 slidesPerView: "auto"
