@@ -63,10 +63,15 @@ class ProductCartPositionFx extends Object implements CartPositionInterface
         if($affiliate_plan_id){
             if($stock_count=$this->product->getStockCount($qty,$affiliate_plan_id)){
                 if($limit_max_qty=$this->product->getLimitMaxQtyFx($affiliate_plan_id)){
-                    if(!$limit_max_qty && $stock_count>=$limit_max_qty){
+                    if($stock_count>=$limit_max_qty){
                         $stock_count=$limit_max_qty;
                     }
                 }
+            }else{
+                $stock_count=0;
+            }
+            if($stock_count<=0){
+                return false;
             }
         }else{
             if($stock_count=$this->product->getStockCount($qty)){
