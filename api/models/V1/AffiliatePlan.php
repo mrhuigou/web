@@ -64,4 +64,15 @@ class AffiliatePlan extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
+
+    public function getPlanType(){
+        return $this->hasOne(AffiliatePlanType::className(),['code'=>'type']);
+    }
+
+    public function getAffiliatePlanDetailByPositionCode($code = '')
+    {
+        $plan=AffiliatePlan::find()->where(['and','date_start<=NOW()','date_end>=NOW()','status=1'])->andWhere(['position'=>$code])->all();
+         return $plan;
+    }
+
 }

@@ -67,7 +67,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 </header>
 <div class="content" >
 <section class="veiwport " style="max-width: inherit;width: 32rem;height: auto;">
-    <div id="swiper_content" style="max-width: inherit;width: 32rem;height: 13.3rem;overflow: hidden;"></div>
+    <div id="swiper_content" style="max-width: inherit;width: 32rem;height: 13.3rem;overflow: hidden;display: none"></div>
     <script id="swiper_content_tpl" type="text/html">
         <div class="swiper-container" id="swiper-container_banner">
             <div class="swiper-wrapper">
@@ -99,16 +99,14 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         </div>
         <ul class="pro-list23 pt10">
             <?php foreach ($ad_banner_1 as $key => $value) { ?>
-                <?php if (in_array($value['advertise_media_type'],['PACK','IMAGE'])) { ?>
                     <li class="clearfix mb5 pl5 pr5" style="overflow: hidden;">
-                        <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>">
+                        <a href="<?= 'https://m.mrhuigou.com/page/3556.html' ?>">
                             <img
                                     data-original="<?= \common\component\image\Image::resize($value->source_url) ?>"
-                                    title="<?php echo $value->title; ?>" alt="<?= $value->title ?>"
+                                    title="<?php echo $value->name; ?>" alt="<?= $value->name ?>"
                                     class="db w lazy" >
                         </a>
                     </li>
-                <?php } ?>
             <?php } ?>
         </ul>
     <?php } ?>
@@ -140,26 +138,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         </div>
     </div>
 </script>
-
-    <?php if($ad_promotion_12){?>
-    <div class="cx flex-col">
-        <a href="https://m.mrhuigou.com/page/994.html" class="t"></a>
-            <?php foreach($ad_promotion_12 as $value){ ?>
-                <a class="flex-item-6" href="<?= \yii\helpers\Url::to($value->link_url, true) ?>">
-                    <img src="<?= \common\component\image\Image::resize($value->source_url, 320, 190) ?>" class="w">
-                </a>
-            <?php } ?>
-    </div>
-    <?php } ?>
-
-    <!--广告位-->
-    <?php if ($ad_banner_2) { ?>
-        <?php foreach ($ad_banner_2 as $value) { ?>
-            <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>">
-                <img  data-original="<?= \common\component\image\Image::resize($value->source_url, 640, 156) ?>" class="db  lazy mt10" style="width:32rem;height: 7.8rem;overflow: hidden;">
-            </a>
-        <?php } ?>
-    <?php } ?>
+    
     <!--分销方案商品列表-->
     <?php  echo \fx\widgets\Affiliate\AffiliatePlan::widget(['plan_type_code'=>'DEFAULT'])?>
 </section>
@@ -195,13 +174,14 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     }
     var swiper_content_tpl = $('#swiper_content_tpl').html();
     var source = getSourceParms();
-    $.getJSON('<?php echo Yii::$app->params["API_URL"]?>/mall/v1/ad/index?code=H5-0F-SLIDE&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
+    $.getJSON('<?php echo Yii::$app->params["API_URL"]?>/mall/v1/affiliate-plan/index?code=AF-1F&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
     if(!result.status){
         return;
     }
-
     var html= template(swiper_content_tpl, {list:result.data,from:0,to:(result.data.length-1)});
-
+    if(result.data.length>0){
+        $("#swiper_content").show();
+    }
     $("#swiper_content").html(html);
     $("img.lazy").scrollLoading({container:$(".content")});
     var swiper_banner = new Swiper('#swiper-container_banner', {

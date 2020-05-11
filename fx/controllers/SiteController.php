@@ -102,90 +102,11 @@ class SiteController extends Controller {
 
 	public function actionIndex()
 	{
+        $data = [];
+        $affiliate_plan = new AffiliatePlan();
 
-//	    return $this->redirect('/affiliate-plan/index?sourcefrom=mrhuigou&type_code=DEFAULT');
-//		if (\Yii::$app->user->isGuest) {
-//		return $this->redirect(['/site/login','redirect'=>\Yii::$app->request->getAbsoluteUrl()]);
-//		}
-//        $url = "http://m.mrhuigou.com/?sourcefrom=hssrwd&k=1&v=2";
-//        $url = $this->removeSourceAff($url);
-//        print_r($url);exit;
-//        $return = ReturnBase::findOne(['return_id'=>10267]);
-//        $this->sendToZhqd($return);exit;
-//$this->OrderCommission();
-		$data = [];
-		$advertise = new AdvertiseDetail();
-//		/*获取滚动banner*/
-		$focus_position = ['H5-1L-NAV1'];
-		$data['nav'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		//爆款
-		$focus_position = ['H5-0F-AD'];
-		$data['hot_sale'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		//通栏广告一
-		$focus_position = ['H5-TL1-AD'];
-		$data['ad_banner_1'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		//通栏广告二
-		$focus_position = ['H5-TL2-AD'];
-		$data['ad_banner_2'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-2F-PROMOTION'];
-		$data['ad_promotion'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-2F-PROMOTION1'];
-		$data['ad_promotion_12'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		//品牌特卖
-		$focus_position = ['H5-3F-BRAND'];
-		$data['ad_brand'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		//楼层广告
-		$focus_position = ['H5-1F-SECKILL'];
-		$data['firstF_SECKILL'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-1F-FREEDLY'];
-		$data['firstF_FREEDLY'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-1F-ACTION'];
-		$data['firstF_ACTION'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-1F-PROMOTION'];
-		$data['firstF_PROMOTION'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		//4F product
-		$focus_position = ['H5-4F-PRODUCT-1'];
-		$data['fourthF_PRODUCT_ONE'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-4F-PRODUCT-2'];
-		$data['fourthF_PRODUCT_TWO'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-4F-PRODUCT-3'];
-		$data['fourthF_PRODUCT_THREE'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-4F-PRODUCT-4'];
-		$data['fourthF_PRODUCT_FOUR'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-4F-PRODUCT-5'];
-		$data['fourthF_PRODUCT_FIVE'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-        $focus_position = ['H5-4F-PRODUCT-6'];
-        $data['fourthF_PRODUCT_SIX'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		//4F brand
-		$focus_position = ['H5-4F-PBRAND-1'];
-		$data['fourthF_BRAND_ONE'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-4F-PBRAND-2'];
-		$data['fourthF_BRAND_TWO'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-4F-PBRAND-3'];
-		$data['fourthF_BRAND_THREE'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-4F-PBRAND-4'];
-		$data['fourthF_BRAND_FOUR'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-4F-PBRAND-5'];
-		$data['fourthF_BRAND_FIVE'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-        $focus_position = ['H5-4F-PBRAND-6'];
-        $data['fourthF_BRAND_SIX'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		//4F brand logo
-		$focus_position = ['H5-4F-PLOGO-1'];
-		$data['fourthF_PLOGO_ONE'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-4F-PLOGO-2'];
-		$data['fourthF_PLOGO_TWO'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-4F-PLOGO-3'];
-		$data['fourthF_PLOGO_THREE'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-4F-PLOGO-4'];
-		$data['fourthF_PLOGO_FOUR'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-		$focus_position = ['H5-4F-PLOGO-5'];
-		$data['fourthF_PLOGO_FIVE'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-        $focus_position = ['H5-4F-PLOGO-6'];
-        $data['fourthF_PLOGO_SIX'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-
-        $focus_position = ['H5-1L-AD01'];
-        $data['firstF_AD01'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
-
+        $focus_position = ['AF-3F'];
+        $data['ad_banner_1'] = $affiliate_plan->getAffiliatePlanDetailByPositionCode($focus_position);
 		return $this->render('index-new', $data);
 	}
 
