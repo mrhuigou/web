@@ -58,7 +58,7 @@ class AffiliatePlanController extends Controller {
                         $data[$key] = [
                             'title' => $detail->name,
                             'image' => Image::resize($detail->source_url),
-                            'url'=> 'https://m.mrhuigou.com/page/3556.html'
+                            'url'=> Url::to(['affiliate-plan-detail/index','plan_id'=>$detail->affiliate_plan_id])
                         ];
 
                     }
@@ -107,7 +107,6 @@ class AffiliatePlanController extends Controller {
                     if(!$ad_detail_product){
                         continue;
                     }
-
                     //对商品图进行处理
                     $imagelist = '';
                     $images = $detail->product->productBase->imagelist;
@@ -119,7 +118,6 @@ class AffiliatePlanController extends Controller {
                         }
                     }
 
-
                     $data[$count] = [
                         'item_id'=>$ad_detail_product->product_base_id,
                         'item_code'=>$ad_detail_product->product_base_code,
@@ -128,10 +126,10 @@ class AffiliatePlanController extends Controller {
                         'image' => Image::resize(($detail->image_url?:$imagelist)?:'',320,320),
                         'sale_price' => $detail->price,
                         'vip_price' => $ad_detail_product->vip_price,
-                        'cur_price' => $ad_detail_product->getPrice(),
-                        'stock'=>$ad_detail_product->getStockCount($detail->affiliate_plan_id),
+                        'cur_price' => $detail->getPrice(),
+                        'stock'=>$ad_detail_product->getStockCount(0,$detail->affiliate_plan_id),
                         'beintoinv'=>$ad_detail_product->beintoinv,//判断是否下架 1上架
-                        'url'=>Url::to(['product/index','shop_code'=>$ad_detail_product->store_code,'product_code'=>$ad_detail_product->product_code,'affiliate_plan_id'=>$detail->affiliate_plan_id]),//'/'.$ad_detail->product->store_code."-".$ad_detail->product->product_code.".html"
+                        'url'=>Url::to(['product/index','shop_code'=>$ad_detail_product->store_code,'product_code'=>$ad_detail_product->product_code,'affiliate_plan_id'=>$detail->affiliate_plan_id]),
                     ];
                     $count ++ ;
 

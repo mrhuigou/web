@@ -19,6 +19,7 @@ $config = [
                 // '<controller:\w+>/<action:\w+>' => '<controller>/<action:\w+>',
                 'oauth2/<action:\w+>' => 'oauth2/default/<action>',
                 'shop/<action:\w+>' => 'shop/default/<action>',
+                '<shop_code:\w+>-<affiliate_plan_id:\w+>-<product_code:\w+>.html' => 'product/index',
                 '<shop_code:\w+>-<product_code:\w+>.html' => 'product/index',
             ],
         ],
