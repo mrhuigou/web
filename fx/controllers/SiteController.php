@@ -186,40 +186,6 @@ class SiteController extends Controller {
         $focus_position = ['H5-1L-AD01'];
         $data['firstF_AD01'] = $advertise->getAdvertiserDetailByPositionCode($focus_position);
 
-//====================================================获取当前进行的分销方案 商品列表=====================================
-        $plan_code = \Yii::$app->request->get('plan_code');
-        $plan_type_code = \Yii::$app->request->get('plan_type_code');
-        $plan_type_code = 'DEFAULT';
-        //获取分销方案code编码
-        if(!$plan_code){
-            if ($model = AffiliatePlanType::findOne(['code' => $plan_type_code, 'status' => 1])) {
-                $plans = AffiliatePlan::find()->where(['type'=>$model->code,'status'=>1])->andWhere(['and','date_start < NOW()','date_end > NOW()'])->orderBy('date_start asc,date_end desc,affiliate_plan_id desc')->all();
-                if(empty($plans)){
-                    throw new NotFoundHttpException("没有找到相关分销方案");
-                }
-                $plan_code = $plans[0]->code;
-            }else{
-                throw new NotFoundHttpException("没有找到相关分销方案类型");
-            }
-        }
-
-        //正在进行的方案
-        $affiliate_plan = AffiliatePlan::find()->where(['status' => 1,'code'=>$plan_code])->andWhere(['<', 'date_start', date('Y-m-d H:i:s')])->andWhere(['>', 'date_end', date('Y-m-d H:i:s')])->one();
-        $data['products'] = [];
-
-        if ($affiliate_plan) {
-
-            if ($model = AffiliatePlanType::findOne(['code' => $affiliate_plan->type, 'status' => 1])) {
-            }else{
-                throw new NotFoundHttpException("没有找到相关分销方案类型");
-            }
-            $data['products'] = AffiliatePlanDetail::find()->where(['status' => 1, 'affiliate_plan_id' => $affiliate_plan->affiliate_plan_id])->orderBy('priority asc')->all();
-
-        } else {
-            throw new NotFoundHttpException("没有找到相关分销方案");
-        }
-//====================================================获取当前进行的分销方案 商品列表=====================================
-
 		return $this->render('index-new', $data);
 	}
 
