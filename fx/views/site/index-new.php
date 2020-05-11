@@ -100,7 +100,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         <ul class="pro-list23 pt10">
             <?php foreach ($ad_banner_1 as $key => $value) { ?>
                     <li class="clearfix mb5 pl5 pr5" style="overflow: hidden;">
-                        <a href="<?= 'https://m.mrhuigou.com/page/3556.html' ?>">
+                        <a href="<?= \yii\helpers\Url::to(['affiliate-plan-detail/index','plan_id'=>$value->affiliate_plan_id]) ?>">
                             <img
                                     data-original="<?= \common\component\image\Image::resize($value->source_url) ?>"
                                     title="<?php echo $value->name; ?>" alt="<?= $value->name ?>"
@@ -138,7 +138,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         </div>
     </div>
 </script>
-    
+
     <!--分销方案商品列表-->
     <?php  echo \fx\widgets\Affiliate\AffiliatePlan::widget(['plan_type_code'=>'DEFAULT'])?>
 </section>
