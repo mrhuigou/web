@@ -1,8 +1,8 @@
 <?php
 namespace fx\controllers;
 
+use api\models\V1\AffiliatePlan;
 use api\models\V1\Page;
-use fx\widgets\Affiliate\AffiliatePlan;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -18,8 +18,13 @@ class AffiliatePlanDetailController extends Controller
             return $this->redirect(['/site/login','redirect'=>\Yii::$app->request->getAbsoluteUrl()]);
         }
 
-        $plan_id = Yii::$app->request->get("plan_id");
-        $plan = \api\models\V1\AffiliatePlan::findOne($plan_id);
+        if(!$plan_id = Yii::$app->request->get("plan_id")){
+            $position = Yii::$app->request->get("position");
+            if($affiliatePlan=AffiliatePlan::find()->where(['and',"position='".$position."'",'date_start<=NOW()','date_end>=NOW()','status=1'])->one()){
+                $plan_id = $affiliatePlan->affiliate_plan_id;
+            }
+        }
+        $plan = AffiliatePlan::findOne($plan_id);
 
         if(!empty($plan)){
             return $this->render("index",['plan'=>$plan]);

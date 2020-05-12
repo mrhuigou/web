@@ -121,7 +121,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         <p class="fl countdown">
             <span class="hour_show">00</span>:<span class="minute_show">00</span>:<span class="second_show">00</span>
         </p>
-        <a class="fr f12 red mt2" href="<?=\yii\helpers\Url::to(['/promotion/index','subject'=>'PANIC'])?>">更多&gt;&gt;</a>
+        <a class="fr f12 red mt2" href="<?=\yii\helpers\Url::to(['/affiliate-plan-detail/index','position'=>'AF-4F'])?>">更多&gt;&gt;</a>
     </div>
     <div class="swiper-container  " id="swiper-container-sales">
         <div class="swiper-pagination swiper-pagination-qg" style="position: relative;"></div>
