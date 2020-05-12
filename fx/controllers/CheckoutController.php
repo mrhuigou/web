@@ -61,7 +61,7 @@ class CheckoutController extends \yii\web\Controller {
 		$cart_datas = [];
         $cart_warehouses = [];
 		foreach ($cart as $value) {
-			if (!$value->hasStock()) {
+			if (!$value->hasStock($value->affiliate_plan_id)) {
 				return $this->redirect(['/cart/index']);
 			}
 			$cart_datas[$value->store_id][] = $value;
