@@ -88,7 +88,14 @@ class AffiliatePlanController extends Controller {
         $message = "";
         $data = [];
         try {
-            if ($code = \Yii::$app->request->get('code')) {//方案code
+            $code = \Yii::$app->request->get('code');
+            if(!$code){//通过位置编码获取 正在进行的方案code
+                $position = \Yii::$app->request->get('position');
+                if($affiliatePlan=AffiliatePlan::find()->where(['and',"position='".$position."'",'date_start<=NOW()','date_end>=NOW()','status=1'])->one()){
+                    $code = $affiliatePlan->code;
+                }
+            }
+            if ($code) {//方案code
                 $plan = AffiliatePlan::findOne(['code'=>$code]);
                 if($plan->status && $plan->planType->status){
                     //获取所有的商品
@@ -139,7 +146,7 @@ class AffiliatePlanController extends Controller {
             $status = 0;
             $message = $e->getMessage();
         }
-        $data = ['status' => $status, 'data' => $data, 'message' => $message];
+        $data = ['status' => $status, 'data' => $data, 'promotion'=>['title'=>$plan->name,'timestamp'=>strtotime($plan->date_end)-time()], 'message' => $message];
         if (Yii::$app->request->get('callback')) {
             Yii::$app->getResponse()->format = "jsonp";
             return [

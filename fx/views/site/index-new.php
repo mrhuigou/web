@@ -209,7 +209,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     });
     });
     var skill_content_tpl = $('#skill_content_tpl').html();
-    $.getJSON('<?php echo Yii::$app->params["API_URL"]?>/mall/v1/promotion/subject?subject=PANIC&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
+    $.getJSON('<?php echo Yii::$app->params["API_URL"]?>/mall/v1/affiliate-plan/product?position=AF-4F&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
     var html= template(skill_content_tpl, {promotion:result.promotion,list:result.data,from:0,to:(result.data.length-1) });
     $("#skill_content").html(html);
     $("img.lazy").scrollLoading({container:$(".content")});
