@@ -211,7 +211,7 @@ $this->title = '商品详情';
 				</a>
 			</div>
 	<?php if($model->online_status){?>
-		<?php if($model->getStockCount()>0){ ?>
+		<?php if($model->getStockCount($affiliate_plan_id,$product->product_code)>0){ ?>
 			<a class="flex-item-4 flex-row flex-middle pt2 disabled graybg white f14" id="J_LinkBasket"   href="javascript:;" style="line-height: 52px;">
 				加入购物车
 			</a>

@@ -279,7 +279,8 @@ class ProductBase extends \yii\db\ActiveRecord
                     $data[$product->sku]=[
                         'price'=>number_format($product->getPrice($affiliate_plan_id),2),
                         'sale_price'=>number_format($product->price,2),
-                        'count'=>max(0,$product->stockCount),
+//                        'count'=>max(0,$product->stockCount),
+                        'count'=>max(0,$product->getStockCount(0,$affiliate_plan_id)),
                         'format'=>$product->format,
                         'code'=>$product->product_code,
                         'stock_type' => $stock_type,
@@ -291,7 +292,8 @@ class ProductBase extends \yii\db\ActiveRecord
                     $data['0:'.$product->product_id]=[
                         'price'=>number_format($product->getPrice($affiliate_plan_id),2),
                         'sale_price'=>number_format($product->price,2),
-                        'count'=>$product->stockCount,
+//                        'count'=>$product->stockCount,
+                        'count'=>$product->getStockCount(0,$affiliate_plan_id),
                         'stock_type' => $stock_type,
                         'low_limit' => $this->category ? $this->category->low_limit : 0,
                         'format'=>$product->format,
@@ -358,14 +360,21 @@ class ProductBase extends \yii\db\ActiveRecord
         }
     return $status;
     }
-    public function getStockCount(){
+    public function getStockCount($affiliate_plan_id=0,$product_code=''){
         $stock_count=0;
-        if($this->bepresell){
-            $stock_count=9999;
+
+        if($affiliate_plan_id && $product_code){
+            if($info = AffiliatePlanDetail::findOne(['status'=>1,'affiliate_plan_id'=> $affiliate_plan_id,'product_code'=> $product_code])){
+                $stock_count = $info->max_quantity - $info->tmp_qty;
+            }
         }else{
-            foreach($this->product as $product){
-                if($product->beintoinv=='1'){
-                    $stock_count+=$product->stockCount;
+            if($this->bepresell){
+                $stock_count=9999;
+            }else{
+                foreach($this->product as $product){
+                    if($product->beintoinv=='1'){
+                        $stock_count+=$product->stockCount;
+                    }
                 }
             }
         }

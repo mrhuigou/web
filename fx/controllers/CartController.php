@@ -30,7 +30,7 @@ class CartController extends \yii\web\Controller {
                 $sku = \Yii::$app->request->post('sku') ? \Yii::$app->request->post('sku') : '';
                 $product_base_id = \Yii::$app->request->post('product_base_id') ? \Yii::$app->request->post('product_base_id') : 0;
                 $qty = \Yii::$app->request->post('qty') ? \Yii::$app->request->post('qty') : 1;
-                $params['affiliate_plan_id'] = \Yii::$app->request->post('affiliate_plan_id') ? \Yii::$app->request->post('affiliate_plan_id') : 0;
+                $params['affiliate_plan_id'] = $affiliate_plan_id = \Yii::$app->request->post('affiliate_plan_id') ? \Yii::$app->request->post('affiliate_plan_id') : 0;
                 if (strpos($sku, ":")) {
                     if (substr($sku, 0, 1) != 0) {
                         $model = Product::findOne(['sku' => $sku, 'product_base_id' => $product_base_id, 'beintoinv' => 1]);
@@ -42,8 +42,8 @@ class CartController extends \yii\web\Controller {
                 }
 
                 if ($model && $qty > 0) {
-                    if($stock_count=$model->getStockCount()){
-                        if($limit_max_qty=$model->getLimitMaxQty(\Yii::$app->user->getId())){
+                    if($stock_count=$model->getStockCount(0,$affiliate_plan_id)){
+                        if($limit_max_qty=$model->getLimitMaxQtyFx($affiliate_plan_id)){
                             $stock_count=min($limit_max_qty,$stock_count);
                         }
                     }
@@ -51,7 +51,7 @@ class CartController extends \yii\web\Controller {
                         if (\Yii::$app->fxcart->hasPosition($model->getCartPositionFx($params)->getId())) {
                             $position = \Yii::$app->fxcart->getPositionById($model->getCartPositionFx($params)->getId());
                             $quantity = $qty + $position->getQuantity();
-                            $stock_count=$model->getStockCount($quantity);
+                            $stock_count=$model->getStockCount($quantity,$affiliate_plan_id);
                             if ($quantity > 100 || $quantity > $stock_count) {
                                 throw new ErrorException('最大可购买' . min($stock_count, 100) . '件');
                             }
@@ -234,7 +234,7 @@ class CartController extends \yii\web\Controller {
                 $sku = \Yii::$app->request->post('sku') ? \Yii::$app->request->post('sku') : '';
                 $product_base_id = \Yii::$app->request->post('product_base_id') ? \Yii::$app->request->post('product_base_id') : 0;
                 $qty = \Yii::$app->request->post('qty') ? \Yii::$app->request->post('qty') : 1;
-                $params['affiliate_plan_id'] = \Yii::$app->request->post('affiliate_plan_id') ? \Yii::$app->request->post('affiliate_plan_id') : 0;
+                $params['affiliate_plan_id'] = $affiliate_plan_id = \Yii::$app->request->post('affiliate_plan_id') ? \Yii::$app->request->post('affiliate_plan_id') : 0;
                 if(strpos($sku,":")){
                     if(substr($sku,0,1)!=0){
                         $model=Product::findOne(['sku'=>$sku,'product_base_id'=>$product_base_id,'beintoinv'=>1]);
@@ -245,8 +245,8 @@ class CartController extends \yii\web\Controller {
                     $model=Product::findOne(['product_id'=>$sku ,'beintoinv'=>1]);
                 }
                 if ($model && $qty>0) {
-                    if($stock_count=$model->getStockCount()){
-                        if($limit_max_qty=$model->getLimitMaxQty(\Yii::$app->user->getId())){
+                    if($stock_count=$model->getStockCount(0,$affiliate_plan_id)){
+                        if($limit_max_qty=$model->getLimitMaxQtyFx($affiliate_plan_id)){
                             $stock_count=min($limit_max_qty,$stock_count);
                         }
                     }
