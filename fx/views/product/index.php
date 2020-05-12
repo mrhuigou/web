@@ -79,20 +79,6 @@ $this->title = '商品详情';
 
 							<!--卖点-->
 						<p class="gray9 f12 lh150 red">
-                                <!--促销方案详情-->
-                                <?php if ($model->promotion) { ?>
-                                    <?php foreach ($model->promotion as $promotion) { ?>
-                                            <?php if ($promotion->promotion_detail_title) { ?>
-                                                <?= Html::encode('[促]'.$promotion->promotion_detail_title) ?>
-                                            <?php }?>
-                                    <?php }?>
-                                <?php }?>
-                                <!--优惠券详情-->
-                                <?php if ($model->coupon) { ?>
-                                    <?php foreach ($model->coupon as $coupon) { ?>
-                                            <?= '[券]'.$coupon->comment; ?>
-                                    <?php }?>
-                                <?php }?>
                                 <?php if ($model->description->meta_description) { ?>
                                     <?= Html::encode($model->description->meta_description) ?>
                                 <?php } ?>
@@ -211,7 +197,7 @@ $this->title = '商品详情';
 				</a>
 			</div>
 	<?php if($model->online_status){?>
-		<?php if($model->getStockCount($affiliate_plan_id,$product->product_code)>0){ ?>
+		<?php if($model->getStockCount($affiliate_plan_id)>0){ ?>
 			<a class="flex-item-4 flex-row flex-middle pt2 disabled graybg white f14" id="J_LinkBasket"   href="javascript:;" style="line-height: 52px;">
 				加入购物车
 			</a>

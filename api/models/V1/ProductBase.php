@@ -360,12 +360,14 @@ class ProductBase extends \yii\db\ActiveRecord
         }
     return $status;
     }
-    public function getStockCount($affiliate_plan_id=0,$product_code=''){
+    public function getStockCount($affiliate_plan_id=0){
         $stock_count=0;
 
-        if($affiliate_plan_id && $product_code){
-            if($info = AffiliatePlanDetail::findOne(['status'=>1,'affiliate_plan_id'=> $affiliate_plan_id,'product_code'=> $product_code])){
-                $stock_count = $info->max_quantity - $info->tmp_qty;
+        if($affiliate_plan_id){
+            foreach($this->product as $product){
+                if($product->beintoinv=='1'){
+                    $stock_count+=$product->getStockCount(0,$affiliate_plan_id);
+                }
             }
         }else{
             if($this->bepresell){
