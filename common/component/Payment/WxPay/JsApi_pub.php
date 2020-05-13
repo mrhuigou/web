@@ -20,9 +20,9 @@ class JsApi_pub extends Common_util_pub
     /**
      * 	作用：生成可以获得code的url
      */
-    function createOauthUrlForCode($redirectUrl,$state="STATE",$scope='snsapi_base')
+    function createOauthUrlForCode($redirectUrl,$state="STATE",$scope='snsapi_base',$appid='')
     {
-        $urlObj["appid"] = WxPayConf_pub::APPID;
+        $urlObj["appid"] = !empty($appid)?$appid:WxPayConf_pub::APPID;
         $urlObj["redirect_uri"] = "$redirectUrl";
         $urlObj["response_type"] = "code";
         $urlObj["scope"] = $scope ? $scope :"snsapi_base";
@@ -34,10 +34,14 @@ class JsApi_pub extends Common_util_pub
     /**
      * 	作用：生成可以获得openid的url
      */
-    function createOauthUrlForOpenid()
+    function createOauthUrlForOpenid($wechat2=false)
     {
         $urlObj["appid"] = WxPayConf_pub::APPID;
         $urlObj["secret"] = WxPayConf_pub::APPSECRET;
+        if($wechat2){
+            $urlObj["appid"] = WxPayConf_pub::APPID2;
+            $urlObj["secret"] = WxPayConf_pub::APPSECRET2;
+        }
         $urlObj["code"] = $this->code;
         $urlObj["grant_type"] = "authorization_code";
         $bizString = $this->formatBizQueryParaMap($urlObj, false);
@@ -48,9 +52,9 @@ class JsApi_pub extends Common_util_pub
     /**
      * 	作用：通过curl向微信提交code，以获取openid
      */
-    function getOpenid()
+    function getOpenid($wechat2=false)
     {
-        $url = $this->createOauthUrlForOpenid();
+        $url = $this->createOauthUrlForOpenid($wechat2);
         //初始化curl
         $ch = curl_init();
         //设置超时

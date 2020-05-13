@@ -269,7 +269,10 @@ class SiteController extends Controller {
             $state = AuthState::create($url);
 		    if($from_affiliate_uid==259){
                 $base_url="http://0532.qingdaonews.com/api/jiarun/wxauth?".http_build_query(['redirect_uri'=>urlencode(Url::to(['/site/auth-zhqd'],true)),'state_ext'=>$state]);
-            }else{
+            }elseif ($from_affiliate_uid==278){//白金每日惠购
+                $base_url=Yii::$app->wechat2->getOauth2AuthorizeUrl(Url::to(['site/weixin2'], true),$state,'snsapi_userinfo');
+            }
+            else{
                 $base_url=Yii::$app->wechat->getOauth2AuthorizeUrl(Url::to(['site/weixin'], true),$state,'snsapi_userinfo');
             }
 			return $this->redirect($base_url);
@@ -823,6 +826,109 @@ class SiteController extends Controller {
 		}
 	}
 
+    public function actionWeixin2()
+    {
+        $code = Yii::$app->request->get("code");
+        $state = AuthState::get(Yii::$app->request->get("state"));
+        Yii::error('source_from_begin:$code:'.json_encode($code));
+        if ($result = Yii::$app->wechat2->getOauth2AccessToken($code, $grantType = 'authorization_code')) {
+            Yii::error('source_from_begin:$result:'.json_encode($result));
+            $identifier = isset($result['unionid']) ? $result['unionid'] : $result['openid'];
+            if (!$model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'identifier' => [$identifier, md5($identifier)]])) {
+                $model = new CustomerAuthentication();
+                $model->status = 0;
+                $model->date_added = date('Y-m-d H:i:s', time());
+            }
+            Yii::error('source_from_begin:$customerAuthentication:'.json_encode($model));
+            if ($UserInfo = Yii::$app->wechat2->getSnsMemberInfo($result['openid'], $result['access_token'])) {
+                Yii::error('source_from_begin:$UserInfo:'.json_encode($UserInfo));
+                if ($UserInfo['sex'] == 1) {
+                    $sex = '男';
+                } elseif ($UserInfo['sex'] == 2) {
+                    $sex = '女';
+                } else {
+                    $sex = '未知';
+                }
+                $model->provider = 'WeiXin';
+                $model->display_name = $UserInfo['nickname'] ? $UserInfo['nickname'] : "匿名";
+                $model->gender = $sex;
+                $model->photo_url = $UserInfo['headimgurl'];
+                $model->date_added = date('Y-m-d H:i:s', time());
+                $model->identifier = $identifier;
+                $model->openid = $UserInfo['openid'];
+                $model->save();
+            } else {
+                throw new NotFoundHttpException("获取用户信息失败");
+            }
+            Yii::error('source_from_begin:$customer:'.json_encode(User::findIdentity($model->customer_id)));
+            if (!$customer = User::findIdentity($model->customer_id)) {
+                $customer = new User();
+                $customer->nickname = $model->display_name;
+                $customer->firstname = $model->display_name;
+                $customer->gender = $model->gender;
+                $customer->photo = $model->photo_url;
+                $customer->setPassword('weinxin@365jiarun');
+                $customer->generateAuthKey();
+                $customer->email_validate = 0;
+                $customer->telephone_validate = 0;
+                $customer->customer_group_id = 1;
+                $customer->approved = 1;
+                $customer->status = 1;
+                $customer->user_agent = Yii::$app->request->getUserAgent();
+                $customer->date_added = date('Y-m-d H:i:s', time());
+                if(Yii::$app->session->get('from_affiliate_uid')){
+                    $customer->affiliate_id = Yii::$app->session->get('from_affiliate_uid');
+                }
+                if (!$customer->save(false)) {
+                    throw new NotFoundHttpException("用户注册失败");
+                }
+                if ($auth = CustomerAuthentication::findOne(['customer_authentication_id' => $model->customer_authentication_id])) {
+                    $auth->customer_id = $customer->customer_id;
+                    if (!$auth->save(false)) {
+                        throw new NotFoundHttpException("用户绑定微信失败");
+                    }
+                }
+                Yii::error('source_from_begin:'.Yii::$app->session->get('source_from_uid'));
+                if ($share_user_id = Yii::$app->session->get('source_from_uid')) {
+                    Yii::error('source_from_begin,$share_user:'.json_encode(User::findIdentity($share_user_id)));
+                    if (User::findIdentity($share_user_id)) {
+
+                        if (!$auth = CustomerFollower::findOne(['follower_id' => $customer->getId()])) {
+                            $customer_share_user = new CustomerFollower();
+                            $customer_share_user->customer_id = $share_user_id;
+                            $customer_share_user->follower_id = $customer->getId();
+                            $customer_share_user->status = 0;
+                            $customer_share_user->creat_at = time();
+                            $customer_share_user->save();
+                            Yii::error('source_from_begin,$customer_share_user:'.json_encode($customer_share_user));
+                        }
+                    }
+                }
+            }
+            if(Yii::$app->session->get('from_affiliate_uid')){
+                $aff = Affiliate::findOne(['affiliate_id'=>Yii::$app->session->get('from_affiliate_uid')]);
+                if($aff->point_id){ //接入商有积分
+                    $point_customer = PointCustomer::findOne(['customer_id'=>$customer->getId(),'point_id'=>$aff->point_id]);
+                    if(!$point_customer){
+                        //只有不存在 point_customer时才会新增point_customer
+                        //$points = $point_customer->point->pointByCurl; //实时获取points 消费时候不能
+                        $point_customer = new PointCustomer();
+                        $point_customer->point_id = $aff->point_id;
+                        $point_customer->customer_id = $customer->getId();
+                        $point_customer->points = 0;  //消费时候不能直接用该字段
+                        $point_customer->date_added = date("Y-m-d H:i:s");
+                        $point_customer->date_modified = date("Y-m-d H:i:s");
+                        $point_customer->save();
+                    }
+                }
+            }
+            Yii::$app->user->login($customer, 3600 * 24 * 7);
+            \Yii::$app->cart->loadFromLogin();
+            return $this->redirect($state);
+        } else {
+            throw new NotFoundHttpException("用户授权失败！");
+        }
+    }
 	/**
 	 * Success Callback
 	 * @param QqAuth|WeiboAuth $client

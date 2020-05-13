@@ -58,5 +58,14 @@ return [
 		    'appSecret' => 'dcedb30a7ec916a09a9fc5e82fbbd6f7',
 		    'token' => '1q2w3e4r'
 	    ],
+        'wechat2' => [
+            'class' => 'common\component\weixin\Wechat',
+//                  'appId' => 'wx587c246fefd26199',
+//                  'appSecret' => '434835003061e422aec7f95716d49830',
+            'appId' => 'wx3a4ab807648462b0',
+            'appSecret' => '2e5921c27b7893bd34e8de7374946b79',
+            'token' => '1q2w3e4r'
+        ],
+
     ],
 ];
