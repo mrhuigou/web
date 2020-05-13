@@ -59,7 +59,10 @@ class WxpayAction extends Action{
 
             if($data && isset($data['openid'])){
 	            Yii::$app->session->set('open_id',$data['openid']);
-	            Yii::$app->session->set('union_id',$data['unionid']);
+	            if(isset($data['unionid']) && !empty($data['unionid'])){
+                    Yii::$app->session->set('union_id',$data['unionid']);
+                }
+//	            Yii::$app->session->set('union_id',$data['unionid']);
             }
             return Yii::$app->response->redirect(urldecode($state));
         }
