@@ -16,11 +16,14 @@ class UnifiedOrder_pub extends Wxpay_client_pub
     /**
      * 生成接口参数xml
      */
-    function createXml()
+    function createXml($wechat2=false)
     {
         try
         {
             $this->parameters["appid"] = WxPayConf_pub::APPID;//公众账号ID
+            if($wechat2){
+                $this->parameters["appid"] = WxPayConf_pub::APPID2;//公众账号ID
+            }
             $this->parameters["mch_id"] = WxPayConf_pub::MCHID;//商户号
 //            $this->parameters["spbill_create_ip"] = \Yii::$app->request->getUserIP();//终端ip
             $this->parameters["spbill_create_ip"] = explode(',', \Yii::$app->request->getUserIP())[0];//终端ip
@@ -45,9 +48,9 @@ class UnifiedOrder_pub extends Wxpay_client_pub
     /**
      * 获取prepay_id
      */
-    function getPrepayId()
+    function getPrepayId($wechat2=false)
     {
-        $this->postXml();
+        $this->postXml($wechat2);
         if($this->response){
             $this->result = $this->xmlToArray($this->response);
             if(isset($this->result['prepay_id']) && $this->result["prepay_id"]){

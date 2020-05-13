@@ -22,9 +22,12 @@ class Wxpay_client_pub extends Common_util_pub
     /**
      * 	作用：设置标配的请求参数，生成签名，生成接口参数xml
      */
-    function createXml()
+    function createXml($wechat2=false)
     {
         $this->parameters["appid"] = WxPayConf_pub::APPID;//公众账号ID
+        if($wechat2){
+            $this->parameters["appid"] = WxPayConf_pub::APPID2;//公众账号ID
+        }
         $this->parameters["mch_id"] = WxPayConf_pub::MCHID;//商户号
         $this->parameters["nonce_str"] = $this->createNoncestr();//随机字符串
         $this->parameters["sign"] = $this->getSign($this->parameters);//签名
@@ -34,9 +37,9 @@ class Wxpay_client_pub extends Common_util_pub
     /**
      * 	作用：post请求xml
      */
-    function postXml()
+    function postXml($wechat2=false)
     {
-        $xml = $this->createXml();
+        $xml = $this->createXml($wechat2);
         $this->response = $this->postXmlCurl($xml,$this->url,$this->curl_timeout);
         return $this->response;
     }

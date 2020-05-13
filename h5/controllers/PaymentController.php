@@ -34,7 +34,13 @@ class PaymentController extends \yii\web\Controller
         }
         $trade_no=Yii::$app->request->get('trade_no');
         $useragent=\Yii::$app->request->getUserAgent();
-        if(strpos(strtolower($useragent), 'micromessenger') && !$open_id=\Yii::$app->session->get('open_id')){
+        $from_affiliate_uid=Yii::$app->session->get('from_affiliate_uid');
+        if($from_affiliate_uid && $from_affiliate_uid==278){
+            $open_id=\Yii::$app->session->get('open_id2');
+        }else{
+            $open_id=\Yii::$app->session->get('open_id');
+        }
+        if(strpos(strtolower($useragent), 'micromessenger') && !$open_id){
             return $this->redirect(['/payment/wx-js-call','path'=>Url::to(['/payment/index','trade_no'=>$trade_no,'showwxpaytitle'=>1],true)]);
         }
         try{
@@ -80,17 +86,31 @@ class PaymentController extends \yii\web\Controller
             //设置统一支付接口参数
             //设置必填参数
 	        $useragent=\Yii::$app->request->getUserAgent();
-            if(strpos(strtolower($useragent), 'micromessenger') &&  ($open_id=\Yii::$app->session->get('open_id'))){
+            $from_affiliate_uid=Yii::$app->session->get('from_affiliate_uid');
+            if($from_affiliate_uid && $from_affiliate_uid==278){
+                $open_id=\Yii::$app->session->get('open_id2');
+            }else{
+                $open_id=\Yii::$app->session->get('open_id');
+            }
+            if(strpos(strtolower($useragent), 'micromessenger') &&  ($open_id)){
 	            $unifiedOrder->setParameter("openid", "$open_id");//用户ID
 	            $unifiedOrder->setParameter("body","每日惠购");//商品描述
 	            $unifiedOrder->setParameter("out_trade_no", "$order->merge_code"."_JSAPI");//商户订单号
+                if($from_affiliate_uid && $from_affiliate_uid==278){
+                    $unifiedOrder->setParameter("out_trade_no", "$order->merge_code"."_JSAPI2");//商户订单号
+                }
 	            $unifiedOrder->setParameter("total_fee", $order->total * 100);//总金额
 	            $unifiedOrder->setParameter("notify_url", "https://open.mrhuigou.com/payment/weixin");//通知地址
 	            $unifiedOrder->setParameter("trade_type", "JSAPI");//交易类型
-	            $prepay_id = $unifiedOrder->getPrepayId();
+                $wechat2 = false;
+                if($from_affiliate_uid && $from_affiliate_uid==278){
+                    $wechat2=true;
+                }
+                $prepay_id = $unifiedOrder->getPrepayId($wechat2);
+//                $prepay_id = $unifiedOrder->getPrepayId();
 	            if($prepay_id){
 		            $jsApi->setPrepayId($prepay_id);
-		            $jsApiParameters = $jsApi->getParameters();
+		            $jsApiParameters = $jsApi->getParameters($wechat2);
 		            return Json::encode(['status'=>1,'data'=>$jsApiParameters]);
 	            }else{
 		            throw new NotFoundHttpException("微信支付网关异常！");

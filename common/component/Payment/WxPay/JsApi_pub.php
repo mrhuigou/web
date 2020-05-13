@@ -94,9 +94,12 @@ class JsApi_pub extends Common_util_pub
     /**
      * 	作用：设置jsapi的参数
      */
-    public function getParameters()
+    public function getParameters($wechat2=false)
     {
         $jsApiObj["appId"] = WxPayConf_pub::APPID;
+        if($wechat2){
+            $jsApiObj["appId"] = WxPayConf_pub::APPID2;
+        }
         $timeStamp = time();
         $jsApiObj["timeStamp"] = "$timeStamp";
         $jsApiObj["nonceStr"] = $this->createNoncestr();
