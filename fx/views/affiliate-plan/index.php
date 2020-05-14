@@ -25,8 +25,8 @@ $this->title = "每日惠购";
     <!--团长头像-->
     <div class="fx-head-img" style="padding: 0 0;">
         <div class="  flex-col flex-middle p10">
-            <div class="flex-item-3">
-                <a href="#" style=" line-height: 140px;">
+            <div class="flex-item-3" style="width: 0;">
+                <a href="#" style=" line-height: 120px;">
                     <img src="<?= \common\component\image\Image::resize(!empty($affiliate_info)?$affiliate_info->customer->photo:'/assets/images/defaul.png', 100, 100) ?>"
                          alt="每日惠购" class="ava mava">
                 </a>
@@ -135,7 +135,7 @@ $this->title = "每日惠购";
                     ?>
                     <div class="flex-item-7 flex-row   p5">
                         <div class="w">
-                            <h2 class="row-one"><?=$value->product->description->name?></h2>
+                            <h2 class=""><?=$value->product->description->name?></h2>
                             <p class="row-one red f13 mt5"><?php echo $value->title?></p>
                             <p class="gray9  mt2"><?=$value->product->getSku()?></p>
                         </div>
