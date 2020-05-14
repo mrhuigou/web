@@ -192,6 +192,9 @@ class AffiliateForm extends Affiliate {
             if($model->mode == 'DOWN_LINE'){
                 $return_data['ADDRESS'] = $model->address;
             }
+            else{
+                $return_data['ADDRESS'] = "";
+            }
             //自动同步后台
             if($return_data){
                 $erp_wsdl = Yii::$app->params['ERP_SOAP_URL'];

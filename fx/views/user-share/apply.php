@@ -22,7 +22,7 @@ $this->title ='申请团长';
         <?= $form->field($model, 'zone_name', ['template' => '{input}'])->hiddenInput(['id' => 'province'])->label(false) ?>
         <?= $form->field($model, 'city_name', ['template' => '{input}'])->hiddenInput(['id' => 'city'])->label(false) ?>
         <?= $form->field($model, 'district_name',['template' => '{input}'])->hiddenInput(['id' => 'district'])?>
-<!--        --><?//= $form->field($model, 'mode', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'DOWN_LINE'=>'线下', 'ON_LINE'=>'线上'])->hiddenInput()->label(false)?>
+        <?= $form->field($model, 'mode', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'DOWN_LINE'=>'线下', 'ON_LINE'=>'线上'])->hiddenInput()->label(false)?>
 
         <ul class="line-book mt10 whitebg">
 <!--            --><?//= $form->field($model, 'mode', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'DOWN_LINE'=>'线下', 'ON_LINE'=>'线上'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline p10']],
