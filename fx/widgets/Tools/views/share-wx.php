@@ -27,7 +27,7 @@ $this->beginBlock('JS_INIT')
     imgUrl: '<?=$data['image']?>',
     success:function () {
     $.showLoading("正在加载");
-    $.post('<?=\yii\helpers\Url::to('/weixin-brage/share',true)?>',{title:'<?=$data['title']?>', desc: '<?=$data['desc']?>',link: '<?=$data['link']?>','trace_code':'<?=$data['trace_code']?>'},function(res){
+    $.post('/weixin-brage/share',{title:'<?=$data['title']?>', desc: '<?=$data['desc']?>',link: '<?=$data['link']?>','trace_code':'<?=$data['trace_code']?>'},function(res){
     $.hideLoading();
     if(res.status){
     $.toast('分享成功!');
