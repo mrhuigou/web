@@ -8,7 +8,7 @@ use common\component\Helper\Map;
 use common\component\Helper\RandomString;
 use Yii;
 class AffiliateForm extends Affiliate {
-    public $mode = 'DOWN_LINE';
+    public $mode = 'ON_LINE';
     public $rebate_type = 'product';
     public $type = 'personal';
     public $name;
@@ -25,7 +25,7 @@ class AffiliateForm extends Affiliate {
     public $in_range=1;
     public $has_other_zone;
     public $telephone;
-    public function __construct($mode='DOWN_LINE',$config = [])
+    public function __construct($mode='ON_LINE',$config = [])
     {
 //        if($model = Affiliate::findOne(['status'=>1,'customer_id'=>Yii::$app->user->getId()])){
 //            $this->mode = $model->mode;

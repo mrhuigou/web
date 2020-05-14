@@ -22,25 +22,26 @@ $this->title ='申请团长';
         <?= $form->field($model, 'zone_name', ['template' => '{input}'])->hiddenInput(['id' => 'province'])->label(false) ?>
         <?= $form->field($model, 'city_name', ['template' => '{input}'])->hiddenInput(['id' => 'city'])->label(false) ?>
         <?= $form->field($model, 'district_name',['template' => '{input}'])->hiddenInput(['id' => 'district'])?>
+<!--        --><?//= $form->field($model, 'mode', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'DOWN_LINE'=>'线下', 'ON_LINE'=>'线上'])->hiddenInput()->label(false)?>
 
         <ul class="line-book mt10 whitebg">
-            <?= $form->field($model, 'mode', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'DOWN_LINE'=>'线下', 'ON_LINE'=>'线上'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline p10']],
-                'onchange' => 'if( ($(this).find(":radio:checked").val() == "DOWN_LINE")){ 
-				$(".tab_1").show();
-				}else if($(this).find(":radio:checked").val() =="ON_LINE"){
-				   $(".tab_1").hide();
-                 }
-				else{
-				   $(".tab_1").show();
-				} 
-				 '
-                ])?>
-            <p class="org f12 lh150">选择线下模式时，用户不方便收货时,须代收</p>
+<!--            --><?//= $form->field($model, 'mode', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'DOWN_LINE'=>'线下', 'ON_LINE'=>'线上'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline p10']],
+//                'onchange' => 'if( ($(this).find(":radio:checked").val() == "DOWN_LINE")){
+//				$(".tab_1").show();
+//				}else if($(this).find(":radio:checked").val() =="ON_LINE"){
+//				   $(".tab_1").hide();
+//                 }
+//				else{
+//				   $(".tab_1").show();
+//				}
+//				 '
+//                ])?>
+<!--            <p class="org f12 lh150">选择线下模式时，用户不方便收货时,须代收</p>-->
 
             <!--            --><?//= $form->field($model, 'type', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'personal'=>'个人', 'company'=>'公司'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline p10']],])?>
 <!--            --><?//= $form->field($model, 'rebate_type', ['labelOptions' => ['class' => 'fb f14 p10 ']])->inline()->radioList([ 'order'=>'订单', 'product'=>'商品'], ['itemOptions' => ['labelOptions' => ['class' => 'radio-inline p10']],])?>
             <?= $form->field($model, 'name', ['labelOptions' => ['class' => 'pr5 ']])->textInput(['maxlength' => 255, 'placeholder' => '请填写名称'])->label('名称'); ?>
-            <?= $form->field($model, 'username', ['inputOptions' => ["placeholder" => '请填写展示名称']])->label('展示名称'); ?>
+<!--            --><?//= $form->field($model, 'username', ['inputOptions' => ["placeholder" => '请填写展示名称']])->label('展示名称'); ?>
 <!--            --><?//= $form->field($model, 'description', ['labelOptions' => ['class' => 'pr5 ']])->textInput(['maxlength' => 255, 'placeholder' => '请填写描述'])->label('描述'); ?>
             <?= $form->field($model, 'contact_name', ['labelOptions' => ['class' => 'pr5 ']])->textInput(['maxlength' => 255, 'placeholder' => '请填写联系人名称'])->label('联系人'); ?>
             <?= $form->field($model, 'telephone', ['inputOptions' => ["placeholder" => '请填写联系电话']])->label('联系电话'); ?>
