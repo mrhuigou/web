@@ -175,7 +175,7 @@ $this->title = '用户中心';
 	</div>
 </section>
 </div>
-<?= fx\widgets\MainMenu::widget(); ?>
+<?//= fx\widgets\MainMenu::widget(); ?>
 
 <?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     $data = [

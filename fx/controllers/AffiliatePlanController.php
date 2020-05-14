@@ -441,52 +441,55 @@ class AffiliatePlanController extends \yii\web\Controller {
             if($cart){
                 $totals = 0;
                 foreach ($cart as $affiliate_plan_id => $products){
-                    $plan_info = AffiliatePlan::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1])->one();
+//                     $plan_info = AffiliatePlan::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1])->one();
 
-                    if ($model = AffiliatePlanType::findOne(['code' => $plan_info->type, 'status' => 1])) {
-                    }else{
-                        throw new Exception("没有找到相关分销方案类型");
-                    }
-
-                    if (strtotime($plan_info->date_start) > strtotime(date('Y-m-d H:i:s'))) {
-                        throw new Exception("分销活动未开始");
-                    }
-                    if (strtotime($plan_info->date_end) < strtotime(date('Y-m-d H:i:s'))) {
-                        throw  new  Exception("分销活动已结束");
-                    }
-
-                    if( time() > strtotime( $plan_info->ship_end) ){
-                        throw  new  Exception("超过配送时间，请不要下单");
-                    }
-
-                    if($products){
-                        $total = 0;
-                        foreach ($products as $code => $qty) {
-                            $affiliate_plan_detail = AffiliatePlanDetail::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1, 'product_code' => $code])->one();
-                            if ($affiliate_plan_detail->max_buy_qty && $affiliate_plan_detail->max_buy_qty < $qty) {
-                                //购买数量超过最大购买数量
-                                throw new Exception("最多购买".$affiliate_plan_detail->max_buy_qty.'件');
-                            }
-                            $price = $affiliate_plan_detail->price;
-                            $total = round(bcadd($total, bcmul($affiliate_plan_detail->price_type == 1 ? $affiliate_plan_detail->price:$affiliate_plan_detail->product->productBase->price, $qty,4),4),2);
-
-                            //$this->submit();
+                    if($plan_info = AffiliatePlan::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1])->one()){
+                        if ($model = AffiliatePlanType::findOne(['code' => $plan_info->type, 'status' => 1])) {
+                        }else{
+                            throw new Exception("没有找到相关分销方案类型");
                         }
 
-                        $base[$affiliate_plan_id]['total'] = $total;
-                        $base[$affiliate_plan_id]['platform_id'] = 1;
-                        $base[$affiliate_plan_id]['store_id'] = 1;
-                        $base[$affiliate_plan_id]['name'] = '青岛每日惠购';
-                        $base[$affiliate_plan_id]['url'] = 'https://m.mrhuigou.com/affiliate-plan/index';
-                        $base[$affiliate_plan_id]['affiliate_plan_id'] = $affiliate_plan_id;
-                        $base[$affiliate_plan_id]['affiliate_plan_code'] = $plan_info->code;
-                        $base[$affiliate_plan_id]['affiliate_code'] = $affiliate_info->code;
+                        if (strtotime($plan_info->date_start) > strtotime(date('Y-m-d H:i:s'))) {
+                            throw new Exception("分销活动未开始");
+                        }
+                        if (strtotime($plan_info->date_end) < strtotime(date('Y-m-d H:i:s'))) {
+                            throw  new  Exception("分销活动已结束");
+                        }
 
-                        \Yii::$app->session->set('ground_push_base',json_encode($base));
+                        if( time() > strtotime( $plan_info->ship_end) ){
+                            throw  new  Exception("超过配送时间，请不要下单");
+                        }
 
+                        if($products){
+                            $total = 0;
+                            foreach ($products as $code => $qty) {
+                                $affiliate_plan_detail = AffiliatePlanDetail::find()->where(['affiliate_plan_id' => $affiliate_plan_id, 'status' => 1, 'product_code' => $code])->one();
+//                            if ($affiliate_plan_detail->max_buy_qty && $affiliate_plan_detail->max_buy_qty < $qty) {
+//                                //购买数量超过最大购买数量
+//                                throw new Exception("最多购买".$affiliate_plan_detail->max_buy_qty.'件');
+//                            }
+                                $price = $affiliate_plan_detail->price;
+                                $total = round(bcadd($total, bcmul($affiliate_plan_detail->price_type == 1 ? $affiliate_plan_detail->price:$affiliate_plan_detail->product->productBase->price, $qty,4),4),2);
+
+                                //$this->submit();
+                            }
+
+                            $base[$affiliate_plan_id]['total'] = $total;
+                            $base[$affiliate_plan_id]['platform_id'] = 1;
+                            $base[$affiliate_plan_id]['store_id'] = 1;
+                            $base[$affiliate_plan_id]['name'] = '青岛每日惠购';
+                            $base[$affiliate_plan_id]['url'] = 'https://m.mrhuigou.com/affiliate-plan/index';
+                            $base[$affiliate_plan_id]['affiliate_plan_id'] = $affiliate_plan_id;
+                            $base[$affiliate_plan_id]['affiliate_plan_code'] = $plan_info->code;
+                            $base[$affiliate_plan_id]['affiliate_code'] = $affiliate_info->code;
+
+                            \Yii::$app->session->set('ground_push_base',json_encode($base));
+
+                        }
+
+                        $totals = round(bcadd($totals, $total,4),2);
                     }
 
-                    $totals = round(bcadd($totals, $total,4),2);
                 }
 
                 return $this->redirect(['/affiliate-plan/confirm','plan_id'=>$affiliate_plan_id]);

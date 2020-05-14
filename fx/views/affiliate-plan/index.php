@@ -6,7 +6,7 @@
  * Time: 15:54
  */
 use yii\helpers\Url;
-$this->title = "一起团";
+$this->title = "每日惠购";
 ?>
 <header class="fx-top bs-bottom whitebg lh44">
     <div class="flex-col tc">
@@ -47,7 +47,7 @@ $this->title = "一起团";
     <?php if ($affiliate_plan) { ?>
         <div id="cart-list">
 <!--            --><?php //if($affiliate_info && $affiliate_info->mode == 'DOWN_LINE'){?>
-                <p class="mt5 bg-wh pt10 pb10 pl10">团长：<i class="red"><?php echo $affiliate_info->username?></i></p>
+                <p class="mt5 bg-wh pt10 pb10 pl10"><i class="red"><?php echo $affiliate_info->username?></i></p>
 <!--            --><?php //}?>
             <p class=" mb5 bg-wh pt5 pb5 pl10">
 <!--                开团时间：<i class="red">--><?php //echo date('Y-m-d',strtotime($affiliate_plan->date_start))?><!--</i>-->
