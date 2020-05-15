@@ -370,7 +370,12 @@ class Product extends \yii\db\ActiveRecord implements CartPositionProviderInterf
 
         if($affiliate_plan_id){
             if($info = AffiliatePlanDetail::findOne(['status'=>1,'affiliate_plan_id'=> $affiliate_plan_id,'product_code'=> $this->product_code])){
-                $total = $info->max_quantity - $info->tmp_qty;
+                if($info->max_quantity){
+                    $total = $info->max_quantity - $info->tmp_qty;
+                }else{
+                    $total = 9999;
+                }
+
             }
         }
         return max(0,$total);
