@@ -78,6 +78,7 @@ class AffiliatePlanDetailController extends Controller
                     'product_code'=>$detail->product_code,
                     'affiliate_plan_id'=>$detail->affiliate_plan_id,
                     'count'=>$detail->getQty($detail->affiliate_plan_id),
+                    'plan_status'=>$plan_status,
                     'title'=>$detail->title,
                     'item_id'=>$ad_detail_product->product_base_id,
                     'item_code'=>$ad_detail_product->product_base_code,
@@ -91,6 +92,9 @@ class AffiliatePlanDetailController extends Controller
                     'beintoinv'=>$ad_detail_product->beintoinv,//判断是否下架 1上架
                     'url'=>Url::to(['product/index','shop_code'=>$ad_detail_product->store_code,'product_code'=>$ad_detail_product->product_code,'affiliate_plan_id'=>$detail->affiliate_plan_id]),
                 ];
+                if($plan_status == 1){
+                    $data[$count]['url'] = "#";
+                }
                 $count ++ ;
 
             }

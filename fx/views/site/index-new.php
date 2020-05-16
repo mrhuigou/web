@@ -104,7 +104,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                             <span class="num-lower iconfont"  style="display:<%:=list[i].count?'':'none'%>;"></span>
                             <input type="text" value="<%:=list[i].count%>" class="num-text" style="display:<%:=list[i].count?'':'none'%>;">
                             <span class="num-add iconfont" style="display:<%:=list[i].count?'':'none'%>;"></span>
-                            <div class="add-click" style="display:<%:=list[i].count?'none':''%>;"><i class="iconfont" ></i></div>
+                            <div class="add-click" style="display:<%:= list[i].plan_status == 1 ? 'none': ( list[i].count?'none':'')%>;"><i class="iconfont" ></i></div>
                     </div>
                     <p>
                         <span class="red f20 mr5 ">￥<%:=list[i].sale_price%></span>
