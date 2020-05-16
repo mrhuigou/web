@@ -104,7 +104,7 @@ $this->title ='购物车';
         </div>
     <?php } ?>
     </div>
-    <?=\fx\widgets\Cart\Relation::widget()?>
+<!--    --><?//=\fx\widgets\Cart\Relation::widget()?>
 </section>
 </div>
     <div class="fx-bottom flex-col bdt whitebg ">

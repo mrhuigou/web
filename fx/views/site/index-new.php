@@ -82,11 +82,21 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 
     <ul class="filter redFilter two f16 clearfix" style="border-bottom: 1px solid #ff463c;">
         <li class="" id="jinri">
-            <img data-original="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_peKAELAIAAAkILDuqBo736.jpg" title="正在抢购" alt="正在抢购" class="db w lazy" >
-        </li>
+            <div id="jinri1">
+                <img data-original="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_peKAELAIAAAkILDuqBo736.jpg" title="正在抢购" alt="正在抢购" class="db w lazy" >
+            </div>
+            <div id="jinri2" style="display: none">
+                <img data-original="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_s9aALVCVAAANnjPagng521.jpg" title="正在抢购" alt="正在抢购" class="db w lazy">
+            </div>
+         </li>
         <li class="" id="mingri">
-            <img data-original="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_peKAJq1WAAAR4v-fXBc675.jpg" title="下期预购" alt="下期预购" class="db w lazy" >
-        </li>
+            <div id="mingri1">
+                 <img data-original="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_peKAJq1WAAAR4v-fXBc675.jpg" title="下期预购" alt="下期预购" class="db w lazy" >
+            </div>
+            <div id="mingri2" style="display: none">
+                <img data-original="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_tFqASLXwAAAUvihjChk406.jpg" title="下期预购" alt="下期预购" class="db w lazy" style="display: none" >
+            </div>
+         </li>
     </ul>
     <div id="affiliate_plan"></div>
     <script id="affiliate_plan_tpl" type="text/html">
@@ -235,8 +245,10 @@ var affiliate_plan_tpl = $('#affiliate_plan_tpl').html();
 });
 
 $("body").on('click','#jinri',function(){
-    $('#jinri').addClass("cur");
-    $('#mingri').removeClass("cur");
+    $('#jinri1').show();
+    $('#mingri1').show();
+    $('#jinri2').hide();
+    $('#mingri2').hide();
     plan_status = 0;
     $.showLoading("正在加载");
     $.post('<?php echo \yii\helpers\Url::to(["/affiliate-plan-detail/default-product"])?>',{plan_status:plan_status},function(result) {
@@ -246,8 +258,10 @@ $("body").on('click','#jinri',function(){
     });
 });
 $("body").on('click','#mingri',function(){
-    $('#mingri').addClass("cur");
-    $('#jinri').removeClass("cur");
+    $('#jinri2').show();
+    $('#mingri2').show();
+    $('#jinri1').hide();
+    $('#mingri1').hide();
     plan_status = 1;
     $.showLoading("正在加载");
     $.post('<?php echo \yii\helpers\Url::to(["/affiliate-plan-detail/default-product"])?>',{plan_status:plan_status},function(result) {

@@ -15,7 +15,7 @@ $this->title ='购物车';
         <a class="btn mbtn redbtn " href="/">去逛逛</a>
         <a class="graybtn btn mbtn  " href="<?php echo \yii\helpers\Url::to(['/user/index'])?>">用户中心</a>
     </div>
-        <?=\fx\widgets\Cart\Relation::widget()?>
+<!--        --><?//=\fx\widgets\Cart\Relation::widget()?>
     </div>
 </section>
 <?= fx\widgets\MainMenu::widget(); ?>
