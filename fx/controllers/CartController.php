@@ -140,6 +140,7 @@ class CartController extends \yii\web\Controller {
     public function actionUpdateFx()
     {
         $status = 1;
+        $stock_tag = "";
         $product_code = \Yii::$app->request->post('product_code') ? \Yii::$app->request->post('product_code') : 0;
         $qty = \Yii::$app->request->post('qty') ? \Yii::$app->request->post('qty') : 0;
         $params['affiliate_plan_id'] = $affiliate_plan_id = \Yii::$app->request->post('affiliate_plan_id') ? \Yii::$app->request->post('affiliate_plan_id') : 0;
