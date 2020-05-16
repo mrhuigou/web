@@ -5,67 +5,8 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 	$this->title = "每日惠购-一起团";
 }
 ?>
-<header class="header" >
-    <?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){ ?>
-        <a href="/site/index?sourcefrom=zhqd" class="header-left" id="show-notification">
-            <img src="/images/zhqd_logo.png" width="110" style="margin-top: -6px;">
-        </a>
-        <div class="header-search clearfix pr" style="margin-right: 10px;">
-            <form action="<?php echo \yii\helpers\Url::to(['/search/index'])?>" method="get" id="search_form">
-                <input class="input-text s w" id="searchBox"  type="text" name="keyword"
-                       value="<?= Yii::$app->request->get('keyword') ?>" autocomplete="off" tabindex="1" style="border: medium none;">
-                <a href="javascript:void(0)" class="search-btn iconfont">&#xe601;</a>
-            </form>
-        </div>
-    <?php }else{?>
-    <a href="javascript:;" class="header-left" id="show-notification">
-        <img src="/assets/images/logo2.jpg" width="110" style="margin-top: -6px;">
-    </a>
-    <!--20150609-->
-<!--    <div class="header-search clearfix pr">-->
-<!--        <form action="--><?php //echo \yii\helpers\Url::to(['/search/index'])?><!--" method="get" id="search_form">-->
-<!--            <input class="input-text s w" id="searchBox" type="text" name="keyword"-->
-<!--                   value="--><?//= Yii::$app->request->get('keyword') ?><!--" autocomplete="off" tabindex="1" style="border: medium none;">-->
-<!--            <a href="javascript:void(0)" class="search-btn iconfont">&#xe601;</a>-->
-<!--        </form>-->
-<!--    </div>-->
-    <!--消息-->
-    <div class="dropdown dropdown1">
-        <div class="pa-rt tc w50 dropdown-t" >
-            <i class="iconfont green">&#xe670;</i>
-<?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->messageCount > 0) { ?>
-            <em class="dots-o pa-tr r10 t10"></em>
-    <?php }?>
-        </div>
-        <ul class="dropdown-c r0 lh180" style="display: none;">
-            <li>
-                <a href="/news/list">
-                    <i class="iconfont vm mr5">&#xe649;</i>
-                    <span class="vm">消息</span>
-	                <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->messageCount > 0) { ?>
-                        <em class="dots-o pa-tr r10 t10"></em>
-	                <?php }?>
-                </a>
-            </li>
-            <?php if(!\Yii::$app->session->get('source_from_agent_wx_xcx')){?>
-            <li>
-                <a href="javascript:;" class="share-guide">
-                    <i class="iconfont vm mr5">&#xe644;</i>
-                    <span class="vm">分享</span>
-                </a>
-            </li>
-            <?php }?>
-            <li>
-                <a href="tel:400-968-9870">
-                    <i class="iconfont vm mr5">&#xe65e;</i>
-                    <span class="vm">客服</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <?php } ?>
-</header>
-<div class="content" >
+
+<div class="content" style="top: 0px;">
 <section class="veiwport " style="max-width: inherit;width: 32rem;height: auto;">
     <div id="swiper_content" style="max-width: inherit;width: 32rem;height: 13.3rem;overflow: hidden;display: none"></div>
     <script id="swiper_content_tpl" type="text/html">
@@ -89,7 +30,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 
 
     <?=\fx\widgets\IndexHot::widget()?>
-    <?php  echo \fx\widgets\Block\News::widget()?>
+<!--    --><?php // echo \fx\widgets\Block\News::widget()?>
     <?php if ($ad_banner_1) { ?>
         <div class="ts_1" style="display: none">
             <div class="tit1 greentit1">
@@ -139,8 +80,43 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     </div>
 </script>
 
+    <ul class="filter redFilter two f16 clearfix" style="border-bottom: 1px solid #ff463c;">
+        <li class="cur" id="jinri">
+            今日抢购
+        </li>
+        <li class="" id="mingri">
+            明日预告
+        </li>
+    </ul>
+    <div id="affiliate_plan"></div>
+    <script id="affiliate_plan_tpl" type="text/html">
+        <% for(var i=from; i<=to; i++) {%>
+        <div class="flex-col mb5 br5 whitebg f12 bs coupon-product ml10 mr10" data-id="<%:=list[i].product_code%>" data-param="<%:=list[i].affiliate_plan_id%>">
+            <div class="flex-item-4 tc pt5 pb5">
+                <a href="<%:=list[i].url%>"><img src="<%:=list[i].image%>" alt="商品图片" width="95" height="95"></a>
+            </div>
+
+            <div class="flex-item-8 pt10">
+                <a href="<%:=list[i].url%>" class="f14"><%:=list[i].name%></a>
+                <p class="row-one red f13 mt5"><%:=list[i].title%></p>
+                <div class="pt10">
+                    <div class="num-wrap num2 fr pr10 mt2 numDynamic ">
+                            <span class="num-lower iconfont"  style="display:<%:=list[i].count?'':'none'%>;"></span>
+                            <input type="text" value="<%:=list[i].count%>" class="num-text" style="display:<%:=list[i].count?'':'none'%>;">
+                            <span class="num-add iconfont" style="display:<%:=list[i].count?'':'none'%>;"></span>
+                            <div class="add-click" style="display:<%:=list[i].count?'none':''%>;"><i class="iconfont" ></i></div>
+                    </div>
+                    <p>
+                        <span class="red f20 mr5 ">￥<%:=list[i].sale_price%></span>
+                        <span class="gray9 del">￥<%:=list[i].vip_price%></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </script>
     <!--分销方案商品列表-->
-    <?php  echo \fx\widgets\Affiliate\AffiliatePlan::widget(['plan_type_code'=>'DEFAULT'])?>
+<!--    --><?php // echo \fx\widgets\Affiliate\AffiliatePlan::widget(['plan_type_code'=>'DEFAULT'])?>
 </section>
 
 
@@ -248,6 +224,222 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 $(".dropdown1").dropdown();
 $.backtop(".content");
 
+
+var plan_status = 0;
+var affiliate_plan_tpl = $('#affiliate_plan_tpl').html();
+//$.getJSON('<?php //echo Yii::$app->params["API_URL"]?>///mall/v1/affiliate-plan/default-product?plan_status='+plan_status+'&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
+    $.post('<?php echo \yii\helpers\Url::to(["/affiliate-plan-detail/default-product"])?>',{plan_status:plan_status},function(result) {
+
+        var html = template(affiliate_plan_tpl, {list:result.data,from:0,to:(result.data.length-1) });
+    $("#affiliate_plan").html(html);
+});
+
+$("body").on('click','#jinri',function(){
+    $('#jinri').addClass("cur");
+    $('#mingri').removeClass("cur");
+    plan_status = 0;
+    $.showLoading("正在加载");
+    $.post('<?php echo \yii\helpers\Url::to(["/affiliate-plan-detail/default-product"])?>',{plan_status:plan_status},function(result) {
+        $.hideLoading();
+        var html= template(affiliate_plan_tpl, {list:result.data,from:0,to:(result.data.length-1) });
+        $("#affiliate_plan").html(html);
+    });
+});
+$("body").on('click','#mingri',function(){
+    $('#mingri').addClass("cur");
+    $('#jinri').removeClass("cur");
+    plan_status = 1;
+    $.showLoading("正在加载");
+    $.post('<?php echo \yii\helpers\Url::to(["/affiliate-plan-detail/default-product"])?>',{plan_status:plan_status},function(result) {
+        $.hideLoading();
+        var html= template(affiliate_plan_tpl, {list:result.data,from:0,to:(result.data.length-1) });
+        $("#affiliate_plan").html(html);
+    });
+});
+
+$("body").on('click','.add-click',function(){
+    $(this).hide();
+    var wrap = $(this).parent(".num-wrap");
+    wrap.find('.num-add').show();
+    wrap.find('.num-lower').show();
+    wrap.find('.num-add').click();
+});
+//基础代码
+$("body").on('click','.num-add',function(){
+    var _this = $(this);
+    var wrap = _this.parent(".num-wrap");
+    var text = wrap.find(".num-text");
+    var lower = wrap.find(".num-lower");
+    var a=text.val();
+    a++;
+    text.val(a);
+    if(text.val() == 1){
+        lower.addClass("first");
+    }else{
+        lower.removeClass("first");
+    }
+    var key=_this.parents(".coupon-product").data('id');
+    var qty=_this.parents(".coupon-product").find('.num-text').val();
+    var affiliate_plan_id=_this.parents(".coupon-product").data('param');
+    $.post('/cart/add-to-cart-fx', {
+        'product_code': key,
+        'qty': qty,
+        'affiliate_plan_id': affiliate_plan_id,
+    }, function (data) {
+        $.hideIndicator();
+        if(data.status){
+            layer.open({
+                content: data.stock_status,
+                skin: 'msg',
+                time: 2 //2秒后自动关闭
+            });
+            $(".cart_qty").show().text(data.data);
+            wrap.find(".num-text").val(data.qty);
+        }else{
+            layer.open({
+                content:data.stock_status,
+                skin: 'msg',
+                time: 2
+            });
+            wrap.find(".num-text").val(data.qty);
+            $(".cart_qty").show().text(data.data);
+        }
+    },'json');
+
+});
+
+$("body").on('click','.num-lower',function(){
+    var _this = $(this);
+    var wrap = _this.parent(".num-wrap");
+    var text = wrap.find(".num-text");
+    var lower = wrap.find(".num-lower");
+    var a=text.val();
+    if(a>0){
+        a--;
+    }
+    text.val(a);
+    if(text.val() == 1){
+        lower.addClass("first");
+    }else{
+        lower.removeClass("first");
+    }
+    var key=_this.parents(".coupon-product").data('id');
+    var qty=_this.parents(".coupon-product").find('.num-text').val();
+    var affiliate_plan_id=_this.parents(".coupon-product").data('param');
+
+    $.post('/cart/add-to-cart-fx', {
+        'product_code': key,
+        'qty': qty,
+        'affiliate_plan_id': affiliate_plan_id,
+    }, function (data) {
+        $.hideIndicator();
+        if(data.status){
+            $(".cart_qty").show().text(data.data);
+            wrap.find(".num-text").val(data.qty);
+        }else{
+            layer.open({
+                content:data.stock_status,
+                skin: 'msg',
+                time: 2
+            });
+            wrap.find(".num-text").val(data.qty);
+            $(".cart_qty").show().text(data.data);
+        }
+    },'json');
+});
+
+
+$("body").on('blur','.num-text',function(){
+    var _this = $(this);
+    var wrap = _this.parent(".num-wrap");
+    var text = wrap.find(".num-text");
+    var lower = wrap.find(".num-lower");
+    var a=text.val();
+    text.val(a);
+    if(text.val() == 1){
+        lower.addClass("first");
+    }else{
+        lower.removeClass("first");
+    }
+    var key=_this.parents(".coupon-product").data('id');
+    var qty=_this.parents(".coupon-product").find('.num-text').val();
+    var affiliate_plan_id=_this.parents(".coupon-product").data('param');
+    // Gooddisplaywiget(key,qty,affiliate_plan_id,_this);
+
+    $.post('/cart/update-fx', {
+        'product_code': key,
+        'qty': qty,
+        'affiliate_plan_id': affiliate_plan_id,
+    }, function (data) {
+        $.hideIndicator();
+        if(data.status){
+            $(".cart_qty").show().text(data.data);
+            wrap.find(".num-text").val(data.qty);
+        }else{
+            layer.open({
+                content:data.stock_status,
+                skin: 'msg',
+                time: 2
+            });
+            wrap.find(".num-text").val(data.qty);
+            $(".cart_qty").show().text(data.data);
+        }
+    },'json');
+});
+
+
+function Gooddisplaywiget(product_code,qty,affiliate_plan_id,_this='') {
+    $.post('/cart/add-to-cart-fx', {
+        'product_code': product_code,
+        'qty': qty,
+        'affiliate_plan_id': affiliate_plan_id,
+
+    }, function (data) {
+        $.hideIndicator();
+        if(data.status){
+            layer.open({
+                content: '加入购物车成功',
+                skin: 'msg',
+                time: 2 //2秒后自动关闭
+            });
+            $(".cart_qty").text(data.data);
+        }else{
+            layer.open({
+                content:data.message,
+                skin: 'msg',
+                time: 2
+            });
+        }
+    },'json');
+    fillingHtml();
+}
+
+function fillingHtml() {
+
+}
+
+$("body").on('click','.numDynamic .num-add',function(){
+    var text = $(this).siblings(".num-text");
+    if(parseInt(text.val()) > 0){
+        $(this).siblings(".num-lower").show();
+        $(this).siblings(".num-text").show();
+    }else{
+        $(this).siblings(".num-lower").hide();
+        $(this).siblings(".num-text").hide();
+    }
+})
+$("body").on('click','.numDynamic .num-lower',function(){
+    var text = $(this).siblings(".num-text");
+    if(parseInt(text.val()) > 0){
+        $(this).show();
+        $(this).siblings(".num-text").show();
+    }else{
+        $(this).hide();
+        $(this).siblings(".num-text").hide();
+        $(this).siblings(".num-add").hide();
+        $(this).siblings(".add-click").show();
+    }
+})
 
 
 Ad_Sys_Code();

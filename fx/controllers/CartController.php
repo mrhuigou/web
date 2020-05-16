@@ -83,71 +83,113 @@ class CartController extends \yii\web\Controller {
     //分销方案商品添加购物车
     public function actionAddToCartFx()
     {
-        try {
-            if (\Yii::$app->request->getIsPost() && \Yii::$app->request->isAjax) {
-                $product_code = \Yii::$app->request->post('product_code') ? \Yii::$app->request->post('product_code') : 0;
-                $qty = \Yii::$app->request->post('qty') ? \Yii::$app->request->post('qty') : 0;
-                $params['affiliate_plan_id'] = $affiliate_plan_id = \Yii::$app->request->post('affiliate_plan_id') ? \Yii::$app->request->post('affiliate_plan_id') : 0;
+        $status = 1;
+        $product_code = \Yii::$app->request->post('product_code') ? \Yii::$app->request->post('product_code') : 0;
+        $qty = \Yii::$app->request->post('qty') ? \Yii::$app->request->post('qty') : 0;
+        $params['affiliate_plan_id'] = $affiliate_plan_id = \Yii::$app->request->post('affiliate_plan_id') ? \Yii::$app->request->post('affiliate_plan_id') : 0;
 
-                $model = Product::findOne(['product_code' => $product_code, 'beintoinv' => 1]);
+        $model = Product::findOne(['product_code' => $product_code, 'beintoinv' => 1]);
 
-                if ($model) {
-
-                    if($qty > 0){
-                        if($stock_count=$model->getStockCount(0,$affiliate_plan_id)){
-                            if($limit_max_qty=$model->getLimitMaxQtyFx($affiliate_plan_id)){
-                                $stock_count=min($limit_max_qty,$stock_count);
-                            }
-                        }
-                        if ($stock_count > 0) {
-
-//                            if (\Yii::$app->fxcart->hasPosition($model->getCartPositionFx($params)->getId())) {
-//                                $position = \Yii::$app->fxcart->getPositionById($model->getCartPositionFx($params)->getId());
-//                                $quantity = $qty + $position->getQuantity();
-//                                $stock_count=$model->getStockCount($quantity,$affiliate_plan_id);
-//                                if ($quantity > 100 || $quantity > $stock_count) {
-//                                    throw new ErrorException('最大可购买' . min($stock_count, 100) . '件');
-//                                }
-//                            } else {
-                                if ($qty > $stock_count) {
-                                    throw new ErrorException('最大可购买' . $stock_count . '件');
-                                }
-//                            }
-
-                            Track::add($model->product_base_id,'add_cart');
-                            if(\Yii::$app->fxcart->hasPosition($model->getCartPositionFx($params)->getId())){
-                                \Yii::$app->fxcart->update($model->getCartPositionFx($params), $qty);
-                            }else{
-                                \Yii::$app->fxcart->put($model->getCartPositionFx($params), $qty);
-                            }
-
-                            $data = ['status' => 1, 'data' =>\Yii::$app->fxcart->getCount()];
-                        } else {
-                            throw new ErrorException('库存不足');
-                        }
-                    } else{ // 当前商品购买数量为0
-                        if(\Yii::$app->fxcart->hasPosition($model->getCartPositionFx($params)->getId())){
-                            \Yii::$app->fxcart->removeById($model->getCartPositionFx($params)->getId());
-                            if (\Yii::$app->session->get('FirstBuy') == $model->getCartPositionFx($params)->getId()) {
-                                \Yii::$app->session->remove('FirstBuy');
-                            }
-                        }
-                        $data = ['status' => 1, 'data' =>\Yii::$app->fxcart->getCount()];
+        if ($model) {
+            if($qty > 0){
+                if($stock_count=$model->getStockCount(0,$affiliate_plan_id)){
+                    if($limit_max_qty=$model->getLimitMaxQtyFx($affiliate_plan_id)){
+                        $stock_count=min($limit_max_qty,$stock_count);
                     }
-
-
-                } else {
-                    throw new ErrorException('商品不存在或者已经下架');
                 }
-            } else {
-                throw new ErrorException('数据加载失败');
+                if ($stock_count > 0) {
+                    if ($qty > $stock_count) {
+                        $stock_tag='最大可购买' . min($stock_count, 100) . '件';
+                        $qty=min($stock_count, 99999);
+                    }else{
+                        $stock_tag = "加入购物车成功";
+                    }
+                    Track::add($model->product_base_id,'add_cart');
+                    if(\Yii::$app->fxcart->hasPosition($model->getCartPositionFx($params)->getId())){
+                        \Yii::$app->fxcart->update($model->getCartPositionFx($params), $qty);
+                    }else{
+                        \Yii::$app->fxcart->put($model->getCartPositionFx($params), $qty);
+                    }
+                } else {
+                    $stock_tag='库存不足';
+                }
+            } else{ // 当前商品购买数量为0
+                if(\Yii::$app->fxcart->hasPosition($model->getCartPositionFx($params)->getId())){
+                    \Yii::$app->fxcart->removeById($model->getCartPositionFx($params)->getId());
+                    if (\Yii::$app->session->get('FirstBuy') == $model->getCartPositionFx($params)->getId()) {
+                        \Yii::$app->session->remove('FirstBuy');
+                    }
+                }
             }
-
-        } catch (ErrorException $e) {
-            $data = ['status' => 0, 'message' => $e->getMessage(),'data'=> $stock_count];
+        } else {
+            $stock_tag='商品不存在或者已经下架';
+            $status = 0;
+            $qty = 0;
         }
+        $json=[
+            'status'=>$status,
+            'data' =>\Yii::$app->fxcart->getCount(),
+            'stock_status'=>$stock_tag,
+            'qty'=>$qty,
+        ];
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        return $data;
+        return $json;
+    }
+
+//分销方案商品减少购物车数量
+    public function actionUpdateFx()
+    {
+        $status = 1;
+        $product_code = \Yii::$app->request->post('product_code') ? \Yii::$app->request->post('product_code') : 0;
+        $qty = \Yii::$app->request->post('qty') ? \Yii::$app->request->post('qty') : 0;
+        $params['affiliate_plan_id'] = $affiliate_plan_id = \Yii::$app->request->post('affiliate_plan_id') ? \Yii::$app->request->post('affiliate_plan_id') : 0;
+
+        $model = Product::findOne(['product_code' => $product_code, 'beintoinv' => 1]);
+
+        if ($model) {
+            if($qty > 0){
+                if($stock_count=$model->getStockCount(0,$affiliate_plan_id)){
+                    if($limit_max_qty=$model->getLimitMaxQtyFx($affiliate_plan_id)){
+                        $stock_count=min($limit_max_qty,$stock_count);
+                    }
+                }
+                if ($stock_count > 0) {
+                    if ($qty > $stock_count) {
+                        $stock_tag='最大可购买' . min($stock_count, 100) . '件';
+                        $qty=min($stock_count, 99999);
+                        $status = 0;
+                    }
+                    Track::add($model->product_base_id,'add_cart');
+                    if(\Yii::$app->fxcart->hasPosition($model->getCartPositionFx($params)->getId())){
+                        \Yii::$app->fxcart->update($model->getCartPositionFx($params), $qty);
+                    }else{
+                        \Yii::$app->fxcart->put($model->getCartPositionFx($params), $qty);
+                    }
+                } else {
+                    $stock_tag='库存不足';
+                    $status = 0;
+                }
+            } else{ // 当前商品购买数量为0
+                if(\Yii::$app->fxcart->hasPosition($model->getCartPositionFx($params)->getId())){
+                    \Yii::$app->fxcart->removeById($model->getCartPositionFx($params)->getId());
+                    if (\Yii::$app->session->get('FirstBuy') == $model->getCartPositionFx($params)->getId()) {
+                        \Yii::$app->session->remove('FirstBuy');
+                    }
+                }
+            }
+        } else {
+            $stock_tag='商品不存在或者已经下架';
+            $status = 0;
+            $qty = 0;
+        }
+        $json=[
+            'status'=>$status,
+            'data' =>\Yii::$app->fxcart->getCount(),
+            'stock_status'=>$stock_tag,
+            'qty'=>$qty,
+        ];
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $json;
     }
 
 

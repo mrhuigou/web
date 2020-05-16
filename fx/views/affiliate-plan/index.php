@@ -438,7 +438,8 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         'title' => $affiliate_plan?$affiliate_plan->name:"遇到好东西，总想分享给最亲爱的你。",
         'desc' => "每日惠购，物美价廉，当日订单，当日送达。",
         'link' => Yii::$app->request->getAbsoluteUrl(),
-        'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.png'
+//        'image' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.png'
+        'image' => 'https://m.mrhuigou.com/assets/images/mrhuigou_logo.png'
     ];
 }
 ?>
