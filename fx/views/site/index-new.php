@@ -81,11 +81,11 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 </script>
 
     <ul class="filter redFilter two f16 clearfix" style="border-bottom: 1px solid #ff463c;">
-        <li class="cur" id="jinri">
-            今日抢购
+        <li class="" id="jinri">
+            <img data-original="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_peKAELAIAAAkILDuqBo736.jpg" title="正在抢购" alt="正在抢购" class="db w lazy" >
         </li>
         <li class="" id="mingri">
-            明日预告
+            <img data-original="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_peKAJq1WAAAR4v-fXBc675.jpg" title="下期预购" alt="下期预购" class="db w lazy" >
         </li>
     </ul>
     <div id="affiliate_plan"></div>
