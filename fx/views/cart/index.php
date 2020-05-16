@@ -23,20 +23,20 @@ $this->title ='购物车';
     <?php foreach ( $cart as $val){ ?>
 <!--        <div class="store_content mb10">-->
         <div class="store_content mb5">
-        <h2 class="p10 db bdb whitebg clearfix ">
-            <a class="fl " href="<?=\yii\helpers\Url::to(['/shop/index','shop_code'=>$val['base']->store_code],true)?>">
-                店铺：<span class="gray6 mr5"><?=$val['base']['name']?></span>
-                <span class="red"><?php if ($val['base']->befreepostage == 1) { //是否包邮（满X元包邮）
-                        if ($val['base']->minbookcash > 0) {
-                            echo '满' . $val['base']->minbookcash . '元包邮';
-                        } else {
-                            echo '包邮';
-                        }
-                    }
-                    ?></span>
-                <i class="iconfont gray6 fr " style="font-size: 12px;">&#xe60b;</i>
-            </a>
-            </h2>
+<!--        <h2 class="p10 db bdb whitebg clearfix ">-->
+<!--            <a class="fl " href="--><?//=\yii\helpers\Url::to(['/shop/index','shop_code'=>$val['base']->store_code],true)?><!--">-->
+<!--                店铺：<span class="gray6 mr5">--><?//=$val['base']['name']?><!--</span>-->
+<!--                <span class="red">--><?php //if ($val['base']->befreepostage == 1) { //是否包邮（满X元包邮）
+//                        if ($val['base']->minbookcash > 0) {
+//                            echo '满' . $val['base']->minbookcash . '元包邮';
+//                        } else {
+//                            echo '包邮';
+//                        }
+//                    }
+//                    ?><!--</span>-->
+<!--                <i class="iconfont gray6 fr " style="font-size: 12px;">&#xe60b;</i>-->
+<!--            </a>-->
+<!--            </h2>   -->
         <?php foreach( $val['products'] as $key=>$value) { ?>
             <div class="flex-col flex-center store-item bdb  whitebg" data-content="<?=$key?>">
                 <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center tc" style="line-height:79px;">
