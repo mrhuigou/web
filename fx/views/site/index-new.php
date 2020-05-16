@@ -101,7 +101,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     <div id="affiliate_plan"></div>
     <script id="affiliate_plan_tpl" type="text/html">
         <% for(var i=from; i<=to; i++) {%>
-        <div class="flex-col mb5 br5 whitebg f12 bs coupon-product ml10 mr10" data-id="<%:=list[i].product_code%>" data-param="<%:=list[i].affiliate_plan_id%>">
+        <div class="flex-col mb5 br5 whitebg f12 bs coupon-product ml10 mr10" data-id="<%:=list[i].pu_code%>" data-param="<%:=list[i].affiliate_plan_id%>">
             <div class="flex-item-4 tc pt5 pb5">
                 <a href="<%:=list[i].url%>"><img src="<%:=list[i].image%>" alt="商品图片" width="95" height="95"></a>
             </div>

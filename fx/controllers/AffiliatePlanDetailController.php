@@ -76,6 +76,7 @@ class AffiliatePlanDetailController extends Controller
 
                 $data[$count] = [
                     'product_code'=>$detail->product_code,
+                    'pu_code'=>$detail->pu_code,
                     'affiliate_plan_id'=>$detail->affiliate_plan_id,
                     'count'=>$detail->getQty($detail->affiliate_plan_id),
                     'plan_status'=>$plan_status,
