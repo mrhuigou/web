@@ -49,6 +49,7 @@ class AffiliatePlanDetailController extends Controller
             $affiliatePlan=AffiliatePlan::find()->where(['and',"type='".$plan_type."'",'date_start>=NOW()','date_end>=NOW()','status=1'])->one();
         }
 
+        $details = [];
         if($affiliatePlan){
             //获取所有的商品
             $details =  AffiliatePlanDetail::find()->where(['status' => 1, 'affiliate_plan_id' => $affiliatePlan->affiliate_plan_id])->orderBy('priority asc')->all();
