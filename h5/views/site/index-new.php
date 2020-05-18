@@ -19,7 +19,11 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         </div>
     <?php }else{?>
     <a href="javascript:;" class="header-left" id="show-notification">
-        <img src="/assets/images/logo2.jpg" width="110" style="margin-top: -6px;">
+        <?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'baijin'){ ?>
+            <img src="http://img1.mrhuigou.com/group1/M00/06/D9/wKgB7l7COdWALfw9AAAYP6H2TfE121.jpg" width="110" style="margin-top: -6px;">
+        <?php }else{?>
+            <img src="/assets/images/logo2.jpg" width="110" style="margin-top: -6px;">
+        <?php }?>
     </a>
     <!--20150609-->
     <div class="header-search clearfix pr">
