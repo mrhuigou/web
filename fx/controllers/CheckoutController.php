@@ -2,10 +2,12 @@
 namespace fx\controllers;
 use api\models\V1\Address;
 use api\models\V1\AdvertiseDetail;
+use api\models\V1\Affiliate;
 use api\models\V1\Coupon;
 use api\models\V1\CouponHistory;
 use api\models\V1\CustomerCoupon;
 use api\models\V1\Invoice;
+use api\models\V1\Order;
 use api\models\V1\OrderBlack;
 use api\models\V1\OrderMerge;
 use api\models\V1\PlatformStation;
@@ -162,11 +164,38 @@ class CheckoutController extends \yii\web\Controller {
         $focus_position =   'H5-BYTC-DES1';
         $checkout_ad = $advertise->getAdvertiserDetailByPositionCode($focus_position);
 
+        if($affiliate_id = \Yii::$app->session->get('from_affiliate_uid')?:259){
+            $affiliate_info = Affiliate::find()->where(['status'=>1,'affiliate_id'=>$affiliate_id])->one();
+            \Yii::$app->session->set('from_affiliate_code',$affiliate_info->code);
+        }
+
+        $shipping_method = \Yii::$app->session->get("shipping_method")?:1;
+
+        if($shipping_address = \Yii::$app->session->get("shipping_address")){
+            $shipping_address = json_decode($shipping_address,true);
+        }else{
+            //获取当前用户的最后一次购物的收货地址
+            $last_order_info = Order::find()->where(['customer_id'=> \Yii::$app->user->getId(),'sent_to_erp'=> 'Y'])->orderBy('date_added desc')->one();
+            $shipping_address = [];
+            if($last_order_info){
+                $shipping_address['zone_name'] = $last_order_info->orderShipping->shipping_zone;
+                $shipping_address['city_name'] = $last_order_info->orderShipping->shipping_city;
+                $shipping_address['district_name'] = $last_order_info->orderShipping->shipping_district;
+                $shipping_address['address'] = $last_order_info->orderShipping->shipping_address_1;
+                $shipping_address['lng'] = $last_order_info->orderShipping->lng;
+                $shipping_address['lat'] = $last_order_info->orderShipping->lat;
+            }
+            \Yii::$app->session->set("shipping_address",json_encode($shipping_address));
+        }
+
 		return $this->render('index', [
 			'cart' => $comfirm_orders,
 			'pay_total' => number_format($merge_order_total, 2),
 			'model' => $model,
-            'checkout_ad' => $checkout_ad
+            'checkout_ad' => $checkout_ad,
+            'affiliate_info' => $affiliate_info,
+            'shipping_method'=> $shipping_method,
+            'shipping_address'=> $shipping_address,
 		]);
 	}
 

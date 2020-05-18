@@ -95,7 +95,7 @@ $("body").on("click",".save_address",function(){
     // $("#form-address").submit();
     $.showLoading("正在提交");
     // $('#form-checkout').submit();
-    $.post('/affiliate-plan/edit-address',{region:start,address_1:address_1},function(result){
+    $.post('/affiliate-plan/edit-address',{region:start,address_1:address_1,redirect_url:"<?php echo$redirect_url;?>"},function(result){
         //location.href='affiliate-plan/checkout';
         if(result && !result.status){
             $.hideLoading();

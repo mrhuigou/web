@@ -45,6 +45,8 @@ class AffiliatePlanDetailController extends Controller
         if(!$plan_status){
             //获取正在进行的方案
             $affiliatePlan=AffiliatePlan::find()->where(['and',"type='".$plan_type."'",'date_start<=NOW()','date_end>=NOW()','status=1'])->one();
+            \Yii::$app->session->set('affiliate_plan_code_ing',$affiliatePlan->code);
+            \Yii::$app->session->set('affiliate_plan_ship_end',$affiliatePlan->ship_end);
         }else{
             $affiliatePlan=AffiliatePlan::find()->where(['and',"type='".$plan_type."'",'date_start>=NOW()','date_end>=NOW()','status=1'])->one();
         }

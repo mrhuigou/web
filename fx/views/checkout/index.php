@@ -5,6 +5,11 @@ use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 $this->title = '订单确认';
+if(!empty($shipping_address)){
+    $is_empty_shipping_address = 0; //不为空
+}else{
+    $is_empty_shipping_address = 1; //空
+}
 ?>
 <header class="header">
     <div class="flex-col tc">
@@ -31,26 +36,98 @@ $this->title = '订单确认';
 			'inputOptions' => ["class" => 'appbtn tl w'],
 			'errorOptions' => ['class' => 'red fb tc db error']
 		],]); ?>
-		<?= $form->field($model, 'address_id')->widget(\fx\widgets\Checkout\Address::className()); ?>
+<!--		--><?//= $form->field($model, 'address_id')->widget(\fx\widgets\Checkout\Address::className()); ?>
+        <input type="text" id="confirm_address"   name="confirm_address" style="display: none" value="">
+        <input type="text" id="confirm_address_1"   name="confirm_address_1" style="display: none" value="">
+        <input type="text" id="confirm_lng"   name="confirm_lng" style="display: none" value="">
+        <input type="text" id="confirm_lat"   name="confirm_lat" style="display: none" value="">
+
+        <div class="store_contain whitebg " id="store_contain">
+            <div class="mt5">
+                <div class="flex-row ">
+                    <div class="flex-item-3 p5 pt10 pl10"><i class="red">*</i>收货人</div>
+                    <div class="flex-item-9 mt5 "><input type="text" class="input-text w" id="firstname" name="firstname" value="<?php echo Yii::$app->user->identity ? Yii::$app->user->identity->firstname : "";?>"></div>
+                </div>
+                <div class="flex-row mt10 ">
+                    <div class="flex-item-3 pt10 pl10"><i class="red">*</i>收货电话</div>
+                    <div class="flex-item-9 mb10 "><input type="text" class="input-text w " id="telephone" name="telephone" value="<?php echo Yii::$app->user->identity ? Yii::$app->user->identity->telephone: "";?>">     </div>
+                </div>
+            </div>
+        </div>
+        <div class="store_contain whitebg " id="store_contain">
+            <div class="mt5">
+                <div class="flex-row mt10 ">
+                    <div id="address_list" class="">
+                        <?php if($affiliate_info->is_deliver_home == 'true'){//分销商 是否配送到家?>
+                            <div class="flex-col flex-center store-item bdb  whitebg p5 item-address <?=$shipping_method==1?"red":""?>">
+                                <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center" style="margin-top: 10px;">
+                                    <input type="radio" value="1" name="shipping_method"  class="item" <?=$shipping_method==1?'checked':""?>>
+                                    <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                </label>
+
+                                <div class="flex-item-3 pt10">配送到家</div>
+                                <?php if(!empty($shipping_address)){?>
+                                    <div class="flex-item-6 ">
+                                        <p class="shipping-region"><?=$shipping_address['zone_name'].'-'.$shipping_address['city_name'].'-'.$shipping_address['district_name']?></p>
+                                        <p class="shipping-address"><?=$shipping_address['address']?></p>
+                                        <p class="shipping-lng" style="display: none"><?=$shipping_address['lng']?></p>
+                                        <p class="shipping-lat" style="display: none"><?=$shipping_address['lat']?></p>
+                                    </div>
+                                    <div class="flex-item-2 flex-row flex-middle flex-center">
+                                        <?php $in_range = Yii::$app->request->get('in_range',1);?>
+                                        <a href="<?=\yii\helpers\Url::to(['/affiliate-plan/edit-address','redirect'=>Yii::$app->request->getAbsoluteUrl()])?>" class="iconfont gray9 ">&#xe615;</a>
+                                    </div>
+                                <?php }else{ ?>
+                                    <div class="flex-item-6 ">
+                                        <a class="db  rarrow whitebg f14 tc" href="<?=\yii\helpers\Url::to(['/affiliate-plan/edit-address','redirect'=>Yii::$app->request->getAbsoluteUrl()])?>"><span class="iconfont fb">&#xe60c;</span>创建您的收货地址 </a>
+                                    </div>
+                                <?php }?>
+
+                            </div>
+                        <?php }?>
+                        <?php if($affiliate_info->mode == 'DOWN_LINE' || $affiliate_info->is_deliver_home == 'false'){//分销商为线下时 显示自提点 或不允许配送到家?>
+                            <div class="flex-col flex-center store-item bdb  whitebg p5 item-address <?=$shipping_method == 2 || $affiliate_info->is_deliver_home == 'false'?"red":""?>">
+                                <label class="label-checkbox item-content flex-item-1 flex-row flex-middle flex-center" style="margin-top: 10px;">
+                                    <input type="radio" value="2" name="shipping_method"  class="item" <?=$shipping_method == 2 || $affiliate_info->is_deliver_home == 'false'?'checked':""?>>
+                                    <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                </label>
+                                <div class="flex-item-3 pt10">团长处自提</div>
+                                <div class="flex-item-6 ">
+                                    <p class="shipping-region"><?=$affiliate_info->zone_name.'-'.$affiliate_info->city_name.'-'.$affiliate_info->district_name?></p>
+                                    <p class="shipping-address"><?=$affiliate_info->address?></p>
+                                    <p class="shipping-lng" style="display: none"><?=$affiliate_info->lng?></p>
+                                    <p class="shipping-lat" style="display: none"><?=$affiliate_info->lat?></p>
+                                </div>
+                            </div>
+                        <?php }?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
 <!--        --><?//= $form->field($model, 'invoice_id')->widget(\fx\widgets\Checkout\Invoice::className()); ?>
         <?php $is_jiarun = false;?>
 		<?php foreach ($cart as $k => $val) { ?>
             <?php if($val['base']->store_id == 1){ $is_jiarun = true;}?>
-			<?= fx\widgets\Checkout\Delivery::widget(['store_id' => $val['base']->store_id, 'total' => $val['total']]) ?>
+<!--			--><?//= fx\widgets\Checkout\Delivery::widget(['store_id' => $val['base']->store_id, 'total' => $val['total']]) ?>
             <div class="store_contain whitebg " id="store_contain_<?= $val['base']->store_id ?>">
-                <div class="mt5">
-                    <h2 class="clearfix p10">
-                        <span class="fl ">店铺：<em class="org"><?= $val['base']->name ?></em></span>
-                        <span class="fr red"><?php if ($val['base']->befreepostage == 1) { //是否包邮（满X元包邮）
-								if ($val['base']->minbookcash > 0) {
-									echo '店铺订单金额满' . $val['base']->minbookcash . '元包邮';
-								} else {
-									echo '店铺包邮';
-								}
-							}
-							?></span>
-                    </h2>
-                </div>
+<!--                <div class="mt5">-->
+<!--                    <h2 class="clearfix p10">-->
+<!--                        <span class="fl ">店铺：<em class="org">--><?//= $val['base']->name ?><!--</em></span>-->
+<!--                        <span class="fr red">--><?php //if ($val['base']->befreepostage == 1) { //是否包邮（满X元包邮）
+//								if ($val['base']->minbookcash > 0) {
+//									echo '店铺订单金额满' . $val['base']->minbookcash . '元包邮';
+//								} else {
+//									echo '店铺包邮';
+//								}
+//							}
+//							?><!--</span>-->
+<!--                    </h2>-->
+<!--                </div>-->
 				<?php foreach ($val['products'] as $key => $value) { ?>
                     <div class="flex-col tc p5 graybg" style="border-bottom: 1px dotted #999;">
                         <div class="flex-item-3">
@@ -268,11 +345,64 @@ $(".btn_points").click(function(){
     });
 });
 $("#button_submit").click(function(){
+    var is_deliver_home = <?= $affiliate_info->is_deliver_home?>;
+    var telephone = $("#telephone").val();
+    var firstname = $("#firstname").val();
+    var confirm_zone= $(".shipping-region").eq($("input[type='radio']:checked").val() - 1).text();
+    var confirm_address = $(".shipping-address").eq($("input[type='radio']:checked").val() - 1).text();
+    if(!is_deliver_home){
+        var confirm_zone= $(".shipping-region").eq(0).text();
+        var confirm_address = $(".shipping-address").eq(0).text();
+    }
+    var is_empty_shipping_address = <?= $is_empty_shipping_address?>;
+    if(is_empty_shipping_address && $("input[type='radio']:checked").val() == 1){
+        $.alert("请先创建地址!");
+        return false;
+    }
+    if(is_empty_shipping_address && $("input[type='radio']:checked").val() == 2){
+        var confirm_zone= $(".shipping-region").eq(0).text();
+        var confirm_address = $(".shipping-address").eq(0).text();
+    }
+
+    if(!firstname){
+        $.alert("收货人姓名必须填写");
+        $("#firstname").css('border-color',"red");
+        return false;
+    }
+    if(!telephone){
+        $.alert("手机号码必须填写");
+        $("#telephone").css('border-color',"red");
+        return false;
+    }
+
+    var myreg =  /^1[3456789]\d{9}$/;
+    if(!myreg.test(telephone))
+    {
+        $.alert('请输入有效的手机号码！');
+        $("#telephone").css('border-color',"red");
+        return false;
+    }
+    if(!confirm_address){
+        $.alert("详细地址必须填写");
+        return false;
+    }
+    if(!confirm_zone){
+        $.alert("地区必须填写");
+        return false;
+    }
+
+
+
     $("#confirm_form_address").html($(".select_address").html());
     var delivery_list="";
-    $(".delivery-default").each(function(){
-        delivery_list+='<div class="flex-item-4 mb5">配送时间：</div><div class="flex-item-8  tr mb5">'+$(this).html()+'</div>';
-    });
+    // $(".delivery-default").each(function(){
+    //     delivery_list+='<div class="flex-item-4 mb5">配送时间：</div><div class="flex-item-8  tr mb5">'+$(this).html()+'</div>';
+    // });
+
+    delivery_list = '<div>' +
+        '<p><span class="fb">'+ $("#firstname").val()+ '</span><em class="ml10">'+ $("#telephone").val()+'</em></p>' +
+        '<p>'+ confirm_zone + confirm_address +'</p>' +
+        '</div>';
     $("#confirm_form_shippingtime").html(delivery_list);
     maskdiv($("#confirm_form_order"),"bottom");
 });
@@ -282,11 +412,24 @@ $("#confirm_cannel").click(function(e){
     $(".maskdiv").remove();
     $(".content").scrollTop(0);
 });
-//ost_flag=true;
+post_flag=true;
 $("#confirm_pay").click(function(){
     if(post_flag){
         post_flag=false;
         $.showLoading("正在提交");
+
+        var is_deliver_home = <?= $affiliate_info->is_deliver_home?>;
+        $("#confirm_address").val($(".shipping-region").eq($("input[type='radio']:checked").val() - 1).text());
+        $("#confirm_address_1").val($(".shipping-address").eq($("input[type='radio']:checked").val() - 1).text());
+        $("#confirm_lng").val($(".shipping-lng").eq($("input[type='radio']:checked").val() - 1).text());
+        $("#confirm_lat").val($(".shipping-lat").eq($("input[type='radio']:checked").val() - 1).text());
+        var is_empty_shipping_address = <?= $is_empty_shipping_address?>;
+        if(!is_deliver_home || (is_empty_shipping_address && $("input[type='radio']:checked").val() == 2)){
+            $("#confirm_address").val($(".shipping-region").eq(0).text());
+            $("#confirm_address_1").val($(".shipping-address").eq(0).text());
+            $("#confirm_lng").val($(".shipping-lng").eq(0).text());
+            $("#confirm_lat").val($(".shipping-lat").eq(0).text());
+        }
 
         $('#form-checkout').submit();
         $.hideLoading();
@@ -331,6 +474,19 @@ $("body").on('click','.layerTri', function () { layer.open({
     })  });
 
 // Ad_Sys_Code();
+
+
+$("#address_list  .item-address").click(function(){
+    $(this).addClass('red').siblings().removeClass('red');
+    $(this).find('input:radio').attr('checked',true);
+});
+
+
+
+
+
+
+
 <?php $this->endBlock() ?>
 </script>
 <?php

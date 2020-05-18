@@ -11,6 +11,7 @@ use api\models\V1\Affiliate;
 use api\models\V1\AffiliateCustomer;
 use api\models\V1\AffiliatePersonal;
 use api\models\V1\AffiliatePlanDetail;
+use api\models\V1\City;
 use api\models\V1\CouponHistory;
 use api\models\V1\Customer;
 use api\models\V1\CustomerAffiliate;
@@ -18,6 +19,7 @@ use api\models\V1\CustomerCommission;
 use api\models\V1\CustomerCommissionFlow;
 use api\models\V1\CustomerCoupon;
 use api\models\V1\CustomerFollower;
+use api\models\V1\District;
 use api\models\V1\Invoice;
 use api\models\V1\Order;
 use api\models\V1\OrderBlack;
@@ -38,6 +40,7 @@ use api\models\V1\PromotionHistory;
 use api\models\V1\ReturnBase;
 use api\models\V1\ReturnProduct;
 use api\models\V1\WarehouseStock;
+use api\models\V1\Zone;
 use common\component\Helper\OrderSn;
 use common\models\User;
 use yii\base\ErrorException;
@@ -153,13 +156,13 @@ class CheckoutForm extends Model {
 //	}
 	public function FormValidate($attribute, $params)
 	{
-		if (!$model = Address::findOne(['address_id' => $this->address_id, 'customer_id' => Yii::$app->user->getId()])) {
-			$this->addError('address_id', '收货地址不能为空!');
-		}
-		if (!$this->delivery || !$this->delivery) {
-			$this->addError('delivery', '配送时间不能为空!');
-			Yii::$app->getSession()->setFlash('error', '配送时间不能为空！');
-		}
+//		if (!$model = Address::findOne(['address_id' => $this->address_id, 'customer_id' => Yii::$app->user->getId()])) {
+//			$this->addError('address_id', '收货地址不能为空!');
+//		}
+//		if (!$this->delivery || !$this->delivery) {
+//			$this->addError('delivery', '配送时间不能为空!');
+//			Yii::$app->getSession()->setFlash('error', '配送时间不能为空！');
+//		}
 	}
 
 	public function attributeLabels()
@@ -282,39 +285,68 @@ class CheckoutForm extends Model {
                         $Order_model->use_points = "0";
                     }
 					$Order_model->sent_to_erp = "N";
+                    $Order_model->affiliate_code = \Yii::$app->session->get('from_affiliate_code')?:'';
+                    $Order_model->affiliate_plan_code =  \Yii::$app->session->get('affiliate_plan_code_ing')?:"";
 					if (!$Order_model->save(false)) {
 						throw new \Exception("订单数据异常");
 					}
 
+                    $address = [];
+                    $telephone = \Yii::$app->request->post("telephone");
+                    $firstname = \Yii::$app->request->post("firstname");
+                    $region = \Yii::$app->request->post("confirm_address");
+                    $address_1 = \Yii::$app->request->post("confirm_address_1");
+                    $shipping_method = \Yii::$app->request->post("shipping_method");
+                    if(!empty($region)){
+                        $region = explode('-',$region);
+                        $address['province'] = $region[0];
+                        $address['city'] = $region[1];
+                        $address['district'] = $region[2];
+                    }
+
+                    $address['telephone'] = $telephone;
+                    $address['firstname'] = $firstname;
+//                $address['region'] = $region;
+                    $address['address_1'] = $address_1;
+                    $address['shipping_method'] = $shipping_method;
+                    $address['confirm_lng'] = \Yii::$app->request->post("confirm_lng");
+                    $address['confirm_lat'] = \Yii::$app->request->post("confirm_lat");
+
 					//订单地址表数据
 					$shipping_address = [];
-					if (($this->address_id) && isset($this->delivery[$k]) && ($delivery = $this->delivery[$k])) {
-					     if ($address = Address::findOne(['address_id' => $this->address_id, 'customer_id' => Yii::$app->user->getId()])) {
+					if ($address) {
+
+					     if ($address) {
 							$address_formart=$address->address_1;
-							$shipping_address = [
+                             $delivery_time = '不限';
+                             $zone=Zone::findOne(['name'=>$address['province']]);
+                             $city=City::findOne(['name'=>$address['city'],'zone_id'=>$zone?$zone->zone_id:0]);
+                             $district=District::findOne(['name'=>$address['district'],'city_id'=>$city?$city->city_id:0]);
+                             $ship_end = \Yii::$app->session->get('affiliate_plan_ship_end')?:"";;//配送时间
+                             $shipping_address = [
 								'shipping_method' => '每日惠购配送',
 								'shipping_code' => 'limit',
 								'delivery_code' => 'limit',
-								'delivery_date' => $delivery['date'],
-								'delivery_time' => $delivery['time'],
+                                'delivery_date' => date("Y-m-d",strtotime($ship_end)),
+                                'delivery_time' => $delivery_time,
 								'delivery_station_id' => 0,
 								'delivery_station_code' => '',
-								'username' => $address->firstname,
-								'telephone' => $address->telephone,
-								'address' => $address_formart,
-								'postcode' => $address->postcode,
-								'zone' => $address->zone->name,
-								'zone_code' => $address->zone->code,
-								'zone_id' => $address->zone_id,
-								'city' => $address->citys ? $address->citys->name : "",
-								'city_code' => $address->citys ? $address->citys->code : "",
-								'city_id' => $address->city_id,
-								'district' => $address->district ? $address->district->name : "",
-								'district_code' => $address->district ? $address->district->code : "",
-								'district_id' => $address->district_id,
-								'lat' => $address->lat,
-								'lng' => $address->lng,
-								'is_delivery' => 1,
+                                'username' => $address['firstname'],
+                                'telephone' => $address['telephone'],
+                                'address' => $address['address_1'],
+								'postcode' => 266000,
+                                'zone' => $address['province']? : "",
+                                'zone_code' => $zone?$zone->code:"",
+                                'zone_id' => $zone?$zone->zone_id:0,
+                                'city' => $address['city']? : "",
+                                'city_code' => $city?$city->code: "",
+                                'city_id' => $city?$city->city_id:0,
+                                'district' => $address['district']? : "",
+                                'district_code' => $district?$district->code: "",
+                                'district_id' => $district?$district->district_id:0,
+                                'lat' => $address['confirm_lat'],
+                                'lng' => $address['confirm_lng'],
+                                'is_delivery' => 1,
 							];
 						} else {
 							throw new \Exception("收货地址不存在");

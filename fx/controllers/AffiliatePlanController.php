@@ -680,11 +680,19 @@ class AffiliatePlanController extends \yii\web\Controller {
             $address = json_decode($shipping_address,true);
         }
 
+        if (\Yii::$app->request->get('redirect')) {
+            $redirect_url = \Yii::$app->request->get('redirect');
+        } elseif (\Yii::$app->session->get('redirect_url')) {
+            $redirect_url = \Yii::$app->session->get('redirect_url');
+        } else {
+            $redirect_url = Url::to(["/affiliate-plan/confirm"],true);
+        }
         try {
 
             if($post = \Yii::$app->request->isPost){
                 $region = \Yii::$app->request->post('region');
                 $address_edit['address'] = \Yii::$app->request->post('address_1');
+                $redirect_url = \Yii::$app->request->post('redirect_url');
 
                 if(!empty($region)){
                     $region = explode(' ',$region);
@@ -738,10 +746,11 @@ class AffiliatePlanController extends \yii\web\Controller {
                 }
 
                 \Yii::$app->session->set("shipping_address",json_encode($address_edit));
-                return $this->redirect(['/affiliate-plan/confirm']);
+                return $this->redirect($redirect_url);
+//                return $this->redirect(['/affiliate-plan/confirm']);
             }
 
-            return $this->render('edit-address', ['address'=>$address]);
+            return $this->render('edit-address', ['address'=>$address,'redirect_url'=>$redirect_url]);
 
         }catch (Exception $e){
             $e->getMessage();
