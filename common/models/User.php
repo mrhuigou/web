@@ -260,6 +260,15 @@ class User extends ActiveRecord implements IdentityInterface,\OAuth2\Storage\Use
             return false;
         }
     }
+
+    public function getSubcription2(){
+        if($model=CustomerAuthentication::findOne(['customer_id'=>$this->customer_id,'status2'=>1,'provider'=>'WeiXin'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function getWxOpenId(){
         if($model=CustomerAuthentication::findOne(['customer_id'=>$this->customer_id,'provider'=>'WeiXin','status'=>1])){
             return $model->openid;

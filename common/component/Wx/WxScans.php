@@ -12,7 +12,10 @@ use Yii;
 use yii\helpers\Json;
 
 class WxScans{
-	public function creatScan($scene_str){
+	public function creatScan($scene_str,$wechat2=false){
+	    if($wechat2){
+            return Yii::$app->wechat2->createQrCode(['action_name'=>'QR_LIMIT_STR_SCENE','action_info'=>['scene'=>['scene_str'=>$scene_str]]]);
+        }
 		return Yii::$app->wechat->createQrCode(['action_name'=>'QR_LIMIT_STR_SCENE','action_info'=>['scene'=>['scene_str'=>$scene_str]]]);
 	}
 	public function getScan($ticket){

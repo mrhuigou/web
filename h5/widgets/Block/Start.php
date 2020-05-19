@@ -48,6 +48,33 @@ class Start extends Widget{
 					}
 			}
 		}
+
+		//白金每日惠购
+        if(strpos(strtolower($useragent), 'micromessenger') && ($from_affiliate_uid == 278) && !\Yii::$app->session->get('source_from_agent_wx_xcx')){
+            if (!\Yii::$app->user->isGuest) {
+                if(\Yii::$app->user->identity->getSubcription2()){
+                    \Yii::$app->session->set('ad_pop_flag2',0);
+                    return;
+                }else{
+                    $time=\Yii::$app->session->get('subcription_time2',0);
+                    if((time()-$time)>60*20){
+                        \Yii::$app->session->set('subcription_time2',time());
+                        \Yii::$app->session->set('subcription_url2',\Yii::$app->request->getAbsoluteUrl());
+                    }else{
+                        \Yii::$app->session->set('subcription_url2',\Yii::$app->request->getAbsoluteUrl());
+                        if(!$this->type){
+                            \Yii::$app->session->set('ad_pop_flag2',0);
+                            return;
+                        }
+                    }
+                    \Yii::$app->session->set('ad_pop_flag2',1);
+                    return $this->render('start',['type'=>$this->type,'status'=>1,'share_logo' => $this->getShareLogo(true),'ticket_code' => $this->getTicketCode(true)]);
+//						return $this->render('start',['type'=>$this->type,'status'=>$this->getUserStatus()]);
+                }
+            }
+        }
+
+
 	}
 	public function getUserStatus(){
 		$status=0;
@@ -72,11 +99,11 @@ class Start extends Widget{
 	}
 
     //生成相应的场景二维码
-	public function getTicketCode(){
+	public function getTicketCode($wechat2=false){
         //生成相应的场景二维码
         $scan=new WxScans();
         $scene_str=md5(serialize(time()));
-        if($data=$scan->creatScan($scene_str)){
+        if($data=$scan->creatScan($scene_str,$wechat2)){
             //创建场景二维码推送的消息
             $ticket_info = array(
                 'title' => '恭喜你关注成功!',
@@ -87,15 +114,26 @@ class Start extends Widget{
             $ticket = $data['ticket'];
             \Yii::$app->redis->set($ticket,json_encode($ticket_info));
         }
+        if($wechat2){
+            $url = \Yii::$app->wechat2->getQrCodeUrl($ticket);
+            $image = \Yii::$app->wechat2->httpGet($url);//exit;
+        }else{
+            $url = \Yii::$app->wechat->getQrCodeUrl($ticket);
+            $image = \Yii::$app->wechat->httpGet($url);//exit;
+        }
 
-        $url = \Yii::$app->wechat->getQrCodeUrl($ticket);
-        $image = \Yii::$app->wechat->httpGet($url);//exit;
+//        $url = \Yii::$app->wechat->getQrCodeUrl($ticket);
+//        $image = \Yii::$app->wechat->httpGet($url);//exit;
         $file= "./scans_code/".$ticket.".jpg"; //设置图片名字
         file_put_contents($file,$image); //二维码保存到本地
         return "/scans_code/".$ticket.".jpg";
     }
 
-	public function getShareLogo(){
+	public function getShareLogo($wechat2=false){
+	    if($wechat2){
+            $share_logo = '/group1/M00/06/AF/wKgB7l4Vh4aAC6R0AAI4qqO0gas539.png';
+            return $share_logo;
+        }
         $cur_param=\Yii::$app->request->getPathInfo();
 
         $logo_type = 1;//默认类型
