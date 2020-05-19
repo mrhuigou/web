@@ -295,8 +295,11 @@ class Customer extends ActiveRecord implements IdentityInterface,\OAuth2\Storage
         return $qty;
     }
 
-    public function getWxOpenId(){
+    public function getWxOpenId($wechat2=false){
         if($model=CustomerAuthentication::findOne(['customer_id'=>$this->customer_id,'provider'=>'WeiXin'])){
+            if($wechat2){
+                return $model->openid2;
+            }
             return $model->openid;
         }else{
             return false;

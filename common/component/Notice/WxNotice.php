@@ -32,7 +32,7 @@ class WxNotice {
 		];
 		return $this->send($to,$template_id,$url,$data);
 	}
-	 public function order($to,$url,$message)
+	 public function order($to,$url,$message,$wechat2=false)
 	{  //已申请模板2019-12-25
 //		$template_id = "LoReehuDPcpcBT-ctBreshLyX0dz-dU1FrHA0LswWr8";
 //		$data = [
@@ -42,6 +42,9 @@ class WxNotice {
 //			'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电0532-55769778或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
 //		];
         $template_id = "ZU1CfmLOIKx8lny9N4xV12ztvZuMHMBk9aObLxU16CE";
+        if($wechat2){
+            $template_id = ""; //白金每日惠购的 模板id
+        }
         $data = [
             'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
             'keyword1' => ['value' => '订单编号 '.isset($message['order_no'])?$message['order_no']:'','color'=>'#173177'],
@@ -49,7 +52,7 @@ class WxNotice {
             'keyword3' => ['value' => isset($message['status'])?$message['status']:'','color'=>'#173177'],
             'remark' => ['value' =>  isset($message['remark'])?$message['remark']:'如有问题请致电400-968-9870或直接在微信留言，我们将第一时间为您服务！','color'=>'#173177']
         ];
-		return $this->send($to,$template_id,$url,$data);
+		return $this->send($to,$template_id,$url,$data,$wechat2);
 	}
 	public function party($to,$url,$message){
 		$template_id = "R9b8y-oZ7eGJxL3Wcx3mK8qIkgNt2eXsytm19Hwd8jw";
@@ -154,7 +157,7 @@ class WxNotice {
         ];
         return $this->send($to,$template_id,$url,$data);
     }
-	protected function send($to, $template_id, $url, $data)
+	protected function send($to, $template_id, $url, $data,$wechat2=false)
 	{
             $body = [
                 'touser' => $to,
@@ -163,6 +166,9 @@ class WxNotice {
                 'topcolor' => '#173177',
                 'data' => $data
             ];
+            if($wechat2){
+                return \Yii::$app->wechat2->sendTemplateMessage($body);
+            }
 		return \Yii::$app->wechat->sendTemplateMessage($body);
 	}
 
