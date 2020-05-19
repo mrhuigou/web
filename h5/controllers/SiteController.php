@@ -855,7 +855,7 @@ class SiteController extends Controller {
                 $model->photo_url = $UserInfo['headimgurl'];
                 $model->date_added = date('Y-m-d H:i:s', time());
                 $model->identifier = $identifier;
-                $model->openid = $UserInfo['openid'];
+                $model->openid2 = $UserInfo['openid'];
                 $model->save();
             } else {
                 throw new NotFoundHttpException("获取用户信息失败");
