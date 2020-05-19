@@ -32,7 +32,7 @@ class Wechat2Controller extends Controller {
 
 	public function actionIndex()
 	{
-		if ($this->msg = \Yii::$app->wechat->parseRequestData()) {
+            if ($this->msg = \Yii::$app->wechat2->parseRequestData()) {
 			$this->msgtype = $this->msg['MsgType'];
 			if ($this->msgtype == 'event') {
 				$this->responseEvent();
@@ -114,9 +114,9 @@ class Wechat2Controller extends Controller {
 					];
 				}
 			}
-			\Yii::$app->wechat->sendNews($this->msg['FromUserName'], $data);
+			\Yii::$app->wechat2->sendNews($this->msg['FromUserName'], $data);
 		} else {
-			\Yii::$app->wechat->sendText($this->msg['FromUserName'], "正在建设中。。。");
+			\Yii::$app->wechat2->sendText($this->msg['FromUserName'], "正在建设中。。。");
 		}
 	}
 
@@ -147,11 +147,11 @@ class Wechat2Controller extends Controller {
 						];
 					}
 				}
-				\Yii::$app->wechat->sendNews($this->msg['FromUserName'], $data);
+				\Yii::$app->wechat2->sendNews($this->msg['FromUserName'], $data);
 			} else {
-//				\Yii::$app->wechat->sendText($this->msg['FromUserName'], "恭喜您关注成功！");
-                $content = "你好呀，我们终于见面了。"."\n"."感谢你关注家润每日惠购!";
-				\Yii::$app->wechat->sendText($this->msg['FromUserName'], $content);
+//				\Yii::$app->wechat2->sendText($this->msg['FromUserName'], "恭喜您关注成功！");
+                $content = "你好呀，我们终于见面了。"."\n"."感谢你关注白金每日惠购!";
+				\Yii::$app->wechat2->sendText($this->msg['FromUserName'], $content);
 			}
 			$customer_id = $this->BindUser($openid, $affiliate_id);
 			$this->sendGift($customer_id, $openid);
@@ -207,9 +207,9 @@ class Wechat2Controller extends Controller {
                             ];
                         }
                     }
-                    \Yii::$app->wechat->sendNews($msg['FromUserName'], $message);
+                    \Yii::$app->wechat2->sendNews($msg['FromUserName'], $message);
                 } else {
-                    \Yii::$app->wechat->sendText($msg['FromUserName'], "恭喜您关注成功！");
+                    \Yii::$app->wechat2->sendText($msg['FromUserName'], "恭喜您关注成功！");
                 }
                 $customer_id = $this->BindUser($openid, $affiliate_id,$source_info);
                 $this->sendGift($customer_id, $openid);
@@ -223,10 +223,10 @@ class Wechat2Controller extends Controller {
                         'picurl' => Image::resize($ticket_info['pic_url'], 200, 200),
                         'url' => $ticket_info['url'],
                     ];
-                    \Yii::$app->wechat->sendNews($msg['FromUserName'], $message);
+                    \Yii::$app->wechat2->sendNews($msg['FromUserName'], $message);
 
                 }else{
-                    \Yii::$app->wechat->sendText($msg['FromUserName'], "恭喜您关注成功！");
+                    \Yii::$app->wechat2->sendText($msg['FromUserName'], "恭喜您关注成功！");
                 }
                 $customer_id = $this->BindUser($openid, $affiliate_id,$source_info);
                 $this->sendGift($customer_id, $openid);
@@ -238,14 +238,14 @@ class Wechat2Controller extends Controller {
 	{
         $is_new_customer = 1;
         $customer_id = 0;
-		if ($model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'openid' => $openid])) {
-			$model->date_update = date('Y-m-d H:i:s', time());
-			$model->status = 1;
+		if ($model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'openid2' => $openid])) {
+			$model->date_update2 = date('Y-m-d H:i:s', time());
+			$model->status2 = 1;
 			$model->save();
             $is_new_customer = 0;
             $customer_id = $model->customer_id;
 		} else {
-			if ($UserInfo = \Yii::$app->wechat->getMemberInfo($openid)) {
+			if ($UserInfo = \Yii::$app->wechat2->getMemberInfo($openid)) {
 				$identifier = isset($UserInfo['unionid']) ? $UserInfo['unionid'] : $openid;
 				if (!$model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'identifier' => $identifier])) {
 					$customer = new User();
@@ -276,7 +276,7 @@ class Wechat2Controller extends Controller {
 					$model->customer_id = $customer_id;
 					$model->provider = 'WeiXin';
 					$model->identifier = $identifier;
-					$model->openid = $openid;
+					$model->openid2 = $openid;
 					$model->display_name = $UserInfo['nickname'] ? $UserInfo['nickname'] : '匿名';
 					$model->gender = $sex;
 					$model->photo_url = $UserInfo['headimgurl'];
@@ -356,7 +356,7 @@ class Wechat2Controller extends Controller {
                         'picurl' => Yii::$app->request->getHostInfo().'/assets/images/mrhuigou_logo.png',
                         'url' => 'https://m.mrhuigou.com/user-coupon/index',
                     ];
-                    \Yii::$app->wechat->sendNews($openid, [$msg]);
+                    \Yii::$app->wechat2->sendNews($openid, [$msg]);
                 }
 			}
 		}
@@ -422,9 +422,9 @@ class Wechat2Controller extends Controller {
 	public function Unsubscribe()
 	{
 		$openid = $this->msg['FromUserName'];
-		if ($model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'openid' => $openid])) {
-			$model->date_update = date('Y-m-d H:i:s', time());
-			$model->status = 0;
+		if ($model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'openid2' => $openid])) {
+			$model->date_update2 = date('Y-m-d H:i:s', time());
+			$model->status2 = 0;
 			$model->save();
 		}
 	}
