@@ -131,7 +131,7 @@ class Start extends Widget{
 
 	public function getShareLogo($wechat2=false){
 	    if($wechat2){
-            $share_logo = '/group1/M00/06/AF/wKgB7l4Vh4aAC6R0AAI4qqO0gas539.png';
+            $share_logo = '/group1/M00/06/D9/wKgB7l7Dl1GAH-iVAAHY_LIs_UU130.png';
             return $share_logo;
         }
         $cur_param=\Yii::$app->request->getPathInfo();
