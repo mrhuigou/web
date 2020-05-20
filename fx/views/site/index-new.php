@@ -85,21 +85,13 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 </script>
 
     <ul class="filter redFilter two f16 clearfix" style="border-bottom: 1px solid #ff463c;">
-        <li class="" id="jinri">
-            <div id="jinri1">
-                <img data-original="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_peKAELAIAAAkILDuqBo736.jpg" title="正在抢购" alt="正在抢购" class="db w lazy" >
-            </div>
-            <div id="jinri2" style="display: none">
-                <img data-original="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_s9aALVCVAAANnjPagng521.jpg" title="正在抢购" alt="正在抢购" class="db w lazy">
-            </div>
+        <li class="" id="jinri" >
+            <img id="jinri1" style="width: 15rem;" src="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_peKAELAIAAAkILDuqBo736.jpg" title="正在抢购" alt="正在抢购" class="" >
+            <img id="jinri2" style="width: 15rem;" hidden="hidden" src="http://img1.mrhuigou.com/group1/M00/06/DA/wKgB7l7E5DSAalSqAAARSAzmDy4344.jpg" title="正在抢购" alt="正在抢购" class="">
          </li>
         <li class="" id="mingri">
-            <div id="mingri1">
-                 <img data-original="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_peKAJq1WAAAR4v-fXBc675.jpg" title="下期预购" alt="下期预购" class="db w lazy" >
-            </div>
-            <div id="mingri2" style="display: none">
-                <img data-original="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_tFqASLXwAAAUvihjChk406.jpg" title="下期预购" alt="下期预购" class="db w lazy" style="display: none" >
-            </div>
+            <img  id="mingri1" style="width: 15rem;" src="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_peKAJq1WAAAR4v-fXBc675.jpg" title="下期预购" alt="下期预购" class="" >
+            <img  id="mingri2" style="width: 15rem;" hidden="hidden" src="http://img1.mrhuigou.com/group1/M00/06/D8/wKgB7l6_tFqASLXwAAAUvihjChk406.jpg" title="下期预购" alt="下期预购" class="">
          </li>
     </ul>
     <div id="affiliate_plan"></div>
