@@ -601,8 +601,9 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     autoplayDisableOnInteraction: false
     });
     });
+    var sourcefrom = "<?=strtolower(Yii::$app->request->get("sourcefrom",'')) ?>";
     var hot_content_tpl = $('#hot_content_tpl').html();
-    $.getJSON('<?php echo Yii::$app->params["API_URL"]?>/mall/v1/ad/index?code=H5-0F-AD&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
+    $.getJSON('<?php echo Yii::$app->params["API_URL"]?>/mall/v1/ad/index?code=H5-0F-AD&sourcefrom='+sourcefrom+'&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
     var html= template(hot_content_tpl, {list:result.data,from:0,to:(result.data.length-1)});
     $("#hot_content").html(html);
     $("img.lazy").scrollLoading({container:$(".content")});
@@ -675,7 +676,16 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         'link' => Yii::$app->request->getAbsoluteUrl(),
         'image' => Yii::$app->request->getHostInfo().'/assets/images/zhqd/logo_300x300.jpeg'
     ];
-}else{
+}
+elseif (strtolower(Yii::$app->request->get("sourcefrom")) == 'baijin'){//白金每日惠购
+    $data = [
+        'title' => '遇到好东西，总想分享给最亲爱的你。',
+        'desc' => "口袋超市，物美价廉，当日订单，当日送达。",
+        'link' => Yii::$app->request->getAbsoluteUrl(),
+        'image' => 'http://img1.mrhuigou.com/group1/M00/06/D9/wKgB7l7Dl1GACI_0AAKBXV9WOU4902.jpg'
+    ];
+}
+else{
     $data = [
         'title' => '遇到好东西，总想分享给最亲爱的你。',
         'desc' => "每日惠购，物美价廉，当日订单，当日送达。",
