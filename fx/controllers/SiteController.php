@@ -107,6 +107,12 @@ class SiteController extends Controller {
 
         $focus_position = ['AF-3F'];
         $data['ad_banner_1'] = $affiliate_plan->getAffiliatePlanDetailByPositionCode($focus_position);
+        //分销商信息
+        $affiliate_info = '';
+        if($affiliate_id = \Yii::$app->session->get('from_affiliate_uid')?:259){
+            $affiliate_info = Affiliate::find()->where(['status'=>1,'affiliate_id'=>$affiliate_id])->one();
+        }
+        $data['affiliate_info'] = $affiliate_info;
 		return $this->render('index-new', $data);
 	}
 

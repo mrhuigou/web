@@ -18,12 +18,12 @@
         <div class="clearfix">
             <div class="fl" style="margin-bottom:0.75rem;margin-right:0.5rem;">
                 <?php foreach (array_slice($ad_1,0,1) as $key=> $value) { ?>
-                    <a href="<?= \yii\helpers\Url::to(['affiliate-plan-detail/index','plan_id'=>$value->affiliate_plan_id]) ?>" class="db"><img src="<?= \common\component\image\Image::resize($value->source_url, 300, 120) ?>" style="width: 15rem;height: 6rem;<?php if($key ==0 || $key ==2){ echo 'margin-bottom:0.35rem;';}?>"></a>
+                    <a href="<?= \yii\helpers\Url::to(['affiliate-plan-detail/index','plan_id'=>$value->affiliate_plan_id]) ?>" class="db"><img src="<?= \common\component\image\Image::resize($value->source_url, 300, 120) ?>" style="width: 14rem;height: 6rem;<?php if($key ==0 || $key ==2){ echo 'margin-bottom:0.35rem;';}?>"></a>
                 <?php } ?>
             </div>
             <div class="fl" style="margin-bottom:0.75rem;margin-right:0.5rem;">
                 <?php foreach (array_slice($ad_1,1,1) as $key=> $value) { ?>
-                    <a href="<?= \yii\helpers\Url::to(['affiliate-plan-detail/index','plan_id'=>$value->affiliate_plan_id])?>" class="db"><img src="<?= \common\component\image\Image::resize($value->source_url, 300, 120) ?>" style="width: 15rem;height: 6rem;<?php if($key ==0 || $key ==2){ echo 'margin-bottom:0.35rem;';}?>"></a>
+                    <a href="<?= \yii\helpers\Url::to(['affiliate-plan-detail/index','plan_id'=>$value->affiliate_plan_id])?>" class="db"><img src="<?= \common\component\image\Image::resize($value->source_url, 300, 120) ?>" style="width: 14rem;height: 6rem;<?php if($key ==0 || $key ==2){ echo 'margin-bottom:0.35rem;';}?>"></a>
                 <?php } ?>
             </div>
         </div>
