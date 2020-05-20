@@ -601,9 +601,8 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     autoplayDisableOnInteraction: false
     });
     });
-    var sourcefrom = "<?=strtolower(Yii::$app->request->get("sourcefrom",'')) ?>";
     var hot_content_tpl = $('#hot_content_tpl').html();
-    $.getJSON('<?php echo Yii::$app->params["API_URL"]?>/mall/v1/ad/index?code=H5-0F-AD&sourcefrom='+sourcefrom+'&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
+    $.getJSON('<?php echo Yii::$app->params["API_URL"]?>/mall/v1/ad/index?code=H5-0F-AD&wx_xcx='+wx_xcx+'&callback=?&'+source, function(result){
     var html= template(hot_content_tpl, {list:result.data,from:0,to:(result.data.length-1)});
     $("#hot_content").html(html);
     $("img.lazy").scrollLoading({container:$(".content")});
