@@ -67,7 +67,7 @@ class InitShare extends Event{
                 \Yii::$app->session->set('from_affiliate_uid',$model->affiliate_id);
             }
         }
-        if(\Yii::$app->request->get('sourcefrom') == 'jiarun' && \Yii::$app->session->has("from_affiliate_uid")){
+        if(\Yii::$app->request->get('sourcefrom') == 'mrhuigou' && \Yii::$app->session->has("from_affiliate_uid")){
             \Yii::$app->session->remove('from_affiliate_uid');
         }
 //        $path = \Yii::$app->request->getPathInfo();
