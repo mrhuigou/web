@@ -27,6 +27,9 @@
                      <!--优惠券详情-->
                      <?php if ($model['productBase']->coupon) { ?>
                          <?php foreach ($model['productBase']->coupon as $coupon) { ?>
+                             <?php if(!$coupon->couponCateToCoupon){
+                                 continue;
+                             } ?>
                              <?= '[券]'.$coupon->comment; ?>
                          <?php }?>
                      <?php }?>

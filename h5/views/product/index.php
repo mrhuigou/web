@@ -90,6 +90,9 @@ $this->title = '商品详情';
                                 <!--优惠券详情-->
                                 <?php if ($model->coupon) { ?>
                                     <?php foreach ($model->coupon as $coupon) { ?>
+                                        <?php if(!$coupon->couponCateToCoupon){
+                                            continue;
+                                        } ?>
                                             <?= '[券]'.$coupon->comment; ?>
                                     <?php }?>
                                 <?php }?>

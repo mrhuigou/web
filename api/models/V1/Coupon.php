@@ -176,4 +176,7 @@ class Coupon extends \yii\db\ActiveRecord
         }
         return $status;
     }
+    public function getCouponCateToCoupon(){
+        return $this->hasMany(CouponCateToCoupon::className(),['coupon_id'=>'coupon_id']);
+    }
 }

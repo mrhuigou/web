@@ -30,6 +30,9 @@ class Coupon extends Widget {
 		if ($coupon_products) {
 			foreach ($coupon_products as $coupon_product) {
 				if($coupon_product->status){
+				    if(!$coupon_product->coupon->couponCateToCoupon){
+                        continue;
+                    }
 					$this->_coupon[$coupon_product->coupon_id]=$coupon_product->coupon;
 				}
 			}

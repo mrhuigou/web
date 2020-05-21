@@ -141,6 +141,9 @@ class AdController extends Controller {
                     $coupon_title = '';
                     if($ad_detail_product->productBase->coupon){
                         foreach ($ad_detail_product->productBase->coupon as $coupon){
+                            if(!$coupon->couponCateToCoupon){
+                                continue;
+                            }
                             $coupon_title = '[券]'.$coupon->comment;
                         }
                     }
