@@ -358,7 +358,7 @@ class OrderController extends \yii\console\Controller {
 		if ($order_model = Order::findOne(['order_id' => $order_id])) {
 		    if($order_model->affiliate_id ){
                 $affiliate = Affiliate::findOne(['affiliate_id'=> $order_model->affiliate_id,'status'=>1]);
-                if($affiliate->settle_type == 'order'){
+                if($affiliate->settle_type == 'order' || $affiliate->settle_type == 'product'){
                     echo "order===begin===========";
                     $cash = $order_model->commission;//总提成
                     if ($order_model->affiliate_id && abs($cash) > 0) {
