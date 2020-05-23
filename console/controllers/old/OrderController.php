@@ -726,6 +726,9 @@ class OrderController extends \yii\console\Controller {
 					$data = $this->CreatRequestParams('createOrder', [$value]);
 					$content = $client->getInterfaceForJson($data);
 					$result = $this->getResult($content);
+					if(strpos($result['error'], "该订单后台系统已经存在！")!== false){//如果检测到后台订单已经存在
+                        $result['status'] = 'OK';
+                    }
 					echo $value['CODE'] . "---data-upload-time:" . date("Y-m-d H:i:s", time()) . "\n";
 					if (isset($result['status']) && $result['status'] == 'OK') {
                         ;
