@@ -50,7 +50,7 @@ $this->title = $model->name;
                     <?php }?>
                 <?php }?>
 
-                <img data-original="<?= \common\component\image\Image::resize($promotion_detail_image ?:$detail->product->image, 180, 180) ?>" class="lazy db w fl mr15" >
+                <img data-original="<?= \common\component\image\Image::resize($promotion_detail_image ?:$detail->product->image, 500, 500) ?>" class="lazy db w fl mr15" >
 			</a>
 			<div class="pw66 fr">
 				<a href="<?=Url::to(['/product/index','product_code'=>$detail->product->product_code,'shop_code'=>$detail->product->store_code])?>" class="db pb10"> <?= $detail->product->description->name ?></a>
