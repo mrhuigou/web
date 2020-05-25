@@ -7,11 +7,11 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 ?>
 
 <div class="content" style="top: 0px;">
-    <div class="w" style="max-width: inherit;width: 32rem;height: auto;position: relative;">
-        <img class="" src="http://img1.mrhuigou.com/group1/M00/06/DA/wKgB7l7E1xSASFzaAAAttVIeOCc132.jpg"  style="max-width: inherit;width: 32rem;height: auto;"/>
+    <div class="w" style="max-width: inherit;width: 100%;height: auto;position: relative;">
+        <img class="" src="http://img1.mrhuigou.com/group1/M00/06/DA/wKgB7l7E1xSASFzaAAAttVIeOCc132.jpg"  style="max-width: inherit;width:100%;height: auto;"/>
         <div style="position:absolute;top: 3.5rem;left: 1rem; color: #fff;font-size: 21px;font-weight: bold;"><?=$affiliate_info?$affiliate_info->name:"每日惠购团长"?>  ></div>
     </div>
-<section class="veiwport " style="max-width: inherit;width: 30rem;height: auto;position: absolute;left: 1rem;top: 6rem;">
+<section class="veiwport " style="max-width: inherit;width: 30rem;height: auto;position: relative;top: -6rem;">
     <div id="swiper_content" style="max-width: inherit;width: 30rem;height: 13.3rem;overflow: hidden;display: none"></div>
     <script id="swiper_content_tpl" type="text/html">
         <div class="swiper-container" id="swiper-container_banner">
