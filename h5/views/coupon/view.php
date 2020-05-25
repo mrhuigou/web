@@ -128,7 +128,7 @@ $this->title ='家润每日惠购优惠券';
 
 
 		<?php }else{ ?>
-            <div id="lijishiyong" style="text-align: center;">
+            <div id="lijishiyong" style="text-align: center;display: none;">
                 <a  href="javascript:;"> <img src="http://img1.mrhuigou.com/group1/M00/06/C0/wKgB7l5wZmGAA9cZAAAi9npiRf4890.png" /> </a>
             </div>
 		<?php } ?>
@@ -148,6 +148,10 @@ $this->title ='家润每日惠购优惠券';
 <?php
 $this->beginBlock('JS_SKU')
 ?>
+var  user_status11 = <?=$user_status ?: 0?>;
+if(!user_status11){
+    $("#lijishiyong").show();
+}
 
 function loading(){
     //$.post('<?//='/coupon/ajax-apply-result'?>//',{'coupon_id':'<?//=$model->coupon_id?>//'},function(res){
@@ -371,6 +375,7 @@ $(".coupon-item-btn").on('click',function(){
             console.log(html)
             $("#my_result").html(html);
             $('#my_result').show();
+            $("#lijishiyong").show();
         }else{
             $.toast(data.message);
         }
