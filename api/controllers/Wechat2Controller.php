@@ -281,11 +281,18 @@ class Wechat2Controller extends Controller {
 					$model->gender = $sex;
 					$model->photo_url = $UserInfo['headimgurl'];
 					$model->date_added = date('Y-m-d H:i:s', time());
-					$model->status = 1;
+					$model->status2 = 1;
 					if (!$model->save(false)) {
 						Yii::error("关注注册失败！");
 					}
-				}
+				}else{//信息存在时，插入第二条关注信息
+                    $model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'identifier' => $identifier]);
+                    $model->openid2 = $openid;
+                    $model->date_update2 = date('Y-m-d H:i:s', time());
+                    $model->status2 = 1;
+                    $model->save();
+                }
+
 			}
 		}
         if($source_info && $source_info['status'] && $customer_id){

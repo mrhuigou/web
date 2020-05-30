@@ -52,6 +52,9 @@ class WeixinController extends \yii\web\Controller
             if(strpos($out_trade_no,"_MWEB")){
                 $out_trade_no=str_replace("_MWEB","",$out_trade_no);
             }
+            if(strpos($out_trade_no,"_JSAPI2")){
+                $out_trade_no=str_replace("_JSAPI2","",$out_trade_no);
+            }
             if(strpos($out_trade_no,"_JSAPI")){
                 $out_trade_no=str_replace("_JSAPI","",$out_trade_no);
             }
