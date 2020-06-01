@@ -285,7 +285,13 @@ class WechatController extends Controller {
 					if (!$model->save(false)) {
 						Yii::error("关注注册失败！");
 					}
-				}
+				} else{//信息存在时，插入第二条关注信息
+                    $model = CustomerAuthentication::findOne(['provider' => 'WeiXin', 'identifier' => $identifier]);
+                    $model->openid = $openid;
+                    $model->date_update = date('Y-m-d H:i:s', time());
+                    $model->status = 1;
+                    $model->save();
+                }
 			}
 		}
         if($source_info && $source_info['status'] && $customer_id){
