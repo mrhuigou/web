@@ -224,7 +224,7 @@ class CheckoutForm extends Model {
 					$Order_model->comment = $this->comment[$k];
 					$Order_model->order_status_id = 1;
 
-                    $affiliate_code = "";//默认分销商code为空
+                    $affiliate_code = "mrhuigou";//默认分销商code为空
 					if($affiliate_id = Yii::$app->session->get("from_affiliate_uid",0)){
 					    $affiliate = Affiliate::findOne(['affiliate_id'=>$affiliate_id]);
                         if($affiliate && $affiliate->status ){//非智慧青岛
