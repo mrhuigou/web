@@ -224,9 +224,11 @@ class CheckoutForm extends Model {
 					$Order_model->comment = $this->comment[$k];
 					$Order_model->order_status_id = 1;
 
+                    $affiliate_code = "";//默认分销商code为空
 					if($affiliate_id = Yii::$app->session->get("from_affiliate_uid",0)){
 					    $affiliate = Affiliate::findOne(['affiliate_id'=>$affiliate_id]);
                         if($affiliate && $affiliate->status ){//非智慧青岛
+                            $affiliate_code = $affiliate->code;
                             if($affiliate->affiliate_id != 259){
                                 $customer = Customer::findOne(['customer_id'=>Yii::$app->user->getId()]);
                                 if($customer->affiliate_id == Yii::$app->session->get("from_affiliate_uid")){
@@ -239,6 +241,7 @@ class CheckoutForm extends Model {
                         }
 					}
 					$Order_model->affiliate_id = $affiliate_id;
+					$Order_model->affiliate_code = $affiliate_code;
 					$Order_model->commission=$this->getOrderCommission($order_data['total'],$affiliate_id);
 					if($affiliate_id==0){
                             if($from_share_user=CustomerFollower::findOne(['follower_id'=>Yii::$app->user->getId()])){
