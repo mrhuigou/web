@@ -2831,7 +2831,7 @@ class WebapiController extends \yii\rest\Controller {
         $status = true;
         try {
             foreach ($datas as $data) {
-                if (!$model = Affiliate::findOne(['code' => trim($data['CODE']),'telephone' => trim($data['TELEPHONE'])])) {
+                if (!$model = Affiliate::findOne(['code' => trim($data['CODE'])])) {
                     $model = new Affiliate();
                 }
                 $model->code = trim($data['CODE']);
