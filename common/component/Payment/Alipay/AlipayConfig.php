@@ -22,14 +22,14 @@ class AlipayConfig
 {
 //↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 //合作身份者id，以2088开头的16位纯数字
-    static $partner = '2088011603773712';
+    static $partner = '2088831230151059';
 
 //收款支付宝账号
-    static $seller_id = '2088011603773712';
+    static $seller_id = '2088831230151059';
 
-    static $seller_email="ray_718@139.com";
+    static $seller_email="meirihuigou@126.com";
 
-    static $key="h1vzu2gtfwhpqq25zzy1ys9yxtep7h30";
+    static $key="s988ig15fg1p2n3f1lsq3kagqgqiz4b2";
 
 //商户的私钥（后缀是.pen）文件相对路径
     static $private_key_path = '/key/rsa_private_key.pem';

@@ -39,14 +39,14 @@ $this->title = "收银台";
                 </a>
         <?php }?>
         <?php if(strpos(strtolower(\Yii::$app->request->getUserAgent()), 'micromessenger') === false){ ?>
-<!--            <a href="--><?php //echo \yii\helpers\Url::to(['/payment/alipay','trade_no'=>$model->merge_code])?><!--"  class="payment clearfix">-->
-<!--            <span class="img zfb"></span>-->
-<!--            <div class="fl">-->
-<!--                <h3>支付宝支付</h3>-->
-<!--                <span class="gray9 f12">安全、方便、快捷</span>-->
-<!--            </div>-->
-<!--            <i class="iconfont fr"></i>-->
-<!--        </a>-->
+            <a href="<?php echo \yii\helpers\Url::to(['/payment/alipay','trade_no'=>$model->merge_code])?>"  class="payment clearfix">
+            <span class="img zfb"></span>
+            <div class="fl">
+                <h3>支付宝支付</h3>
+                <span class="gray9 f12">安全、方便、快捷</span>
+            </div>
+            <i class="iconfont fr"></i>
+        </a>
             <?php  } ?>
 <!--        <a href="--><?php //echo\yii\helpers\Url::to(['/payment/upop-pay','trade_no'=>$model->merge_code])?><!--"  class="payment clearfix">-->
 <!--            <span class="img yl"></span>-->
