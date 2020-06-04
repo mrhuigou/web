@@ -65,6 +65,11 @@ class OrderController extends \yii\web\Controller
                 'customer_id'=>\Yii::$app->user->getId(),
             );
         }
+        if($affiliate_id = \Yii::$app->session->get("from_affiliate_uid",0)){
+            $where['affiliate_id'] = $affiliate_id;
+        }else{
+            $where['affiliate_id'] = 0;
+        }
         $model =Order::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $model->where($where)->orderBy('date_added DESC'),
