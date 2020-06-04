@@ -29,7 +29,7 @@ class AlipayConfig
 
     static $seller_email="meirihuigou@126.com";
 
-    static $key="s988ig15fg1p2n3f1lsq3kagqgqiz4b2";
+    static $key="fbszaxcpmnhh251bkj4vhk3jzt17irh6";
 
 //商户的私钥（后缀是.pen）文件相对路径
     static $private_key_path = '/key/rsa_private_key.pem';
