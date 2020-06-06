@@ -197,7 +197,7 @@ class SiteController extends Controller {
 
         $from_affiliate_uid=Yii::$app->session->get('from_affiliate_uid');
         $useragent = \Yii::$app->request->getUserAgent();
-        if(strpos(strtolower($useragent), 'zhqdapp') || strpos(strtolower($useragent), 'anfangapp')){ //APP登录
+        if(strpos(strtolower($useragent), 'zhqdapp') || strpos(strtolower($useragent), 'anfangapp') || strpos(strtolower($useragent), 'ditieapp')){ //APP登录
             if(strpos(strtolower($useragent), 'zhqdapp')){
                 $provider = 'Zhqd';
                 $key = "ziuppmmve4sb0sv94omuhk1400z95w5d";
@@ -235,6 +235,27 @@ class SiteController extends Controller {
                 }
             }elseif (strpos(strtolower($useragent), 'anfangapp')){
                 $provider = 'Anfang';
+                $key = "71a8bf4eefcae84185fa2fe9b199ae93";
+                $getUrl = '';
+                $token = Yii::$app->request->get('token');
+                $token_string = base64_decode($token);
+                $token_arr = explode('|',$token_string);
+                $phone = $token_arr[0];
+                $token = md5($phone);
+                if (!empty($token_string) && !empty($phone) && !empty($token)) {
+                    if($customer_auth=CustomerAuthentication::findOne([ 'identifier' => $token])){
+                        $user=User::findIdentity($customer_auth->customer_id);
+                    }else {
+                        $userInfo['phone'] = $phone;
+                        $userInfo['username'] = '匿名';
+                        $userInfo['face'] = '';
+                        $user = $this->addUser($userInfo,$provider,$token);
+                    }
+                }else{
+                    throw new NotFoundHttpException("数据错误，没有用户标示");
+                }
+            }elseif (strpos(strtolower($useragent), 'ditieapp')){//地铁APP登录
+                $provider = 'Ditie';
                 $key = "71a8bf4eefcae84185fa2fe9b199ae93";
                 $getUrl = '';
                 $token = Yii::$app->request->get('token');
