@@ -99,6 +99,12 @@ class SiteController extends Controller {
 
 	public function actionIndex()
 	{
+        $useragent = \Yii::$app->request->getUserAgent();
+        if (strpos(strtolower($useragent), 'app/qdmetro')) {//地铁app
+            if (\Yii::$app->user->isGuest) {
+                return $this->redirect(['/site/login','redirect'=>\Yii::$app->request->getAbsoluteUrl()]);
+            }
+        }
 //		if (\Yii::$app->user->isGuest) {
 //		return $this->redirect(['/site/login','redirect'=>\Yii::$app->request->getAbsoluteUrl()]);
 //		}

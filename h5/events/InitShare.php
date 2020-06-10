@@ -67,6 +67,15 @@ class InitShare extends Event{
                 \Yii::$app->session->set('from_affiliate_uid',$model->affiliate_id);
             }
         }
+
+        if (strpos(strtolower($useragent), 'app/qdmetro')) {//地铁app
+            if($token=\Yii::$app->request->get('token')){
+                \Yii::$app->session->set('qdmetro_token',$token);
+            }
+        }else{
+            \Yii::$app->session->remove('qdmetro_token');
+        }
+
         if(\Yii::$app->request->get('sourcefrom') == 'mrhuigou' && \Yii::$app->session->has("from_affiliate_uid")){
             \Yii::$app->session->remove('from_affiliate_uid');
         }

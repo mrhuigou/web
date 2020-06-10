@@ -226,7 +226,7 @@ class BaseUrl
 
         $useragent = \Yii::$app->request->getUserAgent();
         if (strpos(strtolower($useragent), 'app/qdmetro')) {//地铁app
-            $token = Yii::$app->request->get('token');
+            $token = Yii::$app->request->get('token')?\Yii::$app->session->get('qdmetro_token',0):"";
             if(!empty($token)){
                 if(is_array($url)){
                     $url['token'] = $token;
