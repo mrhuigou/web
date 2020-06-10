@@ -224,6 +224,23 @@ class BaseUrl
             }
         }
 
+        $useragent = \Yii::$app->request->getUserAgent();
+        if (strpos(strtolower($useragent), 'app/qdmetro')) {//地铁app
+            $token = Yii::$app->request->get('token');
+            if(!empty($token)){
+                if(is_array($url)){
+                    $url['token'] = $token;
+                }elseif(!empty($url)){
+                    if(strpos($url,'?')){
+                        $url = $url.'&token='.$token;
+                    }else{
+                        $url = $url.'?token='.$token;
+                    }
+                }
+            }
+        }
+
+
         $affiliatemode = Yii::$app->request->get('affiliatemode');
         if(!empty($affiliatemode)){
             if(is_array($url)){
