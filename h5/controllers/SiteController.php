@@ -197,7 +197,7 @@ class SiteController extends Controller {
 
         $from_affiliate_uid=Yii::$app->session->get('from_affiliate_uid');
         $useragent = \Yii::$app->request->getUserAgent();
-        if(strpos(strtolower($useragent), 'zhqdapp') || strpos(strtolower($useragent), 'anfangapp') || strpos(strtolower($useragent), 'ditieapp')){ //APP登录
+        if(strpos(strtolower($useragent), 'zhqdapp') || strpos(strtolower($useragent), 'anfangapp') || strpos(strtolower($useragent), 'app/qdmetro')){ //APP登录
             if(strpos(strtolower($useragent), 'zhqdapp')){
                 $provider = 'Zhqd';
                 $key = "ziuppmmve4sb0sv94omuhk1400z95w5d";
@@ -254,7 +254,7 @@ class SiteController extends Controller {
                 }else{
                     throw new NotFoundHttpException("数据错误，没有用户标示");
                 }
-            }elseif (strpos(strtolower($useragent), 'ditieapp')){//地铁APP登录
+            }elseif (strpos(strtolower($useragent), 'app/qdmetro')){//地铁APP登录
                 $provider = 'Ditie';
                 $key = "71a8bf4eefcae84185fa2fe9b199ae93";
                 $getUrl = '';
