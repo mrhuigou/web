@@ -223,6 +223,21 @@ class BaseUrl
 
             }
         }
+
+        $affiliatemode = Yii::$app->request->get('affiliatemode');
+        if(!empty($affiliatemode)){
+            if(is_array($url)){
+                $url['affiliatemode'] = $affiliatemode;
+            }elseif(!empty($url)){
+                if(strpos($url,'?')){
+                    $url = $url.'&affiliatemode='.$affiliatemode;
+                }else{
+                    $url = $url.'?affiliatemode='.$affiliatemode;
+                }
+            }
+        }
+
+
         if (is_array($url)) {
             return static::toRoute($url, $scheme);
         }

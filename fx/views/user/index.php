@@ -175,7 +175,10 @@ $this->title = '用户中心';
 	</div>
 </section>
 </div>
-<?//= fx\widgets\MainMenu::widget(); ?>
+<?php if($from_affiliate_mode = \Yii::$app->session->get('from_affiliate_mode',0)){?>
+<?php }else{?>
+    <?= fx\widgets\MainMenu::widget(); ?>
+<?php }?>
 
 <?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     $data = [

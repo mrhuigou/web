@@ -51,6 +51,14 @@ class InitShare extends Event{
 		if($from_affiliate_uid=\Yii::$app->request->get('from_affiliate_uid')){
 			\Yii::$app->session->set('from_affiliate_uid',$from_affiliate_uid);
 		}
+
+		//fx 模块分销商 分销模式affiliatemode入口确定
+        if($from_affiliate_mode=\Yii::$app->request->get('affiliatemode')){
+            \Yii::$app->session->set('from_affiliate_mode',$from_affiliate_mode);
+        }else{
+            \Yii::$app->session->remove('from_affiliate_mode');
+        }
+
 		//第三方分销平台来源与用户token;
 		if($from_channel_source=\Yii::$app->request->get('sourcefrom')){
 			if($model=Affiliate::findOne(['code'=>$from_channel_source])){

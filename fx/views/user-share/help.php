@@ -52,8 +52,15 @@ $this->title="我的分享"
         </ul>
     </div>
     <div class="fx-bottom fx-convert-tar p5 bdt bg-wh">
+        <?php if($from_affiliate_mode = \Yii::$app->session->get('from_affiliate_mode',0)){?>
+            <!--        <a class="btn lbtn bluebtn w"  href="--><?php //echo \yii\helpers\Url::to(['/affiliate-plan/index']).'?type_code='.$model->plan_type?><!--" >开始分享</a>-->
+            <a class="btn lbtn bluebtn w"  href="<?php echo '/affiliate-plan/index?sourcefrom='.$model->code.'&type_code='.$model->plan_type.'&affiliatemode='.$from_affiliate_mode?>" >开始分享</a>
+        <?php }else{?>
+            <!--        <a class="btn lbtn bluebtn w"  href="--><?php //echo \yii\helpers\Url::to(['/site/index'])?><!--" >开始分享</a>-->
+            <a class="btn lbtn bluebtn w"  href="<?php echo '/site/index?sourcefrom='.$model->code?>" >开始分享</a>
+        <?php }?>
         <!--<a class="btn lbtn bluebtn w"  href="--><?php //echo \yii\helpers\Url::to(['/affiliate-plan/index']).'?sourcefrom='.$model->code.'&type_code=DEFAULT'?><!--" >开始分享</a>-->
-        <a class="btn lbtn bluebtn w"  href="<?php echo '/affiliate-plan/index?sourcefrom='.$model->code.'&type_code='.$model->plan_type?>" >开始分享</a>
+<!--        <a class="btn lbtn bluebtn w"  href="--><?php //echo '/affiliate-plan/index?sourcefrom='.$model->code.'&type_code='.$model->plan_type?><!--" >开始分享</a>-->
 <!--        <a class="btn lbtn greenbtn w m5" href="--><?//=\yii\helpers\Url::to(['/affiliate-plan/index']).'&type_code=DEFAULT'?><!--">开始分享</a>-->
     </div>
 
