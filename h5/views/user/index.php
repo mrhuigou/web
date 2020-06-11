@@ -3,22 +3,31 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 $this->title = '用户中心';
+$useragent = \Yii::$app->request->getUserAgent();
 ?>
-<header class="header">
-	<div class="flex-col tc">
-		<a class="flex-item-2" href="javascript:history.back();">
-			<i class="aui-icon aui-icon-left green f28"></i>
-		</a>
-		<div class="flex-item-8 f16">
-			<?=Html::encode($this->title)?>
-		</div>
-		<a class="flex-item-2" href="<?php echo \yii\helpers\Url::to(['/user/edit-myinfo'])?>">
-			<i class="aui-icon aui-icon-settings green f28"></i>
-            <i class="vm f14 lh150 green" >设置</i>
-		</a>
-	</div>
-</header>
+
+<?php  if (strpos(strtolower($useragent), 'app/qdmetro')) {//地铁app?>
+    <?=h5\widgets\Header::widget(['title'=>$this->title])?>
+<div class="content" style="top: 0px">
+<?php }else{?>
+    <header class="header">
+        <div class="flex-col tc">
+            <a class="flex-item-2" href="javascript:history.back();">
+                <i class="aui-icon aui-icon-left green f28"></i>
+            </a>
+            <div class="flex-item-8 f16">
+                <?=Html::encode($this->title)?>
+            </div>
+            <a class="flex-item-2" href="<?php echo \yii\helpers\Url::to(['/user/edit-myinfo'])?>">
+                <i class="aui-icon aui-icon-settings green f28"></i>
+                <i class="vm f14 lh150 green" >设置</i>
+            </a>
+        </div>
+    </header>
 <div class="content">
+<?php }?>
+
+<!--<div class="content">-->
 <section class="veiwport mb50">
 	<div class="w">
 		<!--用户头像-->

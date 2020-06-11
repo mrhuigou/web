@@ -29,6 +29,8 @@ class Header extends Widget{
                 return $this->render('header-wx',['title'=>$this->title]);
             }elseif(strpos(strtolower($useragent), 'zhqdapp')){
                 return $this->render('header-wx',['title'=>$this->title]);
+            } elseif (strpos(strtolower($useragent), 'app/qdmetro')) {//地铁app
+                return $this->render('header-wx',['title'=>$this->title]);
             } else{
                 return $this->render('header',['title'=>$this->title]);
             }
