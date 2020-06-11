@@ -110,10 +110,10 @@ class CheckoutForm extends Model {
 	public function rules()
 	{
 		return [
-			[['address_id'], 'required'],
+//			[['address_id'], 'required'],
 			[['invoice_value','invoice_address','invoice_bank', 'comment', 'coupon','invoice_title'], 'safe'],
 			[['address_id', 'delivery'], 'safe'],
-			[['address_id', 'delivery'], 'FormValidate'],
+//			[['address_id', 'delivery'], 'FormValidate'],
 			//[['invoice_type'],'ValidateInvoice']
 		];
 	}
@@ -317,7 +317,7 @@ class CheckoutForm extends Model {
 					if ($address) {
 
 					     if ($address) {
-							$address_formart=$address->address_1;
+//							$address_formart=$address->address_1;
                              $delivery_time = '不限';
                              $zone=Zone::findOne(['name'=>$address['province']]);
                              $city=City::findOne(['name'=>$address['city'],'zone_id'=>$zone?$zone->zone_id:0]);

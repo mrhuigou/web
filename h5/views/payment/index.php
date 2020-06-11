@@ -175,7 +175,8 @@ $("#weixin_wap_btn").bind("click",function(){
 //                ]
 //            });
             if (/iphone|ipad|ipod/.test(ua)) {
-                location.href=res.data+'&redirect_url=<?=urlencode('https://m.mrhuigou.com/site/index?trade_no='.$model->merge_code)?>';
+                //location.href=res.data+'&redirect_url=<?//=urlencode('https://m.mrhuigou.com/site/index?trade_no='.$model->merge_code)?>//';
+                location.href=res.data+'&redirect_url=<?=urlencode(\yii\helpers\Url::to(['checkout/complate','trade_no'=>$model->merge_code],true))?>';
             } else{
                 location.href=res.data;
             }
