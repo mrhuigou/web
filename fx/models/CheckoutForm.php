@@ -206,8 +206,8 @@ class CheckoutForm extends Model {
 				foreach ($this->cart_data as $k => $order_data) {
 					$invoice_temp = ['不需要发票', '个人发票', '企业增值税普票','企业增值税专票'];
 
-					$comment = "";
-                    if(!empty($comment)){
+                    $shipping_method = \Yii::$app->request->post("shipping_method")?:0;//配送方式
+                    if($shipping_method == 1){
                         $comment = "<配送到家>";
                     }else{
                         $comment = "<团长处自提>";
@@ -390,7 +390,7 @@ class CheckoutForm extends Model {
 						foreach ($order_data['products'] as $product) {
 
 						    $product_info = Product::findOne($product->product_id);
-                            $affiliate_plan_detail = AffiliatePlanDetail::find()->where(['affiliate_plan_id'=>$product->affiliate_plan_id,'status'=>1,'product_code'=>$product_info->product_code])->one();
+                            $affiliate_plan_detail = AffiliatePlanDetail::find()->where(['affiliate_plan_id'=>$product->affiliate_plan_id,'status'=>1,'pu_code'=>$product_info->product_code])->one();
 							if(!$product->product->getStockCount()){
                                 throw new \Exception("库存不足");
                             }

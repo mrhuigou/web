@@ -129,13 +129,14 @@ $this->title = '订单详情';
 		<?php if ($model->order_status_id == 1) { ?>
 			<a class="btn sbtn redbtn pr10 pl10"
 			   href="<?= \yii\helpers\Url::to(['/order/pay', 'order_no' => $model->order_no], true) ?>"> 支付 </a>
-			<?= Html::a('取消订单', ['cancel', 'order_no' => $model->order_no], [
-				'class' => 'fr btn sbtn graybtn pr10 pl10 ',
-				'data' => [
-					'confirm' => '您确认要取消吗？',
-					'method' => 'post',
-				],
-			]) ?>
+                <a class="fr btn sbtn graybtn pr10 pl10 cancel-order" href="#" data-content="<?=$model->order_no?>"> 取消订单</a>
+<!--			--><?//= Html::a('取消订单', ['cancel', 'order_no' => $model->order_no], [
+//				'class' => 'fr btn sbtn graybtn pr10 pl10 ',
+//				'data' => [
+//					'confirm' => '您确认要取消吗？',
+//					'method' => 'post',
+//				],
+//			]) ?>
 		<?php } else { ?>
 			<?php if (in_array($model->order_status_id, [2, 3, 5, 9, 10, 13]) && !$model->use_points) { ?>
 				<a class="btn sbtn bluebtn pr10 pl10"
@@ -149,13 +150,14 @@ $this->title = '订单详情';
 		<?php if ($model->order_status_id == 1) { ?>
 			<a class="btn sbtn redbtn pr10 pl10"
 			   href="<?= \yii\helpers\Url::to(['/order/pay', 'order_no' => $model->order_no], true) ?>"> 支付 </a>
-			<?= Html::a('取消订单', ['cancel', 'order_no' => $model->order_no], [
-				'class' => 'fr btn sbtn graybtn pr10 pl10 ',
-				'data' => [
-					'confirm' => '您确认要取消吗？',
-					'method' => 'post',
-				],
-			]) ?>
+                <a class="fr btn sbtn graybtn pr10 pl10 cancel-order" href="#" data-content="<?=$model->order_no?>"> 取消订单</a>
+<!--			--><?//= Html::a('取消订单', ['cancel', 'order_no' => $model->order_no], [
+//				'class' => 'fr btn sbtn graybtn pr10 pl10 ',
+//				'data' => [
+//					'confirm' => '您确认要取消吗？',
+//					'method' => 'post',
+//				],
+//			]) ?>
 		<?php } else { ?>
 				<a class="btn sbtn graybtn pr10 pl10"  href="javascript:history.back();"> 返回 </a>
 			<?php } ?>
@@ -163,3 +165,20 @@ $this->title = '订单详情';
 	</div>
 
 </section>
+
+    <script>
+        <?php $this->beginBlock('JS_END') ?>
+        $(".cancel-order").click(function(){
+            var _this = $(this);
+            var order_no = _this.attr('data-content');
+            $.confirm("您确认要取消吗?",'友情提示',function(){
+                $.get('<?php echo \yii\helpers\Url::to(["/order/cancel"])?>',{order_no:order_no},function(){
+                });
+            });
+        });
+        <?php $this->endBlock() ?>
+    </script>
+<?php
+\yii\web\YiiAsset::register($this);
+$this->registerJs($this->blocks['JS_END'],\yii\web\View::POS_END);
+?>

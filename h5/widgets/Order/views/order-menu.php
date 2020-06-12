@@ -10,13 +10,14 @@
 <?php if($model->order_status_id == 1){ ?>
 	<a class="btn sbtn orgbtn pr10 pl10" href="<?=\yii\helpers\Url::to(['/order/add-cart','order_no'=>$model->order_no],true)?>" > 编辑 </a>
 	<a class="btn sbtn redbtn pr10 pl10" href="<?=\yii\helpers\Url::to(['/order/pay','order_no'=>$model->order_no],true)?>" > 支付 </a>
-	<?= \yii\helpers\Html::a('取消订单', ['cancel', 'order_no' => $model->order_no], [
-		'class' => 'btn sbtn graybtn pr10 pl10 ',
-		'data' => [
-			'confirm' => '您确认要取消吗？',
-			'method' => 'post',
-		],
-	])?>
+	<a class="btn sbtn graybtn pr10 pl10 cancel-order" href="#" data-content="<?=$model->order_no?>"> 取消订单 </a>
+<!--	--><?//= \yii\helpers\Html::a('取消订单', ['cancel', 'order_no' => $model->order_no], [
+//		'class' => 'btn sbtn graybtn pr10 pl10 ',
+//		'data' => [
+//			'confirm' => '您确认要取消吗？',
+//			'method' => 'post',
+//		],
+//	])?>
 <?php }else{?>
 <!--        --><?php //if($return = \api\models\V1\ReturnBase::findOne(['order_id'=>$model->order_id])){ ?>
 <!--            <span class="vm fl">退货：<i class="org">--><?php //echo $return->returnStatus->name;?><!--</i></span>-->
@@ -71,3 +72,20 @@
 		<a class="btn sbtn graybtn pr10 pl10" href="<?=\yii\helpers\Url::to(['/order/info','order_no'=>$model->order_no],true)?>" > 查看详情 </a>
 	<?php }?>
 <?php } ?>
+
+<script>
+<?php $this->beginBlock('JS_END') ?>
+$(".cancel-order").click(function(){
+        var _this = $(this);
+        var order_no = _this.attr('data-content');
+     $.confirm("您确认要取消吗?",'友情提示',function(){
+        $.get('<?php echo \yii\helpers\Url::to(["/order/cancel"])?>',{order_no:order_no},function(){
+        });
+    });
+});
+<?php $this->endBlock() ?>
+</script>
+<?php
+\yii\web\YiiAsset::register($this);
+$this->registerJs($this->blocks['JS_END'],\yii\web\View::POS_END);
+?>
