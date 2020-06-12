@@ -131,6 +131,7 @@ $useragent = \Yii::$app->request->getUserAgent();
 
 		</div>
 
+        <?php  if (!strpos(strtolower($useragent), 'app/qdmetro')){//地铁app?>
 		<a class="line-a db w clearfix mt5 " href="<?= \yii\helpers\Url::to(['/user/security-center']) ?>">
             <span class="fl"><em class="aui-icon aui-icon-safe org f18" style="line-height: 20px;"></em>安全中心</span>
 			<span class="fr org  vm"><i class="iconfont fr"></i>更多</span>
@@ -161,6 +162,7 @@ $useragent = \Yii::$app->request->getUserAgent();
                 <p>账户绑定</p>
             </a>
 		</div>
+        <?php }?>
 		<a class="line-a db w clearfix p10 " href="<?=\yii\helpers\Url::to(['page/3561.html'])?>" target="">
 			客服热线：400-968-9870
 			<i class="iconfont fr"></i>
