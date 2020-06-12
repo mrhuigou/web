@@ -115,6 +115,12 @@ if(!empty($shipping_address)){
             <?php if($val['base']->store_id == 1){ $is_jiarun = true;}?>
 <!--			--><?//= fx\widgets\Checkout\Delivery::widget(['store_id' => $val['base']->store_id, 'total' => $val['total']]) ?>
             <div class="store_contain whitebg " id="store_contain_<?= $val['base']->store_id ?>">
+                    <div class="mt5">
+                        <h2 class="clearfix p10">
+                            <span class="fl ">配送时间：</span>
+                            <span class="fr red"><?= date('Y-m-d',strtotime(\Yii::$app->session->get('affiliate_plan_ship_end')?:""));//配送时间?></span>
+                        </h2>
+                    </div>
 <!--                <div class="mt5">-->
 <!--                    <h2 class="clearfix p10">-->
 <!--                        <span class="fl ">店铺：<em class="org">--><?//= $val['base']->name ?><!--</em></span>-->
