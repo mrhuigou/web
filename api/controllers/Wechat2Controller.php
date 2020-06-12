@@ -15,6 +15,8 @@ use api\models\V1\CustomerMap;
 use api\models\V1\CustomerSource;
 use api\models\V1\Order;
 use api\models\V1\PrizeBox;
+use api\models\V1\Weixin2Scans;
+use api\models\V1\Weixin2ScansNews;
 use api\models\V1\WeixinMessage;
 use api\models\V1\WeixinScans;
 use api\models\V1\WeixinScansNews;
@@ -168,7 +170,7 @@ class Wechat2Controller extends Controller {
         $affiliate_id = 0;
         $openid = $msg['FromUserName'];
         if (isset($msg['Ticket']) && $msg['Ticket']) {
-            if ($scan = WeixinScans::findOne(['ticket' => $msg['Ticket']])) {
+            if ($scan = Weixin2Scans::findOne(['ticket' => $msg['Ticket']])) {
                 if ($scan->affiliate) {
                     $affiliate_id = $scan->affiliate->affiliate_id;
                 }
@@ -176,19 +178,19 @@ class Wechat2Controller extends Controller {
                 if($scan->type == 2){
                     $source_info['status'] = true;
                     $source_info['source_from_type'] = $scan->type;
-                    $source_info['from_table'] = 'jr_weixin_scans';
+                    $source_info['from_table'] = 'jr_weixin2_scans';
                     $source_info['from_id'] = $scan->id;
                     $source_info['code'] = $scan->code;
                 }
                 if($scan->type == 3){
                     $source_info['status'] = true;
                     $source_info['source_from_type'] = $scan->type;
-                    $source_info['from_table'] = 'jr_weixin_scans';
+                    $source_info['from_table'] = 'jr_weixin2_scans';
                     $source_info['from_id'] = $scan->id;
                     $source_info['code'] = $scan->code;
                 }
 
-                if ($scan_news = WeixinScansNews::find()->where(['weixin_scans_id' => $scan->id])->orderBy('sort_order asc')->all()) {
+                if ($scan_news = Weixin2ScansNews::find()->where(['weixin_scans_id' => $scan->id])->orderBy('sort_order asc')->all()) {
                     foreach ($scan_news as $k => $scan_new) {
 
                         if ($k == 0) {
