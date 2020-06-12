@@ -18,21 +18,25 @@ class Header extends Widget{
     public function run()
     {
 	    $useragent=\Yii::$app->request->getUserAgent();
-        $device  = Helper::get_device_type();
-        if($device == "android"){
-            return $this->render('header',['title'=>$this->title]);
-        }else{
+        if (strpos(strtolower($useragent), 'app/qdmetro')) {//地铁app
+            return $this->render('header-wx',['title'=>$this->title]);
+        }else {
+            $device = Helper::get_device_type();
+            if ($device == "android") {
+                return $this->render('header', ['title' => $this->title]);
+            } else {
 //            if(strpos(strtolower($useragent), 'jiaruncustomerapp') || \Yii::$app->session->get('source_from_agent_wx_xcx')){
 //                return $this->render('header-app',['title'=>$this->title]);
 //            }else
-            if(strpos(strtolower($useragent), 'micromessenger') && !\Yii::$app->session->get('source_from_agent_wx_xcx')){
-                return $this->render('header-wx',['title'=>$this->title]);
-            }elseif(strpos(strtolower($useragent), 'zhqdapp')){
-                return $this->render('header-wx',['title'=>$this->title]);
-            } elseif (strpos(strtolower($useragent), 'app/qdmetro')) {//地铁app
-                return $this->render('header-wx',['title'=>$this->title]);
-            } else{
-                return $this->render('header',['title'=>$this->title]);
+                if (strpos(strtolower($useragent), 'micromessenger') && !\Yii::$app->session->get('source_from_agent_wx_xcx')) {
+                    return $this->render('header-wx', ['title' => $this->title]);
+                } elseif (strpos(strtolower($useragent), 'zhqdapp')) {
+                    return $this->render('header-wx', ['title' => $this->title]);
+                } elseif (strpos(strtolower($useragent), 'app/qdmetro')) {//地铁app
+                    return $this->render('header-wx', ['title' => $this->title]);
+                } else {
+                    return $this->render('header', ['title' => $this->title]);
+                }
             }
         }
 
