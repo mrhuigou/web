@@ -43,7 +43,7 @@ class WxNotice {
 //		];
         $template_id = "ZU1CfmLOIKx8lny9N4xV12ztvZuMHMBk9aObLxU16CE";
         if($wechat2){
-            $template_id = ""; //白金每日惠购的 模板id
+            $template_id = "IOF6gPO6ZZUV0m7z7_tHN7dgzpatybR5nE6rt1Zj3YA"; //白金每日惠购的 模板id
         }
         $data = [
             'first' => ['value' => isset($message['title'])?$message['title']:'','color'=>'#173177'],
