@@ -6,6 +6,7 @@
  * Time: 15:52
  */
 namespace h5\controllers;
+use api\models\V1\Affiliate;
 use api\models\V1\Customer;
 use api\models\V1\GroundPushPlan;
 use api\models\V1\GroundPushPlanView;
@@ -397,6 +398,14 @@ class GroundPushController extends \yii\web\Controller {
                     $Order_model->order_status_id = 1;
                     $affiliate_id = 0;
 
+                    $affiliate_code = "mrhuigou";//默认分销商code为空
+                    if($affiliate_id = \Yii::$app->session->get("from_affiliate_uid",0)){
+                        $affiliate = Affiliate::findOne(['affiliate_id'=>$affiliate_id]);
+                        if($affiliate && $affiliate->status ){//非智慧青岛
+                            $affiliate_code = $affiliate->code;
+                        }
+                    }
+                    $Order_model->affiliate_code = $affiliate_code;
                     $Order_model->affiliate_id = $affiliate_id;
                     $Order_model->commission=0;
                     $Order_model->source_customer_id=0;
