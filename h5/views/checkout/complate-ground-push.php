@@ -7,7 +7,7 @@ $this->context->layout = 'main_other';
 ?>
 <header class="fx-top bs-bottom whitebg lh44">
     <div class="flex-col tc">
-        <a class="flex-item-2" href="/">
+        <a class="flex-item-2" href="<?= \yii\helpers\Url::to(['/site/index']) ?>">
             <i class="iconfont">&#xe63f;</i>
         </a>
         <div class="flex-item-8 f16">
@@ -20,7 +20,13 @@ $this->context->layout = 'main_other';
 </header>
 <section class="pt50">
     <div class="bg-wh">
-        <img src="/assets/images/order-ok.png" class="w">
+        <?php $sourcefrom = Yii::$app->request->get('sourcefrom'); ?>
+        <?php if($sourcefrom == 'baijin'){?>
+            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7kk9KAMI1xAAEBvptl-yM384.png" class="w">
+        <?php }else{?>
+            <img src="/assets/images/order-ok3.png" class="w">
+        <?php }?>
+<!--        <img src="/assets/images/order-ok3.png" class="w">-->
         <div class="tc pb5 " style="margin-top: -12px;">
             <?php if($model->status && $order_model->order_status_id==2){ //此处生成取货码?>
                 <h2 class="f12 red">将该二维码出示给地推人员，扫描提货</h2>

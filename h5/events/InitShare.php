@@ -54,6 +54,7 @@ class InitShare extends Event{
 		if($from_channel_source=\Yii::$app->request->get('sourcefrom')){
 			if($model=Affiliate::findOne(['code'=>$from_channel_source])){
 				\Yii::$app->session->set('from_affiliate_uid',$model->affiliate_id);
+				\Yii::$app->session->set('from_sourcefrom',$from_channel_source);
 			}
 		}
         $useragent = \Yii::$app->request->getUserAgent();
@@ -78,6 +79,9 @@ class InitShare extends Event{
 
         if(\Yii::$app->request->get('sourcefrom') == 'mrhuigou' && \Yii::$app->session->has("from_affiliate_uid")){
             \Yii::$app->session->remove('from_affiliate_uid');
+        }
+        if(\Yii::$app->request->get('sourcefrom') == 'mrhuigou' && \Yii::$app->session->has("from_sourcefrom")){
+            \Yii::$app->session->remove('from_sourcefrom');
         }
 //        $path = \Yii::$app->request->getPathInfo();
 //        if(  $path != 'site/login' && !\Yii::$app->user->isGuest && \Yii::$app->session->get('from_affiliate_uid') && isset($model)){

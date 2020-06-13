@@ -275,7 +275,8 @@ class GroundPushController extends \yii\web\Controller {
                 \Yii::$app->session->set('ground_push_base',$base);
 
                 //$this->submit($base, $cart, $ground_push_plan_id);
-                return $this->redirect(['/ground-push/confirm','plan_id'=>$ground_push_plan_id]);
+                $from_sourcefrom = \Yii::$app->session->get('from_sourcefrom','mrhuigou');
+                return $this->redirect(['/ground-push/confirm','plan_id'=>$ground_push_plan_id,'sourcefrom'=>$from_sourcefrom]);
             }
 
 

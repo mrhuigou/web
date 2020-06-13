@@ -9,7 +9,7 @@ $this->title = "地推现场";
 ?>
 <header class="fx-top bs-bottom whitebg lh44">
     <div class="flex-col tc">
-        <a class="flex-item-2" href="/">
+        <a class="flex-item-2" href="<?= \yii\helpers\Url::to(['/site/index']) ?>">
             <i class="aui-icon aui-icon-home green f28"></i>
         </a>
         <div class="flex-item-8 f16">
@@ -24,7 +24,7 @@ $this->title = "地推现场";
     <!-- 新改图片 -->
     <div class="bg-wh pb5 mb5">
         <a href="<?php echo \yii\helpers\Url::to(['coupon/coupon-rules','id'=>4])?>">
-        <img src="../assets/images/ditui/gp-top.jpeg" class="w" />
+        <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7kcsaAf9lWAAIJi1q3Zbw603.jpg" class="w" />
         </a>
 
         <?php
