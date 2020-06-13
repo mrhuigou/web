@@ -41,11 +41,12 @@ class UserController extends \yii\web\Controller {
 		if (\Yii::$app->user->isGuest) {
 			return $this->redirect(['/site/login', 'redirect' => $url]);
 		}
-		$model = Order::find()->where(['customer_id' => \Yii::$app->user->getId(), 'order_type_code' => ['normal', 'presell']]);
+        $affiliate_id = \Yii::$app->session->get("from_affiliate_uid",0);
+		$model = Order::find()->where(['affiliate_id' => $affiliate_id, 'customer_id' => \Yii::$app->user->getId(), 'order_type_code' => ['normal', 'presell']]);
 		$nopay = $model->andWhere(['order_status_id' => 1])->count('*');
-		$model = Order::find()->where(['customer_id' => \Yii::$app->user->getId(), 'order_type_code' => ['normal', 'presell']]);
+		$model = Order::find()->where(['affiliate_id' => $affiliate_id, 'customer_id' => \Yii::$app->user->getId(), 'order_type_code' => ['normal', 'presell']]);
 		$noway = $model->andWhere(['order_status_id' => [2, 3, 5]])->count('*');
-		$model = Order::find()->where(['customer_id' => \Yii::$app->user->getId(), 'order_type_code' => ['normal', 'presell']]);
+		$model = Order::find()->where(['affiliate_id' => $affiliate_id, 'customer_id' => \Yii::$app->user->getId(), 'order_type_code' => ['normal', 'presell']]);
 		$onway = $model->andWhere(['order_status_id' => 9])->count('*');
 		return $this->render('index', ['nopay' => $nopay, 'noway' => $noway, 'onway' => $onway,]);
 	}
