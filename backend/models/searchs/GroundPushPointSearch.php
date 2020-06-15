@@ -77,6 +77,7 @@ class GroundPushPointSearch extends GroundPushPoint
             ->andFilterWhere(['like', 'contact_name', $this->contact_name])
             ->andFilterWhere(['like', 'contact_tel', $this->contact_tel]);
 
+        $query->orderBy(['id'=>SORT_DESC]);
         return $dataProvider;
     }
 }

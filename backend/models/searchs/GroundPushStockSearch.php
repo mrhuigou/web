@@ -73,6 +73,7 @@ class GroundPushStockSearch extends GroundPushStock
 
         $query->andFilterWhere(['like', 'product_code', $this->product_code]);
 
+        $query->orderBy(['id'=>SORT_DESC]);
         return $dataProvider;
     }
 }
