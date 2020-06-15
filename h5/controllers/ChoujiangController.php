@@ -187,9 +187,9 @@ class ChoujiangController extends \yii\web\Controller {
             if($result_count >= $chances_per_customer){
                 throw  new ErrorException("您的抽奖机会已经用完！");
             }
-			if ($lottery_count = LotteryResult::find()->where(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()])->count()) {
+			if ($lottery_count = LotteryResult::find()->where(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()])->andWhere(['>=','creat_at',strtotime(date('Y-m-d',time()))])->andWhere(['<=','creat_at',strtotime(date('Y-m-d',time())) + 24*60*60 - 1])->count()) {
 				if($lottery_count>=1){
-					throw new ErrorException('您已经抽过了');
+					throw new ErrorException('您已经抽过了,请明日再参加抽奖!');
 				}
 			}
 			if (!$prize_box = LotteryPrize::find()->where(['lottery_id' => $lottery_id])->all()) {
@@ -243,6 +243,7 @@ class ChoujiangController extends \yii\web\Controller {
 					$customer_coupon->customer_id = \Yii::$app->user->getId();
 					$customer_coupon->coupon_id = $result->coupon->coupon_id;
 					$customer_coupon->description = "抽奖获得";
+					$customer_coupon->from_lottery_result_id = $model->id;
 					$customer_coupon->is_use = 0;
 					if ($result->coupon->date_type == 'DAYS') {
 						$customer_coupon->start_time = date('Y-m-d H:i:s', time());
@@ -486,7 +487,8 @@ class ChoujiangController extends \yii\web\Controller {
 	{
 		$lottery_id = \Yii::$app->request->post('lottery_id');
 		$data = [];
-		$model = LotteryResult::findOne(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()]);
+//		$model = LotteryResult::findOne(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()]);
+		$model = LotteryResult::find()->where(['lottery_id' => $lottery_id, 'customer_id' => \Yii::$app->user->getId()])->andWhere(['>=','creat_at',strtotime(date('Y-m-d',time()))])->andWhere(['<=','creat_at',strtotime(date('Y-m-d',time())) + 24*60*60 - 1])->one();
 		if ($model) {
 
             $datetime = date('m/d H:i:s', $model->creat_at);
@@ -494,7 +496,7 @@ class ChoujiangController extends \yii\web\Controller {
             $LotteryPrize = LotteryPrize::findOne(['id' => $model->lottery_prize_id]);
             $coupon_id = $LotteryPrize->coupon_id;
             $customer_id = \Yii::$app->user->getId();
-            $customer_coupon_info = \api\models\V1\CustomerCoupon::find()->where(['customer_id'=>$customer_id,'coupon_id'=>$coupon_id])->orderBy('customer_coupon_id desc')->one();
+            $customer_coupon_info = \api\models\V1\CustomerCoupon::find()->where(['customer_id'=>$customer_id,'coupon_id'=>$coupon_id,'from_lottery_result_id'=>$model->id])->orderBy('customer_coupon_id desc')->one();
 
             if($customer_coupon_info){
                 if($customer_coupon_info->is_use == 2){

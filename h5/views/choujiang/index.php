@@ -33,7 +33,7 @@ $this->title="每日惠购 幸运大抽奖";
 		<img class="hand" src="/assets/images/choujiang/z_1.png" alt="">
 	</div>
 </div>
-<div id="my_result">
+<div id="my_result1">
     <?php if($my_self){?>
         <?php foreach ($my_self as $value){?>
     <div class="br5 opc-f p10 m10" id="my_self">
@@ -47,7 +47,7 @@ $this->title="每日惠购 幸运大抽奖";
                 <?php
                 $coupon_id = $value->prize->coupon->coupon_id;
                 $customer_id = $value->customer->customer_id;
-                $customer_coupon_info = \api\models\V1\CustomerCoupon::find()->where(['customer_id'=>$customer_id,'coupon_id'=>$coupon_id])->orderBy('customer_coupon_id desc')->one();
+                $customer_coupon_info = \api\models\V1\CustomerCoupon::find()->where(['customer_id'=>$customer_id,'coupon_id'=>$coupon_id,'from_lottery_result_id'=>$value->id])->orderBy('customer_coupon_id desc')->one();
                 ?>
                 <?php if($customer_coupon_info){?>
                     <?php if($customer_coupon_info->is_use == 2){?>
@@ -66,8 +66,10 @@ $this->title="每日惠购 幸运大抽奖";
         </div>
     </div>
 	    <?php } ?>
-        <div class="m10 tc"><a class="btn lbtn greenbtn" href="/">点击立即使用</a></div>
+        <div class="m10 tc"><a class="btn lbtn greenbtn" id="lijishiyong" href="/">点击立即使用</a></div>
     <?php } ?>
+</div>
+<div id="my_result">
 </div>
 <!--<div class="m10 tc"><a class="btn lbtn greenbtn" href="/">点击立即使用</a></div>-->
 
@@ -210,6 +212,7 @@ function loading(){
 $.post('<?=\yii\helpers\Url::to(['/choujiang/result'])?>',{'lottery_id':'<?=$id?>'},function(res){
 if(res){
 var html= template(tpl, {list:res.data});
+$("#lijishiyong").hide();
 $("#my_result").html(html);
 }
 },'json');
