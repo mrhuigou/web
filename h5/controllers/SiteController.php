@@ -305,7 +305,7 @@ class SiteController extends Controller {
 			return $this->redirect($base_url);
 		}else{
             try{
-                if($from_affiliate_uid ){
+                if($from_affiliate_uid && !in_array($from_affiliate_uid,['278'])){
                     if($aff = Affiliate::findOne(['affiliate_id'=>$from_affiliate_uid,'status'=>1])){
                         $provider = $aff->code;
                         $key = $aff->encrypt_key;//"1234567812345678";
