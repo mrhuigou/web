@@ -34,7 +34,7 @@ if($point_lists){
         <?php $sourcefrom = Yii::$app->request->get('sourcefrom'); ?>
         <?php if($sourcefrom == 'baijin'){?>
             <a href="<?php echo \yii\helpers\Url::to(['coupon/coupon-rules','id'=>4])?>">
-                <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7m3yaAailpAAJPBBpn5Zc575.jpg" class="w" />
+                <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7m6HeAGtUjAAJYQ70gEzg897.jpg" class="w" />
             </a>
         <?php }else{?>
             <a href="<?php echo \yii\helpers\Url::to(['coupon/coupon-rules','id'=>4])?>">
