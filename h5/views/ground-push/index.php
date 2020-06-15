@@ -6,6 +6,14 @@
  * Time: 15:54
  */
 $this->title = "地推现场";
+
+if($point_lists){
+    foreach ($point_lists as $point_list){
+        if($model->id == $point_list->id){
+            $this->title = $point_list->name;
+        }
+    }
+}
 ?>
 <header class="fx-top bs-bottom whitebg lh44">
     <div class="flex-col tc">
@@ -23,9 +31,20 @@ $this->title = "地推现场";
 <div class="content  bc">
     <!-- 新改图片 -->
     <div class="bg-wh pb5 mb5">
-        <a href="<?php echo \yii\helpers\Url::to(['coupon/coupon-rules','id'=>4])?>">
-        <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7kcsaAf9lWAAIJi1q3Zbw603.jpg" class="w" />
-        </a>
+        <?php $sourcefrom = Yii::$app->request->get('sourcefrom'); ?>
+        <?php if($sourcefrom == 'baijin'){?>
+            <a href="<?php echo \yii\helpers\Url::to(['coupon/coupon-rules','id'=>4])?>">
+                <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7m3yaAailpAAJPBBpn5Zc575.jpg" class="w" />
+            </a>
+        <?php }else{?>
+            <a href="<?php echo \yii\helpers\Url::to(['coupon/coupon-rules','id'=>4])?>">
+                <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7kcsaAf9lWAAIJi1q3Zbw603.jpg" class="w" />
+            </a>
+        <?php }?>
+
+<!--        <a href="--><?php //echo \yii\helpers\Url::to(['coupon/coupon-rules','id'=>4])?><!--">-->
+<!--        <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7kcsaAf9lWAAIJi1q3Zbw603.jpg" class="w" />-->
+<!--        </a>-->
 
         <?php
         if(time()>strtotime(date('Y-m-d 16:00:00',time()))){
