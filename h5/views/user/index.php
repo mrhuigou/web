@@ -32,6 +32,20 @@ $useragent = \Yii::$app->request->getUserAgent();
 	<div class="w">
 		<!--用户头像-->
         <div class="head-img" style="padding: 0 0;">
+        <?php  if (strpos(strtolower($useragent), 'app/qdmetro')) {//地铁app?>
+            <div class="  flex-col flex-middle p10">
+                <div class="flex-item-3">
+                    <a href="#" style="line-height: 100px;">
+                        <img src="<?= \common\component\image\Image::resize(\Yii::$app->user->identity->photo_dt, 100, 100) ?>"
+                             alt="<?= \Yii::$app->user->identity->nickname_dt ?>" class="ava mava">
+                    </a>
+                </div>
+                <div class="flex-item-6 tc pt30" >
+                    <?= \Yii::$app->user->identity->nickname_dt ?>
+                </div>
+            </div>
+        <?php }else{?>
+
 		<div class="  flex-col flex-middle p10">
 			<div class="flex-item-3">
 				<a href="<?php echo \yii\helpers\Url::to(['/user/avatar'])?>" style="line-height: 100px;">
@@ -49,6 +63,7 @@ $useragent = \Yii::$app->request->getUserAgent();
 				</a>
 			</div>
 		</div>
+        <?php }?>
         <div class="flex-col tc lh37 bg-wh " style="opacity: 0.7;">
             <a class="flex-item-4" href="<?= \yii\helpers\Url::to(['collect/index']) ?>">
                 <i class="aui-icon aui-icon-favor" style="font-size: 16px;"></i>

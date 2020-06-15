@@ -57,12 +57,12 @@ class User extends ActiveRecord implements IdentityInterface,\OAuth2\Storage\Use
             [['password', 'salt'], 'required'],
             [['cart', 'wishlist', 'favourite_stores','user_agent'], 'string'],
             [['longitude', 'latitude'], 'number'],
-            [['firstname', 'lastname', 'telephone', 'fax'], 'string', 'max' => 32],
-            [['nickname', 'onmobile', 'email'], 'string', 'max' => 100],
+            [['firstname','firstname_dt', 'lastname', 'telephone', 'fax'], 'string', 'max' => 32],
+            [['nickname', 'nickname_dt','onmobile', 'email'], 'string', 'max' => 100],
             [['gender', 'education', 'occupation', 'idcard', 'token', 'code', 'signature', 'source_from', 'company_name', 'company_no', 'legel_name'], 'string', 'max' => 255],
             [['password', 'ip', 'paymentpwd'], 'string', 'max' => 40],
             [['salt', 'psalt'], 'string', 'max' => 9],
-            [['photo'], 'string', 'max' => 255],
+            [['photo','photo_dt'], 'string', 'max' => 255],
             [['timeline_bg'], 'string', 'max' => 64]
         ];
     }

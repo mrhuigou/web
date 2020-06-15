@@ -449,6 +449,28 @@ class SiteController extends Controller {
                 $model->openid = '';
                 $model->status = 0;
                 $model->save();
+            }elseif($provider == "Ditie"){
+                if(!$model=CustomerAuthentication::findOne([ 'identifier' => $token,'provider'=>$provider])){
+                    //用户授权记录
+                    $model = new CustomerAuthentication();
+                    $model->provider = $provider;
+                    $model->customer_id=$user->getId();
+                    $model->display_name = $userInfo['username'] ? $userInfo['username'] : '匿名';
+                    $model->gender = '未知';
+                    $model->phone=$userInfo['phone'];
+                    $model->photo_url = $userInfo['face'];
+                    $model->date_added = date('Y-m-d H:i:s', time());
+                    $model->identifier = $token;
+                    $model->openid = '';
+                    $model->status = 0;
+                    $model->save();
+                    $user->firstname_dt = $userInfo['username'] ? $userInfo['username'] : '匿名';
+                    $user->nickname_dt = $userInfo['username'] ? $userInfo['username'] : '匿名';
+                    $user->photo_dt = $userInfo['face'];
+                    if (!$user->save(false)) {
+                        throw new NotFoundHttpException("用户注册失败");
+                    }
+                }
             }
 
             return $user;
