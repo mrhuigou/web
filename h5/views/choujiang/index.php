@@ -66,7 +66,7 @@ $this->title="每日惠购 幸运大抽奖";
         </div>
     </div>
 	    <?php } ?>
-        <div class="m10 tc"><a class="btn lbtn greenbtn" id="lijishiyong" href="<?=\yii\helpers\Url::to(['/site/index'])?>">点击立即使用</a></div>
+        <div class="m10 tc"><a class="btn lbtn greenbtn" id="lijishiyong" href="<?php echo \yii\helpers\Url::to(['/page/index','page_id'=>3538])?>">点击立即使用</a></div>
     <?php } ?>
 </div>
 <div id="my_result">
@@ -175,7 +175,7 @@ $this->title="每日惠购 幸运大抽奖";
 		</div>
 	</div>
     </div>
-    <div class="m10 tc"><a class="btn lbtn greenbtn" href="/">点击立即使用</a></div>
+    <div class="m10 tc"><a class="btn lbtn greenbtn" href="<?php echo \yii\helpers\Url::to(['/page/index','page_id'=>3538])?>">点击立即使用</a></div>
 </script>
 <?php $this->beginBlock('J_Reviews') ?>
 var $hand = $('.hand');
