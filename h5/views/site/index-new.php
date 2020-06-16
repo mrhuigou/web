@@ -295,7 +295,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                                     </a>
                                     <?php if(time() >= strtotime('2020-06-16 00:00:00') && time() <= strtotime('2020-06-20 23:59:59')){?>
                                         <div style="position: absolute;top: 0px;" >
-                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="">
+                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="" style="width: 14rem;">
                                         </div>
                                     <?php }?>
                                 </li>
@@ -356,7 +356,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                                     </a>
                                     <?php if(time() >= strtotime('2020-06-16 00:00:00') && time() <= strtotime('2020-06-20 23:59:59')){?>
                                         <div style="position: absolute;top: 0px;" >
-                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="">
+                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="" style="width: 14rem;">
                                         </div>
                                     <?php }?>
                                 </li>
@@ -417,7 +417,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                                     </a>
                                     <?php if(time() >= strtotime('2020-06-16 00:00:00') && time() <= strtotime('2020-06-20 23:59:59')){?>
                                         <div style="position: absolute;top: 0px;" >
-                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="">
+                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="" style="width: 14rem;">
                                         </div>
                                     <?php }?>
                                 </li>
@@ -481,7 +481,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                                     </a>
                                     <?php if(time() >= strtotime('2020-06-16 00:00:00') && time() <= strtotime('2020-06-20 23:59:59')){?>
                                         <div style="position: absolute;top: 0px;" >
-                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="">
+                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="" style="width: 14rem;">
                                         </div>
                                     <?php }?>
                                 </li>
@@ -543,7 +543,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                                     </a>
                                     <?php if(time() >= strtotime('2020-06-16 00:00:00') && time() <= strtotime('2020-06-20 23:59:59')){?>
                                         <div style="position: absolute;top: 0px;" >
-                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="">
+                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="" style="width: 14rem;">
                                         </div>
                                     <?php }?>
                                 </li>
