@@ -121,7 +121,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                 </h2>
             </div>
         <?php }?>
-    <div id="hot_content" style="max-width: inherit;overflow: hidden;" class="pl5 pr5"></div>
+    <div id="hot_content" style="max-width: inherit;overflow: hidden;border: 0.125rem solid #fa3f3f;" class="pl5 pr5"></div>
     </div>
     <script id="hot_content_tpl" type="text/html">
     <div class="swiper-container" id="swiper-container_ad">
