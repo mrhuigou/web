@@ -105,11 +105,22 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         <img class="w" src="../assets/images/skin/skin-0.jpg" />
     </a>-->
     <div class="jb" style="padding-bottom: 0px;">
-        <a href="https://m.mrhuigou.com/page/3538.html" class="t"></a>
-        <div class="tit1  redtit1">
-            <h2>爆品专区<a class="fr f12 red mt2" href="<?php echo \yii\helpers\Url::to(['/page/index','page_id'=>3538])?>">更多&gt;&gt;</a>
-            </h2>
-        </div>
+<!--        <a href="https://m.mrhuigou.com/page/3538.html" class="t"></a>-->
+<!--        <div class="tit1  redtit1">-->
+<!--            <h2>爆品专区<a class="fr f12 red mt2" href="--><?php //echo \yii\helpers\Url::to(['/page/index','page_id'=>3538])?><!--">更多&gt;&gt;</a>-->
+<!--            </h2>-->
+<!--        </div>-->
+        <?php if(time() >= strtotime('2020-06-16 00:00:00') && time() <= strtotime('2020-06-20 23:59:59')){?>
+            <a href="<?php echo \yii\helpers\Url::to(['/page/index','page_id'=>3538])?>">
+                <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPFiAK0aoAAFsWrZ71Ow505.png" class="db w" />
+            </a>
+        <?php }else{?>
+            <a href="https://m.mrhuigou.com/page/3538.html" class="t"></a>
+            <div class="tit1  redtit1">
+                <h2>爆品专区<a class="fr f12 red mt2" href="<?php echo \yii\helpers\Url::to(['/page/index','page_id'=>3538])?>">更多&gt;&gt;</a>
+                </h2>
+            </div>
+        <?php }?>
     <div id="hot_content" style="max-width: inherit;overflow: hidden;" class="pl5 pr5"></div>
     </div>
     <script id="hot_content_tpl" type="text/html">
@@ -131,12 +142,21 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     </div>
     </script>
     <?php if ($ad_banner_1) { ?>
-        <div class="ts_1">
-            <div class="tit1 greentit1">
-                <!--            <h2>孕婴频道</h2>-->
-                <h2>特别推荐</h2>
+    <?php if(time() >= strtotime('2020-06-16 00:00:00') && time() <= strtotime('2020-06-20 23:59:59')){?>
+        <?php }else{?>
+            <div class="ts_1">
+                <div class="tit1 greentit1">
+                    <!--            <h2>孕婴频道</h2>-->
+                    <h2>特别推荐</h2>
+                </div>
             </div>
-        </div>
+        <?php }?>
+<!--        <div class="ts_1">-->
+<!--            <div class="tit1 greentit1">-->
+<!--                <!--            <h2>孕婴频道</h2>-->
+<!--                <h2>特别推荐</h2>-->
+<!--            </div>-->
+<!--        </div>-->
         <ul class="pro-list23 pt10">
             <?php foreach ($ad_banner_1 as $key => $value) { ?>
                 <?php if (in_array($value['advertise_media_type'],['PACK','IMAGE'])) { ?>
@@ -266,13 +286,18 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                     <ul class="pro-list23">
                         <?php foreach ($fourthF_PRODUCT_ONE as $key => $value) { ?>
                             <?php if (in_array($value['advertise_media_type'],['PACK','IMAGE'])) { ?>
-                                <li class="clearfix mb5 pl5 pr5" style="width: 32rem;height: 12.5rem;overflow: hidden;">
+                                <li class="clearfix mb5 pl5 pr5" style="width: 32rem;height: 12.5rem;overflow: hidden; position: relative">
                                     <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>">
                                         <img
                                               data-original="<?= \common\component\image\Image::resize($value->source_url, 640, 250) ?>"
                                             title="<?php echo $value->title; ?>" alt="<?= $value->title ?>"
                                             class="db w lazy" >
                                     </a>
+                                    <?php if(time() >= strtotime('2020-06-16 00:00:00') && time() <= strtotime('2020-06-20 23:59:59')){?>
+                                        <div style="position: absolute;top: 0px;" >
+                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="">
+                                        </div>
+                                    <?php }?>
                                 </li>
                             <?php } ?>
                         <?php } ?>
@@ -322,13 +347,18 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                     <ul class="pro-list23">
                         <?php foreach ($fourthF_PRODUCT_TWO as $key => $value) { ?>
                             <?php if (in_array($value['advertise_media_type'],['PACK','IMAGE'])) { ?>
-                                <li class="clearfix mb5 pl5 pr5" style="width: 32rem;height: 12.5rem;overflow: hidden;">
+                                <li class="clearfix mb5 pl5 pr5" style="width: 32rem;height: 12.5rem;overflow: hidden;position: relative;">
                                     <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>">
                                         <img
                                               data-original="<?= \common\component\image\Image::resize($value->source_url, 640, 250) ?>"
                                             title="<?php echo $value->title; ?>" alt="<?= $value->title ?>"
                                             class="db w lazy" >
                                     </a>
+                                    <?php if(time() >= strtotime('2020-06-16 00:00:00') && time() <= strtotime('2020-06-20 23:59:59')){?>
+                                        <div style="position: absolute;top: 0px;" >
+                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="">
+                                        </div>
+                                    <?php }?>
                                 </li>
                             <?php } ?>
                         <?php } ?>
@@ -378,13 +408,18 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                     <ul class="pro-list23">
                         <?php foreach ($fourthF_PRODUCT_THREE as $key => $value) { ?>
                             <?php if (in_array($value['advertise_media_type'],['PACK','IMAGE'])) { ?>
-                                <li class="clearfix mb5 pl5 pr5" style="width: 32rem;height: 12.5rem;overflow: hidden;">
+                                <li class="clearfix mb5 pl5 pr5" style="width: 32rem;height: 12.5rem;overflow: hidden;position: relative;">
                                     <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>">
                                         <img
                                               data-original="<?= \common\component\image\Image::resize($value->source_url, 640, 250) ?>"
                                             title="<?php echo $value->title; ?>" alt="<?= $value->title ?>"
                                             class="db w lazy" >
                                     </a>
+                                    <?php if(time() >= strtotime('2020-06-16 00:00:00') && time() <= strtotime('2020-06-20 23:59:59')){?>
+                                        <div style="position: absolute;top: 0px;" >
+                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="">
+                                        </div>
+                                    <?php }?>
                                 </li>
                             <?php } ?>
                         <?php } ?>
@@ -437,13 +472,18 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                     <ul class="pro-list23">
                         <?php foreach ($fourthF_PRODUCT_FOUR as $key => $value) { ?>
                             <?php if (in_array($value['advertise_media_type'],['PACK','IMAGE'])) { ?>
-                                <li class="clearfix mb5 pl5 pr5" style="width: 32rem;height: 12.5rem;overflow: hidden;">
+                                <li class="clearfix mb5 pl5 pr5" style="width: 32rem;height: 12.5rem;overflow: hidden;position: relative;">
                                     <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>">
                                         <img
                                               data-original="<?= \common\component\image\Image::resize($value->source_url, 640, 250) ?>"
                                             title="<?php echo $value->title; ?>" alt="<?= $value->title ?>"
                                             class="db w lazy" >
                                     </a>
+                                    <?php if(time() >= strtotime('2020-06-16 00:00:00') && time() <= strtotime('2020-06-20 23:59:59')){?>
+                                        <div style="position: absolute;top: 0px;" >
+                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="">
+                                        </div>
+                                    <?php }?>
                                 </li>
                             <?php } ?>
                         <?php } ?>
@@ -494,13 +534,18 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
                     <ul class="pro-list23">
                         <?php foreach ($fourthF_PRODUCT_FIVE as $key => $value) { ?>
                             <?php if (in_array($value['advertise_media_type'],['PACK','IMAGE'])) { ?>
-                                <li class="clearfix mb5 pl5 pr5" style="width: 32rem;height: 12.5rem;overflow: hidden;">
+                                <li class="clearfix mb5 pl5 pr5" style="width: 32rem;height: 12.5rem;overflow: hidden;position: relative;">
                                     <a href="<?= \yii\helpers\Url::to($value->link_url, true) ?>">
                                         <img
                                                 data-original="<?= \common\component\image\Image::resize($value->source_url, 640, 250) ?>"
                                                 title="<?php echo $value->title; ?>" alt="<?= $value->title ?>"
                                                 class="db w lazy" >
                                     </a>
+                                    <?php if(time() >= strtotime('2020-06-16 00:00:00') && time() <= strtotime('2020-06-20 23:59:59')){?>
+                                        <div style="position: absolute;top: 0px;" >
+                                            <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPg2Ab7ajAAAQlyuU10U160.png" alt="">
+                                        </div>
+                                    <?php }?>
                                 </li>
                             <?php } ?>
                         <?php } ?>
