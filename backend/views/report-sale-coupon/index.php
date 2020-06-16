@@ -49,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model['customer_not_use_count'];//.'['.Html::a('导出',['report-sale-coupon/export?type=export_not_use_customer&coupon_id='.$model['coupon_id']]).']';
                 }  ],
 
+	            ['label'=>'状态',  'attribute' => 'status',  'value' => 'status' ],
 	            ['label'=>'订单数',  'attribute' => 'order_count',  'value' => 'order_count' ],
 	            ['label'=>'优惠总计',  'attribute' => 'coupon_total',  'value' => 'coupon_total' ],
 	            ['label'=>'订单合计',  'attribute' => 'order_total',  'value' => 'order_total' ],
