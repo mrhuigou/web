@@ -15,7 +15,7 @@ $this->title="每日惠购 幸运大抽奖";
 </style>
 <header class="fx-top bs-bottom whitebg lh44">
     <div class="flex-col tc">
-        <a class="flex-item-2" href="/">
+        <a class="flex-item-2" href="<?=\yii\helpers\Url::to(['/site/index'])?>">
             <i class="aui-icon aui-icon-home green f28"></i>
         </a>
         <div class="flex-item-8 f16">
@@ -66,7 +66,7 @@ $this->title="每日惠购 幸运大抽奖";
         </div>
     </div>
 	    <?php } ?>
-        <div class="m10 tc"><a class="btn lbtn greenbtn" id="lijishiyong" href="/">点击立即使用</a></div>
+        <div class="m10 tc"><a class="btn lbtn greenbtn" id="lijishiyong" href="<?=\yii\helpers\Url::to(['/site/index'])?>">点击立即使用</a></div>
     <?php } ?>
 </div>
 <div id="my_result">

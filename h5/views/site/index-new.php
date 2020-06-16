@@ -111,8 +111,8 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 <!--            </h2>-->
 <!--        </div>-->
         <?php if(time() >= strtotime('2020-06-16 00:00:00') && time() <= strtotime('2020-06-20 23:59:59')){?>
-            <a href="<?php echo \yii\helpers\Url::to(['/page/index','page_id'=>3538])?>">
-                <img src="http://img1.mrhuigou.com/group1/M00/06/E4/wKgB7l7oPFiAK0aoAAFsWrZ71Ow505.png" class="db w" />
+            <a href="<?php echo \yii\helpers\Url::to(['/choujiang/index','id'=>43])?>">
+                <img src="http://img1.mrhuigou.com/group1/M00/06/E5/wKgB7l7ooVuAGOhDAAGKLTknKRs222.png" class="db w" />
             </a>
         <?php }else{?>
             <a href="https://m.mrhuigou.com/page/3538.html" class="t"></a>
