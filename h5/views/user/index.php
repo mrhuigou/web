@@ -37,7 +37,7 @@ $useragent = \Yii::$app->request->getUserAgent();
                 <div class="flex-item-3">
                     <a href="#" style="line-height: 100px;">
                         <img src="<?= \common\component\image\Image::resize(\Yii::$app->user->identity->photo_dt, 100, 100) ?>"
-                             alt="<?= \Yii::$app->user->identity->nickname_dt ?>" class="ava mava" id="photo-dt">
+                             alt="" class="ava mava" id="photo-dt">
                     </a>
                 </div>
                 <div class="flex-item-6 tc pt30" id="nickname-dt">
@@ -294,18 +294,28 @@ $useragent = \Yii::$app->request->getUserAgent();
         <?php
         $this->beginBlock('JS_INIT')
         ?>
+        var photo = "";
         <?php  if (strpos(strtolower($useragent), 'app/qdmetro')) {//地铁app?>
             <?php $device = common\component\Helper\Helper::get_device_type();?>
             <?php  if ($device == "android") {?>
                 var userinfo = window.AndroidWebView.getUserInfo();
                 userinfo = JSON.parse(userinfo);
+                photo = userinfo.image;
+                if(photo == "" || photo == null || photo == undefined){ // "",null,undefined
+                    photo = 'https://img1.mrhuigou.com/group1/M00/06/DF/wKgB7l7UugCAHe-QAAE82L3Jk8s789.jpg_320x320.jpg';
+                }
                 $("#nickname-dt").html(userinfo.nickName);//安卓
-                $("#photo-dt").attr('src',userinfo.image);//安卓
+                $("#photo-dt").attr('src',photo);//安卓
             <?php }else{?>
-                var userinfo = window.webkit.messageHandlers.QDMETRO_H5_LOGIN.postMessage();
-                userinfo = JSON.parse(userinfo);
-                $("#nickname-dt").html(userinfo.QDUserInfoModel.share.nickName);//安卓
-                $("#photo-dt").attr('src',QDUserInfoModel.share.image.urlEncode() ?? "");//安卓
+                function getInfo(obj) {
+                    $("#nickname-dt").html(obj.user_nick_name);//ios
+                    photo = obj.user_nick_image_url;
+                    if(photo == "" || photo == null || photo == undefined){ // "",null,undefined
+                        photo = 'https://img1.mrhuigou.com/group1/M00/06/DF/wKgB7l7UugCAHe-QAAE82L3Jk8s789.jpg_320x320.jpg';
+                    }
+                    $("#photo-dt").attr('src',photo);//ios
+                }
+                window.webkit.messageHandlers.QDMETRO_H5_LOGIN_CALLBACK.postMessage("getInfo");
             <?php }?>
         <?php }?>
 
