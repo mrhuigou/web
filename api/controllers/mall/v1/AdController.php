@@ -144,7 +144,7 @@ class AdController extends Controller {
                             if(!$coupon->couponCateToCoupon){
                                 continue;
                             }
-                            $coupon_title = '[券]'.$coupon->comment;
+                            $coupon_title = $coupon_title .'[券]'.$coupon->comment;
                         }
                     }
                     //------------------------优惠券描述---------------------
