@@ -26,7 +26,7 @@ class Coupon extends Widget {
 			$query->andFilterWhere([">=", "jr_coupon.date_end", date('Y-m-d H:i:s', time())]);
 			$query->andFilterWhere(["=", "jr_coupon.is_open", 1]);
 			$query->andFilterWhere(["=", "jr_coupon.status", 1]);
-		}])->where(['product_id' => $ids])->all();
+		}])->where(['product_id' => $ids])->orderBy('jr_coupon.date_added desc')->all();
 		if ($coupon_products) {
 			foreach ($coupon_products as $coupon_product) {
 				if($coupon_product->status){
