@@ -37,11 +37,12 @@ class ChoujiangController extends \yii\web\Controller {
 //		if(!\Yii::$app->user->identity->getSubcription()){
 //			return $this->redirect('/');
 //		}
+        $lottery = Lottery::findOne(['id'=>$id]);
 		$model = LotteryResult::find()->where(['lottery_id' => $id])->andWhere(['not in','customer_id',[\Yii::$app->user->getId()]]);
 		$count = $model->count();
 		$history = $model->limit(100)->orderBy('id desc')->all();
 		$my_self = LotteryResult::find()->where(['lottery_id' => $id, 'customer_id' => \Yii::$app->user->getId()])->all();
-		return $this->render('index', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
+		return $this->render('index', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self,'lottery'=>$lottery]);
 //		return $this->render('index-new', ['id' => $id, 'history' => $history, 'count' => $count, 'my_self' => $my_self]);
 	}
 //    public function actionIndexNew($id = 41)
