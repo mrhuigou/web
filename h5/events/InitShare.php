@@ -76,9 +76,7 @@ class InitShare extends Event{
         }else{
             \Yii::$app->session->remove('qdmetro_token');
         }
-       if(\Yii::$app->user->getId()==540976 || \Yii::$app->user->getId()==545369) {
-           \Yii::error('action qdmetro_token:' . \Yii::$app->session->get('qdmetro_token', ''));
-       }
+
         if(\Yii::$app->request->get('sourcefrom') == 'mrhuigou' && \Yii::$app->session->has("from_affiliate_uid")){
             \Yii::$app->session->remove('from_affiliate_uid');
         }
