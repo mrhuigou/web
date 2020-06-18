@@ -69,7 +69,7 @@ class InitShare extends Event{
             }
         }
 
-        if (strpos(strtolower($useragent), 'app/qdmetro')) {//地铁app
+        if (strpos(strtolower($useragent), 'app/qdmetro') || $from_channel_source == "ditie") {//地铁app
             if($token=\Yii::$app->request->get('token')){
                 \Yii::$app->session->set('qdmetro_token',$token);
             }
