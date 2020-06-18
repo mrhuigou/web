@@ -302,7 +302,7 @@ $useragent = \Yii::$app->request->getUserAgent();
                 userinfo = JSON.parse(userinfo);
                 photo = userinfo.image;
                 if(photo == "" || photo == null || photo == undefined){ // "",null,undefined
-                    photo = 'https://img1.mrhuigou.com/group1/M00/06/DF/wKgB7l7UugCAHe-QAAE82L3Jk8s789.jpg_320x320.jpg';
+                    photo = 'http://img1.mrhuigou.com/group1/M00/06/E5/wKgB7l7pxyOAGWmxAAAIUs8k_5U490.png';
                 }
                 $("#nickname-dt").html(userinfo.nickName);//安卓
                 $("#photo-dt").attr('src',photo);//安卓
@@ -311,7 +311,7 @@ $useragent = \Yii::$app->request->getUserAgent();
                     $("#nickname-dt").html(obj.user_nick_name);//ios
                     photo = obj.user_nick_image_url;
                     if(photo == "" || photo == null || photo == undefined){ // "",null,undefined
-                        photo = 'https://img1.mrhuigou.com/group1/M00/06/DF/wKgB7l7UugCAHe-QAAE82L3Jk8s789.jpg_320x320.jpg';
+                        photo = 'http://img1.mrhuigou.com/group1/M00/06/E5/wKgB7l7pxyOAGWmxAAAIUs8k_5U490.png';
                     }
                     $("#photo-dt").attr('src',photo);//ios
                 }

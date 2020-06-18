@@ -264,7 +264,7 @@ class SiteController extends Controller {
                 $provider = 'Ditie';
                 $key = "71a8bf4eefcae84185fa2fe9b199ae93";
                 $getUrl = '';
-                $token = Yii::$app->request->get('token')?\Yii::$app->session->get('qdmetro_token',0):"";
+                $token = Yii::$app->request->get('token')?:\Yii::$app->session->get('qdmetro_token',"");
                 $token_string = base64_decode($token);
                 $token_arr = explode('|',$token_string);
                 $phone = $token_arr[0];
