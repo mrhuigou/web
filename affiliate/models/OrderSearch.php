@@ -3,6 +3,7 @@
 namespace affiliate\models;
 
 use api\models\V1\Order;
+use api\models\V1\ReturnBase;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -93,4 +94,50 @@ class OrderSearch extends Order
 
 		return $dataProvider;
 	}
+
+	public function searchAllOrder($params){
+        $this->load($params);
+        $order_status_id = ['1'];
+        $query = Order::find()->where(['order_status_id' => $order_status_id]);
+        if($this->begin_date) {
+            $query = $query->andWhere(['>=', 'date_added', date('Y-m-d 00:00:00', strtotime($this->begin_date))]);
+        }
+        if($this->end_date) {
+            $query = $query->andWhere(['<=', 'date_added', date('Y-m-d 23:59:59', strtotime($this->end_date))]);
+        }
+
+        if(!Yii::$app->user->isGuest){
+            $query = $query->andWhere(["affiliate_id"=>Yii::$app->user->getId()]);
+        }else{
+            $query = $query->andWhere(["affiliate_id"=>0]);
+        }
+        $query = $query->orderBy(['date_added'=>SORT_DESC])
+            ->all();
+        return $query;
+    }
+
+
+	public function searchAllReturn($params){
+        $this->load($params);
+        $query = ReturnBase::find()
+            ->joinWith([
+                'order'=>function($query){
+                }
+            ]);
+        if($this->begin_date) {
+            $query = $query->where(['>=', 'jr_return.date_added', date('Y-m-d 00:00:00', strtotime($this->begin_date))]);
+        }
+        if($this->end_date) {
+            $query = $query->andWhere(['<=', 'jr_return.date_added', date('Y-m-d 23:59:59', strtotime($this->end_date))]);
+        }
+        if(!Yii::$app->user->isGuest){
+            $query = $query->andWhere(["jr_order.affiliate_id"=>Yii::$app->user->getId()]);
+        }else{
+            $query = $query->andWhere(["jr_order.affiliate_id"=>0]);
+        }
+        $query = $query->andWhere(["jr_order.affiliate_id"=>Yii::$app->user->getId()]);
+        $query = $query ->andWhere(['<>','jr_return.return_status_id','6'])->all();
+
+        return $query;
+    }
 }
