@@ -24,12 +24,14 @@ use yii\widgets\ActiveForm;
           'mask' => '9999-99-99',
       ]);
     ?>
+    <?= $form->field($model, 'commission') ?>
 
     <div class="form-group">
         <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('重置', ['class' => 'btn btn-default']) ?>
         <?php if(Yii::$app->request->getQueryParams()){?>
             <?= Html::a('导出', array_merge(['export'],Yii::$app->request->getQueryParams()), ['class' => 'btn btn-success']) ?>
+            <?= Html::a('佣金计算', array_merge(['commission'],Yii::$app->request->getQueryParams()), ['class' => 'btn btn-success']) ?>
         <?php }?>
     </div>
 

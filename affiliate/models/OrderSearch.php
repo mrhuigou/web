@@ -16,6 +16,7 @@ class OrderSearch extends Order
 	public $begin_date;
 	public $end_date;
 	public $order_no;
+	public $commission;
 	/**
 	 * @inheritdoc
 	 */
@@ -24,6 +25,7 @@ class OrderSearch extends Order
 		return [
 			[['order_no'], 'string','max'=>255],
 			[['begin_date','end_date'],'string','max'=>255],
+            [['commission'], 'string','max'=>255],
 		];
 	}
 
@@ -35,6 +37,7 @@ class OrderSearch extends Order
 			'begin_date'=>'开始时间',
 			'end_date'=>'结束时间',
 			'order_no'=>'订单编号',
+			'commission'=>'佣金收益比例',
 		];
 
 
