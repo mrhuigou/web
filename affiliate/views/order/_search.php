@@ -28,6 +28,9 @@ use yii\widgets\ActiveForm;
     <div class="form-group">
         <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('重置', ['class' => 'btn btn-default']) ?>
+        <?php if(Yii::$app->request->getQueryParams()){?>
+            <?= Html::a('导出', array_merge(['export'],Yii::$app->request->getQueryParams()), ['class' => 'btn btn-success']) ?>
+        <?php }?>
     </div>
 
     <?php ActiveForm::end(); ?>

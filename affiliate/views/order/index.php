@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'date_added',
             ['label' => '对账',
 	        'value' => function ($model) {
-                    if(\api\models\V1\AffiliateTransaction::findOne($model->order_id)){
+                    if(\api\models\V1\AffiliateTransactionFlow::findOne(['type_id'=> $model->order_id])){
 	                    return '已对帐';
                     }else{
 	                    return '未对账';

@@ -2,6 +2,7 @@
 
 namespace affiliate\controllers;
 
+use common\extensions\widgets\xlsxwriter\xlsxwriter as XLSXWriter;
 use Yii;
 use api\models\V1\AffiliateTransaction;
 use api\models\V1\AffiliateTransactionSearch;
@@ -73,5 +74,45 @@ class AffiliateTransactionController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionExport(){
+        $searchModel = new AffiliateTransactionSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setPagination(['pagesize'=>$dataProvider->totalCount]);
+        $header = array(
+            'Title'=>'string',
+            'Amount'=>'string',
+            'Balance'=>'string',
+            'Remark'=>'string',
+            '创建时间'=>'string',
+        );
+        $writer = new XLSXWriter();
+        $writer->writeSheetHeader('Sheet1', $header );
+        if($model=$dataProvider->getModels()){
+            foreach($model as $value){
+                $writer->writeSheetRow('Sheet1',[
+                    $value['title'],
+                    $value['amount'],
+                    $value['balance'],
+                    $value['remark'],
+                    date('Y-m-d H:i:s',$value['create_at'])
+                ]);
+            }
+        }
+
+        $writer->writeToFile('/tmp/output.xlsx');
+
+        // 输入文件标签
+        header("Content-Type:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=utf-8");
+        header("Content-Disposition: attachment; filename=output.xlsx");  //File name extension was wrong
+        header("Expires: 0");
+        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        header("Cache-Control: private",false);
+        ob_clean();
+
+        // 输出文件内容
+        readfile('/tmp/output.xlsx');
+
     }
 }
