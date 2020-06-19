@@ -6,7 +6,7 @@ $this->title = '网站管理系统';
 ?>
 <!-- BEGIN LOGO -->
 <div class="logo">
-    <img src="/assets/img/logo-big.png" alt=""/>
+    <img src="http://img1.mrhuigou.com/group1/M00/06/E6/wKgB7l7sLsiAZnE_AAAbvrBPGTg113.png" alt=""/>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
