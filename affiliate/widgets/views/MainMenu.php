@@ -48,6 +48,20 @@
                     </span>
             </a>
         </li>
+        <?php
+        if(!Yii::$app->user->isGuest){?>
+            <?php if(Yii::$app->user->getId() == 9){?>
+                <li class="">
+                    <a href="<?= \yii\helpers\Url::to('/affiliate-transaction-statement/index')?>">
+                        <i class="fa fa-briefcase"></i>
+                        <span class="title">
+                            结算单
+                        </span>
+                    </a>
+                </li>
+            <?php  } ?>
+        <?php } ?>
+
     </ul>
     <!-- END SIDEBAR MENU -->
 </div>
