@@ -290,6 +290,10 @@ $(".btn_points").click(function(){
     });
 });
 $("#button_submit").click(function(){
+    if(!$("#checkoutform-address_id").val()){
+        $.alert("请创建收货地址！");
+    }
+    console.log($("#checkoutform-address_id").val());
     $("#confirm_form_address").html($(".select_address").html());
     var delivery_list="";
     $(".delivery-default").each(function(){
