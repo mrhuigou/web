@@ -31,7 +31,9 @@ use yii\widgets\ActiveForm;
         <?= Html::resetButton('重置', ['class' => 'btn btn-default']) ?>
         <?php if(Yii::$app->request->getQueryParams()){?>
             <?= Html::a('导出', array_merge(['export'],Yii::$app->request->getQueryParams()), ['class' => 'btn btn-success']) ?>
-            <?= Html::a('生成结算单', array_merge(['statement'],Yii::$app->request->getQueryParams()), ['class' => 'btn btn-success']) ?>
+            <?php if(Yii::$app->user->getId() == 9){?>
+                <?= Html::a('生成结算单', array_merge(['statement'],Yii::$app->request->getQueryParams()), ['class' => 'btn btn-success']) ?>
+            <?php }?>
         <?php }?>
     </div>
 
