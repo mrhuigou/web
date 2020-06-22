@@ -97,8 +97,7 @@ class OrderSearch extends Order
 
 	public function searchAllOrder($params){
         $this->load($params);
-        $order_status_id = ['1'];
-        $query = Order::find()->where(['order_status_id' => $order_status_id]);
+        $query = Order::find()->where(['<>','order_status_id','7']);
         if($this->begin_date) {
             $query = $query->andWhere(['>=', 'date_added', date('Y-m-d 00:00:00', strtotime($this->begin_date))]);
         }
