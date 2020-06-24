@@ -132,7 +132,7 @@ class AdController extends Controller {
                     $promotion_detail_image = '';
                     if($ad_detail_product->promotions){
                         foreach ($ad_detail_product->promotions as $promotion){
-                            $promotion_detail_title = '[促]'.$promotion->promotion_detail_title;
+                            $promotion_detail_title = '[促]'.$promotion->promotion_detail_title ." ";
                             $promotion_detail_image = $promotion->promotion_detail_image;
                         }
                     }
@@ -144,7 +144,7 @@ class AdController extends Controller {
                             if(!$coupon->couponCateToCoupon){
                                 continue;
                             }
-                            $coupon_title = $coupon_title .'[券]'.$coupon->comment;
+                            $coupon_title = $coupon_title .'[券]'.$coupon->comment." ";
                         }
                     }
                     //------------------------优惠券描述---------------------
