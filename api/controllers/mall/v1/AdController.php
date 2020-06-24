@@ -164,6 +164,8 @@ class AdController extends Controller {
                         'item_code'=>$ad_detail_product->product_base_code,
                         'name' => $ad_detail_product->description->name,
                         'meta_description' => $promotion_detail_title.$coupon_title.$ad_detail_product->description->meta_description,
+                        'meta_description1' => $promotion_detail_title.$coupon_title,
+                        'meta_description2' => $ad_detail_product->description->meta_description,
 //						'image' => Image::resize(($ad_detail->source_url ?: $promotion_detail_image )? :$ad_detail->product->image,320,320),
                         'image' => Image::resize(($promotion_detail_image ? :$imagelist)?:'',320,320),
                         'ad_image' => Image::resize($ad_detail->source_url ?: $promotion_detail_image),
