@@ -7,7 +7,7 @@
                 <div class="popr tc" style="
 		width: 27rem;
 		height: 41.45rem;
-		background: url('../assets/images/new_guy_pop.jpeg') no-repeat center top;
+		background: url('http://img1.mrhuigou.com/group1/M00/06/EB/wKgB7l77QGuAY973AAQr_ZMcDJU048.jpg') no-repeat center top;
 		background-size:100%;
 		padding-top:14rem;">
                 </div>
