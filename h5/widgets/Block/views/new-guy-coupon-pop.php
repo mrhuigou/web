@@ -1,4 +1,18 @@
 <div id="coupon_pop" style="display: none">
+        <?php $affiliate_id = Yii::$app->session->get("from_affiliate_uid",0);?>
+        <?php if($affiliate_id == 9 ){//地铁新用户?>
+
+            <a href="<?php echo $share_url;?>">
+
+                <div class="popr tc" style="
+		width: 27rem;
+		height: 41.45rem;
+		background: url('../assets/images/new_guy_pop.jpeg') no-repeat center top;
+		background-size:100%;
+		padding-top:14rem;">
+                </div>
+            </a>
+        <?php }else{?>
 <a href="<?php echo \yii\helpers\Url::to(['/share/index'])?>">
 
         <div class="popr tc" style="
@@ -9,6 +23,7 @@
 		padding-top:14rem;">
         </div>
 </a>
+   <?php }?>
 </div>
 
 

@@ -45,7 +45,8 @@ class NewGuyCouponPop extends Widget {
                         $totals = $totals + $customer_coupon->coupon->discount;
                     }
                     $totals = floor($totals);
-                    return $this->render('new-guy-coupon-pop',['totals'=>$totals,'customer_coupons'=>$customer_coupons]);
+                    return $this->render('new-guy-coupon-pop',['totals'=>$totals,'customer_coupons'=>$customer_coupons,'share_url' => Yii::$app->request->getAbsoluteUrl()]);
+//                    return $this->render('new-guy-coupon-pop',['totals'=>$totals,'customer_coupons'=>$customer_coupons]);
                 }
             }
         }
