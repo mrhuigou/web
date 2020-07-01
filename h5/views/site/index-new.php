@@ -1,6 +1,8 @@
 <?php
 if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     $this->title = "智慧生活";
+}elseif(strtolower(Yii::$app->request->get("sourcefrom")) == 'ditie'){
+    $this->title = "惠购物";
 }else{
 	$this->title = "每日惠购";
 }
@@ -21,6 +23,8 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
     <a href="javascript:;" class="header-left" id="show-notification">
         <?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'baijin'){ ?>
             <img src="http://img1.mrhuigou.com/group1/M00/06/D9/wKgB7l7COdWALfw9AAAYP6H2TfE121.jpg" width="110" style="margin-top: -6px;">
+        <?php  }elseif(strtolower(Yii::$app->request->get("sourcefrom")) == 'ditie'){ ?>
+            <img src="http://img1.mrhuigou.com/group1/M00/06/EB/wKgB7l777LeAJ1eAAAAPXVHpRm8601.jpg" width="110" style="margin-top: -6px;">
         <?php }else{?>
             <img src="/assets/images/logo2.jpg" width="110" style="margin-top: -6px;">
         <?php }?>
