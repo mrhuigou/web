@@ -34,9 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            ['label'=>'昵称',  'attribute' => 'firstname',  'value' => 'customer.firstname' ],
+            ['label'=>'电话',  'attribute' => 'telephone',  'value' => 'customer.telephone' ],
             'order_no',
-            'total',
+            ['label'=>'订单时间',  'attribute' => 'date_added',  'value' => 'date_added' ],
 	        ['label'=>'订单状态',  'attribute' => 'name',  'value' => 'orderStatus.name' ],
+            'total',
+	        ['label'=>'收货电话',  'attribute' => 'shipping_telephone',  'value' => 'orderShipping.shipping_telephone' ],
+
             ['label'=>'订单佣金',  'value' => function ($model) {
                 if(in_array($model->order_status_id,[6,7])){
 	                return 0.00;
@@ -45,8 +50,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
 
             }],
-            'date_added',
-            ['label' => '对账',
+//            'date_added',
+            ['label' => '对账状态',
 	        'value' => function ($model) {
                     if(\api\models\V1\AffiliateTransactionFlow::findOne(['type_id'=> $model->order_id])){
 	                    return '已对帐';

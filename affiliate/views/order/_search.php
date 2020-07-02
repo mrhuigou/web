@@ -15,25 +15,32 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'order_no') ?>
-    <?php  echo  $form->field($model, 'begin_date')->widget(\yii\widgets\MaskedInput::className(), [
-          'mask' => '9999-99-99',
-      ]);
+<!--    --><?//= $form->field($model, 'order_no') ?>
+<!--    --><?php // echo  $form->field($model, 'begin_date')->widget(\yii\widgets\MaskedInput::className(), [
+//          'mask' => '9999-99-99',
+//      ]);
+//    ?>
+<!--        --><?php // echo  $form->field($model, 'end_date')->widget(\yii\widgets\MaskedInput::className(), [
+//          'mask' => '9999-99-99',
+//      ]);
+//    ?>
+
+    <?php echo $form->field($model, 'begin_date')->widget(\yii\jui\DatePicker::className(), ['language' => 'zh-CN',
+        'dateFormat' => 'yyyy-MM-dd','options'=>['class'=>'form-control']]);
     ?>
-        <?php  echo  $form->field($model, 'end_date')->widget(\yii\widgets\MaskedInput::className(), [
-          'mask' => '9999-99-99',
-      ]);
+    <?php echo $form->field($model, 'end_date')->widget(\yii\jui\DatePicker::className(), ['language' => 'zh-CN',
+        'dateFormat' => 'yyyy-MM-dd','options'=>['class'=>'form-control']]);
     ?>
-    <?= $form->field($model, 'commission') ?>
+<!--    --><?//= $form->field($model, 'commission') ?>
 
     <div class="form-group">
         <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('重置', ['class' => 'btn btn-default']) ?>
         <?php if(Yii::$app->request->getQueryParams()){?>
             <?= Html::a('导出', array_merge(['export'],Yii::$app->request->getQueryParams()), ['class' => 'btn btn-success']) ?>
-            <?php if(Yii::$app->user->getId() == 9){?>
-                <?= Html::a('生成结算单', array_merge(['statement'],Yii::$app->request->getQueryParams()), ['class' => 'btn btn-success']) ?>
-            <?php }?>
+<!--            --><?php //if(Yii::$app->user->getId() == 9){?>
+<!--                --><?//= Html::a('生成结算单', array_merge(['statement'],Yii::$app->request->getQueryParams()), ['class' => 'btn btn-success']) ?>
+<!--            --><?php //}?>
         <?php }?>
     </div>
 
