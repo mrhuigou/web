@@ -5,6 +5,9 @@ namespace affiliate\controllers;
 use api\models\V1\AffiliateTransaction;
 use api\models\V1\AffiliateTransactionFlow;
 use api\models\V1\AffiliateTransactionStatement;
+use api\models\V1\Customer;
+use api\models\V1\OrderShipping;
+use api\models\V1\OrderStatus;
 use api\models\V1\ReturnBase;
 use common\extensions\widgets\xlsxwriter\xlsxwriter as XLSXWriter;
 use Yii;
@@ -143,21 +146,31 @@ class OrderController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->setPagination(['pagesize'=>$dataProvider->totalCount]);
         $header = array(
+            '昵称'=>'string',
+            '电话'=>'string',
             '订单编号'=>'string',
-            '订单总额'=>'string',
+            '订单时间'=>'string',
             '订单状态'=>'string',
+            '订单总额'=>'string',
+            '收货电话'=>'string',
             '订单佣金'=>'string',
-            '创建时间'=>'string',
         );
         $writer = new XLSXWriter();
         $writer->writeSheetHeader('Sheet1', $header );
         if($model=$dataProvider->getModels()){
             foreach($model as $value){
+                $customer = Customer::findOne($value['customer_id']);
+                $orderStatus = OrderStatus::findOne($value['order_status_id']);
+                $orderShipping = OrderShipping::findOne(['order_id'=>$value['order_id']]);
                 $writer->writeSheetRow('Sheet1',[
-                    $value['order_no'],$value['total'],
-                    $value['order_status_id'],
-                    $value['commission'],
-                    $value['date_added']
+                    $customer->firstname,
+                    $customer->telephone,
+                    $value['order_no'],
+                    $value['date_added'],
+                    $orderStatus->name,
+                    $value['total'],
+                    $orderShipping->shipping_telephone,
+                    $value['commission']
                 ]);
             }
         }

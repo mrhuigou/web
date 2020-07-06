@@ -51,16 +51,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             }],
 //            'date_added',
-            ['label' => '对账状态',
-	        'value' => function ($model) {
-                    if(\api\models\V1\AffiliateTransactionFlow::findOne(['type_id'=> $model->order_id])){
-	                    return '已对帐';
-                    }else{
-	                    return '未对账';
-                    }
-
-	        }
-        ],
+//            ['label' => '对账状态',
+//	        'value' => function ($model) {
+//                    if(\api\models\V1\AffiliateTransactionFlow::findOne(['type_id'=> $model->order_id])){
+//	                    return '已对帐';
+//                    }else{
+//	                    return '未对账';
+//                    }
+//
+//	        }
+//        ],
         ],
     ]); ?>
 </div>
