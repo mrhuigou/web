@@ -6,6 +6,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 }else{
 	$this->title = "每日惠购";
 }
+$useragent = \Yii::$app->request->getUserAgent();
 ?>
 <header class="header" >
     <?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){ ?>
@@ -604,7 +605,12 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
         </footer>
     <?php }else{ ?>
         <footer class="gray9 tc p10 f14">
-            Copyright©2015每日惠购 版权所有<br>
+            <?php  if (strpos(strtolower($useragent), 'app/qdmetro')) {//地铁app?>
+            <?php }else{?>
+                Copyright©2015每日惠购 版权所有<br>
+            <?php }?>
+
+
             <a href="<?=\yii\helpers\Url::to(['page/3561.html'])?>">
 <!--                <i class="iconfont vm mr5">&#xe65e;</i>-->
                 <span class="vm">客服热线：400-968-9870</span>
