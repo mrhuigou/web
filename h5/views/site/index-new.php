@@ -710,8 +710,8 @@ Ad_Sys_Code();
 
 <?php
 $this->registerJs($this->blocks['JS'], \yii\web\View::POS_READY);
-$this->registerJsFile('https://g.alicdn.com/opensearch/opensearch-console/0.16.0/scripts/jquery-ui-1.10.2.js',['depends'=>['h5\assets\AppAsset'],'position' => \yii\web\View::POS_END]);
-$this->registerCssFile('https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css',['depends'=>['h5\assets\AppAsset'],'position' => \yii\web\View::POS_HEAD]);
+$this->registerJsFile('/assets/script/jquery-ui-1.10.2.js',['depends'=>['h5\assets\AppAsset'],'position' => \yii\web\View::POS_END]);
+$this->registerCssFile('/assets/script/jqui/smoothness/jquery-ui.css',['depends'=>['h5\assets\AppAsset'],'position' => \yii\web\View::POS_HEAD]);
 $this->registerJsFile('/assets/script/auto_product_name.js',['depends'=>['h5\assets\AppAsset'],'position' => \yii\web\View::POS_END]);
 ?>
 <?= h5\widgets\MainMenu::widget(); ?>
