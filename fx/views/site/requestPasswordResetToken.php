@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'template' => "<div class='pt-15em clearfix'><div class=\"pr w-per60 fl\">{input}<p class=\"input-setup clearfix\"><a href=\"javascript:void(0);\" class=\"input-del  fr\" style=\"display:none;\"></a></p></div><button  type='button' class=\"appbtn graybtn w-per35 fr\" name='send-vcode' id='send-vcode'>获取验证码</button></div>{error}",
         "inputOptions"=>["maxlength"=>"6","autocomplete"=>"off",'placeholder'=>'请输入验证码'],
     ]) ?>
-    <p class="red lh150">每日惠购通过语音播报验证码,请你接听来自0532/400/12590开头的来电.</p>
+
     <?= Html::submitButton('下一步', ['class' => 'appbtn mt-15em w greenbtn', 'name' => 'Send']) ?>
     <?php ActiveForm::end(); ?>
 </section>
