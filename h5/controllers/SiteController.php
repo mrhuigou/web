@@ -34,6 +34,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
+use yii\helpers\Html;
 
 /**
  * Site controller
@@ -567,11 +568,12 @@ class SiteController extends Controller {
 			$model->date_added = date('Y-m-d H:i:s', time());
 			$model->save();
 			$message = "您的每日惠购验证码:" . $model->code . "，请勿将验证码泄露给其他人。";
-//			Sms::send($telephone,$message);
-//            $re = Sms::send_system($telephone,$message);
-//            print_r($re);
-			$voice = new VoiceVerify();
-            $re = $voice->send($telephone, $code);
+			Sms::send($telephone,$message);
+            $re = Sms::send_system($telephone,$message);
+            // 使用电话语音验证方式
+//			$voice = new VoiceVerify();
+//          $re = $voice->send($telephone, $code);
+            // 使用电话语音验证方式
             Yii::$app->session->set('telephone_send_limit', time() + 58);
             $msg = '发送成功';
             $status = true;
@@ -928,6 +930,14 @@ class SiteController extends Controller {
                 $customer->date_added = date('Y-m-d H:i:s', time());
                 if(Yii::$app->session->get('from_affiliate_uid')){
                     $customer->affiliate_id = Yii::$app->session->get('from_affiliate_uid');
+                }else{
+                    $sourceFromCode=Yii::$app->request->get('sourcefrom');
+                    if($sourceFromCode){
+                        $aff = Affiliate::findOne(['code'=>$sourceFromCode,'status'=>1]);
+                        if($aff){
+                            $customer->affiliate_id = $aff->affiliate_id;
+                        }
+                    }
                 }
                 if (!$customer->save(false)) {
                     throw new NotFoundHttpException("用户注册失败");
