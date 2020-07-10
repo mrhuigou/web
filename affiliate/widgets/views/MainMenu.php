@@ -40,18 +40,18 @@
                     </span>
             </a>
         </li>
-        <?php if(!Yii::$app->user->isGuest){?>
-            <?php if(Yii::$app->user->getId() != 9){?>
-                <li class="">
-                    <a href="<?= \yii\helpers\Url::to('/affiliate-transaction/index')?>">
-                        <i class="fa fa-briefcase"></i>
-                        <span class="title">
-                        帐户佣金
-                    </span>
-                    </a>
-                </li>
-            <?php  } ?>
-        <?php } ?>
+<!--        --><?php //if(!Yii::$app->user->isGuest){?>
+<!--            --><?php //if(Yii::$app->user->getId() != 9){?>
+<!--                <li class="">-->
+<!--                    <a href="--><?//= \yii\helpers\Url::to('/affiliate-transaction/index')?><!--">-->
+<!--                        <i class="fa fa-briefcase"></i>-->
+<!--                        <span class="title">-->
+<!--                        帐户佣金-->
+<!--                    </span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--            --><?php // } ?>
+<!--        --><?php //} ?>
 
 <!--        --><?php //if(!Yii::$app->user->isGuest){?>
 <!--            --><?php //if(Yii::$app->user->getId() == 9){?>
