@@ -42,14 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'total',
 	        ['label'=>'收货电话',  'attribute' => 'shipping_telephone',  'value' => 'orderShipping.shipping_telephone' ],
 
-            ['label'=>'订单佣金',  'value' => function ($model) {
-                if(in_array($model->order_status_id,[6,7])){
-	                return 0.00;
-                }else{
-	                return $model->commission;
-                }
-
-            }],
+//            ['label'=>'订单佣金',  'value' => function ($model) {
+//                if(in_array($model->order_status_id,[6,7])){
+//	                return 0.00;
+//                }else{
+//	                return $model->commission;
+//                }
+//
+//            }],
 //            'date_added',
 //            ['label' => '对账状态',
 //	        'value' => function ($model) {

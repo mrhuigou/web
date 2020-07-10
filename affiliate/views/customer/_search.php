@@ -14,13 +14,11 @@ use yii\widgets\ActiveForm;
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
-    <?php  echo  $form->field($model, 'begin_date')->widget(\yii\widgets\MaskedInput::className(), [
-          'mask' => '9999-99-99',
-      ]);
+    <?php echo $form->field($model, 'begin_date')->widget(\yii\jui\DatePicker::className(), ['language' => 'zh-CN',
+        'dateFormat' => 'yyyy-MM-dd','options'=>['class'=>'form-control']]);
     ?>
-        <?php  echo  $form->field($model, 'end_date')->widget(\yii\widgets\MaskedInput::className(), [
-          'mask' => '9999-99-99',
-      ]);
+    <?php echo $form->field($model, 'end_date')->widget(\yii\jui\DatePicker::className(), ['language' => 'zh-CN',
+        'dateFormat' => 'yyyy-MM-dd','options'=>['class'=>'form-control']]);
     ?>
 
     <div class="form-group">

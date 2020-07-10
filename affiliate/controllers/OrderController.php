@@ -153,7 +153,7 @@ class OrderController extends Controller
             '订单状态'=>'string',
             '订单总额'=>'string',
             '收货电话'=>'string',
-            '订单佣金'=>'string',
+//            '订单佣金'=>'string',
         );
         $writer = new XLSXWriter();
         $writer->writeSheetHeader('Sheet1', $header );
@@ -163,14 +163,14 @@ class OrderController extends Controller
                 $orderStatus = OrderStatus::findOne($value['order_status_id']);
                 $orderShipping = OrderShipping::findOne(['order_id'=>$value['order_id']]);
                 $writer->writeSheetRow('Sheet1',[
-                    $customer->firstname,
-                    $customer->telephone,
+                    empty($customer->firstname)?'':$customer->firstname,
+                    empty($customer->telephone)?'':$customer->telephone,
                     $value['order_no'],
                     $value['date_added'],
                     $orderStatus->name,
                     $value['total'],
                     $orderShipping->shipping_telephone,
-                    $value['commission']
+//                    $value['commission']
                 ]);
             }
         }

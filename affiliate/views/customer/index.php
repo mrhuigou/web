@@ -4,7 +4,7 @@ use yii\widgets\Breadcrumbs;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\grid\DataColumn;
-$this->title = '订单管理';
+$this->title = '用户管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-content">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-12">
             <!-- BEGIN PAGE TITLE & BREADCRUMB-->
             <h3 class="page-title">
-                订单管理 <small>监控、统计、分析</small>
+                用户管理 <small>监控、统计、分析</small>
             </h3>
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
