@@ -37,10 +37,10 @@ $this->title =$model->name.'-首页';
                     <i class="iconfont f14">&#xe64b;</i><br>收藏
                 <?php }?>
             </span>
-            <p class="fr green tc mr5">
-                <span><?=count($model->collect)?></span> <br>
-                粉丝数
-            </p>
+<!--            <p class="fr green tc mr5">-->
+<!--                <span>--><?//=count($model->collect)?><!--</span> <br>-->
+<!--                粉丝数-->
+<!--            </p>-->
             </div>
         </div>
     </div>
