@@ -140,7 +140,7 @@ class CheckoutController extends \yii\web\Controller {
                         if($n['code']=='sub_total'){
                             $proTotal=bcadd($proTotal, $n['value'], 2);//  商品总额
                         }
-                        if($v['code']=='coupon'){
+                        if($n['code']=='coupon'){
                             $couponTotal=bcadd($couponTotal, $n['value'], 2);// 优惠券总额
                         }
                     }
