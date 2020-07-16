@@ -1069,9 +1069,13 @@ class CheckoutController extends \yii\web\Controller {
                 }
                 unset($v);
             }else{
+                $sbShopFell=10;
+                if(count($comfirm_orders)>1){
+                    $sbShopFell=5;
+                }
                 foreach ($totals as &$v){
                     if($v['code']=='shipping'){
-                        $v['value']=5;
+                        $v['value']=$sbShopFell;
                     }
                 }
                 unset($v);
