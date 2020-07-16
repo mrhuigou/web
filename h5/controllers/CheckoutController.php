@@ -132,26 +132,52 @@ class CheckoutController extends \yii\web\Controller {
 		}
         $mergeOrderShipFree=0;
 		$proTotal=0;// be do Total
+        $couponTotal=0;// 优惠券总额
         if(count($comfirm_orders)>1){// not only stroe
-            foreach ($comfirm_orders as $key=>&$val){
-                $proTotal=bcadd($proTotal, $val['totals'][0]['value'], 2);
+            foreach ($comfirm_orders as $v){
+               if($v['totals']){
+                    foreach ($v['totals'] as $n){
+                        if($n['code']=='sub_total'){
+                            $proTotal=bcadd($proTotal, $n['value'], 2);//  商品总额
+                        }
+                        if($v['code']=='coupon'){
+                            $couponTotal=bcadd($couponTotal, $n['value'], 2);// 优惠券总额
+                        }
+                    }
+               }
             }
-            unset($val);
-            if($proTotal>=68){ // ￥68 can free shipping
+            $proTotalFinal=$proTotal+$couponTotal;// 商品最终总额=商品总额+优惠券总额(负数)
+            if($proTotalFinal>=68){ // ￥68 can free shipping
                 foreach ($comfirm_orders as $key=>&$val){
-                    if($val['totals'][1]['value']>0){
-                        $val['total']=$val['total']-$val['totals'][1]['value'];
-                        $val['totals'][2]['value']=$val['totals'][2]['value']-$val['totals'][1]['value'];
-                        $val['totals'][1]['value']=0;
+                    if($val['totals']){
+                        $oldSpFe=0;
+                        foreach ($v['totals'] as $k=>$n){
+                            if($n['code']=='shipping'){
+                                $oldSpFe=$n['value'];
+                                $val['totals'][$k]['value']=0;
+                            }
+                            if($n['code']=='total'){ //实付总计
+                                $val['totals'][$k]['value']=$val['totals'][$k]['value']-$oldSpFe+$couponTotal;
+                            }
+                        }
+                        $val['total']=$val['total']-$oldSpFe+$couponTotal;//更新总价
                     }
                 }
             }else{
                 $temporaryShipFree=5;
                 foreach ($comfirm_orders as $key=>&$val){
-                    if($val['totals'][1]['value']>0){
-                        $val['total']=$val['total']-$temporaryShipFree;
-                        $val['totals'][2]['value']=$val['totals'][2]['value']-$temporaryShipFree;
-                        $val['totals'][1]['value']=$temporaryShipFree;
+                    if($val['totals']){
+                        $oldSpFe=0;
+                        foreach ($v['totals'] as $k=>$n){
+                            if($n['code']=='shipping'){
+                                $oldSpFe=$n['value'];
+                                $val['totals'][$k]['value']=$temporaryShipFree;
+                            }
+                            if($n['code']=='total'){ //实付总计
+                                $val['totals'][$k]['value']=$val['totals'][$k]['value']-$oldSpFe+$temporaryShipFree+$couponTotal;
+                            }
+                        }
+                        $val['total']=$val['total']-$oldSpFe+$temporaryShipFree+$couponTotal;//更新总价
                     }
                 }
                 $mergeOrderShipFree=10;// most 10
@@ -163,6 +189,8 @@ class CheckoutController extends \yii\web\Controller {
             }
         }
 		Yii::$app->session->set('comfirm_orders', $comfirm_orders);
+        Yii::error('mengyh');
+        Yii::error(json_encode($comfirm_orders));
 		//计算总计金额
 		$merge_order_total = 0;
 		if ($comfirm_orders) {
@@ -173,6 +201,7 @@ class CheckoutController extends \yii\web\Controller {
 
 		$model = new CheckoutForm($comfirm_orders, $this->order_product_paytotal,$this->order_coupon_product_rate);
 			if ($model->load(Yii::$app->request->post()) && $trade_no = $model->submit()) {
+
 				Yii::$app->session->remove('comfirm_orders');
 				Yii::$app->session->remove('confirm_cart');
                 Yii::$app->session->remove('customer_point_h5');
