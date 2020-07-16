@@ -133,6 +133,8 @@ class CheckoutController extends \yii\web\Controller {
         $mergeOrderShipFree=0;
 		$proTotal=0;// be do Total
         $couponTotal=0;// 优惠券总额
+        Yii::error('mengyh');
+        Yii::error(json_encode($comfirm_orders));
         if(count($comfirm_orders)>1){// not only stroe
             foreach ($comfirm_orders as $v){
                if($v['totals']){
@@ -151,7 +153,7 @@ class CheckoutController extends \yii\web\Controller {
                 foreach ($comfirm_orders as $key=>&$val){
                     if($val['totals']){
                         $oldSpFe=0;
-                        foreach ($v['totals'] as $k=>$n){
+                        foreach ($val['totals'] as $k=>$n){
                             if($n['code']=='shipping'){
                                 $oldSpFe=$n['value'];
                                 $val['totals'][$k]['value']=0;
@@ -188,6 +190,7 @@ class CheckoutController extends \yii\web\Controller {
                 $mergeOrderShipFree=$val['totals'][1]['value'];
             }
         }
+        Yii::error(json_encode($comfirm_orders));
 		Yii::$app->session->set('comfirm_orders', $comfirm_orders);
 		//计算总计金额
 		$merge_order_total = 0;
