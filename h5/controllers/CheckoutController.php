@@ -157,10 +157,10 @@ class CheckoutController extends \yii\web\Controller {
                                 $val['totals'][$k]['value']=0;
                             }
                             if($n['code']=='total'){ //实付总计
-                                $val['totals'][$k]['value']=$val['totals'][$k]['value']-$oldSpFe+$couponTotal;
+                                $val['totals'][$k]['value']=$val['totals'][$k]['value']-$oldSpFe;
                             }
                         }
-                        $val['total']=$val['total']-$oldSpFe+$couponTotal;//更新总价
+                        $val['total']=$val['total']-$oldSpFe;//更新总价
                     }
                 }
             }else{
@@ -174,10 +174,10 @@ class CheckoutController extends \yii\web\Controller {
                                 $val['totals'][$k]['value']=$temporaryShipFree;
                             }
                             if($n['code']=='total'){ //实付总计
-                                $val['totals'][$k]['value']=$val['totals'][$k]['value']-$oldSpFe+$temporaryShipFree+$couponTotal;
+                                $val['totals'][$k]['value']=$val['totals'][$k]['value']-$oldSpFe+$temporaryShipFree;
                             }
                         }
-                        $val['total']=$val['total']-$oldSpFe+$temporaryShipFree+$couponTotal;//更新总价
+                        $val['total']=$val['total']-$oldSpFe+$temporaryShipFree;//更新总价
                     }
                 }
                 $mergeOrderShipFree=10;// most 10
