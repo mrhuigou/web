@@ -243,10 +243,10 @@
                         $(this).text(maxSpFe);
                         let sbTal=$(this).parent().parent().next().find(".total");
                         let sbTalTx=sbTal.text();
-                        sbTal.text(sbTalTx+maxSpFe);
+                        sbTal.text(parseFloat(sbTalTx)+maxSpFe);
                         let allPrice=$('#pay_total');
                         let allPriceTx=allPrice.text();
-                        allPrice.text(allPriceTx+maxSpFe);
+                        allPrice.text(parseFloat(allPriceTx)+maxSpFe);
                     }
                 });
 
