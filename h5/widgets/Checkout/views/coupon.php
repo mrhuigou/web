@@ -237,7 +237,6 @@
                     $('#free_return').hide();
                 }
                 // 同步 运费
-                console.log(maxSpFe);
                 $('.shipping').each(function(){
                     let tx=$(this).text();
                     if(tx<maxSpFe){

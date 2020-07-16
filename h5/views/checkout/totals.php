@@ -37,7 +37,7 @@ foreach($model as $total){
         <div style="border:1px dashed #000;margin-top: 30px;"></div>
 
         <p class="mb5 clearfix lh150">
-            <span class="fr red fb">￥<em class="<?=$total['code']?>"><?=$total['value']?></em></span>
+            <span class="fr red fb">￥<em class="coupon-sp-f <?=$total['code']?>"><?=$total['value']?></em></span>
             <span class="fl fb"><?=$total['title']?>：</span>
         </p>
 
@@ -103,3 +103,15 @@ foreach($model as $total){
     <?php } ?>
 
 <?php } ?>
+
+<script type="application/javascript">
+    var maxSpFe=0;
+    $('.coupon-sp-f').each(function(){
+        let st=$(this).text();
+        if(st>maxSpFe){
+            maxSpFe=st;
+        }
+    });
+    console.log('page val');
+    console.log(maxSpFe);
+</script>
