@@ -1060,7 +1060,11 @@ class CheckoutController extends \yii\web\Controller {
                 $proTotal=bcadd($proTotal, $val['totals'][0]['value'], 2);
 
             }
+            Yii::error('mengyh');
+            Yii::error($proTotal);
+            Yii::error($subTotal);
             $proTotal=$proTotal+$subTotal;// 总额=商品总额+抵扣总额(负数)
+            Yii::error($proTotal);
             if($proTotal>=68){
                 foreach ($totals as &$v){
                     if($v['code']=='shipping'){
