@@ -1062,10 +1062,16 @@ class CheckoutController extends \yii\web\Controller {
             }
             $proTotal=$proTotal+$subTotal;// 总额=商品总额+抵扣总额(负数)
             if($proTotal>=68){
+                $oldSpFree=0;
                 foreach ($totals as &$v){
                     if($v['code']=='shipping'){
+                        $oldSpFree=$v['value'];
                         $v['value']=0;
                     }
+                    if($v['code']=='total'){
+                        $v['value']-=$oldSpFree;
+                    }
+
                 }
                 unset($v);
             }else{
@@ -1073,9 +1079,15 @@ class CheckoutController extends \yii\web\Controller {
                 if(count($comfirm_orders)>1){
                     $sbShopFell=5;
                 }
+                $oldSpFree=0;
                 foreach ($totals as &$v){
                     if($v['code']=='shipping'){
+                        $oldSpFree=$v['value'];
                         $v['value']=$sbShopFell;
+                    }
+                    if($v['code']=='total'){
+                        $v['value']-=$oldSpFree;
+                        $v['value']+=$sbShopFell;
                     }
                 }
                 unset($v);
