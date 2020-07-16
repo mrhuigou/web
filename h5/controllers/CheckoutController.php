@@ -24,6 +24,7 @@ use api\models\V1\Store;
 use yii\base\ErrorException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
+use yii\helpers\VarDumper;
 use yii\httpclient\Client;
 use yii\web\NotFoundHttpException;
 
@@ -129,6 +130,38 @@ class CheckoutController extends \yii\web\Controller {
 
 			}
 		}
+        $mergeOrderShipFree=0;
+		$proTotal=0;// be do Total
+        if(count($comfirm_orders)>1){// not only stroe
+            foreach ($comfirm_orders as $key=>&$val){
+                $proTotal=bcadd($proTotal, $val['totals'][0]['value'], 2);
+            }
+            unset($val);
+            if($proTotal>=68){ // ￥68 can free shipping
+                foreach ($comfirm_orders as $key=>&$val){
+                    if($val['totals'][1]['value']>0){
+                        $val['total']=$val['total']-$val['totals'][1]['value'];
+                        $val['totals'][2]['value']=$val['totals'][2]['value']-$val['totals'][1]['value'];
+                        $val['totals'][1]['value']=0;
+                    }
+                }
+            }else{
+                $temporaryShipFree=5;
+                foreach ($comfirm_orders as $key=>&$val){
+                    if($val['totals'][1]['value']>0){
+                        $val['total']=$val['total']-$temporaryShipFree;
+                        $val['totals'][2]['value']=$val['totals'][2]['value']-$temporaryShipFree;
+                        $val['totals'][1]['value']=$temporaryShipFree;
+                    }
+                }
+                $mergeOrderShipFree=10;// most 10
+            }
+            unset($val);
+        }else{
+            foreach ($comfirm_orders as $key=>$val){
+                $mergeOrderShipFree=$val['totals'][1]['value'];
+            }
+        }
 		Yii::$app->session->set('comfirm_orders', $comfirm_orders);
 		//计算总计金额
 		$merge_order_total = 0;
