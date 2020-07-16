@@ -240,13 +240,16 @@
                 $('.shipping').each(function(){
                     let tx=$(this).text();
                     if(tx<maxSpFe){
+                        console.log(maxSpFe);
                         $(this).text(maxSpFe);
                         let sbTal=$(this).parent().parent().next().find(".total");
                         let sbTalTx=sbTal.text();
-                        sbTal.text(parseFloat(sbTalTx)+maxSpFe);
+                        console.log(sbTalTx);
+                        sbTal.text((parseFloat(sbTalTx)+parseFloat(maxSpFe)));
                         let allPrice=$('#pay_total');
                         let allPriceTx=allPrice.text();
-                        allPrice.text(parseFloat(allPriceTx)+maxSpFe);
+                        console.log(allPriceTx);
+                        allPrice.text((parseFloat(allPriceTx)+parseFloat(maxSpFe)));
                     }
                 });
 
