@@ -203,7 +203,7 @@ $this->title = '商品详情';
 		<div class="flex-col tc flex-center">
 			<div class="flex-item-4 flex-col pt2">
 				<a class="flex-item-6"
-				   href="<?= \yii\helpers\Url::to(['/shop/index', 'shop_code' => $model->store_code]) ?>">
+				   href="<?= \yii\helpers\Url::to(['/shop/index', 'shop_code' => 'DP0001']) ?>">
 					<i class="iconfont f20">&#xe63f;</i>
 					<p>首页</p>
 				</a>
