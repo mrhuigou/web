@@ -197,7 +197,6 @@
         $.post('<?= \yii\helpers\Url::to('/checkout/order-ajax') ?>',{'store_id':store_id,'customer_coupon_id':customer_coupon_ids},function(data){
             $.hideLoading();
             if(data && data.status){
-
                 $("#store_contain_"+store_id).find(".store_coupon_content").html('已使用'+data.coupon_array.length+"张");
                 $("#store_contain_"+store_id).find(".store_totals").html(data.data);
                 $("#store_contain_"+store_id).find(".store-promotion").html(data.store_promotion);
@@ -237,6 +236,20 @@
                     $('#shipping_script').hide();
                     $('#free_return').hide();
                 }
+                // 同步 运费
+                console.log(maxSpFe);
+                $('.shipping').each(function(){
+                    let tx=$(this).text();
+                    if(tx<maxSpFe){
+                        $(this).text(maxSpFe);
+                        let sbTal=$(this).parent().parent().next().find(".total");
+                        let sbTalTx=sbTal.text();
+                        sbTal.text(sbTalTx+maxSpFe);
+                        let allPrice=$('#pay_total');
+                        let allPriceTx=allPrice.text();
+                        allPrice.text(allPriceTx+maxSpFe);
+                    }
+                });
 
 
             }else{

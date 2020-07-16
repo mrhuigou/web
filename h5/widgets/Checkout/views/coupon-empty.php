@@ -9,8 +9,8 @@
 <script>
     <?php $this->beginBlock('JS_END') ?>
 
-    var sub_total1 = <?= $sub_total;?>;
-    var shipping1 = <?= $shipping;?>;
+    var sub_total1 = <?= $sub_total?$sub_total:0;?>;
+    var shipping1 = <?= $shipping?$shipping:0;?>;
 
     if(shipping1 > 0 && sub_total1 < 68){
         layer.open({
