@@ -189,8 +189,6 @@ class CheckoutController extends \yii\web\Controller {
             }
         }
 		Yii::$app->session->set('comfirm_orders', $comfirm_orders);
-        Yii::error('mengyh');
-        Yii::error(json_encode($comfirm_orders));
 		//计算总计金额
 		$merge_order_total = 0;
 		if ($comfirm_orders) {
