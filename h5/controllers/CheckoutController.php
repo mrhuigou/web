@@ -1046,9 +1046,40 @@ class CheckoutController extends \yii\web\Controller {
             $this->getShippingTotal($totals, $total, $data, $store_id, $shipping_cost, $delivery_station_id,$shipping_cost_free);
 			//计算订单金额
 			$this->getTotal($totals, $total);
+            $comfirm_orders=Yii::$app->session->get('comfirm_orders');
+            $subTotal=0;// 抵扣总额
+            foreach ($totals as $v){
+                if($v['code'] == 'sub_total'){
+                    $subTotal = bcadd($subTotal,$v['value'],2);
+                }
+            }
+            unset($v);
+            // 重新计算 合店商品
+            $proTotal=0;// be do Total
+            foreach ($comfirm_orders as $key=>$val){
+                $proTotal=bcadd($proTotal, $val['totals'][0]['value'], 2);
+
+            }
+            $proTotal=$proTotal+$subTotal;// 总额=商品总额+抵扣总额(负数)
+            if($proTotal>=68){
+                foreach ($totals as &$v){
+                    if($v['code']=='shipping'){
+                        $v['value']=0;
+                    }
+                }
+                unset($v);
+            }else{
+                foreach ($totals as &$v){
+                    if($v['code']=='shipping'){
+                        $v['value']=5;
+                    }
+                }
+                unset($v);
+            }
 
 
-			$json = [
+
+            $json = [
 				'status' => true,
 				'data' => $this->renderPartial('totals', ['model' => $totals,]),
 				'store_promotion' => StorePromotion::widget(['promotion' => $promotion, 'coupon_gift' => $coupon_gift]),
