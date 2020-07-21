@@ -29,20 +29,22 @@ foreach($model as $total){
     }
 
 }
+$merge_orders=Yii::$app->session->get('can_merge_orders');
+$isMerge=$merge_orders['isOrderMerge'];
 
 ?>
 <?php foreach ($models as $total) { ?>
 
     <?php   if($total['code'] == 'shipping'){?>
-        <div style="border:1px dashed #000;margin-top: 30px;"></div>
+        <?php if(empty($isMerge)) {?>
+            <div style="border:1px dashed #000;margin-top: 30px;"></div>
 
-        <p class="mb5 clearfix lh150">
-            <span class="fr red fb">￥<em class="coupon-sp-f <?=$total['code']?>"><?=$total['value']?></em></span>
-            <span class="fl fb"><?=$total['title']?>：</span>
-        </p>
-
+            <p class="mb5 clearfix lh150">
+                <span class="fr red fb">￥<em class="coupon-sp-f <?=$total['code']?>"><?=$total['value']?></em></span>
+                <span class="fl fb"><?=$total['title']?>：</span>
+            </p>
+        <?php }?>
     <?php }else{?>
-
 
         <?php   if($total['code'] == 'coupon'){ ?>
             <p class="mb5 clearfix lh150">
@@ -62,7 +64,7 @@ foreach($model as $total){
                 </p>
         <?php } ?>
             <p class="mb5 clearfix lh150">
-                <span class="fr red fb">￥<em><?=$sub_total_old + $discount?></em></span>
+                <span class="fr red fb">￥<em class="m-order-total"><?=$sub_total_old + $discount?></em></span>
                 <span class="fl fb">订单金额：</span>
             </p>
             <div class="p5" id="free_return" style="display: none">
@@ -81,7 +83,7 @@ foreach($model as $total){
                     <span class="fl fb"><?=$total['title']?>：</span>
                 </p>
                 <p class="mb5 clearfix lh150">
-                    <span class="fr red fb">￥<em><?=$sub_total_old + $discount?></em></span>
+                    <span class="fr red fb">￥<em class="m-order-total"><?=$sub_total_old + $discount?></em></span>
                     <span class="fl fb">订单金额：</span>
                 </p>
                 <div class="p5" id="free_return" style="display: none">
@@ -93,10 +95,12 @@ foreach($model as $total){
 
                 </div>
                 <?php }else{?>
-            <p class="mb5 clearfix lh150">
-                <span class="fr red fb">￥<em class="<?=$total['code']?>"><?=$total['value']?></em></span>
-                <span class="fl fb"><?=$total['title']?>：</span>
-            </p>
+                    <?php if(empty($isMerge)) {?>
+                        <p class="mb5 clearfix lh150">
+                            <span class="fr red fb">￥<em class="<?=$total['code']?>"><?=$total['value']?></em></span>
+                            <span class="fl fb"><?=$total['title']?>：</span>
+                        </p>
+                    <?php }?>
         <?php }?>
 
     <?php } ?>
@@ -104,14 +108,3 @@ foreach($model as $total){
 
 <?php } ?>
 
-<script type="application/javascript">
-    var maxSpFe=0;
-    $('.coupon-sp-f').each(function(){
-        let st=$(this).text();
-        if(st>maxSpFe){
-            maxSpFe=st;
-        }
-    });
-    console.log('page val');
-    console.log(maxSpFe);
-</script>

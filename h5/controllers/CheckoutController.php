@@ -8,6 +8,7 @@ use api\models\V1\CustomerCoupon;
 use api\models\V1\Invoice;
 use api\models\V1\OrderBlack;
 use api\models\V1\OrderMerge;
+use api\models\V1\Platform;
 use api\models\V1\PlatformStation;
 use api\models\V1\PointCustomer;
 use api\models\V1\PointCustomerFlow;
@@ -60,22 +61,28 @@ class CheckoutController extends \yii\web\Controller {
 		}
 		//商品进行店铺拆分
 		$cart_datas = [];
-        $cart_warehouses = [];
 		foreach ($cart as $value) {
 			if (!$value->hasStock()) {
 				return $this->redirect(['/cart/index']);
 			}
 			$cart_datas[$value->store_id][] = $value;
-
-            $product = Product::findOne(['product_id'=>$value->product_id]);
-            if($product && $product->warehouseStock){
-                $cart_warehouses[$product->warehouseStock->warehouse_id][] = $value;//按仓库id分组
-            }
 		}
+		//判断是否存在合单情况
+        $mergeStArr=[];// 可合单的店铺
+        $platformName='';// 平台名称
+        if(count($cart_datas)>1){
+            foreach ($cart_datas as $k=>$v){
+                $st=Store::findOne(['store_id' => $k,'is_merge'=>1]);//是否可合单的店铺
+                if($st){
+                    $mergeStArr[]=$k;
+                    if(empty($platformName)){
+                        $platformName=Platform::findOne(['platform_id'=>$st->platform_id]);
+                        $platformName=$platformName->platform_name;
+                    }
+                }
+            }
 
-        //$stores_shipping = $this->getStoresShipping($cart_warehouses);
-
-
+        }
 		$comfirm_orders = [];
 		if ($cart_datas) {
 			//分别统计每家店铺的数据
@@ -124,74 +131,107 @@ class CheckoutController extends \yii\web\Controller {
 				if($key ==1){
 //                    $this->getPointsTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data);
                 }
-                $this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id,$shipping_cost_free);
+                $this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id,$shipping_cost_free,count($mergeStArr)>1?1:0,$mergeStArr);
 				//应付订单金额
 				$this->getTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total']);
 
 			}
 		}
-        $mergeOrderShipFree=0;
-		$proTotal=0;// be do Total
-        $couponTotal=0;// 优惠券总额
-        Yii::error('mengyh');
-        Yii::error(json_encode($comfirm_orders));
-        if(count($comfirm_orders)>1){// not only stroe
-            foreach ($comfirm_orders as $v){
-               if($v['totals']){
-                    foreach ($v['totals'] as $n){
-                        if($n['code']=='sub_total'){
-                            $proTotal=bcadd($proTotal, $n['value'], 2);//  商品总额
-                        }
-                        if($n['code']=='coupon'){
-                            $couponTotal=bcadd($couponTotal, $n['value'], 2);// 优惠券总额
-                        }
-                    }
-               }
-            }
-            $proTotalFinal=$proTotal+$couponTotal;// 商品最终总额=商品总额+优惠券总额(负数)
-            if($proTotalFinal>=68){ // ￥68 can free shipping
-                foreach ($comfirm_orders as $key=>&$val){
-                    if($val['totals']){
-                        $oldSpFe=0;
-                        foreach ($val['totals'] as $k=>$n){
-                            if($n['code']=='shipping'){
-                                $oldSpFe=$n['value'];
-                                $val['totals'][$k]['value']=0;
-                            }
-                            if($n['code']=='total'){ //实付总计
-                                $val['totals'][$k]['value']=$val['totals'][$k]['value']-$oldSpFe;
-                            }
-                        }
-                        $val['total']=$val['total']-$oldSpFe;//更新总价
-                    }
+//        $mergeOrderShipFree=0;
+//		$proTotal=0;// be do Total
+//        $couponTotal=0;// 优惠券总额
+//        if(count($comfirm_orders)>1){// not only stroe
+//            foreach ($comfirm_orders as $v){
+//               if($v['totals']){
+//                    foreach ($v['totals'] as $n){
+//                        if($n['code']=='sub_total'){
+//                            $proTotal=bcadd($proTotal, $n['value'], 2);//  商品总额
+//                        }
+//                        if($n['code']=='coupon'){
+//                            $couponTotal=bcadd($couponTotal, $n['value'], 2);// 优惠券总额
+//                        }
+//                    }
+//               }
+//            }
+//            $proTotalFinal=$proTotal+$couponTotal;// 商品最终总额=商品总额+优惠券总额(负数)
+//            if($proTotalFinal>=68){ // ￥68 can free shipping
+//                foreach ($comfirm_orders as $key=>&$val){
+//                    if($val['totals']){
+//                        $oldSpFe=0;
+//                        foreach ($val['totals'] as $k=>$n){
+//                            if($n['code']=='shipping'){
+//                                $oldSpFe=$n['value'];
+//                                $val['totals'][$k]['value']=0;
+//                            }
+//                            if($n['code']=='total'){ //实付总计
+//                                $val['totals'][$k]['value']=$val['totals'][$k]['value']-$oldSpFe;
+//                            }
+//                        }
+//                        $val['total']=$val['total']-$oldSpFe;//更新总价
+//                    }
+//                }
+//            }else{
+//                $temporaryShipFree=5;
+//                foreach ($comfirm_orders as $key=>&$val){
+//                    if($val['totals']){
+//                        $oldSpFe=0;
+//                        foreach ($v['totals'] as $k=>$n){
+//                            if($n['code']=='shipping'){
+//                                $oldSpFe=$n['value'];
+//                                $val['totals'][$k]['value']=$temporaryShipFree;
+//                            }
+//                            if($n['code']=='total'){ //实付总计
+//                                $val['totals'][$k]['value']=$val['totals'][$k]['value']-$oldSpFe+$temporaryShipFree;
+//                            }
+//                        }
+//                        $val['total']=$val['total']-$oldSpFe+$temporaryShipFree;//更新总价
+//                    }
+//                }
+//                $mergeOrderShipFree=10;// most 10
+//            }
+//            unset($val);
+//        }else{
+//            foreach ($comfirm_orders as $key=>$val){
+//                $mergeOrderShipFree=$val['totals'][1]['value'];
+//            }
+//        }
+
+        $mergeList=[];// 合单列
+        $noMergeList=[];// 非合单列
+        $mergeSpTotal=0;// 合并单 总邮费
+        $mergeOrderTotal=0;// 合并单 总金额
+        if(count($mergeStArr)>1){ // 有合单情况
+            foreach ($comfirm_orders as $k=>$v){
+                if(in_array($k, $mergeStArr)){
+                    $mergeList[$k]=$v;
+                }else{
+                    $noMergeList[$k]=$v;
                 }
-            }else{
-                $temporaryShipFree=5;
-                foreach ($comfirm_orders as $key=>&$val){
-                    if($val['totals']){
-                        $oldSpFe=0;
-                        foreach ($v['totals'] as $k=>$n){
-                            if($n['code']=='shipping'){
-                                $oldSpFe=$n['value'];
-                                $val['totals'][$k]['value']=$temporaryShipFree;
-                            }
-                            if($n['code']=='total'){ //实付总计
-                                $val['totals'][$k]['value']=$val['totals'][$k]['value']-$oldSpFe+$temporaryShipFree;
-                            }
-                        }
-                        $val['total']=$val['total']-$oldSpFe+$temporaryShipFree;//更新总价
-                    }
-                }
-                $mergeOrderShipFree=10;// most 10
-            }
-            unset($val);
-        }else{
-            foreach ($comfirm_orders as $key=>$val){
-                $mergeOrderShipFree=$val['totals'][1]['value'];
             }
         }
-        Yii::error(json_encode($comfirm_orders));
+        if(!empty($mergeList)){
+            $mergeTotal=0;
+            foreach ($mergeList as $vt){
+                $mergeTotal=bcadd($mergeTotal, $vt['total'], 2);
+            }
+            if($mergeTotal>=68){ // 合并店铺 固定规则 68包邮
+                $mergeSpTotal=0;
+            }else{
+                $mergeSpTotal=10;
+            }
+            $mergeOrderTotal=$mergeSpTotal>0?bcadd($mergeTotal, $mergeSpTotal, 2):$mergeTotal;
+
+        }
 		Yii::$app->session->set('comfirm_orders', $comfirm_orders);
+        Yii::$app->session->set('can_merge_orders', array(
+            'isOrderMerge' => count($mergeStArr)>1?1:0,// 是否存在合单
+            'mergeList' => $mergeList,// 合并列
+            'noMergeList' => $noMergeList, //非合并列
+            'mergeTotals' => array(
+                'shopping' => $mergeSpTotal,
+                'total' => $mergeOrderTotal
+            ),// 合并单 单独计算的 邮费 and 应付金额
+        ));
 		//计算总计金额
 		$merge_order_total = 0;
 		if ($comfirm_orders) {
@@ -199,6 +239,9 @@ class CheckoutController extends \yii\web\Controller {
 				$merge_order_total = bcadd($merge_order_total, $value['total'], 2);
 			}
 		}
+		if($mergeSpTotal>0){ // 追加 合并单的邮费
+            $merge_order_total=bcadd($merge_order_total, $mergeSpTotal, 2);
+        }
 
 		$model = new CheckoutForm($comfirm_orders, $this->order_product_paytotal,$this->order_coupon_product_rate);
 			if ($model->load(Yii::$app->request->post()) && $trade_no = $model->submit()) {
@@ -207,6 +250,7 @@ class CheckoutController extends \yii\web\Controller {
 				Yii::$app->session->remove('confirm_cart');
                 Yii::$app->session->remove('customer_point_h5');
                 Yii::$app->session->remove('checkout_address_id');
+                Yii::$app->session->remove('can_merge_orders');
 				if (!Yii::$app->cart->getIsEmpty()) {
 					foreach ($cart as $key => $id) {
 						if (Yii::$app->cart->hasPosition($key)) {
@@ -229,7 +273,16 @@ class CheckoutController extends \yii\web\Controller {
 			'cart' => $comfirm_orders,
 			'pay_total' => number_format($merge_order_total, 2),
 			'model' => $model,
-            'checkout_ad' => $checkout_ad
+            'checkout_ad' => $checkout_ad,
+            'isOrderMerge' => count($mergeStArr)>1?1:0,// 是否存在合单
+            'mergeList' => $mergeList,
+            'noMergeList' => $noMergeList,
+            'mergeTotals' => array(
+                'shopping' => $mergeSpTotal,
+                'total' => $mergeOrderTotal
+            ),// 合并单 单独计算的 邮费 and 应付金额
+            'platformName' => $platformName
+
 		]);
 	}
 
@@ -294,7 +347,7 @@ class CheckoutController extends \yii\web\Controller {
 
         return $sub_total;
     }
-	public function getShippingTotal(&$total_data, &$total, $cart, $store_id = 0, &$shipping_cost, $delivery_station_id = 0,$shipping_cost_free = 0)
+	public function getShippingTotal(&$total_data, &$total, $cart, $store_id = 0, &$shipping_cost, $delivery_station_id = 0,$shipping_cost_free = 0,$isMergeOrder=0,$mergeArr=[])
 	{
 		//进行运费计算
 		$sub_total = 10;
@@ -337,6 +390,11 @@ class CheckoutController extends \yii\web\Controller {
 		}
 		if($shipping_cost_free){
             $sub_total = 0;
+        }
+		if($isMergeOrder){ // 可合并无需计算邮费
+		    if(in_array($store_id,$mergeArr)){
+                $sub_total = 0;
+            }
         }
 		$shipping_cost = $sub_total;
 		$total_data[] = [
@@ -1076,58 +1134,29 @@ class CheckoutController extends \yii\web\Controller {
             $this->getShippingTotal($totals, $total, $data, $store_id, $shipping_cost, $delivery_station_id,$shipping_cost_free);
 			//计算订单金额
 			$this->getTotal($totals, $total);
-            $comfirm_orders=Yii::$app->session->get('comfirm_orders');
-            $subTotal=0;// 抵扣总额
-            foreach ($totals as $v){
-                if($v['code'] == 'coupon'){
-                    $subTotal = bcadd($subTotal,$v['value'],2);
+
+            //合单前计算
+            $mergeOrders=Yii::$app->session->get('can_merge_orders');
+            if($mergeOrders['isOrderMerge']){ // 有合单情况
+                $mergeList=$mergeOrders['mergeList'];
+                if(array_key_exists($store_id,$mergeList)){
+                    $oldSp=0;
+                    foreach ($totals as &$v){
+                        if($v['code']== 'shipping'){
+                            $oldSp=$v['value'];
+                            $v['value'] = 0;
+                        }
+                        if($v['code'] == 'total'){
+                            $v['value']=$v['value']-$oldSp;
+                        }
+                    }
+                    unset($v);
                 }
             }
-            unset($v);
-            // 重新计算 合店商品
-            $proTotal=0;// be do Total
-            foreach ($comfirm_orders as $key=>$val){
-                $proTotal=bcadd($proTotal, $val['totals'][0]['value'], 2);
-
-            }
-            $proTotal=$proTotal+$subTotal;// 总额=商品总额+抵扣总额(负数)
-            if($proTotal>=68){
-                $oldSpFree=0;
-                foreach ($totals as &$v){
-                    if($v['code']=='shipping'){
-                        $oldSpFree=$v['value'];
-                        $v['value']=0;
-                    }
-                    if($v['code']=='total'){
-                        $v['value']-=$oldSpFree;
-                    }
-
-                }
-                unset($v);
-            }else{
-                $sbShopFell=10;
-                if(count($comfirm_orders)>1){
-                    $sbShopFell=5;
-                }
-                $oldSpFree=0;
-                foreach ($totals as &$v){
-                    if($v['code']=='shipping'){
-                        $oldSpFree=$v['value'];
-                        $v['value']=$sbShopFell;
-                    }
-                    if($v['code']=='total'){
-                        $v['value']-=$oldSpFree;
-                        $v['value']+=$sbShopFell;
-                    }
-                }
-                unset($v);
-            }
-
-
 
             $json = [
 				'status' => true,
-				'data' => $this->renderPartial('totals', ['model' => $totals,]),
+				'data' => $this->renderPartial('totals', ['model' => $totals,'merge_orders'=>$mergeOrders]),
 				'store_promotion' => StorePromotion::widget(['promotion' => $promotion, 'coupon_gift' => $coupon_gift]),
                 'coupon_array'=>$coupon_array,
                 'shipping_cost'=>$shipping_cost,

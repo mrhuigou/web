@@ -6,6 +6,27 @@ use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
 $this->title = '订单确认';
 ?>
+<style type="text/css">
+    .plat-box{
+        width: 96%;
+        margin: 0 auto;
+        border-top: 1px solid #47b34f;
+        border-left: 3px solid #47b34f;
+        border-right: 3px solid #47b34f;
+        border-bottom: 3px solid #47b34f;
+        margin-bottom: 20px;
+    }
+    .plat-title{
+        background-color: #47b34f;
+        color: #FFFFFF;
+        height: 45px;
+        line-height: 45px;
+        width: 100%;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
 <header class="header">
     <div class="flex-col tc">
         <a class="flex-item-2" href="javascript:history.back()">
@@ -34,184 +55,445 @@ $this->title = '订单确认';
 		<?= $form->field($model, 'address_id')->widget(\h5\widgets\Checkout\Address::className()); ?>
         <?= $form->field($model, 'invoice_id')->widget(\h5\widgets\Checkout\Invoice::className()); ?>
         <?php $is_jiarun = false;?>
-		<?php foreach ($cart as $k => $val) { ?>
-            <?php if($val['base']->store_id == 1){ $is_jiarun = true;}?>
-			<?= h5\widgets\Checkout\Delivery::widget(['store_id' => $val['base']->store_id, 'total' => $val['total']]) ?>
-            <div class="store_contain whitebg " id="store_contain_<?= $val['base']->store_id ?>">
-                <div class="mt5">
-                    <h2 class="clearfix p10">
-                        <span class="fl ">店铺：<em class="org"><?= $val['base']->name ?></em></span>
-                        <span class="fr red"><?php if ($val['base']->befreepostage == 1) { //是否包邮（满X元包邮）
-								if ($val['base']->minbookcash > 0) {
-									echo '店铺订单金额满' . $val['base']->minbookcash . '元包邮';
-								} else {
-									echo '店铺包邮';
-								}
-							}
-							?></span>
-                    </h2>
-                </div>
-				<?php foreach ($val['products'] as $key => $value) { ?>
-                    <div class="flex-col tc p5 graybg" style="border-bottom: 1px dotted #999;">
-                        <div class="flex-item-3">
-                            <a href="<?= \yii\helpers\Url::to(['product/index', 'product_code' => $value->product->product_code, 'shop_code' => $value->product->store_code]) ?>">
-                                <img src="<?= \common\component\image\Image::resize($value->product->image, 100, 100) ?>"
-                                     class="db w">
-                            </a>
+        <?php if ($isOrderMerge) { ?>
+            <!--      Merge      -->
+            <div class="plat-box">
+                <div class="plat-title"><?= $platformName ?></div>
+                <?= h5\widgets\Checkout\Delivery::widget(['store_id' => 1, 'total' => $val['total']]) ?>
+                <?php foreach ($mergeList as $k => $val) { ?>
+                    <?php if($val['base']->store_id == 1){ $is_jiarun = true;}?>
+                    <div class="store_contain whitebg " id="store_contain_<?= $val['base']->store_id ?>">
+                        <!--     店铺title           -->
+                        <div class="mt5">
+                            <h2 class="clearfix p10">
+                                <span class="fl ">店铺：<em class="org"><?= $val['base']->name ?></em></span>
+                                <span class="fr red"><?php if ($val['base']->befreepostage == 1) { //是否包邮（满X元包邮）
+                                        if ($val['base']->minbookcash > 0) {
+                                            echo '店铺订单金额满' . $val['base']->minbookcash . '元包邮';
+                                        } else {
+                                            echo '店铺包邮';
+                                        }
+                                    }
+                                    ?></span>
+                            </h2>
                         </div>
-                        <div class="flex-item-7 tl pl10">
-                            <h2><?= $value->product->description->name ?></h2>
-                            <p class="gray9  mt2"><?= $value->product->getSku() ?></p>
-							<?= h5\widgets\Checkout\Promotion::widget(['promotion' => $value->getPromotion(), 'qty' => $value->quantity]) ?>
-                        </div>
-                        <div class="flex-item-2 tc flex-middle flex-row">
-                            <p class="blue mb5"> x<?= $value->quantity ?></p>
-                            <p class="red  fb">￥<?= $value->getCost() ?></p>
-                        </div>
-                    </div>
-				<?php } ?>
-                <div class="store-promotion  mb5"><?= h5\widgets\Checkout\StorePromotion::widget(['promotion' => $val['promotion'], 'coupon_gift' => $val['coupon_gift']]) ?></div>
-<!--				--><?//= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products']]) ?>
-                <?php if($is_jiarun){?>
-                <?php $shipping = 0;$sub_total = 0;?>
-                <?php if ($val['totals']) {
-                     foreach ($val['totals'] as $value) {
-                         if($value['code'] == 'shipping'){
-                             $shipping = $value['value'];
-                         }
-                         if($value['code'] == 'sub_total'){
-                             $sub_total = $value['value'];
-                         }
-                     }
-
-                 } ?>
-                    <?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products'],'sub_total' => $sub_total,'shipping' => $shipping]) ?>
-<!--                --><?php //if ($shipping > 0 && $sub_total < 68 && count($checkout_ad) >0) { ?>
-                <?php if (count($checkout_ad) >0) { ?>
-                    <div id="shipping_script" hidden>
-
-<!--                    <div class="p5">-->
-<!--                        --><?php //if( count($checkout_ad) < 1){?>
-<!--                            <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>-->
-<!--                        --><?php //}else{?>
-<!--                            <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">满68包邮，去凑单</a>-->
-<!--                        --><?php //}?>
-<!---->
-<!--                    </div>-->
-                    <?php if( count($checkout_ad) >0 ){?>
-                    <div id="layerCon" style="display: none;">
-
-                        <div class="layer0" style="padding: 5px;">
-                            <h2 class="f14 row-two-max mb10">
-                                <span class="btn btn-xxs btn-bd-red">免邮</span>
-                                订单金额满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red" id="diff_free"><?php echo bcsub($val['base']->minbookcash,$sub_total,2)?></i>元,即可以享受包邮！</h2>
-
-                            <div class="flex-col"  <?= (count($checkout_ad) == 1)? "style=\"text-align: center\"" : ""?>>
-                                    <?php
-                                     switch (count($checkout_ad)){
-                                         case  1: $items = 12;break;
-                                         case  2: $items = 6;break;
-                                         case  3: $items = 4;break;
-                                         case  4: $items = 3;break;
-                                         default: $items = 6;break;
-                                     }
-                                    ?>
-                                    <?php foreach ($checkout_ad as $ad){?>
-                                        <a href="<?= \yii\helpers\Url::to($ad->link_url, true) ?>" class="flex-item-<?php echo $items?>">
-                                            <img src="<?= \common\component\image\Image::resize($ad->source_url) ?>" class="w bd m2"  <?= (count($checkout_ad) == 1)? "style=\"width:180px\"" : ""?>>
-                                        </a>
-                                    <?php }?>
-
+                        <!--     商品列表           -->
+                        <?php foreach ($val['products'] as $key => $value) { ?>
+                            <div class="flex-col tc p5 graybg" style="border-bottom: 1px dotted #999;">
+                                <div class="flex-item-3">
+                                    <a href="<?= \yii\helpers\Url::to(['product/index', 'product_code' => $value->product->product_code, 'shop_code' => $value->product->store_code]) ?>">
+                                        <img src="<?= \common\component\image\Image::resize($value->product->image, 100, 100) ?>"
+                                             class="db w">
+                                    </a>
+                                </div>
+                                <div class="flex-item-7 tl pl10">
+                                    <h2><?= $value->product->description->name ?></h2>
+                                    <p class="gray9  mt2"><?= $value->product->getSku() ?></p>
+                                    <?= h5\widgets\Checkout\Promotion::widget(['promotion' => $value->getPromotion(), 'qty' => $value->quantity]) ?>
+                                </div>
+                                <div class="flex-item-2 tc flex-middle flex-row">
+                                    <p class="blue mb5"> x<?= $value->quantity ?></p>
+                                    <p class="red  fb">￥<?= $value->getCost() ?></p>
+                                </div>
                             </div>
-                            <!-- 关闭按钮 -->
-                            <a class="layer-close iconfont" href="javascript:;">&#xe612;</a>
+                        <?php } ?>
+                        <div class="store-promotion  mb5"><?= h5\widgets\Checkout\StorePromotion::widget(['promotion' => $val['promotion'], 'coupon_gift' => $val['coupon_gift']]) ?></div>
+                        <?php if($is_jiarun){?>
+                            <?php $shipping = 0;$sub_total = 0;?>
+                            <?php if ($val['totals']) {
+                                foreach ($val['totals'] as $value) {
+                                    if($value['code'] == 'shipping'){
+                                        $shipping = $value['value'];
+                                    }
+                                    if($value['code'] == 'sub_total'){
+                                        $sub_total = $value['value'];
+                                    }
+                                }
 
+                            } ?>
+                            <?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products'],'sub_total' => $sub_total,'shipping' => $shipping]) ?>
+                            <?php if (count($checkout_ad) >0) { ?>
+                                <div id="shipping_script" hidden>
+                                    <?php if( count($checkout_ad) >0 ){?>
+                                        <div id="layerCon" style="display: none;">
+
+                                            <div class="layer0" style="padding: 5px;">
+                                                <h2 class="f14 row-two-max mb10">
+                                                    <span class="btn btn-xxs btn-bd-red">免邮</span>
+                                                    订单金额满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red" id="diff_free"><?php echo bcsub($val['base']->minbookcash,$sub_total,2)?></i>元,即可以享受包邮！</h2>
+
+                                                <div class="flex-col"  <?= (count($checkout_ad) == 1)? "style=\"text-align: center\"" : ""?>>
+                                                    <?php
+                                                    switch (count($checkout_ad)){
+                                                        case  1: $items = 12;break;
+                                                        case  2: $items = 6;break;
+                                                        case  3: $items = 4;break;
+                                                        case  4: $items = 3;break;
+                                                        default: $items = 6;break;
+                                                    }
+                                                    ?>
+                                                    <?php foreach ($checkout_ad as $ad){?>
+                                                        <a href="<?= \yii\helpers\Url::to($ad->link_url, true) ?>" class="flex-item-<?php echo $items?>">
+                                                            <img src="<?= \common\component\image\Image::resize($ad->source_url) ?>" class="w bd m2"  <?= (count($checkout_ad) == 1)? "style=\"width:180px\"" : ""?>>
+                                                        </a>
+                                                    <?php }?>
+
+                                                </div>
+                                                <!-- 关闭按钮 -->
+                                                <a class="layer-close iconfont" href="javascript:;">&#xe612;</a>
+
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            <?php } ?>
+
+                        <?php }else{ ?>
+                            <?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products']]) ?>
+                        <?php } ?>
+                        <!--  每笔订单底部明细 总额-金额-运费-总计  -->
+                        <div class="graybg p10 store_totals">
+                            <?php if ($val['totals']) { ?>
+                                <?php foreach ($val['totals'] as $value) { ?>
+                                    <?php   if($value['code'] == 'shipping'){?>
+
+                                    <?php }else{?>
+                                        <?php if($value['code']=='sub_total'){?>
+                                            <p class="mb5 clearfix lh150">
+                                                <span class="fr red fb">￥<em class="<?=$value['code']?>"><?=$value['value']?></em></span>
+                                                <span class="fl fb"><?=$value['title']?>：</span>
+                                            </p>
+                                            <p class="mb5 clearfix lh150">
+                                                <span class="fr red fb">￥<em class="m-order-total"><?=$value['value']?></em></span>
+                                                <span class="fl fb">订单金额：</span>
+                                            </p>
+
+                                        <?php }else{?>
+
+                                        <?php }?>
+                                    <?php } ?>
+                                <?php } ?>
+                            <?php } ?>
                         </div>
-                    </div>
-				<?php } ?>
-                    </div>
-                    <?php } ?>
-                <?php if($val['base']->store_id == 1){?>
-<!--                        --><?php // $point_customers = \api\models\V1\PointCustomer::find()->where(['customer_id'=>Yii::$app->user->getId()])->all();?>
-<!--                        --><?php //if($point_customers && count($point_customers) > 0){ ?>
-<!--                        --><?php //$setArray = Yii::$app->session->get("customer_point_h5");?>
-<!--                        --><?php //foreach ($point_customers as $point_customer){?>
-<!--                    --><?php //$point_total = $point_customer->point->pointByCurl?>
-<!--                    --><?php //if($point_total > 0 && bcmul($point_customer->point->rate,$point_total,2) >0){?>
-<!---->
-<!--                            <p class="clearfix ">-->
-<!--                                <span class="">-->
-<!--                                    <a href="javascript:void(0)"  class="line-a bdt btn_points" data-date="--><?php //echo $point_customer->point_customer_id?><!--" data-content="--><?php //echo $val['base']->store_id?><!--" STYLE="border-bottom: none">-->
-<!--                                    <i class="iconfont fr"></i>-->
-<!--                                    <span class="fb">--><?php //echo $point_customer->point->display_name?><!--积分：</span>-->
-<!--                                    <em class="f12 red">--><?php //echo $point_total;?><!--（可抵用--><?php //echo bcmul($point_customer->point->rate,$point_total,2)?><!--元）</em><em class="btn_balance_html">--><?php //if(isset($setArray[$point_customer->point_customer_id]) && $setArray[$point_customer->point_customer_id]){ ?><!--(取消使用) --><?php // }else{?><!--  (点击使用)--><?php //}?><!--</em>-->
-<!--                                        <br><em class="f12 red">【注：积分抵扣的订单不支持退货】</em>-->
-<!--                                    </a>-->
-<!--                                </span>-->
-<!--                            </p>-->
-<!--                --><?php //} ?>
-<!--                --><?php //} ?>
-<!--                        --><?php //} ?>
 
-                        <?php }?>
-                <?php }else{ ?>
-                <?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products']]) ?>
+                    </div>
                 <?php } ?>
+
+                <!--  合单后 邮费 and 总额     -->
                 <div class="graybg p10 store_totals">
-					<?php if ($val['totals']) { ?>
-						<?php foreach ($val['totals'] as $value) { ?>
-                            <?php   if($value['code'] == 'shipping'){?>
-                                <div style="border:1px dashed #000;margin-top: 30px;"></div>
+                    <div style="border:1px dashed #000;margin-top: 30px;"></div>
+                    <div class="p5" id="free_return" style="display: none">
+                        <?php if( count($checkout_ad) < 1){?>
+                            <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
+                        <?php }else{?>
+                            <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">订单金额满68元免运费，去凑单</a>
+                        <?php }?>
 
-                                <p class="mb5 clearfix lh150">
-                                    <span class="fr red fb">￥<em class="<?=$value['code']?>"><?=$value['value']?></em></span>
-                                    <span class="fl fb"><?=$value['title']?>：</span>
-                                </p>
+                    </div>
+                    <p class="mb5 clearfix lh150">
+                        <span class="fr red fb">￥<em class="shopping merge-spt"><?= $mergeTotals['shopping'] ?></em></span>
+                        <span class="fl fb">邮费：</span>
+                    </p>
+                    <!--            <p class="mb5 clearfix lh150 total_line" id = "--><?php //if($value['code'] =='points'){ echo 'point_customer_total_'.$value['customer_code_id'];}?><!--" >-->
+                    <p class="mb5 clearfix lh150 total_line" id = "point_customer_total_1" >
+                        <span class="fr red fb">￥<em class="total merge-totals"><?= $mergeTotals['total'] ?> </em></span>
+                        <span class="fl fb">实付总计：</span>
+                    </p>
+                    <div class="mt5 mb50">
+                        <input type="text" class="w p10 gray6 bd" name="CheckoutForm[comment][merge]" placeholder="备注：如有特殊需求请填写" maxlength="50">
+                    </div>
+                </div>
 
-                            <?php }else{?>
-                                <?php if($value['code']=='sub_total'){?>
+            </div>
+            <!--      Merge  other    -->
+            <?php if (!empty($noMergeList)) { ?>
+                <?php foreach ($noMergeList as $k => $val) { ?>
+                    <?php if($val['base']->store_id == 1){ $is_jiarun = true;}?>
+                    <?= h5\widgets\Checkout\Delivery::widget(['store_id' => $val['base']->store_id, 'total' => $val['total']]) ?>
+                    <div class="store_contain whitebg " id="store_contain_<?= $val['base']->store_id ?>">
+                        <!--     店铺title           -->
+                        <div class="mt5">
+                            <h2 class="clearfix p10">
+                                <span class="fl ">店铺：<em class="org"><?= $val['base']->name ?></em></span>
+                                <span class="fr red"><?php if ($val['base']->befreepostage == 1) { //是否包邮（满X元包邮）
+                                        if ($val['base']->minbookcash > 0) {
+                                            echo '店铺订单金额满' . $val['base']->minbookcash . '元包邮';
+                                        } else {
+                                            echo '店铺包邮';
+                                        }
+                                    }
+                                    ?></span>
+                            </h2>
+                        </div>
+                        <!--     商品列表           -->
+                        <?php foreach ($val['products'] as $key => $value) { ?>
+                            <div class="flex-col tc p5 graybg" style="border-bottom: 1px dotted #999;">
+                                <div class="flex-item-3">
+                                    <a href="<?= \yii\helpers\Url::to(['product/index', 'product_code' => $value->product->product_code, 'shop_code' => $value->product->store_code]) ?>">
+                                        <img src="<?= \common\component\image\Image::resize($value->product->image, 100, 100) ?>"
+                                             class="db w">
+                                    </a>
+                                </div>
+                                <div class="flex-item-7 tl pl10">
+                                    <h2><?= $value->product->description->name ?></h2>
+                                    <p class="gray9  mt2"><?= $value->product->getSku() ?></p>
+                                    <?= h5\widgets\Checkout\Promotion::widget(['promotion' => $value->getPromotion(), 'qty' => $value->quantity]) ?>
+                                </div>
+                                <div class="flex-item-2 tc flex-middle flex-row">
+                                    <p class="blue mb5"> x<?= $value->quantity ?></p>
+                                    <p class="red  fb">￥<?= $value->getCost() ?></p>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <div class="store-promotion  mb5"><?= h5\widgets\Checkout\StorePromotion::widget(['promotion' => $val['promotion'], 'coupon_gift' => $val['coupon_gift']]) ?></div>
+                        <?php if($is_jiarun){?>
+                            <?php $shipping = 0;$sub_total = 0;?>
+                            <?php if ($val['totals']) {
+                                foreach ($val['totals'] as $value) {
+                                    if($value['code'] == 'shipping'){
+                                        $shipping = $value['value'];
+                                    }
+                                    if($value['code'] == 'sub_total'){
+                                        $sub_total = $value['value'];
+                                    }
+                                }
+
+                            } ?>
+                            <?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products'],'sub_total' => $sub_total,'shipping' => $shipping]) ?>
+                            <?php if (count($checkout_ad) >0) { ?>
+                                <div id="shipping_script" hidden>
+                                    <?php if( count($checkout_ad) >0 ){?>
+                                        <div id="layerCon" style="display: none;">
+
+                                            <div class="layer0" style="padding: 5px;">
+                                                <h2 class="f14 row-two-max mb10">
+                                                    <span class="btn btn-xxs btn-bd-red">免邮</span>
+                                                    订单金额满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red" id="diff_free"><?php echo bcsub($val['base']->minbookcash,$sub_total,2)?></i>元,即可以享受包邮！</h2>
+
+                                                <div class="flex-col"  <?= (count($checkout_ad) == 1)? "style=\"text-align: center\"" : ""?>>
+                                                    <?php
+                                                    switch (count($checkout_ad)){
+                                                        case  1: $items = 12;break;
+                                                        case  2: $items = 6;break;
+                                                        case  3: $items = 4;break;
+                                                        case  4: $items = 3;break;
+                                                        default: $items = 6;break;
+                                                    }
+                                                    ?>
+                                                    <?php foreach ($checkout_ad as $ad){?>
+                                                        <a href="<?= \yii\helpers\Url::to($ad->link_url, true) ?>" class="flex-item-<?php echo $items?>">
+                                                            <img src="<?= \common\component\image\Image::resize($ad->source_url) ?>" class="w bd m2"  <?= (count($checkout_ad) == 1)? "style=\"width:180px\"" : ""?>>
+                                                        </a>
+                                                    <?php }?>
+
+                                                </div>
+                                                <!-- 关闭按钮 -->
+                                                <a class="layer-close iconfont" href="javascript:;">&#xe612;</a>
+
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            <?php } ?>
+
+                        <?php }else{ ?>
+                            <?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products']]) ?>
+                        <?php } ?>
+                        <!--  每笔订单底部明细 总额-金额-运费-总计  -->
+                        <div class="graybg p10 store_totals">
+                            <?php if ($val['totals']) { ?>
+                                <?php foreach ($val['totals'] as $value) { ?>
+                                    <?php   if($value['code'] == 'shipping'){?>
+                                        <div style="border:1px dashed #000;margin-top: 30px;"></div>
+
+                                        <p class="mb5 clearfix lh150">
+                                            <span class="fr red fb">￥<em class="<?=$value['code']?>"><?=$value['value']?></em></span>
+                                            <span class="fl fb"><?=$value['title']?>：</span>
+                                        </p>
+
+                                    <?php }else{?>
+                                        <?php if($value['code']=='sub_total'){?>
+                                            <p class="mb5 clearfix lh150">
+                                                <span class="fr red fb">￥<em class="<?=$value['code']?>"><?=$value['value']?></em></span>
+                                                <span class="fl fb"><?=$value['title']?>：</span>
+                                            </p>
+                                            <p class="mb5 clearfix lh150">
+                                                <span class="fr red fb">￥<em><?=$value['value']?></em></span>
+                                                <span class="fl fb">订单金额：</span>
+                                            </p>
+                                            <div class="p5" id="free_return" style="display: none">
+                                                <?php if( count($checkout_ad) < 1){?>
+                                                    <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
+                                                <?php }else{?>
+                                                    <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">订单金额满68元免运费，去凑单</a>
+                                                <?php }?>
+
+                                            </div>
+                                        <?php }else{?>
+                                            <p class="mb5 clearfix lh150 total_line" id = "<?php if($value['code'] =='points'){ echo 'point_customer_total_'.$value['customer_code_id'];}?>" >
+                                    <span class="fr red fb">￥<em
+                                                class="<?= $value['code'] ?>"><?= $value['value'] ?></em></span>
+                                                <span class="fl fb"><?= $value['title'] ?>：</span>
+                                            </p>
+                                        <?php }?>
+                                    <?php } ?>
+                                <?php } ?>
+                            <?php } ?>
+                        </div>
+
+                    </div>
+                    <div class="mt5 mb50">
+                        <input type="text" class="w p10 gray6 bd" name="CheckoutForm[comment][<?= $k ?>]" placeholder="备注：如有特殊需求请填写" maxlength="50">
+                    </div>
+                <?php } ?>
+            <?php } ?>
+
+        <?php } else{ ?>
+            <!--     No Merge      -->
+            <?php foreach ($cart as $k => $val) { ?>
+                <?php if($val['base']->store_id == 1){ $is_jiarun = true;}?>
+                <?= h5\widgets\Checkout\Delivery::widget(['store_id' => $val['base']->store_id, 'total' => $val['total']]) ?>
+                <div class="store_contain whitebg " id="store_contain_<?= $val['base']->store_id ?>">
+                    <!--     店铺title           -->
+                    <div class="mt5">
+                        <h2 class="clearfix p10">
+                            <span class="fl ">店铺：<em class="org"><?= $val['base']->name ?></em></span>
+                            <span class="fr red"><?php if ($val['base']->befreepostage == 1) { //是否包邮（满X元包邮）
+                                    if ($val['base']->minbookcash > 0) {
+                                        echo '店铺订单金额满' . $val['base']->minbookcash . '元包邮';
+                                    } else {
+                                        echo '店铺包邮';
+                                    }
+                                }
+                                ?></span>
+                        </h2>
+                    </div>
+                    <!--     商品列表           -->
+                    <?php foreach ($val['products'] as $key => $value) { ?>
+                        <div class="flex-col tc p5 graybg" style="border-bottom: 1px dotted #999;">
+                            <div class="flex-item-3">
+                                <a href="<?= \yii\helpers\Url::to(['product/index', 'product_code' => $value->product->product_code, 'shop_code' => $value->product->store_code]) ?>">
+                                    <img src="<?= \common\component\image\Image::resize($value->product->image, 100, 100) ?>"
+                                         class="db w">
+                                </a>
+                            </div>
+                            <div class="flex-item-7 tl pl10">
+                                <h2><?= $value->product->description->name ?></h2>
+                                <p class="gray9  mt2"><?= $value->product->getSku() ?></p>
+                                <?= h5\widgets\Checkout\Promotion::widget(['promotion' => $value->getPromotion(), 'qty' => $value->quantity]) ?>
+                            </div>
+                            <div class="flex-item-2 tc flex-middle flex-row">
+                                <p class="blue mb5"> x<?= $value->quantity ?></p>
+                                <p class="red  fb">￥<?= $value->getCost() ?></p>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <div class="store-promotion  mb5"><?= h5\widgets\Checkout\StorePromotion::widget(['promotion' => $val['promotion'], 'coupon_gift' => $val['coupon_gift']]) ?></div>
+                    <?php if($is_jiarun){?>
+                        <?php $shipping = 0;$sub_total = 0;?>
+                        <?php if ($val['totals']) {
+                            foreach ($val['totals'] as $value) {
+                                if($value['code'] == 'shipping'){
+                                    $shipping = $value['value'];
+                                }
+                                if($value['code'] == 'sub_total'){
+                                    $sub_total = $value['value'];
+                                }
+                            }
+
+                        } ?>
+                        <?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products'],'sub_total' => $sub_total,'shipping' => $shipping]) ?>
+                        <?php if (count($checkout_ad) >0) { ?>
+                            <div id="shipping_script" hidden>
+                                <?php if( count($checkout_ad) >0 ){?>
+                                    <div id="layerCon" style="display: none;">
+
+                                        <div class="layer0" style="padding: 5px;">
+                                            <h2 class="f14 row-two-max mb10">
+                                                <span class="btn btn-xxs btn-bd-red">免邮</span>
+                                                订单金额满<?php echo $val['base']->minbookcash;?>元包邮，您还差<i class="red" id="diff_free"><?php echo bcsub($val['base']->minbookcash,$sub_total,2)?></i>元,即可以享受包邮！</h2>
+
+                                            <div class="flex-col"  <?= (count($checkout_ad) == 1)? "style=\"text-align: center\"" : ""?>>
+                                                <?php
+                                                switch (count($checkout_ad)){
+                                                    case  1: $items = 12;break;
+                                                    case  2: $items = 6;break;
+                                                    case  3: $items = 4;break;
+                                                    case  4: $items = 3;break;
+                                                    default: $items = 6;break;
+                                                }
+                                                ?>
+                                                <?php foreach ($checkout_ad as $ad){?>
+                                                    <a href="<?= \yii\helpers\Url::to($ad->link_url, true) ?>" class="flex-item-<?php echo $items?>">
+                                                        <img src="<?= \common\component\image\Image::resize($ad->source_url) ?>" class="w bd m2"  <?= (count($checkout_ad) == 1)? "style=\"width:180px\"" : ""?>>
+                                                    </a>
+                                                <?php }?>
+
+                                            </div>
+                                            <!-- 关闭按钮 -->
+                                            <a class="layer-close iconfont" href="javascript:;">&#xe612;</a>
+
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
+
+                    <?php }else{ ?>
+                        <?= h5\widgets\Checkout\Coupon::widget(['store_id' => $val['base']->store_id, 'product' => $val['products']]) ?>
+                    <?php } ?>
+                    <!--  每笔订单底部明细 总额-金额-运费-总计  -->
+                    <div class="graybg p10 store_totals">
+                        <?php if ($val['totals']) { ?>
+                            <?php foreach ($val['totals'] as $value) { ?>
+                                <?php   if($value['code'] == 'shipping'){?>
+                                    <div style="border:1px dashed #000;margin-top: 30px;"></div>
+
                                     <p class="mb5 clearfix lh150">
                                         <span class="fr red fb">￥<em class="<?=$value['code']?>"><?=$value['value']?></em></span>
                                         <span class="fl fb"><?=$value['title']?>：</span>
                                     </p>
-                                    <p class="mb5 clearfix lh150">
-                                        <span class="fr red fb">￥<em><?=$value['value']?></em></span>
-                                        <span class="fl fb">订单金额：</span>
-                                    </p>
-                                                <div class="p5" id="free_return" style="display: none">
-                                                    <?php if( count($checkout_ad) < 1){?>
-                                                        <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
-                                                    <?php }else{?>
-                                                        <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">订单金额满68元免运费，去凑单</a>
-                                                    <?php }?>
 
-                                                </div>
                                 <?php }else{?>
-                                    <p class="mb5 clearfix lh150 total_line" id = "<?php if($value['code'] =='points'){ echo 'point_customer_total_'.$value['customer_code_id'];}?>" >
+                                    <?php if($value['code']=='sub_total'){?>
+                                        <p class="mb5 clearfix lh150">
+                                            <span class="fr red fb">￥<em class="<?=$value['code']?>"><?=$value['value']?></em></span>
+                                            <span class="fl fb"><?=$value['title']?>：</span>
+                                        </p>
+                                        <p class="mb5 clearfix lh150">
+                                            <span class="fr red fb">￥<em><?=$value['value']?></em></span>
+                                            <span class="fl fb">订单金额：</span>
+                                        </p>
+                                        <div class="p5" id="free_return" style="display: none">
+                                            <?php if( count($checkout_ad) < 1){?>
+                                                <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>
+                                            <?php }else{?>
+                                                <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">订单金额满68元免运费，去凑单</a>
+                                            <?php }?>
+
+                                        </div>
+                                    <?php }else{?>
+                                        <p class="mb5 clearfix lh150 total_line" id = "<?php if($value['code'] =='points'){ echo 'point_customer_total_'.$value['customer_code_id'];}?>" >
                                     <span class="fr red fb">￥<em
                                                 class="<?= $value['code'] ?>"><?= $value['value'] ?></em></span>
-                                        <span class="fl fb"><?= $value['title'] ?>：</span>
-                                    </p>
-                                <?php }?>
-						    <?php } ?>
-						<?php } ?>
-					<?php } ?>
+                                            <span class="fl fb"><?= $value['title'] ?>：</span>
+                                        </p>
+                                    <?php }?>
+                                <?php } ?>
+                            <?php } ?>
+                        <?php } ?>
+                    </div>
 
                 </div>
+                <div class="mt5 mb50">
+                    <input type="text" class="w p10 gray6 bd" name="CheckoutForm[comment][<?= $k ?>]" placeholder="备注：如有特殊需求请填写" maxlength="50">
+                </div>
+            <?php } ?>
+        <?php } ?>
 
-            </div>
-<!--            <div class="p5" id="free_return" style="display: none">-->
-<!--                --><?php //if( count($checkout_ad) < 1){?>
-<!--                    <a class="btn mbtn greenbtn-bd tc w" href="/read-more/index">满68包邮，去凑单</a>-->
-<!--                --><?php //}else{?>
-<!--                    <a class="btn mbtn greenbtn-bd tc w layerTri" href="javascript:void(0)">订单金额满68元免运费，去凑单</a>-->
-<!--                --><?php //}?>
-<!---->
-<!--            </div>-->
-            <div class="mt5 mb50">
-                <input type="text" class="w p10 gray6 bd" name="CheckoutForm[comment][<?= $k ?>]" placeholder="备注：如有特殊需求请填写" maxlength="50">
-            </div>
-		<?php } ?>
+
+
+
 
 		<?php ActiveForm::end(); ?>
     </section>
@@ -226,17 +508,6 @@ $this->title = '订单确认';
     </a>
 </div>
 <div id="confirm_form_order" class="bg-f0" style="display: none;">
-<!--    <h2 class="w p10 tc bg-wh">请确认地址与收货时间</h2>-->
-<!--    <div class=" m5 p5  bg-wh">-->
-<!--        <div class="colorbar"></div>-->
-<!--        <div id="confirm_form_address"></div>-->
-<!--        <div class="colorbar "></div>-->
-<!--    </div>-->
-<!--    <div class="col-12 bd m5 p5 whitebg cp f18 red">-->
-<!--        因系统改造升级，<span class="fb">暂停晚间配送！</span>-->
-<!--        给您带来的不便，我们深感抱歉！-->
-<!--        请确定合适的配送时间，感谢您的理解！-->
-<!--    </div>-->
     <div class="   m5 ">
         <div id="confirm_form_shippingtime" class="flex-col w flex-middle bg-green white p10 ">
         </div>

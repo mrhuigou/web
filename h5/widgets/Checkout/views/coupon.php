@@ -209,7 +209,15 @@
                 var pay_total1=0;
                 var minbookcash = <?=$minbookcash?>;
                 var shipping = data.shipping_cost;
-
+                var mergeOrderTotal=0;
+                $(".m-order-total").each(function(){
+                    mergeOrderTotal=FloatAdd(mergeOrderTotal,$(this).html());
+                });
+                if(shipping>0){
+                    mergeOrderTotal=FloatAdd(mergeOrderTotal,shipping);
+                }
+                $('.merge-totals').text(mergeOrderTotal);
+                $('.merge-spt').text(shipping);
                 $(".total").each(function(){
                     pay_total=FloatAdd(pay_total,$(this).html());
                     pay_total1 = FloatSub(pay_total,shipping);
@@ -236,22 +244,6 @@
                     $('#shipping_script').hide();
                     $('#free_return').hide();
                 }
-                // 同步 运费
-                $('.shipping').each(function(){
-                    let tx=$(this).text();
-                    if(tx<maxSpFe){
-                        console.log(maxSpFe);
-                        $(this).text(maxSpFe);
-                        let sbTal=$(this).parent().parent().next().find(".total");
-                        let sbTalTx=sbTal.text();
-                        console.log(sbTalTx);
-                        sbTal.text((parseFloat(sbTalTx)+parseFloat(maxSpFe)));
-                        let allPrice=$('#pay_total');
-                        let allPriceTx=allPrice.text();
-                        console.log(allPriceTx);
-                        allPrice.text((parseFloat(allPriceTx)+parseFloat(maxSpFe)));
-                    }
-                });
 
 
             }else{

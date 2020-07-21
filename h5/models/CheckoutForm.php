@@ -191,15 +191,78 @@ class CheckoutForm extends Model {
 	public function submit()
 	{   //交易号
 		$trade_no = "";
-//		print_r($this->order_coupon_product_rate);
-//		print_r($this->order_product_rate);exit;
+        $comfirmOrders = $this->cart_data;//原始session
+        $mergeOrder = Yii::$app->session->get('can_merge_orders');
+        if($mergeOrder['isOrderMerge']){ //有合单
+            $newMerge=array();
+            $newMerge['base']=[];
+            $mergeList=$mergeOrder['mergeList'];
+            $noMergeList=$mergeOrder['noMergeList'];
+            $mergeTotals=$mergeOrder['mergeTotals'];
+            $newPromotion=[];
+            $newProducts=[];
+            $newCouponGift=[];
+            $newTotal=0; // 订单总额
+            $newSubTotal=0;//商品总额
+            $newCouponArr=[];//优惠券
+            foreach ($mergeList as $v){
+                if(empty($newMerge['base'])){
+                    $newMerge['base']=$v['base'];
+                }
+                $newPromotion=array_merge($newPromotion,$v['promotion']);
+                $newProducts=array_merge($newProducts,$v['products']);
+                $newCouponGift=array_merge($newCouponGift,$v['coupon_gift']);
+                $newTotal=bcadd($newTotal, $v['total'], 2);
+                if($v['totals']){
+                    foreach ($v['totals'] as $m){
+                        if($m['code'] == 'sub_total'){
+                            $newSubTotal=bcadd($newSubTotal, $m['value'], 2);//商品总额 sub_total
+                        }
+                        if($m['code'] == 'coupon'){
+                            $newCouponArr[]=$m;// coupon 优惠券
+                        }
+                    }
+                }
+            }
+            $newTotal=bcadd($newTotal, $mergeTotals['shopping'], 2);
+            $newMerge['products']=$newProducts;// products
+            $newMerge['promotion']=$newPromotion; // promotion
+            $newMerge['rate']=[];                 // rate
+            $newMerge['coupon_gift']=$newCouponGift;// coupon_gift
+            $newMerge['total']=$newTotal;// total
+            $newMerge['totals']=array(
+                array(
+                    'code' => 'sub_total',
+                    'title' => '商品总额',
+                    'value' => $newSubTotal,
+                    'sort_order' => 1,
+                ),
+                array(
+                    'code' => 'shipping',
+                    'title' => '固定运费',
+                    'value' => $mergeTotals['shopping'],
+                    'sort_order' => 2,
+                ),
+                array(
+                    'code' => 'total',
+                    'title' => '实付总计',
+                    'value' => $newTotal,
+                    'sort_order' => 10,
+                ),
+
+            );// totals
+            $newMerge['totals']=array_merge($newMerge['totals'],$newCouponArr);
+            array_push($noMergeList,$newMerge);
+            $comfirmOrders=$noMergeList;
+
+        }
 		if ($this->validate()) {
 			$merge_order_ids = [];
 			$merge_total = 0;
 			$product_stock = [];
 			$transaction = \Yii::$app->db->beginTransaction();
 			try {
-				foreach ($this->cart_data as $k => $order_data) {
+				foreach ($comfirmOrders as $k => $order_data) {
 					$invoice_temp = ['不需要发票', '个人发票', '企业增值税普票','企业增值税专票'];
 					//订单主数据
 					$Order_model = new Order();
@@ -436,11 +499,24 @@ class CheckoutForm extends Model {
                     }
 					//店铺促销（满赠、满减）
 					if (isset($order_data['promotion']) && $order_data['promotion']) {
-						$this->StorePromotion($order_data['promotion'], $Order_model->order_id, $product_stock);
+					    if(is_array($order_data['promotion'])){
+                            foreach ($order_data['promotion'] as $v){ // 修改数据方式
+                                $this->StorePromotion($v, $Order_model->order_id, $product_stock);
+                            }
+                        }else{
+                            $this->StorePromotion($order_data['promotion'], $Order_model->order_id, $product_stock);
+                        }
 					}
 					//优惠券赠品
 					if (isset($order_data['coupon_gift']) && $order_data['coupon_gift']) {
-						$this->CouponGift($order_data['coupon_gift'], $Order_model->order_id, $product_stock);
+                        if(is_array($order_data['coupon_gift'])){
+                            foreach ($order_data['coupon_gift'] as $v){ // 修改数据方式
+                                $this->CouponGift($v, $Order_model->order_id, $product_stock);
+                            }
+                        }else{
+                            $this->CouponGift($order_data['coupon_gift'], $Order_model->order_id, $product_stock);
+                        }
+
 					}
 					//添加订单总计信息
 					if ($order_data['totals']) {
@@ -562,6 +638,7 @@ class CheckoutForm extends Model {
 		}
 		return $trade_no;
 	}
+
     private function notice_points($Order_model){  //添加 PointCustomerFlow 并未进行通知，通知应在支付成功时候通知
 	    try{
 	        if($Order_model && $Order_model->use_points){
