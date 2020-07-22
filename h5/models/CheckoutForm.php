@@ -286,8 +286,10 @@ class CheckoutForm extends Model {
 					$Order_model->total = $order_data['total'];
 					if(isset($this->comment[$k]) && $this->comment[$k]){
                         $Order_model->comment = $this->comment[$k];
-                    }else{
+                    }else if(isset($this->comment['merge']) && $this->comment['merge']){
                         $Order_model->comment = $this->comment['merge'];
+                    }else{
+                        $Order_model->comment = '';
                     }
 					$Order_model->order_status_id = 1;
 
