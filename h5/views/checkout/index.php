@@ -69,7 +69,7 @@ $this->title = '订单确认';
                                 <span class="fl ">店铺：<em class="org"><?= $val['base']->name ?></em></span>
                                 <span class="fr red"><?php if ($val['base']->befreepostage == 1) { //是否包邮（满X元包邮）
                                         if ($val['base']->minbookcash > 0) {
-                                            echo '店铺订单金额满' . $val['base']->minbookcash . '元包邮';
+                                            echo '订单金额满' . $val['base']->minbookcash . '元包邮';
                                         } else {
                                             echo '店铺包邮';
                                         }
@@ -217,7 +217,7 @@ $this->title = '订单确认';
                                 <span class="fl ">店铺：<em class="org"><?= $val['base']->name ?></em></span>
                                 <span class="fr red"><?php if ($val['base']->befreepostage == 1) { //是否包邮（满X元包邮）
                                         if ($val['base']->minbookcash > 0) {
-                                            echo '店铺订单金额满' . $val['base']->minbookcash . '元包邮';
+                                            echo '订单金额满' . $val['base']->minbookcash . '元包邮';
                                         } else {
                                             echo '店铺包邮';
                                         }
@@ -360,7 +360,7 @@ $this->title = '订单确认';
                             <span class="fl ">店铺：<em class="org"><?= $val['base']->name ?></em></span>
                             <span class="fr red"><?php if ($val['base']->befreepostage == 1) { //是否包邮（满X元包邮）
                                     if ($val['base']->minbookcash > 0) {
-                                        echo '店铺订单金额满' . $val['base']->minbookcash . '元包邮';
+                                        echo '订单金额满' . $val['base']->minbookcash . '元包邮';
                                     } else {
                                         echo '店铺包邮';
                                     }

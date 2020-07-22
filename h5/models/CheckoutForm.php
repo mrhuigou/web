@@ -44,6 +44,7 @@ use yii\base\Exception;
 use yii\base\InvalidParamException;
 use yii\base\Model;
 use Yii;
+use yii\db\Query;
 use yii\db\StaleObjectException;
 use yii\log\Logger;
 use yii\web\NotFoundHttpException;
@@ -195,6 +196,7 @@ class CheckoutForm extends Model {
         $mergeOrder = Yii::$app->session->get('can_merge_orders');
         if($mergeOrder['isOrderMerge']){ //有合单
             $newMerge=array();
+            $newMergeKeys=0;
             $newMerge['base']=[];
             $mergeList=$mergeOrder['mergeList'];
             $noMergeList=$mergeOrder['noMergeList'];
@@ -205,9 +207,12 @@ class CheckoutForm extends Model {
             $newTotal=0; // 订单总额
             $newSubTotal=0;//商品总额
             $newCouponArr=[];//优惠券
-            foreach ($mergeList as $v){
+            foreach ($mergeList as $key => $v){
                 if(empty($newMerge['base'])){
                     $newMerge['base']=$v['base'];
+                }
+                if(empty($newMergeKeys)){
+                    $newMergeKeys=$key;
                 }
                 $newPromotion=array_merge($newPromotion,$v['promotion']);
                 $newProducts=array_merge($newProducts,$v['products']);
@@ -252,9 +257,11 @@ class CheckoutForm extends Model {
 
             );// totals
             $newMerge['totals']=array_merge($newMerge['totals'],$newCouponArr);
-            array_push($noMergeList,$newMerge);
-            $comfirmOrders=$noMergeList;
-
+            $newMergeHaveKeys[$newMergeKeys]=$newMerge;
+            if(!empty($noMergeList)){
+                $newMergeHaveKeys=$newMergeHaveKeys+$noMergeList;
+            }
+            $comfirmOrders=$newMergeHaveKeys;
         }
 		if ($this->validate()) {
 			$merge_order_ids = [];
