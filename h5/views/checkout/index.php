@@ -59,7 +59,7 @@ $this->title = '订单确认';
             <!--      Merge      -->
             <div class="plat-box">
                 <div class="plat-title"><?= $platformName ?></div>
-                <?= h5\widgets\Checkout\Delivery::widget(['store_id' => 1, 'total' => $val['total']]) ?>
+                <?= h5\widgets\Checkout\Delivery::widget(['store_id' => $mergeStoreId, 'total' => $mergeTotals['total']]) ?>
                 <?php foreach ($mergeList as $k => $val) { ?>
                     <?php if($val['base']->store_id == 1){ $is_jiarun = true;}?>
                     <div class="store_contain whitebg " id="store_contain_<?= $val['base']->store_id ?>">

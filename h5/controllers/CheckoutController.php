@@ -281,7 +281,8 @@ class CheckoutController extends \yii\web\Controller {
                 'shopping' => $mergeSpTotal,
                 'total' => $mergeOrderTotal
             ),// 合并单 单独计算的 邮费 and 应付金额
-            'platformName' => $platformName
+            'platformName' => $platformName,
+            'mergeStoreId' => $mergeStArr[0],
 
 		]);
 	}
