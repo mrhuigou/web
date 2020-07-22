@@ -282,7 +282,7 @@ class CheckoutController extends \yii\web\Controller {
                 'total' => $mergeOrderTotal
             ),// 合并单 单独计算的 邮费 and 应付金额
             'platformName' => $platformName,
-            'mergeStoreId' => $mergeStArr[0],
+            'mergeStoreId' => empty($mergeStArr)?1:$mergeStArr[0],
 
 		]);
 	}
