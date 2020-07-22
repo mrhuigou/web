@@ -149,6 +149,15 @@
                 var pay_total1=0;
                 var minbookcash = <?=$minbookcash?>;
                 var shipping = data.shipping_cost;
+                var mergeOrderTotal=0;
+                $(".m-order-total").each(function(){
+                    mergeOrderTotal=FloatAdd(mergeOrderTotal,$(this).html());
+                });
+                if(shipping>0){
+                    mergeOrderTotal=FloatAdd(mergeOrderTotal,shipping);
+                }
+                $('.merge-totals').text(mergeOrderTotal);
+                $('.merge-spt').text(shipping);
                 $(".total").each(function(){
                     pay_total=FloatAdd(pay_total,$(this).html());
                     pay_total1 = FloatSub(pay_total,shipping);

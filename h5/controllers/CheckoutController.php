@@ -195,7 +195,7 @@ class CheckoutController extends \yii\web\Controller {
 //                $mergeOrderShipFree=$val['totals'][1]['value'];
 //            }
 //        }
-
+        $couponStoreTotal=[]; // 优惠券计算用
         $mergeList=[];// 合单列
         $noMergeList=[];// 非合单列
         $mergeSpTotal=0;// 合并单 总邮费
@@ -204,6 +204,7 @@ class CheckoutController extends \yii\web\Controller {
             foreach ($comfirm_orders as $k=>$v){
                 if(in_array($k, $mergeStArr)){
                     $mergeList[$k]=$v;
+                    $couponStoreTotal[$k]['total']=$v['total'];
                 }else{
                     $noMergeList[$k]=$v;
                 }
@@ -232,6 +233,7 @@ class CheckoutController extends \yii\web\Controller {
                 'total' => $mergeOrderTotal
             ),// 合并单 单独计算的 邮费 and 应付金额
         ));
+        Yii::$app->session->set('coupon_store_total',$couponStoreTotal);
 		//计算总计金额
 		$merge_order_total = 0;
 		if ($comfirm_orders) {
@@ -251,6 +253,7 @@ class CheckoutController extends \yii\web\Controller {
                 Yii::$app->session->remove('customer_point_h5');
                 Yii::$app->session->remove('checkout_address_id');
                 Yii::$app->session->remove('can_merge_orders');
+                Yii::$app->session->remove('coupon_store_total');
 				if (!Yii::$app->cart->getIsEmpty()) {
 					foreach ($cart as $key => $id) {
 						if (Yii::$app->cart->hasPosition($key)) {
@@ -1137,6 +1140,7 @@ class CheckoutController extends \yii\web\Controller {
 			$this->getTotal($totals, $total);
 
             //合单前计算
+            $couponStoreTotal=Yii::$app->session->get('coupon_store_total');
             $mergeOrders=Yii::$app->session->get('can_merge_orders');
             if($mergeOrders['isOrderMerge']){ // 有合单情况
                 $mergeList=$mergeOrders['mergeList'];
@@ -1149,12 +1153,25 @@ class CheckoutController extends \yii\web\Controller {
                         }
                         if($v['code'] == 'total'){
                             $v['value']=$v['value']-$oldSp;
+                            if(isset($couponStoreTotal[$store_id]) && $couponStoreTotal[$store_id]){
+                                $couponStoreTotal[$store_id]['total']=$v['value'];
+                            }
                         }
                     }
                     unset($v);
-                }
-            }
+                    $sumMergeTotal=0;
+                    foreach ($couponStoreTotal as $n){
+                        $sumMergeTotal=bcadd($sumMergeTotal, $n['total'], 2);
+                    }
+                    if($sumMergeTotal>=68){
+                        $shipping_cost=0;
+                    }else{
+                        $shipping_cost=10;
+                    }
 
+                }
+
+            }
             $json = [
 				'status' => true,
 				'data' => $this->renderPartial('totals', ['model' => $totals,'merge_orders'=>$mergeOrders]),
