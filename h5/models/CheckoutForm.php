@@ -284,7 +284,11 @@ class CheckoutForm extends Model {
 					$Order_model->payment_method = "";
 					$Order_model->payment_code = "";
 					$Order_model->total = $order_data['total'];
-					$Order_model->comment = $this->comment[$k];
+					if(isset($this->comment[$k]) && $this->comment[$k]){
+                        $Order_model->comment = $this->comment[$k];
+                    }else{
+                        $Order_model->comment = $this->comment['merge'];
+                    }
 					$Order_model->order_status_id = 1;
 
                     $affiliate_code = "mrhuigou";//默认分销商code为空
