@@ -1179,10 +1179,11 @@ class OrderController extends \yii\console\Controller {
 					$return_products = ReturnProduct::find()->where(['return_id' => $return_order['return_id']])->asArray()->all();
 					if ($return_products) {
 						foreach ($return_products as $return_product) {
+                            $spCode=$return_product->product->store_code;
 							$details[] = [
 								'ORDERCODE' => $return_product['return_code'],
 								'LINENO' => $lineno,
-								'SHOPCODE' => $return_product['store_code'],
+								'SHOPCODE' => $spCode?$spCode:'',
 								'PRODUCTCODE' => $return_product['product_base_code'],
 								'PUCODE' => $return_product['product_code'],
 								'QUANTITY' => $return_product['quantity'],
