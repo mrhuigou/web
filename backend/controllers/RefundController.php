@@ -333,11 +333,12 @@ class RefundController extends Controller
 			        }elseif ($returnproduct['from_table'] == 'order_gift') {
 				        $od_product = OrderGift::findOne($returnproduct->from_id);
 			        }
+			        $spCode=$returnproduct->product->store_code;
 			        $return_product[]=[
 				        'ORDERCODE'=>$return_info->return_code,
                         'TYPE' => 'product',
 				        'LINENO'=>$line_no,
-				        'SHOPCODE'=>$return_info->order->store->store_code,
+				        'SHOPCODE'=>$spCode?$spCode:'',
 				        'PRODUCTCODE'=>$returnproduct->product_base_code,
 				        'PUCODE'=>$returnproduct->product_code,
 				        'QUANTITY'=>$returnproduct->quantity,
