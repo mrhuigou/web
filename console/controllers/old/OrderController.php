@@ -588,11 +588,12 @@ class OrderController extends \yii\console\Controller {
 				$lineno = 1;
 				if ($order->orderProducts) {
 					foreach ($order->orderProducts as $OrderProduct) {
+					    $spCode=$OrderProduct->product->store_code;
 						$details[] = [
 							'ORDERCODE' => "O" . $order->order_id,
                             'TYPE' => 'product',
 							'LINENO' => $lineno,
-							'SHOPCODE' => $order->store ? $order->store->store_code : '',
+							'SHOPCODE' => $spCode ? $spCode : '',
 							'PRODUCTCODE' => $OrderProduct->product_base_code,
 							'PUCODE' => $OrderProduct->product_code,
 							'QUANTITY' => $OrderProduct->quantity,
