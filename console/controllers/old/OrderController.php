@@ -632,11 +632,12 @@ class OrderController extends \yii\console\Controller {
 				//订单赠品信息
 				if ($order->orderGifts) {
 					foreach ($order->orderGifts as $gift) {
+					    $giftStoreCode=$gift->product->store_code;
 						$details[] = [
 							'ORDERCODE' => "O" . $order->order_id,
                             'TYPE' => 'product',
 							'LINENO' => $lineno,
-							'SHOPCODE' => $order->store ? $order->store->store_code : '',
+							'SHOPCODE' => $giftStoreCode ? $giftStoreCode : '',
 							'PRODUCTCODE' => $gift->product_base_code,
 							'PUCODE' => $gift->product_code,
 							'QUANTITY' => $gift->quantity,
