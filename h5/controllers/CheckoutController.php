@@ -22,6 +22,7 @@ use h5\models\ViewDeliveryForm;
 use h5\widgets\Checkout\StorePromotion;
 use Yii;
 use api\models\V1\Store;
+use yii\base\Action;
 use yii\base\ErrorException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -84,6 +85,7 @@ class CheckoutController extends \yii\web\Controller {
 
         }
 		$comfirm_orders = [];
+        $freeShippingProIdArr=[];// 包邮产品
 		if ($cart_datas) {
 			//分别统计每家店铺的数据
 			foreach ($cart_datas as $key => $cart_data) {
@@ -131,7 +133,7 @@ class CheckoutController extends \yii\web\Controller {
 				if($key ==1){
 //                    $this->getPointsTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data);
                 }
-                $this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id,$shipping_cost_free,count($mergeStArr)>1?1:0,$mergeStArr);
+                $this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id,$shipping_cost_free,count($mergeStArr)>1?1:0,$mergeStArr,$freeShippingProIdArr);
 				//应付订单金额
 				$this->getTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total']);
 
@@ -195,7 +197,7 @@ class CheckoutController extends \yii\web\Controller {
 //                $mergeOrderShipFree=$val['totals'][1]['value'];
 //            }
 //        }
-        $couponStoreTotal=[]; // 优惠券计算用
+        $couponStoreTotal=[]; // order-ajax优惠券计算用
         $mergeList=[];// 合单列
         $noMergeList=[];// 非合单列
         $mergeSpTotal=0;// 合并单 总邮费
@@ -210,15 +212,31 @@ class CheckoutController extends \yii\web\Controller {
                 }
             }
         }
+        $haveFreePro=0;// 包含包邮产品 标识
         if(!empty($mergeList)){
             $mergeTotal=0;
             foreach ($mergeList as $vt){
                 $mergeTotal=bcadd($mergeTotal, $vt['total'], 2);
+                if(!empty($freeShippingProIdArr)){
+                    if($vt['products']){
+                        foreach ($vt['products'] as $p){
+                            if(in_array($p->product_id,$freeShippingProIdArr)){
+                                $haveFreePro=1;
+                                break;
+                            }
+
+                        }
+                    }
+                }
             }
-            if($mergeTotal>=68){ // 合并店铺 固定规则 68包邮
-                $mergeSpTotal=0;
+            if($haveFreePro){
+                $mergeSpTotal=0;// 包含包邮产品
             }else{
-                $mergeSpTotal=10;
+                if($mergeTotal>=68){ // 合并店铺 固定规则 68包邮
+                    $mergeSpTotal=0;
+                }else{
+                    $mergeSpTotal=10;
+                }
             }
             $mergeOrderTotal=$mergeSpTotal>0?bcadd($mergeTotal, $mergeSpTotal, 2):$mergeTotal;
 
@@ -234,6 +252,7 @@ class CheckoutController extends \yii\web\Controller {
             ),// 合并单 单独计算的 邮费 and 应付金额
         ));
         Yii::$app->session->set('coupon_store_total',$couponStoreTotal);
+        Yii::$app->session->set('haveFreePro',$haveFreePro);
 		//计算总计金额
 		$merge_order_total = 0;
 		if ($comfirm_orders) {
@@ -254,6 +273,7 @@ class CheckoutController extends \yii\web\Controller {
                 Yii::$app->session->remove('checkout_address_id');
                 Yii::$app->session->remove('can_merge_orders');
                 Yii::$app->session->remove('coupon_store_total');
+                Yii::$app->session->remove('haveFreePro');
 				if (!Yii::$app->cart->getIsEmpty()) {
 					foreach ($cart as $key => $id) {
 						if (Yii::$app->cart->hasPosition($key)) {
@@ -351,7 +371,7 @@ class CheckoutController extends \yii\web\Controller {
 
         return $sub_total;
     }
-	public function getShippingTotal(&$total_data, &$total, $cart, $store_id = 0, &$shipping_cost, $delivery_station_id = 0,$shipping_cost_free = 0,$isMergeOrder=0,$mergeArr=[])
+	public function getShippingTotal(&$total_data, &$total, $cart, $store_id = 0, &$shipping_cost, $delivery_station_id = 0,$shipping_cost_free = 0,$isMergeOrder=0,$mergeArr=[],&$fellProArr=[])
 	{
 		//进行运费计算
 		$sub_total = 10;
@@ -376,6 +396,7 @@ class CheckoutController extends \yii\web\Controller {
 			foreach ($cart as $value) {
 				if ($value->product->baoyou) { //包邮活动
 					$sub_total = 0;
+                    $fellProArr[]=$value->product->product_id;// 记录 包邮产品id
 					break;
 				}
 //				if ($value->promotion && $value->promotion->promotion->subject == 'YIYUANGOU') { //一元免邮
@@ -1142,6 +1163,8 @@ class CheckoutController extends \yii\web\Controller {
             //合单前计算
             $couponStoreTotal=Yii::$app->session->get('coupon_store_total');
             $mergeOrders=Yii::$app->session->get('can_merge_orders');
+            $haveFreePro=Yii::$app->session->get('haveFreePro');
+
             if($mergeOrders['isOrderMerge']){ // 有合单情况
                 $mergeList=$mergeOrders['mergeList'];
                 if(array_key_exists($store_id,$mergeList)){
@@ -1163,12 +1186,15 @@ class CheckoutController extends \yii\web\Controller {
                     foreach ($couponStoreTotal as $n){
                         $sumMergeTotal=bcadd($sumMergeTotal, $n['total'], 2);
                     }
-                    if($sumMergeTotal>=68){
+                    if($haveFreePro){
                         $shipping_cost=0;
                     }else{
-                        $shipping_cost=10;
+                        if($sumMergeTotal>=68){
+                            $shipping_cost=0;
+                        }else{
+                            $shipping_cost=10;
+                        }
                     }
-
                 }
 
             }
