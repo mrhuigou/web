@@ -437,7 +437,7 @@ class CheckoutForm extends Model {
 						foreach ($order_data['products'] as $product) {
 
 							if(!$product->product->getStockCount()){
-								throw new \Exception("库存不足");
+								throw new \Exception("库存不足3");
 							}
                             $order_products_array[] = $product->product->product_id;
 							$product_price = $product->getPrice();
@@ -520,16 +520,10 @@ class CheckoutForm extends Model {
                             $this->StorePromotion($order_data['promotion'], $Order_model->order_id, $product_stock);
                         }
 					}
+
 					//优惠券赠品
 					if (isset($order_data['coupon_gift']) && $order_data['coupon_gift']) {
-                        if(is_array($order_data['coupon_gift'])){
-                            foreach ($order_data['coupon_gift'] as $v){ // 修改数据方式
-                                $this->CouponGift($v, $Order_model->order_id, $product_stock);
-                            }
-                        }else{
-                            $this->CouponGift($order_data['coupon_gift'], $Order_model->order_id, $product_stock);
-                        }
-
+					    $this->CouponGift($order_data['coupon_gift'], $Order_model->order_id, $product_stock);
 					}
 					//添加订单总计信息
 					if ($order_data['totals']) {
@@ -603,11 +597,11 @@ class CheckoutForm extends Model {
 
                                     if(!$product->bepresell && !$product->begift) {
                                         if(($model->quantity-$model->tmp_qty)<0){
-                                            throw new \Exception("[".$product->product_code."]库存不足");
+                                            throw new \Exception("[".$product->product_code."]库存不足1");
                                         }
                                     }
                                 }else{
-                                    throw new \Exception("[".$product_code."]库存不足");
+                                    throw new \Exception("[".$product_code."]库存不足2");
                                 }
                             }
 
