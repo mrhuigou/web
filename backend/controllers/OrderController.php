@@ -81,30 +81,38 @@ class OrderController extends Controller
             $discount->value = Yii::$app->request->post("total");
             $discount->sort_order = 3;
             $discount->save();
+
             $order_merage = OrderMerge::find()->where('find_in_set('.$id.',order_ids)')->andWhere(['status'=>0])->one();
             if($order_merage){
                 $order_merage->status = -1;
                 $order_merage->save();
             }
-            $order_products_models = OrderProduct::find()->where(['order_id'=>$id]);
-            $pay_totals = $order_products_models->sum('pay_total');
-            $order_products = $order_products_models->all();
+
             $change_total = Yii::$app->request->post("total");
-            $percent = bcdiv($change_total,$pay_totals,8);
-            if($order_products){
-                foreach ($order_products as $order_product){
-                    $product_pay_total = $order_product->pay_total;
-                    $order_product->pay_total = $product_pay_total + (bcmul($product_pay_total,$percent,2));
-                    $order_product->save();
+            $total_change = OrderTotal::findOne(['order_id'=>$id,'code'=>'total']);
+            $total_change->text = '￥'.bcadd($total_change->value,Yii::$app->request->post("total"),2);
+            $total_change->value = bcadd($total_change->value,Yii::$app->request->post("total"),2);
+            $total_change->save();
+            $model->total = bcadd($total_change->value,Yii::$app->request->post("total"),2);
+            $model->save();
+
+            $order_total_shipping=OrderTotal::findOne(['order_id'=>$id,'code'=>'shipping']);// 邮费
+
+            if(bcadd($change_total,$order_total_shipping->value,2)<0){ // 修改金额大于了 邮费
+                $order_products_models = OrderProduct::find()->where(['order_id'=>$id]);
+                $pay_totals = $order_products_models->sum('pay_total');
+                $order_products = $order_products_models->all();
+                $change_total=bcadd($change_total,$order_total_shipping->value,2);
+                $percent = bcdiv($change_total,$pay_totals,8);
+                if($order_products){
+                    foreach ($order_products as $order_product){
+                        $product_pay_total = $order_product->pay_total;
+                        $order_product->pay_total = $product_pay_total + (bcmul($product_pay_total,$percent,2));
+                        $order_product->save();
+                    }
                 }
             }
 
-            $total_change = OrderTotal::findOne(['order_id'=>$id,'code'=>'total']);
-            $total_change->text = '￥'.bcadd($total_change->value,Yii::$app->request->post("total"),2);
-            $model->total = bcadd($total_change->value,Yii::$app->request->post("total"),2);
-            $total_change->value = bcadd($total_change->value,Yii::$app->request->post("total"),2);
-            $total_change->save();
-            $model->save();
             return $this->redirect(['view', 'id' => $id, '#'=>'tab_6_8']);
         }
 
