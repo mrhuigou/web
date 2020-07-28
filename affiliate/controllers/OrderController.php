@@ -2,13 +2,16 @@
 
 namespace affiliate\controllers;
 
+use affiliate\models\RefundSearch;
 use api\models\V1\AffiliateTransaction;
 use api\models\V1\AffiliateTransactionFlow;
 use api\models\V1\AffiliateTransactionStatement;
 use api\models\V1\Customer;
+use api\models\V1\Order;
 use api\models\V1\OrderShipping;
 use api\models\V1\OrderStatus;
 use api\models\V1\ReturnBase;
+use api\models\V1\ReturnStatus;
 use common\extensions\widgets\xlsxwriter\xlsxwriter as XLSXWriter;
 use Yii;
 use affiliate\models\OrderSearch;
@@ -188,6 +191,68 @@ class OrderController extends Controller
         // 输出文件内容
         readfile('/tmp/output.xlsx');
 
+    }
+
+    public function actionRefundExport(){
+        $searchModel = new RefundSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setPagination(['pagesize'=>$dataProvider->totalCount]);
+        $header = array(
+            '昵称'=>'string',
+            '电话'=>'string',
+            '订单编号'=>'string',
+            '退货时间'=>'string',
+            '订单状态'=>'string',
+            '订单总额'=>'string',
+            '收货电话'=>'string',
+//            '订单佣金'=>'string',
+        );
+        $writer = new XLSXWriter();
+        $writer->writeSheetHeader('Sheet1', $header );
+        if($model=$dataProvider->getModels()){
+            foreach($model as $value){
+                $orderStatus = ReturnStatus::findOne($value['return_status_id']);
+                $orderShipping = OrderShipping::findOne(['order_id'=>$value['order_id']]);
+                $writer->writeSheetRow('Sheet1',[
+                    $value['firstname'],
+                    $value['telephone'],
+                    $value['order_no'],
+                    $value['date_added'],
+                    $orderStatus->name,
+                    $value['total'],
+                    $orderShipping->shipping_telephone,
+//                    $value['commission']
+                ]);
+            }
+        }
+
+        $writer->writeToFile('/tmp/output.xlsx');
+
+        // 输入文件标签
+        header("Content-Type:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=utf-8");
+        header("Content-Disposition: attachment; filename=output.xlsx");  //File name extension was wrong
+        header("Expires: 0");
+        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        header("Cache-Control: private",false);
+        ob_clean();
+
+        // 输出文件内容
+        readfile('/tmp/output.xlsx');
+
+    }
+
+
+    public function actionRefund()
+    {
+        if (\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        $searchModel = new RefundSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('refund', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
 }

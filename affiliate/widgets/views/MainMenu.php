@@ -40,6 +40,14 @@
                     </span>
             </a>
         </li>
+        <li class="">
+            <a href="<?= \yii\helpers\Url::to('/order/refund')?>">
+                <i class="fa fa-briefcase"></i>
+                <span class="title">
+                        退货订单管理
+                    </span>
+            </a>
+        </li>
 <!--        --><?php //if(!Yii::$app->user->isGuest){?>
 <!--            --><?php //if(Yii::$app->user->getId() != 9){?>
 <!--                <li class="">-->
