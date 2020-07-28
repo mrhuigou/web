@@ -104,4 +104,8 @@ class ReturnBase extends \yii\db\ActiveRecord
     public function getHistory(){
     	return $this->hasMany(ReturnHistory::className(),['return_id'=>'return_id']);
     }
+
+    public function getOrderShipping(){
+        return $this->hasOne(OrderShipping::className(),['order_id'=>'order_id']);
+    }
 }
