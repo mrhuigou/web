@@ -93,7 +93,7 @@ class OrderController extends Controller
             $total_change->text = '￥'.bcadd($total_change->value,Yii::$app->request->post("total"),2);
             $total_change->value = bcadd($total_change->value,Yii::$app->request->post("total"),2);
             $total_change->save();
-            $model->total = bcadd($total_change->value,Yii::$app->request->post("total"),2);
+            $model->total = $total_change->value;
             $model->save();
 
             $order_total_shipping=OrderTotal::findOne(['order_id'=>$id,'code'=>'shipping']);// 邮费
