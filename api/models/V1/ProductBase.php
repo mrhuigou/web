@@ -188,6 +188,35 @@ class ProductBase extends \yii\db\ActiveRecord
         }
     return array_unique($data);
     }
+    public function getImagelistByInfo($proId=0){
+        $data=[];
+        $imgNow='';
+        if($this->product){
+            foreach($this->product as $value){
+                if($value->image && $value->beintoinv){
+                    if($value->product_id==$proId){
+                        $imgNow=$value->image;
+                    }else{
+                        $data[]=$value->image;
+                    }
+                    if($value->images){
+                        foreach($value->images as $val){
+                            $data[]=$val->image;
+                        }
+                    }
+                }
+            }
+        }
+        $data=array_unique($data);
+        if(!empty($imgNow)){
+            if(in_array($imgNow,$data)){
+                $data=array_diff($data,array($imgNow));
+            }
+            array_unshift($data,$imgNow);
+        }
+        return $data;
+    }
+
     public function getSku(){
         $result=[];
         if($this->product){

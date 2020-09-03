@@ -11,6 +11,15 @@ $this->title = '商品详情';
 			<div class="swiper-container" id="swiper-container_banner">
 				<div class="swiper-wrapper">
 
+                    <?php foreach ($model->getImagelistByInfo($product->product_id) as $value) { ?>
+                        <div class="swiper-slide">
+                            <div class="item-photo">
+                                <img src="<?= \common\component\image\Image::resize($value, 320, 320) ?>" class="w">
+
+                            </div>
+                        </div>
+                    <?php } ?>
+
                     <?php if ($model->promotion) { ?>
                         <?php foreach ($model->promotion as $promotion) { ?>
                             <?php if ($promotion->promotion_detail_image) { ?>
@@ -22,15 +31,6 @@ $this->title = '商品详情';
                             <?php }?>
                         <?php }?>
                     <?php }?>
-
-					<?php foreach ($model->imagelist as $value) { ?>
-						<div class="swiper-slide">
-                            <div class="item-photo">
-							<img src="<?= \common\component\image\Image::resize($value, 320, 320) ?>" class="w">
-
-                            </div>
-						</div>
-					<?php } ?>
 				</div>
 			</div>
 			<?php if ($model->bedisplaylife) { ?>
