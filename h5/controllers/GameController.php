@@ -26,7 +26,7 @@ use yii\web\NotFoundHttpException;
 use yii\base\ErrorException;
 
 class GameController extends \yii\web\Controller {
-    private $lottery_id = 34;
+    private $lottery_id = 44;
 	public function actionIndex()
 	{
 		if (\Yii::$app->user->isGuest) {
