@@ -86,6 +86,7 @@ class CheckoutController extends \yii\web\Controller {
         }
 		$comfirm_orders = [];
         $freeShippingProIdArr=[];// 包邮产品
+        $haveFreeCard=0;// 全局包邮卷通用
 		if ($cart_datas) {
 			//分别统计每家店铺的数据
 			foreach ($cart_datas as $key => $cart_data) {
@@ -124,6 +125,9 @@ class CheckoutController extends \yii\web\Controller {
 				}
 
                 $shipping_cost_free = 0; //判断是否有免邮属性的优惠券
+                if($haveFreeCard){
+                    $shipping_cost_free=1;
+                }
 				//计算全局优惠券金额
 				$this->getGlobalCouponTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $comfirm_orders[$key]['coupon_gift'],$comfirm_orders[$key]['rate']);
 				//计算优惠金额
@@ -133,9 +137,13 @@ class CheckoutController extends \yii\web\Controller {
 				if($key ==1){
 //                    $this->getPointsTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data);
                 }
+				// 计算邮费
                 $this->getShippingTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total'], $cart_data, $key, $shipping_cost, $delivery_station_id,$shipping_cost_free,count($mergeStArr)>1?1:0,$mergeStArr,$freeShippingProIdArr);
 				//应付订单金额
 				$this->getTotal($comfirm_orders[$key]['totals'], $comfirm_orders[$key]['total']);
+				if(empty($haveFreeCard)){  // 没有时才赋值
+                    $haveFreeCard=$shipping_cost_free;
+                }
 
 			}
 		}
@@ -228,6 +236,9 @@ class CheckoutController extends \yii\web\Controller {
                         }
                     }
                 }
+            }
+            if($haveFreeCard){
+                $haveFreePro=1;
             }
             if($haveFreePro){
                 $mergeSpTotal=0;// 包含包邮产品
