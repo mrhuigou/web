@@ -102,7 +102,7 @@ class UserCouponController extends \yii\web\Controller {
 			$coupon = Coupon::findOne(['coupon_id'=>$customer_coupon->coupon_id]);
 			if($coupon->is_entity == 1 && strtoupper($coupon->model) == 'ORDER'){
 			    //
-                  return $this->redirect(['/user-coupon/index']);
+                  return $this->redirect(['/user-coupon/index-delivery']);
             }else{
 //                return $this->redirect(['/coupon/view-delivery','id'=>$customer_coupon->coupon_id]);
                 return $this->redirect(['/coupon/view-delivery','customer_coupon_id'=>$customer_coupon->customer_coupon_id]);
