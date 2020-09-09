@@ -1197,6 +1197,9 @@ class CheckoutController extends \yii\web\Controller {
                     foreach ($couponStoreTotal as $n){
                         $sumMergeTotal=bcadd($sumMergeTotal, $n['total'], 2);
                     }
+                    if($shipping_cost_free){
+                        $haveFreePro=1;
+                    }
                     if($haveFreePro){
                         $shipping_cost=0;
                     }else{
