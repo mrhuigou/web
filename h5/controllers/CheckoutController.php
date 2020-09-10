@@ -274,7 +274,6 @@ class CheckoutController extends \yii\web\Controller {
 		if($mergeSpTotal>0){ // 追加 合并单的邮费
             $merge_order_total=bcadd($merge_order_total, $mergeSpTotal, 2);
         }
-
 		$model = new CheckoutForm($comfirm_orders, $this->order_product_paytotal,$this->order_coupon_product_rate);
 			if ($model->load(Yii::$app->request->post()) && $trade_no = $model->submit()) {
 
@@ -652,7 +651,7 @@ class CheckoutController extends \yii\web\Controller {
 			}
 		}
 	}
-	public function getCouponTotal(&$total_data, &$total, $cart, $customer_coupon_ids = [], $shipping_cost = 0, &$coupon_gift,&$rate,&$shipping_cost_free = 0)
+	public function getCouponTotal(&$total_data, &$total, $cart, $customer_coupon_ids = [], $shipping_cost = 0, &$coupon_gift,&$rate,&$shipping_cost_free = 0,&$arrFreeCards=[])
 	{
 		if ($customer_coupon_ids = $this->FormartCouponIds($customer_coupon_ids)) {
             $coupon_array = [];
@@ -794,7 +793,10 @@ class CheckoutController extends \yii\web\Controller {
 						}
 					}
 					if($discount_total>0 || $coupon_info->gift){
-
+                        $total -= $discount_total;
+                        if($coupon_info->model=='ORDER' && $coupon_info->is_entity){ // 自提
+                            $discount_total=$coupon_info->discount;
+                        }
 						$total_data[] = [
 							'code' => 'coupon',
 							'title' => $coupon_info->name,
@@ -803,7 +805,19 @@ class CheckoutController extends \yii\web\Controller {
 							'code_id' => $coupon_info->coupon_id,
 							'customer_code_id' => $customer_coupon_id
 						];
-						$total -= $discount_total;
+                        if($coupon_info->model=='ORDER' && $coupon_info->is_entity) { // 自提
+                            $arrFreeCards=[
+                                'code' => 'coupon',
+                                'title' => $coupon_info->name,
+                                'value' => -$discount_total,
+                                'sort_order' => 3,
+                                'code_id' => $coupon_info->coupon_id,
+                                'customer_code_id' => $customer_coupon_id
+                            ];
+                        }
+
+
+
 					}
 					$coupon_array[] = $customer_coupon_id;
 					//Yii::$app->session->set('customer_use_coupon_h5',$array);
@@ -1157,15 +1171,15 @@ class CheckoutController extends \yii\web\Controller {
 //            $total = bcadd($comfirm_orders[$store_id]['total'],$shipping_cost,2);
 
             $shipping_cost_free = 0;
+            $arrFreeCards=[]; // 提货卡优惠券 记录
 			$coupon_gift = [];
 			//计算全局优惠券金额
 			$this->getGlobalCouponTotal($totals, $total, $data, $store_id, $shipping_cost, $coupon_gift,$rate);
 			//计算优惠金额
-            $coupon_array = $this->getCouponTotal($totals, $total, $data, $customer_coupon_id, $shipping_cost, $coupon_gift,$rate,$shipping_cost_free);
+            $coupon_array = $this->getCouponTotal($totals, $total, $data, $customer_coupon_id, $shipping_cost, $coupon_gift,$rate,$shipping_cost_free,$arrFreeCards);
 			//计算订单优惠金额
 			$promotion = [];
 			$this->getOrderTotal($totals, $total, $data, $store_id, $promotion);
-
 //            $this->getPointsTotal($totals, $total, $data);
             $this->getShippingTotal($totals, $total, $data, $store_id, $shipping_cost, $delivery_station_id,$shipping_cost_free);
 			//计算订单金额
@@ -1218,6 +1232,8 @@ class CheckoutController extends \yii\web\Controller {
 				'store_promotion' => StorePromotion::widget(['promotion' => $promotion, 'coupon_gift' => $coupon_gift]),
                 'coupon_array'=>$coupon_array,
                 'shipping_cost'=>$shipping_cost,
+                'have_free_card' => empty($arrFreeCards)?0:1,
+                'free_cards' =>  $arrFreeCards,
 			];
 		} else {
 			$json = [

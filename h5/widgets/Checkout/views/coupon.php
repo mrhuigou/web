@@ -156,6 +156,15 @@
                 if(shipping>0){
                     mergeOrderTotal=FloatAdd(mergeOrderTotal,shipping);
                 }
+                if(data.have_free_card==1){ // 提货卡
+                    mergeOrderTotal=FloatAdd(mergeOrderTotal,data.free_cards.value);
+                    $('.show-free-card').show();
+                    $('.show-free-card .card-tit').html(data.free_cards.title);
+                    $('.show-free-card .card-val').html(data.free_cards.value);
+                }else{
+                    $('.show-free-card').hide();
+                }
+                mergeOrderTotal=mergeOrderTotal>0?mergeOrderTotal:0;
                 $('.merge-totals').text(mergeOrderTotal);
                 $('.merge-spt').text(shipping);
                 $(".total").each(function(){
@@ -225,6 +234,15 @@
                 if(shipping>0){
                     mergeOrderTotal=FloatAdd(mergeOrderTotal,shipping);
                 }
+                if(data.have_free_card==1){ // 提货卡
+                    mergeOrderTotal=FloatAdd(mergeOrderTotal,data.free_cards.value);
+                    $('.show-free-card').show();
+                    $('.show-free-card .card-tit').html(data.free_cards.title);
+                    $('.show-free-card .card-val').html(data.free_cards.value);
+                }else{
+                    $('.show-free-card').hide();
+                }
+                mergeOrderTotal=mergeOrderTotal>0?mergeOrderTotal:0;
                 $('.merge-totals').text(mergeOrderTotal);
                 $('.merge-spt').text(shipping);
                 $(".total").each(function(){

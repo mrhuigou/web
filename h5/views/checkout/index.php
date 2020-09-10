@@ -190,6 +190,17 @@ $this->title = '订单确认';
                         <?php }?>
 
                     </div>
+                    <div class="show-free-card" style="display: none;">
+                        <p class="mb5 clearfix lh150">
+                            <span class="fr red fb">￥<em class="card-val"></em></span>
+                            <span class="fl fb">优惠券金额：</span>
+                        </p>
+                        <p class="mb5 clearfix lh150">
+                            <span class="fr grey ">￥<em class="card-val"></em></span>
+                            <span class="fl ti2 card-tit"></span>
+                        </p>
+                    </div>
+
                     <p class="mb5 clearfix lh150">
                         <span class="fr red fb">￥<em class="shopping merge-spt"><?= $mergeTotals['shopping'] ?></em></span>
                         <span class="fl fb">邮费：</span>

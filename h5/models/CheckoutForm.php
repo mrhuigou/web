@@ -10,6 +10,7 @@ use api\models\V1\Address;
 use api\models\V1\Affiliate;
 use api\models\V1\AffiliateCustomer;
 use api\models\V1\AffiliatePersonal;
+use api\models\V1\Coupon;
 use api\models\V1\CouponHistory;
 use api\models\V1\Customer;
 use api\models\V1\CustomerAffiliate;
@@ -207,6 +208,8 @@ class CheckoutForm extends Model {
             $newTotal=0; // 订单总额
             $newSubTotal=0;//商品总额
             $newCouponArr=[];//优惠券
+            $haveFreeCard=0;//是否有 提货卡
+            $freeCards=[];// 提货卡 记录
             foreach ($mergeList as $key => $v){
                 if(empty($newMerge['base'])){
                     $newMerge['base']=$v['base'];
@@ -225,11 +228,21 @@ class CheckoutForm extends Model {
                         }
                         if($m['code'] == 'coupon'){
                             $newCouponArr[]=$m;// coupon 优惠券
+                            $couMd=Coupon::find()->where(['coupon_id' => $m['code_id']])->one();
+                            if($couMd->model=='ORDER' && $couMd->is_entity){
+                                $haveFreeCard=1;
+                                $freeCards=$m;
+                            }
                         }
                     }
                 }
             }
             $newTotal=bcadd($newTotal, $mergeTotals['shopping'], 2);
+            if($haveFreeCard){ // 有 提货卡 累计减免
+                $freeCardsVal=$freeCards['value'];
+                $dnum=bcadd($newSubTotal, $freeCardsVal, 2); // 商品总额-优惠金额
+                $newTotal=$dnum>0?$dnum:0;
+            }
             $newMerge['products']=$newProducts;// products
             $newMerge['promotion']=$newPromotion; // promotion
             $newMerge['rate']=[];                 // rate
