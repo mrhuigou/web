@@ -653,7 +653,8 @@ $useragent = \Yii::$app->request->getUserAgent();
     spaceBetween: 0,
     centeredSlides: true,
     autoplay: 4000,
-    autoplayDisableOnInteraction: false
+    autoplayDisableOnInteraction: false,
+    preventClicks:false,
     });
     });
     var hot_content_tpl = $('#hot_content_tpl').html();
