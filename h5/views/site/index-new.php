@@ -646,14 +646,19 @@ $useragent = \Yii::$app->request->getUserAgent();
     $("#swiper_content").html(html);
     $("img.lazy").scrollLoading({container:$(".content")});
     var swiper_banner = new Swiper('#swiper-container_banner', {
-    pagination: '.swiper-pagination-banner',
-    paginationClickable: true,
-    loop:true,
-    spaceBetween: 0,
-    centeredSlides: true,
-    autoplay: 4000,
-    autoplayDisableOnInteraction: false,
-    preventClicks:false,
+        pagination: '.swiper-pagination-banner',
+        paginationClickable: true,
+        loop:true,
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay: 4000,
+        autoplayDisableOnInteraction: false,
+        preventClicks:false,
+        on:{
+            touchStart: function(event){
+                event.stopPropagation();
+            },
+        },
     });
     });
     var hot_content_tpl = $('#hot_content_tpl').html();
