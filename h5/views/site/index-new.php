@@ -82,10 +82,9 @@ $useragent = \Yii::$app->request->getUserAgent();
             <div class="swiper-wrapper">
                  <% for(var i=from; i<=to; i++) {%>
                     <div class="swiper-slide" >
-                        <a href="<%:=list[i].url%>">
-                            <img
-                                  data-original="<%:=list[i].image%>" class=" w lazy">
-                        </a>
+
+                            <img data-original="<%:=list[i].image%>" class=" w lazy" data-href="<%:=list[i].url%>">
+
                     </div>
                 <% } %>
             </div>
@@ -712,6 +711,11 @@ $(".dropdown1").dropdown();
 $.backtop(".content");
 
 Ad_Sys_Code();
+
+$("#swiper-container_banner .lazy").click(function () {
+    let href=$(this).attr("data-href");
+    window.location.href=href;
+});
 <?php $this->endBlock() ?>
 </script>
 
