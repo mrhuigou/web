@@ -109,7 +109,11 @@ class Delivery extends Widget
 			$delivery_data=['date'=>$Date,'time'=>$value['shipping_time'],'label'=>$value['shipping_label'],'css'=>$value['css'],'limit'=>$value['limit']];
 		}
 		if($delivery_data=$this->getTimeData($delivery_data)){
-			$delivery_times[$Date." ".$value['shipping_time']]=$delivery_data;
+		    // 排除10月1
+            $restDateArr=['2020-10-01','2020-10-02','2020-10-03'];
+            if(!in_array($Date,$restDateArr)){
+                $delivery_times[$Date." ".$value['shipping_time']]=$delivery_data;
+            }
 		}
 		if($index==count($list)-1){
 			$index=0;
