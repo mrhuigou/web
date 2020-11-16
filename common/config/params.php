@@ -5,8 +5,9 @@ return [
     'user.passwordResetTokenExpire' => 3600,
     'HTTP_IMAGE'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://img1.mrhuigou.com/" :  "http://img1.mrhuigou.com/",
 //    'ERP_SOAP_URL'  =>"http://wms.mrhuigou.com:7023/jiarunWebServer/services/web2sys?wsdl",//
-    'ERP_SOAP_URL'=>'http://192.168.1.224:8080/mrhgWebServer/services/web2sys?wsdl',
-    'API_URL' => 'http://api.jiarun.com',
+     'ERP_SOAP_URL'=>'http://192.168.1.20:8085/seamlessWebServer/services/web2sys?wsdl',
+//    'ERP_SOAP_URL'=>'http://wms.mrhuigou.com:7023/mrhgWebServer/services/web2sys?wsdl',
+    'API_URL' => 'http://api.mrhuigou.net',
     'FDFS'=>[
         'tracker_addr'=>'119.167.153.84',
         'tracker_port'=>'22122',
@@ -26,4 +27,7 @@ return [
         'access_key' => "LTAIBE7y6V4iRrj6",
         'secret' => "JqXIuplK2MyVgFsIUDGyuQ5b0JLsH8"
     ],
+    'site_info' =>[
+        'mobile' => '133 8532 3706',
+    ]
 ];
