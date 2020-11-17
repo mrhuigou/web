@@ -46,7 +46,7 @@ use yii\bootstrap\ActiveForm;
                         </div>
                     </div>
                 </div>
-                <p class="org f12 lh150">需要增值税专票，请联系客服，400-968-9870</p>
+                <p class="org f12 lh150">需要增值税专票，请联系客服，<?= Yii::$app->common->getSiteMobile() ?></p>
             </div>
 
         </div>

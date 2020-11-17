@@ -235,7 +235,7 @@ class UserController extends \yii\web\Controller {
                     $stauts = true;
 
                 }else{
-                    $msg = '您的账号异常，请联系客服 400-968-9870';
+                    $msg = '您的账号异常，请联系客服 '. \Yii::$app->common->getSiteMobile();
                     $stauts = false;
                 }
             }else{

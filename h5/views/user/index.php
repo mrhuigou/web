@@ -179,7 +179,7 @@ $useragent = \Yii::$app->request->getUserAgent();
 		</div>
         <?php }?>
 		<a class="line-a db w clearfix p10 " href="<?=\yii\helpers\Url::to(['page/3561.html'])?>" target="">
-			客服热线：400-968-9870
+			客服热线：<?= Yii::$app->common->getSiteMobile() ?>
 			<i class="iconfont fr"></i>
 		</a>
         <?php if(Yii::$app->user->getId()==17412){?>

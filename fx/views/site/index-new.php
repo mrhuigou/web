@@ -125,7 +125,7 @@ if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){
 <!--    --><?php // echo \fx\widgets\Affiliate\AffiliatePlan::widget(['plan_type_code'=>'DEFAULT'])?>
     <footer class="gray9 tc p10 f14">
         Copyright©2015每日惠购 版权所有<br>
-        客服热线：400-968-9870
+        客服热线：<?= Yii::$app->common->getSiteMobile() ?>
         <div>
             <a href="http://www.beian.gov.cn/portal/registerSystemInfo?spm=5176.12825654.7y9jhqsfz.112.e9392c4aykru4M&amp;aly_as=U0MWfk4s" target="_blank" data-spm-anchor-id="5176.12825654.7y9jhqsfz.111"><img data-src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif" style="width: 20px;" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif"></a>
             <a href="http://www.beian.gov.cn/portal/registerSystemInfo?spm=5176.12825654.7y9jhqsfz.112.e9392c4aykru4M&amp;aly_as=U0MWfk4s" target="_blank" data-spm-anchor-id="5176.12825654.7y9jhqsfz.112">

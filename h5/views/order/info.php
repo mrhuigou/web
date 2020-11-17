@@ -109,7 +109,7 @@ $this->title = '订单详情';
 	<?=h5\widgets\Order\OrderTotal::widget(['order_total'=>$model->orderTotals])?>
     <?php if($model->use_points){?>
     <div class="whitebg bdt bdb p10 lh180 f12 mb10">
-        <em class="f12 red">【注：积分抵扣的订单不支持退货，如果发现质量问题，请联系客服为您换货，客服电话： 400-968-9870 】</em>
+        <em class="f12 red">【注：积分抵扣的订单不支持退货，如果发现质量问题，请联系客服为您换货，客服电话： <?= Yii::$app->common->getSiteMobile() ?> 】</em>
     </div>
     <?php }?>
 	<div class="whitebg bdt bdb p10 lh180 f12 mb50">

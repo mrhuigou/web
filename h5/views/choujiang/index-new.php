@@ -136,7 +136,7 @@ $this->title="璀璨上线红包大派送";
         每日<span style="color: #FFFF00">惠万家</span>  只需<span style="color: #FFFF00">新鲜达</span>
     </div>
     <div style="text-align:center; margin-top: -1px;font-size: 17px; color:white">市内四区配送入户，同城当日达</div>
-    <div style="text-align:center; margin-top: -1px;font-size: 17px; color:white">客服电话：400-968-9870</div>
+    <div style="text-align:center; margin-top: -1px;font-size: 17px; color:white">客服电话：<?= Yii::$app->common->getSiteMobile() ?></div>
 </div>
 <!--<div class="br5 opc-f p10 m10">-->
 <!--	<div class="tit-- mt10 mb10">看看大家手气</div>-->
