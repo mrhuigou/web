@@ -600,7 +600,7 @@ $useragent = \Yii::$app->request->getUserAgent();
 
     <?php  if(strtolower(Yii::$app->request->get("sourcefrom")) == 'zhqd'){  ?>
         <footer class="gray9 tc p10 f14">
-            客服热线：400-968-9870
+            客服热线：<?= Yii::$app->common->getSiteMobile() ?>
         </footer>
     <?php }else{ ?>
         <footer class="gray9 tc p10 f14">
@@ -612,7 +612,7 @@ $useragent = \Yii::$app->request->getUserAgent();
 
             <a href="<?=\yii\helpers\Url::to(['page/3561.html'])?>">
 <!--                <i class="iconfont vm mr5">&#xe65e;</i>-->
-                <span class="vm">客服热线：400-968-9870</span>
+                <span class="vm">客服热线：<?= Yii::$app->common->getSiteMobile() ?></span>
             </a>
             <div>
                 <a href="http://www.beian.gov.cn/portal/registerSystemInfo?spm=5176.12825654.7y9jhqsfz.112.e9392c4aykru4M&amp;aly_as=U0MWfk4s" target="_blank" data-spm-anchor-id="5176.12825654.7y9jhqsfz.111"><img data-src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif" style="width: 20px;" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif"></a>

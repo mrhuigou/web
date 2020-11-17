@@ -28,6 +28,6 @@ return [
         'secret' => "JqXIuplK2MyVgFsIUDGyuQ5b0JLsH8"
     ],
     'site_info' =>[
-        'mobile' => '133 8532 3706',
+        'mobile' => '13385323706',
     ]
 ];

@@ -11,12 +11,12 @@ return [
                 // configure more hosts if you have a cluster
             ],
         ],
+        // 加载全局 自定义 函数类
+        // Used Yii::$app->common
+        'common' => [
+            'class' => 'common\components\Common',
+        ],
+    ],
 
-    ],
-    // 加载全局 自定义 函数类
-    // Used Yii::$app->common
-    'common' => [
-        'class' => 'common\components\Common',
-        'property' => '123',
-    ],
+
 ];
